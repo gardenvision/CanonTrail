@@ -27,6 +27,6 @@ jobs:
       - name: Build distributable CLI
         run: npm run build
       - name: Test
-        run: npm test
+        run: npm test -- --maxWorkers=1
       - name: Enforce CanonTrail documentation health
         run: node dist/cli.js finalize . --fail-on-warnings

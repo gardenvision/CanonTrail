@@ -100,7 +100,8 @@ describe("GitHub completion gate", () => {
     expect(action.runs.steps.every((step) => !step.run.includes("--refresh-index"))).toBe(true);
     expect(workflow).toContain("node dist/cli.js finalize . --fail-on-warnings");
     expect(workflow).not.toContain("--refresh-index");
-    expect(template).toContain("uses: gardenvision/CanonTrail@main");
+    expect(template).toContain("uses: gardenvision/CanonTrail@23d542302e7327931cb2c60b7a35ae60e6e47f16");
+    expect(template).not.toMatch(/uses: gardenvision\/CanonTrail@(?:main|master|HEAD)\b/);
     expect(template).toContain('fail-on-warnings: "true"');
   });
 });

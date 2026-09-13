@@ -1,19 +1,20 @@
 {
   "task_id": "T-RELEASE-CLOSURE-001",
   "agent_run_id": null,
-  "created_at": "2026-09-13T21:13:31.734Z",
-  "context_index_hash": "sha256:96536ed920a888c89a4f7489d40f8e9bf1888214a8e80ecc2d9c68fcb71554a0",
+  "created_at": "2026-09-13T21:17:36.524Z",
+  "context_index_hash": "sha256:39d90907c9e70a35905e5ffd6d8c53f61e4479e4c6e2d5b597216145ee52c668",
+  "base_revision": "23d542302e7327931cb2c60b7a35ae60e6e47f16",
   "budget": {
     "total_tokens": 128000,
     "reserved_output_tokens": 12000,
     "reserved_input_tokens": 2048,
-    "estimated_input_tokens": 19292
+    "estimated_input_tokens": 19369
   },
   "sources": [
     {
       "path": "AGENTS.md",
       "content_hash": "sha256:ab21928e3833b41bc93df9c24721f32507fa44484d4872d150f8a4f8bcb9cc2c",
-      "git_blob": null,
+      "git_blob": "d29e28d7990d80f839ce459cb272b80667727188",
       "truth_level": "canonical",
       "level": "L0",
       "priority": 0,
@@ -26,7 +27,7 @@
     {
       "path": ".agent-context/tasks/T-RELEASE-CLOSURE-001/state.yaml",
       "content_hash": "sha256:ec60b875b4d86bdb3d1a4afd2f93eb650bdd8656a974ff1eb05c47e605efc581",
-      "git_blob": null,
+      "git_blob": "39c8aaaa9d4e5597b087f72b3b7c0ad6e522caf1",
       "truth_level": "active-snapshot",
       "level": "L0",
       "priority": 1,
@@ -39,7 +40,7 @@
     {
       "path": ".agent-context/tasks/T-RELEASE-CLOSURE-001/brief.md",
       "content_hash": "sha256:7163aeda157717212731cc9a64367574d620c1cf7b404b0e88947f7a82fabb4f",
-      "git_blob": null,
+      "git_blob": "8d7ab581e59479914efc21d96f81ef587f5f7cfe",
       "truth_level": "active-snapshot",
       "level": "L0",
       "priority": 2,
@@ -52,7 +53,7 @@
     {
       "path": ".agent-context/tasks/T-RELEASE-CLOSURE-001/change.yaml",
       "content_hash": "sha256:5b0ba39eb8cb7fa61c8f5fe3b7cb57ea941c9d34e516d77c38dd469872143f25",
-      "git_blob": null,
+      "git_blob": "5aa327472232d23b9aa8c21194d92d0aabfeb3fe",
       "truth_level": "active-snapshot",
       "level": "L0",
       "priority": 3,
@@ -65,7 +66,7 @@
     {
       "path": "examples/resume-history/README.md",
       "content_hash": "sha256:b5dd275bce89f852828b998ae00d87e5d0e183c347a8af957f01666de3070961",
-      "git_blob": null,
+      "git_blob": "40274044c3d5a46341e5e79b351fe8a31e1f5cb5",
       "truth_level": "design-target",
       "level": "L1",
       "priority": 14,
@@ -78,7 +79,7 @@
     {
       "path": "integrations/gsd/canontrail/README.md",
       "content_hash": "sha256:1bd0ff1697e2f4d23c65234afb9642f29fd187a6bbb1f05eaa5b4012eeac4d58",
-      "git_blob": null,
+      "git_blob": "8b2b5b97b5ddb4dd119d056d39335445e882c9d0",
       "truth_level": "design-target",
       "level": "L1",
       "priority": 14,
@@ -91,7 +92,7 @@
     {
       "path": "integrations/gsd/canontrail/skills/canontrail-finalize/SKILL.md",
       "content_hash": "sha256:2ea4fa240f9c5af18272cd2e3eb9fd851bb8a56ec5f40723fdc60dd6dd43cddd",
-      "git_blob": null,
+      "git_blob": "9022fccbbd30c52fa8c6674e8a0a89f7dfc26944",
       "truth_level": "design-target",
       "level": "L1",
       "priority": 14,
@@ -104,7 +105,7 @@
     {
       "path": "integrations/superpowers/README.md",
       "content_hash": "sha256:8dab971b0d13a1f12a81d456c951397b6480635d0e6d938f5f74b9ac2d238e67",
-      "git_blob": null,
+      "git_blob": "91c7af42e50a4a9e66c9ec91aa62adc872d41dd0",
       "truth_level": "design-target",
       "level": "L1",
       "priority": 14,
@@ -117,7 +118,7 @@
     {
       "path": ".agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/owner-decision.json",
       "content_hash": "sha256:a32387c58e6e4643f9ba646940d998e07a35f361ca41745bf06708d97b174980",
-      "git_blob": null,
+      "git_blob": "2e6fc9bcb25d4ccfbbea495d7043371fa3d79e5b",
       "truth_level": "historical",
       "level": "L4",
       "priority": 22,
@@ -130,7 +131,7 @@
     {
       "path": "docs/alpha-readiness.md",
       "content_hash": "sha256:94ffeb028c19a351df75d03612e8389a604c3e52e04c501ea8f908a11dfcaefc",
-      "git_blob": null,
+      "git_blob": "b52b68ba1b5c7ecd43a33674328ac59b0911767f",
       "truth_level": "draft",
       "level": "L3",
       "priority": 25,
@@ -143,7 +144,7 @@
     {
       "path": "docs/release-checklist.md",
       "content_hash": "sha256:349c30ac781a782b096b2405172a98b6f741a0ef937ded332a960031fb06f1be",
-      "git_blob": null,
+      "git_blob": "2a8fdae0ea797cf63eb1623aa75bff4552d2e4aa",
       "truth_level": "draft",
       "level": "L3",
       "priority": 25,
@@ -156,7 +157,7 @@
     {
       "path": "package.json",
       "content_hash": "sha256:5e18c0cb0660a96ce1c90011793214a2b49ca98a79710b623d1ddf3d5c8300ba",
-      "git_blob": null,
+      "git_blob": "d227d9ea45d642fde2f2790697c69061739cb996",
       "truth_level": "unclassified",
       "level": "L3",
       "priority": 25,
@@ -169,7 +170,7 @@
     {
       "path": "docs/migration.md",
       "content_hash": "sha256:304d797cd2da336cfa0becde40d51b20c22615e930b27ac3ee32391d7647c691",
-      "git_blob": null,
+      "git_blob": "d792b9e08e63aeef0ea622b9f4cdfb3626b6f9e9",
       "truth_level": "draft",
       "level": "L3",
       "priority": 30,
@@ -182,7 +183,7 @@
     {
       "path": "docs/platform-support.md",
       "content_hash": "sha256:4ddc519cf78da96d436fad7e75c62dc7e8749120071559cb69683a4012a0d4b4",
-      "git_blob": null,
+      "git_blob": "e9859d7b4fb387ae7b6e6fd2685a3fa6e347e3b5",
       "truth_level": "draft",
       "level": "L3",
       "priority": 30,
@@ -194,21 +195,21 @@
     },
     {
       "path": "README.md",
-      "content_hash": "sha256:78453374980fa5a13a0b6e48c8d68d16a22cd96ebd5a2f471b5a6c3cc72213a0",
+      "content_hash": "sha256:fbdd8c0af30595e858d3e6a64db7e478f0f17e39e28172d215358cb93f41be63",
       "git_blob": null,
       "truth_level": "draft",
       "level": "L3",
       "priority": 30,
       "selection_reason": "Existing file declared by the current task.",
       "selector": "task-file-intent",
-      "estimated_tokens": 3018,
+      "estimated_tokens": 3045,
       "ownership": "project",
       "source_system": null
     },
     {
       "path": "ROADMAP.md",
       "content_hash": "sha256:e6dff22b13c93d7a43bda7c40d27c4f066255b4de9fe69bc32c8271c31798c65",
-      "git_blob": null,
+      "git_blob": "ad269cb25ec9126c7a5e3b461379eff700acd1e6",
       "truth_level": "draft",
       "level": "L3",
       "priority": 30,
@@ -221,7 +222,7 @@
     {
       "path": "SECURITY.md",
       "content_hash": "sha256:e619327308a2621027899573f4d1841acbd6970ea6cff32451328a0dbf523388",
-      "git_blob": null,
+      "git_blob": "656bc1b07b89847d3298ae4a16499c679deaf706",
       "truth_level": "draft",
       "level": "L3",
       "priority": 30,
@@ -233,27 +234,27 @@
     },
     {
       "path": "templates/github-actions/canontrail.yml",
-      "content_hash": "sha256:7e5a187be59654d6a2aa93d7875bd7fd62eda6e387ddddae0c14273e670e186f",
+      "content_hash": "sha256:988d7f8ac355e1be1e23d01470ea6c4cb6fb7d57f23c3950e601c5cd27a1b7a2",
       "git_blob": null,
       "truth_level": "unclassified",
       "level": "L3",
       "priority": 30,
       "selection_reason": "Existing file declared by the current task.",
       "selector": "task-file-intent",
-      "estimated_tokens": 106,
+      "estimated_tokens": 124,
       "ownership": "project",
       "source_system": null
     },
     {
       "path": "test/workflow-bridges.test.ts",
-      "content_hash": "sha256:c8b5453f751aa22187859cb66fab1cecad447bb339089b630f1d2729719c7a2c",
+      "content_hash": "sha256:6364f7528a18d6984be21378f20525f3168281463f5a8d474d299baa7bc9e10e",
       "git_blob": null,
       "truth_level": "unclassified",
       "level": "L3",
       "priority": 30,
       "selection_reason": "Existing file declared by the current task.",
       "selector": "task-file-intent",
-      "estimated_tokens": 1934,
+      "estimated_tokens": 1966,
       "ownership": "project",
       "source_system": null
     }
@@ -266,5 +267,5 @@
     }
   ],
   "raw_transcripts_included": false,
-  "lock_hash": "sha256:65face0488b2f4dc7a411860939a613ff0b14d528c3f761527c9bc466b20560a"
+  "lock_hash": "sha256:65441c21b61e6bc5569289e11723de0379569c9e228d609078e468e5dc643df4"
 }

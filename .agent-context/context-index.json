@@ -1,7 +1,7 @@
 {
   "version": 1,
   "hash_algorithm": "sha256",
-  "root_hash": "sha256:96536ed920a888c89a4f7489d40f8e9bf1888214a8e80ecc2d9c68fcb71554a0",
+  "root_hash": "sha256:39d90907c9e70a35905e5ffd6d8c53f61e4479e4c6e2d5b597216145ee52c668",
   "documents": [
     {
       "path": ".agent-context/tasks/T-ALPHA-CANDIDATE-001/brief.md",
@@ -700,7 +700,7 @@
     },
     {
       "path": "README.md",
-      "content_hash": "sha256:78453374980fa5a13a0b6e48c8d68d16a22cd96ebd5a2f471b5a6c3cc72213a0",
+      "content_hash": "sha256:fbdd8c0af30595e858d3e6a64db7e478f0f17e39e28172d215358cb93f41be63",
       "stand": "2026-09-13",
       "status": "alpha-candidate",
       "truth_level": "draft",

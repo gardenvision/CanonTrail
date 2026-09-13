@@ -153,7 +153,7 @@ This source distribution retains exact source bytes through Git (`* -text` in `.
 
 This candidate is intended first as source distribution. The package file list includes the linked product guides, protocol and license; a dry-run inventory is not npm publication or installed-package verification. npm publication still requires separate approval. See the [release checklist](docs/release-checklist.md), [third-party inventory](docs/third-party-notices.md), [contribution policy](CONTRIBUTING.md) and [security-reporting status](SECURITY.md).
 
-Inherited integration manifests and the consumer action template name the development repository. They are not proof of an accessible public release. Confirm the eventual distribution URL and replace the template's moving `@main` reference with a reviewed immutable revision before use.
+The distribution destination is `https://github.com/gardenvision/CanonTrail`, a new clean-history repository separate from private development. The consumer Action template pins clean runtime commit `23d542302e7327931cb2c60b7a35ae60e6e47f16`; it does not follow `main`. Public availability and current checks must be verified before using the Action. npm remains a separate, unpublished channel.
 
 ## License
 

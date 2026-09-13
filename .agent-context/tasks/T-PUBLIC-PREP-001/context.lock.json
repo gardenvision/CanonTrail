@@ -1,19 +1,20 @@
 {
   "task_id": "T-PUBLIC-PREP-001",
   "agent_run_id": null,
-  "created_at": "2026-09-13T21:13:31.366Z",
-  "context_index_hash": "sha256:96536ed920a888c89a4f7489d40f8e9bf1888214a8e80ecc2d9c68fcb71554a0",
+  "created_at": "2026-09-13T21:17:22.633Z",
+  "context_index_hash": "sha256:39d90907c9e70a35905e5ffd6d8c53f61e4479e4c6e2d5b597216145ee52c668",
+  "base_revision": "23d542302e7327931cb2c60b7a35ae60e6e47f16",
   "budget": {
     "total_tokens": 128000,
     "reserved_output_tokens": 12000,
     "reserved_input_tokens": 2048,
-    "estimated_input_tokens": 105885
+    "estimated_input_tokens": 105912
   },
   "sources": [
     {
       "path": "AGENTS.md",
       "content_hash": "sha256:ab21928e3833b41bc93df9c24721f32507fa44484d4872d150f8a4f8bcb9cc2c",
-      "git_blob": null,
+      "git_blob": "d29e28d7990d80f839ce459cb272b80667727188",
       "truth_level": "canonical",
       "level": "L0",
       "priority": 0,
@@ -26,7 +27,7 @@
     {
       "path": ".agent-context/tasks/T-PUBLIC-PREP-001/state.yaml",
       "content_hash": "sha256:7024b076bf105e455892fc50caa4c072355874120a3d89ca239b412579e94207",
-      "git_blob": null,
+      "git_blob": "965191941ad34fad986d1593dc80eab6215df82b",
       "truth_level": "active-snapshot",
       "level": "L0",
       "priority": 1,
@@ -39,7 +40,7 @@
     {
       "path": ".agent-context/tasks/T-PUBLIC-PREP-001/brief.md",
       "content_hash": "sha256:ee8a34a30965b08b4516537aa846f5702a50fea0a51e123b556484b51fb3dc94",
-      "git_blob": null,
+      "git_blob": "07657d1041c0c2f93bfa46ea68dcddd8feb0c674",
       "truth_level": "active-snapshot",
       "level": "L0",
       "priority": 2,
@@ -52,7 +53,7 @@
     {
       "path": ".agent-context/tasks/T-PUBLIC-PREP-001/change.yaml",
       "content_hash": "sha256:15449126447a5667255d3b053ca2d32152ac45c9979b521edacb6335ee349b7b",
-      "git_blob": null,
+      "git_blob": "c18a76472357686a25d1479ebe1674152c5a0528",
       "truth_level": "active-snapshot",
       "level": "L0",
       "priority": 3,
@@ -65,7 +66,7 @@
     {
       "path": "docs/decisions/0001-typescript-cli.md",
       "content_hash": "sha256:d561b67300f1fa0db00cf6cdcf0c9023d9e8c6daac831a39cfba87d8a98d7180",
-      "git_blob": null,
+      "git_blob": "29ee81515e704beb57885b22a2424a28ce8bb018",
       "truth_level": "canonical",
       "level": "L1",
       "priority": 9,
@@ -78,7 +79,7 @@
     {
       "path": "examples/feature-save-schema/project-doc.md",
       "content_hash": "sha256:726ba9eb55a587d27605988a1c4f6458d84abdbcffcb2c35de968027be4cea45",
-      "git_blob": null,
+      "git_blob": "97783620b9da96d2ab1282ef1016693962b3e04b",
       "truth_level": "canonical",
       "level": "L1",
       "priority": 9,
@@ -91,7 +92,7 @@
     {
       "path": "VISION.md",
       "content_hash": "sha256:83a88277367d21d27d3d7fa53e2a915138ef9d62ef39a6999a83b3bb9361f987",
-      "git_blob": null,
+      "git_blob": "5d84c81f54ea344e3dddbac9f6a397e482bab107",
       "truth_level": "canonical",
       "level": "L1",
       "priority": 9,
@@ -104,7 +105,7 @@
     {
       "path": "ARTIFACT_PROTOCOL.md",
       "content_hash": "sha256:52d3737465ca665643fbba6426f1c22ff97609d4cb6f5cfb85e1ffe87b493d3e",
-      "git_blob": null,
+      "git_blob": "1caac43f6398c769ccb017ada396ac2e2bf6977d",
       "truth_level": "design-target",
       "level": "L1",
       "priority": 14,
@@ -117,7 +118,7 @@
     {
       "path": "docs/parallel-work.md",
       "content_hash": "sha256:a37b214f0316b7522570fc26cf91652f9c991074693414b05b03b7ef7d1d9df9",
-      "git_blob": null,
+      "git_blob": "75e5262be56c314337508897ad94457b7a824f7f",
       "truth_level": "design-target",
       "level": "L1",
       "priority": 14,
@@ -130,7 +131,7 @@
     {
       "path": "examples/resume-history/README.md",
       "content_hash": "sha256:b5dd275bce89f852828b998ae00d87e5d0e183c347a8af957f01666de3070961",
-      "git_blob": null,
+      "git_blob": "40274044c3d5a46341e5e79b351fe8a31e1f5cb5",
       "truth_level": "design-target",
       "level": "L1",
       "priority": 14,
@@ -143,7 +144,7 @@
     {
       "path": "integrations/gsd/canontrail/skills/canontrail-context/SKILL.md",
       "content_hash": "sha256:f42f448b1e50040fcad14fdad466017c3559974842692f006238a3112a942cc9",
-      "git_blob": null,
+      "git_blob": "d7742fe1fb4e3afef81ba94feeddd4d8eccc7ded",
       "truth_level": "design-target",
       "level": "L1",
       "priority": 14,
@@ -156,7 +157,7 @@
     {
       "path": ".agent-context/tasks/T-PUBLIC-PREP-001/evidence/owner-decision.json",
       "content_hash": "sha256:d93b5e654f2b5fb42c379ec5b083255f0cadc9d4ed60b6f20eff852f0aca51c1",
-      "git_blob": null,
+      "git_blob": "cafb0149a3cca9716ac552c02c598f7c921f9c9a",
       "truth_level": "historical",
       "level": "L4",
       "priority": 22,
@@ -169,7 +170,7 @@
     {
       "path": ".agent-context/tasks/T-PUBLIC-PREP-001/evidence/verification.json",
       "content_hash": "sha256:4f0c06a2819a298ae60ffb8d9286d31dbf2695c956d6dc55de3bacee8f7200ab",
-      "git_blob": null,
+      "git_blob": "52cce6e842263d1ba6646453bf92a902f5c24e90",
       "truth_level": "historical",
       "level": "L4",
       "priority": 22,
@@ -182,7 +183,7 @@
     {
       "path": "docs/alpha-readiness.md",
       "content_hash": "sha256:94ffeb028c19a351df75d03612e8389a604c3e52e04c501ea8f908a11dfcaefc",
-      "git_blob": null,
+      "git_blob": "b52b68ba1b5c7ecd43a33674328ac59b0911767f",
       "truth_level": "draft",
       "level": "L3",
       "priority": 25,
@@ -195,7 +196,7 @@
     {
       "path": "docs/migration.md",
       "content_hash": "sha256:304d797cd2da336cfa0becde40d51b20c22615e930b27ac3ee32391d7647c691",
-      "git_blob": null,
+      "git_blob": "d792b9e08e63aeef0ea622b9f4cdfb3626b6f9e9",
       "truth_level": "draft",
       "level": "L3",
       "priority": 25,
@@ -208,7 +209,7 @@
     {
       "path": "package.json",
       "content_hash": "sha256:5e18c0cb0660a96ce1c90011793214a2b49ca98a79710b623d1ddf3d5c8300ba",
-      "git_blob": null,
+      "git_blob": "d227d9ea45d642fde2f2790697c69061739cb996",
       "truth_level": "unclassified",
       "level": "L3",
       "priority": 25,
@@ -221,7 +222,7 @@
     {
       "path": "schemas/migration-plan.schema.json",
       "content_hash": "sha256:4929e5bf2058bc2261540d8ca9db1b2151bb4a05405ae0fbdecf8aeabb238357",
-      "git_blob": null,
+      "git_blob": "987e3ef63fc847b458ef9713d3129b3baca59c98",
       "truth_level": "unclassified",
       "level": "L3",
       "priority": 25,
@@ -234,7 +235,7 @@
     {
       "path": "docs/release-checklist.md",
       "content_hash": "sha256:349c30ac781a782b096b2405172a98b6f741a0ef937ded332a960031fb06f1be",
-      "git_blob": null,
+      "git_blob": "2a8fdae0ea797cf63eb1623aa75bff4552d2e4aa",
       "truth_level": "draft",
       "level": "L3",
       "priority": 30,
@@ -247,7 +248,7 @@
     {
       "path": "docs/self-documentation.md",
       "content_hash": "sha256:d7609c0c9fe949a6c9c26f42c51e2146637ed7014aeb146e974f3d1f64df9dbd",
-      "git_blob": null,
+      "git_blob": "ceff042ffde9e0d5f0aba23a71c23cb1813a3562",
       "truth_level": "draft",
       "level": "L3",
       "priority": 30,
@@ -260,7 +261,7 @@
     {
       "path": "docs/third-party-notices.md",
       "content_hash": "sha256:7e647e45fe561810b44ed8c9b28417ce38060c949c746f2495cca40111e1c287",
-      "git_blob": null,
+      "git_blob": "530de13cef5ce1240445eb331e80233934f9f2a9",
       "truth_level": "draft",
       "level": "L3",
       "priority": 30,
@@ -273,7 +274,7 @@
     {
       "path": "examples/migration-plan/neutral-plan.json",
       "content_hash": "sha256:e6aaeee436e1de36e3873d58e5ce5c26f4c591c847a37deb12303b78fc7a5b13",
-      "git_blob": null,
+      "git_blob": "7251864893ea951245e69cb0be5e0d075b06205a",
       "truth_level": "unclassified",
       "level": "L3",
       "priority": 30,
@@ -286,7 +287,7 @@
     {
       "path": "examples/migration-plan/README.md",
       "content_hash": "sha256:bd7c126f0d742ea44d549a9bf06771a659e6ac683ac52a160195d1ad335ff3c9",
-      "git_blob": null,
+      "git_blob": "6e083b3740ef69e03a16982ade6a0fdde70ddeb1",
       "truth_level": "draft",
       "level": "L3",
       "priority": 30,
@@ -298,21 +299,21 @@
     },
     {
       "path": "README.md",
-      "content_hash": "sha256:78453374980fa5a13a0b6e48c8d68d16a22cd96ebd5a2f471b5a6c3cc72213a0",
+      "content_hash": "sha256:fbdd8c0af30595e858d3e6a64db7e478f0f17e39e28172d215358cb93f41be63",
       "git_blob": null,
       "truth_level": "draft",
       "level": "L3",
       "priority": 30,
       "selection_reason": "Existing file declared by the current task.",
       "selector": "task-file-intent",
-      "estimated_tokens": 3018,
+      "estimated_tokens": 3045,
       "ownership": "project",
       "source_system": null
     },
     {
       "path": "ROADMAP.md",
       "content_hash": "sha256:e6dff22b13c93d7a43bda7c40d27c4f066255b4de9fe69bc32c8271c31798c65",
-      "git_blob": null,
+      "git_blob": "ad269cb25ec9126c7a5e3b461379eff700acd1e6",
       "truth_level": "draft",
       "level": "L3",
       "priority": 30,
@@ -325,7 +326,7 @@
     {
       "path": "src/cli.ts",
       "content_hash": "sha256:137b9885baffe57c08ac9790ad488cf0683452c79afce4199c55363d0825fb5e",
-      "git_blob": null,
+      "git_blob": "67e296f9b41f41103fb020d1c046cd6263c73d79",
       "truth_level": "unclassified",
       "level": "L3",
       "priority": 30,
@@ -338,7 +339,7 @@
     {
       "path": "src/migration.ts",
       "content_hash": "sha256:1bd888940332e484eb8922f59ac13bfa32d2d4e244ae2a9825452c7fbc831a50",
-      "git_blob": null,
+      "git_blob": "9ce40b56fd2f42e2d43cb5d14be5ebd40a617270",
       "truth_level": "unclassified",
       "level": "L3",
       "priority": 30,
@@ -351,7 +352,7 @@
     {
       "path": "src/validator.ts",
       "content_hash": "sha256:13ce7ad0493a1c3827d57855c498bb99598e511342f2085f84204596a3fc24cd",
-      "git_blob": null,
+      "git_blob": "f2e992bd18ae89039ce5631294a2c9718df6d497",
       "truth_level": "unclassified",
       "level": "L3",
       "priority": 30,
@@ -364,7 +365,7 @@
     {
       "path": "test/migration-naming.test.ts",
       "content_hash": "sha256:26749296207c8cbf8aa04f6cc4c09259124ffe6475274cb4af136045bda8eb0d",
-      "git_blob": null,
+      "git_blob": "fa143dc0d675f6ae2c3edcbb175c0ebed97243fd",
       "truth_level": "unclassified",
       "level": "L3",
       "priority": 30,
@@ -377,7 +378,7 @@
     {
       "path": "test/migration.test.ts",
       "content_hash": "sha256:cf3f639eeb8dfdaab988bc7e61711e2f69c21bb6f5cba32afdf78210d1ebdb89",
-      "git_blob": null,
+      "git_blob": "bcaf2af4e1917b9fbd18db533d319b88374dfebd",
       "truth_level": "unclassified",
       "level": "L3",
       "priority": 30,
@@ -390,7 +391,7 @@
     {
       "path": "test/validator.test.ts",
       "content_hash": "sha256:9fadea3a4ed765b09335fad222b2d733c3c9608d2e4813cb5a02647dbf5b39d7",
-      "git_blob": null,
+      "git_blob": "1537968b6c4f596328b0645198f8c1d970f52fdd",
       "truth_level": "unclassified",
       "level": "L3",
       "priority": 30,
@@ -409,5 +410,5 @@
     }
   ],
   "raw_transcripts_included": false,
-  "lock_hash": "sha256:b6ad1b64a24599328223a2e65b153ea4a3db14e12ae0661dd39d6df615b903ae"
+  "lock_hash": "sha256:63fbbd3117c82304d9efc1f1e66b3778bf56791cd4924bbca52c235c20ba9321"
 }

@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
       - name: Validate CanonTrail documentation and context
-        uses: gardenvision/CanonTrail@main
+        uses: gardenvision/CanonTrail@23d542302e7327931cb2c60b7a35ae60e6e47f16 # immutable clean Alpha action runtime
         with:
           root: "."
           fail-on-warnings: "true"

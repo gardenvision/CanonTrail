@@ -50,7 +50,7 @@ jobs:
         run: npm run build
 
       - name: Run complete suite with per-test outcomes
-        run: npm test -- --reporter=default --reporter=json --outputFile="$RUNNER_TEMP/canontrail-tests.json"
+        run: npm test -- --maxWorkers=1 --reporter=default --reporter=json --outputFile="$RUNNER_TEMP/canontrail-tests.json"
 
       - name: Validate repository with built CLI
         run: node dist/cli.js validate .
