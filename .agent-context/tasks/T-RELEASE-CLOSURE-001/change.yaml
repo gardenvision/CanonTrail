@@ -1,0 +1,39 @@
+version: 1
+change_id: CHG-RELEASE-CLOSURE-001
+revision: 1
+title: Independent review closure and clean source Alpha release
+status: decided
+risk: high
+author: CanonTrail release implementation agent
+canonical_source: .agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/owner-decision.json
+decision_rationale: The owner requested necessary corrections and publication only after passing gates, and explicitly approved preserving private history in a renamed repository while publishing clean sources separately.
+documentation_structure:
+  decision: update-existing-feature-documents
+  rationale: Release operations and package completeness belong to the existing readiness and release-checklist owners; no new product feature or wiki is needed.
+  feature_documents:
+    - {feature_id: release-checklist, action: update, path: docs/release-checklist.md, status: drafted, evidence_refs: [.agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/owner-decision.json]}
+acceptance_cases:
+  - {id: AC-EVIDENCE, given: Two old receipts ambiguously label preservation of the sealed predecessor as candidate equality., expected: Explicit new metrics distinguish 172 sealed predecessor files from 158 equal candidate files and 14 changes., failure_or_uncertainty: Retain the original signed-by-hash artifacts and attach an erratum., counterexample: Claiming all 172 candidate paths equal their predecessor., oracle: Rehash both complete inventories and reconcile changed added removed and equal sets., status: pending, evidence_refs: []}
+  - {id: AC-PACKAGE, given: Published maps point to TypeScript source not currently packaged., expected: Every local source-map reference resolves inside the package while private histories remain excluded., failure_or_uncertainty: No installed-package or npm publication claim without a real check., counterexample: A map references absent or out-of-package source., oracle: Parse all maps against the actual pack inventory and run regressions., status: pending, evidence_refs: []}
+  - {id: AC-RELEASE, given: Narrow independent naming review passes with conditions., expected: Current platform evidence and independent release-boundary assessment support the final source delta., failure_or_uncertainty: Keep unverified gates open and report limitations., counterexample: Borrowing old CI or author review for newly changed code., oracle: Exact hashes current checks and independent findings., status: pending, evidence_refs: []}
+  - {id: AC-HOSTING, given: The desired public name is occupied by private development history., expected: Rename stays private and a separate clean-history repository receives only reviewed files; private reporting is configured before publication., failure_or_uncertainty: Stop if owner choice permission or security contact is missing., counterexample: Publishing the old private repository history., oracle: Owner grants and GitHub metadata plus unauthenticated public reads., status: pending, evidence_refs: []}
+impacts:
+  - {area: requirement, decision: affected, rationale: Explicit source publication authority and boundaries., evidence_refs: [.agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/owner-decision.json]}
+  - {area: data-contracts, decision: not-affected, rationale: Runtime artifact schemas remain byte-identical; only preparation evidence gets clearer labels., evidence_refs: []}
+  - {area: domain-logic, decision: not-affected, rationale: Migration and other runtime algorithms are not changed., evidence_refs: []}
+  - {area: tests-reference-cases, decision: affected, rationale: Verify packaged maps and frozen predecessor compatibility and pin the consumer contract., evidence_refs: [test/migration-naming.test.ts, test/workflow-bridges.test.ts]}
+  - {area: example-data, decision: not-affected, rationale: Existing hashed teaching inputs remain immutable., evidence_refs: []}
+  - {area: ui-api, decision: not-affected, rationale: No CLI behavior or stdout contract changes; deprecated alias remains compatible., evidence_refs: []}
+  - {area: documentation, decision: affected, rationale: Record review disposition and actual release state in existing owners., evidence_refs: [docs/release-checklist.md, docs/alpha-readiness.md]}
+  - {area: diagrams-visuals, decision: not-affected, rationale: No graphical interface or visual layout change., evidence_refs: []}
+  - {area: terminology, decision: affected, rationale: Distinguish sealed-source preservation from comparison equality and experimental Alpha from stable product., evidence_refs: [docs/release-checklist.md]}
+  - {area: operations-compatibility, decision: affected, rationale: Complete package source mapping and configure clean history platform checks and verified hosting., evidence_refs: [package.json, SECURITY.md, .github/workflows/validate.yml]}
+verification:
+  checks: [{name: Current local quality preservation and packaging, status: pending, evidence_refs: []}]
+  terminology_search: {status: pending, terms: [baseline_unchanged, predecessor_files_unchanged, Alpha, private], evidence_refs: []}
+  visual_review: {applicable: false, status: not-applicable, evidence_refs: []}
+  unverifiable_items: [Current hosted platform results independent release review and confidential reporting confirmation are pending.]
+independent_review: {status: pending, reviewer: null, findings: [], evidence_refs: [], waiver: null}
+supersedes: []
+superseded_by: null
+updated_at: "2026-09-13T21:07:00Z"

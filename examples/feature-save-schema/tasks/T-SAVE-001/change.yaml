@@ -1,0 +1,96 @@
+version: 1
+change_id: CHG-SAVE-SCHEMA-001
+revision: 1
+title: Preserve save-schema compatibility during resume
+status: verified
+risk: medium
+author: external-workflow-worker
+canonical_source: examples/feature-save-schema/project-doc.md
+decision_rationale: The canonical save-system document defines backward-compatible schema loading; the external plan supplies execution steps but cannot redefine that behavior.
+documentation_structure:
+  decision: update-existing-feature-documents
+  rationale: Save compatibility is already owned by the existing save-system feature document, so the change updates that location instead of creating another truth owner.
+  feature_documents:
+    - feature_id: save-compatibility
+      action: update
+      status: promoted
+      path: examples/feature-save-schema/project-doc.md
+      evidence_refs:
+        - examples/feature-save-schema/project-doc.md
+        - examples/feature-save-schema/tasks/T-SAVE-001/handoff.yaml
+acceptance_cases:
+  - id: AC-SAVE-OLD
+    given: A valid save created with the previous supported schema.
+    expected: Loading succeeds and produces the canonical current representation.
+    failure_or_uncertainty: An unsupported or corrupt schema is rejected without silently producing partial state.
+    counterexample: A loader that accepts every numeric schema value is not compatible because it hides unsupported formats.
+    oracle: The compatibility behavior stated in project-doc.md and the referenced test outcome.
+    status: pass
+    evidence_refs:
+      - examples/feature-save-schema/project-doc.md
+      - examples/feature-save-schema/tasks/T-SAVE-001/handoff.yaml
+impacts:
+  - area: requirement
+    decision: affected
+    rationale: The compatibility requirement is the decision source.
+    evidence_refs: [examples/feature-save-schema/project-doc.md]
+  - area: data-contracts
+    decision: affected
+    rationale: Save schema versions are a persisted-data contract.
+    evidence_refs: [examples/feature-save-schema/project-doc.md]
+  - area: domain-logic
+    decision: affected
+    rationale: The example handoff records the implemented loader behavior.
+    evidence_refs: [examples/feature-save-schema/tasks/T-SAVE-001/handoff.yaml]
+  - area: tests-reference-cases
+    decision: affected
+    rationale: The handoff records the compatibility check.
+    evidence_refs: [examples/feature-save-schema/tasks/T-SAVE-001/handoff.yaml]
+  - area: example-data
+    decision: not-affected
+    rationale: This portable example names the compatibility case but contains no binary save fixture.
+    evidence_refs: []
+  - area: ui-api
+    decision: not-affected
+    rationale: The example changes loading behavior without a user-interface or public API change.
+    evidence_refs: []
+  - area: documentation
+    decision: affected
+    rationale: Canonical save-system behavior is recorded in the project document.
+    evidence_refs: [examples/feature-save-schema/project-doc.md]
+  - area: diagrams-visuals
+    decision: not-affected
+    rationale: No visual behavior or diagram participates in this compatibility example.
+    evidence_refs: []
+  - area: terminology
+    decision: not-affected
+    rationale: No term was renamed or removed.
+    evidence_refs: []
+  - area: operations-compatibility
+    decision: affected
+    rationale: Resume and backward compatibility are the purpose of the example.
+    evidence_refs: [examples/feature-save-schema/tasks/T-SAVE-001/context.lock.json]
+verification:
+  checks:
+    - name: Validate the worked example artifacts
+      status: pass
+      evidence_refs: [examples/feature-save-schema/tasks/T-SAVE-001/handoff.yaml]
+  terminology_search:
+    status: not-applicable
+    terms: []
+    evidence_refs: [examples/feature-save-schema/README.md]
+  visual_review:
+    applicable: false
+    status: not-applicable
+    evidence_refs: [examples/feature-save-schema/README.md]
+  unverifiable_items: []
+independent_review:
+  status: not-required
+  reviewer: null
+  findings: []
+  evidence_refs: []
+  waiver: null
+external_evidence: []
+supersedes: []
+superseded_by: null
+updated_at: "2026-07-15T00:00:00+02:00"

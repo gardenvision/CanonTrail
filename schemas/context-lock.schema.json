@@ -1,0 +1,262 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:canontrail:schema:context-lock:0",
+  "title": "Context Lock",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "task_id",
+    "created_at",
+    "context_index_hash",
+    "budget",
+    "sources",
+    "omissions",
+    "raw_transcripts_included",
+    "lock_hash"
+  ],
+  "properties": {
+    "task_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "agent_run_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "context_index_hash": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "description": "Index identity recorded at compilation. Active validation may accept a different fresh index after task-relevant compatibility checks; never rewrite this provenance implicitly. Exact saved-preview application still requires equality."
+    },
+    "base_revision": {
+      "type": "string",
+      "minLength": 1
+    },
+    "budget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "total_tokens",
+        "reserved_output_tokens",
+        "estimated_input_tokens"
+      ],
+      "properties": {
+        "total_tokens": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "reserved_output_tokens": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "reserved_input_tokens": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "estimated_input_tokens": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "path",
+          "content_hash",
+          "git_blob",
+          "truth_level",
+          "level",
+          "priority",
+          "selection_reason",
+          "selector",
+          "estimated_tokens",
+          "ownership",
+          "source_system"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "content_hash": {
+            "type": "string",
+            "pattern": "^sha256:[a-f0-9]{64}$"
+          },
+          "git_blob": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "pattern": "^(?:[a-f0-9]{40}|[a-f0-9]{64})$"
+          },
+          "truth_level": {
+            "description": "Governed-document truth level, or unclassified for selected repository sources that are not governed documents.",
+            "enum": [
+              "canonical",
+              "design-target",
+              "active-snapshot",
+              "draft",
+              "historical",
+              "unclassified"
+            ]
+          },
+          "level": {
+            "enum": [
+              "L0",
+              "L1",
+              "L2",
+              "L3",
+              "L4",
+              "L5"
+            ]
+          },
+          "priority": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "selection_reason": {
+            "type": "string",
+            "minLength": 1
+          },
+          "selector": {
+            "type": "string"
+          },
+          "estimated_tokens": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "ownership": {
+            "enum": [
+              "project",
+              "external-tool"
+            ]
+          },
+          "source_system": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "line_ranges": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "prefixItems": [
+                {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              ],
+              "items": false,
+              "minItems": 2,
+              "maxItems": 2
+            },
+            "minItems": 1,
+            "maxItems": 1
+          },
+          "selection_hash": {
+            "type": "string",
+            "pattern": "^sha256:[a-f0-9]{64}$",
+            "description": "SHA-256 of the exact selected UTF-8 bytes; content_hash and git_blob still identify the complete source."
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "ownership": {
+                  "const": "external-tool"
+                }
+              },
+              "required": [
+                "ownership"
+              ]
+            },
+            "then": {
+              "properties": {
+                "source_system": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "ownership": {
+                  "const": "project"
+                }
+              },
+              "required": [
+                "ownership"
+              ]
+            },
+            "then": {
+              "properties": {
+                "source_system": {
+                  "type": "null"
+                }
+              }
+            }
+          }
+        ],
+        "dependentRequired": {
+          "line_ranges": [
+            "selection_hash"
+          ],
+          "selection_hash": [
+            "line_ranges"
+          ]
+        }
+      }
+    },
+    "omissions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "candidate",
+          "reason"
+        ],
+        "properties": {
+          "candidate": {
+            "type": "string",
+            "minLength": 1
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1
+          },
+          "required": {
+            "type": "boolean",
+            "default": false
+          }
+        }
+      }
+    },
+    "raw_transcripts_included": {
+      "type": "boolean",
+      "default": false
+    },
+    "lock_hash": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    }
+  }
+}

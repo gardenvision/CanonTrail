@@ -1,0 +1,23 @@
+task_id: T-MIT-LICENSE-001
+status: verified
+objective: Apply the owner's explicit MIT choice to local licensing metadata without publication or runtime changes.
+non_goals:
+  - Public release, remote operations, original checkout updates or real-project changes.
+  - Legal clearance, patent searches, licensing third-party material or general release approval.
+acceptance_criteria:
+  - {id: AC-LICENSE, statement: Standard MIT text and both root license fields agree with the owner decision while private remains true., verification: Exact official-text and package metadata assertions., status: pass}
+  - {id: AC-DOCS, statement: Current documentation distinguishes selected MIT from outstanding release and content review., verification: Read current owner documents and inspect terminology and lifecycle gates., status: pass}
+  - {id: AC-PRESERVATION, statement: Runtime contracts and historical inputs remain unchanged and local quality checks pass., verification: Baseline hashes plus current build and focused tests., status: pass}
+dependencies: []
+documentation_impact: [README.md, CONTRIBUTING.md, docs/alpha-readiness.md, docs/self-documentation.md, ROADMAP.md]
+file_intents: [LICENSE.txt, package.json, package-lock.json, README.md, CONTRIBUTING.md, docs/alpha-readiness.md, docs/self-documentation.md, ROADMAP.md]
+required_context_sources: [LICENSE.txt, package.json, README.md, CONTRIBUTING.md, docs/alpha-readiness.md]
+context_sections:
+  - {path: package-lock.json, from: 1, to: 29, content_hash: 'sha256:76115c1d799b14720d99c0f6ad4613d6c1dcbc692161f752f018af5d8d06c0b6'}
+parallel_safety: exclusive
+checks:
+  - id: CHECK-LICENSE-APPLICATION
+    command_or_observation: Compare license terms, package metadata, release boundaries and unchanged baseline sources; execute local build and regression checks.
+    status: pass
+    evidence_refs: [.agent-context/tasks/T-MIT-LICENSE-001/evidence/verification.json]
+updated_at: "2026-09-13T18:49:00Z"

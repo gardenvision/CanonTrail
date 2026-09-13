@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://canontrail.dev/schemas/migration-plan.schema.json",
+  "title": "CanonTrail Migration Plan",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "migration_id", "created_at", "mode", "adapter", "root", "documentation_roots", "summary", "documents", "unprocessed", "warnings", "plan_hash"],
+  "properties": {
+    "version": { "const": 1 },
+    "migration_id": { "type": "string", "pattern": "^MIG-[A-Z0-9-]+$" },
+    "created_at": { "type": "string", "format": "date-time" },
+    "mode": { "const": "plan-only" },
+    "adapter": { "enum": ["auto", "canontrail", "legacy-header-v1", "gaertnerei-legacy", "generic-markdown"], "description": "New plans use the neutral adapter; the historical project-specific spelling remains accepted for retained plans." },
+    "root": { "const": "." },
+    "documentation_roots": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/documentationRoot" } },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["documents", "source_formats", "roles", "actions", "review_required", "ignored_by_extension", "unreadable"],
+      "properties": {
+        "documents": { "type": "integer", "minimum": 0 },
+        "source_formats": { "$ref": "#/$defs/sourceFormatCounts" },
+        "roles": { "$ref": "#/$defs/roleCounts" },
+        "actions": { "$ref": "#/$defs/actionCounts" },
+        "review_required": { "type": "integer", "minimum": 0 },
+        "ignored_by_extension": { "type": "object", "additionalProperties": { "type": "integer", "minimum": 1 } },
+        "unreadable": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "documents": { "type": "array", "items": { "$ref": "#/$defs/document" } },
+    "unprocessed": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "reason"],
+        "properties": { "path": { "$ref": "#/$defs/reportedPath" }, "reason": { "type": "string", "minLength": 1 } }
+      }
+    },
+    "warnings": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+    "plan_hash": { "$ref": "#/$defs/hash" }
+  },
+  "$defs": {
+    "documentationRoot": { "anyOf": [{ "const": "." }, { "$ref": "#/$defs/path" }] },
+    "path": {
+      "type": "string",
+      "minLength": 1,
+      "allOf": [
+        { "not": { "pattern": "/$|//|(^|/)\\.(?:/|$)" } },
+        { "not": { "pattern": "(^|/)\\.\\.(/|$)|^[A-Za-z]:|^/|^\\\\" } },
+        { "not": { "pattern": "[\\\\<>:\"|?*\\u0000-\\u001F]" } },
+        { "not": { "pattern": "(^|/)[^/]*[. ]($|/)" } },
+        { "not": { "pattern": "(^|/)(?:[Cc][Oo][Nn]|[Pp][Rr][Nn]|[Aa][Uu][Xx]|[Nn][Uu][Ll]|[Cc][Ll][Oo][Cc][Kk]\\$|[Cc][Oo][Nn][Ii][Nn]\\$|[Cc][Oo][Nn][Oo][Uu][Tt]\\$|[Cc][Oo][Mm][1-9¹²³]|[Ll][Pp][Tt][1-9¹²³])(?: +)?(?:\\.[^/]*)?($|/)" } }
+      ]
+    },
+    "reportedPath": { "type": "string", "minLength": 1 },
+    "hash": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+    "sourceFormatCounts": {
+      "type": "object", "additionalProperties": false,
+      "required": ["canontrail-frontmatter", "plain-markdown"],
+      "oneOf": [
+        { "required": ["legacy-header-v1"], "properties": { "legacy-header-v1": true } },
+        { "required": ["gaertnerei-legacy-header"], "properties": { "gaertnerei-legacy-header": true } }
+      ],
+      "properties": {
+        "canontrail-frontmatter": { "type": "integer", "minimum": 0 },
+        "legacy-header-v1": { "type": "integer", "minimum": 0 },
+        "gaertnerei-legacy-header": { "type": "integer", "minimum": 0 },
+        "plain-markdown": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "roleCounts": {
+      "type": "object", "additionalProperties": false,
+      "required": ["canonical", "active-reference", "active-snapshot", "design-target", "handoff", "review", "historical", "third-party", "unknown"],
+      "properties": {
+        "canonical": { "type": "integer", "minimum": 0 }, "active-reference": { "type": "integer", "minimum": 0 },
+        "active-snapshot": { "type": "integer", "minimum": 0 }, "design-target": { "type": "integer", "minimum": 0 },
+        "handoff": { "type": "integer", "minimum": 0 }, "review": { "type": "integer", "minimum": 0 },
+        "historical": { "type": "integer", "minimum": 0 }, "third-party": { "type": "integer", "minimum": 0 },
+        "unknown": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "actionCounts": {
+      "type": "object", "additionalProperties": false,
+      "required": ["keep", "normalize-header", "review-metadata", "classify-and-normalize", "preserve-historical", "preserve-review", "exclude-external"],
+      "properties": {
+        "keep": { "type": "integer", "minimum": 0 }, "normalize-header": { "type": "integer", "minimum": 0 },
+        "review-metadata": { "type": "integer", "minimum": 0 }, "classify-and-normalize": { "type": "integer", "minimum": 0 },
+        "preserve-historical": { "type": "integer", "minimum": 0 }, "preserve-review": { "type": "integer", "minimum": 0 },
+        "exclude-external": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "metadata": {
+      "type": "object", "additionalProperties": false,
+      "required": ["stand", "status", "truth_level", "verification", "read_if_task_touches", "primary_systems", "safe_to_edit", "do_not_use_instead"],
+      "properties": {
+        "stand": { "type": ["string", "null"] }, "status": { "type": ["string", "null"] },
+        "truth_level": { "type": ["string", "null"] }, "verification": { "type": ["string", "null"] },
+        "read_if_task_touches": { "$ref": "#/$defs/strings" }, "primary_systems": { "$ref": "#/$defs/strings" },
+        "safe_to_edit": { "$ref": "#/$defs/strings" }, "do_not_use_instead": { "$ref": "#/$defs/strings" }
+      }
+    },
+    "strings": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+    "document": {
+      "type": "object", "additionalProperties": false,
+      "required": ["path", "content_hash", "bytes", "source_format", "detected_metadata", "role", "proposed_action", "target_path", "confidence", "requires_review", "reasons"],
+      "properties": {
+        "path": { "$ref": "#/$defs/path" }, "content_hash": { "$ref": "#/$defs/hash" }, "bytes": { "type": "integer", "minimum": 0 },
+        "source_format": { "enum": ["canontrail-frontmatter", "legacy-header-v1", "gaertnerei-legacy-header", "plain-markdown"] },
+        "detected_metadata": { "$ref": "#/$defs/metadata" },
+        "role": { "enum": ["canonical", "active-reference", "active-snapshot", "design-target", "handoff", "review", "historical", "third-party", "unknown"] },
+        "proposed_action": { "enum": ["keep", "normalize-header", "review-metadata", "classify-and-normalize", "preserve-historical", "preserve-review", "exclude-external"] },
+        "target_path": { "$ref": "#/$defs/path" }, "confidence": { "enum": ["high", "medium", "low"] },
+        "requires_review": { "type": "boolean" }, "reasons": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } }
+      }
+    }
+  }
+}

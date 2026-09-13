@@ -1,0 +1,58 @@
+version: 1
+change_id: CHG-MIT-LICENSE-001
+revision: 1
+title: Apply the explicitly chosen MIT license to a local candidate
+status: verified
+risk: medium
+author: CanonTrail licensing implementation agent
+canonical_source: .agent-context/tasks/T-MIT-LICENSE-001/evidence/owner-decision.json
+decision_rationale: The owner selected MIT explicitly. This bounded local metadata change does not authorize public distribution, runtime modification or legal clearance; sealed originals remain available.
+documentation_structure:
+  decision: no-feature-document-change
+  rationale: No product feature changes; existing README license summary and readiness owner suffice, with standard license terms in LICENSE.txt.
+  feature_documents: []
+acceptance_cases:
+  - id: AC-LICENSE
+    given: The owner chose MIT and the local root metadata still says UNLICENSED.
+    expected: Standard MIT terms with project attribution and both MIT root fields; private stays true and third-party package metadata stays unchanged.
+    failure_or_uncertainty: License implementation is not a judgment on ownership or enforceability.
+    counterexample: Switching the license also removes private or rewrites dependency licenses.
+    oracle: Official MIT text, parsed package comparison and explicit owner decision.
+    status: pass
+    evidence_refs: [.agent-context/tasks/T-MIT-LICENSE-001/evidence/owner-decision.json, .agent-context/tasks/T-MIT-LICENSE-001/evidence/verification.json]
+  - id: AC-DOCS
+    given: Current onboarding and readiness documents describe license selection as pending.
+    expected: They record MIT while keeping whole-product review, third-party clearance and publication open.
+    failure_or_uncertainty: Historical review receipts must not be rewritten into license approval.
+    counterexample: A technical review is reported as legal approval or the source is called publicly released.
+    oracle: Review the exact changed paragraphs and their existing task scopes.
+    status: pass
+    evidence_refs: [.agent-context/tasks/T-MIT-LICENSE-001/evidence/verification.json]
+  - id: AC-PRESERVATION
+    given: A sealed V4 baseline and historical task locks exist.
+    expected: No runtime, schema, test, existing example or historical lock bytes change; active Alpha context is archived before refresh.
+    failure_or_uncertainty: Hosted V3 evidence is not attributed to the new licensing revision.
+    counterexample: A historical completed lock is regenerated to hide source drift.
+    oracle: Byte-hash baseline comparison and fresh local quality reports.
+    status: pass
+    evidence_refs: [.agent-context/tasks/T-MIT-LICENSE-001/evidence/verification.json]
+impacts:
+  - {area: requirement, decision: affected, rationale: Apply an explicit owner licensing decision only., evidence_refs: [.agent-context/tasks/T-MIT-LICENSE-001/evidence/owner-decision.json]}
+  - {area: data-contracts, decision: not-affected, rationale: Root licensing values change but artifact schemas and serialized runtime contracts do not., evidence_refs: []}
+  - {area: domain-logic, decision: not-affected, rationale: No runtime implementation changes., evidence_refs: []}
+  - {area: tests-reference-cases, decision: not-affected, rationale: Existing tests retain exact baseline bytes; only new external verification receipts are generated., evidence_refs: []}
+  - {area: example-data, decision: not-affected, rationale: All existing example files stay byte-identical., evidence_refs: []}
+  - {area: ui-api, decision: not-affected, rationale: No UI or CLI behavior changes., evidence_refs: []}
+  - {area: documentation, decision: affected, rationale: Existing license and readiness statements are reconciled with the owner decision., evidence_refs: [README.md, docs/alpha-readiness.md]}
+  - {area: diagrams-visuals, decision: not-affected, rationale: No visual changes or diagrams., evidence_refs: []}
+  - {area: terminology, decision: affected, rationale: Replace current no-license claims without rewriting historical evidence., evidence_refs: [README.md, CONTRIBUTING.md, ROADMAP.md]}
+  - {area: operations-compatibility, decision: affected, rationale: Package/root-lock metadata and contribution boundaries change; npm publication remains disabled., evidence_refs: [package.json, package-lock.json, CONTRIBUTING.md]}
+verification:
+  checks: [{name: Local licensing application and preservation checks, status: pass, evidence_refs: [.agent-context/tasks/T-MIT-LICENSE-001/evidence/verification.json]}]
+  terminology_search: {status: pass, terms: [UNLICENSED, no license, MIT, publication], evidence_refs: [README.md, CONTRIBUTING.md, docs/alpha-readiness.md, .agent-context/tasks/T-MIT-LICENSE-001/evidence/verification.json]}
+  visual_review: {applicable: false, status: not-applicable, evidence_refs: []}
+  unverifiable_items: []
+independent_review: {status: not-required, reviewer: null, findings: [], evidence_refs: [], waiver: null}
+supersedes: []
+superseded_by: null
+updated_at: "2026-09-13T18:49:00Z"

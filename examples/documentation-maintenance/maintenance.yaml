@@ -1,0 +1,21 @@
+version: 1
+created: 2026-08-27
+cadence: weekly
+mode: report-first
+remote_required: false
+stale_after_days:
+  canonical: 180
+  design-target: 90
+  active-snapshot: 30
+  draft: 30
+  historical: null
+future_date_tolerance_days: 1
+checks:
+  - stale documents
+  - duplicate topic ownership
+  - contradiction candidates
+  - broken evidence and file references
+  - orphaned task and handoff artifacts
+  - superseded drafts safe to archive
+  - context index freshness
+mutation_policy: Never delete, rewrite, merge, archive, or promote documentation without review.

@@ -1,0 +1,22 @@
+version: 1
+created: 2026-09-12
+mode: curated-alpha-baseline
+status: review
+policy:
+  one_topic_one_owner: true
+  private_history_is_not_distributed: true
+  historical_approvals_are_not_transferred: true
+  new_documents_begin_as: draft/unverified
+  canonical_promotion_requires: explicit evidence and review
+phases:
+  - id: DOC-ALPHA-BASELINE
+    title: Curate portable product owners and retain executable contracts
+    status: review
+    evidence:
+      - .agent-context/tasks/T-ALPHA-CANDIDATE-001/evidence/verification.json
+subsystem_tasks:
+  - {id: DOC-PURPOSE, title: Product scope, status: review, knowledge_owner: VISION.md}
+  - {id: DOC-CONTRACT, title: Artifact contracts, status: review, knowledge_owner: ARTIFACT_PROTOCOL.md}
+  - {id: DOC-ENTRY, title: Source install and usage, status: review, knowledge_owner: README.md}
+  - {id: DOC-RELEASE, title: Alpha gates, status: review, knowledge_owner: docs/alpha-readiness.md}
+  - {id: DOC-MAP, title: Knowledge owners, status: review, knowledge_owner: docs/self-documentation.md}

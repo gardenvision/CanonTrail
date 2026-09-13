@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:canontrail:schema:resume-packet:0",
+  "title": "Fresh Session Resume Packet",
+  "description": "Immutable receiving-context receipt. Repository validation audits retained integrity only; explicit resume validate --packet checks current task requirements, source bytes and latest handoff before use. No packet-authored lifecycle field grants an exemption. See ARTIFACT_PROTOCOL section 8.1.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "resume_packet_id",
+    "task_id",
+    "created_at",
+    "receiving_session_id",
+    "handoff_path",
+    "handoff_hash",
+    "source_session_id",
+    "source_context_lock_path",
+    "source_context_lock_hash",
+    "receiving_context_lock_path",
+    "receiving_context_lock_hash",
+    "active_context_lock_path",
+    "objective",
+    "next_safe_action",
+    "blockers",
+    "open_questions",
+    "do_not_repeat",
+    "worktree_dirty",
+    "uncommitted_summary",
+    "read_order",
+    "omissions",
+    "bootstrap_instruction",
+    "raw_transcripts_included",
+    "packet_hash"
+  ],
+  "properties": {
+    "resume_packet_id": { "type": "string", "minLength": 1 },
+    "task_id": { "type": "string", "minLength": 1 },
+    "created_at": { "type": "string", "format": "date-time" },
+    "receiving_session_id": { "type": "string", "minLength": 1 },
+    "handoff_path": { "type": "string", "minLength": 1 },
+    "handoff_hash": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+    "source_session_id": { "type": "string", "minLength": 1 },
+    "source_context_lock_path": { "type": "string", "minLength": 1 },
+    "source_context_lock_hash": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+    "receiving_context_lock_path": { "type": "string", "minLength": 1 },
+    "receiving_context_lock_hash": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+    "active_context_lock_path": { "type": "string", "minLength": 1 },
+    "objective": { "type": "string", "minLength": 1 },
+    "next_safe_action": { "type": "string", "minLength": 20 },
+    "blockers": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "open_questions": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "do_not_repeat": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "worktree_dirty": { "type": "boolean" },
+    "uncommitted_summary": { "type": ["string", "null"] },
+    "read_order": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "omissions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["candidate", "reason", "required"],
+        "properties": {
+          "candidate": { "type": "string", "minLength": 1 },
+          "reason": { "type": "string", "minLength": 1 },
+          "required": { "type": "boolean" }
+        }
+      }
+    },
+    "bootstrap_instruction": { "type": "string", "minLength": 1 },
+    "raw_transcripts_included": { "const": false },
+    "packet_hash": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" }
+  }
+}

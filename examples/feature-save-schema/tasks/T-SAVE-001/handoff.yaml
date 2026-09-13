@@ -1,0 +1,42 @@
+handoff_id: H-SAVE-001-01
+task_id: T-SAVE-001
+source_system: superpowers
+source_ref: docs/superpowers/plans/2026-07-13-save-schema.md
+created_at: "2026-07-13T17:00:00+02:00"
+source_session_id: session-codex-001
+source_context_lock_path: examples/feature-save-schema/tasks/T-SAVE-001/source-context.lock.json
+source_context_lock_hash: sha256:30282dd811aa82816a98fd7b5805b848248dcf3e16f6f7e6d70a0aa40727d6f1
+objective: Add schema version serialization and legacy version detection.
+completed:
+  - Inspected the serialization boundary.
+  - Added a failing test fixture for a save without a version field.
+decisions:
+  - statement: Keep version 0 reserved for missing legacy fields.
+    authority: approved
+    source: examples/feature-save-schema/project-doc.md
+files:
+  - path: SaveSystemTests.cs
+    state: modified
+    summary: Added the legacy-save fixture and initial failing test.
+  - path: SaveManager.cs
+    state: inspected
+    summary: Identified the deserialization entry point; no change yet.
+checks:
+  - name: legacy save test
+    status: not-run
+    evidence: ""
+blockers: []
+open_questions:
+  - Should schema version parsing live in SaveData or the serializer adapter?
+next_safe_action: Implement missing-field parsing as version 0 at the deserialization boundary, then run the focused legacy-save test.
+do_not_repeat:
+  - Do not redesign the external workflow plan during resume.
+  - Do not overwrite the legacy fixture during the test.
+resume_sources:
+  - examples/feature-save-schema/task-brief.md
+  - examples/feature-save-schema/project-doc.md
+  - SaveSystemTests.cs
+  - SaveManager.cs
+worktree_dirty: true
+uncommitted_summary: SaveSystemTests.cs contains the failing legacy-save test.
+handoff_hash: sha256:2e7e0d6d25180ab6626f103aeb9943bac0a8fdd6a4e020d23a2d079b21d664d3

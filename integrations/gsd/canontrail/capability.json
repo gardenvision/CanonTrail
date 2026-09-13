@@ -1,0 +1,58 @@
+{
+  "id": "canontrail",
+  "role": "feature",
+  "version": "0.1.0",
+  "title": "CanonTrail documentation continuity",
+  "description": "Adds bounded CanonTrail context before GSD planning and a deterministic CanonTrail completion gate after GSD verification.",
+  "tier": "standard",
+  "requires": [],
+  "engines": {
+    "gsd": ">=1.11.0 <2.0.0"
+  },
+  "runtimeCompat": {
+    "supported": ["*"],
+    "unsupported": []
+  },
+  "skills": [
+    "canontrail-context",
+    "canontrail-finalize"
+  ],
+  "agents": [],
+  "hooks": [],
+  "config": {
+    "canontrail.enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable CanonTrail context and completion steps at GSD phase boundaries."
+    }
+  },
+  "steps": [
+    {
+      "point": "plan:pre",
+      "ref": {
+        "skill": "canontrail-context"
+      },
+      "produces": [],
+      "consumes": ["CONTEXT.md"],
+      "when": "canontrail.enabled",
+      "onError": "halt"
+    },
+    {
+      "point": "verify:post",
+      "ref": {
+        "skill": "canontrail-finalize"
+      },
+      "produces": [],
+      "consumes": ["SUMMARY.md"],
+      "when": "canontrail.enabled",
+      "onError": "halt"
+    }
+  ],
+  "contributions": [],
+  "gates": [],
+  "author": {
+    "name": "CanonTrail maintainers"
+  },
+  "homepage": "https://github.com/gardenvision/CanonTrail",
+  "repository": "https://github.com/gardenvision/CanonTrail"
+}

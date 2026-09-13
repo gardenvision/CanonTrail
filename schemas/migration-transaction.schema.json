@@ -1,0 +1,148 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://canontrail.dev/schemas/migration-transaction.schema.json",
+  "title": "CanonTrail Migration Transaction",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "transaction_id", "migration_id", "created_at", "mode", "plan_hash", "decision_hash", "reviewed_by", "reviewed_at", "decisions", "root", "documentation_roots", "operations", "blockers", "summary", "transaction_hash"],
+  "properties": {
+    "version": { "const": 2 },
+    "transaction_id": { "type": "string", "pattern": "^MTX-[A-Z0-9-]+$" },
+    "migration_id": { "type": "string", "pattern": "^MIG-[A-Z0-9-]+$" },
+    "created_at": { "type": "string", "format": "date-time" },
+    "mode": { "const": "transformation-preview" },
+    "plan_hash": { "$ref": "#/$defs/hash" },
+    "decision_hash": { "anyOf": [{ "$ref": "#/$defs/hash" }, { "type": "null" }] },
+    "reviewed_by": { "type": ["string", "null"] },
+    "reviewed_at": { "anyOf": [{ "type": "string", "format": "date-time" }, { "type": "null" }] },
+    "decisions": { "type": "array", "items": { "$ref": "#/$defs/decision" } },
+    "root": { "const": "." },
+    "documentation_roots": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/documentationRoot" }
+    },
+    "operations": { "type": "array", "items": { "$ref": "#/$defs/operation" } },
+    "blockers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "code", "reason"],
+        "properties": {
+          "path": { "$ref": "#/$defs/reportedPath" },
+          "code": { "type": "string", "minLength": 1 },
+          "reason": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["operations", "blockers", "skipped"],
+      "properties": {
+        "operations": { "type": "integer", "minimum": 0 },
+        "blockers": { "type": "integer", "minimum": 0 },
+        "skipped": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "transaction_hash": { "$ref": "#/$defs/hash" }
+  },
+  "$defs": {
+    "documentationRoot": { "anyOf": [{ "const": "." }, { "$ref": "#/$defs/path" }] },
+    "path": {
+      "type": "string",
+      "minLength": 1,
+      "allOf": [
+        { "not": { "pattern": "/$|//|(^|/)\\.(?:/|$)" } },
+        { "not": { "pattern": "(^|/)\\.\\.(/|$)|^[A-Za-z]:|^/|^\\\\" } },
+        { "not": { "pattern": "[\\\\<>:\"|?*\\u0000-\\u001F]" } },
+        { "not": { "pattern": "(^|/)[^/]*[. ]($|/)" } },
+        { "not": { "pattern": "(^|/)(?:[Cc][Oo][Nn]|[Pp][Rr][Nn]|[Aa][Uu][Xx]|[Nn][Uu][Ll]|[Cc][Ll][Oo][Cc][Kk]\\$|[Cc][Oo][Nn][Ii][Nn]\\$|[Cc][Oo][Nn][Oo][Uu][Tt]\\$|[Cc][Oo][Mm][1-9¹²³]|[Ll][Pp][Tt][1-9¹²³])(?: +)?(?:\\.[^/]*)?($|/)" } }
+      ]
+    },
+    "reportedPath": { "type": "string", "minLength": 1 },
+    "hash": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+    "strings": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+    "header": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["stand", "status", "truth_level", "verification", "read_if_task_touches", "primary_systems", "safe_to_edit", "do_not_use_instead"],
+      "properties": {
+        "topic_id": { "type": "string", "minLength": 1 },
+        "stand": { "type": "string", "minLength": 1 },
+        "status": { "type": "string", "minLength": 1 },
+        "truth_level": { "enum": ["canonical", "design-target", "active-snapshot", "draft", "historical"] },
+        "verification": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["state", "evidence"],
+          "properties": {
+            "state": { "enum": ["unverified", "structurally-reviewed", "internally-reviewed", "reviewed", "verified"] },
+            "evidence": { "$ref": "#/$defs/strings" }
+          }
+        },
+        "read_if_task_touches": { "$ref": "#/$defs/strings" },
+        "primary_systems": { "$ref": "#/$defs/strings" },
+        "safe_to_edit": { "$ref": "#/$defs/strings" },
+        "do_not_use_instead": { "$ref": "#/$defs/strings" }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "truth_level": { "const": "canonical" } }, "required": ["truth_level"] },
+          "then": {
+            "properties": { "topic_id": { "type": "string", "minLength": 1 } },
+            "required": ["topic_id"]
+          }
+        }
+      ]
+    },
+    "operation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["operation_id", "action", "source_path", "target_path", "source_hash", "target_precondition", "output_hash", "output_bytes", "target_header"],
+      "properties": {
+        "operation_id": { "type": "string", "pattern": "^OP-[0-9]{4,}$" },
+        "action": { "const": "normalize-header" },
+        "source_path": { "$ref": "#/$defs/path" },
+        "target_path": { "$ref": "#/$defs/path" },
+        "source_hash": { "$ref": "#/$defs/hash" },
+        "target_precondition": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["state", "content_hash"],
+          "properties": {
+            "state": { "enum": ["same-as-source", "absent"] },
+            "content_hash": { "anyOf": [{ "$ref": "#/$defs/hash" }, { "type": "null" }] }
+          }
+        },
+        "output_hash": { "$ref": "#/$defs/hash" },
+        "output_bytes": { "type": "integer", "minimum": 1 },
+        "target_header": { "$ref": "#/$defs/header" }
+      }
+    },
+    "decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "decision", "action", "target_path", "reason"],
+      "properties": {
+        "path": { "$ref": "#/$defs/path" },
+        "decision": { "enum": ["execute", "skip"] },
+        "action": { "const": "normalize-header" },
+        "target_path": { "$ref": "#/$defs/path" },
+        "reason": { "type": "string", "minLength": 1 },
+        "target_header": { "$ref": "#/$defs/header" }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "decision": { "const": "execute" } }, "required": ["decision"] },
+          "then": {
+            "properties": { "target_header": { "$ref": "#/$defs/header" } },
+            "required": ["target_header"]
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,20 @@
+task_id: T-PUBLIC-PREP-001
+status: review
+objective: Prepare neutral legacy-format naming and a complete local source-release handoff without publication.
+non_goals:
+  - Real project migration, source relocation, remote writes or a public release.
+  - Independent approval by the author or rewriting immutable historical records.
+acceptance_criteria:
+  - {id: AC-NEUTRAL, statement: New plan output and normal CLI help use only the neutral format name., verification: API and built CLI assertions., status: pass}
+  - {id: AC-COMPAT, statement: Historical plan bytes remain valid while mixed vocabularies and false counts fail., verification: Historical fixture and negative schema and validator cases., status: pass}
+  - {id: AC-BOUNDARIES, statement: Transformation and rollback retain their existing safety contracts and byte preservation., verification: Migration regressions and source-preservation manifests., status: pass}
+  - {id: AC-DISTRIBUTION, statement: License inventory and package documentation are complete without enabling publishing or claiming a configured host., verification: Package dry run and release checklist assertions., status: pass}
+dependencies: []
+documentation_impact: [docs/migration.md, docs/alpha-readiness.md, docs/self-documentation.md, README.md, ROADMAP.md, ARTIFACT_PROTOCOL.md]
+file_intents: [src/migration.ts, src/cli.ts, src/validator.ts, schemas/migration-plan.schema.json, test/migration.test.ts, test/validator.test.ts, test/migration-naming.test.ts, examples/migration-plan/README.md, examples/migration-plan/neutral-plan.json, docs/migration.md, docs/release-checklist.md, docs/third-party-notices.md, docs/alpha-readiness.md, docs/self-documentation.md, README.md, ROADMAP.md, ARTIFACT_PROTOCOL.md, package.json]
+required_context_sources: [docs/migration.md, schemas/migration-plan.schema.json, docs/alpha-readiness.md, package.json]
+parallel_safety: exclusive
+checks:
+  - {id: CHECK-QUALITY, command_or_observation: 'Run typecheck, complete tests, build, packaging and repository checks; preserve raw evidence.', status: pass, evidence_refs: [.agent-context/tasks/T-PUBLIC-PREP-001/evidence/verification.json]}
+  - {id: CHECK-REVIEW, command_or_observation: Independent review of the exact naming and release-preparation revision., status: pending, evidence_refs: []}
+updated_at: "2026-09-13T19:36:00Z"

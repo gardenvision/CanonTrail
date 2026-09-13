@@ -1,0 +1,211 @@
+{
+  "version": 1,
+  "task_id": "T-FROZEN-EXAMPLE-LIFECYCLE-001",
+  "observed_at": "2026-09-12T16:57:15.445Z",
+  "scope": "Author verification of isolated local candidate; not independent review, canonical promotion, publication or exact-candidate Linux/macOS evidence.",
+  "environment": {
+    "platform": "win32",
+    "architecture": "x64",
+    "node": "v24.11.1",
+    "git": "No candidate Git history; parent repository discovery disabled."
+  },
+  "full_suite": {
+    "passed": 671,
+    "failed": 0,
+    "skipped": 13,
+    "total": 684,
+    "files": 32,
+    "result_sha256": "0dbc1eca5abfa07dd63b8368be2a5d017ecb31c9827ad7316cca2aac74d753e5"
+  },
+  "focused": {
+    "passed": 52,
+    "failed": 0,
+    "skipped": 1,
+    "total": 53
+  },
+  "receipts": [
+    {
+      "name": "full1-check",
+      "exit": 0,
+      "elapsed_ms": 1097,
+      "receipt_sha256": "d669ece272c2e6024e7d29fe7a73085789d5e0a3a82c10e81e648aa92b37fcfb",
+      "stdout_sha256": "3782fa9c3431ff90253487fa77980b03fe72d986a1e74c9639d20b2d134e5742",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "full1-build",
+      "exit": 0,
+      "elapsed_ms": 1188,
+      "receipt_sha256": "686f8d8c36751dcb64bb46e9627f697b69d17c62547ef8ff1510e3f83e1e6586",
+      "stdout_sha256": "b2a9e1a59f1d674417502092b9b3c9425f31bf9d92d7b54ce627f40c91f1ef56",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "full1-full",
+      "exit": 0,
+      "elapsed_ms": 506703,
+      "receipt_sha256": "35917ed239e321083ff2843261946e2d98e9407f8bc95423ca5a86edc1fbe33f",
+      "stdout_sha256": "a69ebdd8778353dee78554fd61cb842e2e7c32166d4c6c761ce2c7d7c4f5ae5e",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "focused2-check",
+      "exit": 0,
+      "elapsed_ms": 622,
+      "receipt_sha256": "936f640a1fc5473bf46927b95497edb1524452d124732d60391793bbe93e878c",
+      "stdout_sha256": "3782fa9c3431ff90253487fa77980b03fe72d986a1e74c9639d20b2d134e5742",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "focused2-focused",
+      "exit": 0,
+      "elapsed_ms": 20985,
+      "receipt_sha256": "ab2329bd3ec2b95cbf3b344060701a4075f4d31d87877070e7f222d92ffb5569",
+      "stdout_sha256": "b2f619aa8881d8776f259889cf18e48b71c685bc47ed5c7e1a9b9841557e6477",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "tested_subjects": [
+    {
+      "path": "src/frozen-examples.ts",
+      "sha256": "cacfecd511f40743ad553e09b289e8c1126d63d61775981fdb26ef2acea3677b",
+      "bytes": 4906
+    },
+    {
+      "path": "src/docs.ts",
+      "sha256": "a975b4957dd7bd975601849ca9e8965603f3ade5e9e0611a35155292ed14dedd",
+      "bytes": 24796
+    },
+    {
+      "path": "src/validator.ts",
+      "sha256": "7b4ae9ca54597d6219af3b9c21b47c9fce0499d9f19e9eaa66aab05afb6a0d26",
+      "bytes": 64653
+    },
+    {
+      "path": "schemas/maintenance.schema.json",
+      "sha256": "ed0945f89c6193cb9ff5ac7bc307c5faa48c04f52339a9138932983add8e33c8",
+      "bytes": 2017
+    },
+    {
+      "path": "test/frozen-examples.test.ts",
+      "sha256": "2b4f0aad7b71675c550f3e723785cb76bfe7688baaeb9a579202d6a0b1f072ef",
+      "bytes": 15033
+    },
+    {
+      "path": "package.json",
+      "sha256": "93874185a4a5423f0d9c199b2e04dc5893acc76ecde025668a38f18c66a69916",
+      "bytes": 921
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "4eb63f0b55852d34a91f0da0f1655a9ca985f55d3dee9de3c9ab1391f11b2bdc",
+      "bytes": 73015
+    }
+  ],
+  "skipped_cases": [
+    {"file":"test/completion-reference-fields.test.ts","test":"completion reference-field inventory does not skip a URI-looking literal POSIX source path"},
+    {"file":"test/context-review-corrections.test.ts","test":"context review correction regressions keeps distinct exact-case filenames distinct where the filesystem supports them"},
+    {"file":"test/context.test.ts","test":"compileContext rejects a required context source that is a symlink alias of the lock output"},
+    {"file":"test/finalize-audit-errors.test.ts","test":"structured documentation-audit failure returns a failure for an actually unreadable POSIX directory"},
+    {"file":"test/migration-control-evidence.test.ts","test":"independent 43e180e control-evidence findings rejects a linked evidence file intent.json without reading through it"},
+    {"file":"test/migration-control-evidence.test.ts","test":"independent 43e180e control-evidence findings rejects a linked evidence file apply.record.json without reading through it"},
+    {"file":"test/migration-control-evidence.test.ts","test":"independent 43e180e control-evidence findings rejects a linked evidence file rollback.record.json without reading through it"},
+    {"file":"test/migration-control-evidence.test.ts","test":"independent 43e180e control-evidence findings rejects a linked evidence file OP-0001.before.bin without reading through it"},
+    {"file":"test/migration-control-evidence.test.ts","test":"independent 43e180e control-evidence findings rejects a linked evidence file OP-0001.after.bin without reading through it"},
+    {"file":"test/migration-platform.test.ts","test":"native migration portability rejects a native file symlink when the fixture volume permits one"},
+    {"file":"test/migration-platform.test.ts","test":"native migration portability preserves POSIX permission bits across atomic apply and rollback"},
+    {"file":"test/task-scoped-finalize.test.ts","test":"task-scoped completion safety boundary fails closed for a selected peer file alias"},
+    {"file":"test/task-scoped-finalize.test.ts","test":"task-scoped completion safety boundary does not reinterpret distinct case-sensitive directory names as task ownership"}
+  ],
+  "unchanged_teaching_artifacts": [
+    {
+      "path": "examples/feature-save-schema/project-doc.md",
+      "sha256": "726ba9eb55a587d27605988a1c4f6458d84abdbcffcb2c35de968027be4cea45",
+      "bytes": 656
+    },
+    {
+      "path": "examples/feature-save-schema/SaveManager.cs",
+      "sha256": "00d1407bb38c790748990eecd9f43fbe27e12dbaf27c689d5bd7bb43fd975cae",
+      "bytes": 108
+    },
+    {
+      "path": "examples/feature-save-schema/task-brief.md",
+      "sha256": "bfc6bed57871838bbd40f7e1ee9c13114b6bb66b725575b454643f584e34be5f",
+      "bytes": 865
+    },
+    {
+      "path": "examples/feature-save-schema/tasks/T-SAVE-001/change.yaml",
+      "sha256": "927c0fe46f7f4a3b94e480f81fdebc46c2ccafbf29acfccae854617d9b590bf8",
+      "bytes": 4100
+    },
+    {
+      "path": "examples/feature-save-schema/tasks/T-SAVE-001/context.lock.json",
+      "sha256": "92010d8bde82ec221dfb7818b8862fa6436816614e8afcb0ae209721dbd2d051",
+      "bytes": 2824
+    },
+    {
+      "path": "examples/feature-save-schema/tasks/T-SAVE-001/evidence/EVID-SAVE-TEST.evidence.yaml",
+      "sha256": "19c8d62eb4dbba17e40d6afbebcdd4d232e8efa339839c3131f0dd954feabc7d",
+      "bytes": 669
+    },
+    {
+      "path": "examples/feature-save-schema/tasks/T-SAVE-001/handoff.yaml",
+      "sha256": "d1c5a0be8916f019937c5dc6cf06d66427433654c8584ff410a08b2a825887b4",
+      "bytes": 1789
+    },
+    {
+      "path": "examples/feature-save-schema/tasks/T-SAVE-001/receiving-context.lock.json",
+      "sha256": "0650ac2702f31dcb6fa7208e557766f6f3a7e6cf6e8dc53fd19d437b4fbd7d64",
+      "bytes": 2300
+    },
+    {
+      "path": "examples/feature-save-schema/tasks/T-SAVE-001/resume.packet.json",
+      "sha256": "96d7ebd124884e76c8adb20e39ceeaf0abdaebc815a450dc4217b8aa473a3917",
+      "bytes": 2266
+    },
+    {
+      "path": "examples/feature-save-schema/tasks/T-SAVE-001/source-context.lock.json",
+      "sha256": "6aaee495e67990bd89ef0f2c61fe26bf0c65b8a14bf5c2ab0a9c4893d02efa2d",
+      "bytes": 2185
+    },
+    {
+      "path": "examples/feature-save-schema/tasks/T-SAVE-001/state.yaml",
+      "sha256": "6bfb21076efc2da02f49e22a4ab3ab38bac80088b034cfa3ce45896b0f88930d",
+      "bytes": 1157
+    }
+  ],
+  "pre_refresh_active_locks": [
+    {
+      "task_id": "T-ALPHA-CANDIDATE-001",
+      "source": ".agent-context/tasks/T-ALPHA-CANDIDATE-001/context.lock.json",
+      "archive": ".agent-context/tasks/T-ALPHA-CANDIDATE-001/evidence/context-locks/4281fb836956c1bff2588ba835eeb219ca5150803593d9246388ea2ea0a7139e.json",
+      "lock_hash": "sha256:4281fb836956c1bff2588ba835eeb219ca5150803593d9246388ea2ea0a7139e",
+      "file_sha256": "8c53563f7e24d9275cdea939b43a325168c75c04038ca38187f6ecd97724ef4f",
+      "bytes": 10480
+    },
+    {
+      "task_id": "T-FROZEN-EXAMPLE-LIFECYCLE-001",
+      "source": ".agent-context/tasks/T-FROZEN-EXAMPLE-LIFECYCLE-001/context.lock.json",
+      "archive": ".agent-context/tasks/T-FROZEN-EXAMPLE-LIFECYCLE-001/evidence/context-locks/5cd1c70d9c19e959c390469564a531f6d016a9187019a7be990c337842f2846d.json",
+      "lock_hash": "sha256:5cd1c70d9c19e959c390469564a531f6d016a9187019a7be990c337842f2846d",
+      "file_sha256": "d53aa6d78f31a7d6514fa3708dde51df2e68a0fc3af014bfd01de3f5b05556ef",
+      "bytes": 6796
+    }
+  ],
+  "counterexamples": [
+    "Absent/empty declarations retain DOCS101.",
+    "Wrong raw hash, CRLF changes, missing/unindexed source, malformed policy and aliases fail closed.",
+    "Canonical/design-target and operational task paths are ineligible.",
+    "Future-date and schema/reference errors remain visible.",
+    "Rebinding a changed teaching source never repairs its old LOCK004.",
+    "A real old task brief remains stale while a synthetic example is exempt.",
+    "Validation checks policy even outside configured artifact inventory."
+  ],
+  "limitations": [
+    "Readonly filesystem checks assume stable local inputs, not atomic concurrent replacement protection.",
+    "An explicit rationale is a maintainer declaration, not semantic proof or cryptographic reviewer identity.",
+    "Capability skips are not passes; exact-source Windows/Linux/macOS CI and independent review remain open.",
+    "General source-tree onboarding evidence belongs to the earlier Alpha task; it is not rerun or relabeled by this correction."
+  ],
+  "finalization": "A terminal aggregator, to be run separately after recording observations; not a prerequisite check of itself."
+}

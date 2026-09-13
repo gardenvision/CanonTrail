@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:canontrail:schema:compatibility:0",
+  "title": "External Workflow Compatibility Manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "generated", "policy", "integrations"],
+  "properties": {
+    "version": { "const": 1 },
+    "generated": { "type": "string", "format": "date" },
+    "policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "external_artifacts_are_read_only",
+        "external_artifacts_are_canonical",
+        "canonical_promotion_is_explicit"
+      ],
+      "properties": {
+        "external_artifacts_are_read_only": { "const": true },
+        "external_artifacts_are_canonical": { "const": false },
+        "canonical_promotion_is_explicit": { "const": true }
+      }
+    },
+    "integrations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "detected", "roots", "artifact_count"],
+        "properties": {
+          "id": { "enum": ["superpowers", "gsd-core", "gsd-pi"] },
+          "detected": { "type": "boolean" },
+          "roots": {
+            "type": "array",
+            "items": { "type": "string", "minLength": 1 },
+            "uniqueItems": true
+          },
+          "artifact_count": { "type": "integer", "minimum": 0 }
+        }
+      }
+    }
+  }
+}

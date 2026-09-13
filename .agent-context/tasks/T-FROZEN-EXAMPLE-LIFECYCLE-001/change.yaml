@@ -1,0 +1,47 @@
+version: 1
+change_id: CHG-FROZEN-EXAMPLE-LIFECYCLE-001
+revision: 2
+title: Explicit hash-bound age policy for frozen synthetic examples
+status: verified
+risk: high
+author: CanonTrail local implementation agent
+canonical_source: ARTIFACT_PROTOCOL.md
+decision_rationale: The user requested correcting historical teaching-example age without rewriting locked bytes or weakening real-task validation. An explicit exact-hash policy is narrower than excluding documents or extending global thresholds. Revision 2 records only the authorized formal closure after the independently reviewed V3 source passed exact-source platform CI; runtime, tests, schemas and historical inputs remain unchanged. The Alpha product release gate and licensing are not part of this closure.
+documentation_structure:
+  decision: update-existing-feature-documents
+  rationale: Maintenance contract stays in the protocol; release state and worked example are updated in their existing owners.
+  feature_documents:
+    - {feature_id: alpha-readiness, action: update, status: verified, path: docs/alpha-readiness.md, evidence_refs: [ARTIFACT_PROTOCOL.md, .agent-context/tasks/T-FROZEN-EXAMPLE-LIFECYCLE-001/evidence/review-receipt.json, .agent-context/tasks/T-FROZEN-EXAMPLE-LIFECYCLE-001/evidence/platform-results.json]}
+acceptance_cases:
+  - {id: AC-EXAMPLE, given: An unchanged synthetic active snapshot has an explicit maintainer hash binding., expected: Age alone is exempt and the report shows why; all original artifact bytes remain intact., failure_or_uncertainty: A changed file loses the exemption., counterexample: Matching path alone or a whole examples folder suppresses warnings., oracle: Raw hashes and audit/finalization assertions; a bound source change retains LOCK004., status: pass, evidence_refs: [.agent-context/tasks/T-FROZEN-EXAMPLE-LIFECYCLE-001/evidence/verification.json, test/frozen-examples.test.ts]}
+  - {id: AC-STRICT, given: A policy targets an operational or canonical file or a filesystem alias., expected: Validation and audit fail closed without concealing ordinary checks., failure_or_uncertainty: Filename and filesystem capabilities differ by host; exact V3 cross-platform evidence records actual coverage and skips., counterexample: A hard link into a real task bypasses the lexical path guard., oracle: Independent malformed-policy and physical-path probes plus exact-source native platform cases., status: pass, evidence_refs: [.agent-context/tasks/T-FROZEN-EXAMPLE-LIFECYCLE-001/evidence/verification.json, test/frozen-examples.test.ts, .agent-context/tasks/T-FROZEN-EXAMPLE-LIFECYCLE-001/evidence/review-receipt.json, .agent-context/tasks/T-FROZEN-EXAMPLE-LIFECYCLE-001/evidence/platform-results.json]}
+  - {id: AC-COMPAT, given: Existing valid projects omit the optional field., expected: Existing freshness and full regression behavior stay unchanged., failure_or_uncertainty: No new platform results may be inferred from local tests; malformed excluded maintenance files now fail explicitly., counterexample: New default exemptions appear after init., oracle: Full original suite and absent/empty-field regression cases; initializer unchanged., status: pass, evidence_refs: [.agent-context/tasks/T-FROZEN-EXAMPLE-LIFECYCLE-001/evidence/verification.json, src/initializer.ts]}
+impacts:
+  - {area: requirement, decision: affected, rationale: Exact-hash age-only rule and retained gates are explicit., evidence_refs: [ARTIFACT_PROTOCOL.md]}
+  - {area: data-contracts, decision: affected, rationale: Optional version-1 policy field plus additive audit report details; no init default exemption., evidence_refs: [schemas/maintenance.schema.json, src/docs.ts]}
+  - {area: domain-logic, decision: affected, rationale: Shared fail-closed lexical and physical eligibility with raw-byte binding; validator reads policy independently of scan coverage., evidence_refs: [src/frozen-examples.ts, src/validator.ts]}
+  - {area: tests-reference-cases, decision: affected, rationale: 35 new cases and complete local suite passed with existing capability skips retained., evidence_refs: [test/frozen-examples.test.ts, .agent-context/tasks/T-FROZEN-EXAMPLE-LIFECYCLE-001/evidence/verification.json]}
+  - {area: example-data, decision: affected, rationale: External binding and example README changed; 11 teaching inputs/old artifacts retained byte-exact., evidence_refs: [.agent-context/maintenance.yaml, examples/feature-save-schema/README.md, .agent-context/tasks/T-FROZEN-EXAMPLE-LIFECYCLE-001/evidence/verification.json]}
+  - {area: ui-api, decision: affected, rationale: Text status counts and audit names exact age-only exemptions; no rendered application UI changed., evidence_refs: [src/docs.ts, test/frozen-examples.test.ts]}
+  - {area: documentation, decision: affected, rationale: Contract and worked example and Alpha readiness remain in their existing owners., evidence_refs: [ARTIFACT_PROTOCOL.md, docs/alpha-readiness.md, ROADMAP.md]}
+  - {area: diagrams-visuals, decision: not-affected, rationale: No rendered UI or diagram changes., evidence_refs: []}
+  - {area: terminology, decision: affected, rationale: Frozen synthetic example is explicitly age-only and not a task-state transition or canonical promotion., evidence_refs: [ARTIFACT_PROTOCOL.md, examples/feature-save-schema/README.md]}
+  - {area: operations-compatibility, decision: affected, rationale: Valid old policies keep behavior; malformed excluded policies fail visibly. Stable local filesystem assumption and independent/platform review gates remain explicit., evidence_refs: [src/frozen-examples.ts, docs/alpha-readiness.md, .agent-context/tasks/T-FROZEN-EXAMPLE-LIFECYCLE-001/evidence/verification.json]}
+verification:
+  checks:
+    - {name: Typecheck build focused and full local suite with recorded capability skips, status: pass, evidence_refs: [.agent-context/tasks/T-FROZEN-EXAMPLE-LIFECYCLE-001/evidence/verification.json]}
+    - {name: Eleven teaching inputs and historical artifacts plus pre-refresh active-lock archives preserved byte-exact, status: pass, evidence_refs: [.agent-context/tasks/T-FROZEN-EXAMPLE-LIFECYCLE-001/evidence/verification.json]}
+    - {name: Received independent V3 technical review and exact-source hosted platform checks, status: pass, evidence_refs: [.agent-context/tasks/T-FROZEN-EXAMPLE-LIFECYCLE-001/evidence/review-receipt.json, .agent-context/tasks/T-FROZEN-EXAMPLE-LIFECYCLE-001/evidence/platform-results.json]}
+    - {name: Metadata-only closure source-preservation and focused checks, status: pass, evidence_refs: [.agent-context/tasks/T-FROZEN-EXAMPLE-LIFECYCLE-001/evidence/closure-verification.json]}
+  terminology_search: {status: pass, terms: [frozen example, age-only, historical lock], evidence_refs: [ARTIFACT_PROTOCOL.md, examples/feature-save-schema/README.md, docs/alpha-readiness.md]}
+  visual_review: {applicable: false, status: not-applicable, evidence_refs: []}
+  unverifiable_items: []
+independent_review:
+  status: pass
+  reviewer: Claude Opus 5 (independent local reviewer of exact V3)
+  findings: [No blocking code findings; R-1/R-2/R-3 remain explicit nonblocking follow-ups. The report is not whole-product release or new-harness approval.]
+  evidence_refs: [.agent-context/tasks/T-FROZEN-EXAMPLE-LIFECYCLE-001/evidence/review-receipt.json, .agent-context/tasks/T-FROZEN-EXAMPLE-LIFECYCLE-001/evidence/platform-results.json]
+  waiver: null
+supersedes: []
+superseded_by: null
+updated_at: "2026-09-13T09:01:00Z"

@@ -1,0 +1,45 @@
+{
+  "observed_at": "2026-09-13T18:47:32.167Z",
+  "scope": "Mechanical local MIT application only, not legal clearance or release approval",
+  "license": {
+    "spdx": "MIT",
+    "source": "https://opensource.org/license/mit",
+    "standard_terms_match": true,
+    "sha256": "3831348f1476e1c64821eca54a359b5bddfe021020afa990d5b996c45bf78516",
+    "notice": "Copyright (c) 2026 CanonTrail contributors"
+  },
+  "package": {
+    "root_fields_match": true,
+    "private": true,
+    "dependency_records_unchanged": true,
+    "dry_run_includes_license": true,
+    "no_tarball_created": true,
+    "npm_release_readiness": "Still open: broader documentation/package contents and release approval not closed by this license check"
+  },
+  "preservation": {
+    "baseline_files_unchanged": 164,
+    "protected_candidate_files_unchanged": 132,
+    "archived_alpha_lock_hash": "sha256:68223ec84e686ec1bf4295b623012e329e45687a8b6ef40b96ee3b0e263935ef",
+    "completed_frozen_lock_unchanged": true
+  },
+  "quality": {
+    "typecheck": "pass",
+    "build": "pass",
+    "focused_tests": {
+      "files": 3,
+      "total": 52,
+      "passed": 52,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "limits": [
+    "No new full-suite or hosted run claimed; behavior-bearing files match V4",
+    "No third-party/public-content or legal clearance claimed",
+    "No publication, Git operations or original checkout changes"
+  ],
+  "raw_logs": {
+    "commands_sha256": "5648cd4c72e6fbc287d82f8e0fa54cea1f9808fc6609053514839855b16aba13",
+    "focused_sha256": "94c147e3d92d49a932f418b3d160cb4eeed556bbab3c5e04d9fcfa386d5e63a2"
+  }
+}

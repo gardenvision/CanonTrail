@@ -1,0 +1,49 @@
+{
+  "name": "canontrail",
+  "version": "0.1.0",
+  "description": "Canonical documentation, bounded context, and reproducible handoffs for coding-agent workflows.",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "canontrail": "dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "src",
+    "schemas",
+    "integrations",
+    "templates",
+    "action.yml",
+    "docs",
+    "AGENTS.md",
+    "VISION.md",
+    "ARTIFACT_PROTOCOL.md",
+    "ROADMAP.md",
+    "CONTRIBUTING.md",
+    "SECURITY.md"
+  ],
+  "engines": {
+    "node": ">=20.19"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "check": "tsc -p tsconfig.json --noEmit",
+    "canontrail": "tsx src/cli.ts",
+    "index": "tsx src/cli.ts index .",
+    "test": "vitest run --testTimeout 15000",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "ajv": "8.20.0",
+    "ajv-formats": "3.0.1",
+    "commander": "15.0.0",
+    "yaml": "2.9.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "tsx": "4.23.1",
+    "typescript": "7.0.2",
+    "vitest": "4.1.11"
+  }
+}

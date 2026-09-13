@@ -1,0 +1,23 @@
+{
+  "reviewed_manifest_sha256": "3113884e5f0816216e23ad2aa6841294b646b10e20cb91ef52a9ad80e647d6fc",
+  "claude_report_sha256": "920d40822528b6e6366e831195bc713f4fc4c3d458cc4b6e776ba2b691c89398",
+  "claude_scope": "Independent Windows technical review of neutral naming, additive compatibility and package contents; not whole-product publication approval.",
+  "claude_decision": "APPROVE WITH CONDITIONS",
+  "findings": [
+    {"id":"F-1","decision":"Correct using separately named sealed-tree preservation and candidate comparison metrics. Preserve old receipts with explicit erratum."},
+    {"id":"F-2","decision":"Document documentation-only deprecation for Alpha; retain runtime stderr behavior and no scheduled removal."},
+    {"id":"F-3/F-4","decision":"Explain live-source replanning and defensive classification; do not expand execution to stored historical plans or alter safety algorithms."},
+    {"id":"F-5","decision":"Include TypeScript src alongside source maps and verify each map target against actual package inventory."},
+    {"id":"F-6","decision":"Pin consumer template to an immutable clean tested commit and update hosting/history references before publication."},
+    {"id":"F-7/F-8","decision":"Document retained plan validation vs live execution and the explicit plain-Markdown adapter; no unrelated runtime change."}
+  ],
+  "deepseek_report_sha256": "60244a4cfe5139f87444251c491d2b89f77f2231e0bf0e9e7edd4465f85dadf4",
+  "deepseek_scope": "Reports additional Linux/WSL execution and independent cases; raw Linux execution evidence not supplied here.",
+  "deepseek_corrections": [
+    "The reported transaction write used apply:true, unlike the author's no-apply CLI probe. Repeating the no-apply probe preserved the complete fixture and created no .agent-context tree.",
+    "The reported repository-PASS exit code 1 was not reproduced: a fresh Windows CLI process returned 0; Claude independently also recorded 0. Linux raw command/log would be needed to explain the discrepancy.",
+    "Severity labels include a High item explicitly described as no defect. Do not transfer those labels as confirmed product findings."
+  ],
+  "release_boundary_review": "pending independent local review",
+  "publication": "not yet performed"
+}

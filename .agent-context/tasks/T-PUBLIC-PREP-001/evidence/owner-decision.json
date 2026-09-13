@@ -1,0 +1,7 @@
+{
+  "recorded_at": "2026-09-13T19:23:22Z",
+  "authority": "Explicit owner request in the current conversation",
+  "decision": "Use a neutral legacy-format name and prepare the remaining public-release work.",
+  "implementation_boundary": "Preferred legacy-header-v1 in new guidance and generated plans; deprecated old spellings retained only for compatibility, not hidden or silently rewritten. Prepare locally; do not publish.",
+  "not_authorized": ["remote publication or visibility changes", "original development checkout changes", "real-project migration", "independent-review waiver", "invented security contact or public repository"]
+}

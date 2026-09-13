@@ -1,0 +1,4 @@
+Preamble retained in source, not selected.
+Relevant rule: preserve exact bytes.
+Relevant check: reject source drift.
+Unrelated appendix remains outside the section.

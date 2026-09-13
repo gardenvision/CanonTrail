@@ -1,0 +1,412 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:canontrail:schema:context-inspection:1",
+  "title": "Read-only context inspection and excerpt reports",
+  "description": "Report-only: no persisted lock format or project configuration changes. Source output is not model-read telemetry.",
+  "oneOf": [
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "version": {
+          "const": 1
+        },
+        "root": {
+          "type": "string"
+        },
+        "writes_performed": {
+          "const": false
+        },
+        "boundary": {
+          "type": "string"
+        },
+        "kind": {
+          "const": "source-excerpt"
+        },
+        "source": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "type": "string"
+            },
+            "content_hash": {
+              "type": "string",
+              "pattern": "^sha256:[a-f0-9]{64}$"
+            },
+            "bytes": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "total_lines": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "required": [
+            "path",
+            "content_hash",
+            "bytes",
+            "total_lines"
+          ]
+        },
+        "excerpt": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "start_line": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "end_line": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "content": {
+              "type": "string"
+            },
+            "content_hash": {
+              "type": "string",
+              "pattern": "^sha256:[a-f0-9]{64}$"
+            },
+            "bytes": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "estimated_tokens": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "required": [
+            "start_line",
+            "end_line",
+            "content",
+            "content_hash",
+            "bytes",
+            "estimated_tokens"
+          ]
+        },
+        "lock_selection": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "task_id": {
+                  "type": "string"
+                },
+                "lock_hash": {
+                  "type": "string",
+                  "pattern": "^sha256:[a-f0-9]{64}$"
+                },
+                "whole_source_selected": {
+                  "type": "boolean"
+                },
+                "recorded_source_hash": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "pattern": "^sha256:[a-f0-9]{64}$"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "task_id",
+                "lock_hash",
+                "whole_source_selected",
+                "recorded_source_hash"
+              ]
+            }
+          ]
+        }
+      },
+      "required": [
+        "version",
+        "root",
+        "writes_performed",
+        "boundary",
+        "kind",
+        "source",
+        "excerpt",
+        "lock_selection"
+      ]
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "version": {
+          "const": 1
+        },
+        "root": {
+          "type": "string"
+        },
+        "writes_performed": {
+          "const": false
+        },
+        "boundary": {
+          "type": "string"
+        },
+        "kind": {
+          "const": "context-inspection"
+        },
+        "task_id": {
+          "type": "string"
+        },
+        "lock_hash": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "lock_created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "budget": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "total_tokens": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "reserved_output_tokens": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "reserved_input_tokens": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "estimated_input_tokens": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "required": [
+            "total_tokens",
+            "reserved_output_tokens",
+            "estimated_input_tokens"
+          ]
+        },
+        "input_headroom": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "source_snapshot_ok": {
+          "type": "boolean"
+        },
+        "composition": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "category": {
+                "enum": [
+                  "governing-task",
+                  "task-evidence",
+                  "governed-document",
+                  "implementation-and-other"
+                ]
+              },
+              "source_count": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "estimated_tokens": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "required": [
+              "category",
+              "source_count",
+              "estimated_tokens"
+            ]
+          }
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "path": {
+                "type": "string"
+              },
+              "estimated_tokens": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "category": {
+                "enum": [
+                  "governing-task",
+                  "task-evidence",
+                  "governed-document",
+                  "implementation-and-other"
+                ]
+              },
+              "freshness": {
+                "enum": [
+                  "current",
+                  "changed",
+                  "unavailable"
+                ]
+              },
+              "detail": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "path",
+              "estimated_tokens",
+              "category",
+              "freshness",
+              "detail"
+            ]
+          }
+        },
+        "omissions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "candidate": {
+                "type": "string"
+              },
+              "reason": {
+                "type": "string"
+              },
+              "required": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "candidate",
+              "reason"
+            ]
+          }
+        },
+        "declared_dependencies": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "completion_scope": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "mode": {
+              "enum": [
+                "repository",
+                "task"
+              ]
+            },
+            "relevant_task_ids": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "fallback_reason": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "mode",
+            "relevant_task_ids",
+            "fallback_reason"
+          ]
+        },
+        "dependency_hints": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "task_id": {
+                "type": "string"
+              },
+              "mentioned_in": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "action": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "task_id",
+              "mentioned_in",
+              "action"
+            ]
+          }
+        },
+        "note_inspection_issues": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "path": {
+                "type": "string"
+              },
+              "message": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "path",
+              "message"
+            ]
+          }
+        },
+        "compact_evidence_candidates": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "version",
+        "root",
+        "writes_performed",
+        "boundary",
+        "kind",
+        "task_id",
+        "lock_hash",
+        "lock_created_at",
+        "budget",
+        "input_headroom",
+        "source_snapshot_ok",
+        "composition",
+        "sources",
+        "omissions",
+        "declared_dependencies",
+        "completion_scope",
+        "dependency_hints",
+        "note_inspection_issues",
+        "compact_evidence_candidates"
+      ]
+    }
+  ]
+}

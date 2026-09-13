@@ -1,0 +1,11 @@
+{
+  "name": "canontrail-superpowers",
+  "description": "Adds CanonTrail documentation, bounded-context, and completion gates to a Superpowers feature workflow.",
+  "version": "0.1.0",
+  "skills": "./skills/",
+  "author": {
+    "name": "CanonTrail maintainers"
+  },
+  "homepage": "https://github.com/gardenvision/CanonTrail",
+  "repository": "https://github.com/gardenvision/CanonTrail"
+}

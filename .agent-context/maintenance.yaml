@@ -1,0 +1,24 @@
+version: 1
+created: 2026-09-12
+cadence: weekly
+mode: report-first
+remote_required: false
+stale_after_days:
+  canonical: 180
+  design-target: 90
+  active-snapshot: 60
+  draft: 30
+  historical: null
+future_date_tolerance_days: 1
+frozen_examples:
+  - path: examples/feature-save-schema/task-brief.md
+    content_hash: sha256:bfc6bed57871838bbd40f7e1ee9c13114b6bb66b725575b454643f584e34be5f
+    rationale: Immutable synthetic planner input retained by the teaching locks; not an operational project task. Exempt age only and preserve all integrity checks.
+checks:
+  - stale documents
+  - duplicate topic ownership
+  - contradiction candidates
+  - broken evidence and file references
+  - orphaned task and handoff artifacts
+  - context index freshness
+mutation_policy: Never delete, rewrite, merge, archive, or promote documentation without review.

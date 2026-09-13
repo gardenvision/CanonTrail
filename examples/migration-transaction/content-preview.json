@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "encoding": "utf-8",
+  "views": [
+    {
+      "operation_id": "OP-0001",
+      "source_path": "docs/example.md",
+      "target_path": "docs/example.md",
+      "before": {
+        "content": "# Example\n\nStand: 2026-09-05\nStatus: current\nTruth level: source-of-truth\nVerification: manual check pending\nRead if task touches: example\nPrimary systems: Example\nSafe to edit: Preserve words.\nDo not use instead: Old.md\n\n## Contract\n\nGrün 🌱 — unchanged.\n",
+        "content_hash": "sha256:a4d65fec97d6058a97082b2ed950b013f13a12c4f53cccf5221bc6e1caf01d11",
+        "bytes": 261
+      },
+      "after": {
+        "content": "---\ntopic_id: example\nstand: 2026-09-05\nstatus: current\ntruth_level: draft\nverification:\n  state: unverified\n  evidence: []\nread_if_task_touches:\n  - example\nprimary_systems:\n  - Example\nsafe_to_edit:\n  - Preserve words.\ndo_not_use_instead:\n  - Old.md\n---\n\n# Example\n\n\n## Migrated legacy verification\n\nThe following text was preserved verbatim from a legacy `Verification:` declaration as migration provenance. CanonTrail has not independently verified or promoted this statement.\n\n> manual check pending\n\n## Contract\n\nGrün 🌱 — unchanged.\n",
+        "content_hash": "sha256:0ebfea53e0612c3468e116b660c59550944e9b064a9a20d3a979e797b9cbacc2",
+        "bytes": 545
+      }
+    }
+  ]
+}

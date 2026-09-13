@@ -1,0 +1,44 @@
+name: CanonTrail completion gate
+description: Fail CI when CanonTrail documentation, context, or lifecycle invariants are invalid or stale.
+inputs:
+  root:
+    description: Repository-relative CanonTrail project root.
+    required: false
+    default: "."
+  task:
+    description: Optional task completion check in addition to the mandatory repository-wide gate.
+    required: false
+    default: ""
+  fail-on-warnings:
+    description: Treat repository and documentation audit warnings as failures.
+    required: false
+    default: "true"
+runs:
+  using: composite
+  steps:
+    - name: Build CanonTrail action runtime
+      shell: bash
+      working-directory: ${{ github.action_path }}
+      run: |
+        npm ci --ignore-scripts
+        npm run build
+    - name: Run CanonTrail completion gate
+      shell: bash
+      working-directory: ${{ github.workspace }}
+      env:
+        CANONTRAIL_ROOT: ${{ inputs.root }}
+        CANONTRAIL_TASK: ${{ inputs.task }}
+        CANONTRAIL_FAIL_ON_WARNINGS: ${{ inputs.fail-on-warnings }}
+      run: |
+        set -euo pipefail
+        command=(node "$GITHUB_ACTION_PATH/dist/cli.js" finalize "$CANONTRAIL_ROOT")
+        if [[ "$CANONTRAIL_FAIL_ON_WARNINGS" == "true" ]]; then
+          command+=(--fail-on-warnings)
+        fi
+        "${command[@]}"
+        if [[ -n "$CANONTRAIL_TASK" ]]; then
+          "${command[@]}" --task "$CANONTRAIL_TASK"
+        fi
+branding:
+  icon: book-open
+  color: green

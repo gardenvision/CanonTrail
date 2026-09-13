@@ -1,0 +1,378 @@
+{
+  "observed_at": "2026-09-13T09:01:02.430Z",
+  "kind": "author-metadata-closure-verification",
+  "independent_review": false,
+  "baseline_archive_sha256": "d95cd0b307f37a4bfa37eaaaaa93b2e13f83973c7d2280f637787b68cf73591d",
+  "typecheck": "pass",
+  "build": "pass",
+  "dependency_audit": {
+    "status": "pass",
+    "vulnerabilities": 0
+  },
+  "focused_tests": {
+    "files": 3,
+    "total": 52,
+    "passed": 52,
+    "failed": 0,
+    "skipped": 0
+  },
+  "raw_local_results_sha256": "f92939a980b723cfd0cc9d7667086a19d15254e91553b62bbf58a8a6b5ec5534",
+  "raw_focused_tests_sha256": "c599302d2bf27a4a7aa142ab13d779aca17b094cfc1416828a9ea9e0c4172a13",
+  "runtime_schema_test_dependency_files_unchanged": 83,
+  "unchanged_sources": [
+    {
+      "path": "package-lock.json",
+      "sha256": "4eb63f0b55852d34a91f0da0f1655a9ca985f55d3dee9de3c9ab1391f11b2bdc"
+    },
+    {
+      "path": "package.json",
+      "sha256": "93874185a4a5423f0d9c199b2e04dc5893acc76ecde025668a38f18c66a69916"
+    },
+    {
+      "path": "schemas/artifact-header.schema.json",
+      "sha256": "1fdfc9643ec734f89d633730a3699f65f01cdf13b32f51b31c1c99a185a4d518"
+    },
+    {
+      "path": "schemas/change-record.schema.json",
+      "sha256": "313e5aecea96034154321b9dcb6b64bc304404c9710f81c5bf0929c528f5af5c"
+    },
+    {
+      "path": "schemas/compatibility.schema.json",
+      "sha256": "eaaedfbd77f622837147f549826e35dc6727c5feea20dfe4a4e5a4582d540c09"
+    },
+    {
+      "path": "schemas/context-inspection.schema.json",
+      "sha256": "f72798408252f1aea009339a51170007370594f16d29137b4fa753afee24072a"
+    },
+    {
+      "path": "schemas/context-lock.schema.json",
+      "sha256": "4804ef8e8bcf8cbebd17b06c06f9abab2fe57f1357d10edb80fbf3f57705d02f"
+    },
+    {
+      "path": "schemas/evidence-record.schema.json",
+      "sha256": "a5671f640b09b7aafaa141b1f9e309c9af804ec16f6edf948dc6c01805b25fbe"
+    },
+    {
+      "path": "schemas/finalize-scope.schema.json",
+      "sha256": "82541a4ec785cde87fc2cf25d99836ad3c9fe93f3a796e04065b252c71ec3b37"
+    },
+    {
+      "path": "schemas/handoff.schema.json",
+      "sha256": "5e746303db3c2f9c1cb0c7850ea7224b0eb630ead148c753a41455e9bfc47b58"
+    },
+    {
+      "path": "schemas/maintenance.schema.json",
+      "sha256": "ed0945f89c6193cb9ff5ac7bc307c5faa48c04f52339a9138932983add8e33c8"
+    },
+    {
+      "path": "schemas/migration-content-preview.schema.json",
+      "sha256": "fffa92e63e76c4e2925f69dedee8db861ea1072795e50914f8d8902aca9e824f"
+    },
+    {
+      "path": "schemas/migration-execution.schema.json",
+      "sha256": "819750af4f1bcddf218bc2982cf37a7f5ff4311a3120c0f71e1fccf2c61dc8b1"
+    },
+    {
+      "path": "schemas/migration-plan.schema.json",
+      "sha256": "a4ad3aed686fb314913089cacb70d8ffa124995b5c9faf05e70a8939921e39c3"
+    },
+    {
+      "path": "schemas/migration-transaction.schema.json",
+      "sha256": "43f631456693fdb8f0500d4233d1f06bba595a40e74b0365963e3ea7221c5561"
+    },
+    {
+      "path": "schemas/resume-packet.schema.json",
+      "sha256": "7222c7bac98ddf9f2f5aab98e58989a2b4a8d96417efcb5088cdd36d8a2079bd"
+    },
+    {
+      "path": "schemas/task-state.schema.json",
+      "sha256": "89e18a925be4e783d0cf37c7a387abce2301e3e5d74af36e33bdff424e8e9b33"
+    },
+    {
+      "path": "scripts/platform-capabilities.js",
+      "sha256": "fb3f106d0311b24958f5c84cc13e81b788f2525c6ed62e4f163e96529ba3d2f7"
+    },
+    {
+      "path": "src/checkpoint.ts",
+      "sha256": "5ed6ccd20da66da76d01fd8e08507feac2605fe69116c626401912017d111fed"
+    },
+    {
+      "path": "src/cli.ts",
+      "sha256": "8e4c66e849651954cefc0e16366b285640aa6528e730c9478f3b15e997821e9b"
+    },
+    {
+      "path": "src/compatibility.ts",
+      "sha256": "1dc7364fc5228c7a917e6ab66f9817b8793c868779ec4048b326e72d702f3d0c"
+    },
+    {
+      "path": "src/config.ts",
+      "sha256": "0f856dcda07db52a2c789b4d370d97df6f4feb7973be99559649ede66c9362ba"
+    },
+    {
+      "path": "src/context-git.ts",
+      "sha256": "79ccba4a35a3620b54b5047f0e8ff3ffcf786e0f3ca03ae6fff491f5aa65dffa"
+    },
+    {
+      "path": "src/context-inspection.ts",
+      "sha256": "31663265dd4a40a94d225ca6b80160ea5d0839ef5bddeedb7f5bed07f8142fc0"
+    },
+    {
+      "path": "src/context-schema.ts",
+      "sha256": "cb62ecebe14eada667af4942351670de394f036ba480e03bc10b690f099d8f0d"
+    },
+    {
+      "path": "src/context-sections.ts",
+      "sha256": "4fe60bce20718de158db9bd0551b0dc0f2af08de0835b4a8322220ddfa00aede"
+    },
+    {
+      "path": "src/context-source-path.ts",
+      "sha256": "f01b6328d84c5d41fb67f261b7fde359814d57c455f36fa8f027efaff1385e24"
+    },
+    {
+      "path": "src/context.ts",
+      "sha256": "a26d1fd9a30fd4280ac553a5cfd176901ff7ce41a9efe8bea26629d931d0b785"
+    },
+    {
+      "path": "src/date-time.ts",
+      "sha256": "55f863aa42c6085a08b6cd4cc52d01c90c864d1b490231467fce52eb37f0893d"
+    },
+    {
+      "path": "src/docs.ts",
+      "sha256": "a975b4957dd7bd975601849ca9e8965603f3ade5e9e0611a35155292ed14dedd"
+    },
+    {
+      "path": "src/evidence.ts",
+      "sha256": "e324cecc3eb4b4d24766f82cbf581e799cd817ccb26455732ab84ba52815ff97"
+    },
+    {
+      "path": "src/finalize-guard.ts",
+      "sha256": "ec79d4eaa30f24b71eac633aff29dd2141953f2ffbfe022745c67c9089dd6f6e"
+    },
+    {
+      "path": "src/finalize-scope.ts",
+      "sha256": "b26a11c2835278380cab522251c69ba8ac75479df1072aeba8c37468c140b2b6"
+    },
+    {
+      "path": "src/finalize.ts",
+      "sha256": "b3e1f5293df6cf6f797009235505ec36fc2952230008b08334d3102db6314d24"
+    },
+    {
+      "path": "src/frontmatter.ts",
+      "sha256": "58851276b6b4d3fb7aad09e74e23f05b1cfdd4f4e2440e19ccb36d5fe2dae75c"
+    },
+    {
+      "path": "src/frozen-examples.ts",
+      "sha256": "cacfecd511f40743ad553e09b289e8c1126d63d61775981fdb26ef2acea3677b"
+    },
+    {
+      "path": "src/handoff.ts",
+      "sha256": "9561070fcd0ddbfca0798628805007bfde97f263e4f1481eae65fb7ec086d691"
+    },
+    {
+      "path": "src/indexer.ts",
+      "sha256": "f1447eaf59f15f1cd31ab6f3cc294f74a4e29f5583ecb0e661b056f9dfa783c0"
+    },
+    {
+      "path": "src/initializer.ts",
+      "sha256": "6eec5ce4dc2aa85a73f1ddbd11a7c86a9cdce0940c166c6f792f05d2caa011e9"
+    },
+    {
+      "path": "src/migration-content-preview.ts",
+      "sha256": "ea9496d4c6ce486f9694e168cf9d9a0f9fdc0c87e146b832ec469929b743874e"
+    },
+    {
+      "path": "src/migration-control-path.ts",
+      "sha256": "892217fca768fc048df3df04207e981751b598e65a1d83b8b76616b868f3c8c9"
+    },
+    {
+      "path": "src/migration.ts",
+      "sha256": "2c2c84b8157edf5318abac3c38f5275d73938dda0b0d6a30610d58283fca2e59"
+    },
+    {
+      "path": "src/readiness.ts",
+      "sha256": "2563ca2ef00bdf725ae227e64176aafffd91306b273098fe3e553b7b77dbfa0b"
+    },
+    {
+      "path": "src/resume-audit.ts",
+      "sha256": "46c3c5b543e282aa32606327f7104b95f7a5c9bc0243a43ce50d8fa03cc21c6b"
+    },
+    {
+      "path": "src/resume.ts",
+      "sha256": "0d8db448ea1fcc9b48999d489e5ffe2157ae37e193556926946bc32be9b0966e"
+    },
+    {
+      "path": "src/types.ts",
+      "sha256": "154f7202b4534412d1d52949ed68c983a3d0fd899bc4d8e2e64645bd386f3bba"
+    },
+    {
+      "path": "src/validator.ts",
+      "sha256": "7b4ae9ca54597d6219af3b9c21b47c9fce0499d9f19e9eaa66aab05afb6a0d26"
+    },
+    {
+      "path": "test/checkpoint.test.ts",
+      "sha256": "b79ca16efb1182a432847509852593a4f51ad28cd99a6a52138d5f7536c23db6"
+    },
+    {
+      "path": "test/ci-build-order.test.ts",
+      "sha256": "8b50ee78002fcd70e2e7ce5c446a4cfa53ec81a4245fd36d4c3f0e10ef970719"
+    },
+    {
+      "path": "test/compatibility.test.ts",
+      "sha256": "18fd5abee5e2d14572b4a49c1044c7d6dbaa334381d881e2a325e425bf39ca61"
+    },
+    {
+      "path": "test/completion-reference-fields.test.ts",
+      "sha256": "ed68a734cd039703dfbe5ff737ef6f59ca6e8e22b001278949e5e5dfac3d698f"
+    },
+    {
+      "path": "test/context-file-identity.test.ts",
+      "sha256": "3e91f948360effc3c1ce547424ae0a748c27f2e840936a793220d8880642fb0d"
+    },
+    {
+      "path": "test/context-git.test.ts",
+      "sha256": "0aba46b9f7c597cdc717a725ec9c803adf7ec7fc89c31278fda1e8417955a822"
+    },
+    {
+      "path": "test/context-inspection.test.ts",
+      "sha256": "70a73a3ca4e9b8383f608a4d2e83b189ad05540562fc6aad797ff7f806913f12"
+    },
+    {
+      "path": "test/context-review-corrections.test.ts",
+      "sha256": "b90828ca99607aa7357506109180a359ec6c4259e977fbd6f97d3d28512832b9"
+    },
+    {
+      "path": "test/context-routing-precision.test.ts",
+      "sha256": "5206eb8c4fc53a160c5f50f18f60bd43571b6b4ee151864530b1ab06e2f173dd"
+    },
+    {
+      "path": "test/context-sections.test.ts",
+      "sha256": "597c7fdd70352ebc26255c1f98e3376afa9ca6a75a32538d8ca985465900a3f5"
+    },
+    {
+      "path": "test/context.test.ts",
+      "sha256": "b39bfbf977e4062e5a366670b15ae4794f63493f553f3d78c75f4d5438b31d76"
+    },
+    {
+      "path": "test/docs.test.ts",
+      "sha256": "b79b6754c148bc9e8348246148f51284ff86601ffb4d03b0d7ba3bba5a9d945f"
+    },
+    {
+      "path": "test/evidence.test.ts",
+      "sha256": "a0b91cb76ccdf8096ca9586c2d5a4956075d5d0c0fd9823557fa3844846eba92"
+    },
+    {
+      "path": "test/finalize-audit-errors.test.ts",
+      "sha256": "841a4630dc7fc9d08eead5ddc1dd98e9784d1a5f1a946c30728680ee36f7869b"
+    },
+    {
+      "path": "test/finalize.test.ts",
+      "sha256": "ca97dbd5bfebb9eb3255b870626e837368bef1abf42f17042403ac7a19916c2e"
+    },
+    {
+      "path": "test/fixtures/gsd-readiness-v1/03-01-PLAN.md.fixture",
+      "sha256": "e996a866c98f5ce2bae84fa207923d7044f19a559ebd2c3af48c3902b0bfaf2f"
+    },
+    {
+      "path": "test/fixtures/gsd-readiness-v1/03-READINESS.md.fixture",
+      "sha256": "83b3a27a693b7bf5c93d60fc6fe9d53546fe0471934b06cb0a56eccbff790877"
+    },
+    {
+      "path": "test/fixtures/gsd-readiness-v1/REQUIREMENTS.md.fixture",
+      "sha256": "158dcf0f105b9a6f5b4749bc45c9a3c4c6290a9b5a464d08e2b90c53041d20d5"
+    },
+    {
+      "path": "test/frozen-examples.test.ts",
+      "sha256": "2b4f0aad7b71675c550f3e723785cb76bfe7688baaeb9a579202d6a0b1f072ef"
+    },
+    {
+      "path": "test/handoff.test.ts",
+      "sha256": "ce8f1d201fa583c6c362a43ae0cb015efe7f74bdf1c3fd9110f280f0e29fa3b1"
+    },
+    {
+      "path": "test/initializer.test.ts",
+      "sha256": "fd8719488e7385cb943fef3187753cc034ac3d0b0e78e277b98aba83dfcf8de9"
+    },
+    {
+      "path": "test/migration-content-preview.test.ts",
+      "sha256": "c5257448350766e7ba306402775a0d5d1156699d5b2f2d86b3fbc2bc7c7f5796"
+    },
+    {
+      "path": "test/migration-control-evidence.test.ts",
+      "sha256": "f9e27d55370f41f5b3c2cefd7533d49be359acf8fa915187d647123ca4768c2c"
+    },
+    {
+      "path": "test/migration-platform.test.ts",
+      "sha256": "439c425bea9b6151fdbbda1be2f56e10406ca7d7a32d292bed29097a557700dd"
+    },
+    {
+      "path": "test/migration-review-regressions.test.ts",
+      "sha256": "3089af4f94e38bd55a1fead62de245847be96eb83172855011b3056e3e6207e5"
+    },
+    {
+      "path": "test/migration-transformation.test.ts",
+      "sha256": "c53a3bb2dba7de618cc283b4ad7c4f443739eb9e3bd1085752404850329fa438"
+    },
+    {
+      "path": "test/migration.test.ts",
+      "sha256": "e9e467b6618032823761805d632bdccc8d2e5ed70a6a9d21369884e141152894"
+    },
+    {
+      "path": "test/parallel-context-freshness.test.ts",
+      "sha256": "43db7a6e40d624bcc0083f6938b3ffb8b1a84175abf4e36b6596fa341787be10"
+    },
+    {
+      "path": "test/readiness.test.ts",
+      "sha256": "f582ab3ca78f3b7e990b9d66fa01435add7a1f8d09aa6a0babeb8a30c90268d0"
+    },
+    {
+      "path": "test/resume-history.test.ts",
+      "sha256": "5418bb393f652c1e72add21388de4172b8d18945aa661c6ba6445383505ae849"
+    },
+    {
+      "path": "test/resume.test.ts",
+      "sha256": "b74f51a39c52e1146bcee2106049d34accfed1508131b8095df4a463fd803f98"
+    },
+    {
+      "path": "test/task-scoped-finalize.test.ts",
+      "sha256": "df4892414a8cda7e457fc977a7eb6ad8675d7556d65cdcc2ca6119809a00fdae"
+    },
+    {
+      "path": "test/usage-references.test.ts",
+      "sha256": "7361dd20865a7c81bd844347081579ec1a069b420f54a47ea05aa824f7257c13"
+    },
+    {
+      "path": "test/validator.test.ts",
+      "sha256": "9fadea3a4ed765b09335fad222b2d733c3c9608d2e4813cb5a02647dbf5b39d7"
+    },
+    {
+      "path": "test/workflow-bridges.test.ts",
+      "sha256": "c8b5453f751aa22187859cb66fab1cecad447bb339089b630f1d2729719c7a2c"
+    },
+    {
+      "path": "tsconfig.json",
+      "sha256": "7efcd327d201c30ee17957dba93d3dc454155fe2de8be1c368f39ecf0689910c"
+    }
+  ],
+  "archives": [
+    {
+      "task": "T-FROZEN-EXAMPLE-LIFECYCLE-001",
+      "lock_hash": "sha256:d151d26ef6a318728418cf654bff65420ccfc14edcf4c8e3efdf34d054af92b4",
+      "file_sha256": "d9459a16c186b2df5634d742c2bcfb561de952417cdf4fea447f4588093bcf2a",
+      "archive": ".agent-context/tasks/T-FROZEN-EXAMPLE-LIFECYCLE-001/evidence/context-locks/d151d26ef6a318728418cf654bff65420ccfc14edcf4c8e3efdf34d054af92b4.json"
+    },
+    {
+      "task": "T-ALPHA-CANDIDATE-001",
+      "lock_hash": "sha256:34cca2bb3db5ef12bcf325b99aed070468111ce16bc0b16910e909ff762a1d18",
+      "file_sha256": "b8c5c314d0ea1cd81cca311725aea94cfbd60c92b1a7023c2064f6b7c19bcd98",
+      "archive": ".agent-context/tasks/T-ALPHA-CANDIDATE-001/evidence/context-locks/34cca2bb3db5ef12bcf325b99aed070468111ce16bc0b16910e909ff762a1d18.json"
+    }
+  ],
+  "scope": "Document/task closure only. The underlying runtime and 684-case V3 platform results remain identified by their original hashes. New metadata is checked locally; no new hosted CI or independent whole-product release review is claimed.",
+  "checks": [
+    "Review receipt preserves exact report/source identity and limited approval scope.",
+    "All four exact-V3 hosted jobs passed with concrete capability and skip detail.",
+    "Shared readiness remains draft; verification means recorded gate facts, not canonical promotion or public release.",
+    "Alpha preparation remains in review; no license/publication/real-project authority inferred.",
+    "Final current task and repository gates are executed separately after terminal metadata is prepared; they are not self-dependencies in task checks."
+  ]
+}

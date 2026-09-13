@@ -1,0 +1,72 @@
+version: 1
+change_id: CHG-ALPHA-CANDIDATE-001
+revision: 3
+title: Curate a private local Alpha preparation candidate
+status: implemented
+risk: high
+author: CanonTrail candidate preparation agent
+canonical_source: VISION.md
+decision_rationale: Separate distribution content from private development evidence while retaining implementation and protocol safety. No publication or license decision is inferred.
+documentation_structure:
+  decision: create-feature-documents
+  rationale: Add one release-readiness owner; existing product and protocol owners retain their boundaries.
+  feature_documents:
+    - feature_id: alpha-readiness
+      action: create
+      status: verified
+      path: docs/alpha-readiness.md
+      evidence_refs: [.agent-context/tasks/T-ALPHA-CANDIDATE-001/evidence/verification.json, .agent-context/tasks/T-FROZEN-EXAMPLE-LIFECYCLE-001/evidence/review-receipt.json, .agent-context/tasks/T-FROZEN-EXAMPLE-LIFECYCLE-001/evidence/platform-results.json]
+acceptance_cases:
+  - id: AC-CURATION
+    given: A private development tree contains useful implementation and private project evidence.
+    expected: The candidate includes a reviewed allowlist and no unreviewed private evidence.
+    failure_or_uncertainty: References or distribution files may depend on excluded history.
+    counterexample: Excluding a file silently breaks a shipped test or documentation route.
+    oracle: Candidate file inventory, privacy inspection, link checks and complete test suite.
+    status: pass
+    evidence_refs: [.agent-context/tasks/T-ALPHA-CANDIDATE-001/evidence/verification.json]
+  - id: AC-ONBOARDING
+    given: A new user has the candidate source and a small existing project.
+    expected: Build and safe adoption are reproducible with explicit source/target paths and bounded context.
+    failure_or_uncertainty: Init conflicts can still produce partial additions after explicit apply.
+    counterexample: A failed dry-run is followed automatically by an unreviewed adoption.
+    oracle: Synthetic CLI receipts and preserved source hashes.
+    status: pass
+    evidence_refs: [.agent-context/tasks/T-ALPHA-CANDIDATE-001/evidence/verification.json]
+  - id: AC-QUALITY
+    given: Candidate docs and development dependencies have changed.
+    expected: Current quality results and remaining approval gates are reported separately.
+    failure_or_uncertainty: A green structural check does not constitute independent review or license approval.
+    counterexample: Pending release review is marked passed using only author tests.
+    oracle: Tests, dependency audit, structural validation and task-scoped gate receipts.
+    status: pass
+    evidence_refs: [.agent-context/tasks/T-ALPHA-CANDIDATE-001/evidence/verification.json]
+impacts:
+  - {area: requirement, decision: affected, rationale: Local source preparation is explicitly separated from a licensed public release., evidence_refs: [docs/alpha-readiness.md]}
+  - {area: data-contracts, decision: not-affected, rationale: All inherited schema bytes and protocol invariants are preserved; no persisted artifact shape changed., evidence_refs: [.agent-context/tasks/T-ALPHA-CANDIDATE-001/evidence/verification.json]}
+  - {area: domain-logic, decision: not-affected, rationale: Runtime implementation bytes are unchanged., evidence_refs: [.agent-context/tasks/T-ALPHA-CANDIDATE-001/evidence/verification.json]}
+  - {area: tests-reference-cases, decision: affected, rationale: Vitest patch narrowed and the complete suite rerun without weakening assertions; README contract restored after a caught omission., evidence_refs: [.agent-context/tasks/T-ALPHA-CANDIDATE-001/evidence/verification.json]}
+  - {area: example-data, decision: affected, rationale: Reviewed teaching README; frozen brief and bound evidence retained byte-for-byte with the remaining freshness conflict exposed., evidence_refs: [examples/feature-save-schema/README.md]}
+  - {area: ui-api, decision: not-affected, rationale: CLI behavior is unchanged; actual onboarding and conflict exits are documented and tested., evidence_refs: [.agent-context/tasks/T-ALPHA-CANDIDATE-001/evidence/verification.json]}
+  - {area: documentation, decision: affected, rationale: Portable owner documents replace private development routes without transferring historical approval., evidence_refs: [README.md, docs/self-documentation.md, docs/alpha-readiness.md]}
+  - {area: diagrams-visuals, decision: not-affected, rationale: No graphical or application UI change; the knowledge-owner table was checked as text., evidence_refs: [docs/self-documentation.md]}
+  - {area: terminology, decision: affected, rationale: Alpha candidate and author verification are explicitly distinct from release approval and canonical promotion., evidence_refs: [README.md, docs/alpha-readiness.md]}
+  - {area: operations-compatibility, decision: affected, rationale: Source-install instructions and Git-free candidate boundary recorded; platform CI and hosting actions remain separate., evidence_refs: [docs/platform-support.md, AGENTS.md, README.md]}
+verification:
+  checks:
+    - {name: Author local preparation checks, status: pass, evidence_refs: [.agent-context/tasks/T-ALPHA-CANDIDATE-001/evidence/verification.json]}
+  terminology_search: {status: pass, terms: [Alpha, canonical, verified, publish], evidence_refs: [README.md, docs/alpha-readiness.md]}
+  visual_review: {applicable: false, status: not-applicable, evidence_refs: []}
+  unverifiable_items:
+    - Publication permission remains absent. The separate T-MIT-LICENSE-001 records the owner's MIT choice; that selection does not provide third-party/public-content clearance.
+    - Whole-product independent release review remains pending; the narrower frozen-example review is not transferred as general approval. Exact V3 hosted CI passed; this subsequent metadata revision is not the identical hosted snapshot.
+    - The original frozen example DOCS101 blocker is corrected with separately reviewed and platform-tested behavior in T-FROZEN-EXAMPLE-LIFECYCLE-001. Public content clearance and npm documentation contents remain unready for distribution.
+independent_review:
+  status: pending
+  reviewer: null
+  findings: []
+  evidence_refs: []
+  waiver: null
+supersedes: []
+superseded_by: null
+updated_at: "2026-09-13T18:45:00Z"

@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "migration_id": "MIG-EXAMPLE-001",
+  "plan_hash": "sha256:15ffd96bb8dbaba0860d3ca4a988bd04eb5ca91439a0584a76be1d3d8fa8c976",
+  "reviewed_by": "example-reviewer",
+  "reviewed_at": "2026-09-03T20:01:00.000Z",
+  "decisions": [
+    {
+      "path": "docs/plants.md",
+      "decision": "execute",
+      "action": "normalize-header",
+      "target_path": "docs/plants.md",
+      "reason": "Example reviewed mapping.",
+      "target_header": {
+        "topic_id": "plants",
+        "stand": "2026-09-03",
+        "status": "current",
+        "truth_level": "canonical",
+        "verification": {
+          "state": "reviewed",
+          "evidence": ["docs/plants.md"]
+        },
+        "read_if_task_touches": ["plants"],
+        "primary_systems": ["PlantService"],
+        "safe_to_edit": ["Preserve behavior."],
+        "do_not_use_instead": ["OldPlants.md"]
+      }
+    }
+  ]
+}

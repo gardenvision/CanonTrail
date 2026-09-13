@@ -1,0 +1,189 @@
+{
+  "task_id": "T-FROZEN-EXAMPLE-LIFECYCLE-001",
+  "agent_run_id": null,
+  "created_at": "2026-09-12T16:39:08.127Z",
+  "context_index_hash": "sha256:5573df255e99b6b321dd47eac76f8ea2010b6b1cdcbe99feb09bed0d72432f73",
+  "budget": {
+    "total_tokens": 64000,
+    "reserved_output_tokens": 8000,
+    "reserved_input_tokens": 2048,
+    "estimated_input_tokens": 47887
+  },
+  "sources": [
+    {
+      "path": "AGENTS.md",
+      "content_hash": "sha256:3e413d0b0e3b78d24abb20535d3a569362fad07a2ec8c7cd62d2f9e4d325d436",
+      "git_blob": null,
+      "truth_level": "canonical",
+      "level": "L0",
+      "priority": 0,
+      "selection_reason": "Repository governing instructions.",
+      "selector": "governing-instructions",
+      "estimated_tokens": 1348,
+      "ownership": "project",
+      "source_system": null
+    },
+    {
+      "path": ".agent-context/tasks/T-FROZEN-EXAMPLE-LIFECYCLE-001/state.yaml",
+      "content_hash": "sha256:e44e2a7b86ffe935fd29fed73685bc329126f260807351be44e17f09df019a22",
+      "git_blob": null,
+      "truth_level": "active-snapshot",
+      "level": "L0",
+      "priority": 1,
+      "selection_reason": "Current task objective, acceptance criteria, and file intents.",
+      "selector": "task-state",
+      "estimated_tokens": 357,
+      "ownership": "project",
+      "source_system": null
+    },
+    {
+      "path": ".agent-context/tasks/T-FROZEN-EXAMPLE-LIFECYCLE-001/brief.md",
+      "content_hash": "sha256:e760a6eb87df6cfd0c44102c2cfe6bb9b9d6d1632c510e1084fe39a77cbf24af",
+      "git_blob": null,
+      "truth_level": "active-snapshot",
+      "level": "L0",
+      "priority": 2,
+      "selection_reason": "Current task brief.",
+      "selector": "task-brief",
+      "estimated_tokens": 188,
+      "ownership": "project",
+      "source_system": null
+    },
+    {
+      "path": ".agent-context/tasks/T-FROZEN-EXAMPLE-LIFECYCLE-001/change.yaml",
+      "content_hash": "sha256:97607a8ec9940c34e5f6af426d549dfdd5c8243549bb9a83823cc09fa6446bfc",
+      "git_blob": null,
+      "truth_level": "active-snapshot",
+      "level": "L0",
+      "priority": 3,
+      "selection_reason": "Current change decision and acceptance oracle.",
+      "selector": "task-change",
+      "estimated_tokens": 975,
+      "ownership": "project",
+      "source_system": null
+    },
+    {
+      "path": "ARTIFACT_PROTOCOL.md",
+      "content_hash": "sha256:c0780698111c4349c77b963f5c75f770db4708a407feb5f88603990f4f709e0f",
+      "git_blob": null,
+      "truth_level": "design-target",
+      "level": "L3",
+      "priority": 25,
+      "selection_reason": "Persistently required by the current task state.; Existing file declared by the current task.",
+      "selector": "task-required-context,task-file-intent",
+      "estimated_tokens": 20048,
+      "ownership": "project",
+      "source_system": null
+    },
+    {
+      "path": "schemas/maintenance.schema.json",
+      "content_hash": "sha256:d2a2cc21c53eb91572416bceeb8ece0a86197b9e435be016c51b9c299a935ae4",
+      "git_blob": null,
+      "truth_level": "unclassified",
+      "level": "L3",
+      "priority": 25,
+      "selection_reason": "Persistently required by the current task state.; Existing file declared by the current task.",
+      "selector": "task-required-context,task-file-intent",
+      "estimated_tokens": 343,
+      "ownership": "project",
+      "source_system": null
+    },
+    {
+      "path": "src/docs.ts",
+      "content_hash": "sha256:2bd23ad729f8e2f37900943c1ee9c29dc07878ef86c75a1c456010a01468bed6",
+      "git_blob": null,
+      "truth_level": "unclassified",
+      "level": "L3",
+      "priority": 25,
+      "selection_reason": "Persistently required by the current task state.; Existing file declared by the current task.",
+      "selector": "task-required-context,task-file-intent",
+      "estimated_tokens": 5908,
+      "ownership": "project",
+      "source_system": null
+    },
+    {
+      "path": ".agent-context/maintenance.yaml",
+      "content_hash": "sha256:9535dff69060f989bfd378a98b480cc7a5349b24783a0b35def42843f307ad63",
+      "git_blob": null,
+      "truth_level": "unclassified",
+      "level": "L3",
+      "priority": 30,
+      "selection_reason": "Existing file declared by the current task.",
+      "selector": "task-file-intent",
+      "estimated_tokens": 130,
+      "ownership": "project",
+      "source_system": null
+    },
+    {
+      "path": "docs/alpha-readiness.md",
+      "content_hash": "sha256:6148af969653c18508fec734a35f3fb679dfd11d961cd16483583bb263ab3992",
+      "git_blob": null,
+      "truth_level": "draft",
+      "level": "L3",
+      "priority": 30,
+      "selection_reason": "Existing file declared by the current task.",
+      "selector": "task-file-intent",
+      "estimated_tokens": 1021,
+      "ownership": "project",
+      "source_system": null
+    },
+    {
+      "path": "examples/feature-save-schema/README.md",
+      "content_hash": "sha256:2ef28ddec545a48d6066747f4e8535d5ef48a60b0ca731e4b8d4759b2cc9385e",
+      "git_blob": null,
+      "truth_level": "active-snapshot",
+      "level": "L3",
+      "priority": 30,
+      "selection_reason": "Existing file declared by the current task.",
+      "selector": "task-file-intent",
+      "estimated_tokens": 759,
+      "ownership": "project",
+      "source_system": null
+    },
+    {
+      "path": "ROADMAP.md",
+      "content_hash": "sha256:b569f53b3dc0299b7d0fa67084fd06d1a11bdce6f8c82303a204475ba22f1b56",
+      "git_blob": null,
+      "truth_level": "draft",
+      "level": "L3",
+      "priority": 30,
+      "selection_reason": "Existing file declared by the current task.",
+      "selector": "task-file-intent",
+      "estimated_tokens": 682,
+      "ownership": "project",
+      "source_system": null
+    },
+    {
+      "path": "src/validator.ts",
+      "content_hash": "sha256:6bcbccf53397d5661385a8b107b7c10d0e0bef67f00f969f67fc0e0de648288d",
+      "git_blob": null,
+      "truth_level": "unclassified",
+      "level": "L3",
+      "priority": 30,
+      "selection_reason": "Existing file declared by the current task.",
+      "selector": "task-file-intent",
+      "estimated_tokens": 16128,
+      "ownership": "project",
+      "source_system": null
+    }
+  ],
+  "omissions": [
+    {
+      "candidate": ".agent-context/tasks/T-FROZEN-EXAMPLE-LIFECYCLE-001/handoff.yaml",
+      "reason": "No handoff exists for this task yet.",
+      "required": false
+    },
+    {
+      "candidate": "src/frozen-examples.ts",
+      "reason": "File intent does not exist yet; it may be a planned output.",
+      "required": false
+    },
+    {
+      "candidate": "test/frozen-examples.test.ts",
+      "reason": "File intent does not exist yet; it may be a planned output.",
+      "required": false
+    }
+  ],
+  "raw_transcripts_included": false,
+  "lock_hash": "sha256:5cd1c70d9c19e959c390469564a531f6d016a9187019a7be990c337842f2846d"
+}

@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "migration_id": "MIG-EXAMPLE-001",
+  "created_at": "2026-09-03T12:00:00.000Z",
+  "mode": "plan-only",
+  "adapter": "auto",
+  "root": ".",
+  "documentation_roots": [
+    "docs"
+  ],
+  "summary": {
+    "documents": 0,
+    "source_formats": {
+      "canontrail-frontmatter": 0,
+      "gaertnerei-legacy-header": 0,
+      "plain-markdown": 0
+    },
+    "roles": {
+      "canonical": 0,
+      "active-reference": 0,
+      "active-snapshot": 0,
+      "design-target": 0,
+      "handoff": 0,
+      "review": 0,
+      "historical": 0,
+      "third-party": 0,
+      "unknown": 0
+    },
+    "actions": {
+      "keep": 0,
+      "normalize-header": 0,
+      "review-metadata": 0,
+      "classify-and-normalize": 0,
+      "preserve-historical": 0,
+      "preserve-review": 0,
+      "exclude-external": 0
+    },
+    "review_required": 0,
+    "ignored_by_extension": {},
+    "unreadable": 0
+  },
+  "documents": [],
+  "unprocessed": [],
+  "warnings": [],
+  "plan_hash": "sha256:ff8ad130fee244839649d49616310b5dec3c18b17b3e8dbe04f91283ff67b106"
+}

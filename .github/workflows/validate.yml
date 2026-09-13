@@ -1,0 +1,85 @@
+name: CanonTrail validation
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  platform-tests:
+    name: Platform (${{ matrix.os }}, Node ${{ matrix.node }})
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        node: ["24"]
+        include:
+          - os: ubuntu-latest
+            node: "20.19"
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Enable long paths on disposable Windows runner
+        if: runner.os == 'Windows'
+        run: git config --global core.longpaths true
+
+      - name: Check out repository
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+
+      - name: Record actual filesystem capabilities
+        run: node scripts/platform-capabilities.js "$RUNNER_TEMP/canontrail-capabilities.json"
+
+      - name: Install dependencies
+        run: npm ci --ignore-scripts
+
+      - name: Type-check
+        run: npm run check
+
+      - name: Build CLI
+        run: npm run build
+
+      - name: Run complete suite with per-test outcomes
+        run: npm test -- --reporter=default --reporter=json --outputFile="$RUNNER_TEMP/canontrail-tests.json"
+
+      - name: Validate repository with built CLI
+        run: node dist/cli.js validate .
+
+      - name: Enforce strict repository completion
+        run: node dist/cli.js finalize . --fail-on-warnings
+
+      - name: Audit runtime dependencies
+        if: matrix.os == 'ubuntu-latest' && matrix.node == '24'
+        run: npm audit --omit=dev --audit-level=high
+
+      - name: Retain platform evidence including failures and skips
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: platform-${{ matrix.os }}-node-${{ matrix.node }}
+          path: |
+            ${{ runner.temp }}/canontrail-capabilities.json
+            ${{ runner.temp }}/canontrail-tests.json
+          if-no-files-found: warn
+          retention-days: 14
+
+  validate:
+    name: validate
+    needs: platform-tests
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require every platform job to succeed
+        env:
+          PLATFORM_RESULT: ${{ needs.platform-tests.result }}
+        run: test "$PLATFORM_RESULT" = success

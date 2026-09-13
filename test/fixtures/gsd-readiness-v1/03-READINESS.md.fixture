@@ -1,0 +1,35 @@
+---
+artifact_kind: gsd-phase-readiness
+schema_version: 1
+phase: "03"
+status: ready
+assessed_at: "2026-08-26T19:00:00+02:00"
+contract_owner: project-policy
+workflow_owner: gsd-core
+sources:
+  - path: .planning/REQUIREMENTS.md
+    sha256: __REQUIREMENTS_HASH__
+  - path: .planning/phases/03-feature/03-01-PLAN.md
+    sha256: __PLAN_HASH__
+checks:
+  - id: acceptance-oracle
+    status: pass
+    owner: human-and-workflow
+    required: true
+    evidence_refs:
+      - .planning/REQUIREMENTS.md
+    notes: The requirement supplies an independent expected result.
+  - id: quality-gates
+    status: pass
+    owner: gsd-core
+    required: true
+    evidence_refs:
+      - .planning/phases/03-feature/03-01-PLAN.md
+    notes: The phase plan identifies deterministic verification.
+blockers: []
+next_action: Execute only the bounded phase plan.
+---
+
+# Phase 03 readiness
+
+This local project-policy projection records pre-execution readiness only.

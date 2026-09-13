@@ -1,0 +1,4 @@
+# Preserve this source distribution's already hash-bound raw LF/CRLF bytes.
+# Automatic checkout/check-in normalization would invalidate indexes and receipts.
+# -text disables conversion, not text diffs. Review/recompile active changes normally.
+* -text

@@ -1,0 +1,10 @@
+{
+  "decision": "Process the supplied independent reviews, correct necessary release issues, push and publish the source Alpha only if the gates pass.",
+  "repository_choice": "Owner explicitly approved renaming private gardenvision/CanonTrail to CanonTrail-private and creating a new clean-history gardenvision/CanonTrail.",
+  "private_history": "Must remain private; never copy or publish the development Git history.",
+  "independent_release_review": "Owner explicitly approved a local independent review subtask.",
+  "security_channel": "Awaiting explicit answer to the GitHub private-vulnerability-reporting proposal.",
+  "npm_publication": false,
+  "real_project_mutation": false,
+  "scope": "Source publication and required release preparation, not arbitrary product feature work."
+}

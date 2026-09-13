@@ -1,0 +1,24 @@
+{
+  "task_state_fields": {
+    "context_sections": [
+      {
+        "path": "examples/context-sections/source.txt",
+        "from": 2,
+        "to": 3,
+        "content_hash": "sha256:8c89490f5b27570f294cf65c624e122ed4d778ce01d2ccae49b57d882718440f"
+      }
+    ]
+  },
+  "lock_source_fields": {
+    "content_hash": "sha256:8c89490f5b27570f294cf65c624e122ed4d778ce01d2ccae49b57d882718440f",
+    "line_ranges": [
+      [
+        2,
+        3
+      ]
+    ],
+    "selection_hash": "sha256:1b053ec5de40fb0016bd35ee2ddf167376bdfed76b784541596dd74404b9074f",
+    "estimated_tokens": 19
+  },
+  "whole_source_estimated_tokens": 42
+}

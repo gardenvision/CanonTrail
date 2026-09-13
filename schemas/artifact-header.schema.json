@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:canontrail:schema:artifact-header:0",
+  "title": "Governed Artifact Header",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "stand",
+    "status",
+    "truth_level",
+    "verification",
+    "read_if_task_touches",
+    "primary_systems",
+    "safe_to_edit",
+    "do_not_use_instead"
+  ],
+  "properties": {
+    "artifact_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "artifact_kind": {
+      "type": "string",
+      "minLength": 1
+    },
+    "topic_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "stand": {
+      "type": "string",
+      "format": "date"
+    },
+    "status": {
+      "type": "string",
+      "minLength": 1
+    },
+    "truth_level": {
+      "enum": [
+        "canonical",
+        "design-target",
+        "active-snapshot",
+        "draft",
+        "historical"
+      ]
+    },
+    "verification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "evidence"],
+      "properties": {
+        "state": {
+          "enum": [
+            "unverified",
+            "structurally-reviewed",
+            "internally-reviewed",
+            "reviewed",
+            "verified"
+          ]
+        },
+        "evidence": {
+          "type": "array",
+          "items": { "type": "string" },
+          "uniqueItems": true
+        }
+      }
+    },
+    "read_if_task_touches": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "uniqueItems": true
+    },
+    "primary_systems": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "uniqueItems": true
+    },
+    "safe_to_edit": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "do_not_use_instead": {
+      "description": "Usage guidance, not evidence. Standalone bare path-like strings and a single-backtick path occupying the entire value are repository-root-relative references. Marked-up narrative and multiline prose remain verbatim text; embedded code/Markdown links are not parsed for dependencies. Bare known-extension filenames or trailing-slash directories may contain spaces. Verification evidence and supersedes retain their separate reference checks.",
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "uniqueItems": true
+    },
+    "supersedes": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "uniqueItems": true
+    }
+  }
+}

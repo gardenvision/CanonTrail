@@ -1,0 +1,11 @@
+{
+  "recorded_on": "2026-09-13",
+  "decision": "The project owner explicitly selected MIT for CanonTrail.",
+  "source": "Direct owner instruction in the current session; no external review or model preference is treated as permission.",
+  "selected_spdx_identifier": "MIT",
+  "official_text_source": "https://opensource.org/license/mit",
+  "copyright_notice": "Copyright (c) 2026 CanonTrail contributors",
+  "attribution_scope": "Collective project attribution, not an assertion of sole authorship or an assignment of third-party rights.",
+  "authorized": ["Add unmodified MIT terms with project attribution to a new local candidate revision", "Reconcile package license metadata and current documentation"],
+  "not_authorized": ["Public release or remote push", "Alter third-party licensing terms", "Claim legal clearance, patent freedom or immunity from liability", "Change original development checkout or real projects"]
+}

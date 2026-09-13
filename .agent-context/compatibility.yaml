@@ -1,0 +1,10 @@
+version: 1
+generated: 2026-09-12
+policy:
+  external_artifacts_are_read_only: true
+  external_artifacts_are_canonical: false
+  canonical_promotion_is_explicit: true
+integrations:
+  - {id: superpowers, detected: false, roots: [], artifact_count: 0}
+  - {id: gsd-core, detected: false, roots: [], artifact_count: 0}
+  - {id: gsd-pi, detected: false, roots: [], artifact_count: 0}

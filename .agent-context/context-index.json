@@ -1,0 +1,785 @@
+{
+  "version": 1,
+  "hash_algorithm": "sha256",
+  "root_hash": "sha256:96536ed920a888c89a4f7489d40f8e9bf1888214a8e80ecc2d9c68fcb71554a0",
+  "documents": [
+    {
+      "path": ".agent-context/tasks/T-ALPHA-CANDIDATE-001/brief.md",
+      "content_hash": "sha256:890454c779a29f9b2e1537995f43f1dc1a29983319277458bc8c9c1a5d0ee90a",
+      "stand": "2026-09-13",
+      "status": "review",
+      "truth_level": "active-snapshot",
+      "verification_state": "internally-reviewed",
+      "read_if_task_touches": [
+        "alpha candidate preparation"
+      ],
+      "primary_systems": [
+        "release preparation"
+      ],
+      "do_not_use_instead": [
+        "VISION.md"
+      ],
+      "topic_id": "alpha-candidate-preparation-task"
+    },
+    {
+      "path": ".agent-context/tasks/T-FROZEN-EXAMPLE-LIFECYCLE-001/brief.md",
+      "content_hash": "sha256:0ee60f9329c95ba2d47ef5372ea77a4a4240409e0ce3258cde7a608e7949e0f9",
+      "stand": "2026-09-13",
+      "status": "completed",
+      "truth_level": "active-snapshot",
+      "verification_state": "verified",
+      "read_if_task_touches": [
+        "frozen example maintenance"
+      ],
+      "primary_systems": [
+        "documentation audit"
+      ],
+      "do_not_use_instead": [
+        "ARTIFACT_PROTOCOL.md"
+      ],
+      "topic_id": "frozen-example-lifecycle-task"
+    },
+    {
+      "path": ".agent-context/tasks/T-MIT-LICENSE-001/brief.md",
+      "content_hash": "sha256:3cc4808c2a5cd2c0b74e57ca457c70539b96aee256aa3cec84556c1946335f14",
+      "stand": "2026-09-13",
+      "status": "completed",
+      "truth_level": "active-snapshot",
+      "verification_state": "verified",
+      "read_if_task_touches": [
+        "MIT license implementation"
+      ],
+      "primary_systems": [
+        "licensing metadata"
+      ],
+      "do_not_use_instead": [
+        "README.md",
+        "docs/alpha-readiness.md"
+      ],
+      "topic_id": "mit-license-task"
+    },
+    {
+      "path": ".agent-context/tasks/T-PUBLIC-PREP-001/brief.md",
+      "content_hash": "sha256:ee8a34a30965b08b4516537aa846f5702a50fea0a51e123b556484b51fb3dc94",
+      "stand": "2026-09-13",
+      "status": "review",
+      "truth_level": "active-snapshot",
+      "verification_state": "internally-reviewed",
+      "read_if_task_touches": [
+        "T-PUBLIC-PREP-001"
+      ],
+      "primary_systems": [
+        "release preparation"
+      ],
+      "do_not_use_instead": [
+        "docs/alpha-readiness.md"
+      ],
+      "topic_id": "task-public-prep-001"
+    },
+    {
+      "path": ".agent-context/tasks/T-RELEASE-CLOSURE-001/brief.md",
+      "content_hash": "sha256:7163aeda157717212731cc9a64367574d620c1cf7b404b0e88947f7a82fabb4f",
+      "stand": "2026-09-13",
+      "status": "in-progress",
+      "truth_level": "active-snapshot",
+      "verification_state": "unverified",
+      "read_if_task_touches": [
+        "T-RELEASE-CLOSURE-001"
+      ],
+      "primary_systems": [
+        "release operations"
+      ],
+      "do_not_use_instead": [
+        "docs/alpha-readiness.md"
+      ],
+      "topic_id": "task-release-closure-001"
+    },
+    {
+      "path": "AGENTS.md",
+      "content_hash": "sha256:ab21928e3833b41bc93df9c24721f32507fa44484d4872d150f8a4f8bcb9cc2c",
+      "stand": "2026-09-12",
+      "status": "current",
+      "truth_level": "canonical",
+      "verification_state": "internally-reviewed",
+      "read_if_task_touches": [
+        "any repository change"
+      ],
+      "primary_systems": [
+        "documentation governance",
+        "context continuity",
+        "compatibility adapters"
+      ],
+      "do_not_use_instead": [
+        "VISION.md",
+        "ARTIFACT_PROTOCOL.md"
+      ],
+      "topic_id": "agent-instructions"
+    },
+    {
+      "path": "ARTIFACT_PROTOCOL.md",
+      "content_hash": "sha256:52d3737465ca665643fbba6426f1c22ff97609d4cb6f5cfb85e1ffe87b493d3e",
+      "stand": "2026-09-06",
+      "status": "design-target",
+      "truth_level": "design-target",
+      "verification_state": "structurally-reviewed",
+      "read_if_task_touches": [
+        "artifact formats",
+        "documentation governance",
+        "context compilation",
+        "handoffs",
+        "external workflow compatibility",
+        "canonical promotion"
+      ],
+      "primary_systems": [
+        "documentation protocol",
+        "context continuity",
+        "validation"
+      ],
+      "do_not_use_instead": [
+        "VISION.md",
+        "schemas/"
+      ],
+      "topic_id": "artifact-protocol"
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "content_hash": "sha256:9a31a073ea899449f42c076d5c2e39712372b6b2abd8f7ecd2fdcfd98af4f527",
+      "stand": "2026-09-13",
+      "status": "draft-before-public-release",
+      "truth_level": "draft",
+      "verification_state": "unverified",
+      "read_if_task_touches": [
+        "contributions",
+        "pull requests"
+      ],
+      "primary_systems": [
+        "contribution process"
+      ],
+      "do_not_use_instead": [
+        "ARTIFACT_PROTOCOL.md"
+      ],
+      "topic_id": "contribution-policy"
+    },
+    {
+      "path": "docs/alpha-readiness.md",
+      "content_hash": "sha256:94ffeb028c19a351df75d03612e8389a604c3e52e04c501ea8f908a11dfcaefc",
+      "stand": "2026-09-13",
+      "status": "local-preparation-awaiting-release-review",
+      "truth_level": "draft",
+      "verification_state": "verified",
+      "read_if_task_touches": [
+        "alpha release readiness",
+        "distribution scope"
+      ],
+      "primary_systems": [
+        "release preparation"
+      ],
+      "do_not_use_instead": [
+        "VISION.md",
+        "ARTIFACT_PROTOCOL.md"
+      ],
+      "topic_id": "alpha-readiness"
+    },
+    {
+      "path": "docs/change-integrity.md",
+      "content_hash": "sha256:4c7e9d8d2b1f9f16a1b41bb9cbef843816a3a5fc9a090406d64d5ddaf5a3cad0",
+      "stand": "2026-09-12",
+      "status": "alpha-candidate",
+      "truth_level": "draft",
+      "verification_state": "unverified",
+      "read_if_task_touches": [
+        "change integrity",
+        "acceptance criteria",
+        "impact matrix"
+      ],
+      "primary_systems": [
+        "change-record validation"
+      ],
+      "do_not_use_instead": [
+        "ARTIFACT_PROTOCOL.md"
+      ],
+      "topic_id": "change-integrity-analysis"
+    },
+    {
+      "path": "docs/decisions/0001-typescript-cli.md",
+      "content_hash": "sha256:d561b67300f1fa0db00cf6cdcf0c9023d9e8c6daac831a39cfba87d8a98d7180",
+      "stand": "2026-07-13",
+      "status": "accepted-for-mvp",
+      "truth_level": "canonical",
+      "verification_state": "reviewed",
+      "read_if_task_touches": [
+        "CLI implementation",
+        "runtime architecture",
+        "packaging"
+      ],
+      "primary_systems": [
+        "validator",
+        "indexer",
+        "future adapters"
+      ],
+      "do_not_use_instead": [
+        "ROADMAP.md"
+      ],
+      "artifact_id": "ADR-0001",
+      "artifact_kind": "architecture-decision",
+      "topic_id": "implementation-language"
+    },
+    {
+      "path": "docs/integrations.md",
+      "content_hash": "sha256:08eb1af016c8bab658b583a4b2756031cfa5f2b71c500b9b541fececa3134003",
+      "stand": "2026-08-29",
+      "status": "current-research-snapshot",
+      "truth_level": "design-target",
+      "verification_state": "reviewed",
+      "read_if_task_touches": [
+        "compatibility adapters",
+        "Superpowers",
+        "GSD"
+      ],
+      "primary_systems": [
+        "compatibility"
+      ],
+      "do_not_use_instead": [
+        "VISION.md",
+        "ARTIFACT_PROTOCOL.md"
+      ],
+      "topic_id": "workflow-integrations"
+    },
+    {
+      "path": "docs/migration.md",
+      "content_hash": "sha256:304d797cd2da336cfa0becde40d51b20c22615e930b27ac3ee32391d7647c691",
+      "stand": "2026-09-12",
+      "status": "experimental-alpha-candidate",
+      "truth_level": "draft",
+      "verification_state": "internally-reviewed",
+      "read_if_task_touches": [
+        "documentation migration",
+        "brownfield adoption"
+      ],
+      "primary_systems": [
+        "migration planning",
+        "documentation governance"
+      ],
+      "do_not_use_instead": [
+        "ARTIFACT_PROTOCOL.md"
+      ],
+      "topic_id": "canontrail-documentation-migration"
+    },
+    {
+      "path": "docs/parallel-work.md",
+      "content_hash": "sha256:a37b214f0316b7522570fc26cf91652f9c991074693414b05b03b7ef7d1d9df9",
+      "stand": "2026-09-06",
+      "status": "proposed",
+      "truth_level": "design-target",
+      "verification_state": "internally-reviewed",
+      "read_if_task_touches": [
+        "parallel work",
+        "task completion",
+        "shared editor"
+      ],
+      "primary_systems": [
+        "documentation governance",
+        "workflow coordination"
+      ],
+      "do_not_use_instead": [
+        "ARTIFACT_PROTOCOL.md"
+      ],
+      "topic_id": "parallel-work-guidance"
+    },
+    {
+      "path": "docs/platform-support.md",
+      "content_hash": "sha256:4ddc519cf78da96d436fad7e75c62dc7e8749120071559cb69683a4012a0d4b4",
+      "stand": "2026-09-13",
+      "status": "v3-platform-evidence-recorded",
+      "truth_level": "draft",
+      "verification_state": "verified",
+      "read_if_task_touches": [
+        "platform compatibility",
+        "migration portability",
+        "CI matrix"
+      ],
+      "primary_systems": [
+        "platform verification"
+      ],
+      "do_not_use_instead": [
+        "ARTIFACT_PROTOCOL.md",
+        "docs/alpha-readiness.md"
+      ],
+      "topic_id": "canontrail-platform-support"
+    },
+    {
+      "path": "docs/release-checklist.md",
+      "content_hash": "sha256:349c30ac781a782b096b2405172a98b6f741a0ef937ded332a960031fb06f1be",
+      "stand": "2026-09-13",
+      "status": "preparation-not-publication",
+      "truth_level": "draft",
+      "verification_state": "unverified",
+      "read_if_task_touches": [
+        "public release preparation",
+        "source distribution"
+      ],
+      "primary_systems": [
+        "release operations"
+      ],
+      "do_not_use_instead": [
+        "docs/alpha-readiness.md",
+        "SECURITY.md"
+      ],
+      "topic_id": "canontrail-release-checklist"
+    },
+    {
+      "path": "docs/self-documentation.md",
+      "content_hash": "sha256:d7609c0c9fe949a6c9c26f42c51e2146637ed7014aeb146e974f3d1f64df9dbd",
+      "stand": "2026-09-13",
+      "status": "alpha-candidate",
+      "truth_level": "draft",
+      "verification_state": "unverified",
+      "read_if_task_touches": [
+        "session entry",
+        "documentation ownership",
+        "candidate continuity"
+      ],
+      "primary_systems": [
+        "documentation governance"
+      ],
+      "do_not_use_instead": [
+        "VISION.md",
+        "ARTIFACT_PROTOCOL.md",
+        "ROADMAP.md"
+      ],
+      "topic_id": "canontrail-self-documentation"
+    },
+    {
+      "path": "docs/third-party-notices.md",
+      "content_hash": "sha256:7e647e45fe561810b44ed8c9b28417ce38060c949c746f2495cca40111e1c287",
+      "stand": "2026-09-13",
+      "status": "source-distribution-inventory",
+      "truth_level": "draft",
+      "verification_state": "unverified",
+      "read_if_task_touches": [
+        "third-party notices",
+        "distribution contents"
+      ],
+      "primary_systems": [
+        "release operations"
+      ],
+      "do_not_use_instead": [
+        "LICENSE.txt"
+      ],
+      "topic_id": "canontrail-third-party-inventory"
+    },
+    {
+      "path": "examples/context-inspection/README.md",
+      "content_hash": "sha256:f0d8e1e1c522f497b089486d2f3bcf15503fad70ba51e43f3b3ee6002366a287",
+      "stand": "2026-09-07",
+      "status": "example",
+      "truth_level": "design-target",
+      "verification_state": "internally-reviewed",
+      "read_if_task_touches": [
+        "context inspection",
+        "source excerpts"
+      ],
+      "primary_systems": [
+        "context continuity"
+      ],
+      "do_not_use_instead": [
+        "ARTIFACT_PROTOCOL.md"
+      ],
+      "topic_id": "example-context-inspection"
+    },
+    {
+      "path": "examples/context-routing/README.md",
+      "content_hash": "sha256:789017905104175afa07eb2b6fa713a955168bd93d8917b3113cf3b9b6ba70e8",
+      "stand": "2026-09-06",
+      "status": "current",
+      "truth_level": "active-snapshot",
+      "verification_state": "internally-reviewed",
+      "read_if_task_touches": [
+        "coherent context routing"
+      ],
+      "primary_systems": [
+        "context compiler"
+      ],
+      "do_not_use_instead": [
+        "ARTIFACT_PROTOCOL.md"
+      ],
+      "topic_id": "coherent-routing-example"
+    },
+    {
+      "path": "examples/context-sections/README.md",
+      "content_hash": "sha256:24bbe3c79c813c3b70ba8fd69f81affa8d8c74481a2ecea77e73c70268d10217",
+      "stand": "2026-09-07",
+      "status": "current",
+      "truth_level": "active-snapshot",
+      "verification_state": "internally-reviewed",
+      "read_if_task_touches": [
+        "explicit source sections"
+      ],
+      "primary_systems": [
+        "context compiler"
+      ],
+      "do_not_use_instead": [
+        "ARTIFACT_PROTOCOL.md"
+      ],
+      "topic_id": "explicit-context-sections-example"
+    },
+    {
+      "path": "examples/documentation-maintenance/README.md",
+      "content_hash": "sha256:f2acb16b8ed2f9d52f1e53607fb785d9945cd356a0d30fa1ab0c0deb51d18e07",
+      "stand": "2026-08-27",
+      "status": "current",
+      "truth_level": "active-snapshot",
+      "verification_state": "reviewed",
+      "read_if_task_touches": [
+        "documentation maintenance examples",
+        "docs audit"
+      ],
+      "primary_systems": [
+        "examples",
+        "documentation maintenance"
+      ],
+      "do_not_use_instead": [
+        "ARTIFACT_PROTOCOL.md"
+      ],
+      "topic_id": "example-documentation-maintenance"
+    },
+    {
+      "path": "examples/feature-save-schema/project-doc.md",
+      "content_hash": "sha256:726ba9eb55a587d27605988a1c4f6458d84abdbcffcb2c35de968027be4cea45",
+      "stand": "2026-07-13",
+      "status": "current",
+      "truth_level": "canonical",
+      "verification_state": "reviewed",
+      "read_if_task_touches": [
+        "save format",
+        "schema compatibility"
+      ],
+      "primary_systems": [
+        "SaveManager"
+      ],
+      "do_not_use_instead": [],
+      "topic_id": "example-save-format"
+    },
+    {
+      "path": "examples/feature-save-schema/README.md",
+      "content_hash": "sha256:1288e1794b76b3e27933acd30d84ac785cd087e7bfa3a771f3d15492dec76efc",
+      "stand": "2026-09-12",
+      "status": "current",
+      "truth_level": "active-snapshot",
+      "verification_state": "internally-reviewed",
+      "read_if_task_touches": [
+        "worked examples",
+        "external workflow compatibility",
+        "handoffs"
+      ],
+      "primary_systems": [
+        "examples"
+      ],
+      "do_not_use_instead": [
+        "ARTIFACT_PROTOCOL.md"
+      ],
+      "topic_id": "example-save-schema-continuity"
+    },
+    {
+      "path": "examples/feature-save-schema/task-brief.md",
+      "content_hash": "sha256:bfc6bed57871838bbd40f7e1ee9c13114b6bb66b725575b454643f584e34be5f",
+      "stand": "2026-07-13",
+      "status": "in-progress",
+      "truth_level": "active-snapshot",
+      "verification_state": "structurally-reviewed",
+      "read_if_task_touches": [
+        "save migration task"
+      ],
+      "primary_systems": [
+        "SaveManager"
+      ],
+      "do_not_use_instead": [
+        "examples/feature-save-schema/project-doc.md"
+      ],
+      "artifact_id": "T-SAVE-001",
+      "artifact_kind": "external-task-brief",
+      "topic_id": "example-save-task"
+    },
+    {
+      "path": "examples/migration-plan/README.md",
+      "content_hash": "sha256:bd7c126f0d742ea44d549a9bf06771a659e6ac683ac52a160195d1ad335ff3c9",
+      "stand": "2026-09-13",
+      "status": "current-teaching-example",
+      "truth_level": "draft",
+      "verification_state": "unverified",
+      "read_if_task_touches": [
+        "migration plan vocabulary"
+      ],
+      "primary_systems": [
+        "migration planning"
+      ],
+      "do_not_use_instead": [
+        "docs/migration.md"
+      ],
+      "topic_id": "example-migration-plan-vocabulary"
+    },
+    {
+      "path": "examples/parallel-context/README.md",
+      "content_hash": "sha256:df3e37bda17590e3d76a0318df56ea8e015ca0509f35f146622e1f8d450a4c4d",
+      "stand": "2026-09-06",
+      "status": "current",
+      "truth_level": "active-snapshot",
+      "verification_state": "internally-reviewed",
+      "read_if_task_touches": [
+        "parallel context freshness"
+      ],
+      "primary_systems": [
+        "context validation"
+      ],
+      "do_not_use_instead": [
+        "ARTIFACT_PROTOCOL.md"
+      ],
+      "topic_id": "parallel-context-worked-example"
+    },
+    {
+      "path": "examples/pre-compaction-checkpoint/README.md",
+      "content_hash": "sha256:ea81103af9a7fb6936634d7de9297a69a4a6e3938add350d03bd2f8fecb2bd08",
+      "stand": "2026-08-27",
+      "status": "current",
+      "truth_level": "active-snapshot",
+      "verification_state": "reviewed",
+      "read_if_task_touches": [
+        "checkpoint examples",
+        "pre-compaction checkpoints"
+      ],
+      "primary_systems": [
+        "examples",
+        "context continuity"
+      ],
+      "do_not_use_instead": [
+        "ARTIFACT_PROTOCOL.md"
+      ],
+      "topic_id": "example-precompaction-checkpoint"
+    },
+    {
+      "path": "examples/resume-history/README.md",
+      "content_hash": "sha256:b5dd275bce89f852828b998ae00d87e5d0e183c347a8af957f01666de3070961",
+      "stand": "2026-09-09",
+      "status": "implementation-example",
+      "truth_level": "design-target",
+      "verification_state": "internally-reviewed",
+      "read_if_task_touches": [
+        "resume history",
+        "current-use validation"
+      ],
+      "primary_systems": [
+        "context continuity"
+      ],
+      "do_not_use_instead": [
+        "ARTIFACT_PROTOCOL.md"
+      ],
+      "topic_id": "example-resume-history"
+    },
+    {
+      "path": "examples/usage-constraints/README.md",
+      "content_hash": "sha256:19ae127edaa6564dc3f0023c90a7e7f79f781ba08575e9d6ce26a385424892d6",
+      "stand": "2026-09-06",
+      "status": "current",
+      "truth_level": "active-snapshot",
+      "verification_state": "internally-reviewed",
+      "read_if_task_touches": [
+        "usage constraint syntax"
+      ],
+      "primary_systems": [
+        "metadata validation"
+      ],
+      "do_not_use_instead": [
+        "ARTIFACT_PROTOCOL.md",
+        "`ARTIFACT_PROTOCOL.md`",
+        "`legacy/Example.md` illustrates a narrative mention, not declared verification."
+      ],
+      "topic_id": "usage-constraints-worked-example"
+    },
+    {
+      "path": "integrations/gsd/canontrail/README.md",
+      "content_hash": "sha256:1bd0ff1697e2f4d23c65234afb9642f29fd187a6bbb1f05eaa5b4012eeac4d58",
+      "stand": "2026-08-29",
+      "status": "supported-adapter",
+      "truth_level": "design-target",
+      "verification_state": "internally-reviewed",
+      "read_if_task_touches": [
+        "install CanonTrail with GSD",
+        "GSD capability support"
+      ],
+      "primary_systems": [
+        "GSD compatibility"
+      ],
+      "do_not_use_instead": [
+        "docs/integrations.md"
+      ],
+      "topic_id": "gsd-capability-installation"
+    },
+    {
+      "path": "integrations/gsd/canontrail/skills/canontrail-context/SKILL.md",
+      "content_hash": "sha256:f42f448b1e50040fcad14fdad466017c3559974842692f006238a3112a942cc9",
+      "stand": "2026-08-29",
+      "status": "supported-adapter",
+      "truth_level": "design-target",
+      "verification_state": "internally-reviewed",
+      "read_if_task_touches": [
+        "GSD plan pre-hook",
+        "CanonTrail context compilation"
+      ],
+      "primary_systems": [
+        "GSD compatibility",
+        "bounded context"
+      ],
+      "do_not_use_instead": [
+        "AGENTS.md",
+        "ARTIFACT_PROTOCOL.md"
+      ],
+      "topic_id": "gsd-canontrail-context-skill"
+    },
+    {
+      "path": "integrations/gsd/canontrail/skills/canontrail-finalize/SKILL.md",
+      "content_hash": "sha256:2ea4fa240f9c5af18272cd2e3eb9fd851bb8a56ec5f40723fdc60dd6dd43cddd",
+      "stand": "2026-08-29",
+      "status": "supported-adapter",
+      "truth_level": "design-target",
+      "verification_state": "internally-reviewed",
+      "read_if_task_touches": [
+        "GSD verify post-hook",
+        "CanonTrail finalization"
+      ],
+      "primary_systems": [
+        "GSD compatibility",
+        "completion gates"
+      ],
+      "do_not_use_instead": [
+        "AGENTS.md",
+        "ARTIFACT_PROTOCOL.md"
+      ],
+      "topic_id": "gsd-canontrail-finalize-skill"
+    },
+    {
+      "path": "integrations/superpowers/README.md",
+      "content_hash": "sha256:8dab971b0d13a1f12a81d456c951397b6480635d0e6d938f5f74b9ac2d238e67",
+      "stand": "2026-08-29",
+      "status": "supported-adapter",
+      "truth_level": "design-target",
+      "verification_state": "internally-reviewed",
+      "read_if_task_touches": [
+        "install CanonTrail with Superpowers",
+        "Superpowers skill support"
+      ],
+      "primary_systems": [
+        "Superpowers compatibility"
+      ],
+      "do_not_use_instead": [
+        "docs/integrations.md"
+      ],
+      "topic_id": "superpowers-skill-installation"
+    },
+    {
+      "path": "integrations/superpowers/skills/canontrail-feature-lifecycle/SKILL.md",
+      "content_hash": "sha256:70215fcc77952fb26b660908819b0a7a8126684d6441a0b11ecef44696f778e5",
+      "stand": "2026-08-29",
+      "status": "supported-adapter",
+      "truth_level": "design-target",
+      "verification_state": "internally-reviewed",
+      "read_if_task_touches": [
+        "Superpowers feature lifecycle",
+        "CanonTrail task context",
+        "CanonTrail completion"
+      ],
+      "primary_systems": [
+        "Superpowers compatibility",
+        "bounded context",
+        "completion gates"
+      ],
+      "do_not_use_instead": [
+        "AGENTS.md",
+        "ARTIFACT_PROTOCOL.md"
+      ],
+      "topic_id": "superpowers-canontrail-feature-lifecycle-skill"
+    },
+    {
+      "path": "README.md",
+      "content_hash": "sha256:78453374980fa5a13a0b6e48c8d68d16a22cd96ebd5a2f471b5a6c3cc72213a0",
+      "stand": "2026-09-13",
+      "status": "alpha-candidate",
+      "truth_level": "draft",
+      "verification_state": "unverified",
+      "read_if_task_touches": [
+        "project overview",
+        "onboarding"
+      ],
+      "primary_systems": [
+        "project overview"
+      ],
+      "do_not_use_instead": [
+        "VISION.md",
+        "ARTIFACT_PROTOCOL.md"
+      ],
+      "topic_id": "project-overview"
+    },
+    {
+      "path": "ROADMAP.md",
+      "content_hash": "sha256:e6dff22b13c93d7a43bda7c40d27c4f066255b4de9fe69bc32c8271c31798c65",
+      "stand": "2026-09-13",
+      "status": "alpha-candidate",
+      "truth_level": "draft",
+      "verification_state": "unverified",
+      "read_if_task_touches": [
+        "implementation priorities",
+        "alpha scope"
+      ],
+      "primary_systems": [
+        "roadmap"
+      ],
+      "do_not_use_instead": [
+        "VISION.md",
+        "ARTIFACT_PROTOCOL.md"
+      ],
+      "topic_id": "implementation-roadmap"
+    },
+    {
+      "path": "SECURITY.md",
+      "content_hash": "sha256:e619327308a2621027899573f4d1841acbd6970ea6cff32451328a0dbf523388",
+      "stand": "2026-09-12",
+      "status": "draft-before-public-release",
+      "truth_level": "draft",
+      "verification_state": "unverified",
+      "read_if_task_touches": [
+        "security reporting",
+        "supported versions"
+      ],
+      "primary_systems": [
+        "security policy"
+      ],
+      "do_not_use_instead": [
+        "ARTIFACT_PROTOCOL.md"
+      ],
+      "topic_id": "security-reporting-policy"
+    },
+    {
+      "path": "VISION.md",
+      "content_hash": "sha256:83a88277367d21d27d3d7fa53e2a915138ef9d62ef39a6999a83b3bb9361f987",
+      "stand": "2026-08-28",
+      "status": "approved-for-mvp",
+      "truth_level": "canonical",
+      "verification_state": "internally-reviewed",
+      "read_if_task_touches": [
+        "product scope",
+        "product positioning",
+        "architecture principles",
+        "feature prioritization"
+      ],
+      "primary_systems": [
+        "canonical documentation",
+        "context lifecycle",
+        "workflow compatibility"
+      ],
+      "do_not_use_instead": [
+        "ARTIFACT_PROTOCOL.md",
+        "ROADMAP.md"
+      ],
+      "topic_id": "product-vision"
+    }
+  ]
+}

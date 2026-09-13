@@ -1,0 +1,14 @@
+{
+  "mode": "task",
+  "relevant_task_ids": ["A"],
+  "fallback_reason": null,
+  "deferred_findings": [
+    {
+      "code": "LOCK004",
+      "severity": "error",
+      "message": "stale content hash for 'B.ts'",
+      "path": ".agent-context/tasks/B/context.lock.json",
+      "context_drift": { "task_id": "B", "kind": "source-content" }
+    }
+  ]
+}

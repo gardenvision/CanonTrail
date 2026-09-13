@@ -1,0 +1,218 @@
+{
+  "run_id": "34747718414",
+  "url": "https://github.com/gardenvision/CanonTrail/actions/runs/34747718414",
+  "commit": "a7901a3fb7a7a871ba7049e2aa50fc9da759744c",
+  "conclusion": "success",
+  "archive_sha256": "d95cd0b307f37a4bfa37eaaaaa93b2e13f83973c7d2280f637787b68cf73591d",
+  "manifest_sha256": "a3b628e4f78b3d309571fa08a2cb3258c0098410a7d3e4e5c299e6e0b344af6c",
+  "raw_evidence_files": 124,
+  "private_raw_manifest_sha256": "652deec3bfee7680021becb5874ea1703542b7fc6d30a3d1a1e0764d02eb9403",
+  "cells": [
+    {
+      "platform": "darwin",
+      "arch": "arm64",
+      "node": "v24.20.0",
+      "ok": true,
+      "tests": {
+        "total": 684,
+        "passed": 679,
+        "failed": 0,
+        "skipped": 5,
+        "files": 32
+      },
+      "native": {
+        "platform": "darwin",
+        "architecture": "arm64",
+        "node": "v24.20.0",
+        "symlinkSupported": true,
+        "caseSensitive": false,
+        "results": [
+          {
+            "name": "wrong-case exact physical spelling",
+            "status": "pass"
+          },
+          {
+            "name": "native file symlink with supplied discovery record",
+            "status": "pass"
+          },
+          {
+            "name": "distinct exact-case files remain distinct",
+            "status": "unsupported"
+          }
+        ],
+        "scope": "Additional direct probes of the sealed built helper; not a replacement for full CLI tests."
+      },
+      "source_unchanged": true,
+      "commands": 11
+    },
+    {
+      "platform": "linux",
+      "arch": "x64",
+      "node": "v20.19.6",
+      "ok": true,
+      "tests": {
+        "total": 684,
+        "passed": 680,
+        "failed": 0,
+        "skipped": 4,
+        "files": 32
+      },
+      "native": {
+        "platform": "linux",
+        "architecture": "x64",
+        "node": "v20.19.6",
+        "symlinkSupported": true,
+        "caseSensitive": true,
+        "results": [
+          {
+            "name": "wrong-case exact physical spelling",
+            "status": "pass"
+          },
+          {
+            "name": "native file symlink with supplied discovery record",
+            "status": "pass"
+          },
+          {
+            "name": "distinct exact-case files remain distinct",
+            "status": "pass"
+          }
+        ],
+        "scope": "Additional direct probes of the sealed built helper; not a replacement for full CLI tests."
+      },
+      "source_unchanged": true,
+      "commands": 11
+    },
+    {
+      "platform": "linux",
+      "arch": "x64",
+      "node": "v24.20.0",
+      "ok": true,
+      "tests": {
+        "total": 684,
+        "passed": 680,
+        "failed": 0,
+        "skipped": 4,
+        "files": 32
+      },
+      "native": {
+        "platform": "linux",
+        "architecture": "x64",
+        "node": "v24.20.0",
+        "symlinkSupported": true,
+        "caseSensitive": true,
+        "results": [
+          {
+            "name": "wrong-case exact physical spelling",
+            "status": "pass"
+          },
+          {
+            "name": "native file symlink with supplied discovery record",
+            "status": "pass"
+          },
+          {
+            "name": "distinct exact-case files remain distinct",
+            "status": "pass"
+          }
+        ],
+        "scope": "Additional direct probes of the sealed built helper; not a replacement for full CLI tests."
+      },
+      "source_unchanged": true,
+      "commands": 11
+    },
+    {
+      "platform": "win32",
+      "arch": "x64",
+      "node": "v24.20.0",
+      "ok": true,
+      "tests": {
+        "total": 684,
+        "passed": 677,
+        "failed": 0,
+        "skipped": 7,
+        "files": 32
+      },
+      "native": {
+        "platform": "win32",
+        "architecture": "x64",
+        "node": "v24.20.0",
+        "symlinkSupported": true,
+        "caseSensitive": false,
+        "results": [
+          {
+            "name": "wrong-case exact physical spelling",
+            "status": "pass"
+          },
+          {
+            "name": "native file symlink with supplied discovery record",
+            "status": "pass"
+          },
+          {
+            "name": "distinct exact-case files remain distinct",
+            "status": "unsupported"
+          }
+        ],
+        "scope": "Additional direct probes of the sealed built helper; not a replacement for full CLI tests."
+      },
+      "source_unchanged": true,
+      "commands": 11
+    }
+  ],
+  "coverage": {
+    "observed_at": "2026-09-13T08:32:45.196Z",
+    "unique_cases": 684,
+    "executed_successfully_somewhere": 684,
+    "uncovered": [],
+    "scope": "Union of actual case results on five recorded environments; not a claim every case runs on every OS.",
+    "windows_short_name_cases": [
+      {
+        "file": "test/migration-review-regressions.test.ts",
+        "test": "Sonnet review regression boundaries rejects ordinary short-name aliases without banning legitimate tilde names",
+        "passed_in": [
+          "local Windows Node 24.11.1"
+        ],
+        "skipped_in": [
+          "alpha-v3-macos-latest-node-24",
+          "alpha-v3-ubuntu-latest-node-20.19",
+          "alpha-v3-ubuntu-latest-node-24",
+          "alpha-v3-windows-latest-node-24"
+        ]
+      },
+      {
+        "file": "test/migration-review-regressions.test.ts",
+        "test": "Sonnet review regression boundaries rejects a real Windows short-name control-tree alias before execute, rollback, or validation can trust it",
+        "passed_in": [
+          "local Windows Node 24.11.1"
+        ],
+        "skipped_in": [
+          "alpha-v3-macos-latest-node-24",
+          "alpha-v3-ubuntu-latest-node-20.19",
+          "alpha-v3-ubuntu-latest-node-24",
+          "alpha-v3-windows-latest-node-24"
+        ]
+      }
+    ],
+    "source_reports": [
+      {
+        "name": "local Windows Node 24.11.1",
+        "sha256": "07f6677a09f3294491cc07f25f62e53c6cbf3c6ed6d8bf363110c14ba2ca6b90"
+      },
+      {
+        "name": "alpha-v3-macos-latest-node-24",
+        "sha256": "5f3c5c519c387ec2392538039e437e5280d751c0f1c5a8277ed056a0b77cf4bb"
+      },
+      {
+        "name": "alpha-v3-ubuntu-latest-node-20.19",
+        "sha256": "8636cc2725596f8936d0aa0596bbda72034f1b549fd70bc6aad5f8fd89ef0acb"
+      },
+      {
+        "name": "alpha-v3-ubuntu-latest-node-24",
+        "sha256": "1b0103aca890a6748d85083b4316b8ba16cbda714933d5cfc4a807cd435475b8"
+      },
+      {
+        "name": "alpha-v3-windows-latest-node-24",
+        "sha256": "a3340082d747f5dd1d89e2c42e9c0db6a6ae3a1669d310d8bbf00a25f7b5c71a"
+      }
+    ]
+  },
+  "scope": "All source bytes in V3 were tested. This new closure revision has metadata differences; do not call it the exact CI snapshot. No runtime/schema/test/dependency changes are permitted."
+}

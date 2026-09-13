@@ -1,0 +1,29 @@
+task_id: T-SAVE-001
+feature_id: FEAT-SAVE-SCHEMA
+status: verified
+objective: Preserve compatibility for previously stored save data while extending the schema.
+non_goals:
+  - Redesign the complete persistence layer.
+acceptance_criteria:
+  - id: AC-SAVE-OLD
+    statement: Existing version-one saves still load after the schema change.
+    verification: Run the compatibility fixture and retain its compact evidence record.
+    status: pass
+dependencies: []
+documentation_impact:
+  - examples/feature-save-schema/project-doc.md
+file_intents:
+  - examples/feature-save-schema/project-doc.md
+  - examples/feature-save-schema/tasks/T-SAVE-001/change.yaml
+required_context_sources:
+  - examples/feature-save-schema/project-doc.md
+  - examples/feature-save-schema/tasks/T-SAVE-001/change.yaml
+parallel_safety: exclusive
+checks:
+  - id: CHECK-SAVE-COMPATIBILITY
+    command_or_observation: The version-one save fixture loads with the new schema.
+    status: pass
+    evidence_refs:
+      - examples/feature-save-schema/tasks/T-SAVE-001/handoff.yaml
+latest_handoff: examples/feature-save-schema/tasks/T-SAVE-001/handoff.yaml
+updated_at: "2026-07-15T00:00:00+02:00"

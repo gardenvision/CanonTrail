@@ -1,0 +1,47 @@
+task_id: T-ALPHA-CANDIDATE-001
+status: review
+objective: Prepare a curated local Alpha source tree with portable onboarding and truthful release gates.
+non_goals:
+  - Publish, select a license, rewrite history, or alter any real user project.
+  - Expand runtime features or claim universal context savings.
+acceptance_criteria:
+  - id: AC-CURATION
+    statement: The candidate excludes private history and remains a complete testable source distribution.
+    verification: Inspect the file allowlist, privacy scan and dependency references.
+    status: pass
+  - id: AC-ONBOARDING
+    statement: A fresh synthetic project can follow the source-build and bounded-context route with explicit conflicts.
+    verification: Execute and preserve the CLI smoke cases.
+    status: pass
+  - id: AC-QUALITY
+    statement: Candidate checks pass or precisely documented release blockers remain visible.
+    verification: Run current build, tests, audit, validation and both completion scopes.
+    status: pass
+dependencies: []
+documentation_impact:
+  - README.md
+  - docs/alpha-readiness.md
+file_intents:
+  - README.md
+  - VISION.md
+  - ARTIFACT_PROTOCOL.md
+  - ROADMAP.md
+  - docs/alpha-readiness.md
+  - docs/self-documentation.md
+  - CONTRIBUTING.md
+  - SECURITY.md
+  - package.json
+  - package-lock.json
+  - examples/feature-save-schema/README.md
+  - examples/feature-save-schema/task-brief.md
+required_context_sources:
+  - VISION.md
+  - docs/alpha-readiness.md
+parallel_safety: exclusive
+checks:
+  - id: CHECK-LOCAL-PREPARATION
+    command_or_observation: Earlier Alpha baseline build, 649-case suite, dependency audit, synthetic onboarding and source-preservation checks completed with documented limitations; follow-up corrections have separate evidence.
+    status: pass
+    evidence_refs:
+      - .agent-context/tasks/T-ALPHA-CANDIDATE-001/evidence/verification.json
+updated_at: "2026-09-12T16:59:00Z"

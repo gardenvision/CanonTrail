@@ -1,0 +1,53 @@
+{
+  "recorded_at": "2026-09-13T08:54:54.682Z",
+  "reviewer": "Claude Opus 5 (independent local reviewer)",
+  "decision": "APPROVE WITH CONDITIONS",
+  "review_date": "2026-09-12",
+  "report_filename": "REPORT.md",
+  "report_sha256": "0b93460f6ee217b32f2db4002850a1ff738a1869859c8fefbfb50525c2cae729",
+  "report_bytes": 41441,
+  "report_included": false,
+  "report_retention": "The original report and 36 evidence files remain in the private maintainer review archive; no private attachment is republished here.",
+  "scope": "Technical frozen_examples age-only mechanism in exact V3; not whole-product release, license, new harness review or canonical promotion.",
+  "reviewed_archive_sha256": "d95cd0b307f37a4bfa37eaaaaa93b2e13f83973c7d2280f637787b68cf73591d",
+  "reviewed_manifest_sha256": "a3b628e4f78b3d309571fa08a2cb3258c0098410a7d3e4e5c299e6e0b344af6c",
+  "conditions": [
+    {
+      "id": "B-1",
+      "requirement": "Formal closure of T-FROZEN-EXAMPLE-LIFECYCLE-001 using current task checks.",
+      "resolution": "This metadata-only revision records the received independent review; actual finalization must still be executed and retained."
+    },
+    {
+      "id": "B-2",
+      "requirement": "Exact-source Linux/macOS verification and actual filesystem capabilities.",
+      "status": "satisfied",
+      "evidence": "platform-results.json"
+    }
+  ],
+  "nonblocking_recommendations": [
+    {
+      "id": "R-1",
+      "action": "Improve source-eligibility diagnostics.",
+      "disposition": "deferred; no runtime edit in closure revision"
+    },
+    {
+      "id": "R-3",
+      "action": "Add a section-11 cross-reference to the section-10.1 frozen-example validator.",
+      "disposition": "deferred documentation follow-up"
+    },
+    {
+      "id": "R-2",
+      "action": "Choose structured standalone audit parse errors or explicitly document the existing exception.",
+      "disposition": "deferred compatibility decision; pre-existing behavior, not a frozen-example regression"
+    }
+  ],
+  "authenticity": "Hashes establish byte identity, not cryptographic reviewer authentication.",
+  "not_granted": [
+    "public release",
+    "license selection",
+    "whole-product independent review",
+    "new harness independent review",
+    "canonical promotion",
+    "real-project migration"
+  ]
+}

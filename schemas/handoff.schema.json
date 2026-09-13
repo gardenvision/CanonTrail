@@ -1,0 +1,120 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:canontrail:schema:handoff:0",
+  "title": "Task Handoff",
+  "type": "object",
+  "additionalProperties": false,
+  "dependentRequired": {
+    "source_provider_event": ["source_provider"]
+  },
+  "required": [
+    "handoff_id",
+    "task_id",
+    "created_at",
+    "source_session_id",
+    "source_context_lock_path",
+    "source_context_lock_hash",
+    "objective",
+    "completed",
+    "decisions",
+    "files",
+    "checks",
+    "blockers",
+    "open_questions",
+    "next_safe_action",
+    "do_not_repeat",
+    "resume_sources",
+    "worktree_dirty",
+    "uncommitted_summary",
+    "handoff_hash"
+  ],
+  "properties": {
+    "handoff_id": { "type": "string", "minLength": 1 },
+    "task_id": { "type": "string", "minLength": 1 },
+    "source_system": { "type": "string", "minLength": 1 },
+    "source_ref": { "type": "string", "minLength": 1 },
+    "created_at": { "type": "string", "format": "date-time" },
+    "source_session_id": { "type": "string", "minLength": 1 },
+    "checkpoint_trigger": {
+      "enum": [
+        "pause",
+        "agent-switch",
+        "provider-switch",
+        "external-blocker",
+        "phase-transition",
+        "explicit-handoff",
+        "pre-compaction"
+      ]
+    },
+    "source_provider": { "type": "string", "minLength": 1 },
+    "source_provider_event": { "type": "string", "minLength": 1 },
+    "source_context_lock_path": { "type": "string", "minLength": 1 },
+    "source_context_lock_hash": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+    "objective": { "type": "string", "minLength": 1 },
+    "completed": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "decisions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["statement", "authority", "source"],
+        "additionalProperties": false,
+        "properties": {
+          "statement": { "type": "string", "minLength": 1 },
+          "authority": { "enum": ["delegated", "approved", "provisional"] },
+          "source": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "files": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["path", "state", "summary"],
+        "additionalProperties": false,
+        "properties": {
+          "path": { "type": "string", "minLength": 1 },
+          "state": { "enum": ["created", "modified", "deleted", "inspected"] },
+          "summary": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "checks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "status", "evidence"],
+        "additionalProperties": false,
+        "properties": {
+          "name": { "type": "string", "minLength": 1 },
+          "status": { "enum": ["pass", "fail", "blocked", "not-run"] },
+          "evidence": { "type": "string" }
+        }
+      }
+    },
+    "blockers": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "open_questions": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "next_safe_action": { "type": "string", "minLength": 1 },
+    "do_not_repeat": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "resume_sources": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 1 },
+      "uniqueItems": true
+    },
+    "worktree_dirty": { "type": "boolean" },
+    "uncommitted_summary": { "type": ["string", "null"] },
+    "handoff_hash": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" }
+  }
+}

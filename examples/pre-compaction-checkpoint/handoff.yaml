@@ -1,0 +1,38 @@
+handoff_id: H-CHECKPOINT-EXAMPLE-001
+task_id: T-SAVE-001
+source_system: canontrail
+source_ref: examples/pre-compaction-checkpoint/README.md
+created_at: "2026-08-27T10:30:00+02:00"
+source_session_id: claude-session-example-001
+checkpoint_trigger: pre-compaction
+source_provider: claude-code
+source_provider_event: auto
+source_context_lock_path: examples/feature-save-schema/tasks/T-SAVE-001/source-context.lock.json
+source_context_lock_hash: sha256:30282dd811aa82816a98fd7b5805b848248dcf3e16f6f7e6d70a0aa40727d6f1
+objective: Preserve the exact bounded task state before automatic provider compaction.
+completed:
+  - Recorded the current implementation boundary and pending verification.
+decisions:
+  - statement: Keep transcript content outside the CanonTrail checkpoint.
+    authority: approved
+    source: ARTIFACT_PROTOCOL.md
+files:
+  - path: examples/pre-compaction-checkpoint/README.md
+    state: inspected
+    summary: Confirmed the provider-neutral checkpoint boundary.
+checks:
+  - name: focused checkpoint test
+    status: pass
+    evidence: test/checkpoint.test.ts
+blockers: []
+open_questions: []
+next_safe_action: Validate this handoff, then create the receiving session's immutable resume packet.
+do_not_repeat:
+  - Do not read or summarize the provider transcript during resume.
+resume_sources:
+  - ARTIFACT_PROTOCOL.md
+  - examples/pre-compaction-checkpoint/README.md
+  - test/checkpoint.test.ts
+worktree_dirty: false
+uncommitted_summary: null
+handoff_hash: sha256:30a96a88440755f8cfaba3719090dd8b7e8fe1d40d8f0074fcac927cf82ae488

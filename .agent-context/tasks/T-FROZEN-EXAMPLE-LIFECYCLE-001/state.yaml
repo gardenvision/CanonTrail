@@ -1,0 +1,27 @@
+task_id: T-FROZEN-EXAMPLE-LIFECYCLE-001
+status: verified
+objective: Resolve the frozen teaching brief freshness conflict without weakening real-task or integrity checks.
+non_goals: [Publish a release, Change historical locks or headers, Globally relax freshness]
+acceptance_criteria:
+  - {id: AC-EXAMPLE, statement: Only an explicitly bound unchanged synthetic example receives age-only exemption., verification: Test exact hash and audit output while preserving original bytes., status: pass}
+  - {id: AC-STRICT, statement: Invalid bindings and operational or canonical sources remain blocked., verification: Run path alias drift schema and real-task counterexamples., status: pass}
+  - {id: AC-COMPAT, statement: Existing policy behavior and complete suite remain intact., verification: Run focused and full suites; keep release review and platform checks separate., status: pass}
+dependencies: []
+documentation_impact: [ARTIFACT_PROTOCOL.md, examples/feature-save-schema/README.md, docs/alpha-readiness.md, docs/platform-support.md, docs/self-documentation.md]
+file_intents: [src/frozen-examples.ts, src/docs.ts, src/validator.ts, schemas/maintenance.schema.json, test/frozen-examples.test.ts, .agent-context/maintenance.yaml, ARTIFACT_PROTOCOL.md, examples/feature-save-schema/README.md, docs/alpha-readiness.md, docs/platform-support.md, docs/self-documentation.md, ROADMAP.md]
+required_context_sources: [src/frozen-examples.ts, src/docs.ts, schemas/maintenance.schema.json, test/frozen-examples.test.ts, ARTIFACT_PROTOCOL.md]
+parallel_safety: exclusive
+checks:
+  - id: CHECK-AUTHOR-QUALITY
+    command_or_observation: Typecheck and build passed; 671 tests passed with 13 skips and no failures; exact teaching artifacts retained.
+    status: pass
+    evidence_refs: [.agent-context/tasks/T-FROZEN-EXAMPLE-LIFECYCLE-001/evidence/verification.json]
+  - id: CHECK-INDEPENDENT-AND-PLATFORMS
+    command_or_observation: Matched the received independent technical review and exact-source platform receipts without extending their approval scope.
+    status: pass
+    evidence_refs: [.agent-context/tasks/T-FROZEN-EXAMPLE-LIFECYCLE-001/evidence/review-receipt.json, .agent-context/tasks/T-FROZEN-EXAMPLE-LIFECYCLE-001/evidence/platform-results.json]
+  - id: CHECK-METADATA-CLOSURE
+    command_or_observation: Local typecheck build dependency audit and 52 focused cases passed; behavior-bearing sources and original example bytes preserved.
+    status: pass
+    evidence_refs: [.agent-context/tasks/T-FROZEN-EXAMPLE-LIFECYCLE-001/evidence/closure-verification.json]
+updated_at: "2026-09-13T09:01:00Z"

@@ -1,0 +1,94 @@
+{
+  "version": 2,
+  "transaction_id": "MTX-EXAMPLE-001",
+  "migration_id": "MIG-EXAMPLE-001",
+  "created_at": "2026-09-03T20:00:00.000Z",
+  "mode": "transformation-preview",
+  "plan_hash": "sha256:15ffd96bb8dbaba0860d3ca4a988bd04eb5ca91439a0584a76be1d3d8fa8c976",
+  "decision_hash": "sha256:b5ae37304b2cd2f7b7b91054d67ecc9ae1a71c81cb8883590f6bc49081f2ac4f",
+  "reviewed_by": "example-reviewer",
+  "reviewed_at": "2026-09-03T20:01:00.000Z",
+  "decisions": [
+    {
+      "path": "docs/plants.md",
+      "decision": "execute",
+      "action": "normalize-header",
+      "target_path": "docs/plants.md",
+      "reason": "Example reviewed mapping.",
+      "target_header": {
+        "topic_id": "plants",
+        "stand": "2026-09-03",
+        "status": "current",
+        "truth_level": "canonical",
+        "verification": {
+          "state": "reviewed",
+          "evidence": [
+            "docs/plants.md"
+          ]
+        },
+        "read_if_task_touches": [
+          "plants"
+        ],
+        "primary_systems": [
+          "PlantService"
+        ],
+        "safe_to_edit": [
+          "Preserve behavior."
+        ],
+        "do_not_use_instead": [
+          "OldPlants.md"
+        ]
+      }
+    }
+  ],
+  "root": ".",
+  "documentation_roots": [
+    "docs"
+  ],
+  "operations": [
+    {
+      "operation_id": "OP-0001",
+      "action": "normalize-header",
+      "source_path": "docs/plants.md",
+      "target_path": "docs/plants.md",
+      "source_hash": "sha256:27bfcf986e0aa36f2a192ffb31086e6f1b2fe4aa52dd2b7525c6942a56b0fb9c",
+      "target_precondition": {
+        "state": "same-as-source",
+        "content_hash": "sha256:27bfcf986e0aa36f2a192ffb31086e6f1b2fe4aa52dd2b7525c6942a56b0fb9c"
+      },
+      "output_hash": "sha256:07a05b7079c3e31db8b55bd9073dd566e84bf3ad2e990950b4db762640a81b90",
+      "output_bytes": 333,
+      "target_header": {
+        "topic_id": "plants",
+        "stand": "2026-09-03",
+        "status": "current",
+        "truth_level": "canonical",
+        "verification": {
+          "state": "reviewed",
+          "evidence": [
+            "docs/plants.md"
+          ]
+        },
+        "read_if_task_touches": [
+          "plants"
+        ],
+        "primary_systems": [
+          "PlantService"
+        ],
+        "safe_to_edit": [
+          "Preserve behavior."
+        ],
+        "do_not_use_instead": [
+          "OldPlants.md"
+        ]
+      }
+    }
+  ],
+  "blockers": [],
+  "summary": {
+    "operations": 1,
+    "blockers": 0,
+    "skipped": 0
+  },
+  "transaction_hash": "sha256:b31a25c21b6ae6cd63bef817a53be0a14af6e306915c81cc48fba76d1c0d2986"
+}

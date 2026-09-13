@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "migration_id": "MIG-NEUTRAL-EXAMPLE-001",
+  "created_at": "2026-09-13T12:00:00.000Z",
+  "mode": "plan-only",
+  "adapter": "auto",
+  "root": ".",
+  "documentation_roots": [
+    "docs"
+  ],
+  "summary": {
+    "documents": 0,
+    "source_formats": {
+      "canontrail-frontmatter": 0,
+      "legacy-header-v1": 0,
+      "plain-markdown": 0
+    },
+    "roles": {
+      "canonical": 0,
+      "active-reference": 0,
+      "active-snapshot": 0,
+      "design-target": 0,
+      "handoff": 0,
+      "review": 0,
+      "historical": 0,
+      "third-party": 0,
+      "unknown": 0
+    },
+    "actions": {
+      "keep": 0,
+      "normalize-header": 0,
+      "review-metadata": 0,
+      "classify-and-normalize": 0,
+      "preserve-historical": 0,
+      "preserve-review": 0,
+      "exclude-external": 0
+    },
+    "review_required": 0,
+    "ignored_by_extension": {},
+    "unreadable": 0
+  },
+  "documents": [],
+  "unprocessed": [],
+  "warnings": [],
+  "plan_hash": "sha256:7b5f0edcc55d6c1520da6d30a4b876cc02e6c59580a5c9bb94dcc14958598e6d"
+}

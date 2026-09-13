@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:canontrail:schema:evidence-record:1",
+  "title": "Compact Project Evidence Record",
+  "$comment": "Version 1 record_hash recipe: remove record_hash; construct the object in this exact property order: version, evidence_id, task_id, kind, status, claim, summary, observed_at, producer, subjects, references. Producer properties are tool, command. Subject properties are path, role, content_hash. CanonTrail sorts subjects by path and references lexicographically before serialization. Serialize with JavaScript JSON.stringify without spacing, encode as UTF-8, calculate SHA-256, lowercase the hexadecimal digest, and prefix sha256:. Object property order is byte-significant in version 1.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "evidence_id", "task_id", "kind", "status", "claim", "summary", "observed_at", "producer", "subjects", "references", "record_hash"],
+  "properties": {
+    "version": { "const": 1 },
+    "evidence_id": { "type": "string", "pattern": "^EVID-[A-Z0-9-]+$" },
+    "task_id": { "type": "string", "minLength": 1 },
+    "kind": { "enum": ["technical-test", "technical-build", "semantic-runtime", "visual-render", "screenshot", "data-safety-snapshot"] },
+    "status": { "enum": ["pass", "fail", "inconclusive", "not-run"] },
+    "claim": { "type": "string", "minLength": 1 },
+    "summary": { "type": "string", "minLength": 1 },
+    "observed_at": { "type": "string", "format": "date-time" },
+    "producer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tool", "command"],
+      "properties": {
+        "tool": { "type": "string", "minLength": 1 },
+        "command": { "type": ["string", "null"] }
+      }
+    },
+    "subjects": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "role", "content_hash"],
+        "properties": {
+          "path": { "type": "string", "minLength": 1 },
+          "role": { "enum": ["test-source", "implementation", "report", "artifact", "snapshot"] },
+          "content_hash": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" }
+        }
+      }
+    },
+    "references": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "uniqueItems": true
+    },
+    "record_hash": {
+      "description": "Self-hash produced by the version-1 ordered JSON.stringify/UTF-8/SHA-256 recipe documented in this schema's $comment and ARTIFACT_PROTOCOL.md.",
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    }
+  }
+}

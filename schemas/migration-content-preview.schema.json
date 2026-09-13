@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:canontrail:schema:migration-content-preview:1",
+  "title": "Migration Content Preview (report only)",
+  "description": "Opt-in report content; not an applied artifact, transaction, approval or execution record. UTF-8 encoding of each decoded content string must match its hash/byte count and the corresponding transaction operation.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "encoding",
+    "views"
+  ],
+  "properties": {
+    "version": {
+      "const": 1
+    },
+    "encoding": {
+      "const": "utf-8"
+    },
+    "views": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/view"
+      }
+    }
+  },
+  "$defs": {
+    "image": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "content",
+        "content_hash",
+        "bytes"
+      ],
+      "properties": {
+        "content": {
+          "type": "string"
+        },
+        "content_hash": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "view": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "operation_id",
+        "source_path",
+        "target_path",
+        "before",
+        "after"
+      ],
+      "properties": {
+        "operation_id": {
+          "type": "string",
+          "pattern": "^OP-[0-9]{4,}$"
+        },
+        "source_path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "target_path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "before": {
+          "$ref": "#/$defs/image"
+        },
+        "after": {
+          "$ref": "#/$defs/image"
+        }
+      }
+    }
+  }
+}

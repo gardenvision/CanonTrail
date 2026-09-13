@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "kind": "source-excerpt",
+  "root": "<repository>",
+  "source": {
+    "path": "examples/context-inspection/source.txt",
+    "content_hash": "sha256:2d7f37d26d9aef2aecf0c7f94edcdd5534316748b3dfe3e860e94f02875a8ad2",
+    "bytes": 64,
+    "total_lines": 4
+  },
+  "excerpt": {
+    "start_line": 2,
+    "end_line": 3,
+    "content": "Änderung: gezielt lesen.\nKeep provenance.\n",
+    "content_hash": "sha256:6228ba6675e3a547249062a64e4092a49a2a8d24d7580d401f5ee6e34f90fa45",
+    "bytes": 43,
+    "estimated_tokens": 11
+  },
+  "lock_selection": null,
+  "writes_performed": false,
+  "boundary": "Exact source output, not proof of model reading or canonical authority. The whole_source_selected flag means whole-file coverage only; inspect line_ranges and selection_hash in the lock for explicit section coverage."
+}

@@ -1,0 +1,18 @@
+version: 1
+evidence_id: EVID-SAVE-TEST
+task_id: T-SAVE-001
+kind: technical-test
+status: pass
+claim: The focused save-system compatibility tests passed.
+summary: The portable example records the bounded result without embedding the placeholder test source.
+observed_at: 2026-08-30T14:30:00Z
+producer:
+  tool: example-workflow
+  command: dotnet test --filter SaveSystemTests
+subjects:
+  - path: SaveSystemTests.cs
+    role: test-source
+    content_hash: sha256:9c037e7861d1db12cb7b05d6981b5c78cf2b32bd604311b9ccfb93a0b70295f3
+references:
+  - examples/feature-save-schema/project-doc.md
+record_hash: sha256:770e2e2b78e751dd5614686f4a082ff810fa4f249c254988fd27bf869a241152

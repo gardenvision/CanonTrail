@@ -1,0 +1,67 @@
+version: 1
+change_id: CHG-PUBLIC-PREP-001
+revision: 1
+title: Neutral legacy-header naming and local publication preparation
+status: implemented
+risk: high
+author: CanonTrail preparation implementation agent
+canonical_source: .agent-context/tasks/T-PUBLIC-PREP-001/evidence/owner-decision.json
+decision_rationale: The owner requested neutral public naming and preparation. The change preserves old signed-by-hash bytes and separate release authority; no real migration or publication is authorized.
+documentation_structure:
+  decision: update-existing-feature-documents
+  rationale: The supported transformation remains the same feature; update its existing guide and use a separate operational release checklist, not a new product wiki.
+  feature_documents:
+    - {feature_id: documentation-migration, action: update, path: docs/migration.md, status: drafted, evidence_refs: [.agent-context/tasks/T-PUBLIC-PREP-001/evidence/owner-decision.json]}
+acceptance_cases:
+  - id: AC-NEUTRAL
+    given: A supported legacy header is scanned with auto, the preferred explicit adapter or its deprecated alias.
+    expected: New plans use legacy-header-v1 for the detected format and count key; explicit aliases normalize to the preferred adapter and normal help has no historical project name.
+    failure_or_uncertainty: Unknown adapters fail and a neutral name does not imply universal Markdown migration.
+    counterexample: The deprecated name remains in normal JSON output or alias normalization drops detection.
+    oracle: Exact output assertions for the same synthetic source and timestamp, plus CLI help and invalid-input cases.
+    status: pass
+    evidence_refs: [.agent-context/tasks/T-PUBLIC-PREP-001/evidence/verification.json]
+  - id: AC-COMPAT
+    given: An existing version-1 plan uses the historical format and count names.
+    expected: It remains readable and hash-valid without rewriting; new neutral plans also validate. Mixed count/document vocabularies, duplicate aliases and incorrect counts fail.
+    failure_or_uncertainty: Older installed schemas need explicit synchronization before consuming the additive vocabulary; no automatic configuration rewrite.
+    counterexample: Rehashing a contradictory mixed-vocabulary plan makes it validate.
+    oracle: Preserved historical fixture, exact self-hash comparison and independently assembled negative payloads through schema and repository validation.
+    status: pass
+    evidence_refs: [.agent-context/tasks/T-PUBLIC-PREP-001/evidence/verification.json]
+  - id: AC-BOUNDARIES
+    given: The baseline has reviewed migration safety and immutable historical locks and teaching examples.
+    expected: No execution or recovery algorithm changes, historical bytes remain intact and migration and full regressions pass.
+    failure_or_uncertainty: No new hosted platform evidence or real-project execution is claimed.
+    counterexample: Renaming changes restored document bytes or silently refreshes completed locks.
+    oracle: Full test suite, targeted neutral and alias roundtrip comparison and manifest preservation.
+    status: pass
+    evidence_refs: [.agent-context/tasks/T-PUBLIC-PREP-001/evidence/verification.json]
+  - id: AC-DISTRIBUTION
+    given: A private source candidate has linked documentation missing from the package and unconfigured release routes.
+    expected: Documentation and third-party inventory are included in a dry-run package; no operational history is packaged, private remains true and unresolved hosting decisions are explicit.
+    failure_or_uncertainty: Metadata and an author audit are not legal clearance, independent review or publication.
+    counterexample: A nonexistent public endpoint or private reporting address is presented as configured.
+    oracle: Parsed pack inventory, retained license files, explicit release checklist and exact source audit.
+    status: pass
+    evidence_refs: [.agent-context/tasks/T-PUBLIC-PREP-001/evidence/verification.json]
+impacts:
+  - {area: requirement, decision: affected, rationale: Owner selected neutral public wording., evidence_refs: [.agent-context/tasks/T-PUBLIC-PREP-001/evidence/owner-decision.json]}
+  - {area: data-contracts, decision: affected, rationale: Preferred adapter and source-format vocabulary is additive; historical vocabulary stays valid., evidence_refs: [schemas/migration-plan.schema.json]}
+  - {area: domain-logic, decision: affected, rationale: Normalize only the adapter selector and format-count identity; preserve migration safety semantics., evidence_refs: [src/migration.ts, src/validator.ts]}
+  - {area: tests-reference-cases, decision: affected, rationale: Add current and historical naming regression cases plus rejection cases., evidence_refs: [test/migration.test.ts, test/validator.test.ts]}
+  - {area: example-data, decision: affected, rationale: Add a current neutral example without changing the old hashed teaching artifact., evidence_refs: [examples/migration-plan/README.md]}
+  - {area: ui-api, decision: affected, rationale: CLI help and JSON-generated labels become neutral; deprecated input remains accepted., evidence_refs: [src/cli.ts]}
+  - {area: documentation, decision: affected, rationale: Prepare migration instructions and release boundaries., evidence_refs: [docs/migration.md, docs/alpha-readiness.md]}
+  - {area: diagrams-visuals, decision: not-affected, rationale: No graphical UI or visual layout changes; CLI text is covered by command assertions., evidence_refs: []}
+  - {area: terminology, decision: affected, rationale: Public guidance prefers legacy-header-v1 while marked historical compatibility references remain., evidence_refs: [docs/migration.md]}
+  - {area: operations-compatibility, decision: affected, rationale: Broaden documented package contents without publication and retain old-input compatibility., evidence_refs: [package.json, docs/alpha-readiness.md]}
+verification:
+  checks: [{name: Current source quality and preservation, status: pass, evidence_refs: [.agent-context/tasks/T-PUBLIC-PREP-001/evidence/verification.json]}]
+  terminology_search: {status: pass, terms: [gaertnerei-legacy, legacy-header-v1], evidence_refs: [docs/migration.md, .agent-context/tasks/T-PUBLIC-PREP-001/evidence/verification.json]}
+  visual_review: {applicable: false, status: not-applicable, evidence_refs: []}
+  unverifiable_items: []
+independent_review: {status: pending, reviewer: null, findings: [], evidence_refs: [], waiver: null}
+supersedes: []
+superseded_by: null
+updated_at: "2026-09-13T19:36:00Z"

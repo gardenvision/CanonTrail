@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://canontrail.dev/schemas/migration-execution.schema.json",
+  "title": "CanonTrail Migration Execution Evidence",
+  "oneOf": [
+    { "$ref": "#/$defs/intent" },
+    { "$ref": "#/$defs/record" }
+  ],
+  "$defs": {
+    "path": { "type": "string", "minLength": 1, "not": { "pattern": "/$|//|(^|/)\\.(?:/|$)|(^|/)\\.\\.(/|$)|^[A-Za-z]:|^/|\\\\" } },
+    "hash": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+    "intent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["version", "kind", "transaction_hash", "observed_at", "operations", "record_hash"],
+      "properties": {
+        "version": { "const": 1 },
+        "kind": { "const": "migration-apply-intent" },
+        "transaction_hash": { "$ref": "#/$defs/hash" },
+        "observed_at": { "type": "string", "format": "date-time" },
+        "operations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["operation_id", "source_path", "target_path", "source_hash", "output_hash"],
+            "properties": {
+              "operation_id": { "type": "string", "pattern": "^OP-[0-9]{4,}$" },
+              "source_path": { "$ref": "#/$defs/path" },
+              "target_path": { "$ref": "#/$defs/path" },
+              "source_hash": { "$ref": "#/$defs/hash" },
+              "output_hash": { "$ref": "#/$defs/hash" }
+            }
+          }
+        },
+        "record_hash": { "$ref": "#/$defs/hash" }
+      }
+    },
+    "record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["version", "kind", "transaction_hash", "observed_at", "operations", "record_hash"],
+      "properties": {
+        "version": { "const": 1 },
+        "kind": { "enum": ["migration-apply", "migration-rollback"] },
+        "transaction_hash": { "$ref": "#/$defs/hash" },
+        "observed_at": { "type": "string", "format": "date-time" },
+        "operations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["operation_id", "path", "before_hash", "after_hash"],
+            "properties": {
+              "operation_id": { "type": "string", "pattern": "^OP-[0-9]{4,}$" },
+              "path": { "$ref": "#/$defs/path" },
+              "before_hash": { "anyOf": [{ "$ref": "#/$defs/hash" }, { "type": "null" }] },
+              "after_hash": { "anyOf": [{ "$ref": "#/$defs/hash" }, { "type": "null" }] }
+            }
+          }
+        },
+        "record_hash": { "$ref": "#/$defs/hash" }
+      }
+    }
+  }
+}
