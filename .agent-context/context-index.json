@@ -1,15 +1,15 @@
 {
   "version": 1,
   "hash_algorithm": "sha256",
-  "root_hash": "sha256:39d90907c9e70a35905e5ffd6d8c53f61e4479e4c6e2d5b597216145ee52c668",
+  "root_hash": "sha256:a37380aeae204de07288931ad913e97e372aa100fe231279fc0d1be79a62cf73",
   "documents": [
     {
       "path": ".agent-context/tasks/T-ALPHA-CANDIDATE-001/brief.md",
-      "content_hash": "sha256:890454c779a29f9b2e1537995f43f1dc1a29983319277458bc8c9c1a5d0ee90a",
+      "content_hash": "sha256:6fbbde0f8ce3388238442b1a6f172ab0616e084749fdab5bad0cce2c45b08fe3",
       "stand": "2026-09-13",
-      "status": "review",
+      "status": "completed",
       "truth_level": "active-snapshot",
-      "verification_state": "internally-reviewed",
+      "verification_state": "verified",
       "read_if_task_touches": [
         "alpha candidate preparation"
       ],
@@ -60,11 +60,11 @@
     },
     {
       "path": ".agent-context/tasks/T-PUBLIC-PREP-001/brief.md",
-      "content_hash": "sha256:ee8a34a30965b08b4516537aa846f5702a50fea0a51e123b556484b51fb3dc94",
+      "content_hash": "sha256:8d11aafd82b7ea1e84cb07353b334bbef9b3e6a93a69e94c21b794d9a7a4a8de",
       "stand": "2026-09-13",
-      "status": "review",
+      "status": "completed",
       "truth_level": "active-snapshot",
-      "verification_state": "internally-reviewed",
+      "verification_state": "verified",
       "read_if_task_touches": [
         "T-PUBLIC-PREP-001"
       ],
@@ -78,7 +78,7 @@
     },
     {
       "path": ".agent-context/tasks/T-RELEASE-CLOSURE-001/brief.md",
-      "content_hash": "sha256:7163aeda157717212731cc9a64367574d620c1cf7b404b0e88947f7a82fabb4f",
+      "content_hash": "sha256:ed32faf52795a46fa047faea18a64f77bbfb9d30c7ccbcf9de16b50550954826",
       "stand": "2026-09-13",
       "status": "in-progress",
       "truth_level": "active-snapshot",
@@ -162,9 +162,9 @@
     },
     {
       "path": "docs/alpha-readiness.md",
-      "content_hash": "sha256:94ffeb028c19a351df75d03612e8389a604c3e52e04c501ea8f908a11dfcaefc",
+      "content_hash": "sha256:11ae7249cd6bf0f4ac33fbd39712c85ec9d57388b162ed9e34886591b3e6b7b7",
       "stand": "2026-09-13",
-      "status": "local-preparation-awaiting-release-review",
+      "status": "source-reviewed-awaiting-hosting",
       "truth_level": "draft",
       "verification_state": "verified",
       "read_if_task_touches": [
@@ -247,11 +247,11 @@
     },
     {
       "path": "docs/migration.md",
-      "content_hash": "sha256:304d797cd2da336cfa0becde40d51b20c22615e930b27ac3ee32391d7647c691",
-      "stand": "2026-09-12",
+      "content_hash": "sha256:e7664c146bbfac55e8f601dab010f35ebeb553f9ba48a9c7cac0c17aa12df0db",
+      "stand": "2026-09-13",
       "status": "experimental-alpha-candidate",
       "truth_level": "draft",
-      "verification_state": "internally-reviewed",
+      "verification_state": "verified",
       "read_if_task_touches": [
         "documentation migration",
         "brownfield adoption"
@@ -288,9 +288,9 @@
     },
     {
       "path": "docs/platform-support.md",
-      "content_hash": "sha256:4ddc519cf78da96d436fad7e75c62dc7e8749120071559cb69683a4012a0d4b4",
+      "content_hash": "sha256:e44ffd57012cd1883bf6d9cbf15b8d3661e420570721ed989de2eb1539ca5e78",
       "stand": "2026-09-13",
-      "status": "v3-platform-evidence-recorded",
+      "status": "c1-platform-evidence-recorded",
       "truth_level": "draft",
       "verification_state": "verified",
       "read_if_task_touches": [
@@ -309,7 +309,7 @@
     },
     {
       "path": "docs/release-checklist.md",
-      "content_hash": "sha256:349c30ac781a782b096b2405172a98b6f741a0ef937ded332a960031fb06f1be",
+      "content_hash": "sha256:09d32500eb72bf979b0e014b14767d29e3fe52dba4f26de4dcbde119467ea2c9",
       "stand": "2026-09-13",
       "status": "preparation-not-publication",
       "truth_level": "draft",
@@ -329,7 +329,7 @@
     },
     {
       "path": "docs/self-documentation.md",
-      "content_hash": "sha256:d7609c0c9fe949a6c9c26f42c51e2146637ed7014aeb146e974f3d1f64df9dbd",
+      "content_hash": "sha256:2b48de5cafe8d65cbc3779df9a5634a4e021bbf824d62cdd3a54394441169df5",
       "stand": "2026-09-13",
       "status": "alpha-candidate",
       "truth_level": "draft",
@@ -720,7 +720,7 @@
     },
     {
       "path": "ROADMAP.md",
-      "content_hash": "sha256:e6dff22b13c93d7a43bda7c40d27c4f066255b4de9fe69bc32c8271c31798c65",
+      "content_hash": "sha256:e7e3b1167aeaa782a882bb37ca2935a15f60d346176b4f01849ee39383335cb5",
       "stand": "2026-09-13",
       "status": "alpha-candidate",
       "truth_level": "draft",

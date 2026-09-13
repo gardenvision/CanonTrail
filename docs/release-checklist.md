@@ -12,13 +12,13 @@ do_not_use_instead: [docs/alpha-readiness.md, SECURITY.md]
 
 # First public source release
 
-This checklist prepares a release; it does not authorize one. No public destination, repository creation, visibility change, security channel or maintainer notification setting is configured by these files. Read `docs/alpha-readiness.md` for actual review and platform evidence.
+This checklist records the release process; its text does not itself configure GitHub or grant permission. The owner authorized conditional publication of a NEW clean-history `gardenvision/CanonTrail`. That staging repository exists and has received the reviewed source, but remains private. The original development repository is still private as `gardenvision/CanonTrail-private`. Read `docs/alpha-readiness.md` for exact review and platform evidence.
 
-## Owner choices still required
+## Decisions and remaining gates
 
-1. Choose the exact public repository name and URL. Preserve the private development repository. Publish a clean source history built from the reviewed manifest, not the old private branches, tags, reflogs or raw project reports. If the desired name is already occupied, agree on any rename first.
+1. Approved and prepared: `https://github.com/gardenvision/CanonTrail`, with clean root commit `23d542302e7327931cb2c60b7a35ae60e6e47f16` and no private development ancestors. The separately authorized private-repository rename is complete. Never merge old private branches, tags or raw project reports into this history.
 2. Choose a real confidential security reporting channel. GitHub private vulnerability reporting is recommended for the eventual public repository, but is not assumed enabled. Confirm the form and notification delivery after configuration; if a channel must be available before visibility changes, supply a verified alternative contact first. Never invent an email address.
-3. Approve the exact final revision for public source distribution after the independent release review and required quality gates. The neutral format name is already the owner's decision; the old name is compatibility-only, not normal onboarding.
+3. Publication is conditionally authorized after the independent release review and required quality/hosting gates, not merely after a push. C1 passed the four-platform hosted matrix; later metadata closure still needs its own validation and bounded review. Neutral naming and MIT are already selected. npm, canonical promotion and real-project migrations remain separate.
 
 ## Local preparation and review
 

@@ -1,5 +1,5 @@
 task_id: T-ALPHA-CANDIDATE-001
-status: review
+status: verified
 objective: Prepare a curated local Alpha source tree with portable onboarding and truthful release gates.
 non_goals:
   - Publish, select a license, rewrite history, or alter any real user project.
@@ -44,4 +44,8 @@ checks:
     status: pass
     evidence_refs:
       - .agent-context/tasks/T-ALPHA-CANDIDATE-001/evidence/verification.json
-updated_at: "2026-09-12T16:59:00Z"
+  - id: CHECK-INDEPENDENT-CLOSURE
+    command_or_observation: Independent C1 inventory onboarding and release-boundary review closes local preparation only; actual publication belongs to T-RELEASE-CLOSURE-001.
+    status: pass
+    evidence_refs: [.agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/review-receipt.json, .agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/platform-results.json]
+updated_at: "2026-09-13T21:50:20Z"

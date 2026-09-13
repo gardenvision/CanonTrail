@@ -28,10 +28,10 @@ Presence of these commands is not independent review of the entire product. `doc
 
 ## Before a public Alpha
 
-1. Finish the curated-source review and portable first-use instructions.
-2. Record current installation, tests, audit, validation and source-preservation results.
-3. Finish third-party/public-content clearance and independent whole-product release review. The owner has selected MIT; this does not close those reviews. Exact V3 cross-platform CI is recorded; the later metadata/licensing revisions are not new hosted snapshots.
-4. Obtain separate repository/publication and hosting-rule approval.
+1. Completed for C1: curated-source boundary review, portable first-use probes, package/source-map checks and exact raw-byte Git transport. Keep the documented limits; this is not legal clearance or a full security audit.
+2. Completed for C1: local checks and exact Windows/Linux/macOS CI, plus Linux at the declared Node floor. Reconcile subsequent documentation/lifecycle changes separately.
+3. Remaining: approved confidential reporting route, actual hosting rules and public-access verification; keep private development history separate. The owner has selected MIT and conditionally authorized the new clean repository's publication after gates pass.
+4. T-RELEASE-CLOSURE-001 owns these remaining release steps. npm publication, canonical promotion and real-project migrations are not part of this source release.
 
 Current bounded correction: T-FROZEN-EXAMPLE-LIFECYCLE-001 adds explicit hash-bound age handling for synthetic examples without rewriting historical locks or exempting live tasks. Its revision 2 records the independent V3 review and exact-source CI for formal task closure; the Alpha preparation/release gate remains distinct. See `docs/alpha-readiness.md` for current states. Source distribution is the current target. T-PUBLIC-PREP-001 adds the missing package documentation to the file list; installed-package verification and npm publication remain separate.
 
@@ -39,7 +39,7 @@ Nonblocking follow-ups from that review remain open: R-1 clearer eligibility dia
 
 T-MIT-LICENSE-001 applies the explicit MIT decision in a new local revision. It preserves `private: true`, third-party license metadata, runtime contracts and historical locks. Publication and original-checkout integration remain separate decisions.
 
-T-PUBLIC-PREP-001 introduces neutral `legacy-header-v1` naming with retained historical-input compatibility, records the source-content audit boundary, and prepares the release checklist and third-party inventory. Its new migration-contract behavior requires independent review and current platform evidence; neither is borrowed from V3. Public destination, confidential security reporting and publication authority remain open.
+T-PUBLIC-PREP-001 introduces neutral `legacy-header-v1` naming with retained historical-input compatibility, records the source-content audit boundary, and prepares the release checklist and third-party inventory. Its independent naming/C1 reviews and current platform evidence are recorded; neither is borrowed from V3. Local preparation closes separately from the release task's still-open confidential reporting and actual hosting gates.
 
 ## Useful later work, not this release's automatic scope
 

@@ -1,5 +1,5 @@
 task_id: T-PUBLIC-PREP-001
-status: review
+status: verified
 objective: Prepare neutral legacy-format naming and a complete local source-release handoff without publication.
 non_goals:
   - Real project migration, source relocation, remote writes or a public release.
@@ -16,5 +16,5 @@ required_context_sources: [docs/migration.md, schemas/migration-plan.schema.json
 parallel_safety: exclusive
 checks:
   - {id: CHECK-QUALITY, command_or_observation: 'Run typecheck, complete tests, build, packaging and repository checks; preserve raw evidence.', status: pass, evidence_refs: [.agent-context/tasks/T-PUBLIC-PREP-001/evidence/verification.json]}
-  - {id: CHECK-REVIEW, command_or_observation: Independent review of the exact naming and release-preparation revision., status: pending, evidence_refs: []}
-updated_at: "2026-09-13T19:36:00Z"
+  - {id: CHECK-REVIEW, command_or_observation: Independent naming review and C1 release-boundary reconciliation close local preparation without authorizing publication., status: pass, evidence_refs: [.agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/review-receipt.json, .agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/naming-erratum.json, .agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/platform-results.json]}
+updated_at: "2026-09-13T21:50:20Z"

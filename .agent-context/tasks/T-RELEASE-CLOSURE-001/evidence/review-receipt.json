@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "reviewer": "Independent Codex release-boundary subtask, separate from the implementation author",
+  "report_sha256": "e9a1c2e8a3c84879aabe924000803d5884be41e99f03059e9af9143f76faceea",
+  "decision": "APPROVE WITH CONDITIONS for exact C1 local source Alpha preparation",
+  "source_commit": "bed8fa84beb3d0a763f001f42a415fafd6ddaf85",
+  "source_manifest_sha256": "2922a29f2e57482b3d4a2815e2051e8b6dd31bbdbd01786048459811b43d62e7",
+  "source_files": 195,
+  "source_bytes": 1682460,
+  "independently_observed": [
+    "All 195 working-tree and Git-archive files match the frozen C1 manifest; only C1 and its clean C0 root are ancestors.",
+    "All 44 runtime/schema files and all historical examples/completed MIT and frozen-example task artifacts match the reviewed predecessor.",
+    "Synthetic onboarding, required-source failure, handoff and current-use versus retained resume probes passed.",
+    "An actual intermediate npm package has 159 entries and all 29 source-map targets; no private history or task evidence is packaged.",
+    "Raw-byte Git transport is preserved; the immutable C0 Action pin has identical build/runtime authority files.",
+    "C1 validate and strict repository finalize passed; documentation audit was healthy with no warnings/errors."
+  ],
+  "local_task_review_gate_eligible": ["T-ALPHA-CANDIDATE-001", "T-PUBLIC-PREP-001"],
+  "closure_requirements": "Record this scoped review and current evidence, update active lifecycle/documentation facts, retain historical receipts, recompile current locks and pass each named task finalization. Publication remains a non-goal of these two tasks.",
+  "release_task_remains_open": "T-RELEASE-CLOSURE-001",
+  "remaining_release_conditions": ["Actual current hosted evidence", "Approved confidential reporting channel and notification path", "Actual hosting and public-access verification", "Bounded reconciliation of later source/lifecycle changes"],
+  "nonblocking_followup": "Generated resume-order shorthand remains ambiguous; README supplies the explicit safe receiving sequence. The generator is not claimed fixed.",
+  "limits": "No legal clearance, perfect-secret-absence guarantee, npm publication, canonical promotion or real-project migration approval. Hosted C1 results were supplied by the author and not independently inspected in this report. Full raw external reports remain outside the public source inventory."
+}

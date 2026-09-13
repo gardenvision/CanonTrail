@@ -1,7 +1,7 @@
 ---
 topic_id: alpha-readiness
 stand: "2026-09-13"
-status: local-preparation-awaiting-release-review
+status: source-reviewed-awaiting-hosting
 truth_level: draft
 verification:
   state: verified
@@ -14,6 +14,8 @@ verification:
     - .agent-context/tasks/T-MIT-LICENSE-001/evidence/owner-decision.json
     - .agent-context/tasks/T-PUBLIC-PREP-001/evidence/verification.json
     - .agent-context/tasks/T-PUBLIC-PREP-001/evidence/readiness-facts.json
+    - .agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/review-receipt.json
+    - .agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/platform-results.json
 read_if_task_touches:
   - alpha release readiness
   - distribution scope
@@ -28,9 +30,9 @@ do_not_use_instead:
 
 # Alpha source release readiness
 
-Current closure: the owner authorized conditional clean-source publication and the old repository was kept private as `gardenvision/CanonTrail-private`. A separate `gardenvision/CanonTrail` now exists as private staging, not a public release. The naming change received independent Claude review; its exact report identity and findings are recorded by T-RELEASE-CLOSURE-001. Current platform checks, independent whole-release assessment and confidential reporting confirmation remain gates. No private Git history is a distribution input.
+Current closure: the owner authorized conditional clean-source publication and the old repository was kept private as `gardenvision/CanonTrail-private`. A separate `gardenvision/CanonTrail` contains only the new clean history and remains private staging. Independent Claude naming review and independent Codex C1 release-boundary review are recorded by T-RELEASE-CLOSURE-001. Exact C1 platform checks passed. The local Alpha and neutral-naming preparation tasks are closed in scope; confidential reporting, actual hosting/public-access checks and reconciliation of subsequent metadata remain release gates. No private Git history is a distribution input.
 
-This source tree is a local neutral-naming/public-preparation revision derived from the sealed MIT candidate. Earlier V4 closed the frozen-example task using exact V3 evidence; the exact V3 source received independent technical review of that correction and passed hosted CI on Windows, Linux and macOS. The subsequent MIT revision changed only licensing metadata and documentation. The present T-PUBLIC-PREP-001 additionally changes migration vocabulary, schema acceptance and CLI help, and therefore needs its own tests and independent review. No old hosted run or technical approval is attributed to these new bytes. MIT remains selected and the package remains private. Review of this readiness document concerns facts and open gates, not legal clearance, public release or canonical promotion.
+This source tree derives from the sealed MIT candidate. Earlier V4 closed the frozen-example task using exact V3 evidence; the subsequent MIT revision changed only licensing metadata and documentation. T-PUBLIC-PREP-001 then changed migration vocabulary, schema acceptance and CLI help. Its own reviews and C1 hosted results now support those bytes; no old V3 approval is substituted for them. This later metadata closure is not retroactively identical to C1. MIT remains selected and the npm package remains private. Review of this readiness document concerns facts and open gates, not legal clearance, public release or canonical promotion.
 
 ## Included and excluded knowledge
 
@@ -56,7 +58,8 @@ Product definitions inherited unchanged do not constitute a new canonical promot
 | Exact V3 hosted CI | Run `34747718414`, transport commit `a7901a3fb7a7a871ba7049e2aa50fc9da759744c`, four jobs passed. See `docs/platform-support.md` and `platform-results.json`. |
 | Formal frozen-example closure | The existing task's revision 2 records the review and platform evidence; its authoritative current lifecycle is `.agent-context/tasks/T-FROZEN-EXAMPLE-LIFECYCLE-001/state.yaml`. Current task finalization must verify the closure metadata. |
 | Public-content author audit | The sealed MIT predecessor's 172 files were scanned and findings classified: no secret-pattern hits, six synthetic fixture identities and historical format-name references. This is not full legal provenance or independent review; the current changed source needs a refreshed exact-inventory scan. |
-| Current change and whole-product release review | Claude independently approved the naming/package change with conditions. Its evidence-label erratum is recorded separately; a local independent release-boundary assessment is in progress. Neither is silently substituted for final current-platform evidence. |
+| Current change and release-boundary review | Claude naming review and independent Codex C1 source-boundary review passed with explicit conditions. The latter independently verified all 195 source/commit files and permits local preparation closure only. The erratum and exact scope are retained in the release task; neither review is legal clearance or a publication grant. |
+| Current C1 hosted CI | Clean commit `bed8fa84beb3d0a763f001f42a415fafd6ddaf85`, run `34783886228`: all four matrix jobs and aggregate passed, with 696 cases per host. Actual counts/capabilities and skipped cases are in the current release task's platform receipt. Later documentation closure is a separate delta. |
 | License selection | MIT explicitly selected by the owner; standard terms are in `LICENSE.txt`. Decision scope is recorded by T-MIT-LICENSE-001; third-party terms are not replaced. |
 | Publication | Owner authorized publication only after gates pass. Clean repository staging is private; no public release or npm publication yet. `private: true` remains enabled for npm. This process gate does not restrict rights granted by MIT. |
 | Product integration and hosting rules | Owner approved a separate clean repository and private-history preservation. The old private transport branch must not be merged into public history. Actual required checks/security reporting are still to be verified. |
@@ -65,7 +68,7 @@ Earlier preparation evidence remains historical: Windows/Node24.11.1 passed 636 
 
 The frozen save-example brief is addressed by `T-FROZEN-EXAMPLE-LIFECYCLE-001`: an exact hash-bound `frozen_examples` policy handles age without changing the brief, its original header or historical artifacts. The exemption is age-only; real task paths, canonical/design truth, malformed declarations, source drift and filesystem aliases remain ineligible. The corrected source passed author typecheck, build and 671 runnable tests (13 skips, 684 total in 32 files) on Windows/Node 24.11.1. This includes 35 new policy cases; old valid policies receive no default exemption. Invalid maintenance files excluded from normal artifact discovery are now checked explicitly and can fail validation.
 
-The V3 working locks of both preparation tasks were archived byte-for-byte before this closure's selected-document updates. No historical teaching lock is rewritten. The separate Alpha preparation task remains in review; no broad release approval is borrowed from the accepted frozen-example correction. A final current working lock is compiled before terminalizing that correction. Subsequent normal repository validation treats its completed lock as historical; targeted finalization still checks it strictly.
+The V3 working locks of both preparation tasks were archived byte-for-byte before selected-document updates. No historical teaching lock was rewritten. At that earlier stage the Alpha task remained in review; its current local-preparation closure uses the separate C1 boundary review, not approval borrowed from the frozen-example correction. Named finalization checks each closing task's current lock strictly; later ordinary repository validation treats completed locks as historical.
 
 The three nonblocking review recommendations remain bounded follow-ups: R-1 clearer source-eligibility diagnostics; R-3 a section-11 validator cross-reference; R-2 a separate decision on pre-existing standalone audit JSON parse-error behavior. None is silently reported fixed by this metadata-only closure.
 

@@ -1,8 +1,8 @@
 version: 1
 change_id: CHG-RELEASE-CLOSURE-001
-revision: 1
+revision: 2
 title: Independent review closure and clean source Alpha release
-status: decided
+status: implemented
 risk: high
 author: CanonTrail release implementation agent
 canonical_source: .agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/owner-decision.json
@@ -13,8 +13,8 @@ documentation_structure:
   feature_documents:
     - {feature_id: release-checklist, action: update, path: docs/release-checklist.md, status: drafted, evidence_refs: [.agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/owner-decision.json]}
 acceptance_cases:
-  - {id: AC-EVIDENCE, given: Two old receipts ambiguously label preservation of the sealed predecessor as candidate equality., expected: Explicit new metrics distinguish 172 sealed predecessor files from 158 equal candidate files and 14 changes., failure_or_uncertainty: Retain the original signed-by-hash artifacts and attach an erratum., counterexample: Claiming all 172 candidate paths equal their predecessor., oracle: Rehash both complete inventories and reconcile changed added removed and equal sets., status: pending, evidence_refs: []}
-  - {id: AC-PACKAGE, given: Published maps point to TypeScript source not currently packaged., expected: Every local source-map reference resolves inside the package while private histories remain excluded., failure_or_uncertainty: No installed-package or npm publication claim without a real check., counterexample: A map references absent or out-of-package source., oracle: Parse all maps against the actual pack inventory and run regressions., status: pending, evidence_refs: []}
+  - {id: AC-EVIDENCE, given: Two old receipts ambiguously label preservation of the sealed predecessor as candidate equality., expected: Explicit new metrics distinguish 172 sealed predecessor files from 158 equal candidate files and 14 changes., failure_or_uncertainty: Retain the original signed-by-hash artifacts and attach an erratum., counterexample: Claiming all 172 candidate paths equal their predecessor., oracle: Rehash both complete inventories and reconcile changed added removed and equal sets., status: pass, evidence_refs: [.agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/naming-erratum.json, .agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/review-receipt.json]}
+  - {id: AC-PACKAGE, given: Published maps point to TypeScript source not currently packaged., expected: Every local source-map reference resolves inside the package while private histories remain excluded., failure_or_uncertainty: No installed-package or npm publication claim without a real check., counterexample: A map references absent or out-of-package source., oracle: Parse all maps against the actual pack inventory and run regressions., status: pass, evidence_refs: [.agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/local-checks.json, .agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/review-receipt.json]}
   - {id: AC-RELEASE, given: Narrow independent naming review passes with conditions., expected: Current platform evidence and independent release-boundary assessment support the final source delta., failure_or_uncertainty: Keep unverified gates open and report limitations., counterexample: Borrowing old CI or author review for newly changed code., oracle: Exact hashes current checks and independent findings., status: pending, evidence_refs: []}
   - {id: AC-HOSTING, given: The desired public name is occupied by private development history., expected: Rename stays private and a separate clean-history repository receives only reviewed files; private reporting is configured before publication., failure_or_uncertainty: Stop if owner choice permission or security contact is missing., counterexample: Publishing the old private repository history., oracle: Owner grants and GitHub metadata plus unauthenticated public reads., status: pending, evidence_refs: []}
 impacts:
@@ -29,11 +29,11 @@ impacts:
   - {area: terminology, decision: affected, rationale: Distinguish sealed-source preservation from comparison equality and experimental Alpha from stable product., evidence_refs: [docs/release-checklist.md]}
   - {area: operations-compatibility, decision: affected, rationale: Complete package source mapping and configure clean history platform checks and verified hosting., evidence_refs: [package.json, SECURITY.md, .github/workflows/validate.yml]}
 verification:
-  checks: [{name: Current local quality preservation and packaging, status: pending, evidence_refs: []}]
-  terminology_search: {status: pending, terms: [baseline_unchanged, predecessor_files_unchanged, Alpha, private], evidence_refs: []}
+  checks: [{name: C1 local quality preservation packaging and exact hosted matrix, status: pass, evidence_refs: [.agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/local-checks.json, .agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/platform-results.json]}]
+  terminology_search: {status: pass, terms: [baseline_unchanged, predecessor_files_unchanged, Alpha, private], evidence_refs: [.agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/naming-erratum.json, docs/release-checklist.md, docs/alpha-readiness.md]}
   visual_review: {applicable: false, status: not-applicable, evidence_refs: []}
-  unverifiable_items: [Current hosted platform results independent release review and confidential reporting confirmation are pending.]
+  unverifiable_items: [C1 source review and platforms passed; later metadata reconciliation and actual security-channel/public-hosting checks remain open.]
 independent_review: {status: pending, reviewer: null, findings: [], evidence_refs: [], waiver: null}
 supersedes: []
 superseded_by: null
-updated_at: "2026-09-13T21:07:00Z"
+updated_at: "2026-09-13T21:50:20Z"

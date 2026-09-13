@@ -1,8 +1,8 @@
 version: 1
 change_id: CHG-PUBLIC-PREP-001
-revision: 1
+revision: 2
 title: Neutral legacy-header naming and local publication preparation
-status: implemented
+status: verified
 risk: high
 author: CanonTrail preparation implementation agent
 canonical_source: .agent-context/tasks/T-PUBLIC-PREP-001/evidence/owner-decision.json
@@ -11,7 +11,7 @@ documentation_structure:
   decision: update-existing-feature-documents
   rationale: The supported transformation remains the same feature; update its existing guide and use a separate operational release checklist, not a new product wiki.
   feature_documents:
-    - {feature_id: documentation-migration, action: update, path: docs/migration.md, status: drafted, evidence_refs: [.agent-context/tasks/T-PUBLIC-PREP-001/evidence/owner-decision.json]}
+    - {feature_id: documentation-migration, action: update, path: docs/migration.md, status: verified, evidence_refs: [.agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/review-receipt.json, .agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/review-disposition.json]}
 acceptance_cases:
   - id: AC-NEUTRAL
     given: A supported legacy header is scanned with auto, the preferred explicit adapter or its deprecated alias.
@@ -57,11 +57,11 @@ impacts:
   - {area: terminology, decision: affected, rationale: Public guidance prefers legacy-header-v1 while marked historical compatibility references remain., evidence_refs: [docs/migration.md]}
   - {area: operations-compatibility, decision: affected, rationale: Broaden documented package contents without publication and retain old-input compatibility., evidence_refs: [package.json, docs/alpha-readiness.md]}
 verification:
-  checks: [{name: Current source quality and preservation, status: pass, evidence_refs: [.agent-context/tasks/T-PUBLIC-PREP-001/evidence/verification.json]}]
+  checks: [{name: Current source quality and preservation, status: pass, evidence_refs: [.agent-context/tasks/T-PUBLIC-PREP-001/evidence/verification.json]}, {name: Independent naming and C1 reconciliation with explicit erratum and current platforms, status: pass, evidence_refs: [.agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/review-receipt.json, .agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/review-disposition.json, .agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/naming-erratum.json, .agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/platform-results.json]}]
   terminology_search: {status: pass, terms: [gaertnerei-legacy, legacy-header-v1], evidence_refs: [docs/migration.md, .agent-context/tasks/T-PUBLIC-PREP-001/evidence/verification.json]}
   visual_review: {applicable: false, status: not-applicable, evidence_refs: []}
   unverifiable_items: []
-independent_review: {status: pending, reviewer: null, findings: [], evidence_refs: [], waiver: null}
+independent_review: {status: pass, reviewer: Claude naming review with independent Codex C1 release-boundary reconciliation, findings: [Local preparation conditions closed; actual publication remains with T-RELEASE-CLOSURE-001.], evidence_refs: [.agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/review-receipt.json, .agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/review-disposition.json], waiver: null}
 supersedes: []
 superseded_by: null
-updated_at: "2026-09-13T19:36:00Z"
+updated_at: "2026-09-13T21:50:20Z"

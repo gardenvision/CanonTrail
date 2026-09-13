@@ -3,8 +3,8 @@ status: in-progress
 objective: Close the independent naming review findings and verify the clean source Alpha publication boundary without publishing private development history.
 non_goals: [npm publication, real project migration, runtime feature expansion, retroactive historical lock rewriting]
 acceptance_criteria:
-  - {id: AC-EVIDENCE, statement: Preservation and comparison counters are unambiguous and independently recalculated., verification: Recompute both sealed-tree preservation and baseline-to-candidate diffs., status: pending}
-  - {id: AC-PACKAGE, statement: Packaged source maps resolve and migration behavior remains unchanged., verification: Package inventory and exact runtime/schema hash comparison plus full tests., status: pending}
+  - {id: AC-EVIDENCE, statement: Preservation and comparison counters are unambiguous and independently recalculated., verification: Recompute both sealed-tree preservation and baseline-to-candidate diffs., status: pass}
+  - {id: AC-PACKAGE, statement: Packaged source maps resolve and migration behavior remains unchanged., verification: Package inventory and exact runtime/schema hash comparison plus full tests., status: pass}
   - {id: AC-RELEASE, statement: Independent release review and current platform checks support only the scoped clean source Alpha., verification: Independent report and revision-bound hosted results., status: pending}
   - {id: AC-HOSTING, statement: Private history stays private and actual public URLs and confidential reporting are verified before publication., verification: Owner decision and GitHub API plus unauthenticated read checks., status: pending}
 dependencies: []
@@ -13,8 +13,8 @@ file_intents: [package.json, README.md, docs/alpha-readiness.md, docs/release-ch
 required_context_sources: [docs/release-checklist.md, docs/alpha-readiness.md, package.json]
 parallel_safety: exclusive
 checks:
-  - {id: CHECK-LOCAL, command_or_observation: 'Reproduce source comparison, package inventory, complete tests and standalone repository validation.', status: pending, evidence_refs: []}
+  - {id: CHECK-LOCAL, command_or_observation: 'C1 source comparison, package inventory, complete tests and standalone repository validation passed; later lifecycle metadata receives separate checks.', status: pass, evidence_refs: [.agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/local-checks.json, .agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/naming-erratum.json, .agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/review-receipt.json]}
   - {id: CHECK-REVIEW, command_or_observation: Independent review of the release boundary and final source delta., status: pending, evidence_refs: []}
-  - {id: CHECK-PLATFORMS, command_or_observation: Observe successful exact-revision Windows Linux and macOS checks and retain capability skips., status: pending, evidence_refs: []}
+  - {id: CHECK-PLATFORMS, command_or_observation: Exact C1 Windows Linux and macOS hosted checks plus Linux Node floor passed; later metadata is not retroactively that snapshot., status: pass, evidence_refs: [.agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/platform-results.json]}
   - {id: CHECK-HOSTING, command_or_observation: Verify authorized clean repository setup and confidential security channel before public release., status: pending, evidence_refs: []}
-updated_at: "2026-09-13T21:07:00Z"
+updated_at: "2026-09-13T21:50:20Z"

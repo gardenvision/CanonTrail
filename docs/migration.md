@@ -1,11 +1,11 @@
 ---
 topic_id: canontrail-documentation-migration
-stand: "2026-09-12"
+stand: "2026-09-13"
 status: experimental-alpha-candidate
 truth_level: draft
 verification:
-  state: internally-reviewed
-  evidence: [src/migration.ts, schemas/migration-plan.schema.json, schemas/migration-transaction.schema.json, test/migration-transformation.test.ts, test/migration-naming.test.ts, .agent-context/tasks/T-PUBLIC-PREP-001/evidence/verification.json]
+  state: verified
+  evidence: [src/migration.ts, schemas/migration-plan.schema.json, schemas/migration-transaction.schema.json, test/migration-transformation.test.ts, test/migration-naming.test.ts, .agent-context/tasks/T-PUBLIC-PREP-001/evidence/verification.json, .agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/review-receipt.json]
 read_if_task_touches: [documentation migration, brownfield adoption]
 primary_systems: [migration planning, documentation governance]
 safe_to_edit: [Keep planning, execution permission and canonical promotion separate.]

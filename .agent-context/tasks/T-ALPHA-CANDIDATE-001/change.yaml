@@ -1,8 +1,8 @@
 version: 1
 change_id: CHG-ALPHA-CANDIDATE-001
-revision: 3
+revision: 4
 title: Curate a private local Alpha preparation candidate
-status: implemented
+status: verified
 risk: high
 author: CanonTrail candidate preparation agent
 canonical_source: VISION.md
@@ -55,18 +55,16 @@ impacts:
 verification:
   checks:
     - {name: Author local preparation checks, status: pass, evidence_refs: [.agent-context/tasks/T-ALPHA-CANDIDATE-001/evidence/verification.json]}
+    - {name: Independent C1 local preparation closure and exact platform evidence, status: pass, evidence_refs: [.agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/review-receipt.json, .agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/platform-results.json]}
   terminology_search: {status: pass, terms: [Alpha, canonical, verified, publish], evidence_refs: [README.md, docs/alpha-readiness.md]}
   visual_review: {applicable: false, status: not-applicable, evidence_refs: []}
-  unverifiable_items:
-    - Publication permission remains absent. The separate T-MIT-LICENSE-001 records the owner's MIT choice; that selection does not provide third-party/public-content clearance.
-    - Whole-product independent release review remains pending; the narrower frozen-example review is not transferred as general approval. Exact V3 hosted CI passed; this subsequent metadata revision is not the identical hosted snapshot.
-    - The original frozen example DOCS101 blocker is corrected with separately reviewed and platform-tested behavior in T-FROZEN-EXAMPLE-LIFECYCLE-001. Public content clearance and npm documentation contents remain unready for distribution.
+  unverifiable_items: []
 independent_review:
-  status: pending
-  reviewer: null
-  findings: []
-  evidence_refs: []
+  status: pass
+  reviewer: Independent Codex release-boundary subtask
+  findings: [C1 local preparation scope is approved; actual publication and confidential reporting remain with T-RELEASE-CLOSURE-001.]
+  evidence_refs: [.agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/review-receipt.json]
   waiver: null
 supersedes: []
 superseded_by: null
-updated_at: "2026-09-13T18:45:00Z"
+updated_at: "2026-09-13T21:50:20Z"
