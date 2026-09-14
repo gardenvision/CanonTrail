@@ -1,0 +1,53 @@
+{
+  "scope": "Bounded README onboarding and generated presentation; no runtime contract change",
+  "observed_on": "2026-09-14",
+  "author_review": true,
+  "independent_review_claimed": false,
+  "visual": {
+    "method": "Local headless Edge with GitHub-like CSS; screenshots actually inspected, not a hosted-render claim",
+    "widths": [1200, 390, 320],
+    "themes": ["light", "dark"],
+    "page_overflow": false,
+    "out_of_bounds_svg_labels": 0,
+    "correct_responsive_picture": true,
+    "readable_diagrams": true,
+    "text_alternative_present": true,
+    "screenshots_retained": "Maintainer's private QA output; no machine paths distributed"
+  },
+  "commands": {
+    "typecheck": "pass",
+    "build": "pass",
+    "projection_freshness": "pass",
+    "new_projection_tests": {"passed": 3, "failed": 0},
+    "initial_focused_suite": {"passed": 9, "failed": 5, "skipped": 1, "failures": "Five existing audit cases exceeded their unchanged 15000ms test timeout"},
+    "local_full_suite": {"result": "incomplete", "reason": "External QA harness reached its 600-second process limit; not a green full run"},
+    "test_deadlines_or_assertions_weakened": false,
+    "structural_validation": {"markdown": 41, "structured": 28, "schemas": 15, "errors": 0, "warnings": 0}
+  },
+  "isolated_first_use": {
+    "cli_help_checked": ["root", "init", "context compile", "resume create", "resume validate"],
+    "space_containing_target_path": true,
+    "preview_exit": 0,
+    "preview_preserved_all_bytes": true,
+    "apply_exit": 0,
+    "apply_preserved_existing_code": true,
+    "generated_entry_config_plan_present": true,
+    "post_adoption_index_and_validation": "pass",
+    "repeat_preview_exit": 2,
+    "repeat_preview_preserved_all_bytes": true,
+    "existing_instructions_conflict_exit": 2,
+    "conflict_preview_preserved_all_bytes": true,
+    "conflict_target_not_initialized": true
+  },
+  "prompt_review": {
+    "method": "Author branch-by-branch comparison against actual CLI help and protocol sections 5, 7 and 8; not an independent agent trial",
+    "tool_and_target_separate": true,
+    "existing_config_skips_init": true,
+    "conflicts_or_incomplete_discovery_stop": true,
+    "bootstrap_not_called_verified": true,
+    "receiving_context_validated_before_action": true,
+    "scope_and_remote_authority_preserved": true
+  },
+  "publication_gate": "Still requires exact new-commit hosted CI and GitHub rendering checks before main is updated",
+  "rendering_reference": "https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes"
+}

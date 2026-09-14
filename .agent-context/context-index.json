@@ -1,7 +1,7 @@
 {
   "version": 1,
   "hash_algorithm": "sha256",
-  "root_hash": "sha256:5f989dc213a1e7c9482ac984e03cb3e18eadba5e9277915c6be0285fa53e9ad8",
+  "root_hash": "sha256:ba267ca17484af7c1112c01f6c42ffbf392e89d33039f27dbce3e0747c1f210a",
   "documents": [
     {
       "path": ".agent-context/tasks/T-ALPHA-CANDIDATE-001/brief.md",
@@ -77,6 +77,25 @@
       "topic_id": "task-public-prep-001"
     },
     {
+      "path": ".agent-context/tasks/T-README-ONBOARDING-001/brief.md",
+      "content_hash": "sha256:3a181389d13908f0382a0e300cb3f96a094ae20b55548c4f86b5279fdfcb549b",
+      "stand": "2026-09-14",
+      "status": "in-progress",
+      "truth_level": "active-snapshot",
+      "verification_state": "unverified",
+      "read_if_task_touches": [
+        "README onboarding redesign"
+      ],
+      "primary_systems": [
+        "public onboarding"
+      ],
+      "do_not_use_instead": [
+        "README.md",
+        "VISION.md"
+      ],
+      "topic_id": "task-readme-onboarding-001"
+    },
+    {
       "path": ".agent-context/tasks/T-RELEASE-CLOSURE-001/brief.md",
       "content_hash": "sha256:a96b8a21df27998ecbc6f3f1377b0a5417ddd9b7851f9c40451c31df02befa43",
       "stand": "2026-09-14",
@@ -96,7 +115,7 @@
     },
     {
       "path": "AGENTS.md",
-      "content_hash": "sha256:ab21928e3833b41bc93df9c24721f32507fa44484d4872d150f8a4f8bcb9cc2c",
+      "content_hash": "sha256:c107a0b6ee502cfea944746c2207c2b098da52cd7652f8a7b673e6ce06d620e5",
       "stand": "2026-09-12",
       "status": "current",
       "truth_level": "canonical",
@@ -329,7 +348,7 @@
     },
     {
       "path": "docs/self-documentation.md",
-      "content_hash": "sha256:cb56514a2f502a3b09714bf10ff5c123f770ffee790b441a61a8679af76319ce",
+      "content_hash": "sha256:7cdab0f81ce6540f65d0489732ba68b80b76173a441eac42b098c3d5b9fb8e1b",
       "stand": "2026-09-14",
       "status": "public-source-alpha",
       "truth_level": "draft",
@@ -367,6 +386,27 @@
         "LICENSE.txt"
       ],
       "topic_id": "canontrail-third-party-inventory"
+    },
+    {
+      "path": "docs/usage.md",
+      "content_hash": "sha256:9a09165fd84412e061c85c7dea9aaa7d7bfea767c0d28a5c9f5bedcf2b48f8eb",
+      "stand": "2026-09-14",
+      "status": "public-source-alpha",
+      "truth_level": "draft",
+      "verification_state": "unverified",
+      "read_if_task_touches": [
+        "first project adoption",
+        "bounded context commands",
+        "receiving session steps"
+      ],
+      "primary_systems": [
+        "usage reference"
+      ],
+      "do_not_use_instead": [
+        "README.md",
+        "ARTIFACT_PROTOCOL.md"
+      ],
+      "topic_id": "usage-guide"
     },
     {
       "path": "examples/context-inspection/README.md",
@@ -700,7 +740,7 @@
     },
     {
       "path": "README.md",
-      "content_hash": "sha256:30744c1990cc0460937cc420f77c50602df2ea3420a542d2333897a2a4a6d452",
+      "content_hash": "sha256:fe2e4873a76775b60d9957fb389b01786b8620f98610e34af0f17318b216fd3e",
       "stand": "2026-09-14",
       "status": "public-source-alpha",
       "truth_level": "draft",

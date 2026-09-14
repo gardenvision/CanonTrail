@@ -18,7 +18,8 @@ do_not_use_instead: [VISION.md, ARTIFACT_PROTOCOL.md, ROADMAP.md]
 |---|---|
 | Purpose, product boundaries and non-goals | `VISION.md` |
 | Artifact/lifecycle rules and safety contracts | `ARTIFACT_PROTOCOL.md` |
-| Installation, entry and everyday commands | `README.md` |
+| Product introduction, installation and copyable agent entry | `README.md` (authored source); `.github/README.md` is its generated presentation only |
+| Detailed adoption, task commands, safe resume and development reference | `docs/usage.md` |
 | Current implementation priorities | `ROADMAP.md` |
 | Alpha readiness, limitations and release gates | `docs/alpha-readiness.md` |
 | Workflow interoperability | `docs/integrations.md` |
@@ -33,6 +34,7 @@ do_not_use_instead: [VISION.md, ARTIFACT_PROTOCOL.md, ROADMAP.md]
 | Release operations and hosting observations | `docs/release-checklist.md` |
 | Clean-source preparation, hosting completion and review/CI receipts | `.agent-context/tasks/T-RELEASE-CLOSURE-001/state.yaml` |
 | Third-party dependency inventory | `docs/third-party-notices.md` |
+| Landing-page design and onboarding verification | `.agent-context/tasks/T-README-ONBOARDING-001/state.yaml` |
 
 Read `AGENTS.md` first and choose new task, validated resume, unfinished bootstrap, or maintenance. Load the relevant owner, not this entire tree by default. Exact task sources belong in a context lock; a narrative summary is not a substitute.
 

@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="866" viewBox="0 0 480 866" role="img" aria-labelledby="title desc">
+  <title id="title">From project knowledge to the next session</title>
+  <desc id="desc">Project knowledge leads to a task context selected by CanonTrail, work by your AI agent, and a next session using evidence and a validated handoff. Documentation is updated with evidence as work progresses.</desc>
+  <defs>
+    <linearGradient id="canvas" x2="1" y2="1"><stop stop-color="#132239"/><stop offset="1" stop-color="#0d1626"/></linearGradient>
+    <marker id="arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0 0 L7 3.5 L0 7" fill="none" stroke="#72d8c5" stroke-width="1.5"/></marker>
+  </defs>
+  <rect width="480" height="866" rx="18" fill="url(#canvas)"/>
+  <g font-family="Segoe UI, Arial, sans-serif">
+    <text x="32" y="48" font-size="28" font-weight="600" fill="#f4f8ff">Knowledge → action → continuity.</text>
+    <text x="32" y="83" font-size="21" fill="#bbcbe0">CanonTrail routes and records.</text>
+    <text x="32" y="112" font-size="21" fill="#bbcbe0">Your agent does the work.</text>
+    <g fill="#1c2d44" stroke="#34465e">
+      <rect x="32" y="142" width="416" height="136" rx="12"/>
+      <rect x="32" y="306" width="416" height="136" rx="12" stroke="#72d8c5"/>
+      <rect x="32" y="470" width="416" height="136" rx="12"/>
+      <rect x="32" y="634" width="416" height="136" rx="12"/>
+    </g>
+    <g fill="#72d8c5" font-size="19" font-weight="600">
+      <text x="54" y="173">01 / KEEP</text><text x="54" y="337">02 / SELECT</text>
+      <text x="54" y="501">03 / WORK</text><text x="54" y="665">04 / CONTINUE</text>
+    </g>
+    <g fill="#f4f8ff" font-size="27" font-weight="600">
+      <text x="54" y="213">Project knowledge</text><text x="54" y="377">Task context</text>
+      <text x="54" y="541">Your AI agent</text><text x="54" y="705">Next session</text>
+    </g>
+    <g fill="#cbd7e7" font-size="22">
+      <text x="54" y="249">Docs, code, tests · One home per topic</text>
+      <text x="54" y="413">Relevant sources · Budget + hashes</text>
+      <text x="54" y="577">Build, test, document · Load as needed</text>
+      <text x="54" y="741">Evidence + handoff · Validate first</text>
+    </g>
+    <g stroke="#72d8c5" stroke-width="2" fill="none" marker-end="url(#arrow)">
+      <path d="M240 280 V299"/><path d="M240 444 V463"/><path d="M240 608 V627"/>
+    </g>
+    <text x="240" y="815" text-anchor="middle" font-size="22" fill="#cbd7e7">Keep project knowledge current</text>
+    <text x="240" y="845" text-anchor="middle" font-size="22" fill="#cbd7e7">with evidence as work progresses.</text>
+  </g>
+</svg>

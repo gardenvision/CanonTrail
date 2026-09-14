@@ -1,0 +1,66 @@
+version: 1
+change_id: CHG-README-ONBOARDING-001
+revision: 1
+title: Clear visual introduction and easier agent onboarding
+status: decided
+risk: medium
+author: CanonTrail documentation implementation agent
+canonical_source: .agent-context/tasks/T-README-ONBOARDING-001/brief.md
+decision_rationale: The maintainer requested a clearer GitHub introduction and copyable entry prompt. Reorganize presentation without changing product authority, safety contracts or runtime behavior.
+documentation_structure:
+  decision: no-feature-document-change
+  rationale: No new product capability; separate concise landing material from existing command-reference detail in a linked usage guide, preserving one owner per section.
+  feature_documents: []
+acceptance_cases:
+  - id: AC-ENTRY
+    given: A reader has not used CanonTrail before.
+    expected: A short introduction, visible Alpha boundary and source-build steps establish what to do first.
+    failure_or_uncertainty: No npm package, automatic knowledge generation or measured savings is promised.
+    counterexample: A catchy description implies the tool runs agents or prevents compaction.
+    oracle: Compare wording to VISION and the published source commands; exercise commands in an isolated fixture.
+    status: pending
+    evidence_refs: []
+  - id: AC-VISUAL
+    given: The GitHub page is read at desktop or mobile width.
+    expected: The diagram explains selection and continuity with readable labels and a text alternative.
+    failure_or_uncertainty: Image blocking leaves explanatory text; no external rendering service is necessary.
+    counterexample: The diagram silently implies full-project ingestion or automatic verified documentation.
+    oracle: Inspect rendered desktop/mobile output and compare labels with the product ownership boundary.
+    status: pending
+    evidence_refs: []
+  - id: AC-PROMPT
+    given: An agent receives the prompt for a new, already adopted, or resumed target.
+    expected: It verifies tool/target paths, chooses the correct route, preserves existing rules and establishes bounded context before work.
+    failure_or_uncertainty: Missing access, conflicting files or incomplete scope stop with an actionable report.
+    counterexample: The same init is applied blindly on every new session, or a handoff alone authorizes implementation.
+    oracle: Walk every prompt branch against actual help and protocol sections 5, 7 and 8.
+    status: pending
+    evidence_refs: []
+  - id: AC-PRESERVE
+    given: A published Alpha and existing operational guidance already exist.
+    expected: Detailed caveats remain linked and runtime, schemas, examples, historical tasks and release identities remain untouched.
+    failure_or_uncertainty: Hosted CI is only claimed after the new revision actually runs.
+    counterexample: Old locks are recompiled merely because README changed, or the existing release tag is moved.
+    oracle: Git diff allowlist, Markdown link checks, baseline hashes and fresh repository/task checks.
+    status: pending
+    evidence_refs: []
+impacts:
+  - {area: requirement, decision: affected, rationale: Maintainer requested simpler public onboarding., evidence_refs: [.agent-context/tasks/T-README-ONBOARDING-001/brief.md]}
+  - {area: data-contracts, decision: not-affected, rationale: All artifact schemas remain byte-identical., evidence_refs: []}
+  - {area: domain-logic, decision: not-affected, rationale: No runtime implementation changes., evidence_refs: []}
+  - {area: tests-reference-cases, decision: affected, rationale: Add projection drift checks and update the existing failure-example test to its new guide location., evidence_refs: [.agent-context/tasks/T-README-ONBOARDING-001/brief.md]}
+  - {area: example-data, decision: not-affected, rationale: Published synthetic examples are not rewritten., evidence_refs: []}
+  - {area: ui-api, decision: affected, rationale: The public landing page presentation changes but CLI behavior does not., evidence_refs: [README.md]}
+  - {area: documentation, decision: affected, rationale: Landing page and read routes are reorganized., evidence_refs: [README.md]}
+  - {area: diagrams-visuals, decision: affected, rationale: A new explanatory diagram will be rendered and reviewed., evidence_refs: [.agent-context/tasks/T-README-ONBOARDING-001/brief.md]}
+  - {area: terminology, decision: affected, rationale: Explain bounded context and canonical knowledge in plain language without weakening their meaning., evidence_refs: [README.md, VISION.md]}
+  - {area: operations-compatibility, decision: affected, rationale: Easier first-use instructions must preserve dry-run and resume safety across platforms., evidence_refs: [README.md]}
+verification:
+  checks: [{name: Onboarding verification, status: pending, evidence_refs: []}]
+  terminology_search: {status: pending, terms: [canonical, bounded, Alpha, dry-run, resume, npm, compaction], evidence_refs: []}
+  visual_review: {applicable: true, status: pending, evidence_refs: []}
+  unverifiable_items: []
+independent_review: {status: not-required, reviewer: null, findings: [], evidence_refs: [], waiver: null}
+supersedes: []
+superseded_by: null
+updated_at: "2026-09-14T08:30:00Z"

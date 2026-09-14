@@ -31,7 +31,7 @@ Durable repository files are the source of truth; chat history and model memory 
 
 ## Read routing
 
-- At session entry, determine whether this is a new task, a validated handoff resume, unfinished documentation bootstrap, or documentation maintenance; then load only the corresponding route. See `README.md` (Give your agent an entry point) for the short entry checklist.
+- At session entry, determine whether this is a new task, a validated handoff resume, unfinished documentation bootstrap, or documentation maintenance; then load only the corresponding route. See `README.md` (Give your agent an entry point) for the short entry checklist and `docs/usage.md` for command details and safe receiving-session order.
 - Read `docs/self-documentation.md` and `.agent-context/documentation-plan.yaml` when determining CanonTrail's current knowledge owners, self-documentation coverage, or continuity state.
 - Read `VISION.md` for product purpose, scope, and non-goals.
 - Read `ARTIFACT_PROTOCOL.md` before changing schemas, context selection, handoffs, promotion, or maintenance.
@@ -67,6 +67,7 @@ Durable repository files are the source of truth; chat history and model memory 
 - Run `npm test` after deterministic behavior changes.
 - Run `npm run build` before testing the distributable CLI.
 - Run `npm run index` after governed Markdown changes.
+- After root README changes, run `node scripts/render-readme.js --write`; `.github/README.md` is an excluded generated presentation, never a second knowledge owner. `npm test` checks exact projection freshness.
 - Run `npm run canontrail -- validate .` before claiming repository validity.
 - Run `npm run canontrail -- finalize . --fail-on-warnings` before claiming repository-level completion; task completion additionally requires `--task <task-id>`.
 

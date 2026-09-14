@@ -4,6 +4,8 @@ schema_path: schemas
 governed_paths:
   - .
 exclude_paths:
+  # Generated presentation only; README.md remains the governed source.
+  - .github/README.md
   - .git
   - node_modules
   - dist

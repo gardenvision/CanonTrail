@@ -18,5 +18,6 @@ subsystem_tasks:
   - {id: DOC-PURPOSE, title: Product scope, status: review, knowledge_owner: VISION.md}
   - {id: DOC-CONTRACT, title: Artifact contracts, status: review, knowledge_owner: ARTIFACT_PROTOCOL.md}
   - {id: DOC-ENTRY, title: Source install and usage, status: review, knowledge_owner: README.md}
+  - {id: DOC-USAGE, title: Detailed local workflow reference, status: review, knowledge_owner: docs/usage.md}
   - {id: DOC-RELEASE, title: Alpha gates, status: review, knowledge_owner: docs/alpha-readiness.md}
   - {id: DOC-MAP, title: Knowledge owners, status: review, knowledge_owner: docs/self-documentation.md}

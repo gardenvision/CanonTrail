@@ -1,26 +1,10 @@
----
-topic_id: project-overview
-stand: "2026-09-14"
-status: public-source-alpha
-truth_level: draft
-verification:
-  state: unverified
-  evidence:
-    - package.json
-    - src/cli.ts
-    - src/initializer.ts
-    - src/context.ts
-read_if_task_touches: [project overview, onboarding]
-primary_systems: [project overview]
-safe_to_edit: [Keep commands reproducible and claims limited to recorded evidence.]
-do_not_use_instead: [VISION.md, ARTIFACT_PROTOCOL.md]
----
+<!-- Generated from ../README.md by scripts/render-readme.js. Do not edit this projection. -->
 
 <h1 align="center">CanonTrail</h1>
 
 <p align="center"><strong>Project knowledge that survives your next AI session.</strong><br>Keep the knowledge. Load the context you need.</p>
 
-<p align="center"><a href="#quick-start">Get started</a> · <a href="#2-give-your-agent-an-entry-point">Copy the AI prompt</a> · <a href="docs/usage.md">Usage guide</a> · <a href="https://github.com/gardenvision/CanonTrail/releases">Releases</a></p>
+<p align="center"><a href="#quick-start">Get started</a> · <a href="#2-give-your-agent-an-entry-point">Copy the AI prompt</a> · <a href="../docs/usage.md">Usage guide</a> · <a href="https://github.com/gardenvision/CanonTrail/releases">Releases</a></p>
 
 ---
 
@@ -31,13 +15,13 @@ A new AI session shouldn't mean rediscovering your project.
 It is a **local CLI + files in your repository**. No CanonTrail account, server or MCP setup is required. Your agent still does the thinking, coding and testing; CanonTrail provides the documentation rules, context selection and continuity checks.
 
 > **Source Alpha · MIT · Windows, Linux & macOS**  
-> Available to try locally. Still experimental—not a stable release or an npm-published package. [Current limits and evidence](docs/alpha-readiness.md).
+> Available to try locally. Still experimental—not a stable release or an npm-published package. [Current limits and evidence](../docs/alpha-readiness.md).
 
 ## How it works
 
 <picture>
-  <source media="(max-width: 760px)" srcset="docs/assets/canontrail-flow-mobile.svg">
-  <img src="docs/assets/canontrail-flow.svg" alt="Project docs, code and tests feed a task-sized context selected by CanonTrail. Your AI agent works and records evidence. A validated handoff helps the next session continue; documentation is updated as work progresses." width="1040">
+  <source media="(max-width: 760px)" srcset="../docs/assets/canontrail-flow-mobile.svg">
+  <img src="../docs/assets/canontrail-flow.svg" alt="Project docs, code and tests feed a task-sized context selected by CanonTrail. Your AI agent works and records evidence. A validated handoff helps the next session continue; documentation is updated as work progresses." width="1040">
 </picture>
 
 **Store broadly. Work selectively. Continue deliberately.** A context lock records which sources were selected, their exact versions and what was left out. When the task needs more knowledge, your agent follows the relevant links and recompiles the selection.
@@ -53,7 +37,7 @@ For example: a search feature may need the data model, search rules and a few te
 | Has conflicting or outdated notes | Make topic ownership, drafts, evidence and stale sources visible. |
 | Already has an established codebase | Discover existing documentation and preview adoption without overwriting files. |
 
-Already using **GSD or Superpowers**? Keep them. They can own planning and execution while CanonTrail organizes knowledge and handoffs. It also works without either. [Integration boundaries](docs/integrations.md).
+Already using **GSD or Superpowers**? Keep them. They can own planning and execution while CanonTrail organizes knowledge and handoffs. It also works without either. [Integration boundaries](../docs/integrations.md).
 
 ## Quick start
 
@@ -131,7 +115,7 @@ and keep verification and handoff records current.
 CanonTrail CLI: <absolute path to CanonTrail>/dist/cli.js
 ```
 
-For a continuation, also provide the specific task ID and handoff path. Prefer your agent's repository instruction mechanism so future sessions discover `AGENTS.md` automatically; [thin provider bridges](docs/integrations.md) help route it, but cannot force an agent to comply.
+For a continuation, also provide the specific task ID and handoff path. Prefer your agent's repository instruction mechanism so future sessions discover `AGENTS.md` automatically; [thin provider bridges](../docs/integrations.md) help route it, but cannot force an agent to comply.
 
 <details>
 <summary><strong>Prefer to preview adoption yourself?</strong></summary>
@@ -152,7 +136,7 @@ TARGET_PROJECT="/absolute/path/to/project"
 node "$CANONTRAIL_HOME/dist/cli.js" init "$TARGET_PROJECT" --adopt --dry-run
 ```
 
-A dry run writes nothing. Inspect it before applying: an applied adoption can preserve conflicts, create other planned files, and exit with a conflict status. See [safe adoption](docs/usage.md#safe-adoption) for the full procedure and large-project options.
+A dry run writes nothing. Inspect it before applying: an applied adoption can preserve conflicts, create other planned files, and exit with a conflict status. See [safe adoption](../docs/usage.md#safe-adoption) for the full procedure and large-project options.
 
 </details>
 
@@ -160,23 +144,23 @@ A dry run writes nothing. Inspect it before applying: an applied adoption can pr
 
 - **Your agent writes the knowledge.** Init creates scaffolding and a documentation plan, not a complete, verified understanding of the project.
 - **Focused context is the goal, not a savings guarantee.** Estimates are not actual provider-token measurements. Large required files can still dominate; CanonTrail cannot prevent session compaction.
-- **Adoption is not migration.** Existing docs and rules are preserved. The [migration path](docs/migration.md) is narrow, reviewed and experimental—not an automatic rewrite of every document.
+- **Adoption is not migration.** Existing docs and rules are preserved. The [migration path](../docs/migration.md) is narrow, reviewed and experimental—not an automatic rewrite of every document.
 - **No remote is needed for ordinary local use.** A readable local Git worktree is required for creating handoffs/checkpoints so uncommitted and untracked files can be disclosed. Unsaved editor buffers are not captured. Application tests and review remain your workflow's responsibility.
 
 ## Go deeper
 
 | I want to… | Start here |
 |---|---|
-| Create tasks, control context or safely resume | [Usage guide](docs/usage.md) |
-| Understand scope and the rules | [Vision](VISION.md) · [Artifact protocol](ARTIFACT_PROTOCOL.md) |
-| Work alongside GSD or Superpowers | [Integrations](docs/integrations.md) |
-| Coordinate parallel tasks | [Parallel work](docs/parallel-work.md) |
-| Assess adoption or migration of existing docs | [Safe adoption](docs/usage.md#safe-adoption) · [Migration](docs/migration.md) |
-| Check current limits or contribute | [Alpha readiness](docs/alpha-readiness.md) · [Roadmap](ROADMAP.md) · [Contributing](CONTRIBUTING.md) |
-| Work on CanonTrail itself | [AGENTS.md](AGENTS.md) · [Knowledge map](docs/self-documentation.md) |
+| Create tasks, control context or safely resume | [Usage guide](../docs/usage.md) |
+| Understand scope and the rules | [Vision](../VISION.md) · [Artifact protocol](../ARTIFACT_PROTOCOL.md) |
+| Work alongside GSD or Superpowers | [Integrations](../docs/integrations.md) |
+| Coordinate parallel tasks | [Parallel work](../docs/parallel-work.md) |
+| Assess adoption or migration of existing docs | [Safe adoption](../docs/usage.md#safe-adoption) · [Migration](../docs/migration.md) |
+| Check current limits or contribute | [Alpha readiness](../docs/alpha-readiness.md) · [Roadmap](../ROADMAP.md) · [Contributing](../CONTRIBUTING.md) |
+| Work on CanonTrail itself | [AGENTS.md](../AGENTS.md) · [Knowledge map](../docs/self-documentation.md) |
 
-Need help or have feedback? [Open an issue](https://github.com/gardenvision/CanonTrail/issues). For a possible security vulnerability, use the [private reporting route](SECURITY.md), not a public issue.
+Need help or have feedback? [Open an issue](https://github.com/gardenvision/CanonTrail/issues). For a possible security vulnerability, use the [private reporting route](../SECURITY.md), not a public issue.
 
 ## License
 
-[MIT](LICENSE.txt) for CanonTrail's own code, schemas, templates and documentation, except where stated otherwise. Preserve applicable notices; [third-party materials retain their own terms](docs/third-party-notices.md). The Alpha is distributed as source; npm publication remains disabled.
+[MIT](../LICENSE.txt) for CanonTrail's own code, schemas, templates and documentation, except where stated otherwise. Preserve applicable notices; [third-party materials retain their own terms](../docs/third-party-notices.md). The Alpha is distributed as source; npm publication remains disabled.

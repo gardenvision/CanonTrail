@@ -91,11 +91,11 @@ describe("structured documentation-audit failure", () => {
     expect(await snapshot(root)).toEqual(before);
   });
 
-  it("matches the worked JSON failure excerpt in the README", async () => {
+  it("matches the worked JSON failure excerpt in the usage guide", async () => {
     const root = await fixture();
     vi.spyOn(docs, "auditDocumentation").mockRejectedValueOnce(new Error("EACCES: permission denied"));
     const report = await finalizeRepository({ root, asOf });
-    const readme = await readFile(new URL("../README.md", import.meta.url), "utf8");
+    const readme = await readFile(new URL("../docs/usage.md", import.meta.url), "utf8");
     const worked = readme.slice(readme.indexOf("Worked JSON excerpt for"));
     const json = worked.match(/```json\s+([\s\S]*?)```/)?.[1];
     expect(json).toBeDefined();
