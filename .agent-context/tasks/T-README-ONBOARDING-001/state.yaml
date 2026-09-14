@@ -1,18 +1,18 @@
 task_id: T-README-ONBOARDING-001
-status: in-progress
+status: verified
 objective: Make the public README welcoming and first use reproducible with a simple diagram and a provider-neutral copyable prompt.
 non_goals:
   - Runtime or schema changes, npm publication, new release tags, private history, or changes to a user's target project.
 acceptance_criteria:
-  - {id: AC-ENTRY, statement: The landing page explains purpose and Alpha boundaries and provides a minimal verified start., verification: Readability review and isolated CLI probes., status: pending}
-  - {id: AC-VISUAL, statement: The diagram is accessible and legible at desktop and mobile widths., verification: Render and inspect at both sizes., status: pending}
-  - {id: AC-PROMPT, statement: The copyable prompt distinguishes setup from existing-project work and validated resume., verification: Check decision branches against CLI and protocol., status: pending}
-  - {id: AC-PRESERVE, statement: Existing operational guidance and all unrelated source bytes are preserved., verification: 'Link scan, diff allowlist and structural checks.', status: pending}
+  - {id: AC-ENTRY, statement: The landing page explains purpose and Alpha boundaries and provides a minimal verified start., verification: Readability review and isolated CLI probes., status: pass}
+  - {id: AC-VISUAL, statement: The diagram is accessible and legible at desktop and mobile widths., verification: Render and inspect at both sizes., status: pass}
+  - {id: AC-PROMPT, statement: The copyable prompt distinguishes setup from existing-project work and validated resume., verification: Check decision branches against CLI and protocol., status: pass}
+  - {id: AC-PRESERVE, statement: Existing operational guidance and all unrelated source bytes are preserved., verification: 'Link scan, diff allowlist and structural checks.', status: pass}
 dependencies: []
 documentation_impact: [README.md, docs/usage.md, AGENTS.md, docs/self-documentation.md, .agent-context/documentation-plan.yaml]
 file_intents: [README.md, docs/usage.md, docs/assets/canontrail-flow.svg, docs/assets/canontrail-flow-mobile.svg, AGENTS.md, docs/self-documentation.md, .agent-context/documentation-plan.yaml, .agent-context/config.yaml, scripts/render-readme.js, test/readme.test.ts, test/finalize-audit-errors.test.ts]
 required_context_sources: [README.md, VISION.md, package.json, docs/alpha-readiness.md]
 parallel_safety: exclusive
 checks:
-  - {id: CHECK-ONBOARDING, command_or_observation: 'Check the rendered presentation, command examples, prompt branches, links and unchanged runtime baseline.', status: pending, evidence_refs: [.agent-context/tasks/T-README-ONBOARDING-001/evidence/local-checks.json]}
-updated_at: "2026-09-14T15:06:00Z"
+  - {id: CHECK-ONBOARDING, command_or_observation: 'Check the rendered presentation, command examples, prompt branches, links and unchanged runtime baseline.', status: pass, evidence_refs: [.agent-context/tasks/T-README-ONBOARDING-001/evidence/local-checks.json, .agent-context/tasks/T-README-ONBOARDING-001/evidence/hosted-checks.json]}
+updated_at: "2026-09-14T15:35:00Z"

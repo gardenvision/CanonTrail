@@ -1,0 +1,41 @@
+{
+  "checked_at": "2026-09-14T15:27:02.240Z",
+  "commit": "d61422b7254e85789810f5098b31dba85ecda494",
+  "repository": "gardenvision/CanonTrail",
+  "repository_id": 1368896286,
+  "workflow": "https://github.com/gardenvision/CanonTrail/actions/runs/34861493996",
+  "conclusion": "success",
+  "platforms": [
+    {"os": "windows-latest", "node": "24", "conclusion": "success"},
+    {"os": "macos-latest", "node": "24", "conclusion": "success"},
+    {"os": "ubuntu-latest", "node": "24", "conclusion": "success"},
+    {"os": "ubuntu-latest", "node": "20.19", "conclusion": "success"}
+  ],
+  "aggregate_validate": "success",
+  "checks_per_platform": ["dependency installation", "typecheck", "build", "full test suite", "structural validation", "strict repository completion"],
+  "github_render": {
+    "preferred_readme": ".github/README.md",
+    "frontmatter_table_before_title": false,
+    "responsive_picture_preserved": true,
+    "all_internal_anchors_resolve": true,
+    "rendered_html_sha256": "2e30b841cfea01944fcd6c570c2f88cfd4ff1c32e0f96027a301bd4bb0c126f3",
+    "remote_projection_and_two_diagrams_match_local_bytes": true
+  },
+  "preservation": {
+    "baseline": "a9d71ec91e127c6cec0b1f1a42130e275f82ab84",
+    "existing_files": 204,
+    "byte_identical": 197,
+    "expected_modified": [".agent-context/config.yaml", ".agent-context/context-index.json", ".agent-context/documentation-plan.yaml", "AGENTS.md", "README.md", "docs/self-documentation.md", "test/finalize-audit-errors.test.ts"],
+    "unexpected_changes": [],
+    "historical_task_locks_changed": false
+  },
+  "terminology_review": {
+    "command": "rg -n -i -e canonical -e bounded -e Alpha -e dry-run -e resume -e npm -e compaction README.md docs/usage.md docs/assets",
+    "result": "Reviewed against product ownership, source-only Alpha, explicit omissions and safe setup/resume boundaries; no automatic semantic verification, measured token savings or compaction prevention promised"
+  },
+  "limits": [
+    "Author review and automated checks; no independent agent review claimed.",
+    "Local full-suite execution was incomplete because of a 600-second harness limit; earlier focused audit timeouts are retained in local-checks.json, not hidden or weakened.",
+    "This receipt proves only the named commit. Closing metadata and final copy edits require their own exact-commit hosted checks before updating main."
+  ]
+}

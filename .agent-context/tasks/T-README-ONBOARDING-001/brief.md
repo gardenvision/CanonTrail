@@ -1,11 +1,11 @@
 ---
 topic_id: task-readme-onboarding-001
 stand: "2026-09-14"
-status: in-progress
+status: completed
 truth_level: active-snapshot
 verification:
-  state: unverified
-  evidence: [.agent-context/tasks/T-README-ONBOARDING-001/state.yaml]
+  state: internally-reviewed
+  evidence: [.agent-context/tasks/T-README-ONBOARDING-001/evidence/local-checks.json, .agent-context/tasks/T-README-ONBOARDING-001/evidence/hosted-checks.json]
 read_if_task_touches: [README onboarding redesign]
 primary_systems: [public onboarding]
 safe_to_edit: [Record verified outcomes and keep publication separate from local preparation.]
@@ -37,6 +37,10 @@ GitHub renders the governed YAML header as a large table before the title. Keep 
 3. A copyable prompt uses exact tool/target placeholders, does not repeat init on an adopted project, stops on conflicts, and establishes receiving context before resumed work.
 4. Build/help and isolated adoption probes confirm the shown commands. Relative links and preserved advanced guidance are checked; repository validation and named completion must pass.
 
-## Current checkpoint
+## Verified outcome and publication boundary
 
-Started from public commit `a9d71ec91e127c6cec0b1f1a42130e275f82ab84` on `codex/readme-onboarding`; clean worktree confirmed before task creation. Landing page, generated projection, responsive diagrams and relocated usage guide are implemented. Desktop/light/dark and 390/320-pixel local renders have no page overflow; text bounds fit and the diagrams were visually inspected. The three new projection tests pass. The initial focused test run had five 15-second timeouts in existing audit cases (9 pass, 1 skip overall), not a clean suite; build and typecheck subsequently passed. The local full-suite harness reached its 600-second limit and is incomplete. Isolated CLI adoption, preservation, conflict and local-link probes pass; see `evidence/local-checks.json`. Next: refresh only this task's index/context, then verify the exact new commit in hosted CI and inspect hosted rendering before updating main. No user project or old release tag is in scope.
+Started from public commit `a9d71ec91e127c6cec0b1f1a42130e275f82ab84` on `codex/readme-onboarding`; clean worktree confirmed before task creation. Landing page, generated projection, responsive diagrams and relocated usage guide are implemented. Desktop/light/dark and 390/320-pixel local renders have no page overflow; text bounds fit and the diagrams were visually inspected. Isolated CLI adoption, preservation, conflict and local-link probes pass. The three new projection tests pass. Local limitations remain explicit: five existing 15-second audit timeouts in the initial focused run (9 pass, 1 skip overall), and a full-suite harness stopped at 600 seconds. No test assertion or deadline was weakened.
+
+Commit `d61422b7254e85789810f5098b31dba85ecda494` then passed the full hosted test/build/validation chain on Windows and macOS with Node 24, and Linux with Node 24 and 20.19, including the aggregate check. GitHub's actual preferred README, anchor targets, responsive picture and raw diagram/projection bytes were checked at that exact revision. The receipts distinguish author visual review, isolated CLI probes and hosted execution. They do not claim an independent agent review or measured token savings.
+
+All acceptance cases are closed by these results. Final closure metadata and the small path-copy clarification must still pass their own exact-commit hosted checks before updating `main`; the earlier CI receipt must not be reused as evidence that a later revision ran. Refresh only this task's context and retain all historical locks. No user project, private history, npm publication or old release tag is in scope.

@@ -1,20 +1,20 @@
 {
   "task_id": "T-README-ONBOARDING-001",
   "agent_run_id": null,
-  "created_at": "2026-09-14T15:12:24.810Z",
-  "context_index_hash": "sha256:ba267ca17484af7c1112c01f6c42ffbf392e89d33039f27dbce3e0747c1f210a",
-  "base_revision": "a9d71ec91e127c6cec0b1f1a42130e275f82ab84",
+  "created_at": "2026-09-14T15:40:45.453Z",
+  "context_index_hash": "sha256:3e79e7992ca9289cdea2d49d17b207d60ba6a8e20c9bb8f41683d41dd95ee242",
+  "base_revision": "d61422b7254e85789810f5098b31dba85ecda494",
   "budget": {
     "total_tokens": 48000,
     "reserved_output_tokens": 6000,
     "reserved_input_tokens": 2048,
-    "estimated_input_tokens": 21140
+    "estimated_input_tokens": 22215
   },
   "sources": [
     {
       "path": "AGENTS.md",
       "content_hash": "sha256:c107a0b6ee502cfea944746c2207c2b098da52cd7652f8a7b673e6ce06d620e5",
-      "git_blob": null,
+      "git_blob": "08b5dc3ff73fd37728ff075fadac820bc95119ea",
       "truth_level": "canonical",
       "level": "L0",
       "priority": 0,
@@ -26,40 +26,40 @@
     },
     {
       "path": ".agent-context/tasks/T-README-ONBOARDING-001/state.yaml",
-      "content_hash": "sha256:dc3a0c9375d63dab0d86ad00eb35111e37143bf199cafe0fb0163e27fe9443b1",
+      "content_hash": "sha256:5352f0b640f22a4acd2e511ae75a66bf400e461b9e6cd57cd6ebd05a8e3c6517",
       "git_blob": null,
       "truth_level": "active-snapshot",
       "level": "L0",
       "priority": 1,
       "selection_reason": "Current task objective, acceptance criteria, and file intents.",
       "selector": "task-state",
-      "estimated_tokens": 495,
+      "estimated_tokens": 509,
       "ownership": "project",
       "source_system": null
     },
     {
       "path": ".agent-context/tasks/T-README-ONBOARDING-001/brief.md",
-      "content_hash": "sha256:3a181389d13908f0382a0e300cb3f96a094ae20b55548c4f86b5279fdfcb549b",
+      "content_hash": "sha256:4abd05dfc9325b8990e81756fae14cfc87341a07ecce597413825392cdb73cc6",
       "git_blob": null,
       "truth_level": "active-snapshot",
       "level": "L0",
       "priority": 2,
       "selection_reason": "Current task brief.",
       "selector": "task-brief",
-      "estimated_tokens": 1027,
+      "estimated_tokens": 1226,
       "ownership": "project",
       "source_system": null
     },
     {
       "path": ".agent-context/tasks/T-README-ONBOARDING-001/change.yaml",
-      "content_hash": "sha256:25bcb502a8970db4e9cc888829c359964b93c41e59de10b65cb1234789957f86",
+      "content_hash": "sha256:d1ebfabab2802f28080938a0fb0b117bcaacdbd47f05af82cf709676a617181c",
       "git_blob": null,
       "truth_level": "active-snapshot",
       "level": "L0",
       "priority": 3,
       "selection_reason": "Current change decision and acceptance oracle.",
       "selector": "task-change",
-      "estimated_tokens": 1297,
+      "estimated_tokens": 1522,
       "ownership": "project",
       "source_system": null
     },
@@ -90,9 +90,22 @@
       "source_system": null
     },
     {
+      "path": ".agent-context/tasks/T-README-ONBOARDING-001/evidence/hosted-checks.json",
+      "content_hash": "sha256:d907c4108f70e4d444e4ca7ecd8d11cfb340a2a86582b485e1c67b7e245f8ebe",
+      "git_blob": null,
+      "truth_level": "historical",
+      "level": "L4",
+      "priority": 22,
+      "selection_reason": "Compact or directly cited task evidence.",
+      "selector": "task-evidence-reference",
+      "estimated_tokens": 598,
+      "ownership": "project",
+      "source_system": null
+    },
+    {
       "path": ".agent-context/tasks/T-README-ONBOARDING-001/evidence/local-checks.json",
       "content_hash": "sha256:6ae6dd4a2fdc04970ad2e0c43fadc5edfcc09edb5afc7cf2fa96e85a0ed42377",
-      "git_blob": null,
+      "git_blob": "3f2e3b195686aa3f10e25a27dfe192477bee466b",
       "truth_level": "historical",
       "level": "L4",
       "priority": 22,
@@ -130,14 +143,14 @@
     },
     {
       "path": "README.md",
-      "content_hash": "sha256:fe2e4873a76775b60d9957fb389b01786b8620f98610e34af0f17318b216fd3e",
+      "content_hash": "sha256:da94ad569642f552ce2535e227959972b6aa434a4ba8bfc4ec76e8bb5068d4ca",
       "git_blob": null,
       "truth_level": "draft",
       "level": "L3",
       "priority": 25,
       "selection_reason": "Persistently required by the current task state.; Existing file declared by the current task.",
       "selector": "task-required-context,task-file-intent",
-      "estimated_tokens": 2625,
+      "estimated_tokens": 2664,
       "ownership": "project",
       "source_system": null
     },
@@ -157,7 +170,7 @@
     {
       "path": ".agent-context/config.yaml",
       "content_hash": "sha256:2294f5417bfc6eacce6a95c8be6f23bc149d30bca127d915fc2939a13c95e4a3",
-      "git_blob": null,
+      "git_blob": "8cca1181dc0d7fe9fdcfe01b18205d8475f9bf1a",
       "truth_level": "unclassified",
       "level": "L3",
       "priority": 30,
@@ -170,7 +183,7 @@
     {
       "path": ".agent-context/documentation-plan.yaml",
       "content_hash": "sha256:eb175bafa1ecca2811b331b270fda2e80b26322d55131ace62f168005d48e1d0",
-      "git_blob": null,
+      "git_blob": "79ffff453e58c82d756eb3f263c4abd0bf50362a",
       "truth_level": "unclassified",
       "level": "L3",
       "priority": 30,
@@ -183,7 +196,7 @@
     {
       "path": "docs/self-documentation.md",
       "content_hash": "sha256:7cdab0f81ce6540f65d0489732ba68b80b76173a441eac42b098c3d5b9fb8e1b",
-      "git_blob": null,
+      "git_blob": "aab96e8e7217553ae0639f106ddd8bdba3f6e725",
       "truth_level": "draft",
       "level": "L3",
       "priority": 30,
@@ -196,7 +209,7 @@
     {
       "path": "docs/usage.md",
       "content_hash": "sha256:9a09165fd84412e061c85c7dea9aaa7d7bfea767c0d28a5c9f5bedcf2b48f8eb",
-      "git_blob": null,
+      "git_blob": "10f88e01f34ed9395ff6892842df0e1c5c802e05",
       "truth_level": "draft",
       "level": "L3",
       "priority": 30,
@@ -209,7 +222,7 @@
     {
       "path": "scripts/render-readme.js",
       "content_hash": "sha256:8565d8b62a1c82f7c7ed904ae4dd6ee93971e1032ecf293eab81c33b709e6a1e",
-      "git_blob": null,
+      "git_blob": "051acd0a207ab1ad7931f2d80a0c256ab1229cf2",
       "truth_level": "unclassified",
       "level": "L3",
       "priority": 30,
@@ -222,7 +235,7 @@
     {
       "path": "test/finalize-audit-errors.test.ts",
       "content_hash": "sha256:70036bdd81014a8a3a3413cf96cff6abfa56230698b977dd8e0f63ce3a8ad75d",
-      "git_blob": null,
+      "git_blob": "10c369dbf95eea9f1eab59a4564cf4b427cec604",
       "truth_level": "unclassified",
       "level": "L3",
       "priority": 30,
@@ -235,7 +248,7 @@
     {
       "path": "test/readme.test.ts",
       "content_hash": "sha256:6a40c390b666e3e681b70e92b4307c28f3f4ce18440fcd16120823fbf4ca7210",
-      "git_blob": null,
+      "git_blob": "bce28d957283ee3c70772f3cf050fcf4580149d8",
       "truth_level": "unclassified",
       "level": "L3",
       "priority": 30,
@@ -264,5 +277,5 @@
     }
   ],
   "raw_transcripts_included": false,
-  "lock_hash": "sha256:dae643e88bd5f84dd133be0e5b2a3fcdccf7722cfa328bcce07ae785653c72a0"
+  "lock_hash": "sha256:2864fdf3d704256c9c9362a8d877d79ad0b9b1a1b95e24839f7d30c3cda30cf9"
 }

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "hash_algorithm": "sha256",
-  "root_hash": "sha256:ba267ca17484af7c1112c01f6c42ffbf392e89d33039f27dbce3e0747c1f210a",
+  "root_hash": "sha256:3e79e7992ca9289cdea2d49d17b207d60ba6a8e20c9bb8f41683d41dd95ee242",
   "documents": [
     {
       "path": ".agent-context/tasks/T-ALPHA-CANDIDATE-001/brief.md",
@@ -78,11 +78,11 @@
     },
     {
       "path": ".agent-context/tasks/T-README-ONBOARDING-001/brief.md",
-      "content_hash": "sha256:3a181389d13908f0382a0e300cb3f96a094ae20b55548c4f86b5279fdfcb549b",
+      "content_hash": "sha256:4abd05dfc9325b8990e81756fae14cfc87341a07ecce597413825392cdb73cc6",
       "stand": "2026-09-14",
-      "status": "in-progress",
+      "status": "completed",
       "truth_level": "active-snapshot",
-      "verification_state": "unverified",
+      "verification_state": "internally-reviewed",
       "read_if_task_touches": [
         "README onboarding redesign"
       ],
@@ -740,7 +740,7 @@
     },
     {
       "path": "README.md",
-      "content_hash": "sha256:fe2e4873a76775b60d9957fb389b01786b8620f98610e34af0f17318b216fd3e",
+      "content_hash": "sha256:da94ad569642f552ce2535e227959972b6aa434a4ba8bfc4ec76e8bb5068d4ca",
       "stand": "2026-09-14",
       "status": "public-source-alpha",
       "truth_level": "draft",

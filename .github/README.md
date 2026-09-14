@@ -14,7 +14,7 @@ A new AI session shouldn't mean rediscovering your project.
 
 It is a **local CLI + files in your repository**. No CanonTrail account, server or MCP setup is required. Your agent still does the thinking, coding and testing; CanonTrail provides the documentation rules, context selection and continuity checks.
 
-> **Source Alpha · MIT · Windows, Linux & macOS**  
+> **Source Alpha · MIT · Windows, Linux & macOS**<br>
 > Available to try locally. Still experimental—not a stable release or an npm-published package. [Current limits and evidence](../docs/alpha-readiness.md).
 
 ## How it works
@@ -51,9 +51,10 @@ cd CanonTrail
 npm ci --ignore-scripts
 npm run build
 node dist/cli.js --help
+node -p "process.cwd()"
 ```
 
-Keep this folder: it is your `CANONTRAIL_HOME`. The application or repository you want to work on is a **different folder**, your `TARGET_PROJECT`. One CanonTrail copy can serve multiple projects. No global installation is needed.
+The last command prints the absolute folder path: copy it as your `CANONTRAIL_HOME`. You can also ask your local coding agent to run this setup block for you. Keep the folder; the application or repository you want to work on is a **different folder**, your `TARGET_PROJECT`. One CanonTrail copy can serve multiple projects. No global installation is needed.
 
 This downloads the current `main`; record `git rev-parse HEAD` if you need its exact revision. For a reproducible released snapshot, choose a tag from [Releases](https://github.com/gardenvision/CanonTrail/releases) and follow the README shipped with that tag. Do not substitute an unrelated `npx canontrail` package.
 
