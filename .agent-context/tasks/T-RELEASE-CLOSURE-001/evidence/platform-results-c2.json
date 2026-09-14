@@ -1,0 +1,156 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-09-13T22:09:48.369Z",
+  "run": {
+    "id": 34785633886,
+    "name": "CanonTrail validation",
+    "head_sha": "4355643c82aea3a69213d0821660cae561ac5b3a",
+    "head_branch": "codex/public-alpha-release",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/gardenvision/CanonTrail/actions/runs/34785633886"
+  },
+  "source_manifest": {
+    "sha256": "7590f4dd67888143db89c6fb68a57b323f8f6bd36551aadd140ba98fcf6359ab",
+    "files": 197
+  },
+  "scope": "Exact C2 source; later documentation or lifecycle edits are not retroactively the tested snapshot.",
+  "jobs": "Every platform job and aggregate validate succeeded. Shipped workflow includes typecheck, build, full suite, built-CLI repository validation and strict finalize; Ubuntu Node24 also audits runtime dependencies.",
+  "raw_artifact_retention_days": 14,
+  "hosts": [
+    {
+      "artifact": "platform-macos-latest-node-24",
+      "capabilities": {
+        "schema_version": 1,
+        "observed_at": "2026-09-13T22:03:50.515Z",
+        "platform": "darwin",
+        "architecture": "arm64",
+        "os_release": "25.6.0",
+        "node": "v24.20.0",
+        "fixture_filesystem_type": "26",
+        "case_sensitive": false,
+        "unicode_form_sensitive": false,
+        "unicode_nfc_preserved": true,
+        "directory_link": "available",
+        "file_symlink": "available",
+        "posix_mode_bits": "available",
+        "windows_short_names": "not-applicable"
+      },
+      "tests": {
+        "total": 696,
+        "passed": 691,
+        "skipped": 5,
+        "failed": 0
+      },
+      "skipped_cases": [
+        "context review correction regressions keeps distinct exact-case filenames distinct where the filesystem supports them",
+        "compileContext rejects a required context source that differs from the lock output only by path case",
+        "Sonnet review regression boundaries rejects ordinary short-name aliases without banning legitimate tilde names",
+        "Sonnet review regression boundaries rejects a real Windows short-name control-tree alias before execute, rollback, or validation can trust it",
+        "task-scoped completion safety boundary does not reinterpret distinct case-sensitive directory names as task ownership"
+      ],
+      "raw_capabilities_sha256": "266c38b1e70758a34368edc159fee8189bdf8c0caacf6845a56b2fb75069c5df",
+      "raw_results_sha256": "491d5cbc0d2dccf23145a3a1c83f48fbaf2eb105d7915ae310c9e77ed22bfd4f"
+    },
+    {
+      "artifact": "platform-ubuntu-latest-node-20.19",
+      "capabilities": {
+        "schema_version": 1,
+        "observed_at": "2026-09-13T22:03:43.862Z",
+        "platform": "linux",
+        "architecture": "x64",
+        "os_release": "6.17.0-1022-azure",
+        "node": "v20.19.6",
+        "fixture_filesystem_type": "61267",
+        "case_sensitive": true,
+        "unicode_form_sensitive": true,
+        "unicode_nfc_preserved": true,
+        "directory_link": "available",
+        "file_symlink": "available",
+        "posix_mode_bits": "available",
+        "windows_short_names": "not-applicable"
+      },
+      "tests": {
+        "total": 696,
+        "passed": 692,
+        "skipped": 4,
+        "failed": 0
+      },
+      "skipped_cases": [
+        "compileContext rejects a required context source that differs from the lock output only by path case",
+        "Sonnet review regression boundaries rejects ordinary short-name aliases without banning legitimate tilde names",
+        "Sonnet review regression boundaries rejects a real Windows short-name control-tree alias before execute, rollback, or validation can trust it",
+        "task-scoped completion safety boundary fails closed for an existing case alias without lowercasing distinct paths"
+      ],
+      "raw_capabilities_sha256": "930ed44a020f6879f8a5b11b18c38ad3e62ece38104aa044fbef6136221469dc",
+      "raw_results_sha256": "c3dafd24872aaed85609b1bc34bcb42d85409f4620a105009fd2cf0ac0e54fa9"
+    },
+    {
+      "artifact": "platform-ubuntu-latest-node-24",
+      "capabilities": {
+        "schema_version": 1,
+        "observed_at": "2026-09-13T22:03:43.845Z",
+        "platform": "linux",
+        "architecture": "x64",
+        "os_release": "6.17.0-1022-azure",
+        "node": "v24.20.0",
+        "fixture_filesystem_type": "61267",
+        "case_sensitive": true,
+        "unicode_form_sensitive": true,
+        "unicode_nfc_preserved": true,
+        "directory_link": "available",
+        "file_symlink": "available",
+        "posix_mode_bits": "available",
+        "windows_short_names": "not-applicable"
+      },
+      "tests": {
+        "total": 696,
+        "passed": 692,
+        "skipped": 4,
+        "failed": 0
+      },
+      "skipped_cases": [
+        "compileContext rejects a required context source that differs from the lock output only by path case",
+        "Sonnet review regression boundaries rejects ordinary short-name aliases without banning legitimate tilde names",
+        "Sonnet review regression boundaries rejects a real Windows short-name control-tree alias before execute, rollback, or validation can trust it",
+        "task-scoped completion safety boundary fails closed for an existing case alias without lowercasing distinct paths"
+      ],
+      "raw_capabilities_sha256": "4cc416c19ec312a6dc25ddbee94118581b0c77eb41cb3102dba012ef7bc9fad0",
+      "raw_results_sha256": "2cf693e1802d97daed4bf26a9b7931b258a216c057bca34726bd4cb02a8c7797"
+    },
+    {
+      "artifact": "platform-windows-latest-node-24",
+      "capabilities": {
+        "schema_version": 1,
+        "observed_at": "2026-09-13T22:03:51.690Z",
+        "platform": "win32",
+        "architecture": "x64",
+        "os_release": "10.0.26100",
+        "node": "v24.20.0",
+        "fixture_filesystem_type": "0",
+        "case_sensitive": false,
+        "unicode_form_sensitive": true,
+        "unicode_nfc_preserved": true,
+        "directory_link": "available",
+        "file_symlink": "available",
+        "posix_mode_bits": "not-applicable",
+        "windows_short_names": "available"
+      },
+      "tests": {
+        "total": 696,
+        "passed": 691,
+        "skipped": 5,
+        "failed": 0
+      },
+      "skipped_cases": [
+        "completion reference-field inventory does not skip a URI-looking literal POSIX source path",
+        "context review correction regressions keeps distinct exact-case filenames distinct where the filesystem supports them",
+        "structured documentation-audit failure returns a failure for an actually unreadable POSIX directory",
+        "native migration portability preserves POSIX permission bits across atomic apply and rollback",
+        "task-scoped completion safety boundary does not reinterpret distinct case-sensitive directory names as task ownership"
+      ],
+      "raw_capabilities_sha256": "9fd10390af5fd949c17f4ce6034c6a558f818fa135672a36d5bfdee80782904b",
+      "raw_results_sha256": "0e23626ba3ec09ded58e7487613fd4f560d8e5e7df8cf061e9a872cda94f1c92"
+    }
+  ]
+}

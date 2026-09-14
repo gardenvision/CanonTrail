@@ -1,0 +1,29 @@
+{
+  "observed_at": "2026-09-14T07:33:11.415Z",
+  "initial": {
+    "id": 34817295233,
+    "run_attempt": 1,
+    "head_sha": "4355643c82aea3a69213d0821660cae561ac5b3a",
+    "status": "completed",
+    "conclusion": "failure",
+    "html_url": "https://github.com/gardenvision/CanonTrail/actions/runs/34817295233"
+  },
+  "retry": {
+    "id": 34817295233,
+    "run_attempt": 2,
+    "head_sha": "4355643c82aea3a69213d0821660cae561ac5b3a",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/gardenvision/CanonTrail/actions/runs/34817295233"
+  },
+  "initial_log_sha256": "195adfe811f518b80daa8129ce9e2c5e23a55075a15f0b9d225b8af5ae95ecf0",
+  "retry_log_sha256": "7ac7f22a9785a7d6cf5e522532f2e4d0e4f34d522d96b3afad322883a7993a08",
+  "initial_error": "ENOTEMPTY removing a temporary fixture directory in test/context.test.ts after the Git-base-revision case; not a context-drift assertion error.",
+  "initial_counts": {
+    "passed": 691,
+    "failed": 1,
+    "skipped": 4,
+    "total": 696
+  },
+  "disposition": "One unchanged-source retry succeeded. Retain the failed attempt; root cause was not established or fixed. Future cleanup hardening is a separate follow-up. Require both final workflows for the final tagged release."
+}

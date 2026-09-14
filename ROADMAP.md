@@ -1,7 +1,7 @@
 ---
 topic_id: implementation-roadmap
-stand: "2026-09-13"
-status: alpha-candidate
+stand: "2026-09-14"
+status: public-source-alpha
 truth_level: draft
 verification:
   state: unverified
@@ -26,12 +26,12 @@ do_not_use_instead: [VISION.md, ARTIFACT_PROTOCOL.md]
 
 Presence of these commands is not independent review of the entire product. `docs/alpha-readiness.md` owns release gates and practical limitations.
 
-## Before a public Alpha
+## Source Alpha release state
 
 1. Completed for C1: curated-source boundary review, portable first-use probes, package/source-map checks and exact raw-byte Git transport. Keep the documented limits; this is not legal clearance or a full security audit.
-2. Completed for C1: local checks and exact Windows/Linux/macOS CI, plus Linux at the declared Node floor. Reconcile subsequent documentation/lifecycle changes separately.
-3. Remaining: approved confidential reporting route, actual hosting rules and public-access verification; keep private development history separate. The owner has selected MIT and conditionally authorized the new clean repository's publication after gates pass.
-4. T-RELEASE-CLOSURE-001 owns these remaining release steps. npm publication, canonical promotion and real-project migrations are not part of this source release.
+2. Completed for C1 and C2: exact Windows/Linux/macOS CI, plus Linux at the declared Node floor; independent C2 metadata reconciliation. Reconcile later documentation/lifecycle changes separately.
+3. Configured and checked: clean public source, separate private development history, confidential GitHub reporting, maintainer repository subscription and required main-branch CI. Actual email delivery is not claimed. MIT is selected.
+4. T-RELEASE-CLOSURE-001 owns final metadata review and source preparation; a tagged Alpha still needs the final commit's hosted checks and an external release receipt. npm publication, canonical promotion and real-project migrations are not part of this source release.
 
 Current bounded correction: T-FROZEN-EXAMPLE-LIFECYCLE-001 adds explicit hash-bound age handling for synthetic examples without rewriting historical locks or exempting live tasks. Its revision 2 records the independent V3 review and exact-source CI for formal task closure; the Alpha preparation/release gate remains distinct. See `docs/alpha-readiness.md` for current states. Source distribution is the current target. T-PUBLIC-PREP-001 adds the missing package documentation to the file list; installed-package verification and npm publication remain separate.
 
@@ -39,9 +39,11 @@ Nonblocking follow-ups from that review remain open: R-1 clearer eligibility dia
 
 T-MIT-LICENSE-001 applies the explicit MIT decision in a new local revision. It preserves `private: true`, third-party license metadata, runtime contracts and historical locks. Publication and original-checkout integration remain separate decisions.
 
-T-PUBLIC-PREP-001 introduces neutral `legacy-header-v1` naming with retained historical-input compatibility, records the source-content audit boundary, and prepares the release checklist and third-party inventory. Its independent naming/C1 reviews and current platform evidence are recorded; neither is borrowed from V3. Local preparation closes separately from the release task's still-open confidential reporting and actual hosting gates.
+T-PUBLIC-PREP-001 introduced neutral `legacy-header-v1` naming with retained historical-input compatibility, recorded the source-content audit boundary, and prepared the release checklist and third-party inventory. Its independent naming/C1 reviews and platform evidence are recorded; neither is borrowed from V3. Its local preparation closure remains distinct from the later release task and actual hosting receipts.
 
 ## Useful later work, not this release's automatic scope
+
+- Investigate temporary-fixture cleanup reliability in `test/context.test.ts`: additional C2 main workflow `34817295233` failed attempt1 with `ENOTEMPTY` during teardown; the unchanged-source attempt2 passed. Both attempts and log hashes are in the release task's `extra-ci-retry.json`. The root cause is not established or fixed; do not mask product assertions or describe every attempt as green. Exact final matrix and additional main workflow remain tag gates.
 
 - Replace the generated resume-entry shorthand with the explicit validated-receiving-packet order already documented in README and protocol section 8. Until that separately reviewed generator change, do not treat a validated handoff alone as permission to execute the next feature action.
 

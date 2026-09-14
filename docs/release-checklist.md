@@ -1,9 +1,9 @@
 ---
 topic_id: canontrail-release-checklist
-stand: "2026-09-13"
-status: preparation-not-publication
+stand: "2026-09-14"
+status: public-source-hosting-reviewed
 truth_level: draft
-verification: {state: unverified, evidence: [docs/alpha-readiness.md, SECURITY.md]}
+verification: {state: verified, evidence: [docs/alpha-readiness.md, SECURITY.md, .agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/review-receipt-hosting.json, .agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/hosting-results.json]}
 read_if_task_touches: [public release preparation, source distribution]
 primary_systems: [release operations]
 safe_to_edit: [Record actual choices and checks without inventing hosting state.]
@@ -12,13 +12,13 @@ do_not_use_instead: [docs/alpha-readiness.md, SECURITY.md]
 
 # First public source release
 
-This checklist records the release process; its text does not itself configure GitHub or grant permission. The owner authorized conditional publication of a NEW clean-history `gardenvision/CanonTrail`. That staging repository exists and has received the reviewed source, but remains private. The original development repository is still private as `gardenvision/CanonTrail-private`. Read `docs/alpha-readiness.md` for exact review and platform evidence.
+This checklist records the release process; its text does not itself configure GitHub or grant permission. On 2026-09-14 the separately reviewed clean-history `gardenvision/CanonTrail` became public at C2. The original development repository remains private as `gardenvision/CanonTrail-private`. Actual hosting observations are in the release task's `hosting-results.json`; read `docs/alpha-readiness.md` for exact review and platform evidence. A tagged Alpha is a later gate, not implied by public visibility alone.
 
 ## Decisions and remaining gates
 
 1. Approved and prepared: `https://github.com/gardenvision/CanonTrail`, with clean root commit `23d542302e7327931cb2c60b7a35ae60e6e47f16` and no private development ancestors. The separately authorized private-repository rename is complete. Never merge old private branches, tags or raw project reports into this history.
-2. Choose a real confidential security reporting channel. GitHub private vulnerability reporting is recommended for the eventual public repository, but is not assumed enabled. Confirm the form and notification delivery after configuration; if a channel must be available before visibility changes, supply a verified alternative contact first. Never invent an email address.
-3. Publication is conditionally authorized after the independent release review and required quality/hosting gates, not merely after a push. C1 passed the four-platform hosted matrix; later metadata closure still needs its own validation and bounded review. Neutral naming and MIT are already selected. npm, canonical promotion and real-project migrations remain separate.
+2. Approved and configured: GitHub private vulnerability reporting. GitHub requires public visibility, so only the reviewed clean source was made public first; the channel was then immediately enabled and verified. The owner confirmed Watch / All Activity and the subscriber API confirmed the maintainer. The anonymous advisories page links to the private form. No advisory was submitted and actual email delivery was not tested; global account preferences were not changed. Never invent an email address or treat approval as configuration evidence.
+3. Configured and API-verified: default branch `main`; required `validate` check bound to GitHub Actions app15368, strict up-to-date checks and admin enforcement; linear history; no force pushes or branch deletion. No second-person pull-request approval requirement is claimed. A tagged Alpha still requires the final metadata review and exact-revision CI. Neutral naming and MIT are selected. npm, canonical promotion and real-project migrations remain separate.
 
 ## Local preparation and review
 
@@ -36,9 +36,9 @@ This checklist records the release process; its text does not itself configure G
 - Create the approved clean repository, stage only the manifest-reviewed files, and inspect the initial commit contents and author identity. Do not copy a private `.git` directory.
 - Preserve exact raw source bytes when transporting hash-bound artifacts: this curated tree uses `* -text`, not automatic end-of-line conversion. Verify a real fresh checkout against the pre-commit inventory, including a consumer with `core.autocrlf=true`; ordinary test success in the pre-commit folder is not this evidence.
 - Set the chosen distribution URL in the README and integration manifests. Pin the consumer GitHub Action to the reviewed immutable release commit, not a moving branch. Do not assume inherited development URLs already identify a public release.
-- Configure the real private vulnerability-reporting channel and maintainer notifications; replace `SECURITY.md`'s draft status with verified facts. Decide supported Alpha versions without promising an unapproved response-time SLA. [GitHub configuration guide](https://docs.github.com/en/code-security/how-tos/report-and-fix-vulnerabilities/configure-vulnerability-reporting/configure-for-a-repository).
+- Configure the real private vulnerability-reporting channel and maintainer notifications; record configuration separately from actual delivery. GitHub requires public visibility before enabling this feature, so use the independently reviewed clean source for that prerequisite and stop the tagged release if activation fails. Update `SECURITY.md` with observed facts, without inventing a response-time SLA. [GitHub configuration guide](https://docs.github.com/en/code-security/how-tos/report-and-fix-vulnerabilities/configure-vulnerability-reporting/configure-for-a-repository).
 - Run the shipped platform workflow against the exact release candidate and configure actual required status checks/branch protections. Workflow YAML alone does not block merging. Inspect results before applying a public tag or release.
-- Publish only after the owner's final permission and verify public read-only access to the repository/archive and essential documentation. Record the resulting revision and URLs.
+- Apply a public tag/release only after the owner's permission and exact final checks: both the platform matrix/aggregate and the separate main `completion-gate` workflow must pass. Branch protection enforces `validate`, not that second workflow, so inspect the second result explicitly. Verify unauthenticated read-only access to the repository/archive and essential documentation. Record the resulting revision and URLs externally or in the GitHub release; do not create a self-referential claim that a receipt-containing commit already included its own future CI result.
 
 ## npm is a separate channel
 

@@ -1,0 +1,32 @@
+{
+  "recorded_at": "2026-09-14T07:40:12.731Z",
+  "reviewer": "Independent Codex release-boundary subtask, separate from the implementation author",
+  "report_sha256": "b1cf6f02d683e90fb1a2def6c712866904f2f4396d626f71c8c5c6f9453d1f41",
+  "decision": "APPROVE WITH CONDITIONS for the bounded hosting-documentation and source-preparation delta",
+  "source_manifest_sha256": "b6d564497243386d7e08ca0ab72580cd5bd8bbf11d26d259358ecfd94de21979",
+  "source_files": 201,
+  "source_bytes": 1718636,
+  "baseline_commit": "4355643c82aea3a69213d0821660cae561ac5b3a",
+  "source_was_committed": false,
+  "observations": [
+    "All201files match,185 unchanged/12changed/4added versusC2; all162protected runtime/schema/test/package/workflow/completed-task files unchanged.",
+    "Independent current GitHub GET checks confirm new public/old private identities, reporting enabled, subscription, main protection and anonymous source/reporting access.",
+    "Independent C2 raw platform receipts and exact historical CI reconciled; additional main failure and successful unchanged retry both observed.",
+    "Own validate, audit and repository finalize pass; named release task correctly retains pending lifecycle/review gates."
+  ],
+  "conditions": [
+    {
+      "id": "HD-1",
+      "requirement": "Separate hosting observation, anonymous access observation and aggregation time; active lifecycle timestamps must follow their evidence.",
+      "disposition": "hosting-results.json now records the two original observation times and a later recording time; state/change timestamps are refreshed after the review."
+    },
+    {
+      "id": "HD-2",
+      "requirement": "Retain the additional C2 workflow cleanup failure, successful unchanged retry and unresolved follow-up.",
+      "disposition": "extra-ci-retry.json retains both attempts and log hashes; ROADMAP records cleanup reliability as deferred, without claiming a fix."
+    }
+  ],
+  "closure_scope": "Author may record review, correct these metadata conditions, close source-preparation/current-hosting lifecycle and run fresh local gates. A tiny independent final-delta reconciliation remains external.",
+  "external_tag_gates": "The final commit must pass the platform matrix and additional main completion workflow and its anonymous source archive must match the final inventory before a tagged Alpha. Final commit/run/tag receipts live outside the source to avoid self-reference.",
+  "limits": "No npm publication, private-history disclosure, canonical promotion, real-project migration, actual email-delivery verification, legal clearance or security guarantee."
+}

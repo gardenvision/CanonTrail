@@ -1,0 +1,13 @@
+{
+  "observed_at": "2026-09-14T07:26:15.489Z",
+  "ok": true,
+  "url": "https://codeload.github.com/gardenvision/CanonTrail/zip/4355643c82aea3a69213d0821660cae561ac5b3a",
+  "authorization_headers_sent": false,
+  "commit": "4355643c82aea3a69213d0821660cae561ac5b3a",
+  "source_manifest_sha256": "7590f4dd67888143db89c6fb68a57b323f8f6bd36551aadd140ba98fcf6359ab",
+  "files": 197,
+  "source_bytes": 1699247,
+  "zip_bytes": 537827,
+  "zip_sha256": "445c743a0fbf10536f48f8cd76eb7f709fbfa20e99c7f1a5402dc4c7b7687d3f",
+  "result": "Every public archive file matches the exact reviewed source manifest; no extra source files, no private Git history."
+}

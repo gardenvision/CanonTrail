@@ -1,22 +1,22 @@
 version: 1
 change_id: CHG-RELEASE-CLOSURE-001
-revision: 2
+revision: 3
 title: Independent review closure and clean source Alpha release
-status: implemented
+status: verified
 risk: high
 author: CanonTrail release implementation agent
-canonical_source: .agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/owner-decision.json
+canonical_source: .agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/publication-decision.json
 decision_rationale: The owner requested necessary corrections and publication only after passing gates, and explicitly approved preserving private history in a renamed repository while publishing clean sources separately.
 documentation_structure:
   decision: update-existing-feature-documents
   rationale: Release operations and package completeness belong to the existing readiness and release-checklist owners; no new product feature or wiki is needed.
   feature_documents:
-    - {feature_id: release-checklist, action: update, path: docs/release-checklist.md, status: drafted, evidence_refs: [.agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/owner-decision.json]}
+    - {feature_id: release-checklist, action: update, path: docs/release-checklist.md, status: verified, evidence_refs: [.agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/hosting-results.json, .agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/review-receipt-hosting.json]}
 acceptance_cases:
   - {id: AC-EVIDENCE, given: Two old receipts ambiguously label preservation of the sealed predecessor as candidate equality., expected: Explicit new metrics distinguish 172 sealed predecessor files from 158 equal candidate files and 14 changes., failure_or_uncertainty: Retain the original signed-by-hash artifacts and attach an erratum., counterexample: Claiming all 172 candidate paths equal their predecessor., oracle: Rehash both complete inventories and reconcile changed added removed and equal sets., status: pass, evidence_refs: [.agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/naming-erratum.json, .agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/review-receipt.json]}
   - {id: AC-PACKAGE, given: Published maps point to TypeScript source not currently packaged., expected: Every local source-map reference resolves inside the package while private histories remain excluded., failure_or_uncertainty: No installed-package or npm publication claim without a real check., counterexample: A map references absent or out-of-package source., oracle: Parse all maps against the actual pack inventory and run regressions., status: pass, evidence_refs: [.agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/local-checks.json, .agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/review-receipt.json]}
-  - {id: AC-RELEASE, given: Narrow independent naming review passes with conditions., expected: Current platform evidence and independent release-boundary assessment support the final source delta., failure_or_uncertainty: Keep unverified gates open and report limitations., counterexample: Borrowing old CI or author review for newly changed code., oracle: Exact hashes current checks and independent findings., status: pending, evidence_refs: []}
-  - {id: AC-HOSTING, given: The desired public name is occupied by private development history., expected: Rename stays private and a separate clean-history repository receives only reviewed files; private reporting is configured before publication., failure_or_uncertainty: Stop if owner choice permission or security contact is missing., counterexample: Publishing the old private repository history., oracle: Owner grants and GitHub metadata plus unauthenticated public reads., status: pending, evidence_refs: []}
+  - {id: AC-RELEASE, given: Narrow independent naming review passes with conditions., expected: Revision-bound platform evidence and independent source/hosting assessment support local preparation; the tagged release separately requires its exact final commit checks., failure_or_uncertainty: Keep external tag gates open until actual CI and archive checks pass., counterexample: Borrowing old CI or author review for newly changed code., oracle: Exact hashes current checks and independent findings., status: pass, evidence_refs: [.agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/review-receipt-c2.json, .agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/review-receipt-hosting.json, .agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/platform-results-c2.json]}
+  - {id: AC-HOSTING, given: Private development history must remain separate and GitHub private reporting requires a public repository., expected: Keep the old repository private; expose only the independently reviewed clean source; immediately enable private reporting and verify hosting before a tagged Alpha release., failure_or_uncertainty: If reporting configuration fails after visibility changes record the intermediate public state and stop the tagged release., counterexample: Publishing the old private repository history or claiming reporting was enabled while the repository was private., oracle: Owner grants and GitHub metadata plus unauthenticated public reads., status: pass, evidence_refs: [.agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/publication-decision.json, .agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/hosting-results.json]}
 impacts:
   - {area: requirement, decision: affected, rationale: Explicit source publication authority and boundaries., evidence_refs: [.agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/owner-decision.json]}
   - {area: data-contracts, decision: not-affected, rationale: Runtime artifact schemas remain byte-identical; only preparation evidence gets clearer labels., evidence_refs: []}
@@ -32,8 +32,8 @@ verification:
   checks: [{name: C1 local quality preservation packaging and exact hosted matrix, status: pass, evidence_refs: [.agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/local-checks.json, .agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/platform-results.json]}]
   terminology_search: {status: pass, terms: [baseline_unchanged, predecessor_files_unchanged, Alpha, private], evidence_refs: [.agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/naming-erratum.json, docs/release-checklist.md, docs/alpha-readiness.md]}
   visual_review: {applicable: false, status: not-applicable, evidence_refs: []}
-  unverifiable_items: [C1 source review and platforms passed; later metadata reconciliation and actual security-channel/public-hosting checks remain open.]
-independent_review: {status: pending, reviewer: null, findings: [], evidence_refs: [], waiver: null}
+  unverifiable_items: []
+independent_review: {status: pass, reviewer: Independent Codex release-boundary subtask, findings: [HD-1 observation and recording timestamps separated; HD-2 failed cleanup and successful retry retained with deferred follow-up; final commit tag gates remain separate.], evidence_refs: [.agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/review-receipt-hosting.json, .agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/extra-ci-retry.json, .agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/hosting-results.json], waiver: null}
 supersedes: []
 superseded_by: null
-updated_at: "2026-09-13T21:50:20Z"
+updated_at: "2026-09-14T07:40:12.731Z"

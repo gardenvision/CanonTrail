@@ -1,7 +1,7 @@
 {
   "version": 1,
   "hash_algorithm": "sha256",
-  "root_hash": "sha256:a37380aeae204de07288931ad913e97e372aa100fe231279fc0d1be79a62cf73",
+  "root_hash": "sha256:5f989dc213a1e7c9482ac984e03cb3e18eadba5e9277915c6be0285fa53e9ad8",
   "documents": [
     {
       "path": ".agent-context/tasks/T-ALPHA-CANDIDATE-001/brief.md",
@@ -78,11 +78,11 @@
     },
     {
       "path": ".agent-context/tasks/T-RELEASE-CLOSURE-001/brief.md",
-      "content_hash": "sha256:ed32faf52795a46fa047faea18a64f77bbfb9d30c7ccbcf9de16b50550954826",
-      "stand": "2026-09-13",
-      "status": "in-progress",
+      "content_hash": "sha256:a96b8a21df27998ecbc6f3f1377b0a5417ddd9b7851f9c40451c31df02befa43",
+      "stand": "2026-09-14",
+      "status": "completed",
       "truth_level": "active-snapshot",
-      "verification_state": "unverified",
+      "verification_state": "verified",
       "read_if_task_touches": [
         "T-RELEASE-CLOSURE-001"
       ],
@@ -162,9 +162,9 @@
     },
     {
       "path": "docs/alpha-readiness.md",
-      "content_hash": "sha256:11ae7249cd6bf0f4ac33fbd39712c85ec9d57388b162ed9e34886591b3e6b7b7",
-      "stand": "2026-09-13",
-      "status": "source-reviewed-awaiting-hosting",
+      "content_hash": "sha256:12bba650807edab24d03201e16aa9cde2fd72b233201529bf32457c39c5d6aef",
+      "stand": "2026-09-14",
+      "status": "public-source-hosting-configured",
       "truth_level": "draft",
       "verification_state": "verified",
       "read_if_task_touches": [
@@ -288,9 +288,9 @@
     },
     {
       "path": "docs/platform-support.md",
-      "content_hash": "sha256:e44ffd57012cd1883bf6d9cbf15b8d3661e420570721ed989de2eb1539ca5e78",
-      "stand": "2026-09-13",
-      "status": "c1-platform-evidence-recorded",
+      "content_hash": "sha256:f7d98389738fba75890a90ccfe959fc3ff4a0ce20380e96eaa8f5942d3f5909b",
+      "stand": "2026-09-14",
+      "status": "c2-platform-evidence-recorded",
       "truth_level": "draft",
       "verification_state": "verified",
       "read_if_task_touches": [
@@ -309,11 +309,11 @@
     },
     {
       "path": "docs/release-checklist.md",
-      "content_hash": "sha256:09d32500eb72bf979b0e014b14767d29e3fe52dba4f26de4dcbde119467ea2c9",
-      "stand": "2026-09-13",
-      "status": "preparation-not-publication",
+      "content_hash": "sha256:1d359e6fa53634b7d01be9e5d9607096344ab951b8eac6b60b9d19cef98c6250",
+      "stand": "2026-09-14",
+      "status": "public-source-hosting-reviewed",
       "truth_level": "draft",
-      "verification_state": "unverified",
+      "verification_state": "verified",
       "read_if_task_touches": [
         "public release preparation",
         "source distribution"
@@ -329,9 +329,9 @@
     },
     {
       "path": "docs/self-documentation.md",
-      "content_hash": "sha256:2b48de5cafe8d65cbc3779df9a5634a4e021bbf824d62cdd3a54394441169df5",
-      "stand": "2026-09-13",
-      "status": "alpha-candidate",
+      "content_hash": "sha256:cb56514a2f502a3b09714bf10ff5c123f770ffee790b441a61a8679af76319ce",
+      "stand": "2026-09-14",
+      "status": "public-source-alpha",
       "truth_level": "draft",
       "verification_state": "unverified",
       "read_if_task_touches": [
@@ -700,9 +700,9 @@
     },
     {
       "path": "README.md",
-      "content_hash": "sha256:fbdd8c0af30595e858d3e6a64db7e478f0f17e39e28172d215358cb93f41be63",
-      "stand": "2026-09-13",
-      "status": "alpha-candidate",
+      "content_hash": "sha256:30744c1990cc0460937cc420f77c50602df2ea3420a542d2333897a2a4a6d452",
+      "stand": "2026-09-14",
+      "status": "public-source-alpha",
       "truth_level": "draft",
       "verification_state": "unverified",
       "read_if_task_touches": [
@@ -720,9 +720,9 @@
     },
     {
       "path": "ROADMAP.md",
-      "content_hash": "sha256:e7e3b1167aeaa782a882bb37ca2935a15f60d346176b4f01849ee39383335cb5",
-      "stand": "2026-09-13",
-      "status": "alpha-candidate",
+      "content_hash": "sha256:2cb3495152f1fd44cee37b7e93314b11503537355e035186a8ff93a9c0939f85",
+      "stand": "2026-09-14",
+      "status": "public-source-alpha",
       "truth_level": "draft",
       "verification_state": "unverified",
       "read_if_task_touches": [
@@ -740,11 +740,11 @@
     },
     {
       "path": "SECURITY.md",
-      "content_hash": "sha256:e619327308a2621027899573f4d1841acbd6970ea6cff32451328a0dbf523388",
-      "stand": "2026-09-12",
-      "status": "draft-before-public-release",
+      "content_hash": "sha256:a3b30fe2910065d8a462c20a678e39e06a2a012e7a60704a77b7bea4c7d14d21",
+      "stand": "2026-09-14",
+      "status": "configured-for-public-alpha",
       "truth_level": "draft",
-      "verification_state": "unverified",
+      "verification_state": "verified",
       "read_if_task_touches": [
         "security reporting",
         "supported versions"

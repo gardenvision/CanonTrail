@@ -1,0 +1,76 @@
+{
+  "source_commit": "4355643c82aea3a69213d0821660cae561ac5b3a",
+  "clean_repository": {
+    "id": 1368896286,
+    "name": "gardenvision/CanonTrail",
+    "private": false,
+    "default_branch": "main",
+    "html_url": "https://github.com/gardenvision/CanonTrail"
+  },
+  "private_history": {
+    "id": 1299443319,
+    "private": true
+  },
+  "private_reporting": {
+    "enabled": true
+  },
+  "reporting_url": "https://github.com/gardenvision/CanonTrail/security/advisories/new",
+  "notifications": {
+    "repository_subscriber": true,
+    "owner_confirmed_all_activity": true,
+    "delivery_tested": false,
+    "limit": "Repository subscription verified; no test advisory was submitted, no global preference changed and actual email delivery was not independently tested."
+  },
+  "main_protection": {
+    "strict_up_to_date": true,
+    "required_checks": [
+      {
+        "context": "validate",
+        "app_id": 15368
+      }
+    ],
+    "enforce_admins": true,
+    "force_pushes": false,
+    "deletions": false,
+    "required_linear_history": true,
+    "pull_request_approval_required": false
+  },
+  "unauthenticated_checks": [
+    {
+      "url": "https://api.github.com/repos/gardenvision/CanonTrail",
+      "status": 200,
+      "final_url": "https://api.github.com/repos/gardenvision/CanonTrail",
+      "bytes": 5510,
+      "sha256": "8064dfc6049bd6ecf3b0fd3feba34b8fdd2ec6e409fa2cb423df1afa66db08bb"
+    },
+    {
+      "url": "https://api.github.com/repos/gardenvision/CanonTrail-private",
+      "status": 404,
+      "final_url": "https://api.github.com/repos/gardenvision/CanonTrail-private",
+      "bytes": 118,
+      "sha256": "4f50e254a719a6b1b06b529bdaa08980e4acf0878aad0090cba7771f6ebdf0b9"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/gardenvision/CanonTrail/4355643c82aea3a69213d0821660cae561ac5b3a/README.md",
+      "status": 200,
+      "final_url": "https://raw.githubusercontent.com/gardenvision/CanonTrail/4355643c82aea3a69213d0821660cae561ac5b3a/README.md",
+      "bytes": 12178,
+      "sha256": "fbdd8c0af30595e858d3e6a64db7e478f0f17e39e28172d215358cb93f41be63"
+    },
+    {
+      "url": "https://github.com/gardenvision/CanonTrail/security/advisories",
+      "status": 200,
+      "final_url": "https://github.com/gardenvision/CanonTrail/security/advisories",
+      "bytes": 196958,
+      "sha256": "19eb4ed96cf261d79ca8e18c115e31aaf881c7cc7f2f815a9808f07f5b8de7b0"
+    }
+  ],
+  "reporting_entry_point_verified": true,
+  "external_receipt_sha256": "cb021dae8ac320f665151fc57c89387f7071e14e7905df41102ee210edc003cf",
+  "external_access_receipt_sha256": "82efaf71b746058d65f437d8c433bc5919dce9046fb65ad4f209efbf496cee17",
+  "sequence": "The clean C2 source became public before enabling reporting because GitHub requires public visibility. Reporting was then enabled and verified. No private history was exposed.",
+  "limit": "Configuration and reachability, not guaranteed email delivery or security correctness. A final metadata commit, exact CI and tagged Alpha release remain separate operations.",
+  "hosting_observed_at": "2026-09-14T07:19:09.601Z",
+  "public_access_observed_at": "2026-09-14T07:19:53.201Z",
+  "recorded_at": "2026-09-14T07:40:12.731Z"
+}

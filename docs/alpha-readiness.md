@@ -1,7 +1,7 @@
 ---
 topic_id: alpha-readiness
-stand: "2026-09-13"
-status: source-reviewed-awaiting-hosting
+stand: "2026-09-14"
+status: public-source-hosting-configured
 truth_level: draft
 verification:
   state: verified
@@ -16,6 +16,9 @@ verification:
     - .agent-context/tasks/T-PUBLIC-PREP-001/evidence/readiness-facts.json
     - .agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/review-receipt.json
     - .agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/platform-results.json
+    - .agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/review-receipt-c2.json
+    - .agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/platform-results-c2.json
+    - .agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/hosting-results.json
 read_if_task_touches:
   - alpha release readiness
   - distribution scope
@@ -30,7 +33,7 @@ do_not_use_instead:
 
 # Alpha source release readiness
 
-Current closure: the owner authorized conditional clean-source publication and the old repository was kept private as `gardenvision/CanonTrail-private`. A separate `gardenvision/CanonTrail` contains only the new clean history and remains private staging. Independent Claude naming review and independent Codex C1 release-boundary review are recorded by T-RELEASE-CLOSURE-001. Exact C1 platform checks passed. The local Alpha and neutral-naming preparation tasks are closed in scope; confidential reporting, actual hosting/public-access checks and reconciliation of subsequent metadata remain release gates. No private Git history is a distribution input.
+Current hosting: the owner authorized clean-source publication; the old repository remains private as `gardenvision/CanonTrail-private`. Only the new clean history in `gardenvision/CanonTrail` is public. Independent Claude naming review, independent Codex C1 release-boundary review and C2 metadata reconciliation are recorded by T-RELEASE-CLOSURE-001. Exact C1 and C2 platform checks passed. Private reporting, the maintainer subscription, default main branch, required CI and anonymous public access were verified on 2026-09-14. Actual email delivery was not tested. Later metadata requires bounded review and exact final CI before a tagged Alpha; the release page records that eventual commit-bound result. No private Git history is a distribution input.
 
 This source tree derives from the sealed MIT candidate. Earlier V4 closed the frozen-example task using exact V3 evidence; the subsequent MIT revision changed only licensing metadata and documentation. T-PUBLIC-PREP-001 then changed migration vocabulary, schema acceptance and CLI help. Its own reviews and C1 hosted results now support those bytes; no old V3 approval is substituted for them. This later metadata closure is not retroactively identical to C1. MIT remains selected and the npm package remains private. Review of this readiness document concerns facts and open gates, not legal clearance, public release or canonical promotion.
 
@@ -60,9 +63,10 @@ Product definitions inherited unchanged do not constitute a new canonical promot
 | Public-content author audit | The sealed MIT predecessor's 172 files were scanned and findings classified: no secret-pattern hits, six synthetic fixture identities and historical format-name references. This is not full legal provenance or independent review; the current changed source needs a refreshed exact-inventory scan. |
 | Current change and release-boundary review | Claude naming review and independent Codex C1 source-boundary review passed with explicit conditions. The latter independently verified all 195 source/commit files and permits local preparation closure only. The erratum and exact scope are retained in the release task; neither review is legal clearance or a publication grant. |
 | Current C1 hosted CI | Clean commit `bed8fa84beb3d0a763f001f42a415fafd6ddaf85`, run `34783886228`: all four matrix jobs and aggregate passed, with 696 cases per host. Actual counts/capabilities and skipped cases are in the current release task's platform receipt. Later documentation closure is a separate delta. |
+| C2 metadata and hosted CI | Independent metadata reconciliation approved exact C2 `4355643c82aea3a69213d0821660cae561ac5b3a`. Run `34785633886` passed all four matrix jobs and aggregate; per-host totals remain 696. The `review-receipt-c2.json` and `platform-results-c2.json` records distinguish the reviewer observations from the later author-collected hosted result. |
 | License selection | MIT explicitly selected by the owner; standard terms are in `LICENSE.txt`. Decision scope is recorded by T-MIT-LICENSE-001; third-party terms are not replaced. |
-| Publication | Owner authorized publication only after gates pass. Clean repository staging is private; no public release or npm publication yet. `private: true` remains enabled for npm. This process gate does not restrict rights granted by MIT. |
-| Product integration and hosting rules | Owner approved a separate clean repository and private-history preservation. The old private transport branch must not be merged into public history. Actual required checks/security reporting are still to be verified. |
+| Source availability | Owner-authorized clean source is public. A tagged Alpha requires its final exact-revision checks and is recorded on the GitHub release page. No npm publication: `private: true` remains enabled. This process gate does not restrict rights granted by MIT. |
+| Hosting rules | API-verified: private reporting enabled; main requires the Actions app15368 `validate` check with strict up-to-date/admin enforcement; force pushes/deletion prohibited. Anonymous source and reporting-entry reads succeeded; anonymous old-repository access returned404. The old private transport branch must never be merged into public history. |
 
 Earlier preparation evidence remains historical: Windows/Node24.11.1 passed 636 tests with 13 skips in the 649-case baseline, plus build/audit and synthetic onboarding. The unchanged V3 correction subsequently passed 671 local tests with 13 skips in 684 cases; all four hosted runs used that exact V3 ZIP. No result is retroactively attributed to a different source snapshot.
 
@@ -74,4 +78,4 @@ The three nonblocking review recommendations remain bounded follow-ups: R-1 clea
 
 The subsequent MIT task owns only mechanical application of the owner's explicit license choice. Its local checks do not become independent legal or release review. The V4 Alpha working lock is archived before updating current selected documents; the completed frozen-example lock and all earlier example/evidence bytes remain historical and unchanged. No new hosted run is claimed for the licensing revision.
 
-The current task replaces application-specific names in normal guidance and newly generated plans with `legacy-header-v1`. Historical format spellings remain only as compatibility inputs and retained examples. No plan, transaction, review receipt or completed lock is rewritten for terminology. `docs/release-checklist.md` owns the remaining preparation sequence; `docs/third-party-notices.md` records dependency licensing. Exact hosting/contact choices remain unconfigured. The new active Alpha lock is archived before refresh; the completed MIT and frozen-example locks remain unchanged.
+The completed neutral-naming task replaced application-specific names in normal guidance and newly generated plans with `legacy-header-v1`. Historical format spellings remain only as compatibility inputs and retained examples. No plan, transaction, review receipt or completed lock was rewritten for terminology. `docs/release-checklist.md` owns release operations; `docs/third-party-notices.md` records dependency licensing. The earlier working Alpha locks were archived before refresh. Alpha, PublicPrep, MIT and frozen-example tasks are now historical and are not refreshed by subsequent hosting-documentation changes.

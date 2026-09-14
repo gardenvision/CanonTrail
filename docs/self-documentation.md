@@ -1,7 +1,7 @@
 ---
 topic_id: canontrail-self-documentation
-stand: "2026-09-13"
-status: alpha-candidate
+stand: "2026-09-14"
+status: public-source-alpha
 truth_level: draft
 verification:
   state: unverified
@@ -30,12 +30,12 @@ do_not_use_instead: [VISION.md, ARTIFACT_PROTOCOL.md, ROADMAP.md]
 | Frozen-example age correction | `.agent-context/tasks/T-FROZEN-EXAMPLE-LIFECYCLE-001/state.yaml` |
 | License terms and local implementation decision | `LICENSE.txt`; `.agent-context/tasks/T-MIT-LICENSE-001/state.yaml` |
 | Neutral naming and current public preparation | `.agent-context/tasks/T-PUBLIC-PREP-001/state.yaml` |
-| Release operations and decisions still needed | `docs/release-checklist.md` |
-| Active clean-source publication and current review/CI receipts | `.agent-context/tasks/T-RELEASE-CLOSURE-001/state.yaml` |
+| Release operations and hosting observations | `docs/release-checklist.md` |
+| Clean-source preparation, hosting completion and review/CI receipts | `.agent-context/tasks/T-RELEASE-CLOSURE-001/state.yaml` |
 | Third-party dependency inventory | `docs/third-party-notices.md` |
 
 Read `AGENTS.md` first and choose new task, validated resume, unfinished bootstrap, or maintenance. Load the relevant owner, not this entire tree by default. Exact task sources belong in a context lock; a narrative summary is not a substitute.
 
 This baseline intentionally does not include private development-task history. Existing product definitions and synthetic examples are not newly promoted by copying them. Current candidate checks must be recorded afresh. The preparation task remains separate from license selection, independent release review and publication permission.
 
-This copy derives from the sealed MIT and neutral-naming candidates and now has a separate clean Git history, without private development ancestors. The frozen-example task retains exact-V3 evidence; the MIT task retains the explicit license choice. The local Alpha and neutral-naming preparation tasks close using independent C1 review, with current raw-byte/source and platform evidence. T-RELEASE-CLOSURE-001 owns the remaining confidential reporting and publication/hosting gates. `docs/alpha-readiness.md` owns their meaning; `docs/platform-support.md` owns exact host results. Do not treat old private runs or C1 results as execution of later metadata revisions. Earlier working locks remain archived; completed MIT/frozen-example locks and historical examples are unchanged. Raw external reviews and machine-local checkpoints remain outside the source tree. No previous chat is needed to find the active task or its remaining gates.
+This copy derives from the sealed MIT and neutral-naming candidates and has a separate clean public Git history, without private development ancestors. The frozen-example task retains exact-V3 evidence; the MIT task retains the explicit license choice. Local Alpha and neutral-naming preparation closed with independent C1/C2 review and revision-bound platform evidence. T-RELEASE-CLOSURE-001 owns hosting and final metadata reconciliation; its state is authoritative. `docs/alpha-readiness.md` owns the limits; `docs/platform-support.md` owns exact host results. Private reporting and main-branch CI protection were actually configured, not merely described. No actual email-delivery test is claimed. Do not treat earlier CI as execution of later metadata revisions; the tagged release must identify its own final commit and run externally. All completed preparation locks and historical examples remain unchanged. Raw external reviews and machine-local checkpoints remain outside the source tree. No previous chat is needed to find the task or its remaining gates.

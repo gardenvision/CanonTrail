@@ -1,7 +1,7 @@
 ---
 topic_id: project-overview
-stand: "2026-09-13"
-status: alpha-candidate
+stand: "2026-09-14"
+status: public-source-alpha
 truth_level: draft
 verification:
   state: unverified
@@ -20,7 +20,7 @@ do_not_use_instead: [VISION.md, ARTIFACT_PROTOCOL.md]
 
 CanonTrail helps coding agents keep project knowledge organized, load a bounded selection for each task, and leave a traceable handoff for the next session. It is a provider-neutral local CLI and readable project files—not an agent runner or a required hosted service.
 
-**Source Alpha release candidate, MIT licensed:** publication is conditional on the [release gates](docs/alpha-readiness.md). The commands below apply to a local source copy; no npm publication is claimed.
+**Public source Alpha, MIT licensed:** [gardenvision/CanonTrail](https://github.com/gardenvision/CanonTrail) is the clean source repository. This is an experimental, locally built tool—not a stable or npm-published product. See [readiness and limitations](docs/alpha-readiness.md) and the [security reporting policy](SECURITY.md).
 
 ## Why use it?
 
@@ -36,15 +36,17 @@ Your chosen agent analyzes the code and writes meaningful documentation. CanonTr
 
 Requires Node.js 20.19 or newer. Git is needed if obtaining a source copy with Git and for project handoff/checkpoint creation; no remote is needed for normal local project use.
 
-In the CanonTrail source directory:
+Obtain the source from the official repository, then build it locally:
 
 ```sh
+git clone https://github.com/gardenvision/CanonTrail.git
+cd CanonTrail
 npm ci --ignore-scripts
 npm run build
 node dist/cli.js --help
 ```
 
-No global installation is necessary. A later public release must provide a reviewed repository/archive URL and revision. For source authenticity, obtain a copy from the maintainer and verify its revision; do not run an unrelated `npx canontrail` package based only on the name.
+No global installation is necessary. The default branch changes over time; use an exact commit or a published tag from the [release page](https://github.com/gardenvision/CanonTrail/releases) for a reproducible copy and compare it with that release's stated revision. The [platform evidence](docs/platform-support.md) identifies the snapshots actually tested. Do not run an unrelated `npx canontrail` package based only on the name.
 
 ## 2. Keep the tool and target project separate
 

@@ -1,0 +1,13 @@
+{
+  "recorded_at": "2026-09-14T07:16:37Z",
+  "supersedes_pending_fields_in": ".agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/owner-decision.json",
+  "source_publication": "Owner explicitly authorized necessary corrections, push and publication after gates pass, preserving the private development history in a separate renamed repository.",
+  "private_reporting": "Owner explicitly approved GitHub Private vulnerability reporting as the confidential security channel.",
+  "notifications": "Owner approved Watch / All Activity and confirmed completing it manually. An authenticated read of the repository subscribers independently returned gardenvision. Actual email delivery and account-wide notification preferences were not tested or changed.",
+  "sequence": "GitHub supports private vulnerability reporting for public repositories. Make only the already independently reviewed clean source public, immediately enable and verify reporting, then verify hosting and final revision checks before a tagged Alpha release. These operations are not atomic; record any intermediate failure honestly.",
+  "new_clean_repository": {"name": "gardenvision/CanonTrail", "id": 1368896286},
+  "private_history_repository": {"name": "gardenvision/CanonTrail-private", "id": 1299443319, "must_remain_private": true},
+  "pre_visibility_source": "4355643c82aea3a69213d0821660cae561ac5b3a",
+  "out_of_scope": ["npm publication", "private development history publication", "real-project migration", "canonical promotion", "account-wide notification changes"],
+  "approval_is_not_configuration_evidence": true
+}
