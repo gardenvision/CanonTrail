@@ -905,7 +905,7 @@ describe("reference diagnostics occurrence counting", () => {
     const root = await fixtureRoot();
     await writeFile(path.join(root, "README.md"), "# Fixture\n");
     const change = verifiedChangeRecord();
-    (change.acceptance_cases as Array<Record<string, unknown>>)[0]!.evidence_refs = ["missing/report.md", "missing/report.md"];
+    (change.acceptance_cases as Array<Record<string, unknown>>)[0]!.evidence_refs = ["missing/report.md", "missing/report.md", "./missing/report.md"];
     ((change.verification as Record<string, unknown>).checks as Array<Record<string, unknown>>)[0]!.evidence_refs = ["missing/report.md"];
     (change.impacts as Array<Record<string, unknown>>)[0]!.evidence_refs = ["missing/report.md"];
     await mkdir(path.join(root, ".agent-context", "tasks", "T-X"), { recursive: true });
@@ -913,7 +913,7 @@ describe("reference diagnostics occurrence counting", () => {
     const report = await validateRepository(root, { checkIndex: false, checkContextLocks: false });
     const hits = report.diagnostics.filter((d) => d.code === "CHANGE004" && d.message.includes("missing/report.md"));
     expect(hits).toHaveLength(1);
-    expect(hits[0]!.message).toContain("(referenced 4 times)");
+    expect(hits[0]!.message).toContain("(referenced 5 times)");
   });
 
   it("dedupes repeated metadata references", async () => {
@@ -924,5 +924,17 @@ describe("reference diagnostics occurrence counting", () => {
     const hits = report.diagnostics.filter((d) => d.code === "REF001" && d.message.includes("missing/doc.md"));
     expect(hits).toHaveLength(1);
     expect(hits[0]!.message).toContain("(referenced 2 times)");
+  });
+});
+
+describe("normalized reference grouping", () => {
+  it("groups metadata references by normalized target", async () => {
+    const root = await fixtureRoot();
+    const doc = markdown("topic-b").replace("  evidence: []", "  evidence: [missing/doc.md, ./missing/doc.md, 'missing/doc.md#frag']");
+    await writeFile(path.join(root, "b.md"), doc);
+    const report = await validateRepository(root, { checkIndex: false, checkContextLocks: false });
+    const hits = report.diagnostics.filter((d) => d.code === "REF001" && d.message.includes("missing/doc.md"));
+    expect(hits).toHaveLength(1);
+    expect(hits[0]!.message).toContain("(referenced 3 times)");
   });
 });

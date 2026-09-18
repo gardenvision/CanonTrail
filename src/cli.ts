@@ -448,6 +448,7 @@ contextCommand
   .option("--reserve-output <number>", "tokens reserved for output and tools", integerOption, 8_000)
   .option("--input-safety <number>", "tokens kept free inside the input budget", integerOption, 1_024)
   .option("--include <paths...>", "additional required repository-relative text sources")
+  .option("--refresh-index", "refresh the deterministic context index before compiling")
   .option("--agent-run <id>", "optional provider-neutral agent run id")
   .option("--created-at <date-time>", "explicit timestamp for reproducible output")
   .option("--apply", "write the task-owned context.lock.json; default is dry-run")
@@ -460,12 +461,23 @@ contextCommand
       reserveOutput: number;
       inputSafety: number;
       include?: string[];
+      refreshIndex?: boolean;
       agentRun?: string;
       createdAt?: string;
       apply?: boolean;
       json?: boolean;
     },
   ) => {
+    if (options.refreshIndex) {
+      const absoluteRoot = path.resolve(root);
+      const preflight = await validateRepository(absoluteRoot, { checkIndex: false, checkContextLocks: false });
+      if (!preflight.ok) {
+        process.stderr.write(`${formatValidationReport(preflight)}\n`);
+        process.exitCode = 1;
+        return;
+      }
+      await generateContextIndex(absoluteRoot);
+    }
     const report = await compileContext({
       root,
       taskId: options.task,

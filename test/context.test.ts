@@ -960,3 +960,35 @@ describe("cited evidence stability guard", () => {
     expect(report.lock.sources.some((source) => source.path === archivePath)).toBe(true);
   });
 });
+
+describe("follow-up guards", () => {
+  it("rejects cited required_context_sources that embed the current lock or index hash", async () => {
+    const root = await fixture();
+    await compileContext({ root, taskId: "T-FEATURE-001", createdAt, apply: true });
+    const lockPath = path.join(root, ".agent-context", "tasks", "T-FEATURE-001", "context.lock.json");
+    const lock = JSON.parse(await readFile(lockPath, "utf8")) as { lock_hash: string };
+    await mkdir(path.join(root, "notes"), { recursive: true });
+    await writeFile(path.join(root, "notes", "run.json"), JSON.stringify({ note: "captured run", lock_hash: lock.lock_hash }, null, 2));
+    const statePath = path.join(root, ".agent-context", "tasks", "T-FEATURE-001", "state.yaml");
+    const state = parse(await readFile(statePath, "utf8")) as Record<string, unknown>;
+    state.required_context_sources = ["notes/run.json"];
+    await writeFile(statePath, stringify(state));
+    await expect(compileContext({ root, taskId: "T-FEATURE-001", createdAt })).rejects.toThrow(/cannot be a stable context source/);
+  });
+
+  it("refreshes a stale index on demand via context compile --refresh-index", async () => {
+    const root = await fixture();
+    await writeFile(path.join(root, "docs", "extra-storage.md"), markdown("extra-storage", "active-snapshot", ["feature storage"], "# Extra storage\n"));
+    const cli = path.resolve("dist/cli.js");
+    let failureText = "";
+    try {
+      await execFileAsync(process.execPath, [cli, "context", "compile", root, "--task", "T-FEATURE-001"], { windowsHide: true, encoding: "utf8" });
+    } catch (error) {
+      failureText = String((error as { stderr?: string }).stderr ?? error);
+    }
+    expect(failureText).toMatch(/index is stale/);
+    const refreshed = await execFileAsync(process.execPath, [cli, "context", "compile", root, "--task", "T-FEATURE-001", "--refresh-index", "--json"], { windowsHide: true, encoding: "utf8", maxBuffer: 8 * 1024 * 1024 });
+    const report = JSON.parse(refreshed.stdout) as { task_id: string };
+    expect(report.task_id).toBe("T-FEATURE-001");
+  });
+});

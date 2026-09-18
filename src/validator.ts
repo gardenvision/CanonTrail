@@ -235,6 +235,13 @@ function checkReference(
   }
 }
 
+function referenceKey(reference: string): string {
+  // Group diagnostics by resolved-path intent (drop fragments, normalize a leading ./)
+  // while the emitted message keeps the first-seen spelling.
+  const withoutFragment = reference.split("#", 1)[0] ?? "";
+  return withoutFragment.startsWith("./") ? withoutFragment.slice(2) : withoutFragment;
+}
+
 /** Usage guidance is not an evidence field or a general Markdown dependency list. */
 function standaloneUsageReference(value: string): { reference: string; explicit: boolean } | undefined {
   const entry = value.trim();
@@ -262,30 +269,34 @@ function validateMetadataReferences(
     if (!document.header) {
       continue;
     }
-    const referenceCounts = new Map<string, number>();
+    const referenceCounts = new Map<string, { display: string; occurrences: number }>();
     for (const reference of [
       ...strings(document.header.verification.evidence),
       ...strings(document.header.supersedes),
     ]) {
-      referenceCounts.set(reference, (referenceCounts.get(reference) ?? 0) + 1);
+      const key = referenceKey(reference);
+      const entry = referenceCounts.get(key) ?? { display: reference, occurrences: 0 };
+      entry.occurrences += 1;
+      referenceCounts.set(key, entry);
     }
-    for (const [reference, occurrences] of referenceCounts) {
-      checkReference(diagnostics, root, config, document.path, reference, root, "REF001", false, occurrences);
+    for (const entry of referenceCounts.values()) {
+      checkReference(diagnostics, root, config, document.path, entry.display, root, "REF001", false, entry.occurrences);
     }
-    const usageReferences = new Map<string, { occurrences: number; explicit: boolean }>();
+    const usageReferences = new Map<string, { display: string; occurrences: number; explicit: boolean }>();
     for (const usage of strings(document.header.do_not_use_instead)) {
       const parsed = standaloneUsageReference(usage);
       if (!parsed) continue;
-      const entry = usageReferences.get(parsed.reference) ?? { occurrences: 0, explicit: false };
+      const key = referenceKey(parsed.reference);
+      const entry = usageReferences.get(key) ?? { display: parsed.reference, occurrences: 0, explicit: false };
       entry.occurrences += 1;
       entry.explicit = entry.explicit || parsed.explicit;
-      usageReferences.set(parsed.reference, entry);
+      usageReferences.set(key, entry);
     }
-    for (const [reference, entry] of usageReferences) {
-      if (reference.startsWith("/") || /^[A-Za-z]:/.test(reference)) {
-        addDiagnostic(diagnostics, "error", "REF001", `usage reference must be repository-relative: ${reference}`, document.path);
+    for (const entry of usageReferences.values()) {
+      if (entry.display.startsWith("/") || /^[A-Za-z]:/.test(entry.display)) {
+        addDiagnostic(diagnostics, "error", "REF001", `usage reference must be repository-relative: ${entry.display}`, document.path);
       } else {
-        checkReference(diagnostics, root, config, document.path, reference, root, "REF001", entry.explicit, entry.occurrences);
+        checkReference(diagnostics, root, config, document.path, entry.display, root, "REF001", entry.explicit, entry.occurrences);
       }
     }
   }
@@ -681,10 +692,13 @@ async function validateChangeRecords(
     if (typeof value.canonical_source === "string") {
       checkReference(diagnostics, root, config, artifactPath, value.canonical_source, root, "CHANGE003");
     }
-    const evidenceReferenceCounts = new Map<string, number>();
+    const evidenceReferenceCounts = new Map<string, { display: string; occurrences: number }>();
     const addEvidenceReferences = (values: string[]): void => {
       for (const reference of values) {
-        evidenceReferenceCounts.set(reference, (evidenceReferenceCounts.get(reference) ?? 0) + 1);
+        const key = referenceKey(reference);
+        const entry = evidenceReferenceCounts.get(key) ?? { display: reference, occurrences: 0 };
+        entry.occurrences += 1;
+        evidenceReferenceCounts.set(key, entry);
       }
     };
     for (const acceptanceCase of records(value.acceptance_cases)) addEvidenceReferences(strings(acceptanceCase.evidence_refs));
@@ -752,8 +766,8 @@ async function validateChangeRecords(
     }
     const independentReview = isRecord(value.independent_review) ? value.independent_review : {};
     addEvidenceReferences(strings(independentReview.evidence_refs));
-    for (const [reference, occurrences] of evidenceReferenceCounts) {
-      checkReference(diagnostics, root, config, artifactPath, reference, root, "CHANGE004", false, occurrences);
+    for (const entry of evidenceReferenceCounts.values()) {
+      checkReference(diagnostics, root, config, artifactPath, entry.display, root, "CHANGE004", false, entry.occurrences);
     }
 
     const externalEvidence = records(value.external_evidence);

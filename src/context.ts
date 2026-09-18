@@ -847,7 +847,7 @@ export async function compileContext(options: CompileContextOptions): Promise<Co
   }
 
   const citedTaskEvidence = await taskEvidencePaths(root, state);
-  const archivedEvidenceRoot = `${taskRoot}/evidence/context-locks/`;
+  const archivedLockCopyPattern = /^\.agent-context\/tasks\/[^/]+\/evidence\/context-locks\//;
   const volatileSourceHashes: string[] = [index.root_hash];
   const previousLockAbsolute = await safeRepositoryFile(root, defaultOutput);
   if (previousLockAbsolute) {
@@ -862,19 +862,6 @@ export async function compileContext(options: CompileContextOptions): Promise<Co
   }
   for (const normalized of citedTaskEvidence) {
     if (!(await safeRepositoryFile(root, normalized))) throw new Error(`referenced task evidence does not exist: ${normalized}`);
-    if (!normalized.startsWith(archivedEvidenceRoot) && isSupportedText(normalized)) {
-      const evidenceAbsolute = await safeRepositoryFile(root, normalized);
-      if (evidenceAbsolute) {
-        const evidenceText = await readFile(evidenceAbsolute, "utf8");
-        const embedded = volatileSourceHashes.find((hash) => evidenceText.includes(hash));
-        if (embedded) {
-          throw new Error(
-            `cited task evidence '${normalized}' embeds the current context lock or index hash and cannot be a stable context source; ` +
-            "save tool output outside the task evidence set, record it with 'canontrail evidence record', or cite a hash-named archived copy under 'evidence/context-locks/'",
-          );
-        }
-      }
-    }
     addCandidate(candidates, {
       path: normalized,
       truthLevel: "historical",
@@ -990,6 +977,20 @@ export async function compileContext(options: CompileContextOptions): Promise<Co
     if (section && sha256(content) !== section.content_hash) throw new Error("Context section source changed: " + candidate.path);
     const selected = section ? selectContextSection(content, section.from, section.to) : undefined;
     prepared.push({ candidate, content, tokens: estimateTokens(selected ?? content), ...(section && selected ? { section, selected } : {}) });
+  }
+
+  const citedSelectors = new Set(["task-evidence-reference", "task-required-context", "explicit-include"]);
+  for (const entry of prepared) {
+    if (!entry.candidate.required || !citedSelectors.has(entry.candidate.selector)) continue;
+    if (archivedLockCopyPattern.test(entry.candidate.path)) continue;
+    const sourceText = entry.content.toString("utf8");
+    const embedded = volatileSourceHashes.find((hash) => sourceText.includes(hash));
+    if (embedded) {
+      throw new Error(
+        `cited context source '${entry.candidate.path}' embeds the current context lock or index hash and cannot be a stable context source; ` +
+        "save tool output outside the cited source set, record it with 'canontrail evidence record', or cite a hash-named archived copy under 'evidence/context-locks/'",
+      );
+    }
   }
 
   const availableInputTokens = totalTokens - reservedOutputTokens - inputSafetyTokens;
