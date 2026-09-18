@@ -1,7 +1,7 @@
 {
   "version": 1,
   "hash_algorithm": "sha256",
-  "root_hash": "sha256:3e79e7992ca9289cdea2d49d17b207d60ba6a8e20c9bb8f41683d41dd95ee242",
+  "root_hash": "sha256:22dd5e9e4df89863112aff165d27c2ac9eba8b35b92f73a659b8673c5d06734c",
   "documents": [
     {
       "path": ".agent-context/tasks/T-ALPHA-CANDIDATE-001/brief.md",
@@ -115,7 +115,7 @@
     },
     {
       "path": "AGENTS.md",
-      "content_hash": "sha256:c107a0b6ee502cfea944746c2207c2b098da52cd7652f8a7b673e6ce06d620e5",
+      "content_hash": "sha256:d28858d55c21d71e53d259afd2afb17eebd61a272b418efd1f2b269abac94e0b",
       "stand": "2026-09-12",
       "status": "current",
       "truth_level": "canonical",
@@ -162,7 +162,7 @@
     },
     {
       "path": "CONTRIBUTING.md",
-      "content_hash": "sha256:9a31a073ea899449f42c076d5c2e39712372b6b2abd8f7ecd2fdcfd98af4f527",
+      "content_hash": "sha256:9b60df0f8dc45f174ab87eab4bd5caca24169d4bcdfe2f3bf0fd86c71ccd923d",
       "stand": "2026-09-13",
       "status": "draft-before-public-release",
       "truth_level": "draft",
@@ -180,9 +180,92 @@
       "topic_id": "contribution-policy"
     },
     {
-      "path": "docs/alpha-readiness.md",
-      "content_hash": "sha256:12bba650807edab24d03201e16aa9cde2fd72b233201529bf32457c39c5d6aef",
+      "path": "README.md",
+      "content_hash": "sha256:2800afd85cc36ac1ff4d5886000bfbe6dea9a6ecbbb9d451ac8a5d95d035c528",
+      "stand": "2026-09-18",
+      "status": "public-source-alpha",
+      "truth_level": "draft",
+      "verification_state": "unverified",
+      "read_if_task_touches": [
+        "project overview",
+        "onboarding"
+      ],
+      "primary_systems": [
+        "project overview"
+      ],
+      "do_not_use_instead": [
+        "VISION.md",
+        "ARTIFACT_PROTOCOL.md"
+      ],
+      "topic_id": "project-overview"
+    },
+    {
+      "path": "ROADMAP.md",
+      "content_hash": "sha256:2cb3495152f1fd44cee37b7e93314b11503537355e035186a8ff93a9c0939f85",
       "stand": "2026-09-14",
+      "status": "public-source-alpha",
+      "truth_level": "draft",
+      "verification_state": "unverified",
+      "read_if_task_touches": [
+        "implementation priorities",
+        "alpha scope"
+      ],
+      "primary_systems": [
+        "roadmap"
+      ],
+      "do_not_use_instead": [
+        "VISION.md",
+        "ARTIFACT_PROTOCOL.md"
+      ],
+      "topic_id": "implementation-roadmap"
+    },
+    {
+      "path": "SECURITY.md",
+      "content_hash": "sha256:a3b30fe2910065d8a462c20a678e39e06a2a012e7a60704a77b7bea4c7d14d21",
+      "stand": "2026-09-14",
+      "status": "configured-for-public-alpha",
+      "truth_level": "draft",
+      "verification_state": "verified",
+      "read_if_task_touches": [
+        "security reporting",
+        "supported versions"
+      ],
+      "primary_systems": [
+        "security policy"
+      ],
+      "do_not_use_instead": [
+        "ARTIFACT_PROTOCOL.md"
+      ],
+      "topic_id": "security-reporting-policy"
+    },
+    {
+      "path": "VISION.md",
+      "content_hash": "sha256:83a88277367d21d27d3d7fa53e2a915138ef9d62ef39a6999a83b3bb9361f987",
+      "stand": "2026-08-28",
+      "status": "approved-for-mvp",
+      "truth_level": "canonical",
+      "verification_state": "internally-reviewed",
+      "read_if_task_touches": [
+        "product scope",
+        "product positioning",
+        "architecture principles",
+        "feature prioritization"
+      ],
+      "primary_systems": [
+        "canonical documentation",
+        "context lifecycle",
+        "workflow compatibility"
+      ],
+      "do_not_use_instead": [
+        "ARTIFACT_PROTOCOL.md",
+        "ROADMAP.md"
+      ],
+      "topic_id": "product-vision"
+    },
+    {
+      "path": "docs/alpha-readiness.md",
+      "content_hash": "sha256:67b2155cc4c5ce050c83c517e22232c829dd61d2d95ad0ba0ce2d6d90a79ffca",
+      "stand": "2026-09-18",
       "status": "public-source-hosting-configured",
       "truth_level": "draft",
       "verification_state": "verified",
@@ -242,6 +325,27 @@
       "artifact_id": "ADR-0001",
       "artifact_kind": "architecture-decision",
       "topic_id": "implementation-language"
+    },
+    {
+      "path": "docs/finding-codes.md",
+      "content_hash": "sha256:dfed18a0d235401d9df5861f14473651a59370392672e9c4ac4905a9fbf1155e",
+      "stand": "2026-09-18",
+      "status": "public-source-alpha",
+      "truth_level": "draft",
+      "verification_state": "internally-reviewed",
+      "read_if_task_touches": [
+        "validation findings",
+        "error codes",
+        "troubleshooting",
+        "CI failures"
+      ],
+      "primary_systems": [
+        "validation reference"
+      ],
+      "do_not_use_instead": [
+        "docs/usage.md"
+      ],
+      "topic_id": "finding-codes"
     },
     {
       "path": "docs/integrations.md",
@@ -389,8 +493,8 @@
     },
     {
       "path": "docs/usage.md",
-      "content_hash": "sha256:9a09165fd84412e061c85c7dea9aaa7d7bfea767c0d28a5c9f5bedcf2b48f8eb",
-      "stand": "2026-09-14",
+      "content_hash": "sha256:fe7dac4022a7a1220106cd260fd3f5f27548d4e43c092bc1062f6b53ee4f6e25",
+      "stand": "2026-09-18",
       "status": "public-source-alpha",
       "truth_level": "draft",
       "verification_state": "unverified",
@@ -484,23 +588,6 @@
       "topic_id": "example-documentation-maintenance"
     },
     {
-      "path": "examples/feature-save-schema/project-doc.md",
-      "content_hash": "sha256:726ba9eb55a587d27605988a1c4f6458d84abdbcffcb2c35de968027be4cea45",
-      "stand": "2026-07-13",
-      "status": "current",
-      "truth_level": "canonical",
-      "verification_state": "reviewed",
-      "read_if_task_touches": [
-        "save format",
-        "schema compatibility"
-      ],
-      "primary_systems": [
-        "SaveManager"
-      ],
-      "do_not_use_instead": [],
-      "topic_id": "example-save-format"
-    },
-    {
       "path": "examples/feature-save-schema/README.md",
       "content_hash": "sha256:1288e1794b76b3e27933acd30d84ac785cd087e7bfa3a771f3d15492dec76efc",
       "stand": "2026-09-12",
@@ -519,6 +606,23 @@
         "ARTIFACT_PROTOCOL.md"
       ],
       "topic_id": "example-save-schema-continuity"
+    },
+    {
+      "path": "examples/feature-save-schema/project-doc.md",
+      "content_hash": "sha256:726ba9eb55a587d27605988a1c4f6458d84abdbcffcb2c35de968027be4cea45",
+      "stand": "2026-07-13",
+      "status": "current",
+      "truth_level": "canonical",
+      "verification_state": "reviewed",
+      "read_if_task_touches": [
+        "save format",
+        "schema compatibility"
+      ],
+      "primary_systems": [
+        "SaveManager"
+      ],
+      "do_not_use_instead": [],
+      "topic_id": "example-save-format"
     },
     {
       "path": "examples/feature-save-schema/task-brief.md",
@@ -737,89 +841,6 @@
         "ARTIFACT_PROTOCOL.md"
       ],
       "topic_id": "superpowers-canontrail-feature-lifecycle-skill"
-    },
-    {
-      "path": "README.md",
-      "content_hash": "sha256:da94ad569642f552ce2535e227959972b6aa434a4ba8bfc4ec76e8bb5068d4ca",
-      "stand": "2026-09-14",
-      "status": "public-source-alpha",
-      "truth_level": "draft",
-      "verification_state": "unverified",
-      "read_if_task_touches": [
-        "project overview",
-        "onboarding"
-      ],
-      "primary_systems": [
-        "project overview"
-      ],
-      "do_not_use_instead": [
-        "VISION.md",
-        "ARTIFACT_PROTOCOL.md"
-      ],
-      "topic_id": "project-overview"
-    },
-    {
-      "path": "ROADMAP.md",
-      "content_hash": "sha256:2cb3495152f1fd44cee37b7e93314b11503537355e035186a8ff93a9c0939f85",
-      "stand": "2026-09-14",
-      "status": "public-source-alpha",
-      "truth_level": "draft",
-      "verification_state": "unverified",
-      "read_if_task_touches": [
-        "implementation priorities",
-        "alpha scope"
-      ],
-      "primary_systems": [
-        "roadmap"
-      ],
-      "do_not_use_instead": [
-        "VISION.md",
-        "ARTIFACT_PROTOCOL.md"
-      ],
-      "topic_id": "implementation-roadmap"
-    },
-    {
-      "path": "SECURITY.md",
-      "content_hash": "sha256:a3b30fe2910065d8a462c20a678e39e06a2a012e7a60704a77b7bea4c7d14d21",
-      "stand": "2026-09-14",
-      "status": "configured-for-public-alpha",
-      "truth_level": "draft",
-      "verification_state": "verified",
-      "read_if_task_touches": [
-        "security reporting",
-        "supported versions"
-      ],
-      "primary_systems": [
-        "security policy"
-      ],
-      "do_not_use_instead": [
-        "ARTIFACT_PROTOCOL.md"
-      ],
-      "topic_id": "security-reporting-policy"
-    },
-    {
-      "path": "VISION.md",
-      "content_hash": "sha256:83a88277367d21d27d3d7fa53e2a915138ef9d62ef39a6999a83b3bb9361f987",
-      "stand": "2026-08-28",
-      "status": "approved-for-mvp",
-      "truth_level": "canonical",
-      "verification_state": "internally-reviewed",
-      "read_if_task_touches": [
-        "product scope",
-        "product positioning",
-        "architecture principles",
-        "feature prioritization"
-      ],
-      "primary_systems": [
-        "canonical documentation",
-        "context lifecycle",
-        "workflow compatibility"
-      ],
-      "do_not_use_instead": [
-        "ARTIFACT_PROTOCOL.md",
-        "ROADMAP.md"
-      ],
-      "topic_id": "product-vision"
     }
   ]
 }
