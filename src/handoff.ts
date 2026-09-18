@@ -104,6 +104,7 @@ export interface CreateHandoffOptions {
   nextSafeAction?: string;
   handoffId?: string;
   createdAt?: string;
+  allowMissingResumeSources?: boolean;
   replace?: boolean;
   apply?: boolean;
 }
@@ -116,6 +117,7 @@ export interface HandoffCreateReport {
   source_context_archive_path: string;
   previous_handoff_archive_path: string | null;
   output_modified: boolean;
+  missing_resume_sources: string[];
   handoff: Handoff;
 }
 
@@ -403,7 +405,7 @@ async function writeArchive(filePath: string, content: string): Promise<void> {
   }
 }
 
-export async function verifyHandoffForTask(root: string, taskId: string, value: JsonRecord): Promise<void> {
+export async function verifyHandoffForTask(root: string, taskId: string, value: JsonRecord): Promise<{ missingResumeSources: string[] }> {
   const config = await loadConfig(root);
   const schemaPath = normalizeRelativePath(`${config.schemaPath}/handoff.schema.json`, "handoff schema path");
   const schemaFile = await safeRepositoryFile(root, schemaPath);
@@ -432,12 +434,8 @@ export async function verifyHandoffForTask(root: string, taskId: string, value: 
     const relative = normalizeRelativePath(source, "existing resume source");
     if (!(await safeRepositoryFile(root, relative))) missingResumeSources.push(relative);
   }
-  if (missingResumeSources.length > 0) {
-    throw new Error(
-      `existing handoff cannot be safely archived; missing resume source(s): ${missingResumeSources.join(", ")}; ` +
-      "restore the file(s), or deliberately update the existing handoff's resume_sources and re-validate it before replacing",
-    );
-  }
+  // Callers decide how to treat missing resume sources: replacement can archive the receipt
+  // list as-is after an explicit acknowledgment, while resume creation stays fail-closed.
   if (typeof value.source_context_lock_path !== "string" || typeof value.source_context_lock_hash !== "string") {
     throw new Error("existing handoff does not identify archived source context");
   }
@@ -460,6 +458,7 @@ export async function verifyHandoffForTask(root: string, taskId: string, value: 
     throw new Error("existing handoff source context archive does not match the handoff");
   }
   validateArchivedSectionShapes(archive);
+  return { missingResumeSources };
 }
 
 export async function createHandoff(options: CreateHandoffOptions): Promise<HandoffCreateReport> {
@@ -501,10 +500,18 @@ export async function createHandoff(options: CreateHandoffOptions): Promise<Hand
   }
 
   let previousArchivePath: string | null = null;
+  let missingResumeSources: string[] = [];
   if (existingHandoff) {
     const previous: unknown = parse(existingHandoff);
     if (!isRecord(previous)) throw new Error("existing handoff is invalid and cannot be safely archived");
-    await verifyHandoffForTask(root, taskId, previous);
+    const verification = await verifyHandoffForTask(root, taskId, previous);
+    missingResumeSources = verification.missingResumeSources;
+    if (missingResumeSources.length > 0 && !options.allowMissingResumeSources) {
+      throw new Error(
+        `existing handoff cannot be safely archived; missing resume source(s): ${missingResumeSources.join(", ")}; ` +
+        "restore the file(s), or rerun with --allow-missing-resume-sources to archive the current receipt list as-is",
+      );
+    }
     const previousHash = String(previous.handoff_hash).replace(/^sha256:/, "");
     previousArchivePath = `${taskRoot}/evidence/handoffs/${previousHash}.yaml`;
   }
@@ -569,6 +576,7 @@ export async function createHandoff(options: CreateHandoffOptions): Promise<Hand
     source_context_archive_path: sourceArchivePath,
     previous_handoff_archive_path: previousArchivePath,
     output_modified: Boolean(options.apply && outputModified),
+    missing_resume_sources: missingResumeSources,
     handoff,
   };
 }
@@ -583,6 +591,10 @@ export function formatHandoffCreateReport(report: HandoffCreateReport): string {
     `Worktree dirty: ${report.handoff.worktree_dirty}`,
     `Resume sources: ${report.handoff.resume_sources.length}`,
     `Handoff hash: ${report.handoff.handoff_hash}`,
+    ...(report.missing_resume_sources.length > 0 ? [
+      "WARNING: prior receipt list references missing resume source(s); archived as-is:",
+      ...report.missing_resume_sources.map((source) => `  - ${source}`),
+    ] : []),
     `Next${report.mode === "dry-run" ? " (after --apply)" : ""}: ensure ${JSON.stringify(`.agent-context/tasks/${report.task_id}/state.yaml`)} sets latest_handoff to ${JSON.stringify(report.output_path)}.`,
     "Task state was not modified. After updating it, recompile the active task context; keep archived source context unchanged.",
   ].join("\n");

@@ -20,6 +20,7 @@ export interface CreateCheckpointOptions {
   nextSafeAction?: string;
   handoffId?: string;
   createdAt?: string;
+  allowMissingResumeSources?: boolean;
   replace?: boolean;
   apply?: boolean;
 }
@@ -49,6 +50,7 @@ export interface CreateClaudeCheckpointOptions {
   nextSafeAction?: string;
   handoffId?: string;
   createdAt?: string;
+  allowMissingResumeSources?: boolean;
   replace?: boolean;
   apply?: boolean;
 }
@@ -120,6 +122,7 @@ export async function createCheckpoint(options: CreateCheckpointOptions): Promis
     ...(options.nextSafeAction ? { nextSafeAction: options.nextSafeAction } : {}),
     ...(options.handoffId ? { handoffId: options.handoffId } : {}),
     ...(options.createdAt ? { createdAt: options.createdAt } : {}),
+    allowMissingResumeSources: options.allowMissingResumeSources ?? false,
     replace: options.replace ?? false,
     apply: options.apply ?? false,
   });
@@ -158,6 +161,7 @@ export async function createClaudeCodePreCompactCheckpoint(
     ...(options.nextSafeAction ? { nextSafeAction: options.nextSafeAction } : {}),
     ...(options.handoffId ? { handoffId: options.handoffId } : {}),
     ...(options.createdAt ? { createdAt: options.createdAt } : {}),
+    allowMissingResumeSources: options.allowMissingResumeSources ?? false,
     replace: options.replace ?? false,
     apply: options.apply ?? false,
   });

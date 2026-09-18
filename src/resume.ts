@@ -188,7 +188,13 @@ export async function createResumePacket(options: CreateResumeOptions): Promise<
   const handoffRaw = await readFile(handoffAbsolute, "utf8");
   const handoffValue: unknown = parse(handoffRaw);
   if (!isRecord(handoffValue)) throw new Error("latest handoff must contain a mapping");
-  await verifyHandoffForTask(root, taskId, handoffValue);
+  const handoffVerification = await verifyHandoffForTask(root, taskId, handoffValue);
+  if (handoffVerification.missingResumeSources.length > 0) {
+    throw new Error(
+      `latest handoff has missing resume source(s): ${handoffVerification.missingResumeSources.join(", ")}; ` +
+      "restore the file(s), or refresh the receipt list with 'checkpoint create --replace --allow-missing-resume-sources'",
+    );
+  }
   const handoff = handoffValue as unknown as Handoff;
 
   const includePaths = [...new Set([handoffPath, ...(options.includePaths ?? [])])];

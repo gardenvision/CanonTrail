@@ -518,6 +518,7 @@ handoffCommand
   .option("--handoff-id <id>", "explicit handoff id")
   .option("--created-at <date-time>", "explicit timestamp for reproducible output")
   .option("--replace", "archive and replace an existing valid latest handoff")
+  .option("--allow-missing-resume-sources", "archive a prior receipt list even when listed files no longer exist (records the missing paths)")
   .option("--apply", "write CanonTrail-owned handoff and archive outputs; default is dry-run")
   .option("--json", "print the machine-readable create report")
   .action(async (
@@ -529,6 +530,7 @@ handoffCommand
       nextAction?: string;
       handoffId?: string;
       createdAt?: string;
+      allowMissingResumeSources?: boolean;
       replace?: boolean;
       apply?: boolean;
       json?: boolean;
@@ -542,6 +544,7 @@ handoffCommand
       ...(options.nextAction ? { nextSafeAction: options.nextAction } : {}),
       ...(options.handoffId ? { handoffId: options.handoffId } : {}),
       ...(options.createdAt ? { createdAt: options.createdAt } : {}),
+      allowMissingResumeSources: options.allowMissingResumeSources ?? false,
       replace: options.replace ?? false,
       apply: options.apply ?? false,
     });
@@ -607,6 +610,7 @@ checkpointCommand
   .option("--handoff-id <id>", "explicit handoff id")
   .option("--created-at <date-time>", "explicit timestamp for reproducible output")
   .option("--replace", "archive and replace an existing valid latest handoff")
+  .option("--allow-missing-resume-sources", "archive a prior receipt list even when listed files no longer exist (records the missing paths)")
   .option("--apply", "write CanonTrail-owned handoff and archive outputs; default is dry-run")
   .option("--json", "print the machine-readable checkpoint report")
   .action(async (
@@ -621,6 +625,7 @@ checkpointCommand
       nextAction?: string;
       handoffId?: string;
       createdAt?: string;
+      allowMissingResumeSources?: boolean;
       replace?: boolean;
       apply?: boolean;
       json?: boolean;
@@ -637,6 +642,7 @@ checkpointCommand
       ...(options.nextAction ? { nextSafeAction: options.nextAction } : {}),
       ...(options.handoffId ? { handoffId: options.handoffId } : {}),
       ...(options.createdAt ? { createdAt: options.createdAt } : {}),
+      allowMissingResumeSources: options.allowMissingResumeSources ?? false,
       replace: options.replace ?? false,
       apply: options.apply ?? false,
     });
@@ -654,6 +660,7 @@ checkpointCommand
   .option("--handoff-id <id>", "explicit handoff id")
   .option("--created-at <date-time>", "explicit timestamp for reproducible output")
   .option("--replace", "archive and replace an existing valid latest handoff")
+  .option("--allow-missing-resume-sources", "archive a prior receipt list even when listed files no longer exist (records the missing paths)")
   .option("--apply", "write CanonTrail-owned handoff and archive outputs; default is dry-run")
   .option("--quiet", "write no successful output, suitable for an opt-in provider hook")
   .option("--json", "print the machine-readable checkpoint report")
@@ -666,6 +673,7 @@ checkpointCommand
       nextAction?: string;
       handoffId?: string;
       createdAt?: string;
+      allowMissingResumeSources?: boolean;
       replace?: boolean;
       apply?: boolean;
       quiet?: boolean;
@@ -682,6 +690,7 @@ checkpointCommand
       ...(options.nextAction ? { nextSafeAction: options.nextAction } : {}),
       ...(options.handoffId ? { handoffId: options.handoffId } : {}),
       ...(options.createdAt ? { createdAt: options.createdAt } : {}),
+      allowMissingResumeSources: options.allowMissingResumeSources ?? false,
       replace: options.replace ?? false,
       apply: options.apply ?? false,
     });

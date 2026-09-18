@@ -322,3 +322,24 @@ describe("handoff validation", () => {
     ]));
   });
 });
+
+describe("missing resume source recovery", () => {
+  it("refuses replacement when a resume source is missing, and archives the receipt list with an explicit acknowledgment", async () => {
+    const root = await fixture();
+    const first = await createHandoff({ ...createOptions(root), apply: true });
+    expect(first.handoff.resume_sources).toContain("src/feature.ts");
+    // Legitimate deletion: a recorded resume source is gone (for example, evidence cleanup).
+    await rm(path.join(root, "src", "feature.ts"), { force: true });
+    await expect(createHandoff({ ...createOptions(root), replace: true, apply: true })).rejects.toThrow(/missing resume source/);
+    const replacement = await createHandoff({
+      ...createOptions(root),
+      replace: true,
+      apply: true,
+      allowMissingResumeSources: true,
+    });
+    expect(replacement.missing_resume_sources).toContain("src/feature.ts");
+    expect(formatHandoffCreateReport(replacement)).toContain("WARNING: prior receipt list references missing resume source(s)");
+    expect(replacement.previous_handoff_archive_path).not.toBeNull();
+    expect(replacement.output_modified).toBe(true);
+  });
+});
