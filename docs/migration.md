@@ -1,6 +1,6 @@
 ---
 topic_id: canontrail-documentation-migration
-stand: "2026-09-13"
+stand: "2026-09-18"
 status: experimental-alpha-candidate
 truth_level: draft
 verification:
@@ -44,7 +44,7 @@ Use `migrate transform-preview --help` for exact options and `--show-content` fo
 
 The current executable adapter only normalizes a fully reviewed legacy header **in place**. It does not relocate, split or merge files, infer canonical truth, or migrate arbitrary documentation systems. Legacy verification prose remains visible as unpromoted provenance. Source hashes, reviewed roots, exact paths and decision/operation binding are validated again at execution.
 
-An approved transaction can be staged separately, then `migrate execute` requires its exact confirmed hash. This is an explicit write operation, not a side effect of ordinary agent entry. Back up the source and keep the tree stable and exclusively owned. Local checks narrow filesystem races; they do not create an atomic distributed/NAS transaction.
+An approved transaction can be staged separately, then `migrate execute` requires its exact confirmed hash. This is an explicit write operation, not a side effect of ordinary agent entry. Back up the source and keep the tree stable and exclusively owned. Local checks narrow filesystem races; they do not create an atomic distributed/NAS transaction. Do not run `migrate execute` and `migrate rollback` for the same transaction concurrently; evidence validation is not a lock.
 
 Rollback restores the recorded bytes only if the transaction and recovery evidence are valid and later user edits would not be overwritten. Transaction IDs are single-use; do not delete recovery evidence to force a retry. Byte restoration does not promise restoration of ownership, ACLs, timestamps, xattrs or link topology.
 

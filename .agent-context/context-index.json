@@ -1,7 +1,7 @@
 {
   "version": 1,
   "hash_algorithm": "sha256",
-  "root_hash": "sha256:6bf366b476b92f31d20872bfe82110768ba1498e6ac017dfcd6f556a84f21b6f",
+  "root_hash": "sha256:e40e46661aa626bea8a6ffb8f9886696147a6afb8fddc277db86bbb5e847ac3a",
   "documents": [
     {
       "path": ".agent-context/tasks/T-ALPHA-CANDIDATE-001/brief.md",
@@ -370,8 +370,8 @@
     },
     {
       "path": "docs/migration.md",
-      "content_hash": "sha256:e7664c146bbfac55e8f601dab010f35ebeb553f9ba48a9c7cac0c17aa12df0db",
-      "stand": "2026-09-13",
+      "content_hash": "sha256:c77e5b7e4f8df1eb009aa4b517048444ddacc77d71ee3765871d8b6725dec3d3",
+      "stand": "2026-09-18",
       "status": "experimental-alpha-candidate",
       "truth_level": "draft",
       "verification_state": "verified",
@@ -493,7 +493,7 @@
     },
     {
       "path": "docs/usage.md",
-      "content_hash": "sha256:a9577452d80312317dbb9e44944aa4238122eceb7ac7ca348bb27c94b9280603",
+      "content_hash": "sha256:695434500fc3312a98b9bded5f986b3cbcf49cb0124e11688a4e48ea61f2b359",
       "stand": "2026-09-18",
       "status": "public-source-alpha",
       "truth_level": "draft",
