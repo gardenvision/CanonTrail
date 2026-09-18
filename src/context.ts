@@ -20,11 +20,13 @@ import type {
   ContextIndexDocument,
   GovernedHeader,
 } from "./types.js";
+import { compareCodeUnits } from "./ordering.js";
+import { writeFileAtomic } from "./safe-write.js";
 
 const INTEGRATION_IDS = new Set<IntegrationId>(["superpowers", "gsd-core", "gsd-pi"]);
 const TEXT_EXTENSIONS = new Set([
   ".c", ".cc", ".cpp", ".cs", ".css", ".go", ".gradle", ".h", ".hpp", ".html",
-  ".ini", ".java", ".js", ".json", ".jsx", ".kt", ".kts", ".md", ".meta", ".properties",
+  ".ini", ".java", ".js", ".json", ".jsx", ".kt", ".kts", ".md", ".meta", ".mjs", ".properties",
   ".ps1", ".py", ".rs", ".scss", ".sh", ".sql", ".svelte", ".toml", ".ts", ".tsx", ".txt",
   ".vue", ".xml", ".yaml", ".yml",
 ]);
@@ -457,7 +459,7 @@ async function loadContextIndex(root: string, config: CanonTrailConfig): Promise
   }
   const current = buildContextIndex(await discoverMarkdown(root, config));
   if (current.root_hash !== value.root_hash) {
-    throw new Error(`context index is stale; run 'canontrail index .' before compiling context`);
+    throw new Error(`context index is stale; run 'canontrail index .', then rerun this command`);
   }
   return current;
 }
@@ -535,7 +537,7 @@ async function taskEvidencePaths(root: string, state: TaskState): Promise<string
     try { normalized = normalizeRelativePath(reference, "task evidence reference"); } catch { continue; }
     if (normalized.startsWith(`${taskRoot}/evidence/`) && isSupportedText(normalized)) paths.add(normalized);
   }
-  return [...paths].sort((a, b) => a.localeCompare(b));
+  return [...paths].sort((a, b) => compareCodeUnits(a, b));
 }
 
 /** Read-only index compatibility, not exact re-application of an old preview.
@@ -698,7 +700,7 @@ export async function compileContext(options: CompileContextOptions): Promise<Co
   const taskRoot = `.agent-context/tasks/${taskId}`;
   const defaultOutput = `${taskRoot}/context.lock.json`;
   const outputPath = normalizeRelativePath(options.outputPath ?? defaultOutput, "output path");
-  if (path.posix.basename(outputPath) !== "context.lock.json" || !outputPath.startsWith(`${taskRoot}/`)) {
+  if (outputPath !== defaultOutput) {
     throw new Error(`output must be the task-owned ${defaultOutput}`);
   }
   const candidates = new Map<string, Candidate>();
@@ -844,8 +846,35 @@ export async function compileContext(options: CompileContextOptions): Promise<Co
     });
   }
 
-  for (const normalized of await taskEvidencePaths(root, state)) {
+  const citedTaskEvidence = await taskEvidencePaths(root, state);
+  const archivedEvidenceRoot = `${taskRoot}/evidence/context-locks/`;
+  const volatileSourceHashes: string[] = [index.root_hash];
+  const previousLockAbsolute = await safeRepositoryFile(root, defaultOutput);
+  if (previousLockAbsolute) {
+    try {
+      const previousLock: unknown = JSON.parse(await readFile(previousLockAbsolute, "utf8"));
+      if (isRecord(previousLock) && typeof previousLock.lock_hash === "string" && previousLock.lock_hash) {
+        volatileSourceHashes.push(previousLock.lock_hash);
+      }
+    } catch {
+      // A missing or unreadable previous lock is reported by normal validation; the guard stays quiet.
+    }
+  }
+  for (const normalized of citedTaskEvidence) {
     if (!(await safeRepositoryFile(root, normalized))) throw new Error(`referenced task evidence does not exist: ${normalized}`);
+    if (!normalized.startsWith(archivedEvidenceRoot) && isSupportedText(normalized)) {
+      const evidenceAbsolute = await safeRepositoryFile(root, normalized);
+      if (evidenceAbsolute) {
+        const evidenceText = await readFile(evidenceAbsolute, "utf8");
+        const embedded = volatileSourceHashes.find((hash) => evidenceText.includes(hash));
+        if (embedded) {
+          throw new Error(
+            `cited task evidence '${normalized}' embeds the current context lock or index hash and cannot be a stable context source; ` +
+            "save tool output outside the task evidence set, record it with 'canontrail evidence record', or cite a hash-named archived copy under 'evidence/context-locks/'",
+          );
+        }
+      }
+    }
     addCandidate(candidates, {
       path: normalized,
       truthLevel: "historical",
@@ -949,7 +978,7 @@ export async function compileContext(options: CompileContextOptions): Promise<Co
       reason: "Explicit hash-bound source section from task state.", selector: "task-context-section", required: true, ownership: "project", sourceSystem: null });
   }
   const prepared: Array<{ candidate: Candidate; content: Buffer; tokens: number; section?: ContextSection; selected?: Buffer }> = [];
-  for (const candidate of [...candidates.values()].sort((left, right) => left.priority - right.priority || left.path.localeCompare(right.path))) {
+  for (const candidate of [...candidates.values()].sort((left, right) => left.priority - right.priority || compareCodeUnits(left.path, right.path))) {
     const absolute = await safeRepositoryFile(root, candidate.path);
     if (!absolute) {
       if (candidate.required) throw new Error(`required context source does not exist: ${candidate.path}`);
@@ -967,9 +996,11 @@ export async function compileContext(options: CompileContextOptions): Promise<Co
   const requiredTokens = prepared.filter((entry) => entry.candidate.required).reduce((sum, entry) => sum + entry.tokens, 0);
   const requiredBreakdown = requiredContextBreakdown(prepared);
   if (requiredTokens > availableInputTokens) {
+    const suggestedTotalTokens = requiredTokens + reservedOutputTokens + inputSafetyTokens;
     throw new Error(
       `required context needs ${requiredTokens} estimated tokens but only ${availableInputTokens} input tokens are available; ` +
-      `breakdown: ${formatRequiredContextBreakdown(requiredBreakdown)}`,
+      `breakdown: ${formatRequiredContextBreakdown(requiredBreakdown)}; ` +
+      `raise --total-tokens to at least ${suggestedTotalTokens} (required + reserves), lower --reserve-output/--input-safety, or reduce required sources; see docs/usage.md`,
     );
   }
 
@@ -1008,11 +1039,11 @@ export async function compileContext(options: CompileContextOptions): Promise<Co
     });
   }
 
-  omissions.sort((left, right) => left.candidate.localeCompare(right.candidate) || left.reason.localeCompare(right.reason));
+  omissions.sort((left, right) => compareCodeUnits(left.candidate, right.candidate) || compareCodeUnits(left.reason, right.reason));
   const selectedPaths = new Set(sources.map((source) => source.path));
   const omittedFileIntents = [...existingFileIntents]
     .filter((fileIntent) => !selectedPaths.has(fileIntent))
-    .sort((left, right) => left.localeCompare(right));
+    .sort((left, right) => compareCodeUnits(left, right));
   const baseRevision = await gitValue(root, ["rev-parse", "HEAD"]);
   const gitBlobs = await matchingGitBlobs(root, baseRevision, sources.map(source => source.path));
   sources.forEach((source, index) => { source.git_blob = gitBlobs[index]!; });
@@ -1050,7 +1081,7 @@ export async function compileContext(options: CompileContextOptions): Promise<Co
       previous = undefined;
     }
     if (previous !== serialized) {
-      await writeFile(absoluteOutput, serialized, "utf8");
+      await writeFileAtomic(absoluteOutput, serialized);
       outputModified = true;
     }
   }
@@ -1173,10 +1204,14 @@ export function formatContextCompileReport(report: ContextCompileReport): string
     `Lock hash: ${report.lock.lock_hash}`,
   ];
   if (report.omitted_file_intents.length > 0) {
+    const omissionReasons = new Map(report.lock.omissions.map((omission) => [omission.candidate, omission.reason]));
     lines.push(
       `WARNING: ${report.omitted_file_intents.length} existing file_intent${report.omitted_file_intents.length === 1 ? " was" : "s were"} omitted from the lock:`,
-      ...report.omitted_file_intents.map((fileIntent) => `  - ${fileIntent}`),
-      "Increase the context budget or require these paths with --include before relying on them.",
+      ...report.omitted_file_intents.map((fileIntent) => {
+        const reason = omissionReasons.get(fileIntent);
+        return reason ? `  - ${fileIntent} (${reason})` : `  - ${fileIntent}`;
+      }),
+      "Review each omission reason: cite task evidence or require needed paths with --include; budget changes only help for budget-based omissions.",
     );
   }
   return lines.join("\n");

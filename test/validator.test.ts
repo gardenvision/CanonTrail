@@ -899,3 +899,30 @@ worktree_dirty: true
     expect(report.diagnostics.some((diagnostic) => diagnostic.code === "CHANGE007")).toBe(true);
   });
 });
+
+describe("reference diagnostics occurrence counting", () => {
+  it("reports one CHANGE004 per missing path with an occurrence count", async () => {
+    const root = await fixtureRoot();
+    await writeFile(path.join(root, "README.md"), "# Fixture\n");
+    const change = verifiedChangeRecord();
+    (change.acceptance_cases as Array<Record<string, unknown>>)[0]!.evidence_refs = ["missing/report.md", "missing/report.md"];
+    ((change.verification as Record<string, unknown>).checks as Array<Record<string, unknown>>)[0]!.evidence_refs = ["missing/report.md"];
+    (change.impacts as Array<Record<string, unknown>>)[0]!.evidence_refs = ["missing/report.md"];
+    await mkdir(path.join(root, ".agent-context", "tasks", "T-X"), { recursive: true });
+    await writeFile(path.join(root, ".agent-context", "tasks", "T-X", "change.yaml"), stringify(change));
+    const report = await validateRepository(root, { checkIndex: false, checkContextLocks: false });
+    const hits = report.diagnostics.filter((d) => d.code === "CHANGE004" && d.message.includes("missing/report.md"));
+    expect(hits).toHaveLength(1);
+    expect(hits[0]!.message).toContain("(referenced 4 times)");
+  });
+
+  it("dedupes repeated metadata references", async () => {
+    const root = await fixtureRoot();
+    const doc = markdown("topic-a").replace("  evidence: []", "  evidence:\n    - missing/doc.md\n    - missing/doc.md");
+    await writeFile(path.join(root, "a.md"), doc);
+    const report = await validateRepository(root, { checkIndex: false, checkContextLocks: false });
+    const hits = report.diagnostics.filter((d) => d.code === "REF001" && d.message.includes("missing/doc.md"));
+    expect(hits).toHaveLength(1);
+    expect(hits[0]!.message).toContain("(referenced 2 times)");
+  });
+});

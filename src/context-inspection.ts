@@ -10,6 +10,7 @@ import { computeContextLockHash, isSupportedText, type ContextLock } from "./con
 import { resolveCompletionScope } from "./finalize-scope.js";
 import { sha256 } from "./indexer.js";
 import type { CanonTrailConfig } from "./types.js";
+import { compareCodeUnits } from "./ordering.js";
 
 const MAX_SOURCE_BYTES = 8 * 1024 * 1024;
 const require = createRequire(import.meta.url);
@@ -229,7 +230,7 @@ export async function inspectTaskContext(options: { root: string; taskId: string
     source_snapshot_ok: rows.every(row => row.freshness === "current"), composition, sources: rows, omissions: lock.omissions,
     declared_dependencies: state.dependencies,
     completion_scope: { mode: scope.mode, relevant_task_ids: scope.relevant_task_ids, fallback_reason: scope.fallback_reason },
-    dependency_hints: [...mentions].sort(([a], [b]) => a.localeCompare(b)).map(([task_id, mentioned_in]) => ({ task_id, mentioned_in, action: "Review whether this is a prerequisite, a historical reference, or independent work; no dependency was added." })),
+    dependency_hints: [...mentions].sort(([a], [b]) => compareCodeUnits(a, b)).map(([task_id, mentioned_in]) => ({ task_id, mentioned_in, action: "Review whether this is a prerequisite, a historical reference, or independent work; no dependency was added." })),
     note_inspection_issues: noteIssues,
     compact_evidence_candidates: lock.sources.filter(s => s.selector.split(",").includes("task-evidence-reference") && !/\.evidence\.(?:ya?ml|json)$/.test(s.path)).map(s => s.path),
     writes_performed: false as const,
