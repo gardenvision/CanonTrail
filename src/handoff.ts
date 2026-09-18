@@ -11,6 +11,8 @@ import { loadConfig } from "./config.js";
 import { computeContextLockHash, type ContextLock } from "./context.js";
 import { isIsoDateTime } from "./date-time.js";
 import { normalizePath, sha256 } from "./indexer.js";
+import { compareCodeUnits } from "./ordering.js";
+import { writeFileAtomic } from "./safe-write.js";
 
 const execFileAsync = promisify(execFile);
 const require = createRequire(import.meta.url);
@@ -361,7 +363,7 @@ async function gitStatus(root: string): Promise<Array<{ code: string; path: stri
     entries.push({ code, path: normalized, state });
     if (code.includes("R") || code.includes("C")) index += 1;
   }
-  return entries.sort((left, right) => left.path.localeCompare(right.path) || left.code.localeCompare(right.code));
+  return entries.sort((left, right) => compareCodeUnits(left.path, right.path) || compareCodeUnits(left.code, right.code));
 }
 
 function defaultChecks(state: TaskState): HandoffCheck[] {
@@ -384,7 +386,7 @@ function mergeFiles(gitEntries: Awaited<ReturnType<typeof gitStatus>>, draftFile
     });
   }
   for (const file of draftFiles) merged.set(file.path, file);
-  return [...merged.values()].sort((left, right) => left.path.localeCompare(right.path));
+  return [...merged.values()].sort((left, right) => compareCodeUnits(left.path, right.path));
 }
 
 function unique(values: string[]): string[] {
@@ -425,11 +427,16 @@ export async function verifyHandoffForTask(root: string, taskId: string, value: 
   const resumeSources = Array.isArray(value.resume_sources)
     ? value.resume_sources.filter((entry): entry is string => typeof entry === "string")
     : [];
+  const missingResumeSources: string[] = [];
   for (const source of resumeSources) {
     const relative = normalizeRelativePath(source, "existing resume source");
-    if (!(await safeRepositoryFile(root, relative))) {
-      throw new Error(`existing handoff has a missing resume source: ${relative}`);
-    }
+    if (!(await safeRepositoryFile(root, relative))) missingResumeSources.push(relative);
+  }
+  if (missingResumeSources.length > 0) {
+    throw new Error(
+      `existing handoff cannot be safely archived; missing resume source(s): ${missingResumeSources.join(", ")}; ` +
+      "restore the file(s), or deliberately update the existing handoff's resume_sources and re-validate it before replacing",
+    );
   }
   if (typeof value.source_context_lock_path !== "string" || typeof value.source_context_lock_hash !== "string") {
     throw new Error("existing handoff does not identify archived source context");
@@ -551,7 +558,7 @@ export async function createHandoff(options: CreateHandoffOptions): Promise<Hand
       await writeArchive(path.join(root, ...previousArchivePath.split("/")), existingHandoff);
     }
     await mkdir(path.dirname(outputAbsolute), { recursive: true });
-    if (outputModified) await writeFile(outputAbsolute, serialized, "utf8");
+    if (outputModified) await writeFileAtomic(outputAbsolute, serialized);
   }
 
   return {

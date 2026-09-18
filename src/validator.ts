@@ -49,6 +49,7 @@ import type {
   ValidationReport,
 } from "./types.js";
 import { auditResumeReferences } from "./resume-audit.js";
+import { compareCodeUnits } from "./ordering.js";
 
 type JsonRecord = Record<string, unknown>;
 
@@ -119,7 +120,7 @@ async function loadSchemaValidators(
   try {
     schemaFiles = (await readdir(schemaDirectory))
       .filter((name) => name.endsWith(".schema.json"))
-      .sort((left, right) => left.localeCompare(right));
+      .sort((left, right) => compareCodeUnits(left, right));
   } catch (error) {
     addDiagnostic(diagnostics, "error", "SCHEMA001", "schemas directory cannot be read", normalizedSchemaPath, (error as Error).message);
     return { validators, count: 0 };
@@ -216,6 +217,7 @@ function checkReference(
   baseDirectory: string,
   code = "REF001",
   explicitPath = false,
+  occurrences = 1,
 ): void {
   if (!reference || /^(?:https?:|urn:|mailto:)/i.test(reference) || (!explicitPath && !isLikelyPath(reference))) {
     return;
@@ -225,10 +227,11 @@ function checkReference(
     return;
   }
   const target = referenceTarget(root, config, reference, baseDirectory);
+  const occurrenceSuffix = occurrences > 1 ? ` (referenced ${occurrences} times)` : "";
   if (!target.absolutePath) {
-    addDiagnostic(diagnostics, "error", code, `reference escapes the repository: ${reference}`, sourcePath);
+    addDiagnostic(diagnostics, "error", code, `reference escapes the repository: ${reference}${occurrenceSuffix}`, sourcePath);
   } else if (!target.exists && !target.allowedMissing) {
-    addDiagnostic(diagnostics, "error", code, `referenced path does not exist: ${reference}`, sourcePath);
+    addDiagnostic(diagnostics, "error", code, `referenced path does not exist: ${reference}${occurrenceSuffix}`, sourcePath);
   }
 }
 
@@ -259,20 +262,30 @@ function validateMetadataReferences(
     if (!document.header) {
       continue;
     }
-    const references = [
+    const referenceCounts = new Map<string, number>();
+    for (const reference of [
       ...strings(document.header.verification.evidence),
       ...strings(document.header.supersedes),
-    ];
-    for (const reference of references) {
-      checkReference(diagnostics, root, config, document.path, reference, root);
+    ]) {
+      referenceCounts.set(reference, (referenceCounts.get(reference) ?? 0) + 1);
     }
+    for (const [reference, occurrences] of referenceCounts) {
+      checkReference(diagnostics, root, config, document.path, reference, root, "REF001", false, occurrences);
+    }
+    const usageReferences = new Map<string, { occurrences: number; explicit: boolean }>();
     for (const usage of strings(document.header.do_not_use_instead)) {
       const parsed = standaloneUsageReference(usage);
       if (!parsed) continue;
-      if (parsed.reference.startsWith("/") || /^[A-Za-z]:/.test(parsed.reference)) {
-        addDiagnostic(diagnostics, "error", "REF001", `usage reference must be repository-relative: ${parsed.reference}`, document.path);
+      const entry = usageReferences.get(parsed.reference) ?? { occurrences: 0, explicit: false };
+      entry.occurrences += 1;
+      entry.explicit = entry.explicit || parsed.explicit;
+      usageReferences.set(parsed.reference, entry);
+    }
+    for (const [reference, entry] of usageReferences) {
+      if (reference.startsWith("/") || /^[A-Za-z]:/.test(reference)) {
+        addDiagnostic(diagnostics, "error", "REF001", `usage reference must be repository-relative: ${reference}`, document.path);
       } else {
-        checkReference(diagnostics, root, config, document.path, parsed.reference, root, "REF001", parsed.explicit);
+        checkReference(diagnostics, root, config, document.path, reference, root, "REF001", entry.explicit, entry.occurrences);
       }
     }
   }
@@ -668,13 +681,18 @@ async function validateChangeRecords(
     if (typeof value.canonical_source === "string") {
       checkReference(diagnostics, root, config, artifactPath, value.canonical_source, root, "CHANGE003");
     }
-    const evidenceReferences: string[] = [];
-    for (const acceptanceCase of records(value.acceptance_cases)) evidenceReferences.push(...strings(acceptanceCase.evidence_refs));
-    for (const impact of impacts) evidenceReferences.push(...strings(impact.evidence_refs));
+    const evidenceReferenceCounts = new Map<string, number>();
+    const addEvidenceReferences = (values: string[]): void => {
+      for (const reference of values) {
+        evidenceReferenceCounts.set(reference, (evidenceReferenceCounts.get(reference) ?? 0) + 1);
+      }
+    };
+    for (const acceptanceCase of records(value.acceptance_cases)) addEvidenceReferences(strings(acceptanceCase.evidence_refs));
+    for (const impact of impacts) addEvidenceReferences(strings(impact.evidence_refs));
     const verification = isRecord(value.verification) ? value.verification : {};
-    for (const check of records(verification.checks)) evidenceReferences.push(...strings(check.evidence_refs));
-    if (isRecord(verification.terminology_search)) evidenceReferences.push(...strings(verification.terminology_search.evidence_refs));
-    if (isRecord(verification.visual_review)) evidenceReferences.push(...strings(verification.visual_review.evidence_refs));
+    for (const check of records(verification.checks)) addEvidenceReferences(strings(check.evidence_refs));
+    if (isRecord(verification.terminology_search)) addEvidenceReferences(strings(verification.terminology_search.evidence_refs));
+    if (isRecord(verification.visual_review)) addEvidenceReferences(strings(verification.visual_review.evidence_refs));
     const documentationStructure = isRecord(value.documentation_structure) ? value.documentation_structure : {};
     const featureDocuments = records(documentationStructure.feature_documents);
     const featureIds = new Set<string>();
@@ -685,7 +703,7 @@ async function validateChangeRecords(
         addDiagnostic(diagnostics, "error", "CHANGE014", `duplicate feature document id '${featureId}'`, artifactPath);
       }
       if (featureId) featureIds.add(featureId);
-      evidenceReferences.push(...strings(featureDocument.evidence_refs));
+      addEvidenceReferences(strings(featureDocument.evidence_refs));
       const documentStatus = typeof featureDocument.status === "string" ? featureDocument.status : "";
       const documentPath = typeof featureDocument.path === "string" ? featureDocument.path : "";
       if (documentPath && featurePaths.has(documentPath)) {
@@ -733,9 +751,9 @@ async function validateChangeRecords(
       }
     }
     const independentReview = isRecord(value.independent_review) ? value.independent_review : {};
-    evidenceReferences.push(...strings(independentReview.evidence_refs));
-    for (const reference of evidenceReferences) {
-      checkReference(diagnostics, root, config, artifactPath, reference, root, "CHANGE004");
+    addEvidenceReferences(strings(independentReview.evidence_refs));
+    for (const [reference, occurrences] of evidenceReferenceCounts) {
+      checkReference(diagnostics, root, config, artifactPath, reference, root, "CHANGE004", false, occurrences);
     }
 
     const externalEvidence = records(value.external_evidence);
@@ -909,8 +927,8 @@ async function validateHandoffs(
       ) {
         addDiagnostic(diagnostics, "error", "HANDOFF006", "archived source context lock does not match the handoff", artifactPath);
       }
-    } catch {
-      addDiagnostic(diagnostics, "error", "HANDOFF006", "archived source context lock cannot be parsed", artifactPath);
+    } catch (error) {
+      addDiagnostic(diagnostics, "error", "HANDOFF006", "archived source context lock cannot be parsed", artifactPath, (error as Error).message);
     }
   }
 }
@@ -1068,7 +1086,16 @@ async function validateContextLocks(
           }
         }
       } catch (error) {
-        addDiagnostic(diagnostics, "error", "LOCK008", "context index compatibility cannot be established", artifactPath, (error as Error).message);
+        const detail = (error as Error).message;
+        const classified =
+          detail === "current context index is stale or inconsistent; refresh the index first"
+            ? "context index is stale or inconsistent; run 'canontrail index .' before recompiling the lock"
+            : detail === "context lock task identity is unavailable or inconsistent"
+              ? "context lock task identity is unavailable or inconsistent; restore the task state or recompile the lock"
+              : /ENOENT|Unexpected token|is not valid JSON|JSON/i.test(detail)
+                ? "context index is missing or unreadable; run 'canontrail index .'"
+                : "context index compatibility cannot be established";
+        addDiagnostic(diagnostics, "error", "LOCK008", classified, artifactPath, detail);
       }
     }
   }
@@ -1164,7 +1191,7 @@ async function validateIndex(
       diagnostics,
       "error",
       "INDEX003",
-      "context index is stale; run 'canontrail index .'",
+      "context index is stale; run 'canontrail index .', then rerun this command",
       normalizePath(config.indexPath),
       `expected root_hash ${expected.root_hash}`,
     );
@@ -1260,7 +1287,7 @@ export async function validateRepository(rootInput: string, options: ValidateOpt
 
   diagnostics.sort((left, right) => {
     const severity = left.severity === right.severity ? 0 : left.severity === "error" ? -1 : 1;
-    return severity || (left.path ?? "").localeCompare(right.path ?? "") || left.code.localeCompare(right.code);
+    return severity || compareCodeUnits(left.path ?? "", right.path ?? "") || compareCodeUnits(left.code, right.code);
   });
   const errors = diagnostics.filter((diagnostic) => diagnostic.severity === "error").length;
   const warnings = diagnostics.length - errors;

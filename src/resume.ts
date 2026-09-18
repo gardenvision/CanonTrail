@@ -15,6 +15,7 @@ import {
 import { isIsoDateTime } from "./date-time.js";
 import { verifyHandoffForTask, type Handoff } from "./handoff.js";
 import { normalizePath, sha256 } from "./indexer.js";
+import { writeFileAtomic } from "./safe-write.js";
 
 type JsonRecord = Record<string, unknown>;
 
@@ -270,7 +271,7 @@ export async function createResumePacket(options: CreateResumeOptions): Promise<
       previousActive = undefined;
     }
     if (previousActive !== contextText) {
-      await writeFile(activeAbsolute, contextText, "utf8");
+      await writeFileAtomic(activeAbsolute, contextText);
       activeContextModified = true;
     }
     packetWritten = await writeImmutable(packetAbsolute, packetText);

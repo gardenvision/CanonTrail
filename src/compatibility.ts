@@ -1,6 +1,7 @@
 import { access, readdir } from "node:fs/promises";
 import path from "node:path";
 import { normalizePath } from "./indexer.js";
+import { compareCodeUnits } from "./ordering.js";
 
 export type IntegrationId = "superpowers" | "gsd-core" | "gsd-pi";
 
@@ -72,7 +73,7 @@ async function collectArtifacts(
   async function walk(directory: string): Promise<void> {
     if (artifacts.length >= maximum) return;
     const entries = await readdir(directory, { withFileTypes: true });
-    entries.sort((left, right) => left.name.localeCompare(right.name));
+    entries.sort((left, right) => compareCodeUnits(left.name, right.name));
     for (const entry of entries) {
       if (artifacts.length >= maximum) break;
       if (entry.isSymbolicLink()) continue;
@@ -99,7 +100,7 @@ async function collectArtifacts(
     const absoluteRoot = path.join(root, ...sourceRoot.split("/"));
     if (await exists(absoluteRoot)) await walk(absoluteRoot);
   }
-  return artifacts.sort((left, right) => left.path.localeCompare(right.path));
+  return artifacts.sort((left, right) => compareCodeUnits(left.path, right.path));
 }
 
 async function integration(

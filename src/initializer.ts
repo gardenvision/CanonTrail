@@ -4,6 +4,7 @@ import path from "node:path";
 import { stringify } from "yaml";
 import { detectCompatibility, type CompatibilityReport } from "./compatibility.js";
 import { generateContextIndex, normalizePath } from "./indexer.js";
+import { compareCodeUnits } from "./ordering.js";
 
 export type InitProfile = "auto" | "generic" | "unity";
 export type DocumentationMode = "none" | "baseline" | "full";
@@ -176,7 +177,7 @@ async function exists(filePath: string): Promise<boolean> {
 }
 
 function sortedRecord(values: Map<string, number>): Record<string, number> {
-  return Object.fromEntries([...values].sort(([left], [right]) => left.localeCompare(right)));
+  return Object.fromEntries([...values].sort(([left], [right]) => compareCodeUnits(left, right)));
 }
 
 function addCount(values: Map<string, number>, key: string): void {
@@ -302,7 +303,7 @@ export async function inventoryProject(
     if (visitedDirectories.has(currentKey)) return;
     visitedDirectories.add(currentKey);
     const entries = await readdir(directory, { withFileTypes: true });
-    entries.sort((left, right) => left.name.localeCompare(right.name));
+    entries.sort((left, right) => compareCodeUnits(left.name, right.name));
     for (const entry of entries) {
       if (entry.isSymbolicLink()) continue;
       const absolutePath = path.join(directory, entry.name);
@@ -402,18 +403,18 @@ export async function inventoryProject(
     fileLimit: maxFiles,
     totalFiles: Math.min(totalFiles, maxFiles),
     totalBytes,
-    documentationFiles: [...documentationFiles].sort((left, right) => left.localeCompare(right)).slice(0, 200),
+    documentationFiles: [...documentationFiles].sort((left, right) => compareCodeUnits(left, right)).slice(0, 200),
     documentationFileCount: documentationFiles.size,
     ownedSourceRoots,
     documentationRoots,
     rootCoverage,
     topLevelCounts: sortedRecord(topLevelCounts),
     extensionCounts: sortedRecord(extensionCounts),
-    subsystemCandidates: [...subsystemCandidates].sort((left, right) => left.localeCompare(right)).slice(0, 100),
+    subsystemCandidates: [...subsystemCandidates].sort((left, right) => compareCodeUnits(left, right)).slice(0, 100),
     truncated,
-    excludedDirectories: [...excludedDirectories].sort((left, right) => left.localeCompare(right)).slice(0, 500),
+    excludedDirectories: [...excludedDirectories].sort((left, right) => compareCodeUnits(left, right)).slice(0, 500),
     excludedDirectoryCount: excludedDirectories.size,
-    unscannedDirectories: [...unscannedDirectories].sort((left, right) => left.localeCompare(right)).slice(0, 500),
+    unscannedDirectories: [...unscannedDirectories].sort((left, right) => compareCodeUnits(left, right)).slice(0, 500),
     unscannedDirectoryCount: unscannedDirectories.size,
   };
 }
@@ -440,7 +441,7 @@ do_not_use_instead: []
 
 function overviewDocument(inventory: ProjectInventory, date: string): string {
   const extensions = Object.entries(inventory.extensionCounts)
-    .sort((left, right) => right[1] - left[1] || left[0].localeCompare(right[0]))
+    .sort((left, right) => right[1] - left[1] || compareCodeUnits(left[0], right[0]))
     .slice(0, 12)
     .map(([extension, count]) => `- \`${extension}\`: ${count}`)
     .join("\n");
@@ -479,7 +480,7 @@ ${extensions || "- No files detected."}
 
 function architectureDocument(inventory: ProjectInventory, date: string): string {
   const topLevels = Object.entries(inventory.topLevelCounts)
-    .sort((left, right) => right[1] - left[1] || left[0].localeCompare(right[0]))
+    .sort((left, right) => right[1] - left[1] || compareCodeUnits(left[0], right[0]))
     .slice(0, 20)
     .map(([name, count]) => `- \`${name}\`: ${count} files`)
     .join("\n");
@@ -630,7 +631,7 @@ function configDocument(inventory: ProjectInventory, localOnly: boolean, documen
     version: 1,
     index_path: ".agent-context/context-index.json",
     schema_path: ".agent-context/schemas",
-    governed_paths: ["docs/canontrail", ".agent-context/tasks", ".agent-context/migrations", ".agent-context/compatibility.yaml"],
+    governed_paths: ["docs/canontrail", ".agent-context/tasks", ".agent-context/migrations", ".agent-context/compatibility.yaml", ".agent-context/maintenance.yaml"],
     exclude_paths: excludes,
     require_frontmatter_for_all_markdown: true,
     require_topic_id_for_canonical: true,

@@ -925,3 +925,38 @@ describe("compileContext", () => {
     ]));
   });
 });
+
+describe("cited evidence stability guard", () => {
+  it("rejects cited task evidence that embeds the current lock or index hash", async () => {
+    const root = await fixture();
+    await compileContext({ root, taskId: "T-FEATURE-001", createdAt, apply: true });
+    const lockPath = path.join(root, ".agent-context", "tasks", "T-FEATURE-001", "context.lock.json");
+    const lock = JSON.parse(await readFile(lockPath, "utf8")) as { lock_hash: string };
+    const evidenceDir = path.join(root, ".agent-context", "tasks", "T-FEATURE-001", "evidence");
+    await mkdir(evidenceDir, { recursive: true });
+    const reportPath = ".agent-context/tasks/T-FEATURE-001/evidence/compile-report.json";
+    await writeFile(path.join(evidenceDir, "compile-report.json"), JSON.stringify({ lock_hash: lock.lock_hash }, null, 2));
+    const statePath = path.join(root, ".agent-context", "tasks", "T-FEATURE-001", "state.yaml");
+    const state = parse(await readFile(statePath, "utf8")) as Record<string, unknown>;
+    state.checks = [{ id: "CHECK-REPORT", command_or_observation: "Compile report captured.", status: "pass", evidence_refs: [reportPath] }];
+    await writeFile(statePath, stringify(state));
+    await expect(compileContext({ root, taskId: "T-FEATURE-001", createdAt })).rejects.toThrow(/cannot be a stable context source/);
+  });
+
+  it("still allows hash-named archived lock copies under evidence/context-locks", async () => {
+    const root = await fixture();
+    await compileContext({ root, taskId: "T-FEATURE-001", createdAt, apply: true });
+    const lockPath = path.join(root, ".agent-context", "tasks", "T-FEATURE-001", "context.lock.json");
+    const lockBytes = await readFile(lockPath, "utf8");
+    const archiveDir = path.join(root, ".agent-context", "tasks", "T-FEATURE-001", "evidence", "context-locks");
+    await mkdir(archiveDir, { recursive: true });
+    const archivePath = ".agent-context/tasks/T-FEATURE-001/evidence/context-locks/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.json";
+    await writeFile(path.join(root, ...archivePath.split("/")), lockBytes);
+    const statePath = path.join(root, ".agent-context", "tasks", "T-FEATURE-001", "state.yaml");
+    const state = parse(await readFile(statePath, "utf8")) as Record<string, unknown>;
+    state.checks = [{ id: "CHECK-ARCHIVE", command_or_observation: "Archived lock cited.", status: "pass", evidence_refs: [archivePath] }];
+    await writeFile(statePath, stringify(state));
+    const report = await compileContext({ root, taskId: "T-FEATURE-001", createdAt });
+    expect(report.lock.sources.some((source) => source.path === archivePath)).toBe(true);
+  });
+});

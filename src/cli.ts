@@ -751,7 +751,8 @@ program
   .command("index")
   .description("Generate the deterministic context index from governed Markdown")
   .argument("[root]", "repository root", ".")
-  .action(async (root: string) => {
+  .option("--json", "print the machine-readable index report")
+  .action(async (root: string, options: { json?: boolean }) => {
     const absoluteRoot = path.resolve(root);
     const preflight = await validateRepository(absoluteRoot, { checkIndex: false, checkContextLocks: false });
     if (!preflight.ok) {
@@ -760,7 +761,11 @@ program
       return;
     }
     const result = await generateContextIndex(absoluteRoot);
-    process.stdout.write(`Wrote ${result.path} with ${result.index.documents.length} documents (${result.index.root_hash}).\n`);
+    if (options.json) {
+      process.stdout.write(`${JSON.stringify({ root: absoluteRoot, path: result.path, documents: result.index.documents.length, root_hash: result.index.root_hash }, null, 2)}\n`);
+    } else {
+      process.stdout.write(`Wrote ${result.path} with ${result.index.documents.length} documents (${result.index.root_hash}).\n`);
+    }
   });
 
 program.parseAsync(process.argv).catch((error: unknown) => {

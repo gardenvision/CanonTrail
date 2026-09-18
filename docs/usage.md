@@ -1,6 +1,6 @@
 ---
 topic_id: usage-guide
-stand: "2026-09-14"
+stand: "2026-09-18"
 status: public-source-alpha
 truth_level: draft
 verification:
@@ -36,7 +36,7 @@ node "$CANONTRAIL_HOME/dist/cli.js" init "$TARGET_PROJECT" --adopt --dry-run
 
 Check the target path, scan coverage, proposed files and conflicts. Only when the proposal is wanted and conflicts have been resolved should you repeat it without `--dry-run`. Initialization never commits, pushes, fetches, installs hooks or overwrites existing files.
 
-**Conflicts are not transactional rollback:** a dry run writes nothing. An explicitly applied adoption may preserve conflicting files, create the other planned files, and return exit 2. Do not automatically apply after a failed preview. Existing `AGENTS.md`/provider rules require deliberate integration of the proposed bridge. A new session in an already initialized project does not need another init.
+**Conflicts are not transactional rollback:** a dry run writes nothing. An adoption with conflicts preserves those files, creates the other planned files, and returns exit 2; a dry run with conflicts also returns exit 2 without writing anything. Suggested merge bridges are written under `.agent-context/generated/bridges/`. Do not automatically apply after a failed preview. Existing `AGENTS.md`/provider rules require deliberate integration of the proposed bridge. A new session in an already initialized project does not need another init.
 
 For large repositories, inspect `init --help` and set explicit `--documentation-root`/`--owned-source-root` paths. The Unity profile excludes common generated output. Unscanned directories remain unknown; no profile guarantees semantic feature discovery.
 
@@ -53,7 +53,9 @@ node <CANONTRAIL_HOME>/dist/cli.js context compile <TARGET_PROJECT> --task <TASK
 
 Inspect selected sources, reasons and omissions, then repeat with `--apply` if the proposal is correct. 16k is an example, not a universal budget. A required source that cannot fit causes failure instead of silent omission; the prior lock is preserved. Add a narrow source with `--include`, or choose an [explicit optional-source section](../examples/context-sections/README.md), then recompile. Required whole files cannot be silently narrowed.
 
-The compiler uses a fixed text-extension list. `.js`, `.ts`, `.cs`, `.kt`, `.md`, `.json` and `.yaml` are supported; `.mjs` and `.cjs` currently are not. Do not rename real source files just to bypass this limitation. Use `context inspect` to understand costs and drift.
+Cite only immutable evidence: files that CanonTrail commands or scripts regenerate (for example a saved compile or finalize JSON, or a rewritten log) must not be cited as task evidence. The context lock can never become stable while its producer keeps changing such a file, and compilation refuses cited evidence that embeds the current lock or index hash. Record durable snapshots with `canontrail evidence record`, or cite hash-named archived copies under `.agent-context/tasks/<task-id>/evidence/context-locks/`.
+
+The compiler uses a fixed text-extension allowlist (`TEXT_EXTENSIONS` in `src/context.ts`): common text and source extensions such as `.js`, `.mjs`, `.cjs`, `.ts`, `.tsx`, `.jsx`, `.cs`, `.kt`, `.py`, `.rs`, `.md`, `.json`, `.yaml`/`.yml`, `.xml`, `.html`, `.css` and `.txt`. Files outside the allowlist are not loadable as sources; do not rename real source files just to bypass this. Use `context inspect` to understand costs and drift.
 
 ## Verification and handoffs
 
@@ -79,6 +81,25 @@ For a handoff/checkpoint, the target must be a readable local Git worktree so di
 - [Platform support](../docs/platform-support.md): Windows/Linux/macOS targets, capability-dependent skips and exact-candidate CI boundaries.
 - Weekly `docs audit` is report-first. Findings do not authorize automatic cleanup or promotion.
 
+## Troubleshooting
+
+Common symptoms and their fixes:
+
+- **`Cannot find module '…/dist/cli.js'`** (or any MODULE_NOT_FOUND when running the CLI): the tool is not built. In `CANONTRAIL_HOME`, run `npm ci --ignore-scripts` (first time only) and `npm run build`; confirm with `node dist/cli.js --help`.
+- **`npm test` fails on a clean checkout**: the CLI integration tests execute `node dist/cli.js`. Run `npm run build` first, then `npm test`.
+- **`canontrail: project is not empty; use 'canontrail init --adopt' to preserve and document an existing project`**: the target already contains files; add `--adopt` (preview with `--dry-run` first).
+- **`CONFLICT <path>: existing file preserved` (exit 2)**: nothing was overwritten. A dry run also exits 2 when it finds conflicts, and writes nothing. Merge manually - a suggested bridge may be under `.agent-context/generated/bridges/<name>.proposed` - then re-run the preview until it is conflict-free or deliberately accepted.
+- **`context index is stale; run 'canontrail index .', then rerun this command`**: refresh the index, then rerun the original command (compile, validate or finalize).
+- **`required context needs X estimated tokens but only Y input tokens are available; breakdown: …`**: required sources cannot fit. The message proposes a minimum `--total-tokens` (required + reserves); alternatively lower `--reserve-output`/`--input-safety` or reduce required sources (move whole files to optional candidates, or select `context_sections` for large documents). Required whole files are never silently dropped and the previous lock is preserved.
+- **`cited task evidence '…' embeds the current context lock or index hash …`**: you cited a file that CanonTrail itself regenerates (a saved compile/finalize JSON, or a rewritten log). Such a file can never stay stable and blocks `LOCK004` convergence. Save run output outside the task evidence set, record an immutable snapshot with `canontrail evidence record`, or cite a hash-named archived copy under `.agent-context/tasks/<task-id>/evidence/context-locks/`.
+- **`LOCK004 stale content hash for '<path>'`**: a selected source changed after compilation. Reread the file, update the task, then recompile (`context compile … --apply`). During `finalize --task A`, drift in an unrelated task's lock is reported separately as project-health debt, not as a failure of task A.
+- **`LOCK008`**: the message names the cause - a stale or inconsistent index (`run 'canontrail index .' before recompiling the lock`), a lock/task identity mismatch (restore the task state or recompile), or task-relevant index changes (refresh the index, then recompile).
+- **`CHANGE004 referenced path does not exist: <path>`**: a `change.yaml` reference points to a missing path. References are repository-root-relative; fix the path or create the file. Repeated occurrences of the same path are collapsed with `(referenced N times)`.
+- **`FINALIZE115` / `FINALIZE116`**: a change marked `verified` still has open acceptance cases or verification checks. Close them (or mark them `not-applicable`) before finalizing.
+- **`FINALIZE001 Documentation audit could not complete: …`**: finalization fails with `ok:false`, `documentation: null` and exit 1 (even without `--fail-on-warnings`). Check permissions and `.agent-context/maintenance.yaml`; never fake a healthy audit.
+
+Exit codes: `0` = pass; `1` = failed validation/finalization/index preflight (and any CLI error); `2` = `init` found conflicts (dry run or applied - files preserved, nothing overwritten). The complete finding-code registry lives in [Finding codes](finding-codes.md).
+
 ## Development and packaging
 
 If the documentation audit cannot complete (for example, because of permissions or a malformed maintenance policy), finalization fails with `FINALIZE001`. In JSON output, `documentation` is `null`, not a fabricated healthy report. Check `ok` and handle the unavailable audit; this error exits 1 even without `--fail-on-warnings`.
@@ -102,10 +123,13 @@ Worked JSON excerpt for `canontrail finalize . --json` when the audit raises a p
 }
 ```
 
+Build `dist/` before running the test suite: the CLI integration tests spawn `node dist/cli.js` and fail on a clean checkout until `npm run build` has completed. The CI workflows enforce the same order (`test/ci-build-order.test.ts`).
+
 ```sh
+npm ci --ignore-scripts        # clean checkout only
 npm run check
-npm test
-npm run build
+npm run build                  # required before npm test: CLI integration tests spawn dist/cli.js
+npm test -- --maxWorkers=1
 npm run index
 node dist/cli.js validate .
 node dist/cli.js finalize . --fail-on-warnings

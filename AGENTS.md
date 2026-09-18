@@ -65,7 +65,7 @@ Durable repository files are the source of truth; chat history and model memory 
 
 - Run `npm run check` after TypeScript changes.
 - Run `npm test` after deterministic behavior changes.
-- Run `npm run build` before testing the distributable CLI.
+- Run `npm run build` before `npm test` on a clean checkout and before testing the distributable CLI (CLI integration tests execute `dist/cli.js`).
 - Run `npm run index` after governed Markdown changes.
 - After root README changes, run `node scripts/render-readme.js --write`; `.github/README.md` is an excluded generated presentation, never a second knowledge owner. `npm test` checks exact projection freshness.
 - Run `npm run canontrail -- validate .` before claiming repository validity.

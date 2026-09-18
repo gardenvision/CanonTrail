@@ -276,7 +276,7 @@
       "items": { "type": "string", "pattern": "^CHG-[A-Z0-9-]+$" },
       "uniqueItems": true
     },
-    "superseded_by": { "type": ["string", "null"] },
+    "superseded_by": { "type": ["string", "null"], "pattern": "^CHG-[A-Z0-9-]+$" },
     "updated_at": { "type": "string", "format": "date-time" }
   },
   "allOf": [
