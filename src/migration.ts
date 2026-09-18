@@ -519,7 +519,7 @@ async function safeDocumentationRoot(root: string, requested: string): Promise<{
   return { absolute: resolved, relative };
 }
 
-async function walkDocumentation(rootReal: string, directory: string, files: string[], unprocessed: Array<{ path: string; reason: string }>, ignored: Record<string, number>): Promise<void> {
+async function walkDocumentation(rootReal: string, directory: string, files: string[], unprocessed: Array<{ path: string; reason: string }>, ignored: Record<string, number>, ignoredSeen: Set<string>): Promise<void> {
   let entries;
   try {
     entries = await readdir(directory, { withFileTypes: true });
@@ -539,11 +539,11 @@ async function walkDocumentation(rootReal: string, directory: string, files: str
         unprocessed.push({ path: relative, reason: "reserved .git or .agent-context control tree not scanned" });
         continue;
       }
-      await walkDocumentation(rootReal, absolute, files, unprocessed, ignored);
+      await walkDocumentation(rootReal, absolute, files, unprocessed, ignored, ignoredSeen);
     } else if (entry.isFile()) {
       const extension = path.extname(entry.name).toLowerCase() || "[none]";
       if (extension === ".md" || extension === ".markdown") files.push(relative);
-      else ignored[extension] = (ignored[extension] ?? 0) + 1;
+      else if (!ignoredSeen.has(relative)) { ignoredSeen.add(relative); ignored[extension] = (ignored[extension] ?? 0) + 1; }
     } else {
       unprocessed.push({ path: relative, reason: "unsupported filesystem entry" });
     }
@@ -572,10 +572,18 @@ export async function planMigration(options: MigrationPlanOptions): Promise<Migr
   const paths = new Set<string>();
   const unprocessed: Array<{ path: string; reason: string }> = [];
   const ignoredByExtension: Record<string, number> = {};
+  const ignoredSeen = new Set<string>();
   for (const documentationRoot of uniqueRoots) {
     const discovered: string[] = [];
-    await walkDocumentation(root, documentationRoot.absolute, discovered, unprocessed, ignoredByExtension);
+    await walkDocumentation(root, documentationRoot.absolute, discovered, unprocessed, ignoredByExtension, ignoredSeen);
     for (const item of discovered) paths.add(item);
+  }
+  const unprocessedKeys = new Set<string>();
+  for (let index = unprocessed.length - 1; index >= 0; index -= 1) {
+    const entry = unprocessed[index]!;
+    const key = JSON.stringify([entry.path, entry.reason]);
+    if (unprocessedKeys.has(key)) unprocessed.splice(index, 1);
+    else unprocessedKeys.add(key);
   }
   const documents: MigrationPlanDocument[] = [];
   for (const relativePath of [...paths].sort(compareText)) {
@@ -849,8 +857,19 @@ export async function migrationDocumentResolutionErrors(root: string, documentat
 
 function stripRecognizedLegacyMetadata(source: string): { bom: string; body: string; eol: string } {
   const scan = scanLegacyHeader(source);
+  // Never strip recognized-looking keys out of an unmarked leading YAML frontmatter block:
+  // mixed frontmatter/legacy input stays review-gated and the block is preserved verbatim.
+  let frontmatterEnd = -1;
+  if ((scan.lines[0]?.content ?? "").trim() === "---") {
+    for (let index = 1; index < scan.lines.length; index += 1) {
+      if ((scan.lines[index]?.content ?? "").trim() === "---") {
+        frontmatterEnd = index;
+        break;
+      }
+    }
+  }
   const body = scan.lines
-    .filter((_line, index) => !RECOGNIZED_LEGACY_KEYS.has(scan.metadataByLine.get(index)?.key ?? ""))
+    .filter((_line, index) => index <= frontmatterEnd || !RECOGNIZED_LEGACY_KEYS.has(scan.metadataByLine.get(index)?.key ?? ""))
     .map((line) => `${line.content}${line.ending}`)
     .join("");
   const eol = scan.lines.find((line) => line.ending)?.ending ?? "\n";
@@ -938,6 +957,19 @@ function normalizedLegacySource(source: string, header: MigrationTargetHeader): 
 
 export function computeMigrationTransactionHash(transaction: Omit<MigrationTransaction, "transaction_hash">): string {
   return sha256(JSON.stringify(transaction));
+}
+
+function canonicalDecisionSet(decisionSet: MigrationDecisionSet): MigrationDecisionSet {
+  // The reviewed decision set is hash-bound, so it is rebuilt in a fixed field order.
+  // JSON object member order must not decide whether a valid transaction stays executable.
+  return {
+    version: 1,
+    migration_id: decisionSet.migration_id,
+    plan_hash: decisionSet.plan_hash,
+    reviewed_by: decisionSet.reviewed_by,
+    reviewed_at: decisionSet.reviewed_at,
+    decisions: decisionSet.decisions,
+  };
 }
 
 export function computeMigrationDecisionSetHash(decisions: MigrationDecisionSet): string {
@@ -1089,6 +1121,11 @@ function validateDecisionSet(plan: MigrationPlan, decisions: MigrationDecisionSe
   if (decisions.version !== 1 || decisions.migration_id !== plan.migration_id || decisions.plan_hash !== plan.plan_hash) {
     throw new Error("decision set does not match the migration plan identity");
   }
+  const knownDecisionKeys = new Set(["version", "migration_id", "plan_hash", "reviewed_by", "reviewed_at", "decisions"]);
+  const unknownDecisionKeys = Object.keys(decisions).filter((key) => !knownDecisionKeys.has(key));
+  if (unknownDecisionKeys.length > 0) {
+    throw new Error(`decision set contains unsupported top-level keys: ${unknownDecisionKeys.join(", ")}`);
+  }
   if (!decisions.reviewed_by.trim()) throw new Error("decision set reviewed_by must not be empty");
   assertIsoDateTime(decisions.reviewed_at, "decision reviewed_at");
   const result = new Map<string, MigrationReviewDecision>();
@@ -1108,10 +1145,10 @@ export async function prepareMigrationTransformation(options: MigrationTransform
   const planReport = await planMigration({ ...options, apply: false });
   const plan = planReport.plan;
   const decisions = validateDecisionSet(plan, options.decisions);
-  const normalizedDecisionSet = options.decisions ? {
+  const normalizedDecisionSet = options.decisions ? canonicalDecisionSet({
     ...options.decisions,
     decisions: [...decisions.values()].sort((left, right) => compareText(left.path, right.path)),
-  } satisfies MigrationDecisionSet : null;
+  }) : null;
   const root = planReport.root;
   const blockers: MigrationTransaction["blockers"] = [];
   const operations: MigrationTransactionOperation[] = [];
@@ -1255,14 +1292,14 @@ async function readTransaction(root: string, transactionInput: string): Promise<
     throw new Error("migration transaction operations require reviewed decisions");
   }
   if (value.decision_hash) {
-    const decisionSet: MigrationDecisionSet = {
+    const decisionSet = canonicalDecisionSet({
       version: 1,
       migration_id: value.migration_id,
       plan_hash: value.plan_hash,
       reviewed_by: value.reviewed_by ?? "",
       reviewed_at: value.reviewed_at ?? "",
       decisions: value.decisions,
-    };
+    });
     if (computeMigrationDecisionSetHash(decisionSet) !== value.decision_hash) throw new Error("migration decision-set hash is invalid");
   }
   if (!bindableShape) {
@@ -1362,7 +1399,9 @@ async function validateStagedMigrationImages(root: string, executionDirectory: s
 
 async function writeAtomic(absolute: string, bytes: Buffer, token: string): Promise<void> {
   await mkdir(path.dirname(absolute), { recursive: true });
-  const temporary = `${absolute}.canontrail-${token}.tmp`;
+  // Unique suffix: a leftover from a killed run must not block later transactions
+  // for the same document (operation ids restart per transaction).
+  const temporary = `${absolute}.canontrail-${token}-${process.pid}-${Date.now().toString(36)}.tmp`;
   // Atomic replacement must not widen a private document's basic POSIX permissions.
   // ACLs, ownership, xattrs and timestamps are not a byte-rollback guarantee.
   let mode: number | undefined;

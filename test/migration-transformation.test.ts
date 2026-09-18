@@ -912,3 +912,31 @@ An older, author-owned section with the same heading.
     expect(await readFile(path.join(root, "docs", "plants.md"), "utf8")).toBe("post-transaction user edit\n");
   });
 });
+
+describe("reviewed decision serialization", () => {
+  it("keeps a valid transaction executable when the reviewed decision file uses a different top-level key order", async () => {
+    const root = await fixture();
+    const canonical = await decisionSet(root);
+    // Same reviewed values; JSON object members have no semantic order (RFC 8259).
+    const reordered: MigrationDecisionSet = {
+      decisions: canonical.decisions,
+      reviewed_at: canonical.reviewed_at,
+      reviewed_by: canonical.reviewed_by,
+      plan_hash: canonical.plan_hash,
+      migration_id: canonical.migration_id,
+      version: canonical.version,
+    };
+    const prepared = await prepareMigrationTransformation({
+      root,
+      migrationId: "MIG-TRANSFORM-001",
+      transactionId: "MTX-TRANSFORM-001",
+      documentationRoots: ["docs"],
+      createdAt: "2026-09-03T20:00:00.000Z",
+      decisions: reordered,
+      apply: true,
+    });
+    expect(prepared.transaction.blockers).toEqual([]);
+    const record = await executeMigrationTransaction(root, prepared.output_path, prepared.transaction.transaction_hash);
+    expect(record.record_hash).toMatch(/^sha256:/);
+  });
+});
