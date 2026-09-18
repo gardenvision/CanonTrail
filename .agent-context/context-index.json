@@ -1,7 +1,7 @@
 {
   "version": 1,
   "hash_algorithm": "sha256",
-  "root_hash": "sha256:22dd5e9e4df89863112aff165d27c2ac9eba8b35b92f73a659b8673c5d06734c",
+  "root_hash": "sha256:6bf366b476b92f31d20872bfe82110768ba1498e6ac017dfcd6f556a84f21b6f",
   "documents": [
     {
       "path": ".agent-context/tasks/T-ALPHA-CANDIDATE-001/brief.md",
@@ -181,7 +181,7 @@
     },
     {
       "path": "README.md",
-      "content_hash": "sha256:2800afd85cc36ac1ff4d5886000bfbe6dea9a6ecbbb9d451ac8a5d95d035c528",
+      "content_hash": "sha256:86cd20f953e9430d6d75b4af61a952e6ba8bedb703243b490df06c3ef7ed84d0",
       "stand": "2026-09-18",
       "status": "public-source-alpha",
       "truth_level": "draft",
@@ -328,7 +328,7 @@
     },
     {
       "path": "docs/finding-codes.md",
-      "content_hash": "sha256:dfed18a0d235401d9df5861f14473651a59370392672e9c4ac4905a9fbf1155e",
+      "content_hash": "sha256:1101158c465a24398ab82d2b1f74144bcd0b90facc6feca45cdccacc1edf95ad",
       "stand": "2026-09-18",
       "status": "public-source-alpha",
       "truth_level": "draft",
@@ -493,7 +493,7 @@
     },
     {
       "path": "docs/usage.md",
-      "content_hash": "sha256:fe7dac4022a7a1220106cd260fd3f5f27548d4e43c092bc1062f6b53ee4f6e25",
+      "content_hash": "sha256:a9577452d80312317dbb9e44944aa4238122eceb7ac7ca348bb27c94b9280603",
       "stand": "2026-09-18",
       "status": "public-source-alpha",
       "truth_level": "draft",

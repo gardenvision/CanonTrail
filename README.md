@@ -132,7 +132,18 @@ and keep verification and handoff records current.
 CanonTrail CLI: <absolute path to CanonTrail>/dist/cli.js
 ```
 
-For a continuation, also provide the specific task ID and handoff path. Prefer your agent's repository instruction mechanism so future sessions discover `AGENTS.md` automatically; [thin provider bridges](docs/integrations.md) help route it, but cannot force an agent to comply.
+For a continuation, also provide the specific task ID and handoff path:
+
+```text
+Continue task <TASK-ID>. First validate the supplied handoff
+(<TARGET_PROJECT>/.agent-context/tasks/<TASK-ID>/handoff.yaml), then follow the
+receiving-session order from docs/usage.md before acting: validate handoff ->
+resume create preview and apply -> resume validate --packet -> read the
+packet's read_order -> only then perform the recorded next safe action.
+CanonTrail CLI: <absolute path to CanonTrail>/dist/cli.js
+```
+
+Prefer your agent's repository instruction mechanism so future sessions discover `AGENTS.md` automatically; [thin provider bridges](docs/integrations.md) help route it, but cannot force an agent to comply.
 
 <details>
 <summary><strong>Prefer to preview adoption yourself?</strong></summary>

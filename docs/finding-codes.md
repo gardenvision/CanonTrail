@@ -38,7 +38,7 @@ Exit codes: `0` pass — `1` failed validation/finalization/index preflight or C
 |---|---|---|---|
 | `INDEX001` | error | context index missing | run `canontrail index .` |
 | `INDEX002` | error | index unreadable or invalid | regenerate with `canontrail index .`; inspect unexpected edits |
-| `INDEX003` | error | index stale (governed documents changed) | run `canontrail index .`, then rerun the original command |
+| `INDEX003` | error | index stale (governed documents changed) | run `canontrail index .`, then rerun the original command; `context compile ... --refresh-index` refreshes automatically |
 
 ## References (`REF`)
 
