@@ -1,0 +1,45 @@
+CanonTrail context-budget clarity verification
+Date: 2026-09-25 UTC
+Scope: local public-source candidate branch codex/context-budget-clarity.
+Gärtnerei is read-only motivating evidence; no target-project files were changed.
+
+Motivating observation (not a provider-token measurement):
+- T-GERANIUM-VAT-INGAME-006 selected 50,938 estimated input tokens in a 60,000-token window.
+- Two explicit whole-file requirements contributed 18,879 + 11,220 = 30,099 estimated tokens.
+- Its cited follow-up evidence contributed another 6,298 estimated tokens.
+- Existing context_sections cannot narrow these sources while independent whole-source requirements remain.
+
+Implementation and oracle:
+- The compile report now lists all required source costs in JSON, sorted by descending estimated tokens and path as tie-breaker; text and budget errors show the largest five.
+- Optional candidates are excluded; aggregate category totals and persisted lock fields remain unchanged.
+- Owner-reviewed whole-to-section conversion uses existing hash-bound context_sections; tests reject a retained whole requirement and drift outside the selected range.
+- Task-scoped finalize text now distinguishes named-task completion from raw repository structural health; JSON gates, status and repository-only strictness are untouched.
+
+Executed checks:
+- npm run check: PASS, tsc --noEmit.
+- Focused context, section and task-scope tests: initial new assertions exposed combined selector strings; assertions were corrected to the actual candidate contract. Focused rerun's new whole-to-section test: PASS.
+- npm test -- --maxWorkers=1: PASS, 34 test files, 687 passed, 13 skipped, 700 total.
+- npm run build: PASS.
+- node dist/cli.js index .: PASS, 42 governed documents indexed after Markdown edits.
+- node dist/cli.js validate .: PASS, 42 Markdown documents, 31 structured artifacts, 15 schemas, 0 errors, 0 warnings before lifecycle closure.
+- node dist/cli.js docs audit .: healthy, 0 errors, 0 warnings before lifecycle closure.
+- node dist/cli.js finalize . --fail-on-warnings: PASS before lifecycle closure.
+- git diff --check: PASS.
+
+Observed CLI text after the change (representative local task compile):
+  Required context:
+    - governing-task: 3979 tokens across 4 sources
+    - explicit-required: 40790 tokens across 4 sources
+  Largest required sources (estimated, top 5):
+    - ARTIFACT_PROTOCOL.md=21278 tokens (explicit-required; task-required-context,task-file-intent)
+    - src/context.ts=13834 tokens (explicit-required; task-required-context,task-file-intent)
+Observed repository-only finalization begins:
+  CanonTrail finalize PASS
+  Repository-wide completion: PASS.
+The task-scoped PASS with failed raw repository health is asserted in test/task-scoped-finalize.test.ts; the test preserves its failed project-health gate and strict repository-only counterexample.
+
+Self-review and limits:
+- No persisted schema/lock shape, routing priority, source selection, task gate, exit code or Gärtnerei file was changed.
+- The new costs are ceil(bytes/4) estimates, not observed provider input or proof that a whole-to-section decision is semantically sufficient.
+- Task and repository health remain independent. An unrelated stale lock can be non-blocking only for a correctly scoped named task; CI/release still needs repository-only finalize.
+- Initial Vitest invocation in the default Windows sandbox failed before tests with spawn EPERM. The suite was rerun with local process-start permission and passed; this was an execution-environment limitation, not a hidden test failure.

@@ -1,0 +1,58 @@
+version: 1
+change_id: CHG-CONTEXT-BUDGET-CLARITY-001
+revision: 2
+title: Explain required-source costs and task completion scope
+status: verified
+risk: medium
+author: CanonTrail implementation agent
+canonical_source: ARTIFACT_PROTOCOL.md
+decision_rationale: The maintainer requested more useful context-budget guidance and clearer parallel-task finalization after a practical Unity task. Reuse the existing explicit section contract and preserve all selection and completion gates.
+documentation_structure:
+  decision: no-feature-document-change
+  rationale: The context and finalization behavior belongs to the existing protocol and usage guide; no new user-facing feature boundary is introduced.
+  feature_documents: []
+acceptance_cases:
+  - id: AC-COSTS
+    given: A task requires several whole sources with different sizes and also has optional candidates.
+    expected: Successful text and JSON reports expose every required source cost and a stable largest-first human summary; over-budget errors identify the same largest drivers.
+    failure_or_uncertainty: Estimates are byte-based and do not claim actual model usage; failure preserves the previous lock.
+    counterexample: An optional large file appears in the required ranking or a required file disappears from the breakdown.
+    oracle: Compare source identities and estimates with the candidate list and assert unchanged compiled lock bytes in a deterministic fixture.
+    status: pass
+    evidence_refs: [test/context.test.ts, .agent-context/tasks/T-CONTEXT-BUDGET-CLARITY-001/evidence/verification.txt]
+  - id: AC-SECTIONS
+    given: A task owner reviews a required whole source and decides that one exact range suffices.
+    expected: Removing only that task-owned whole requirement and adding its current hash-bound context_sections entry yields a smaller required view; full-file drift or a retained whole requirement is rejected.
+    failure_or_uncertainty: Intrinsically required canonical, governing, external, or cited evidence sources remain whole; semantic sufficiency is the task owner's decision.
+    counterexample: The compiler silently narrows a strong canonical route or accepts a stale full-file hash for the section.
+    oracle: Existing section contract and a new whole-to-section fixture compare selected bytes, rejection cases and lock hashes.
+    status: pass
+    evidence_refs: [test/context-sections.test.ts, .agent-context/tasks/T-CONTEXT-BUDGET-CLARITY-001/evidence/verification.txt]
+  - id: AC-SCOPE
+    given: The named task meets completion gates but an unrelated active peer has selected-source drift.
+    expected: Human output states that task completion passes and repository health fails; JSON and repository-only finalization preserve existing strictness and diagnostics.
+    failure_or_uncertainty: Unresolved task dependencies or integrity faults still block the named task.
+    counterexample: The report says the project is healthy or defers a relevant peer's drift.
+    oracle: Compare task-scoped and repository-only reports in the existing parallel-context fixture.
+    status: pass
+    evidence_refs: [test/task-scoped-finalize.test.ts, .agent-context/tasks/T-CONTEXT-BUDGET-CLARITY-001/evidence/verification.txt]
+impacts:
+  - {area: requirement, decision: affected, rationale: The task records more actionable budget and completion reporting without changing authority., evidence_refs: [.agent-context/tasks/T-CONTEXT-BUDGET-CLARITY-001/brief.md]}
+  - {area: data-contracts, decision: not-affected, rationale: Persisted lock and task schemas remain unchanged., evidence_refs: []}
+  - {area: domain-logic, decision: not-affected, rationale: Candidate selection and gate predicates remain unchanged., evidence_refs: []}
+  - {area: tests-reference-cases, decision: affected, rationale: Context and finalization report fixtures require additional assertions., evidence_refs: [test/context.test.ts, test/context-sections.test.ts, test/task-scoped-finalize.test.ts]}
+  - {area: example-data, decision: affected, rationale: The existing section example gains a reviewed whole-to-section usage case., evidence_refs: [examples/context-sections/README.md]}
+  - {area: ui-api, decision: affected, rationale: Human and JSON compile reports gain per-source cost diagnostics and finalization text becomes clearer., evidence_refs: [src/context.ts, src/finalize.ts]}
+  - {area: documentation, decision: affected, rationale: Protocol and usage guide explain diagnostics and explicit section conversion., evidence_refs: [ARTIFACT_PROTOCOL.md, docs/usage.md]}
+  - {area: diagrams-visuals, decision: not-affected, rationale: No visual diagram or rendered application interface changes., evidence_refs: []}
+  - {area: terminology, decision: affected, rationale: "Differentiate required whole sources, required sections and non-blocking project health in text.", evidence_refs: [docs/usage.md]}
+  - {area: operations-compatibility, decision: affected, rationale: Old locks and target project schemas stay valid while existing CLI reports remain additive., evidence_refs: [ARTIFACT_PROTOCOL.md, src/context.ts]}
+verification:
+  checks: [{name: CLI usability and safety fixtures, status: pass, evidence_refs: [.agent-context/tasks/T-CONTEXT-BUDGET-CLARITY-001/evidence/verification.txt]}]
+  terminology_search: {status: pass, terms: [required_context_sources, context_sections, project-health], evidence_refs: [docs/usage.md, ARTIFACT_PROTOCOL.md, .agent-context/tasks/T-CONTEXT-BUDGET-CLARITY-001/evidence/verification.txt]}
+  visual_review: {applicable: true, status: pass, evidence_refs: [.agent-context/tasks/T-CONTEXT-BUDGET-CLARITY-001/evidence/verification.txt]}
+  unverifiable_items: []
+independent_review: {status: not-required, reviewer: null, findings: [], evidence_refs: [], waiver: null}
+supersedes: []
+superseded_by: null
+updated_at: "2026-09-25T12:49:04Z"

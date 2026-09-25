@@ -214,8 +214,23 @@ describe("compileContext", () => {
         ].includes(source.path))
         .reduce((sum, source) => sum + source.estimated_tokens, 0),
     );
+    expect(first.required_source_costs).toHaveLength(6);
+    expect(first.required_source_costs.map((entry) => entry.estimated_tokens)).toEqual(
+      [...first.required_source_costs.map((entry) => entry.estimated_tokens)].sort((left, right) => right - left),
+    );
+    expect(first.required_source_costs.reduce((sum, entry) => sum + entry.estimated_tokens, 0)).toBe(
+      first.required_context_breakdown.reduce((sum, entry) => sum + entry.estimated_tokens, 0),
+    );
+    expect(first.required_source_costs).not.toContainEqual(expect.objectContaining({ path: "src/feature.ts" }));
+    expect(first.required_source_costs.find((entry) => entry.path === "test/feature.test.ts")).toMatchObject({
+      selector: "explicit-include",
+      category: "explicit-required",
+    });
     expect(formatContextCompileReport(first)).toContain("metadata-routed-canonical:");
     expect(formatContextCompileReport(first)).toContain("explicit-required:");
+    expect(formatContextCompileReport(first)).toContain("Largest required sources (estimated, top 5):");
+    expect(formatContextCompileReport(first)).toContain(first.required_source_costs[0]!.path);
+    expect(JSON.parse(JSON.stringify(first)).required_source_costs).toEqual(first.required_source_costs);
 
     const applied = await compileContext({ ...options, apply: true });
     const repeated = await compileContext({ ...options, apply: true });
@@ -472,6 +487,8 @@ describe("compileContext", () => {
     await expect(failure).rejects.toThrow(/governing-task=\d+ tokens\/3 sources/);
     await expect(failure).rejects.toThrow(/metadata-routed-canonical=\d+ tokens\/1 sources/);
     await expect(failure).rejects.toThrow(/external-workflow=\d+ tokens\/1 sources/);
+    await expect(failure).rejects.toThrow(/largest required sources: .*tokens \(.*; .*\)/);
+    await expect(failure).rejects.toThrow(generous.required_source_costs[0]!.path);
     expect(await readFile(output, "utf8")).toBe(before);
   });
 

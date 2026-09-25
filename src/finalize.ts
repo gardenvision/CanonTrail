@@ -331,6 +331,14 @@ export function formatFinalizeReport(report: FinalizeReport): string {
   const lines = [
     `CanonTrail finalize ${report.ok ? "PASS" : "FAIL"}${report.task_id ? ` for ${report.task_id}` : ""}`,
   ];
+  if (report.task_id) {
+    lines.push(
+      `Named-task completion: ${report.ok ? "PASS" : "FAIL"}.`,
+      `Repository structural health: ${report.repository.ok ? "PASS" : "FAIL"}${report.completion_scope.deferred_findings.length > 0 ? " (unrelated active-task drift remains; not a CI or release approval)" : ""}.`,
+    );
+  } else {
+    lines.push(`Repository-wide completion: ${report.ok ? "PASS" : "FAIL"}.`);
+  }
   for (const gate of report.gates) {
     lines.push(`${gate.status.toUpperCase()} ${gate.id}${gate.blocking === false ? " [non-blocking for this task only]" : ""}: ${gate.summary}`);
     for (const finding of gate.findings) {

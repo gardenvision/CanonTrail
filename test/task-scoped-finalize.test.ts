@@ -97,6 +97,8 @@ describe("task-scoped completion safety boundary", () => {
     expect(report.ok, JSON.stringify(report)).toBe(true);
     expect(report.completion_scope).toMatchObject({ mode: "task", relevant_task_ids: ["A"], deferred_findings: [] });
     expect(report.gates.some(g => g.id === "project-health")).toBe(false);
+    expect(formatFinalizeReport(report)).toContain("Named-task completion: PASS.");
+    expect(formatFinalizeReport(report)).toContain("Repository structural health: PASS.");
   });
   it("separates unrelated drift while preserving raw failure and exact locks", async () => {
     const root = await fixture(); await drift(root);
@@ -107,7 +109,12 @@ describe("task-scoped completion safety boundary", () => {
     expect(report.completion_scope.deferred_findings.map(d => d.code)).toEqual(["LOCK004"]);
     expect(report.gates.find(g => g.id === "project-health")).toMatchObject({ status: "fail", blocking: false });
     expect(formatFinalizeReport(report)).toContain("not a repository/CI/release PASS");
-    expect((await finalize(root)).ok).toBe(false); expect((await validateRepository(root)).ok).toBe(false);
+    expect(formatFinalizeReport(report)).toContain("Named-task completion: PASS.");
+    expect(formatFinalizeReport(report)).toContain("Repository structural health: FAIL (unrelated active-task drift remains; not a CI or release approval).");
+    const global = await finalize(root);
+    expect(global.ok).toBe(false);
+    expect(formatFinalizeReport(global)).toContain("Repository-wide completion: FAIL.");
+    expect((await validateRepository(root)).ok).toBe(false);
     expect(await Promise.all(["A", "B", "C"].map(id => readFile(path.join(root, task(id, "context.lock.json")))))).toEqual(before);
     expect(report.writes_performed).toBe(false);
   });

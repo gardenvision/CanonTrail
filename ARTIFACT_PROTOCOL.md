@@ -1,6 +1,6 @@
 ---
 topic_id: artifact-protocol
-stand: "2026-09-06"
+stand: "2026-09-25"
 status: design-target
 truth_level: design-target
 verification:
@@ -328,6 +328,8 @@ The first context lock is a bounded starting view, not a declaration that no oth
 
 The current compiler implements deterministic initial routing, task ownership, persistent required sources, file intents, explicit includes, and handoff selection. Richer selector languages, autonomous multi-step retrieval, and semantic discovery remain future capabilities and MUST NOT be inferred from this protocol.
 
+The compile report MUST show the estimated cost of every required source, its selector and category, sorted largest first; the human view MAY show only the five largest while the JSON report retains the complete list. Over-budget failures SHOULD name those largest drivers alongside category totals. This is a diagnostic over the selected candidate bytes, not actual provider-token usage or permission to discard requirements. Report fields MUST NOT change persisted lock bytes, source selection, or authority.
+
 ### 7.1 Read-only inspection and source excerpts
 
 The report-only commands `context inspect` and `context excerpt` use `schemas/context-inspection.schema.json`; they MUST NOT modify a task, lock, source, index, configuration or completion gate. This schema is packaged for report consumers and copied by new initializations, not a new persisted project artifact or a required migration of existing project schemas.
@@ -349,6 +351,8 @@ Filesystem checks assume stable local inputs and narrow mutation races; they do 
 Task state MAY declare `context_sections` entries with exact repository-relative `path`, inclusive one-based `from`/`to`, and the expected full-file SHA-256 `content_hash`. Version 1 permits one contiguous range per unique source. The agent chooses and justifies the range; CanonTrail does not infer semantic boundaries or guarantee sufficient context. Both project task-state and context-lock schemas must explicitly support the fields before compilation or resume; no schema/config is silently rewritten.
 
 A declared section is a required input. It may introduce a source or replace an otherwise optional file-intent/weak-route candidate, but MUST NOT narrow a fully required source: AGENTS, task records, strong canonical routes, persistent whole sources, explicit whole includes, external workflow sources and directly cited task evidence retain whole-file coverage. Control/task artifacts under .agent-context cannot be sectioned. A conflicting request fails with an explicit explanation rather than silently widening, truncating or dropping an input.
+
+When a task-owned `required_context_sources` declaration makes a large file whole-required, the owner MAY first review whether the entire file is genuinely necessary. Only if a specific range is sufficient MAY the owner remove that particular whole-file declaration and record a current hash-bound `context_sections` range, then recompile and inspect the resulting lock. This does not override any other independent whole-file requirement (including strong canonical routing or a direct evidence citation). A larger budget or the full source is required when such a requirement remains. The range choice and any information intentionally left out remain the owner's responsibility; the compiler cannot establish semantic sufficiency.
 
 Source identities use the exact spelling of each on-disk directory entry on every platform. A case alias accepted by Windows or a case-insensitive macOS/Linux volume MUST NOT become a second source identity. Distinct correctly spelled names on a case-sensitive volume remain distinct; implementations MUST NOT enforce identity by blanket lowercasing. Historical source paths are not retrospectively rewritten or re-resolved.
 
@@ -470,6 +474,8 @@ Dependency discovery MUST inspect schema-defined references: task source/handoff
 Interpretation is field-specific, not a blanket text heuristic. Task source/handoff/documentation-impact/file-intent/required-source declarations and omission candidates use compiler-style whitespace trimming; stored lock sources and feature/external artifact identities remain literal. Documentary canonical-source and evidence references retain validator fragment handling and external-URI treatment; a pure `#fragment` names no file. The compiler also consumes exact trimmed supported evidence files within the owning task's evidence directory (from state checks and `change.yaml`), so that actual identity must be checked as well. Feature updates/non-planned targets and external references also undergo the validator's reference check; both real consumer interpretations remain relevant when they differ. A literal selected `safe#part.ts` does not imply a reference to `safe`. Extensionless paths must not be skipped, and unsupported control characters in genuine reference fields require strict fallback rather than silent omission.
 
 Deferral MUST NOT hide or rewrite findings: raw `repository.ok`, counts and diagnostics remain unchanged, and a failed `project-health` gate explicitly marks only those classified findings `blocking: false`. The additive `completion_scope` report lists the relevant tasks, fallback reason and deferred findings; its report-only contract and example are `schemas/finalize-scope.schema.json` and `examples/parallel-context/task-completion-scope.json`. Fresh initialization includes this report schema alongside the other shipped schemas, but no existing project configuration or stored task/lock artifact must be migrated. The only non-blocking failed gate is this task-scoped project-health gate. Schema, integrity, paths, missing sources, budget, required omissions, unknown findings, global-index failures, documentation audit and warning policy remain blocking under their normal rules. Open target acceptance, project checks or review gates still fail.
+
+Human finalization output SHOULD name the task-completion result separately from raw repository structural health. A task-scoped PASS with non-blocking peer drift MUST visibly state that repository structural health still fails and is not CI or release approval. This is a wording change only; JSON fields, gate status, exit behavior and repository-only strictness remain authoritative.
 
 `canontrail validate` and `canontrail finalize` without `--task` MUST remain repository-wide and strict. A task PASS while project health fails is not integration, CI, release, migration or promotion permission. CI/release owners MUST also run repository-only finalization; the shipped GitHub action always runs it even when an optional task is supplied. GSD/Superpowers continue to own execution and scheduling. Shared-resource order and release guidance lives in `docs/parallel-work.md`, not in an automatic CanonTrail lock service.
 

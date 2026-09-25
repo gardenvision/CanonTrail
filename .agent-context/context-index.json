@@ -1,7 +1,7 @@
 {
   "version": 1,
   "hash_algorithm": "sha256",
-  "root_hash": "sha256:3e79e7992ca9289cdea2d49d17b207d60ba6a8e20c9bb8f41683d41dd95ee242",
+  "root_hash": "sha256:fcdc19483ae8d1cfe3908c05e38ae12e0d35b5ce4d1a8ffa61cbe24af0f1a643",
   "documents": [
     {
       "path": ".agent-context/tasks/T-ALPHA-CANDIDATE-001/brief.md",
@@ -20,6 +20,28 @@
         "VISION.md"
       ],
       "topic_id": "alpha-candidate-preparation-task"
+    },
+    {
+      "path": ".agent-context/tasks/T-CONTEXT-BUDGET-CLARITY-001/brief.md",
+      "content_hash": "sha256:e27452cdea9c03d9df1586b5661081597d1be52e9abb9976a03013299ac1935e",
+      "stand": "2026-09-25",
+      "status": "completed",
+      "truth_level": "active-snapshot",
+      "verification_state": "internally-reviewed",
+      "read_if_task_touches": [
+        "context budget diagnostics",
+        "explicit source sections",
+        "task-scoped finalization"
+      ],
+      "primary_systems": [
+        "context compilation",
+        "completion reporting"
+      ],
+      "do_not_use_instead": [
+        "ARTIFACT_PROTOCOL.md",
+        "VISION.md"
+      ],
+      "topic_id": "task-context-budget-clarity-001"
     },
     {
       "path": ".agent-context/tasks/T-FROZEN-EXAMPLE-LIFECYCLE-001/brief.md",
@@ -136,8 +158,8 @@
     },
     {
       "path": "ARTIFACT_PROTOCOL.md",
-      "content_hash": "sha256:52d3737465ca665643fbba6426f1c22ff97609d4cb6f5cfb85e1ffe87b493d3e",
-      "stand": "2026-09-06",
+      "content_hash": "sha256:ab7a37b8727ce7145fbcdeee2d040d40fb7a69dc9476356c621b1d0e2ab06dad",
+      "stand": "2026-09-25",
       "status": "design-target",
       "truth_level": "design-target",
       "verification_state": "structurally-reviewed",
@@ -389,8 +411,8 @@
     },
     {
       "path": "docs/usage.md",
-      "content_hash": "sha256:9a09165fd84412e061c85c7dea9aaa7d7bfea767c0d28a5c9f5bedcf2b48f8eb",
-      "stand": "2026-09-14",
+      "content_hash": "sha256:943cebd2f1140bbe15ff12b20145a2a4b8115fb757391f1fe8223e6089419867",
+      "stand": "2026-09-25",
       "status": "public-source-alpha",
       "truth_level": "draft",
       "verification_state": "unverified",
@@ -447,8 +469,8 @@
     },
     {
       "path": "examples/context-sections/README.md",
-      "content_hash": "sha256:24bbe3c79c813c3b70ba8fd69f81affa8d8c74481a2ecea77e73c70268d10217",
-      "stand": "2026-09-07",
+      "content_hash": "sha256:f7cd5105d44a7a0bb7d4dcc3d8b5743597dfd62c945048011e512f64a84dfc59",
+      "stand": "2026-09-25",
       "status": "current",
       "truth_level": "active-snapshot",
       "verification_state": "internally-reviewed",

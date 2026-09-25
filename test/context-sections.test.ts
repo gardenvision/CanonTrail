@@ -58,6 +58,24 @@ describe("exact context sections",()=>{
     expect((await compile(f.root,{totalTokens:total})).lock.budget.estimated_input_tokens).toBe(total);
     await expect(compile(f.root,{totalTokens:total-1})).rejects.toThrow(/required context/);
   });
+  it("requires an owner-reviewed whole-to-section change and keeps whole-file drift protection",async()=>{
+    const f=await fixture();
+    f.state.required_context_sources=["src/large.ts"];await f.save();
+    await expect(compile(f.root)).rejects.toThrow(/required by .*task-required-context/);
+    await expect(compile(f.root)).rejects.toThrow(/Review any task-owned required_context_sources/);
+    f.state.context_sections=[];await f.save();
+    const whole=await compile(f.root);
+    expect(whole.required_source_costs.find(entry=>entry.path==="src/large.ts")?.selector).toContain("task-required-context");
+    f.state.required_context_sources=[];
+    f.state.context_sections=[{path:"src/large.ts",from:2,to:2,content_hash:sha256(f.bytes)}];
+    await f.save();
+    const selected=await compile(f.root);
+    expect(selected.required_source_costs.find(entry=>entry.path==="src/large.ts")?.selector).toContain("task-context-section");
+    expect(selected.lock.sources.find(entry=>entry.path==="src/large.ts")?.line_ranges).toEqual([[2,2]]);
+    expect(whole.lock.budget.estimated_input_tokens-selected.lock.budget.estimated_input_tokens).toBeGreaterThan(2000);
+    await writeFile(path.join(f.root,"src/large.ts"),Buffer.concat([f.bytes,Buffer.from("outside the section\n")]));
+    await expect(compile(f.root)).rejects.toThrow(/Context section source changed/);
+  });
   it.each(["explicit","persistent","instructions","canonical","control"])("cannot narrow %s whole inputs",async kind=>{
     const f=await fixture();let extra={};
     if(kind==="explicit")extra={includePaths:["src/large.ts"]};

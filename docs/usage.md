@@ -1,6 +1,6 @@
 ---
 topic_id: usage-guide
-stand: "2026-09-14"
+stand: "2026-09-25"
 status: public-source-alpha
 truth_level: draft
 verification:
@@ -51,7 +51,23 @@ node <CANONTRAIL_HOME>/dist/cli.js index <TARGET_PROJECT>
 node <CANONTRAIL_HOME>/dist/cli.js context compile <TARGET_PROJECT> --task <TASK-ID> --total-tokens 16000 --reserve-output 2000 --input-safety 1024
 ```
 
-Inspect selected sources, reasons and omissions, then repeat with `--apply` if the proposal is correct. 16k is an example, not a universal budget. A required source that cannot fit causes failure instead of silent omission; the prior lock is preserved. Add a narrow source with `--include`, or choose an [explicit optional-source section](../examples/context-sections/README.md), then recompile. Required whole files cannot be silently narrowed.
+Inspect selected sources, reasons and omissions, then repeat with `--apply` if the proposal is correct. 16k is an example, not a universal budget. A required source that cannot fit causes failure instead of silent omission; the prior lock is preserved. The compile report lists required-source costs largest first (`required_source_costs` in JSON, top five in text); each entry names the path, selector and estimated tokens. Optional candidates are not in that ranking. These are byte-based estimates, not measured provider tokens or proof of a saving. The error for an over-budget task names the same largest drivers.
+
+If a large file is listed in `required_context_sources`, first decide whether the *whole* file is truly needed. Do not remove a safety-critical requirement merely to make a lock fit. If one exact range suffices, the task owner can remove only that task-owned whole-file declaration, use the read-only `context excerpt` command to inspect the range and its full-source hash, then add a `context_sections` entry to `state.yaml`:
+
+```text
+node <CANONTRAIL_HOME>/dist/cli.js context excerpt <TARGET_PROJECT> --source <repository-relative-path> --from <first-line> --to <last-line> --task <TASK-ID>
+```
+
+```yaml
+context_sections:
+  - path: docs/example.md
+    from: 20
+    to: 48
+    content_hash: "sha256:<whole-file-hash-from-excerpt>"
+```
+
+Then refresh the index if governed Markdown changed, compile without `--apply`, inspect the section, omissions and budget, and apply only a sound proposal. The section is itself required and bound to the *entire* source hash: edits outside lines 20–48 also force a fresh decision. If another rule still requires the whole file (for example governing instructions, strong canonical routing, a direct evidence citation or `--include`), compilation rejects the narrower request; keep the whole file or use a larger budget. [The worked example](../examples/context-sections/README.md) shows exact hashes and bytes. `--include` requests a whole source, not a section.
 
 The compiler uses a fixed text-extension list. `.js`, `.ts`, `.cs`, `.kt`, `.md`, `.json` and `.yaml` are supported; `.mjs` and `.cjs` currently are not. Do not rename real source files just to bypass this limitation. Use `context inspect` to understand costs and drift.
 
@@ -65,7 +81,7 @@ node <CANONTRAIL_HOME>/dist/cli.js docs audit <TARGET_PROJECT>
 node <CANONTRAIL_HOME>/dist/cli.js finalize <TARGET_PROJECT> --task <TASK-ID> --fail-on-warnings
 ```
 
-Validation checks structural contracts; it does not independently prove every narrative claim. Record actual application tests and evidence first. `finalize` is the terminal aggregator, not a task check that should invoke itself. Technical verification, independent review and canonical promotion are separate gates. See [parallel work](../docs/parallel-work.md) for task completion versus unrelated active-lock drift.
+Validation checks structural contracts; it does not independently prove every narrative claim. Record actual application tests and evidence first. `finalize` is the terminal aggregator, not a task check that should invoke itself. Technical verification, independent review and canonical promotion are separate gates. A task-scoped report names both the named-task result and raw repository structural health. Unrelated active-task lock drift can remain visible as non-blocking for that task; it is still a failed project-health gate, not CI or release approval. Run repository-only `finalize` for project-wide strictness. See [parallel work](../docs/parallel-work.md) for the full boundary.
 
 For a handoff/checkpoint, the target must be a readable local Git worktree so dirty/untracked changes can be recorded. Use `handoff --help`, `checkpoint --help` and [protocol section8](../ARTIFACT_PROTOCOL.md#8-task-and-session-continuity). After applying a handoff, update `latest_handoff` and recompile the active task lock; the archived source lock remains unchanged. A receiving session validates its packet and follows the recorded read order, not old chat transcripts by default.
 
@@ -118,4 +134,3 @@ This source distribution retains exact source bytes through Git (`* -text` in `.
 This candidate is intended first as source distribution. The package file list includes the linked product guides, protocol and license; a dry-run inventory is not npm publication or installed-package verification. npm publication still requires separate approval. See the [release checklist](../docs/release-checklist.md), [third-party inventory](../docs/third-party-notices.md), [contribution policy](../CONTRIBUTING.md) and [security-reporting status](../SECURITY.md).
 
 The distribution destination is `https://github.com/gardenvision/CanonTrail`, a new clean-history repository separate from private development. The consumer Action template pins clean runtime commit `23d542302e7327931cb2c60b7a35ae60e6e47f16`; it does not follow `main`. Public availability and current checks must be verified before using the Action. npm remains a separate, unpublished channel.
-

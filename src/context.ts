@@ -121,6 +121,12 @@ export interface ContextCompileReport {
     source_count: number;
     estimated_tokens: number;
   }>;
+  required_source_costs: Array<{
+    path: string;
+    category: RequiredContextCategory;
+    selector: string;
+    estimated_tokens: number;
+  }>;
   lock: ContextLock;
 }
 
@@ -671,6 +677,25 @@ function formatRequiredContextBreakdown(
     .join(", ");
 }
 
+function requiredSourceCosts(
+  prepared: Array<{ candidate: Candidate; tokens: number }>,
+): ContextCompileReport["required_source_costs"] {
+  return prepared
+    .filter((entry) => entry.candidate.required)
+    .map((entry) => ({
+      path: entry.candidate.path,
+      category: requiredContextCategory(entry.candidate),
+      selector: entry.candidate.selector,
+      estimated_tokens: entry.tokens,
+    }))
+    .sort((left, right) => right.estimated_tokens - left.estimated_tokens || left.path.localeCompare(right.path));
+}
+
+function formatRequiredSourceCosts(costs: ContextCompileReport["required_source_costs"]): string[] {
+  return costs.slice(0, 5).map((entry) =>
+    `${entry.path}=${entry.estimated_tokens} tokens (${entry.category}; ${entry.selector})`);
+}
+
 export function computeContextLockHash(value: Omit<ContextLock, "lock_hash">): string {
   return sha256(JSON.stringify(value));
 }
@@ -944,7 +969,14 @@ export async function compileContext(options: CompileContextOptions): Promise<Co
         || await isSameAsOutput(root, outputPath, normalized) || await findContextLockCycle(root, outputPath, normalized)) {
       throw new Error("Unsafe or excluded context section: " + section.path);
     }
-    if (candidates.get(normalized)?.required) throw new Error("Cannot narrow a required whole context source: " + normalized);
+    const wholeCandidate = candidates.get(normalized);
+    if (wholeCandidate?.required) {
+      throw new Error(
+        `Cannot narrow a required whole context source: ${normalized} (required by ${wholeCandidate.selector}). ` +
+        "Review any task-owned required_context_sources declaration before replacing it with a hash-bound context_sections range; " +
+        "governing, canonical, external-workflow and cited-evidence whole-source requirements cannot be narrowed.",
+      );
+    }
     addCandidate(candidates, { path: normalized, truthLevel: indexedTruth(index, normalized, "unclassified"), level: "L3", priority: 25,
       reason: "Explicit hash-bound source section from task state.", selector: "task-context-section", required: true, ownership: "project", sourceSystem: null });
   }
@@ -966,10 +998,12 @@ export async function compileContext(options: CompileContextOptions): Promise<Co
   const availableInputTokens = totalTokens - reservedOutputTokens - inputSafetyTokens;
   const requiredTokens = prepared.filter((entry) => entry.candidate.required).reduce((sum, entry) => sum + entry.tokens, 0);
   const requiredBreakdown = requiredContextBreakdown(prepared);
+  const sourceCosts = requiredSourceCosts(prepared);
   if (requiredTokens > availableInputTokens) {
     throw new Error(
       `required context needs ${requiredTokens} estimated tokens but only ${availableInputTokens} input tokens are available; ` +
-      `breakdown: ${formatRequiredContextBreakdown(requiredBreakdown)}`,
+      `breakdown: ${formatRequiredContextBreakdown(requiredBreakdown)}; ` +
+      `largest required sources: ${formatRequiredSourceCosts(sourceCosts).join(", ")}`,
     );
   }
 
@@ -1065,6 +1099,7 @@ export async function compileContext(options: CompileContextOptions): Promise<Co
     omitted_candidates: omissions.length,
     omitted_file_intents: omittedFileIntents,
     required_context_breakdown: requiredBreakdown,
+    required_source_costs: sourceCosts,
     lock,
   };
 }
@@ -1168,6 +1203,8 @@ export function formatContextCompileReport(report: ContextCompileReport): string
     ...report.required_context_breakdown
       .filter((entry) => entry.source_count > 0)
       .map((entry) => `  - ${entry.category}: ${entry.estimated_tokens} tokens across ${entry.source_count} source${entry.source_count === 1 ? "" : "s"}`),
+    "Largest required sources (estimated, top 5):",
+    ...formatRequiredSourceCosts(report.required_source_costs).map((entry) => `  - ${entry}`),
     `Omitted candidates: ${report.omitted_candidates}`,
     `Output: ${report.output_path} (${outputState})`,
     `Lock hash: ${report.lock.lock_hash}`,
