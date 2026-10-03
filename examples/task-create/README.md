@@ -39,6 +39,12 @@ statements are pending. All ten impact decisions are pending. Authority is null,
 review is pending, and no evidence, source path, ownership lease or Git base is
 invented. The `author` string records the caller's claim, not a signed identity.
 
+The brief presents the objective and acceptance statements as JSON-quoted data.
+For example, an objective containing a newline followed by `## Before implementation`
+keeps that newline escaped inside the quote; it does not add another structural
+section. YAML preserves the original text. Quoting is not a model-safety guarantee
+and caller text does not grant authority.
+
 Before implementation, the owning agent fills starting conditions, failure
 behavior, counterexamples and test oracles; reviews risk and all impacts; chooses
 the existing truth locations and actual source files; and records the real

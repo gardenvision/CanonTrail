@@ -692,7 +692,7 @@ function requiredSourceCosts(
       selector: entry.candidate.selector,
       estimated_tokens: entry.tokens,
     }))
-    .sort((left, right) => right.estimated_tokens - left.estimated_tokens || left.path.localeCompare(right.path));
+    .sort((left, right) => right.estimated_tokens - left.estimated_tokens || compareCodeUnits(left.path, right.path));
 }
 
 function formatRequiredSourceCosts(costs: ContextCompileReport["required_source_costs"]): string[] {

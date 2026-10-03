@@ -48,4 +48,13 @@ Compact-handoff revision 3 received a bounded independent conditional review con
 
 This baseline intentionally does not include private development-task history. Existing product definitions and synthetic examples are not newly promoted by copying them. Current candidate checks must be recorded afresh. The preparation task remains separate from license selection, independent release review and publication permission.
 
+The independent conditional review of 66be45e and the owner's compatibility/name
+decisions are retained by `T-PUBLISH-CONTINUITY-001/evidence/review-consolidation.md`.
+Its revision-3 correction has four RED/GREEN regressions and a fresh full Windows
+chain (831 passed, 13 capability skips, 844 cases). New correction-head CI and an
+independent delta review remain open. Raw reviewer evidence stays outside public
+source; 124 protected control artifacts and all frozen snapshots remain exact.
+Do not rebuild consumer runtimes, rewrite historical receipts or merge on the
+strength of the predecessor review alone.
+
 This copy derives from the sealed MIT and neutral-naming candidates and has a separate clean public Git history, without private development ancestors. The frozen-example task retains exact-V3 evidence; the MIT task retains the explicit license choice. Local Alpha and neutral-naming preparation closed with independent C1/C2 review and revision-bound platform evidence. T-RELEASE-CLOSURE-001 owns hosting and final metadata reconciliation; its state is authoritative. `docs/alpha-readiness.md` owns the limits; `docs/platform-support.md` owns exact host results. Private reporting and main-branch CI protection were actually configured, not merely described. No actual email-delivery test is claimed. Do not treat earlier CI as execution of later metadata revisions; the tagged release must identify its own final commit and run externally. All completed preparation locks and historical examples remain unchanged. Raw external reviews and machine-local checkpoints remain outside the source tree. No previous chat is needed to find the task or its remaining gates.

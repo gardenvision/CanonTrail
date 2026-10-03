@@ -1,6 +1,6 @@
 ---
 topic_id: alpha-readiness
-stand: "2026-09-18"
+stand: "2026-10-03"
 status: public-source-hosting-configured
 truth_level: draft
 verification:
@@ -19,6 +19,7 @@ verification:
     - .agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/review-receipt-c2.json
     - .agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/platform-results-c2.json
     - .agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/hosting-results.json
+    - .agent-context/tasks/T-PUBLISH-CONTINUITY-001/evidence/review-consolidation.md
 read_if_task_touches:
   - alpha release readiness
   - distribution scope
@@ -51,7 +52,15 @@ Product definitions inherited unchanged do not constitute a new canonical promot
 - Migration execution is narrow and experimental for the Alpha. Independently reviewed inputs, backup, stable exclusive source access and separate execution authority remain mandatory. No universal restructuring or network-filesystem transaction is promised.
 - A source file's participation in context does not make it canonical. Technical verification and canonical promotion remain distinct. Evolving documents and historical promotion records can require a reviewed lifecycle decision.
 - External tools own workflow, agents, worktrees and shared editor access. CanonTrail does not schedule parallel work.
-- The context compiler supports a fixed text-extension allowlist, which includes `.mjs` and `.cjs` since the 2026-09-18 review; files outside the allowlist are not loadable as sources. See the [usage guide](usage.md).
+- The context compiler supports a fixed text-extension allowlist. The September public-main baseline already supported `.mjs`; the later field-workflow change adds `.cjs` and `.hlsl`, `.glsl`, `.shader`, `.compute`, `.cginc`. All these module/shader formats now require at most 8 MiB, valid UTF-8 and no NUL on new compilation and saved-preview application. The owner explicitly accepted the tighter `.mjs` policy as a compatibility change; it does not rewrite historical locks. Files outside the allowlist are not loadable as sources. See the [usage guide](usage.md).
+
+The October continuity predecessor `66be45e` passed exact hosted Windows/Linux/
+macOS/Node-floor CI and an independent conditional local review. Its bounded
+report/brief/documentation correction still needs its own exact-head checks and
+independent delta review. The publication task's `evidence/review-consolidation.md`
+owns those conditions; earlier release receipts are not approval of this delta.
+The document's retained verification state describes checked factual guidance,
+not independent approval, canonical promotion or release of the correction.
 
 ## Recorded evidence and remaining gates
 

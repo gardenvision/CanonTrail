@@ -1,0 +1,92 @@
+handoff_id: H-T-PUBLISH-CONTINUITY-001-20261003133000
+task_id: T-PUBLISH-CONTINUITY-001
+created_at: "2026-10-03T13:30:00Z"
+source_session_id: canontrail442-publish-20261003
+source_context_lock_path: .agent-context/tasks/T-PUBLISH-CONTINUITY-001/evidence/context-locks/84109417edeb1bccdbca5757a628023d9fd430f9d115e975a4e572d3ef7d3323.json
+source_context_lock_hash: sha256:84109417edeb1bccdbca5757a628023d9fd430f9d115e975a4e572d3ef7d3323
+objective: Integrate tested continuity and task-authoring updates with public main and publish a reviewable branch with exact hosted checks.
+completed:
+  - Preserved the exact starting source and 31 historical locks and archive files.
+  - Integrated public main corrections with compact handoffs task drafts and checked shader/module context.
+  - Updated only the fast-uri lock from 3.1.6 to 3.1.8 and reconciled third-party inventory.
+  - Passed the corrected fresh Windows chain with 827 tests and 13 explicit skips plus five repeated control-evidence fixture runs; audit validation documentation audit and strict repository completion pass.
+  - Retained both hosted Windows failures and the local EPERM setup failures; amended only test premises and bounded fixture setup without changing runtime security gates.
+decisions:
+  - statement: Publish the branch for exact hosted checks while retaining independent high-risk review and keeping shared consumer runtimes unchanged.
+    authority: approved
+    source: .agent-context/tasks/T-PUBLISH-CONTINUITY-001/brief.md
+files:
+  - path: .agent-context/tasks/T-PUBLISH-CONTINUITY-001/change.yaml
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: .agent-context/tasks/T-PUBLISH-CONTINUITY-001/evidence/progress.md
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: .agent-context/tasks/T-PUBLISH-CONTINUITY-001/state.yaml
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: test/continuity-write-hardening.test.ts
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: test/fixture-rename.test.ts
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: test/fixture-rename.ts
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: test/migration-control-evidence.test.ts
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+checks:
+  - name: Fresh Windows quality chain
+    status: pass
+    evidence: .agent-context/tasks/T-PUBLISH-CONTINUITY-001/evidence/progress.md
+  - name: Exact hosted matrix
+    status: not-run
+    evidence: Corrected revision awaits push and new checks; initial Windows CI failures remain recorded rather than transferred as approval.
+blockers:
+  - Independent review is required before the high-risk integration is verified or merged.
+open_questions:
+  - Exact hosted platform results will be observed after branch publication; source records describe the pre-CI snapshot.
+next_safe_action: Inspect the draft branch and exact hosted Windows Linux macOS and Node-floor outcomes; preserve failures and review gates without replacing consumer runtimes.
+do_not_repeat:
+  - Do not rewrite historical evidence to match current sources.
+  - Do not rebuild a shared stable consumer CLI in place or mark earlier reviews as approval of this integration.
+resume_sources:
+  - AGENTS.md
+  - .agent-context/tasks/T-PUBLISH-CONTINUITY-001/state.yaml
+  - .agent-context/tasks/T-PUBLISH-CONTINUITY-001/brief.md
+  - .agent-context/tasks/T-PUBLISH-CONTINUITY-001/change.yaml
+  - ARTIFACT_PROTOCOL.md
+  - examples/compact-handoff/README.md
+  - examples/context-inspection/README.md
+  - examples/resume-history/README.md
+  - .agent-context/tasks/T-PUBLISH-CONTINUITY-001/evidence/progress.md
+  - .github/workflows/validate.yml
+  - package-lock.json
+  - package.json
+  - src/context.ts
+  - src/continuity-files.ts
+  - src/handoff.ts
+  - src/task-create.ts
+  - test/fixture-rename.test.ts
+  - test/fixture-rename.ts
+  - test/migration-control-evidence.test.ts
+  - ROADMAP.md
+  - docs/release-checklist.md
+  - docs/self-documentation.md
+  - docs/third-party-notices.md
+  - src/cli.ts
+  - src/resume.ts
+  - src/safe-write.ts
+  - test/compact-handoff.test.ts
+  - test/continuity-write-hardening.test.ts
+  - .agent-context/tasks/T-PUBLISH-CONTINUITY-001/handoff.yaml
+  - .agent-context/tasks/T-PUBLISH-CONTINUITY-001/context.lock.json
+worktree_dirty: true
+uncommitted_summary: Git reports 12 changed/untracked entries; 7 task-selected or explicitly reported files are listed below. The complete hash-bound worktree_inventory is separate on-demand safety evidence, not an ownership claim or file-content backup.
+worktree_inventory:
+  path: .agent-context/tasks/T-PUBLISH-CONTINUITY-001/evidence/worktree-inventories/86a546172694cc9fdde2425276795a1a297a098f186f08cd8ead5333c66bc50b.worktree-inventory.json
+  content_hash: sha256:86a546172694cc9fdde2425276795a1a297a098f186f08cd8ead5333c66bc50b
+  entry_count: 12
+handoff_hash: sha256:b5e8962a82a1b1a06d836dbbd14d891595a8af3399f5c34043672ca48ef009e3

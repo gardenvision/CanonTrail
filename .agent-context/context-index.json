@@ -1,7 +1,7 @@
 {
   "version": 1,
   "hash_algorithm": "sha256",
-  "root_hash": "sha256:932c6cb02873e8904282fd283d3d17386eaa70e58ee544ac86b41293488c2ee3",
+  "root_hash": "sha256:72628dfa0c0fc8d4768f432d76c4b07024d56e61264eadf54cebb425e2f08cce",
   "documents": [
     {
       "path": ".agent-context/tasks/T-ALPHA-CANDIDATE-001/brief.md",
@@ -308,7 +308,7 @@
     },
     {
       "path": ".agent-context/tasks/T-PUBLISH-CONTINUITY-001/brief.md",
-      "content_hash": "sha256:e96e6e0bdfed2d0569998a27a6979f6d5c778fed323e28b102d36f2d39e47451",
+      "content_hash": "sha256:4482c11ae83c08753f2753f8116bcd12190c73b2056756af8a9b78695754188b",
       "stand": "2026-10-03",
       "status": "review",
       "truth_level": "active-snapshot",
@@ -324,7 +324,7 @@
     },
     {
       "path": ".agent-context/tasks/T-PUBLISH-CONTINUITY-001/evidence/progress.md",
-      "content_hash": "sha256:427d849af58a2b7232e2c48e98e791670efddaac7505ab75584057eefe3e314e",
+      "content_hash": "sha256:39ddda2e348bd0bbe3ca9af1f5ec17278ddfecc99b20bb4ba1663a2e3b0080e7",
       "stand": "2026-10-03",
       "status": "in-progress",
       "truth_level": "active-snapshot",
@@ -339,6 +339,25 @@
         "ARTIFACT_PROTOCOL.md"
       ],
       "topic_id": "publish-continuity-progress"
+    },
+    {
+      "path": ".agent-context/tasks/T-PUBLISH-CONTINUITY-001/evidence/review-consolidation.md",
+      "content_hash": "sha256:50b82c9dfea5e37be85a83224ddb5b4e3a1800594157905f980d2f3078d27014",
+      "stand": "2026-10-03",
+      "status": "in-progress",
+      "truth_level": "active-snapshot",
+      "verification_state": "internally-reviewed",
+      "read_if_task_touches": [
+        "T-PUBLISH-CONTINUITY-001",
+        "independent publication review"
+      ],
+      "primary_systems": [
+        "release preparation"
+      ],
+      "do_not_use_instead": [
+        "ARTIFACT_PROTOCOL.md"
+      ],
+      "topic_id": "publication-review-consolidation"
     },
     {
       "path": ".agent-context/tasks/T-README-ONBOARDING-001/brief.md",
@@ -400,8 +419,8 @@
     },
     {
       "path": "ARTIFACT_PROTOCOL.md",
-      "content_hash": "sha256:0eb68003a99bda82e9b6e64962f45d7fca5ea52d2b5ea64769223982fcffa611",
-      "stand": "2026-10-01",
+      "content_hash": "sha256:d741f9c16fc6a43fdad4dc38e32e39591503b4e07a7c1e2552abd01853abf388",
+      "stand": "2026-10-03",
       "status": "design-target",
       "truth_level": "design-target",
       "verification_state": "structurally-reviewed",
@@ -465,7 +484,7 @@
     },
     {
       "path": "ROADMAP.md",
-      "content_hash": "sha256:71203b02fb3d7b7c361932bb6e0d0acf09160749cee3189e4e523382e7b0788c",
+      "content_hash": "sha256:01f458388da2b01842ca06c7fd255c1f809ae1a1937d6029d1d431f63c673e7a",
       "stand": "2026-10-03",
       "status": "public-source-alpha",
       "truth_level": "draft",
@@ -528,8 +547,8 @@
     },
     {
       "path": "docs/alpha-readiness.md",
-      "content_hash": "sha256:67b2155cc4c5ce050c83c517e22232c829dd61d2d95ad0ba0ce2d6d90a79ffca",
-      "stand": "2026-09-18",
+      "content_hash": "sha256:6df83e17b13dbec1deb1799be94fe75306f125334d1d429291a838b9f202b8dd",
+      "stand": "2026-10-03",
       "status": "public-source-hosting-configured",
       "truth_level": "draft",
       "verification_state": "verified",
@@ -716,7 +735,7 @@
     },
     {
       "path": "docs/self-documentation.md",
-      "content_hash": "sha256:07e02026b33f49423e64f6ba861e1c8b056569f6cadc405c89ba7a91e1f053d2",
+      "content_hash": "sha256:39c84105cd05dfc2d48873d571d55f2a89e343956dc8b7eccd57c20b29d96357",
       "stand": "2026-10-03",
       "status": "public-source-alpha",
       "truth_level": "draft",
@@ -757,7 +776,7 @@
     },
     {
       "path": "docs/usage.md",
-      "content_hash": "sha256:5c08955057b1bf3f9d2d08151d3be285b6890f91040b805d9b18f0d2b1b7b972",
+      "content_hash": "sha256:416f4874bf1f79c6cfcff088be62547ff03788713417e99705572756cc3da77a",
       "stand": "2026-10-03",
       "status": "public-source-alpha",
       "truth_level": "draft",
@@ -1004,7 +1023,7 @@
     },
     {
       "path": "examples/task-create/README.md",
-      "content_hash": "sha256:c3c1881c57d3b71b3b61ef7c8c40e781273269f62f43b1c7a32b395e9c654555",
+      "content_hash": "sha256:7e2d785529cf30dcfe8b7ccf33374afef29ebc8f20c2204978e69d9e14c5eae6",
       "stand": "2026-10-01",
       "status": "teaching-example",
       "truth_level": "draft",

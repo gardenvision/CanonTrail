@@ -110,7 +110,7 @@ export async function createTask(options: CreateTaskOptions) {
   await validateDraft(root, schemaPath, "change-record", change);
   await validateDraft(root, schemaPath, "artifact-header", header);
   const yaml = (value: unknown) => stringify(value, { lineWidth: 0 });
-  const brief = `---\n${yaml(header)}---\n\n# Task draft: ${options.taskId}\n\n## Objective\n\n${objective}\n\n## Acceptance statements (not verified)\n\n${criteria.map(c => `- ${c.id}: ${JSON.stringify(c.statement)}`).join("\n")}\n\n## Before implementation\n\n${NEXT_STEPS.map(step => `- ${step}`).join("\n")}\n\nNo implementation decision, execution authority, acceptance, review, or canonical promotion is supplied by this scaffold. The caller must resolve every TODO and record actual evidence.\n`;
+  const brief = `---\n${yaml(header)}---\n\n# Task draft: ${options.taskId}\n\n## Objective\n\n${JSON.stringify(objective)}\n\n## Acceptance statements (not verified)\n\n${criteria.map(c => `- ${c.id}: ${JSON.stringify(c.statement)}`).join("\n")}\n\n## Before implementation\n\n${NEXT_STEPS.map(step => `- ${step}`).join("\n")}\n\nNo implementation decision, execution authority, acceptance, review, or canonical promotion is supplied by this scaffold. The caller must resolve every TODO and record actual evidence.\n`;
   const files = [brief, yaml(state), yaml(change)].map((content, i) => ({ path: paths[i]!, bytes: Buffer.byteLength(content), content_hash: sha256(content), content }));
   const written: string[] = [];
   if (options.apply) {

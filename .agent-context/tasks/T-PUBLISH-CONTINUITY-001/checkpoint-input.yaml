@@ -2,24 +2,27 @@ completed:
   - Preserved the exact starting source and 31 historical locks and archive files.
   - Integrated public main corrections with compact handoffs task drafts and checked shader/module context.
   - Updated only the fast-uri lock from 3.1.6 to 3.1.8 and reconciled third-party inventory.
-  - Passed the corrected fresh Windows chain with 827 tests and 13 explicit skips plus five repeated control-evidence fixture runs; audit validation documentation audit and strict repository completion pass.
+  - Predecessor 66be45e passed its exact hosted matrix and independent conditional review; those receipts are not current correction approval.
+  - Recorded owner acceptance of retained names and stricter mjs compatibility; corrected equal-cost report ordering objective quoting and source-backed documentation.
+  - Four new regressions are RED on predecessor runtime and GREEN after correction; the fresh r8 Windows chain passes 831 tests and 13 explicit skips with zero audit vulnerabilities and green repository documentation gates.
+  - Preserved 124 prior control artifacts all frozen test snapshots and reviewer evidence; shared stable consumer CLI unchanged.
   - Retained both hosted Windows failures and the local EPERM setup failures; amended only test premises and bounded fixture setup without changing runtime security gates.
 decisions:
   - statement: Publish the branch for exact hosted checks while retaining independent high-risk review and keeping shared consumer runtimes unchanged.
     authority: approved
     source: .agent-context/tasks/T-PUBLISH-CONTINUITY-001/brief.md
 checks:
-  - name: Fresh Windows quality chain
+  - name: Fresh correction Windows quality chain
     status: pass
-    evidence: .agent-context/tasks/T-PUBLISH-CONTINUITY-001/evidence/progress.md
+    evidence: .agent-context/tasks/T-PUBLISH-CONTINUITY-001/evidence/review-consolidation.md
   - name: Exact hosted matrix
     status: not-run
-    evidence: Corrected revision awaits push and new checks; initial Windows CI failures remain recorded rather than transferred as approval.
+    evidence: Correction head awaits push and its own checks; predecessor hosted success and earlier Windows failures remain separately retained.
 blockers:
-  - Independent review is required before the high-risk integration is verified or merged.
+  - Independent delta review is required before the corrected high-risk integration is verified or merged.
 open_questions:
   - Exact hosted platform results will be observed after branch publication; source records describe the pre-CI snapshot.
-next_safe_action: Inspect the draft branch and exact hosted Windows Linux macOS and Node-floor outcomes; preserve failures and review gates without replacing consumer runtimes.
+next_safe_action: Inspect the correction branch and its exact hosted Windows Linux macOS and Node-floor outcomes then obtain bounded independent delta review against predecessor 66be45e; preserve failures and do not merge or replace consumer runtimes without authority.
 do_not_repeat:
   - Do not rewrite historical evidence to match current sources.
   - Do not rebuild a shared stable consumer CLI in place or mark earlier reviews as approval of this integration.
@@ -28,3 +31,4 @@ resume_sources:
   - .agent-context/tasks/T-PUBLISH-CONTINUITY-001/state.yaml
   - .agent-context/tasks/T-PUBLISH-CONTINUITY-001/change.yaml
   - .agent-context/tasks/T-PUBLISH-CONTINUITY-001/evidence/progress.md
+  - .agent-context/tasks/T-PUBLISH-CONTINUITY-001/evidence/review-consolidation.md

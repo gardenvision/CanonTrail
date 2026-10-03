@@ -26,6 +26,7 @@ Integrate tested continuity and task-authoring updates with public main and publ
 - AC-001: "Public main corrections and existing working changes are preserved."
 - AC-002: "Pinned dependency audit finding is remediated without unrelated upgrades."
 - AC-003: "The source passes checks and the branch is published with honest review and platform status."
+- AC-004: "Equal-cost reports are locale-independent and multiline objective text stays quoted data with unchanged draft lifecycle."
 
 ## Authority and boundary
 
@@ -34,6 +35,13 @@ checks. Preserve public-main corrections and all historical receipts. Publish a
 reviewable branch; high-risk independent review remains a merge gate. This work
 does not update consumer schemas or runtimes, migrate a real project, or implement
 the separately requested PersonalCanon idea.
+
+The predecessor 66be45e received an independent conditional review. Its receipt
+and the owner's superseding acceptance of retained project-name references are
+in `evidence/review-consolidation.md`. Revision 3 corrects only the bounded
+report/brief/documentation findings. The owner also explicitly accepted the
+stricter `.mjs` compatibility policy. New exact-head CI and independent delta
+review remain explicit gates.
 
 ## Verification route
 

@@ -96,3 +96,22 @@ strict repository finalization. The four new fixture-helper unit cases passed.
 This snapshot still precedes its new hosted revision; inspect the draft PR's
 actual checks before calling that revision cross-platform green. All prior
 failures and their distinct scopes remain retained, not silently overwritten.
+
+## Revision-3 review corrections
+
+The independent review of predecessor 66be45e conditionally approved its exact
+scope and hosted checks. The owner explicitly accepted the stricter `.mjs`
+compatibility policy and superseded the initial project-name rejection. No
+history rewrite follows. `evidence/review-consolidation.md` owns the report hashes,
+conditions, precise correction scope and retained nonblocking observations.
+
+Four new regressions are RED on predecessor runtime and GREEN after the bounded
+report-ordering and objective-quoting changes. After a retained setup-only EPERM,
+the existing bounded fixture-rename helper is reused for two setup moves; runtime
+rollback and security assertions are unchanged. Fresh source-r8-full passes the
+complete Windows chain: 831 passed / 13 explicit skips / 844 total in 41 files,
+zero audit vulnerabilities, 59/59/16 validation with zero errors/warnings, healthy
+docs audit and strict repository finalize. Preservation checks confirm 124 prior
+control artifacts, all test snapshots and copied reviewer evidence unchanged.
+New exact-head CI and independent delta review remain open; publication and the
+three high-risk task closures are not claimed complete.

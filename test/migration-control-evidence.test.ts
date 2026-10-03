@@ -253,8 +253,8 @@ describe("independent 43e180e control-evidence findings", () => {
     const f = await fixture();
     await f.apply();
     const upper = path.join(path.dirname(f.execution), "EXECUTION");
-    await rename(f.execution, f.execution + "-rename");
-    await rename(f.execution + "-rename", upper);
+    await renameFixtureDirectory(f.execution, f.execution + "-rename");
+    await renameFixtureDirectory(f.execution + "-rename", upper);
     const names = (await readdir(upper)).sort();
     await expect(f.rollback()).rejects.toThrow(/filesystem alias|no rollback evidence/);
     expect((await readdir(upper)).sort()).toEqual(names);

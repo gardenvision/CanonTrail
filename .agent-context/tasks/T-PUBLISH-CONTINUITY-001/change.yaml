@@ -1,12 +1,12 @@
 version: 1
 change_id: CHG-PUBLISH-CONTINUITY-001
-revision: 2
+revision: 3
 title: Integrate tested continuity and task-authoring updates with public main and publish a reviewable branch with exact hosted checks.
 status: implemented
 risk: high
 author: CanonTrail publication maintainer
 canonical_source: .agent-context/tasks/T-PUBLISH-CONTINUITY-001/brief.md
-decision_rationale: The maintainer requested completion of the pending updates and commit/push. Preserve both public-main fixes and local corrections; fix the known dependency finding and publish revision-bound CI while keeping high-risk review honest. Hosted Windows Git does not emit the locally observed long-path warning; the fixture must either prove refusal on a diagnostic or prove complete warning-free capture including the deep file. Missing paths remain assertion failures; no runtime or global timeout change is needed.
+decision_rationale: Preserve the independently reviewed predecessor and apply only bounded report-ordering caller-text and documentation corrections from its conditional review. The owner accepted retained project-name references after superseding an initial rejection; do not rewrite history or immutable archives. The owner explicitly retained the stricter mjs policy and requested clear compatibility documentation. A new head needs exact CI and independent delta review; predecessor evidence is not new approval.
 documentation_structure:
   decision: no-feature-document-change
   rationale: Existing protocol usage release and dependency owners cover this bounded integration; no new product feature boundary.
@@ -36,10 +36,18 @@ acceptance_cases:
     oracle: Exact head identity per hosted check plus local quality and structural reports.
     status: pending
     evidence_refs: []
+  - id: AC-004
+    given: The predecessor review found equal-cost locale sorting and raw multiline objective insertion into the generated brief.
+    expected: Report ties use code-unit order and the objective remains visibly quoted data without changing YAML semantics or draft lifecycle.
+    failure_or_uncertainty: Keep the same source selection lock contracts and no-authority draft semantics; do not treat quoting as enforcement of model behavior.
+    counterexample: A changed host locale changes equal-cost report order or caller text creates a second unquoted implementation section.
+    oracle: Predecessor RED and corrected GREEN regressions plus schema and full-suite checks in an isolated snapshot.
+    status: pass
+    evidence_refs: [.agent-context/tasks/T-PUBLISH-CONTINUITY-001/evidence/review-consolidation.md]
 impacts:
   - area: requirement
     decision: affected
-    rationale: Publish bounded existing work under explicit review and platform gates.
+    rationale: Publish bounded work and review corrections under explicit compatibility review and platform gates.
     evidence_refs: [.agent-context/tasks/T-PUBLISH-CONTINUITY-001/brief.md]
   - area: data-contracts
     decision: affected
@@ -51,7 +59,7 @@ impacts:
     evidence_refs: [src/handoff.ts, src/context.ts, src/continuity-files.ts]
   - area: tests-reference-cases
     decision: affected
-    rationale: Both existing branch regressions and current full suites must pass.
+    rationale: Preserve branch regressions and add RED GREEN report-ordering and multiline-objective counterexamples before the current full suite.
     evidence_refs: [test/compact-handoff-review.test.ts, test/continuity-write-hardening.test.ts, test/task-create.test.ts, test/migration-control-evidence.test.ts, test/fixture-rename.ts, test/fixture-rename.test.ts]
   - area: example-data
     decision: affected
@@ -63,8 +71,8 @@ impacts:
     evidence_refs: [src/cli.ts]
   - area: documentation
     decision: affected
-    rationale: Dependency and current integration status must match source.
-    evidence_refs: [docs/self-documentation.md, docs/third-party-notices.md, ROADMAP.md]
+    rationale: Dependency review scope format attribution and current integration status must match source.
+    evidence_refs: [docs/self-documentation.md, docs/third-party-notices.md, docs/alpha-readiness.md, ROADMAP.md]
   - area: diagrams-visuals
     decision: not-affected
     rationale: No new graphical output or diagram changes.
@@ -79,7 +87,8 @@ impacts:
     evidence_refs: [package-lock.json, .github/workflows/validate.yml]
 verification:
   checks:
-    - {name: Fresh Windows installation check build complete suite and runtime/full audit, status: pass, evidence_refs: [.agent-context/tasks/T-PUBLISH-CONTINUITY-001/evidence/progress.md]}
+    - {name: Predecessor Windows installation check build complete suite and runtime/full audit, status: pass, evidence_refs: [.agent-context/tasks/T-PUBLISH-CONTINUITY-001/evidence/progress.md]}
+    - {name: Current review-correction full chain after bounded case-alias fixture setup correction, status: pass, evidence_refs: [.agent-context/tasks/T-PUBLISH-CONTINUITY-001/evidence/review-consolidation.md]}
   terminology_search:
     status: pass
     terms: [independent review, exact bytes, fast-uri, shared stable runtime]
@@ -88,13 +97,13 @@ verification:
     applicable: false
     status: not-applicable
     evidence_refs: []
-  unverifiable_items: [Exact hosted checks pending, Independent continuity review pending]
+  unverifiable_items: [New head hosted checks pending, Independent delta review pending]
 independent_review:
   status: pending
-  reviewer: null
-  findings: []
-  evidence_refs: []
+  reviewer: Claude independent local reviewer of predecessor 66be45e
+  findings: [Predecessor conditionally approved; current runtime and metadata delta remains unreviewed, Retained project-name references accepted by owner, Stricter mjs policy explicitly accepted as a compatibility change]
+  evidence_refs: [.agent-context/tasks/T-PUBLISH-CONTINUITY-001/evidence/review-consolidation.md]
   waiver: null
 supersedes: []
 superseded_by: null
-updated_at: 2026-10-03T13:30:00Z
+updated_at: 2026-10-03T17:36:00Z

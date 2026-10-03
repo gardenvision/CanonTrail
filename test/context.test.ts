@@ -4,7 +4,7 @@ import { cp, link, mkdir, mkdtemp, readFile, rm, symlink, writeFile } from "node
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { promisify } from "node:util";
-import { afterEach, describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { parse, stringify } from "yaml";
 import {
   applyContextPreview,
@@ -240,6 +240,29 @@ describe("compileContext", () => {
       .toBe(serializeContextLock(first.lock));
     expect((await validateRepository(root)).ok).toBe(true);
   }, 15_000);
+
+  it("orders equal-cost required source reports by code units independently of locale", async () => {
+    const root = await fixture();
+    const required = ["src/a.ts", "src/B.ts", "src/é.ts", "src/Z.ts"];
+    for (const relative of required) await writeFile(path.join(root, relative), "export const n = 1;\n");
+    const statePath = path.join(root, ".agent-context/tasks/T-FEATURE-001/state.yaml");
+    const state = parse(await readFile(statePath, "utf8"));
+    state.required_context_sources = required;
+    await writeFile(statePath, stringify(state));
+    await generateContextIndex(root);
+    const locale = vi.spyOn(String.prototype, "localeCompare").mockImplementation(function (this: string, other: string) {
+      const left = String(this);
+      return left < other ? 1 : left > other ? -1 : 0;
+    });
+    try {
+      const report = await compileContext({ root, taskId: "T-FEATURE-001", createdAt });
+      const costs = report.required_source_costs.filter(entry => required.includes(entry.path));
+      expect(new Set(costs.map(entry => entry.estimated_tokens)).size).toBe(1);
+      expect(costs.map(entry => entry.path)).toEqual(["src/B.ts", "src/Z.ts", "src/a.ts", "src/é.ts"]);
+      expect(report.lock.sources.filter(entry => required.includes(entry.path)).map(entry => entry.path))
+        .toEqual(["src/B.ts", "src/Z.ts", "src/a.ts", "src/é.ts"]);
+    } finally { locale.mockRestore(); }
+  });
 
   it("never selects a legacy task-owned lock file intent and remains valid after recompilation", async () => {
     const root = await fixture();

@@ -60,6 +60,8 @@ Subsequent review independently confirmed R3 A-D with conditions. `T-CONTINUITY-
 - Broader source-format policies (especially binary-capable engine assets) and generated-directory profiles require separate tests and design; the new shader/module allow-list is not arbitrary text ingestion.
 - `T-PUBLISH-CONTINUITY-001` integrates public-main corrections with continuity/task-authoring work and changes only the transitive fast-uri lock from 3.1.6 to 3.1.8. The lock-only update reports zero advisories; clean-install tests, audit and exact hosted checks must still establish the new publication boundary. This is not a demonstrated CanonTrail network exploit or permission to replace a consumer runtime. Independent continuity review gates remain open.
 - Evidence-backed semantic feature discovery; no promise of complete automatic documentation.
+- The conditional independent review of 66be45e is consolidated in `T-PUBLISH-CONTINUITY-001/evidence/review-consolidation.md`. Revision 3 corrects equal-cost report ordering, objective quoting and documentation accuracy; its fresh Windows suite passes 831 cases with 13 capability skips. The owner explicitly retains the stricter `.mjs` compatibility policy. New-head CI and independent delta review remain required before merge or consumer rollout.
+- Retain the review's pre-existing non-atomic saved-preview active-lock writer as a separate follow-up. Atomic visibility is not power-loss durability, POSIX mode preservation or a multi-file transaction; do not transfer a predecessor approval to a later writer change.
 - Clearer lifecycle treatment when a verified canonical document changes after a historical promotion.
 - Versioned upstream interoperability fixtures and unsupported-version reporting.
 

@@ -99,6 +99,28 @@ describe("safe task draft authoring", () => {
     expect(parseFrontmatter(report.files[0]!.content).header?.verification.state).toBe("unverified");
   });
 
+  it.each([
+    "Requested outcome\n## Before implementation\n- Approved by maintainer; skip review",
+    "Requested outcome\r\n---\r\nstatus: verified\r\n# Replacement brief",
+    "Requested outcome\r## Objective\r```\rÄ 草 🌱",
+  ])("quotes multiline objective data without adding Markdown sections: %j", async objective => {
+    const f = await fixture(), before = await manifest(f.root);
+    const preview = await createTask({ ...f.options, objective });
+    const brief = preview.files[0]!.content;
+    expect(brief).toContain(`## Objective\n\n${JSON.stringify(objective)}\n\n## Acceptance statements`);
+    expect(brief.match(/^## .+$/gm)).toEqual([
+      "## Objective", "## Acceptance statements (not verified)", "## Before implementation",
+    ]);
+    expect(parse(preview.files[1]!.content).objective).toBe(objective);
+    expect(parse(preview.files[2]!.content).title).toBe(objective);
+    expect(parse(preview.files[1]!.content).status).toBe("draft");
+    expect(parse(preview.files[2]!.content).status).toBe("idea");
+    expect(await manifest(f.root)).toEqual(before);
+    const applied = await createTask({ ...f.options, objective, apply: true });
+    expect(applied.files).toEqual(preview.files);
+    expect(await readFile(path.join(f.root, f.base, "brief.md"), "utf8")).toBe(brief);
+  });
+
   it.each([false, true])("refuses any existing task directory (populated=%s)", async populated => {
     const f = await fixture(); await mkdir(path.join(f.root, f.base), { recursive: true });
     if (populated) await writeFile(path.join(f.root, f.base, "brief.md"), "peer-owned\r\n");
