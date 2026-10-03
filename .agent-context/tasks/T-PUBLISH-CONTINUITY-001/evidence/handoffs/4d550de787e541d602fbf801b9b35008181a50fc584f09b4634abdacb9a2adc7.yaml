@@ -1,21 +1,23 @@
-handoff_id: H-T-PUBLISH-CONTINUITY-001-20261003133000
+handoff_id: H-T-PUBLISH-CONTINUITY-001-20261003130200
 task_id: T-PUBLISH-CONTINUITY-001
-created_at: "2026-10-03T13:30:00Z"
+created_at: "2026-10-03T13:02:00Z"
 source_session_id: canontrail442-publish-20261003
-source_context_lock_path: .agent-context/tasks/T-PUBLISH-CONTINUITY-001/evidence/context-locks/84109417edeb1bccdbca5757a628023d9fd430f9d115e975a4e572d3ef7d3323.json
-source_context_lock_hash: sha256:84109417edeb1bccdbca5757a628023d9fd430f9d115e975a4e572d3ef7d3323
+source_context_lock_path: .agent-context/tasks/T-PUBLISH-CONTINUITY-001/evidence/context-locks/27a14583d72786100fd4129f75d58b1e0b7478476fa1106f57bb2123536b3f05.json
+source_context_lock_hash: sha256:27a14583d72786100fd4129f75d58b1e0b7478476fa1106f57bb2123536b3f05
 objective: Integrate tested continuity and task-authoring updates with public main and publish a reviewable branch with exact hosted checks.
 completed:
   - Preserved the exact starting source and 31 historical locks and archive files.
   - Integrated public main corrections with compact handoffs task drafts and checked shader/module context.
   - Updated only the fast-uri lock from 3.1.6 to 3.1.8 and reconciled third-party inventory.
-  - Passed the corrected fresh Windows chain with 827 tests and 13 explicit skips plus five repeated control-evidence fixture runs; audit validation documentation audit and strict repository completion pass.
-  - Retained both hosted Windows failures and the local EPERM setup failures; amended only test premises and bounded fixture setup without changing runtime security gates.
+  - Passed fresh Windows installation typecheck build 823 tests with 13 explicit skips audit validation documentation audit and strict repository completion.
 decisions:
   - statement: Publish the branch for exact hosted checks while retaining independent high-risk review and keeping shared consumer runtimes unchanged.
     authority: approved
     source: .agent-context/tasks/T-PUBLISH-CONTINUITY-001/brief.md
 files:
+  - path: .agent-context/tasks/T-PUBLISH-CONTINUITY-001/brief.md
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
   - path: .agent-context/tasks/T-PUBLISH-CONTINUITY-001/change.yaml
     state: modified
     summary: Git status M before handoff; selected by task context or exact file intent.
@@ -25,16 +27,16 @@ files:
   - path: .agent-context/tasks/T-PUBLISH-CONTINUITY-001/state.yaml
     state: modified
     summary: Git status M before handoff; selected by task context or exact file intent.
-  - path: test/continuity-write-hardening.test.ts
+  - path: ROADMAP.md
     state: modified
     summary: Git status M before handoff; selected by task context or exact file intent.
-  - path: test/fixture-rename.test.ts
-    state: created
-    summary: Git status ?? before handoff; selected by task context or exact file intent.
-  - path: test/fixture-rename.ts
-    state: created
-    summary: Git status ?? before handoff; selected by task context or exact file intent.
-  - path: test/migration-control-evidence.test.ts
+  - path: docs/release-checklist.md
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: docs/self-documentation.md
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: docs/third-party-notices.md
     state: modified
     summary: Git status M before handoff; selected by task context or exact file intent.
 checks:
@@ -43,7 +45,7 @@ checks:
     evidence: .agent-context/tasks/T-PUBLISH-CONTINUITY-001/evidence/progress.md
   - name: Exact hosted matrix
     status: not-run
-    evidence: Corrected revision awaits push and new checks; initial Windows CI failures remain recorded rather than transferred as approval.
+    evidence: Pending branch push; inspect actual GitHub checks rather than transferring older platform receipts.
 blockers:
   - Independent review is required before the high-risk integration is verified or merged.
 open_questions:
@@ -69,24 +71,17 @@ resume_sources:
   - src/continuity-files.ts
   - src/handoff.ts
   - src/task-create.ts
-  - test/fixture-rename.test.ts
-  - test/fixture-rename.ts
-  - test/migration-control-evidence.test.ts
   - ROADMAP.md
   - docs/release-checklist.md
   - docs/self-documentation.md
   - docs/third-party-notices.md
   - src/cli.ts
   - src/resume.ts
-  - src/safe-write.ts
-  - test/compact-handoff.test.ts
-  - test/continuity-write-hardening.test.ts
-  - .agent-context/tasks/T-PUBLISH-CONTINUITY-001/handoff.yaml
   - .agent-context/tasks/T-PUBLISH-CONTINUITY-001/context.lock.json
 worktree_dirty: true
-uncommitted_summary: Git reports 12 changed/untracked entries; 7 task-selected or explicitly reported files are listed below. The complete hash-bound worktree_inventory is separate on-demand safety evidence, not an ownership claim or file-content backup.
+uncommitted_summary: Git reports 16 changed/untracked entries; 8 task-selected or explicitly reported files are listed below. The complete hash-bound worktree_inventory is separate on-demand safety evidence, not an ownership claim or file-content backup.
 worktree_inventory:
-  path: .agent-context/tasks/T-PUBLISH-CONTINUITY-001/evidence/worktree-inventories/86a546172694cc9fdde2425276795a1a297a098f186f08cd8ead5333c66bc50b.worktree-inventory.json
-  content_hash: sha256:86a546172694cc9fdde2425276795a1a297a098f186f08cd8ead5333c66bc50b
-  entry_count: 12
-handoff_hash: sha256:b5e8962a82a1b1a06d836dbbd14d891595a8af3399f5c34043672ca48ef009e3
+  path: .agent-context/tasks/T-PUBLISH-CONTINUITY-001/evidence/worktree-inventories/ffb8c4ff7282e491c32a22956089d49e8111de34019280b7c8be722525cd6725.worktree-inventory.json
+  content_hash: sha256:ffb8c4ff7282e491c32a22956089d49e8111de34019280b7c8be722525cd6725
+  entry_count: 16
+handoff_hash: sha256:4d550de787e541d602fbf801b9b35008181a50fc584f09b4634abdacb9a2adc7

@@ -17,14 +17,14 @@ acceptance_criteria:
     status: pending
 dependencies: []
 documentation_impact: [ROADMAP.md, docs/self-documentation.md, docs/third-party-notices.md, docs/release-checklist.md]
-file_intents: [package-lock.json, docs/third-party-notices.md, ROADMAP.md, docs/self-documentation.md, docs/release-checklist.md, src/handoff.ts, src/continuity-files.ts, src/context.ts, src/cli.ts, src/validator.ts, src/resume.ts]
-required_context_sources: [ARTIFACT_PROTOCOL.md, package.json, package-lock.json, src/handoff.ts, src/continuity-files.ts, src/context.ts, src/task-create.ts, .github/workflows/validate.yml]
+file_intents: [package-lock.json, docs/third-party-notices.md, ROADMAP.md, docs/self-documentation.md, docs/release-checklist.md, src/handoff.ts, src/continuity-files.ts, src/safe-write.ts, src/context.ts, src/cli.ts, src/validator.ts, src/resume.ts, test/compact-handoff.test.ts, test/continuity-write-hardening.test.ts, test/migration-control-evidence.test.ts, test/fixture-rename.ts, test/fixture-rename.test.ts]
+required_context_sources: [ARTIFACT_PROTOCOL.md, package.json, package-lock.json, src/handoff.ts, src/continuity-files.ts, src/context.ts, src/task-create.ts, .github/workflows/validate.yml, test/migration-control-evidence.test.ts, test/fixture-rename.ts, test/fixture-rename.test.ts]
 parallel_safety: exclusive
 owner: null
 worktree: null
 checks:
-  - {id: CHECK-WINDOWS, command_or_observation: Fresh installation typecheck build full 836-case Windows suite audit and strict repository gates., status: pass, evidence_refs: [.agent-context/tasks/T-PUBLISH-CONTINUITY-001/evidence/progress.md]}
+  - {id: CHECK-WINDOWS, command_or_observation: Fresh revision-2 installation typecheck build full 840-case Windows suite five repeated control fixtures audit and strict repository gates., status: pass, evidence_refs: [.agent-context/tasks/T-PUBLISH-CONTINUITY-001/evidence/progress.md]}
   - {id: CHECK-CI, command_or_observation: Exact branch hosted Linux Windows macOS and Node-floor checks., status: pending, evidence_refs: []}
   - {id: CHECK-REVIEW, command_or_observation: Independent review of the integrated high-risk continuity change before merge., status: pending, evidence_refs: []}
 latest_handoff: .agent-context/tasks/T-PUBLISH-CONTINUITY-001/handoff.yaml
-updated_at: 2026-10-03T13:00:00Z
+updated_at: 2026-10-03T13:30:00Z

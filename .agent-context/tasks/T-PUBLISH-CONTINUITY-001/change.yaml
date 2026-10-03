@@ -1,12 +1,12 @@
 version: 1
 change_id: CHG-PUBLISH-CONTINUITY-001
-revision: 1
+revision: 2
 title: Integrate tested continuity and task-authoring updates with public main and publish a reviewable branch with exact hosted checks.
 status: implemented
 risk: high
 author: CanonTrail publication maintainer
 canonical_source: .agent-context/tasks/T-PUBLISH-CONTINUITY-001/brief.md
-decision_rationale: The maintainer requested completion of the pending updates and commit/push. Preserve both public-main fixes and local corrections; fix the known dependency finding and publish revision-bound CI while keeping high-risk review honest.
+decision_rationale: The maintainer requested completion of the pending updates and commit/push. Preserve both public-main fixes and local corrections; fix the known dependency finding and publish revision-bound CI while keeping high-risk review honest. Hosted Windows Git does not emit the locally observed long-path warning; the fixture must either prove refusal on a diagnostic or prove complete warning-free capture including the deep file. Missing paths remain assertion failures; no runtime or global timeout change is needed.
 documentation_structure:
   decision: no-feature-document-change
   rationale: Existing protocol usage release and dependency owners cover this bounded integration; no new product feature boundary.
@@ -52,7 +52,7 @@ impacts:
   - area: tests-reference-cases
     decision: affected
     rationale: Both existing branch regressions and current full suites must pass.
-    evidence_refs: [test/compact-handoff-review.test.ts, test/continuity-write-hardening.test.ts, test/task-create.test.ts]
+    evidence_refs: [test/compact-handoff-review.test.ts, test/continuity-write-hardening.test.ts, test/task-create.test.ts, test/migration-control-evidence.test.ts, test/fixture-rename.ts, test/fixture-rename.test.ts]
   - area: example-data
     decision: affected
     rationale: Publish existing neutral task-draft and inventory examples.
@@ -97,4 +97,4 @@ independent_review:
   waiver: null
 supersedes: []
 superseded_by: null
-updated_at: 2026-10-03T13:00:00Z
+updated_at: 2026-10-03T13:30:00Z

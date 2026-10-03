@@ -2,7 +2,8 @@ completed:
   - Preserved the exact starting source and 31 historical locks and archive files.
   - Integrated public main corrections with compact handoffs task drafts and checked shader/module context.
   - Updated only the fast-uri lock from 3.1.6 to 3.1.8 and reconciled third-party inventory.
-  - Passed fresh Windows installation typecheck build 823 tests with 13 explicit skips audit validation documentation audit and strict repository completion.
+  - Passed the corrected fresh Windows chain with 827 tests and 13 explicit skips plus five repeated control-evidence fixture runs; audit validation documentation audit and strict repository completion pass.
+  - Retained both hosted Windows failures and the local EPERM setup failures; amended only test premises and bounded fixture setup without changing runtime security gates.
 decisions:
   - statement: Publish the branch for exact hosted checks while retaining independent high-risk review and keeping shared consumer runtimes unchanged.
     authority: approved
@@ -13,7 +14,7 @@ checks:
     evidence: .agent-context/tasks/T-PUBLISH-CONTINUITY-001/evidence/progress.md
   - name: Exact hosted matrix
     status: not-run
-    evidence: Pending branch push; inspect actual GitHub checks rather than transferring older platform receipts.
+    evidence: Corrected revision awaits push and new checks; initial Windows CI failures remain recorded rather than transferred as approval.
 blockers:
   - Independent review is required before the high-risk integration is verified or merged.
 open_questions:

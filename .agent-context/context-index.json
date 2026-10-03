@@ -1,7 +1,7 @@
 {
   "version": 1,
   "hash_algorithm": "sha256",
-  "root_hash": "sha256:68a70034b19fb8b54a59314eac2e785d0ede38cf4db7548fc9136e12ae6ad429",
+  "root_hash": "sha256:932c6cb02873e8904282fd283d3d17386eaa70e58ee544ac86b41293488c2ee3",
   "documents": [
     {
       "path": ".agent-context/tasks/T-ALPHA-CANDIDATE-001/brief.md",
@@ -324,7 +324,7 @@
     },
     {
       "path": ".agent-context/tasks/T-PUBLISH-CONTINUITY-001/evidence/progress.md",
-      "content_hash": "sha256:cb5922e2a29e000015cd0526c7f55d0796acf3856de66839f34d9b6d6a89a090",
+      "content_hash": "sha256:427d849af58a2b7232e2c48e98e791670efddaac7505ab75584057eefe3e314e",
       "stand": "2026-10-03",
       "status": "in-progress",
       "truth_level": "active-snapshot",

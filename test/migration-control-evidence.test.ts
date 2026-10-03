@@ -11,6 +11,7 @@ import {
   prepareMigrationTransformation, type MigrationTargetHeader,
 } from "../src/migration.js";
 import { validateRepository } from "../src/validator.js";
+import { renameFixtureDirectory } from "./fixture-rename.js";
 
 const roots: string[] = [];
 const DATE = "2026-09-05T18:00:00.000Z";
@@ -59,7 +60,7 @@ async function linkDirectory(target: string, link: string) {
 }
 async function replaceWithLink(directory: string) {
   const outside = path.join(await temporaryRoot(), "moved");
-  await rename(directory, outside);
+  await renameFixtureDirectory(directory, outside);
   await linkDirectory(outside, directory);
   return outside;
 }

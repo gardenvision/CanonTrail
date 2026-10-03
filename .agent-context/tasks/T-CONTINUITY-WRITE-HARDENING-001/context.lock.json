@@ -1,14 +1,14 @@
 {
   "task_id": "T-CONTINUITY-WRITE-HARDENING-001",
   "agent_run_id": null,
-  "created_at": "2026-10-03T13:00:00Z",
-  "context_index_hash": "sha256:68a70034b19fb8b54a59314eac2e785d0ede38cf4db7548fc9136e12ae6ad429",
-  "base_revision": "f08d3cadb04441a24ee9fabc7bea65c1dc0ea55b",
+  "created_at": "2026-10-03T13:30:00Z",
+  "context_index_hash": "sha256:932c6cb02873e8904282fd283d3d17386eaa70e58ee544ac86b41293488c2ee3",
+  "base_revision": "373d60555f735c8a88750336b663c0d5b17f7f81",
   "budget": {
     "total_tokens": 140000,
     "reserved_output_tokens": 16000,
     "reserved_input_tokens": 4096,
-    "estimated_input_tokens": 117079
+    "estimated_input_tokens": 117368
   },
   "sources": [
     {
@@ -234,21 +234,21 @@
     },
     {
       "path": "test/continuity-write-hardening.test.ts",
-      "content_hash": "sha256:431cb032bf47c47a075b9abaf9c229d743a66c5007ad406507bb6fd6405bf28a",
-      "git_blob": "ba51b750b55f45fd01c9bd41f3a2bba114888f58",
+      "content_hash": "sha256:3fbcbab47bfe6a0aeaf6a4d71fda3d0dfa5af1c065b0e65ebc678c35c64e5970",
+      "git_blob": null,
       "truth_level": "unclassified",
       "level": "L3",
       "priority": 25,
       "selection_reason": "Persistently required by the current task state.; Existing file declared by the current task.",
       "selector": "task-required-context,task-file-intent",
-      "estimated_tokens": 5124,
+      "estimated_tokens": 5413,
       "ownership": "project",
       "source_system": null
     },
     {
       "path": "ROADMAP.md",
       "content_hash": "sha256:71203b02fb3d7b7c361932bb6e0d0acf09160749cee3189e4e523382e7b0788c",
-      "git_blob": null,
+      "git_blob": "ea315d71041ff2295ae889c1ae3a6387360937be",
       "truth_level": "draft",
       "level": "L3",
       "priority": 30,
@@ -261,7 +261,7 @@
     {
       "path": "docs/release-checklist.md",
       "content_hash": "sha256:e82992fc8380962d1e8baa8ae154c8beb9a42ab0912f270637bd927b1b351ccd",
-      "git_blob": null,
+      "git_blob": "6fee4b1264d0d36900778d8a0524c8cd70313ade",
       "truth_level": "draft",
       "level": "L3",
       "priority": 30,
@@ -274,7 +274,7 @@
     {
       "path": "docs/self-documentation.md",
       "content_hash": "sha256:07e02026b33f49423e64f6ba861e1c8b056569f6cadc405c89ba7a91e1f053d2",
-      "git_blob": null,
+      "git_blob": "9c43a31188c1b7e6a20008ade22ac8916a648dab",
       "truth_level": "draft",
       "level": "L3",
       "priority": 30,
@@ -339,7 +339,7 @@
     {
       "path": "test/compact-handoff.test.ts",
       "content_hash": "sha256:33b25357560a3f3b4a11ecdd301651ac4a1ac5ccd3753141a12a01306e7675fd",
-      "git_blob": null,
+      "git_blob": "adc97deb025ff1d2e827b6cd0e6b755a23c3925f",
       "truth_level": "unclassified",
       "level": "L3",
       "priority": 30,
@@ -378,5 +378,5 @@
   ],
   "omissions": [],
   "raw_transcripts_included": false,
-  "lock_hash": "sha256:ca9f6b0c314b58b2a0bc88fc5bec0c386ea1341bdf67b809f0ebfc54a7a673c0"
+  "lock_hash": "sha256:089bc51d7f0b2822277d082dcefcce783f14afc12a7b9afa218942bc450b4f0f"
 }

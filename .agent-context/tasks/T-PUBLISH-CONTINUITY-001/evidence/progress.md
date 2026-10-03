@@ -53,3 +53,46 @@ pending. Historical locks/archives retain their original identities. Only the
 three owning active locks were refreshed after inspecting source changes; the
 initializer section now selects the same complete schema list at lines 104..121.
 No shared consumer executable is rebuilt or replaced by this publication.
+
+## Hosted revision-1 observation and fixture correction
+
+The pushed head 373d605 passed both Linux matrix variants, macOS and the separate
+completion gate. Both hosted Windows runs failed the same test assertion: the
+Git invocation did not emit the long-path warning the local installation emits.
+The failed runs (37124835783 and 37124889267) are retained externally; they are
+not described as green or discarded by a retry.
+
+Revision 2 corrects this test premise, not the runtime contract: a diagnostic
+still requires rejection with no writes. Without a diagnostic the test must
+find the exact deep-file status entry, compare the complete captured sidecar with
+the independently observed Git entries, and preserve every pre-existing file.
+Missing entries still fail. The platform-neutral injected-warning assertions
+remain unchanged. Fresh execution of this changed fixture and the final hosted
+revision is required; no global timeout increase or new capability skip is used.
+
+The next complete local suite passed the changed long-path test but failed while
+constructing a different migration attack fixture: Windows denied renaming its
+fresh execution directory with EPERM, before the junction attack was installed.
+Two focused unchanged-source probes produced one pass and another setup EPERM
+in a different test using the same helper. The failure and probe logs are retained.
+This establishes repeated setup access denial, not its OS/scanner root cause.
+
+The fixture-only directory rename now retries identical Windows EPERM/EACCES/EBUSY
+operations at most five times (775 ms total delay). Persistent errors, other error
+codes and non-Windows errors still fail. Four deterministic unit cases pin this
+bound. Product operations, containment assertions, no-mutation checks, global
+timeouts and skip policy are unchanged. This is not a runtime migration fix or
+proof of a hostile-race guarantee; the corrected complete suite is still required.
+
+## Revision-2 local completion
+
+The frozen source-r4 manifest covers 305 files (2,510,350 bytes), with raw SHA-256
+a357d278a78a319e5b7b9353522479dc7c08db8c7d2ea9cfc61f3ce34072deef.
+Five complete repeated control-evidence fixture runs passed. A fresh complete
+Windows chain then passed installation, typecheck, build, 827 tests with 13
+explicit skips (840 total in 41 files), full audit with zero vulnerabilities,
+validation (58/57/16, zero errors/warnings), healthy documentation audit and
+strict repository finalization. The four new fixture-helper unit cases passed.
+This snapshot still precedes its new hosted revision; inspect the draft PR's
+actual checks before calling that revision cross-platform green. All prior
+failures and their distinct scopes remain retained, not silently overwritten.

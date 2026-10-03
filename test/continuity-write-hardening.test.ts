@@ -275,14 +275,29 @@ describe("retained history and current entry", () => {
     expect(parseGitStatusCapture(Buffer.from("?? visible.txt\0"), Buffer.alloc(0))).toEqual([{ code: "??", path: "visible.txt" }]);
   });
 
-  it.skipIf(process.platform !== "win32")("refuses an exit-zero Git warning for untracked paths beyond MAX_PATH", async () => {
+  it.skipIf(process.platform !== "win32")("rejects warned long-path traversal or proves complete warning-free capture", async () => {
     const f = await fixture(); await git(f.root, ["config", "core.longpaths", "false"]);
     const deep = path.join(f.root, ...Array.from({ length: 6 }, (_, i) => `long-${i}-${"x".repeat(48)}`));
     await mkdir(deep, { recursive: true }); await writeFile(path.join(deep, "hidden.txt"), "must not silently omit\n");
     const status = await git(f.root, ["status", "--porcelain=v1", "-z", "--untracked-files=all"]);
-    expect(status.stderr).toMatch(/warning|too long/i);
     const before = await snapshot(f.root);
-    await expect(createHandoff({ ...f.options, apply: true })).rejects.toThrow(/Git.*warning|Git.*diagnostic|status.*incomplete/i);
-    expect(await snapshot(f.root)).toEqual(before);
+    if (status.stderr.trim()) {
+      expect(status.stderr).toMatch(/warning|too long/i);
+      await expect(createHandoff({ ...f.options, apply: true })).rejects.toThrow(/Git.*warning|Git.*diagnostic|status.*incomplete/i);
+      expect(await snapshot(f.root)).toEqual(before);
+      console.info(JSON.stringify({ fixture: "windows-long-path-capture", behavior: "warned-traversal-refused" }));
+    } else {
+      // Some Git/Windows combinations traverse long paths even with this local
+      // setting disabled. No warning is not enough: prove the file was captured.
+      const hidden = path.relative(f.root, path.join(deep, "hidden.txt")).split(path.sep).join("/");
+      const expected = parseGitStatusCapture(Buffer.from(status.stdout), Buffer.from(status.stderr));
+      expect(expected).toContainEqual({ code: "??", path: hidden });
+      const made = await createHandoff({ ...f.options, apply: true });
+      const inventory = parseWorktreeInventoryBytes(await readFile(path.join(f.root, made.handoff.worktree_inventory!.path)));
+      expect(inventory.entries).toEqual(expected);
+      const after = await snapshot(f.root);
+      for (const [name, hash] of Object.entries(before)) expect(after[name]).toBe(hash);
+      console.info(JSON.stringify({ fixture: "windows-long-path-capture", behavior: "complete-warning-free-traversal", entries: inventory.entries.length }));
+    }
   });
 });
