@@ -382,6 +382,13 @@ See `examples/context-sections/README.md` for byte-reproducible input and lock f
 
 The provider-neutral entrypoint SHOULD explain CanonTrail's capabilities and first determine whether the arriving session is starting a new task, resuming a validated handoff, continuing an unfinished documentation bootstrap, or performing documentation maintenance. Provider bridges SHOULD route to that entrypoint instead of duplicating these rules.
 
+`canontrail guide` emits concise instructions bundled with the running CLI,
+without reading newer checkout or online documentation. It MUST retain the safe
+receiving-session order and user/project authority boundary. A CLI version label
+alone is not exact build identity, independent review, or permission to update a
+consumer. The guide MUST NOT initialize a target, install host skills, mutate
+schemas, run agents or infer current live session state.
+
 Task state MAY reference an external source system and source artifact. External task IDs are opaque strings; CanonTrail MUST NOT require another tool to adopt CanonTrail's ID format.
 
 `canontrail task create` is an optional draft-authoring convenience, not a scheduler or decision engine. It requires explicit portable task/change identities, objective, acceptance statements, author and provisional risk. It previews exactly three files by default: governed `brief.md`, `state.yaml`, and `change.yaml`. Apply MUST create only a previously nonexistent task directory and MUST NOT merge into or overwrite an existing directory, even an empty one. Initialized configuration, a readable project entrypoint, governed/non-excluded output paths and both shipped and installed task/change/header schemas must pass preflight. No schema or configuration is synchronized automatically. Control paths retain exact portable spelling and no-link checks; stable exclusive filesystem access is required. Exclusive file creation cannot promise a crash-atomic three-file transaction: unexpected I/O failure may leave a partial new draft for explicit inspection, never automatic deletion or overwrite.
@@ -512,6 +519,15 @@ Interpretation is field-specific, not a blanket text heuristic. Task source/hand
 Deferral MUST NOT hide or rewrite findings: raw `repository.ok`, counts and diagnostics remain unchanged, and a failed `project-health` gate explicitly marks only those classified findings `blocking: false`. The additive `completion_scope` report lists the relevant tasks, fallback reason and deferred findings; its report-only contract and example are `schemas/finalize-scope.schema.json` and `examples/parallel-context/task-completion-scope.json`. Fresh initialization includes this report schema alongside the other shipped schemas, but no existing project configuration or stored task/lock artifact must be migrated. The only non-blocking failed gate is this task-scoped project-health gate. Schema, integrity, paths, missing sources, budget, required omissions, unknown findings, global-index failures, documentation audit and warning policy remain blocking under their normal rules. Open target acceptance, project checks or review gates still fail.
 
 Human finalization output SHOULD name the task-completion result separately from raw repository structural health. A task-scoped PASS with non-blocking peer drift MUST visibly state that repository structural health still fails and is not CI or release approval. This is a wording change only; JSON fields, gate status, exit behavior and repository-only strictness remain authoritative.
+
+`canontrail task status` is a read-only view over the same named-task finalize
+result, with no index refresh. Human lifecycle labels and acceptance/check counts
+are recorded claims, not re-executed observations or new task states. Pending
+acceptance/review MUST NOT be described as a failed test; a failed test MUST NOT
+be reduced to mere pending approval. Missing, malformed or unsafe input remains
+unconfirmed/failed under the existing rules. JSON and exit status MUST retain
+the existing finalize semantics, including visible raw repository health and
+unrelated deferred drift. No stored artifact or report-schema change follows.
 
 `canontrail validate` and `canontrail finalize` without `--task` MUST remain repository-wide and strict. A task PASS while project health fails is not integration, CI, release, migration or promotion permission. CI/release owners MUST also run repository-only finalization; the shipped GitHub action always runs it even when an optional task is supplied. GSD/Superpowers continue to own execution and scheduling. Shared-resource order and release guidance lives in `docs/parallel-work.md`, not in an automatic CanonTrail lock service.
 

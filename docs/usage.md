@@ -40,6 +40,45 @@ Check the target path, scan coverage, proposed files and conflicts. Only when th
 
 For large repositories, inspect `init --help` and set explicit `--documentation-root`/`--owned-source-root` paths. The Unity profile excludes common generated output. Unscanned directories remain unknown; no profile guarantees semantic feature discovery.
 
+## Bundled guidance and task status
+
+Ask the executable you will actually use for its short operating guide:
+
+```text
+node <CANONTRAIL_HOME>/dist/cli.js guide
+node <CANONTRAIL_HOME>/dist/cli.js task status <TARGET_PROJECT> --task <TASK-ID>
+```
+
+`guide` is compiled with that CLI and reads no target project or newer checkout
+documentation. It covers existing/new setup, unfinished bootstrap, maintenance
+and the exact safe receiving-session order. It is provider-neutral instructions,
+not an installed host skill, a schema update, authorization or proof that an
+agent follows them. The displayed version label is not an exact build identity:
+different development builds may share it. Record the reviewed source/release
+revision and runtime receipt as described under Development and packaging.
+An older executable without this command needs its own help/docs, not a command
+copied from a newer checkout. Neither command requires an agent runtime or Herdr.
+
+`task status` reuses task-scoped finalization without refreshing the index.
+Its human view separates recorded task/change/review states and acceptance/check
+counts from checked context, formal completion and raw repository health.
+`implemented` plus pending acceptance/review is not a failed-test claim and not
+completion. Failed checks remain explicitly failed. Unknown/unreadable metadata
+is not guessed; labels are quoted data, not a live running/waiting agent signal.
+Context is only confirmed when the named-task structural checks and exact local
+context identity permit it; unrelated structural problems may conservatively
+leave it unconfirmed. This is a stable-tree snapshot, not a concurrency guarantee.
+
+All existing gate diagnostics remain visible. Unrelated deferred drift stays
+visible as failed project health even when the named task passes. Use
+`--as-of YYYY-MM-DD` for reproducible freshness and `--fail-on-warnings` for
+strict warning policy. `--json` returns the existing task-scoped finalize report;
+no new report schema or stored lifecycle format is introduced. Exit 0 means
+that result passes, exit 1 means it does not (or the command cannot complete).
+No `--apply` or `--refresh-index` exists here. Reporting runs no application
+tests and writes no project files. Full-project CI/release still needs
+`finalize` without `--task`. See the [neutral example](../examples/agent-guidance/README.md).
+
 ## Tasks and bounded context
 
 For a new task, preview a schema-valid draft with the new `task create` command (check the actual executable's help before using development-source instructions):

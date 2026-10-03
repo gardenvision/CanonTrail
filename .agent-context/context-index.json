@@ -1,8 +1,64 @@
 {
   "version": 1,
   "hash_algorithm": "sha256",
-  "root_hash": "sha256:72628dfa0c0fc8d4768f432d76c4b07024d56e61264eadf54cebb425e2f08cce",
+  "root_hash": "sha256:82f45b84dc6228566e933581a78e539476dc2d81d603510657d410912ba0d866",
   "documents": [
+    {
+      "path": ".agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/brief.md",
+      "content_hash": "sha256:522d76202bcd8f31e74394d01478a4c32dec59a09cd4589878635fb7d2362086",
+      "stand": "2026-10-03",
+      "status": "completed",
+      "truth_level": "active-snapshot",
+      "verification_state": "verified",
+      "read_if_task_touches": [
+        "bundled agent guidance",
+        "readable task status"
+      ],
+      "primary_systems": [
+        "CLI guidance"
+      ],
+      "do_not_use_instead": [
+        "ARTIFACT_PROTOCOL.md",
+        "docs/usage.md"
+      ],
+      "topic_id": "bundled-agent-guide-and-status"
+    },
+    {
+      "path": ".agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/evidence/self-review.md",
+      "content_hash": "sha256:353249f693b1339a1fac581fc758a7dab0105e41928f8dcf808bcd2d4acd089c",
+      "stand": "2026-10-03",
+      "status": "author-reviewed",
+      "truth_level": "active-snapshot",
+      "verification_state": "internally-reviewed",
+      "read_if_task_touches": [
+        "bundled guidance self-review"
+      ],
+      "primary_systems": [
+        "CLI guidance"
+      ],
+      "do_not_use_instead": [
+        "ARTIFACT_PROTOCOL.md"
+      ],
+      "topic_id": "bundled-guidance-self-review"
+    },
+    {
+      "path": ".agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/evidence/verification.md",
+      "content_hash": "sha256:0c65827b5cac771c35c48c35d09d2cd10a9b6b12470281fe3a60cd3a174dac08",
+      "stand": "2026-10-03",
+      "status": "checked-local",
+      "truth_level": "active-snapshot",
+      "verification_state": "internally-reviewed",
+      "read_if_task_touches": [
+        "bundled guidance verification"
+      ],
+      "primary_systems": [
+        "CLI guidance"
+      ],
+      "do_not_use_instead": [
+        ".agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/state.yaml"
+      ],
+      "topic_id": "bundled-guidance-verification"
+    },
     {
       "path": ".agent-context/tasks/T-ALPHA-CANDIDATE-001/brief.md",
       "content_hash": "sha256:6fbbde0f8ce3388238442b1a6f172ab0616e084749fdab5bad0cce2c45b08fe3",
@@ -419,7 +475,7 @@
     },
     {
       "path": "ARTIFACT_PROTOCOL.md",
-      "content_hash": "sha256:d741f9c16fc6a43fdad4dc38e32e39591503b4e07a7c1e2552abd01853abf388",
+      "content_hash": "sha256:235d7358fcecabc065b3b2effe918a1a150284eea296c6a85dcf9fd05895c8ff",
       "stand": "2026-10-03",
       "status": "design-target",
       "truth_level": "design-target",
@@ -464,7 +520,7 @@
     },
     {
       "path": "README.md",
-      "content_hash": "sha256:2800afd85cc36ac1ff4d5886000bfbe6dea9a6ecbbb9d451ac8a5d95d035c528",
+      "content_hash": "sha256:e7d0fa1dd40aef47600389ce91b44776ba354896a9dc021344d5bb552a38581f",
       "stand": "2026-09-18",
       "status": "public-source-alpha",
       "truth_level": "draft",
@@ -484,7 +540,7 @@
     },
     {
       "path": "ROADMAP.md",
-      "content_hash": "sha256:01f458388da2b01842ca06c7fd255c1f809ae1a1937d6029d1d431f63c673e7a",
+      "content_hash": "sha256:f81b0f9aa708555946184de5c5fa218a21d42bb2c5fe95c7a1da0e7616abc4b0",
       "stand": "2026-10-03",
       "status": "public-source-alpha",
       "truth_level": "draft",
@@ -735,7 +791,7 @@
     },
     {
       "path": "docs/self-documentation.md",
-      "content_hash": "sha256:39c84105cd05dfc2d48873d571d55f2a89e343956dc8b7eccd57c20b29d96357",
+      "content_hash": "sha256:c5e597697c18330bcdd641f4563096654d81964cc1abaca0252c5af806c85ec2",
       "stand": "2026-10-03",
       "status": "public-source-alpha",
       "truth_level": "draft",
@@ -776,7 +832,7 @@
     },
     {
       "path": "docs/usage.md",
-      "content_hash": "sha256:416f4874bf1f79c6cfcff088be62547ff03788713417e99705572756cc3da77a",
+      "content_hash": "sha256:18eb39933dc1cc65f08e382272b847a1db9498e68dd371f37741dee5da0c21f6",
       "stand": "2026-10-03",
       "status": "public-source-alpha",
       "truth_level": "draft",
@@ -794,6 +850,26 @@
         "ARTIFACT_PROTOCOL.md"
       ],
       "topic_id": "usage-guide"
+    },
+    {
+      "path": "examples/agent-guidance/README.md",
+      "content_hash": "sha256:18e735499020b92ae9647bd055f581390e6468d03f065fb88fefa7ea6c6deb9d",
+      "stand": "2026-10-03",
+      "status": "synthetic-example",
+      "truth_level": "draft",
+      "verification_state": "unverified",
+      "read_if_task_touches": [
+        "bundled guidance example",
+        "readable task status"
+      ],
+      "primary_systems": [
+        "CLI guidance"
+      ],
+      "do_not_use_instead": [
+        "docs/usage.md",
+        "ARTIFACT_PROTOCOL.md"
+      ],
+      "topic_id": "bundled-guidance-example"
     },
     {
       "path": "examples/compact-handoff/README.md",

@@ -4,6 +4,7 @@ import { access, readFile } from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
 import { Command, Option } from "commander";
+import { formatAgentGuide } from "./agent-guide.js";
 import { resolveContinuityFile } from "./continuity-files.js";
 import { detectCompatibility, formatCompatibilityReport } from "./compatibility.js";
 import {
@@ -63,6 +64,7 @@ import {
 } from "./migration.js";
 import { createResumePacket, formatResumeCreateReport } from "./resume.js";
 import { createTask, formatTaskCreateReport, type CreateTaskOptions } from "./task-create.js";
+import { formatTaskStatus, inspectTaskStatus } from "./task-status.js";
 import { formatValidationReport, validateRepository, validateResumePacketAt } from "./validator.js";
 
 const program = new Command();
@@ -112,6 +114,11 @@ program
   .name("canontrail")
   .description("Govern documentation, bounded context, and handoffs across coding-agent workflows")
   .version("0.1.0");
+
+program
+  .command("guide")
+  .description("Print concise provider-neutral guidance bundled with this CLI; no project reads or writes")
+  .action(() => { process.stdout.write(formatAgentGuide(program.version()!)); });
 
 program
   .command("init")
@@ -166,6 +173,23 @@ program
   });
 
 const taskCommand = program.command("task").description("Prepare honest task drafts without scheduling or completing work");
+
+taskCommand.command("status")
+  .description("Read recorded lifecycle, context and completion separately from project health; no writes")
+  .argument("[root]", "repository root", ".")
+  .requiredOption("--task <id>", "existing task id under .agent-context/tasks")
+  .option("--as-of <date>", "ISO date used for deterministic documentation freshness checks")
+  .option("--fail-on-warnings", "retain strict repository/documentation warning policy")
+  .option("--json", "print the unchanged task-scoped finalize report")
+  .action(async (root: string, options: { task: string; asOf?: string; failOnWarnings?: boolean; json?: boolean }) => {
+    const report = await inspectTaskStatus({
+      root, taskId: options.task,
+      ...(options.asOf ? { asOf: options.asOf } : {}),
+      failOnWarnings: options.failOnWarnings ?? false,
+    });
+    process.stdout.write(options.json ? JSON.stringify(report, null, 2) + "\n" : await formatTaskStatus(report) + "\n");
+    if (!report.ok) process.exitCode = 1;
+  });
 taskCommand.command("create")
   .description("Preview three schema-valid task draft files; --apply creates only a new task directory")
   .argument("[root]", "initialized project root", ".")

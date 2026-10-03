@@ -1,0 +1,32 @@
+completed:
+  - Added a concise provider-neutral guide bundled with the running CLI rather than fetched from newer docs.
+  - Added read-only task status reusing existing finalization JSON exit behavior and predicates without index refresh.
+  - Verified 32 new guide/status cases and all 863 runnable cases with 13 explicit capability skips.
+  - Passed isolated Windows typecheck build audit validation documentation and strict repository checks.
+  - Preserved prior task states approvals archives frozen examples and the shared original CLI; archived active context preimages exactly.
+decisions:
+  - statement: Limit this task to runtime-bundled guidance and read-only status presentation; host orchestration consumer rollout and publication stay outside scope.
+    authority: approved
+    source: .agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/brief.md
+checks:
+  - name: Fresh isolated guide/status quality and preservation
+    status: pass
+    evidence: .agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/evidence/verification.md
+blockers: []
+open_questions:
+  - Whether to publish the new local branch for exact Linux macOS Windows and Node-floor CI; previous CI is not evidence for these bytes.
+  - Separate publication-delta independent review and earlier high-risk integration gates remain open; this task does not close them.
+next_safe_action: Inspect the local guide/status diff and Windows receipts, then decide whether to publish the new branch for exact hosted checks; preserve the sealed PR2 review target and do not replace consumer CLIs without rollout authority.
+do_not_repeat:
+  - Do not infer acceptance from a live host idle/done signal or stored implemented claim.
+  - Do not rebuild the shared original or consumer runtime in place.
+  - Do not merge PR2 or rewrite historical evidence to obtain passing gates.
+resume_sources:
+  - .agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/brief.md
+  - .agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/state.yaml
+  - .agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/change.yaml
+  - .agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/evidence/verification.md
+  - .agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/evidence/self-review.md
+  - docs/usage.md
+  - src/agent-guide.ts
+  - src/task-status.ts

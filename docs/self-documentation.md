@@ -39,8 +39,16 @@ do_not_use_instead: [VISION.md, ARTIFACT_PROTOCOL.md, ROADMAP.md]
 | Continuity byte/path preflight and retained-handoff hardening | `.agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/state.yaml` |
 | Abstract field feedback, task draft creation and checked shader/module context | `.agent-context/tasks/T-FIELD-WORKFLOW-001/state.yaml` |
 | Public-main integration, dependency correction and branch publication | `.agent-context/tasks/T-PUBLISH-CONTINUITY-001/state.yaml` |
+| Bundled runtime agent guide and read-only task status | `.agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/state.yaml`; `docs/usage.md` |
 
 Read `AGENTS.md` first and choose new task, validated resume, unfinished bootstrap, or maintenance. Load the relevant owner, not this entire tree by default. Exact task sources belong in a context lock; a narrative summary is not a substitute.
+
+The October 3 guide/status task follows the sealed publication correction
+be191ba on a separate local branch. That baseline passed its exact hosted
+Windows/Linux/macOS/Node-floor checks; independent publication-delta review
+remains open. The new guide/status bytes require fresh evidence of their own.
+They do not change completion authority, stored schemas, consumer runtimes,
+the draft PR's review target or external workflow ownership.
 
 The October field-feedback task reviews a bounded, externally retained consumer corpus and publishes only abstract findings and synthetic fixtures. It adds task draft authoring rather than automatic decisions/completion, and explicit shader/module text support rather than binary ingestion. Its state/evidence own current progress and tests. Shared stable consumer CLIs are deliberately not rebuilt in place; source documentation and older executables must not be conflated. T-PUBLISH-CONTINUITY-001 owns the separate dependency correction and integration with public main. Its fresh evidence, rather than older green receipts, must establish the new source boundary.
 

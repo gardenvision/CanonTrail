@@ -73,6 +73,9 @@ Use CanonTrail for this task. First verify both paths and confirm that
 TARGET_PROJECT is the intended project, not the CanonTrail tool folder.
 If you cannot access the files or run the CLI, stop and tell me what is missing.
 Read CANONTRAIL_HOME/README.md and follow its linked usage guide as needed.
+Run node "<CANONTRAIL_HOME>/dist/cli.js" guide for concise instructions
+bundled with the actual CLI. If absent, use that version's --help and docs;
+do not assume a newer source checkout matches an older build.
 
 If TARGET_PROJECT/.agent-context/config.yaml exists, do not run init again.
 Read the target's AGENTS.md, config and documentation plan. If setup is
@@ -169,6 +172,7 @@ A dry run writes nothing. Inspect it before applying: an adoption with conflicts
 | I want to… | Start here |
 |---|---|
 | Create tasks, control context or safely resume | [Usage guide](../docs/usage.md) |
+| Give an agent version-matched operating instructions | `node <CLI> guide` · [Bundled guidance](../docs/usage.md#bundled-guidance-and-task-status) |
 | Something failed or an error code needs explaining | [Troubleshooting](../docs/usage.md#troubleshooting) · [Finding codes](../docs/finding-codes.md) |
 | Understand scope and the rules | [Vision](../VISION.md) · [Artifact protocol](../ARTIFACT_PROTOCOL.md) |
 | Work alongside GSD or Superpowers | [Integrations](../docs/integrations.md) |

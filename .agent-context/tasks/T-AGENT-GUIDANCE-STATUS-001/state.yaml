@@ -1,0 +1,20 @@
+task_id: T-AGENT-GUIDANCE-STATUS-001
+status: verified
+objective: Add concise bundled CLI guidance and an honest read-only task status view without changing completion authority.
+non_goals: [No Herdr integration or agent orchestration, No consumer rollout or release, No new stored artifact shapes or completion predicates, No Git push or merge]
+acceptance_criteria:
+  - {id: AC-GUIDE, statement: The guide is bundled and teaches safe provider-neutral entry., verification: Distributed CLI output and actual command-help oracles., status: pass}
+  - {id: AC-STATUS, statement: Recorded lifecycle context and project health remain distinct and honest., verification: Real finalized fixtures and adversarial status cases., status: pass}
+  - {id: AC-PRESERVE, statement: Reporting preserves project bytes and historical artifacts., verification: Before-after raw-byte manifests., status: pass}
+  - {id: AC-QUALITY, statement: Build focused/full suite and repository checks pass with limitations explicit., verification: Isolated quality receipts., status: pass}
+dependencies: []
+documentation_impact: [docs/usage.md, ARTIFACT_PROTOCOL.md, README.md, ROADMAP.md, docs/self-documentation.md]
+file_intents: [src/cli.ts, src/agent-guide.ts, src/task-status.ts, test/agent-guidance-status.test.ts, docs/usage.md, ARTIFACT_PROTOCOL.md, README.md, ROADMAP.md, docs/self-documentation.md, examples/agent-guidance/README.md]
+required_context_sources: [VISION.md, ARTIFACT_PROTOCOL.md, docs/usage.md, src/cli.ts, src/agent-guide.ts, src/task-status.ts, test/agent-guidance-status.test.ts, src/finalize.ts, src/continuity-files.ts, schemas/task-state.schema.json, schemas/change-record.schema.json]
+parallel_safety: exclusive
+checks:
+  - {id: CHECK-FOCUSED, command_or_observation: Run guide and status synthetic API/CLI regressions., status: pass, evidence_refs: [.agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/evidence/verification.md]}
+  - {id: CHECK-QUALITY, command_or_observation: Run isolated typecheck build full suite and documentation checks., status: pass, evidence_refs: [.agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/evidence/quality.json]}
+  - {id: CHECK-PRESERVATION, command_or_observation: Compare the baseline protected receipts and shared runtime raw bytes., status: pass, evidence_refs: [.agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/evidence/verification.md]}
+latest_handoff: .agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/handoff.yaml
+updated_at: "2026-10-03T20:07:04Z"

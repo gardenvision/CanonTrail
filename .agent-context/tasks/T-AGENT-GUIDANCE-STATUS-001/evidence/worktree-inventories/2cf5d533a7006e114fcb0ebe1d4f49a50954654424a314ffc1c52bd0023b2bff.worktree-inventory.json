@@ -1,0 +1,131 @@
+{
+  "version": 1,
+  "task_id": "T-AGENT-GUIDANCE-STATUS-001",
+  "created_at": "2026-10-03T20:07:04.362Z",
+  "entries": [
+    {
+      "code": " M",
+      "path": ".agent-context/context-index.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/brief.md"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/change.yaml"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/checkpoint-input.yaml"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/context.lock.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/evidence/context-locks/3a3d19aaa3dd5e4bda12204765129f6a643372342e1774497a9523df7e0ac948.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/evidence/context-locks/421d2a189ead110a9221fa4bcc72a7c76b4d16f25a1781e95aebca03364989ed.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/evidence/quality.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/evidence/self-review.md"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/evidence/verification.md"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/state.yaml"
+    },
+    {
+      "code": " M",
+      "path": ".agent-context/tasks/T-COMPACT-HANDOFF-001/context.lock.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/context-locks/6f13c63ca5ddede3f9ce4167eeac1ec1bce96d779eba3a14f7965f541101036b.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/context-locks/f1518d8ebb0f03848a943f65b5716a2a960dde82ade0206e03cc4f658c841762.json"
+    },
+    {
+      "code": " M",
+      "path": ".agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/context.lock.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/evidence/context-locks/417e2e835a415ff2843c5ddf3ce33a78c61b4e9aea2a58a2c295d8369b65342a.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/evidence/context-locks/8c0f07e5b0bd1a5aba739f8d84f9883a1bce871b074171c64125a326721bfc66.json"
+    },
+    {
+      "code": " M",
+      "path": ".agent-context/tasks/T-PUBLISH-CONTINUITY-001/context.lock.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-PUBLISH-CONTINUITY-001/evidence/context-locks/9d45df713e869dbefff3eac18c623327c63430e79fa551cac8053de3bc64043d.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-PUBLISH-CONTINUITY-001/evidence/context-locks/c29d318ba1876f5f137135b9570c40ab89a8e46e7c0554876340d35a52efb12d.json"
+    },
+    {
+      "code": " M",
+      "path": ".github/README.md"
+    },
+    {
+      "code": " M",
+      "path": "ARTIFACT_PROTOCOL.md"
+    },
+    {
+      "code": " M",
+      "path": "README.md"
+    },
+    {
+      "code": " M",
+      "path": "ROADMAP.md"
+    },
+    {
+      "code": " M",
+      "path": "docs/self-documentation.md"
+    },
+    {
+      "code": " M",
+      "path": "docs/usage.md"
+    },
+    {
+      "code": "??",
+      "path": "examples/agent-guidance/README.md"
+    },
+    {
+      "code": "??",
+      "path": "src/agent-guide.ts"
+    },
+    {
+      "code": " M",
+      "path": "src/cli.ts"
+    },
+    {
+      "code": "??",
+      "path": "src/task-status.ts"
+    },
+    {
+      "code": "??",
+      "path": "test/agent-guidance-status.test.ts"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "observed_at": "2026-10-03T20:00:32Z",
+  "scope": "isolated exact-source local quality before final continuity metadata",
+  "platform": "Windows",
+  "node": "24.11.1",
+  "tests": {"passed": 863, "skipped": 13, "total": 876, "files": 42, "new_cases_passed": 32},
+  "commands": {"install": 0, "typecheck": 0, "build": 0, "tests": 0, "audit": 0, "validate": 0, "documentation": 0, "finalize": 0},
+  "source_manifest_sha256": "9fbc3f6196554aa4bf52ee90451a25e4a1a2ea104533fc162b5f16ea07853297",
+  "tests_receipt_sha256": "e16abd16ca5d41b4536e811a26a20a420261fffb2e9834d7a2963ab832d7263e",
+  "tested_cli_entry_sha256": "0376e92aae130903389a6e0097d7cbfeb6d5446f6440199e5dd5003a21df33a2",
+  "limits": ["Local execution only, not new-head hosted CI", "Runtime entry hash alone is not a complete build manifest", "No approval or consumer rollout of earlier high-risk work"]
+}

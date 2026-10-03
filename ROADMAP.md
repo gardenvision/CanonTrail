@@ -43,6 +43,12 @@ T-PUBLIC-PREP-001 introduced neutral `legacy-header-v1` naming with retained his
 
 ## Useful later work, not this release's automatic scope
 
+- `T-AGENT-GUIDANCE-STATUS-001` owns the additive bundled `guide` and read-only
+  `task status` view. It preserves finalize JSON/predicates and recorded lifecycle
+  shapes. Its current checks do not approve the pending publication branch,
+  update consumers or add Herdr orchestration. A future optional host adapter
+  needs a separate measured pilot and explicit scope.
+
 Current continuity work: `T-COMPACT-HANDOFF-001` separates complete Git-status provenance from required handoff context and clarifies missing-reference/index failures. Its own state, regression results and independent review determine closure. This does not update consumer schemas or old handoffs automatically and is not a new publication.
 
 Revision 2 addresses the independent review's Git-root, byte-transport and diagnostic findings; author Windows/Linux suites pass. Independent remediation closure and exact macOS execution remain open before rollout. The review's deeper archive/resume write-path link hardening is a separately retained safety follow-up; diagnostic completeness, multi-output collision preflight and ordering precision are not silently counted as resolved. See the task's `evidence/review-remediation.md` before expanding scope.

@@ -1,14 +1,14 @@
 {
   "task_id": "T-COMPACT-HANDOFF-001",
   "agent_run_id": null,
-  "created_at": "2026-10-03T19:56:44.810Z",
-  "context_index_hash": "sha256:c1b19c748ec748659698caf033bda9f1e4b8d19465f6c4987a9c4c549f91520c",
-  "base_revision": "be191bafa4af1b5597384d36d42a6de520549673",
+  "created_at": "2026-10-03T17:43:06.765Z",
+  "context_index_hash": "sha256:72628dfa0c0fc8d4768f432d76c4b07024d56e61264eadf54cebb425e2f08cce",
+  "base_revision": "66be45ec5922ab50f0a957dd8800125ebda1db75",
   "budget": {
     "total_tokens": 140000,
     "reserved_output_tokens": 16000,
     "reserved_input_tokens": 4096,
-    "estimated_input_tokens": 113089
+    "estimated_input_tokens": 111649
   },
   "sources": [
     {
@@ -78,14 +78,14 @@
     },
     {
       "path": "ARTIFACT_PROTOCOL.md",
-      "content_hash": "sha256:235d7358fcecabc065b3b2effe918a1a150284eea296c6a85dcf9fd05895c8ff",
+      "content_hash": "sha256:d741f9c16fc6a43fdad4dc38e32e39591503b4e07a7c1e2552abd01853abf388",
       "git_blob": null,
       "truth_level": "design-target",
       "level": "L1",
       "priority": 14,
       "selection_reason": "Weak routing metadata shared 2 normalized semantic task terms, but no single routing entry or complete system name established a strong match.; Persistently required by the current task state.; Existing file declared by the current task.",
       "selector": "metadata-routing,task-required-context,task-file-intent",
-      "estimated_tokens": 24764,
+      "estimated_tokens": 24492,
       "ownership": "project",
       "source_system": null
     },
@@ -280,14 +280,14 @@
     },
     {
       "path": "ROADMAP.md",
-      "content_hash": "sha256:f81b0f9aa708555946184de5c5fa218a21d42bb2c5fe95c7a1da0e7616abc4b0",
+      "content_hash": "sha256:01f458388da2b01842ca06c7fd255c1f809ae1a1937d6029d1d431f63c673e7a",
       "git_blob": null,
       "truth_level": "draft",
       "level": "L3",
       "priority": 30,
       "selection_reason": "Existing file declared by the current task.",
       "selector": "task-file-intent",
-      "estimated_tokens": 2228,
+      "estimated_tokens": 2135,
       "ownership": "project",
       "source_system": null
     },
@@ -306,27 +306,27 @@
     },
     {
       "path": "docs/self-documentation.md",
-      "content_hash": "sha256:c5e597697c18330bcdd641f4563096654d81964cc1abaca0252c5af806c85ec2",
+      "content_hash": "sha256:39c84105cd05dfc2d48873d571d55f2a89e343956dc8b7eccd57c20b29d96357",
       "git_blob": null,
       "truth_level": "draft",
       "level": "L3",
       "priority": 30,
       "selection_reason": "Existing file declared by the current task.",
       "selector": "task-file-intent",
-      "estimated_tokens": 1744,
+      "estimated_tokens": 1600,
       "ownership": "project",
       "source_system": null
     },
     {
       "path": "docs/usage.md",
-      "content_hash": "sha256:18eb39933dc1cc65f08e382272b847a1db9498e68dd371f37741dee5da0c21f6",
+      "content_hash": "sha256:416f4874bf1f79c6cfcff088be62547ff03788713417e99705572756cc3da77a",
       "git_blob": null,
       "truth_level": "draft",
       "level": "L3",
       "priority": 30,
       "selection_reason": "Existing file declared by the current task.",
       "selector": "task-file-intent",
-      "estimated_tokens": 6958,
+      "estimated_tokens": 6364,
       "ownership": "project",
       "source_system": null
     },
@@ -371,14 +371,14 @@
     },
     {
       "path": "src/cli.ts",
-      "content_hash": "sha256:97e40118baf9a4b0fa0d9f9a3e4327f5363bb97393475563982b3b1985ac7e42",
-      "git_blob": null,
+      "content_hash": "sha256:a6a6c976898cc9474d7afc8f757e02837c835d6f78fc57fb5133a197f7e01a5c",
+      "git_blob": "3fdb3c8f4e4a718576f1c40e0675a7c0dee7c64d",
       "truth_level": "unclassified",
       "level": "L3",
       "priority": 30,
       "selection_reason": "Existing file declared by the current task.",
       "selector": "task-file-intent",
-      "estimated_tokens": 10274,
+      "estimated_tokens": 9937,
       "ownership": "project",
       "source_system": null
     },
@@ -411,5 +411,5 @@
   ],
   "omissions": [],
   "raw_transcripts_included": false,
-  "lock_hash": "sha256:6f13c63ca5ddede3f9ce4167eeac1ec1bce96d779eba3a14f7965f541101036b"
+  "lock_hash": "sha256:f1518d8ebb0f03848a943f65b5716a2a960dde82ade0206e03cc4f658c841762"
 }

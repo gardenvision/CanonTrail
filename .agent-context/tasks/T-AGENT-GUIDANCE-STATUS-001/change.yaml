@@ -1,0 +1,40 @@
+version: 1
+change_id: CHG-AGENT-GUIDANCE-STATUS-001
+revision: 1
+title: Bundled provider-neutral guide and read-only task status
+status: verified
+risk: medium
+author: CanonTrail implementation agent
+canonical_source: .agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/brief.md
+decision_rationale: The maintainer authorized the bounded guidance/status improvements after the Herdr comparison. Reuse existing validation and completion rules instead of adding orchestration or inferring approval from live agent activity.
+documentation_structure:
+  decision: no-feature-document-change
+  rationale: Existing CLI usage and protocol owners describe this additive reporting interface; one synthetic example documents its operation.
+  feature_documents: []
+acceptance_cases:
+  - {id: AC-GUIDE, given: A built CLI even outside an initialized project., expected: A concise bundled guide describes actual supported commands and safe receiving order., failure_or_uncertainty: It distinguishes its version label from build identity and does not silently upgrade or read project docs., counterexample: New checkout documentation instructs an old executable or handoff validation alone authorizes action., oracle: Executed CLI help and receiving lifecycle in the existing protocol., status: pass, evidence_refs: [.agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/evidence/verification.md]}
+  - {id: AC-STATUS, given: A task with open acceptance review or unrelated drift., expected: Recorded work checked context completion and raw health are separate with all diagnostics visible., failure_or_uncertainty: Missing unsafe malformed or stale current inputs remain failed or unconfirmed., counterexample: A failed test is relabeled pending approval or unrelated schema damage is hidden., oracle: Existing finalize JSON predicates and real synthetic fixtures., status: pass, evidence_refs: [.agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/evidence/verification.md]}
+  - {id: AC-PRESERVE, given: A populated project and old receipts., expected: The new commands write nothing and preserve previous artifact shapes and hashes., failure_or_uncertainty: Unreadable lifecycle metadata is reported as unavailable rather than guessed., counterexample: Reporting refreshes an index lock lifecycle or stored review status., oracle: Independent before-after raw-byte fixture manifests and baseline evidence identity., status: pass, evidence_refs: [.agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/evidence/verification.md]}
+  - {id: AC-QUALITY, given: The changed source snapshot., expected: Focused and complete deterministic checks pass with explicit execution-platform limits., failure_or_uncertainty: No inherited approval or fabricated platform run., counterexample: Prior CI is attributed to new source bytes., oracle: Fresh isolated command receipts and self-review., status: pass, evidence_refs: [.agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/evidence/verification.md]}
+impacts:
+  - {area: requirement, decision: affected, rationale: Bound the accepted usability improvements., evidence_refs: [.agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/brief.md]}
+  - {area: data-contracts, decision: not-affected, rationale: Reuse finalize JSON with no persisted report or state shape changes., evidence_refs: []}
+  - {area: domain-logic, decision: not-affected, rationale: No validation selection or completion predicate changes., evidence_refs: []}
+  - {area: tests-reference-cases, decision: affected, rationale: Add distributed and synthetic status oracles., evidence_refs: [.agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/brief.md]}
+  - {area: example-data, decision: affected, rationale: Add a neutral usage example without pretend historical evidence., evidence_refs: [.agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/brief.md]}
+  - {area: ui-api, decision: affected, rationale: Add read-only commands and human lifecycle labels., evidence_refs: [src/cli.ts]}
+  - {area: documentation, decision: affected, rationale: Existing usage protocol and entry owners describe the new route., evidence_refs: [docs/usage.md, ARTIFACT_PROTOCOL.md]}
+  - {area: diagrams-visuals, decision: not-affected, rationale: No graphical output diagram or application visual changed; CLI text is verified by observed output., evidence_refs: []}
+  - {area: terminology, decision: affected, rationale: Separate recorded implementation current context approval and repository health., evidence_refs: [.agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/brief.md]}
+  - {area: operations-compatibility, decision: affected, rationale: Guide travels with the executable; no target upgrade or runtime replacement., evidence_refs: [docs/usage.md]}
+verification:
+  checks:
+    - {name: Guide and status focused regressions, status: pass, evidence_refs: [.agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/evidence/verification.md]}
+    - {name: Isolated quality and preservation, status: pass, evidence_refs: [.agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/evidence/quality.json, .agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/evidence/verification.md]}
+  terminology_search: {status: pass, terms: [recorded, current, completion, health, guide], evidence_refs: [.agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/evidence/self-review.md]}
+  visual_review: {applicable: false, status: not-applicable, evidence_refs: [.agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/brief.md]}
+  unverifiable_items: []
+independent_review: {status: not-required, reviewer: null, findings: [Medium-risk additive read-only presentation with existing finalization semantics; does not close separate high-risk review or release gates], evidence_refs: [.agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/brief.md], waiver: null}
+supersedes: []
+superseded_by: null
+updated_at: "2026-10-03T20:07:04Z"
