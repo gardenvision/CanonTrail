@@ -1,6 +1,6 @@
 ---
 topic_id: alpha-readiness
-stand: "2026-09-14"
+stand: "2026-09-18"
 status: public-source-hosting-configured
 truth_level: draft
 verification:
@@ -51,7 +51,7 @@ Product definitions inherited unchanged do not constitute a new canonical promot
 - Migration execution is narrow and experimental for the Alpha. Independently reviewed inputs, backup, stable exclusive source access and separate execution authority remain mandatory. No universal restructuring or network-filesystem transaction is promised.
 - A source file's participation in context does not make it canonical. Technical verification and canonical promotion remain distinct. Evolving documents and historical promotion records can require a reviewed lifecycle decision.
 - External tools own workflow, agents, worktrees and shared editor access. CanonTrail does not schedule parallel work.
-- The context compiler currently supports a fixed list of text extensions; `.mjs` and `.cjs` are not included.
+- The context compiler supports a fixed text-extension allowlist, which includes `.mjs` and `.cjs` since the 2026-09-18 review; files outside the allowlist are not loadable as sources. See the [usage guide](usage.md).
 
 ## Recorded evidence and remaining gates
 

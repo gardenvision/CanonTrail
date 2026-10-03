@@ -461,3 +461,27 @@ describe("compact project evidence", () => {
     expect((parse(await readFile(output, "utf8")) as Record<string, unknown>).evidence_id).toBe("EVID-CLI-APPLY");
   }, 15_000);
 });
+
+describe("normalization dedupe", () => {
+  it("deduplicates subjects and references after normalization", async () => {
+    const f = await fixtureRoot();
+    await writeFile(
+      path.join(f.root, ".agent-context", "tasks", "T-FIXTURE", "state.yaml"),
+      stringify({ task_id: "T-FIXTURE", status: "in-progress", objective: "fixture", acceptance_criteria: [], dependencies: [], file_intents: [], checks: [] }),
+    );
+    const report = await recordProjectEvidence({
+      root: f.root,
+      taskId: "T-FIXTURE",
+      evidenceId: "EVID-DEDUPE-1",
+      kind: "technical-test",
+      status: "pass",
+      claim: "Duplicate spellings collapse to one subject and one reference.",
+      summary: "normalization-dedupe",
+      subjectPaths: [f.verificationPath, `./${f.verificationPath}`],
+      references: [f.planPath, `./${f.planPath}`],
+      tool: "fixture",
+    });
+    expect(report.record.subjects).toHaveLength(1);
+    expect(report.record.references).toHaveLength(1);
+  });
+});

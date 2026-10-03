@@ -405,3 +405,24 @@ describe("finalizeRepository", () => {
     expect(report.repository.diagnostics.some((diagnostic) => diagnostic.code.startsWith("LOCK"))).toBe(false);
   });
 });
+
+describe("verified-change closure gate", () => {
+  it("fails a verified change with open acceptance cases or verification checks", async () => {
+    const root = await fixture();
+    const changePath = path.join(root, ".agent-context", "tasks", taskId, "change.yaml");
+    const change = parse(await readFile(changePath, "utf8")) as Record<string, unknown>;
+    (change.acceptance_cases as Array<Record<string, unknown>>)[0]!.status = "pending";
+    ((change.verification as Record<string, unknown>).checks as Array<Record<string, unknown>>)[0]!.status = "pending";
+    await writeFile(changePath, stringify(change));
+    await compileContext({
+      root, taskId, totalTokens: 32_000, reservedOutputTokens: 8_000,
+      createdAt: "2026-08-29T00:00:00+02:00", apply: true,
+    });
+    const report = await finalizeRepository({ root, taskId, asOf: auditDate });
+    const taskGate = report.gates.find((gate) => gate.id === "task")!;
+    expect(taskGate.status).toBe("fail");
+    const codes = taskGate.findings.map((finding) => finding.code);
+    expect(codes).toContain("FINALIZE115");
+    expect(codes).toContain("FINALIZE116");
+  });
+});

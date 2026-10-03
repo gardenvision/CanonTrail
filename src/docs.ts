@@ -6,6 +6,7 @@ import { discoverMarkdown, normalizePath, walkFiles } from "./indexer.js";
 import type { Diagnostic, DocumentRecord, GovernedHeader, ValidationReport } from "./types.js";
 import { validateRepository } from "./validator.js";
 import { assessFrozenExamples, parseFrozenExamples, type FrozenExample } from "./frozen-examples.js";
+import { compareCodeUnits } from "./ordering.js";
 
 type JsonRecord = Record<string, unknown>;
 type TruthLevel = GovernedHeader["truth_level"];
@@ -202,7 +203,7 @@ function findContradictionCandidates(documents: DocumentRecord[]): Documentation
       return `${header.truth_level}\u0000${header.status}\u0000${header.verification.state}`;
     }));
     if (signatures.size < 2) continue;
-    const paths = entries.map((entry) => entry.path).sort((left, right) => left.localeCompare(right));
+    const paths = entries.map((entry) => entry.path).sort((left, right) => compareCodeUnits(left, right));
     findings.push({
       severity: "warning",
       code: "DOCS201",
@@ -310,7 +311,7 @@ async function taskAudit(root: string, files: string[], documents: DocumentRecor
       // Repository validation reports malformed structured artifacts.
     }
   }
-  for (const taskId of [...taskFiles.keys()].sort((left, right) => left.localeCompare(right))) {
+  for (const taskId of [...taskFiles.keys()].sort((left, right) => compareCodeUnits(left, right))) {
     const entries = taskFiles.get(taskId)!;
     const statePath = `.agent-context/tasks/${taskId}/state.yaml`;
     if (!entries.has("state.yaml")) {
@@ -435,7 +436,7 @@ async function taskAudit(root: string, files: string[], documents: DocumentRecor
   return {
     findings,
     total: taskFiles.size,
-    byStatus: Object.fromEntries([...statuses].sort(([left], [right]) => left.localeCompare(right))),
+    byStatus: Object.fromEntries([...statuses].sort(([left], [right]) => compareCodeUnits(left, right))),
     orphaned: orphanedTasks.size,
   };
 }
@@ -443,8 +444,8 @@ async function taskAudit(root: string, files: string[], documents: DocumentRecor
 function sortFindings(findings: DocumentationAuditFinding[]): DocumentationAuditFinding[] {
   return findings.sort((left, right) => {
     const severity = left.severity === right.severity ? 0 : left.severity === "error" ? -1 : 1;
-    return severity || left.category.localeCompare(right.category) || left.code.localeCompare(right.code) ||
-      (left.path ?? "").localeCompare(right.path ?? "") || left.message.localeCompare(right.message);
+    return severity || compareCodeUnits(left.category, right.category) || compareCodeUnits(left.code, right.code) ||
+      compareCodeUnits(left.path ?? "", right.path ?? "") || compareCodeUnits(left.message, right.message);
   });
 }
 

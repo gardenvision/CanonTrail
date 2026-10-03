@@ -65,7 +65,7 @@ Open your target project in an agent that can **read local files and run command
 Copy the prompt below. Replace the three placeholders; the agent can handle the detailed setup and task records.
 
 ```text
-CANONTRAIL_HOME = <absolute path to the built CanonTrail folder>
+CANONTRAIL_HOME = <absolute path to the built CanonTrail folder; use the node -p "process.cwd()" output from step 1>
 TARGET_PROJECT = <absolute path to the project to work on>
 MY_TASK = <what I want you to build, fix, review or document>
 
@@ -137,7 +137,23 @@ TARGET_PROJECT="/absolute/path/to/project"
 node "$CANONTRAIL_HOME/dist/cli.js" init "$TARGET_PROJECT" --adopt --dry-run
 ```
 
-A dry run writes nothing. Inspect it before applying: an applied adoption can preserve conflicts, create other planned files, and exit with a conflict status. See [safe adoption](../docs/usage.md#safe-adoption) for the full procedure and large-project options.
+A dry run writes nothing. Inspect it before applying: an adoption with conflicts preserves those files, creates other planned files, and exits 2 (a dry run with conflicts also exits 2 without writing). See [safe adoption](../docs/usage.md#safe-adoption) for the full procedure and large-project options.
+
+</details>
+
+<details>
+<summary><strong>First 10 minutes — checklist for a new project</strong></summary>
+
+1. **Check prerequisites.** `node --version` must print `v20.19` or newer; `git --version` must work.
+2. **Build the tool once.** Follow [Get CanonTrail once](#1-get-canontrail-once); use the `node -p "process.cwd()"` output as `CANONTRAIL_HOME`.
+3. **Prepare the target.** Open `TARGET_PROJECT` in an agent with local file and command access. It must be a different folder from `CANONTRAIL_HOME`.
+4. **Preview adoption.** `node "<CANONTRAIL_HOME>/dist/cli.js" init "<TARGET_PROJECT>" --adopt --dry-run` — reads only; writes nothing.
+5. **Decide.**
+   - No conflicts and the scope looks right → repeat the command without `--dry-run`.
+   - `CONFLICT` lines → stop; files were preserved. Merge manually (see `.agent-context/generated/bridges/`), then re-run the preview.
+   - Coverage gaps → repeat the preview with explicit `--documentation-root`/`--owned-source-root`.
+6. **After applying.** Read the generated `AGENTS.md`, `.agent-context/config.yaml` and `.agent-context/documentation-plan.yaml`, then start the first task via the agent prompt above.
+7. **Something failed?** See [Troubleshooting](../docs/usage.md#troubleshooting).
 
 </details>
 
@@ -153,6 +169,7 @@ A dry run writes nothing. Inspect it before applying: an applied adoption can pr
 | I want to… | Start here |
 |---|---|
 | Create tasks, control context or safely resume | [Usage guide](../docs/usage.md) |
+| Something failed or an error code needs explaining | [Troubleshooting](../docs/usage.md#troubleshooting) · [Finding codes](../docs/finding-codes.md) |
 | Understand scope and the rules | [Vision](../VISION.md) · [Artifact protocol](../ARTIFACT_PROTOCOL.md) |
 | Work alongside GSD or Superpowers | [Integrations](../docs/integrations.md) |
 | Coordinate parallel tasks | [Parallel work](../docs/parallel-work.md) |

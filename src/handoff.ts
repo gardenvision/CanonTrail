@@ -16,6 +16,7 @@ import { decodeContinuityText, preflightImmutable, readContinuityBytes, readCont
   writeImmutableContinuity, writeMutableContinuity } from "./continuity-files.js";
 import { inventoryReference, parseGitStatusCapture, resolveInventoryPath, verifyWorktreeInventory,
   writeWorktreeInventory, type WorktreeEntry, type WorktreeInventory, type WorktreeInventoryRef } from "./worktree-inventory.js";
+import { compareCodeUnits } from "./ordering.js";
 
 const execFileAsync = promisify(execFile);
 const require = createRequire(import.meta.url);
@@ -375,7 +376,7 @@ function mergeFiles(gitEntries: WorktreeEntry[], draftFiles: HandoffFile[], rele
     });
   }
   for (const file of draftFiles) merged.set(file.path, file);
-  return [...merged.values()].sort((left, right) => left.path < right.path ? -1 : left.path > right.path ? 1 : 0);
+  return [...merged.values()].sort((left, right) => compareCodeUnits(left.path, right.path));
 }
 
 function unique(values: string[]): string[] {
@@ -415,11 +416,16 @@ export async function verifyHandoffForTask(root: string, taskId: string, value: 
   const resumeSources = Array.isArray(value.resume_sources)
     ? value.resume_sources.filter((entry): entry is string => typeof entry === "string")
     : [];
+  const missingResumeSources: string[] = [];
   for (const source of resumeSources) {
     const relative = normalizeRelativePath(source, "existing resume source");
-    if (!(await safeRepositoryFile(root, relative))) {
-      throw new Error(`existing handoff has a missing resume source: ${relative}`);
-    }
+    if (!(await safeRepositoryFile(root, relative))) missingResumeSources.push(relative);
+  }
+  if (missingResumeSources.length > 0) {
+    throw new Error(
+      `existing handoff cannot be safely archived; missing resume source(s): ${missingResumeSources.join(", ")}; ` +
+      "restore the file(s), or deliberately update the existing handoff's resume_sources and re-validate it before replacing",
+    );
   }
   if (typeof value.source_context_lock_path !== "string" || typeof value.source_context_lock_hash !== "string") {
     throw new Error("existing handoff does not identify archived source context");

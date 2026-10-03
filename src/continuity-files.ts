@@ -1,5 +1,6 @@
 import { lstat, mkdir, readFile, readdir, realpath, writeFile } from "node:fs/promises";
 import path from "node:path";
+import { writeFileAtomic } from "./safe-write.js";
 
 /** Continuity control artifacts use portable exact identities. Observed Git
  * filenames are data and deliberately do NOT pass through this normalizer. */
@@ -81,6 +82,7 @@ export async function writeMutableContinuity(root: string, relative: string, byt
   let absolute = await resolveContinuityFile(root, relative);
   await mkdir(path.dirname(absolute), { recursive: true });
   absolute = await resolveContinuityFile(root, relative);
-  await writeFile(absolute, bytes, { flag: current === undefined ? "wx" : "w" });
+  if (current === undefined) await writeFile(absolute, bytes, { flag: "wx" });
+  else await writeFileAtomic(absolute, bytes);
   return true;
 }

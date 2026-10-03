@@ -1,5 +1,6 @@
 import { lstat, readdir, realpath } from "node:fs/promises";
 import path from "node:path";
+import { compareCodeUnits } from "./ordering.js";
 
 const CONTROL_ROOT = ".agent-context/migrations";
 
@@ -81,7 +82,7 @@ export async function inspectMigrationControlTree(root: string): Promise<boolean
     const relative = pending.pop()!;
     const directory = await resolveMigrationControlPath(root, relative, "directory");
     const entries = await readdir(directory, { withFileTypes: true });
-    entries.sort((left, right) => left.name.localeCompare(right.name));
+    entries.sort((left, right) => compareCodeUnits(left.name, right.name));
     for (const entry of entries) {
       const child = relative + "/" + entry.name;
       if (entry.isSymbolicLink()) throw new Error(`migration control path must not traverse a symbolic link: ${child}`);

@@ -18,4 +18,4 @@ For authorized local work, read `AGENTS.md`, keep one owner per topic, and creat
 
 Keep private project details, credentials, personal paths, raw conversations and unapproved third-party content out of proposed changes. Synthetic fixtures should be clearly synthetic. Preserve safety checks and historical evidence rather than weakening validation to get a green result.
 
-Run typecheck, tests, build, index/validation and applicable finalization. Report failures, environmental skips and remaining review gates honestly. Do not claim Linux/macOS support from a Windows-only run. The owner must define the actual public contribution and security contact routes before release.
+Run typecheck, then `npm run build`, then the test suite, index/validation and applicable finalization (CLI integration tests require a freshly built `dist/cli.js`). Report failures, environmental skips and remaining review gates honestly. Do not claim Linux/macOS support from a Windows-only run. The owner must define the actual public contribution and security contact routes before release.

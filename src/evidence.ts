@@ -8,6 +8,8 @@ import {
 } from "./compatibility.js";
 import { isIsoDateTime } from "./date-time.js";
 import { normalizePath, sha256 } from "./indexer.js";
+import { compareCodeUnits } from "./ordering.js";
+import { writeFileAtomic } from "./safe-write.js";
 
 export type ExternalEvidenceKind = "execution-summary" | "verification" | "human-acceptance" | "review";
 export type ProjectEvidenceKind =
@@ -175,29 +177,35 @@ export async function recordProjectEvidence(options: RecordProjectEvidenceOption
   }
 
   const subjects: ProjectEvidenceSubject[] = [];
-  for (const subjectPath of [...new Set(options.subjectPaths)]) {
+  const seenSubjects = new Set<string>();
+  for (const subjectPath of options.subjectPaths) {
     const subject = resolveInsideRoot(root, subjectPath, "subject path");
     await assertRealPathInsideRoot(root, subject.absolute, "subject path");
+    if (seenSubjects.has(subject.relative)) continue;
     let content: Buffer;
     try {
       content = await readFile(subject.absolute);
     } catch {
       throw new Error(`subject path does not exist: ${subject.relative}`);
     }
+    seenSubjects.add(subject.relative);
     subjects.push({
       path: subject.relative,
       role: options.subjectRole ?? "artifact",
       content_hash: sha256(content),
     });
   }
-  subjects.sort((left, right) => left.path.localeCompare(right.path));
+  subjects.sort((left, right) => compareCodeUnits(left.path, right.path));
   const references: string[] = [];
-  for (const reference of [...new Set(options.references ?? [])]) {
+  const seenReferences = new Set<string>();
+  for (const reference of options.references ?? []) {
     const resolved = resolveInsideRoot(root, reference, "reference");
     await assertRealPathInsideRoot(root, resolved.absolute, "reference");
+    if (seenReferences.has(resolved.relative)) continue;
+    seenReferences.add(resolved.relative);
     references.push(resolved.relative);
   }
-  references.sort((left, right) => left.localeCompare(right));
+  references.sort((left, right) => compareCodeUnits(left, right));
   const payload: Omit<ProjectEvidenceRecord, "record_hash"> = {
     version: 1,
     evidence_id: evidenceId,
@@ -228,7 +236,7 @@ export async function recordProjectEvidence(options: RecordProjectEvidenceOption
   }
   if (options.apply && outputModified) {
     await mkdir(path.dirname(output.absolute), { recursive: true });
-    await writeFile(output.absolute, serialized, "utf8");
+    await writeFileAtomic(output.absolute, serialized);
   }
   return {
     root,
@@ -276,7 +284,7 @@ export async function discoverEvidenceCandidates(rootInput: string): Promise<Evi
     }
   }
 
-  candidates.sort((left, right) => left.path.localeCompare(right.path));
+  candidates.sort((left, right) => compareCodeUnits(left.path, right.path));
   return { root, candidates, notices };
 }
 
@@ -311,7 +319,8 @@ export async function linkExternalEvidence(options: LinkEvidenceOptions): Promis
   if (existingValue !== undefined && !Array.isArray(existingValue)) {
     throw new Error("external_evidence must be an array");
   }
-  const existing = (Array.isArray(existingValue) ? existingValue : []).filter(isRecord);
+  const existingEntries = Array.isArray(existingValue) ? existingValue : [];
+  const existing = existingEntries.filter(isRecord);
   const existingPaths = new Set(existing.map((entry) => entry.path).filter((value): value is string => typeof value === "string"));
   const alreadyLinked = selected.filter((candidate) => existingPaths.has(candidate.path)).map((candidate) => candidate.path);
   const recordedAt = options.recordedAt ?? new Date().toISOString();
@@ -320,8 +329,8 @@ export async function linkExternalEvidence(options: LinkEvidenceOptions): Promis
     .map((candidate) => ({ ...candidate, recorded_at: recordedAt }));
 
   if (options.apply && additions.length > 0) {
-    document.set("external_evidence", [...existing, ...additions]);
-    await writeFile(changeTarget.absolute, document.toString(), "utf8");
+    document.set("external_evidence", [...existingEntries, ...additions]);
+    await writeFileAtomic(changeTarget.absolute, document.toString());
   }
 
   return {

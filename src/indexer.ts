@@ -9,6 +9,8 @@ import type {
   ContextIndexDocument,
   DocumentRecord,
 } from "./types.js";
+import { compareCodeUnits } from "./ordering.js";
+import { writeFileAtomic } from "./safe-write.js";
 
 export function normalizePath(value: string): string {
   return value.split(path.sep).join("/").replace(/^\.\//, "");
@@ -39,7 +41,7 @@ export async function walkFiles(root: string, config: CanonTrailConfig): Promise
 
   async function walk(directory: string): Promise<void> {
     const entries = await readdir(directory, { withFileTypes: true });
-    entries.sort((left, right) => left.name.localeCompare(right.name));
+    entries.sort((left, right) => compareCodeUnits(left.name, right.name));
     for (const entry of entries) {
       const absolutePath = path.join(directory, entry.name);
       const relativePath = normalizePath(path.relative(root, absolutePath));
@@ -55,7 +57,7 @@ export async function walkFiles(root: string, config: CanonTrailConfig): Promise
   }
 
   await walk(root);
-  return found.sort((left, right) => left.localeCompare(right));
+  return found.sort((left, right) => compareCodeUnits(left, right));
 }
 
 export async function discoverMarkdown(root: string, config: CanonTrailConfig): Promise<DocumentRecord[]> {
@@ -114,7 +116,7 @@ export function buildContextIndex(documents: DocumentRecord[]): ContextIndex {
   if (invalid) {
     throw new Error(`${invalid.path}: ${invalid.parseError ?? "invalid frontmatter"}`);
   }
-  const indexed = documents.map(indexDocument).sort((left, right) => left.path.localeCompare(right.path));
+  const indexed = documents.map(indexDocument).sort((left, right) => compareCodeUnits(left.path, right.path));
   return {
     version: 1,
     hash_algorithm: "sha256",
@@ -137,9 +139,11 @@ export async function generateContextIndex(
   const index = buildContextIndex(documents);
   const outputPath = path.join(root, ...normalizePath(config.indexPath).split("/"));
   await mkdir(path.dirname(outputPath), { recursive: true });
-  await writeFile(outputPath, serializeContextIndex(index), {
-    encoding: "utf8",
-    ...(options.exclusive ? { flag: "wx" } : {}),
-  });
+  const serialized = serializeContextIndex(index);
+  if (options.exclusive) {
+    await writeFile(outputPath, serialized, { encoding: "utf8", flag: "wx" });
+  } else {
+    await writeFileAtomic(outputPath, serialized);
+  }
   return { index, path: normalizePath(path.relative(root, outputPath)) };
 }

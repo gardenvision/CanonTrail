@@ -10,7 +10,7 @@ import { createHandoff, computeHandoffHash, serializeHandoff, verifyHandoffForTa
 import { generateContextIndex, sha256 } from "../src/indexer.js";
 import { createResumePacket, formatResumeCreateReport } from "../src/resume.js";
 import { validateRepository } from "../src/validator.js";
-import { decodeContinuityText, preflightImmutable, resolveContinuityFile, writeImmutableContinuity } from "../src/continuity-files.js";
+import { decodeContinuityText, preflightImmutable, resolveContinuityFile, writeImmutableContinuity, writeMutableContinuity } from "../src/continuity-files.js";
 import { parseGitStatusCapture, parseWorktreeInventoryBytes } from "../src/worktree-inventory.js";
 
 const exec = promisify(execFile), roots: string[] = [];
@@ -75,6 +75,16 @@ async function cli(args: string[]) {
 }
 
 describe("continuity raw bytes and complete preflight", () => {
+  it("retains exact BOM and CRLF bytes when atomically replacing an owned mutable artifact", async () => {
+    const f = await fixture(), relative = `${task}/mutable.txt`;
+    const before = Buffer.from("old\r\n"), after = Buffer.from("\uFEFFnew \uFFFD\r\n");
+    await put(f.root, relative, before);
+    expect(await writeMutableContinuity(f.root, relative, after, before)).toBe(true);
+    expect(await readFile(path.join(f.root, relative))).toEqual(after);
+    expect(await writeMutableContinuity(f.root, relative, after, after)).toBe(false);
+    await expect(writeMutableContinuity(f.root, relative, before, before)).rejects.toThrow(/changed since preflight/);
+    expect(await readFile(path.join(f.root, relative))).toEqual(after);
+  });
   it("accepts exact Unicode bytes idempotently without silently dropping a BOM in general control text", async () => {
     const f = await fixture(), relative = `${task}/evidence/valid.json`, bytes = Buffer.from('{"unicode":"\uFFFD"}\n');
     expect(await writeImmutableContinuity(f.root, relative, bytes)).toBe(true);

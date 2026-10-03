@@ -2,6 +2,7 @@ import { access, readFile, realpath } from "node:fs/promises";
 import path from "node:path";
 import { parse } from "yaml";
 import { normalizePath, sha256 } from "./indexer.js";
+import { compareCodeUnits } from "./ordering.js";
 
 export type GsdReadinessDeclaredStatus = "ready" | "not-ready" | "human-decision-required";
 export type GsdReadinessObservationState = "current" | "stale" | "invalid" | "unsupported";
@@ -95,9 +96,9 @@ function finding(code: string, message: string, sourcePath?: string): GsdReadine
 
 function stableFindings(findings: GsdReadinessFinding[]): GsdReadinessFinding[] {
   return findings.sort((left, right) =>
-    left.code.localeCompare(right.code) ||
-    (left.source_path ?? "").localeCompare(right.source_path ?? "") ||
-    left.message.localeCompare(right.message));
+    compareCodeUnits(left.code, right.code) ||
+    compareCodeUnits(left.source_path ?? "", right.source_path ?? "") ||
+    compareCodeUnits(left.message, right.message));
 }
 
 function baseObservation(repositoryPath: string): GsdReadinessObservation {
@@ -273,7 +274,7 @@ export async function observeGsdReadiness(
     if (strings(value.blockers).length > 0) observation.findings.push(finding("RDY_READY_BLOCKER", "ready cannot contain blockers"));
   }
 
-  observation.sources.sort((left, right) => left.path.localeCompare(right.path));
+  observation.sources.sort((left, right) => compareCodeUnits(left.path, right.path));
   observation.findings = stableFindings(observation.findings);
   const stale = observation.findings.some((entry) => entry.code === "RDY_SOURCE_HASH" || entry.code === "RDY_SOURCE_MISSING");
   const invalid = observation.findings.some((entry) => !["RDY_SOURCE_HASH", "RDY_SOURCE_MISSING"].includes(entry.code));

@@ -172,8 +172,31 @@ async function taskGate(root: string, taskId: string): Promise<FinalizeGate> {
         });
       }
       const verification = isRecord(change.verification) ? change.verification : {};
-      if (records(verification.checks).length === 0) {
+      const changeChecks = records(verification.checks);
+      if (changeChecks.length === 0) {
         findings.push({ code: "FINALIZE113", message: "change has no recorded verification check", path: resolvedChangePath });
+      }
+      if (change.status === "verified") {
+        for (const acceptance of records(change.acceptance_cases)) {
+          const acceptanceStatus = String(acceptance.status ?? "pending");
+          if (acceptanceStatus !== "pass" && acceptanceStatus !== "not-applicable") {
+            findings.push({
+              code: "FINALIZE115",
+              message: `change acceptance case '${String(acceptance.id ?? "unknown")}' is '${acceptanceStatus}' although the change is verified`,
+              path: resolvedChangePath,
+            });
+          }
+        }
+        for (const check of changeChecks) {
+          const checkStatus = String(check.status ?? "pending");
+          if (checkStatus !== "pass" && checkStatus !== "not-applicable") {
+            findings.push({
+              code: "FINALIZE116",
+              message: `change verification check '${String(check.name ?? "unknown")}' is '${checkStatus}' although the change is verified`,
+              path: resolvedChangePath,
+            });
+          }
+        }
       }
     } catch (error) {
       findings.push({ code: "FINALIZE111", message: `change record cannot be read: ${(error as Error).message}`, path: resolvedChangePath });
@@ -316,9 +339,7 @@ export async function finalizeRepository(options: FinalizeOptions): Promise<Fina
     as_of: asOf,
     fail_on_warnings: failOnWarnings,
     refresh_index: refreshIndex,
-    ok: gates.every((gate) => gate.status !== "fail" || (
-      completionScope.mode === "task" && gate.id === "project-health" && gate.blocking === false
-    )),
+    ok: gates.every((gate) => gate.status !== "fail" || gate.blocking === false),
     gates,
     repository,
     completion_scope: completionScope,
