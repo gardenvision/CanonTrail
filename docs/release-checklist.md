@@ -1,9 +1,9 @@
 ---
 topic_id: canontrail-release-checklist
-stand: "2026-09-14"
+stand: "2026-09-27"
 status: public-source-hosting-reviewed
 truth_level: draft
-verification: {state: verified, evidence: [docs/alpha-readiness.md, SECURITY.md, .agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/review-receipt-hosting.json, .agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/hosting-results.json]}
+verification: {state: verified, evidence: [docs/alpha-readiness.md, SECURITY.md, .agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/review-receipt-hosting.json, .agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/hosting-results.json, test/compact-handoff-review.test.ts]}
 read_if_task_touches: [public release preparation, source distribution]
 primary_systems: [release operations]
 safe_to_edit: [Record actual choices and checks without inventing hosting state.]
@@ -13,6 +13,10 @@ do_not_use_instead: [docs/alpha-readiness.md, SECURITY.md]
 # First public source release
 
 This checklist records the release process; its text does not itself configure GitHub or grant permission. On 2026-09-14 the separately reviewed clean-history `gardenvision/CanonTrail` became public at C2. The original development repository remains private as `gardenvision/CanonTrail-private`. Actual hosting observations are in the release task's `hosting-results.json`; read `docs/alpha-readiness.md` for exact review and platform evidence. A tagged Alpha is a later gate, not implied by public visibility alone.
+
+The compact-handoff transport checklist added on 2026-09-27 is supported by author-run Windows/Linux regression tests. Its technical verification is not an independent approval or a completed release: the compact-handoff task still owns its pending independent-review and macOS gates. Existing hosting receipts have not been replaced or reinterpreted as reviewing this later implementation.
+
+The later bounded R3 review conditionally confirms its A-D remedies. New continuity write-hardening is a separate task and needs exact-source tests and independent review; no earlier receipt covers those new bytes. Consumer checks must additionally cover warning-free Git status, an up-to-date source lock, unlinked exact control paths and retained archive coverage. Multi-file crash atomicity and producer authentication are not promised.
 
 ## Decisions and remaining gates
 
@@ -29,6 +33,7 @@ This checklist records the release process; its text does not itself configure G
 - Run `node dist/cli.js validate .`, `node dist/cli.js docs audit .`, and `node dist/cli.js finalize . --fail-on-warnings`. Check the named release tasks separately; a repository PASS does not close independent-review gates.
 - Review neutral input, deprecated input, immutable historical plans, mixed-vocabulary rejection and unchanged transformation/rollback behavior. No tests run against an actual user project.
 - Require revision-bound Windows/Linux/macOS evidence for changed behavior, distinguishing supported capabilities and skips. Earlier CI receipts are not the new snapshot.
+- Before a compact-handoff consumer rollout, confirm the target is a Git worktree root, review the installed schema pair, and check raw-byte transport in a fresh clone under `core.autocrlf=true`. Review `.agent-context/** -text` plus every other selected source's transport and any attribute/filter overrides; do not silently edit consumer policy. `eol=lf` is not preservation of previously CRLF-hashed evidence, and clean Git status alone is insufficient. Restore proven originals after conversion; never rewrite historical hashes to accept converted bytes. See `docs/usage.md` and `test/compact-handoff-review.test.ts`.
 - Obtain an independent review of the current change and overall release boundary, or an explicit recorded human waiver permitted by the protocol. Author self-review is not independence.
 
 ## Hosting steps after explicit permission

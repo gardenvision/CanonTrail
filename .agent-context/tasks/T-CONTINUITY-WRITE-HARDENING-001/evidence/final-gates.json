@@ -1,0 +1,98 @@
+{
+  "observed_at": "2026-09-27T13:07:49.240Z",
+  "source_files_unchanged": true,
+  "cli_sha256": "96105b45c7da7865ac5964d1bcaa54f0b7a45c9ae02132ee8f26236e002a7127",
+  "results": {
+    "validate": {
+      "exit_code": 0,
+      "ok": true,
+      "stats": {
+        "markdownDocuments": 50,
+        "structuredArtifacts": 47,
+        "schemas": 16,
+        "errors": 0,
+        "warnings": 0
+      },
+      "codes": []
+    },
+    "audit": {
+      "exit_code": 0,
+      "health": "healthy",
+      "finding_counts": {
+        "errors": 0,
+        "warnings": 0,
+        "total": 0
+      },
+      "codes": []
+    },
+    "repository_finalize": {
+      "exit_code": 0,
+      "ok": true,
+      "codes": []
+    },
+    "task_finalize": {
+      "exit_code": 1,
+      "ok": false,
+      "codes": [
+        "FINALIZE105",
+        "FINALIZE107",
+        "FINALIZE110"
+      ]
+    },
+    "prior_task_finalize": {
+      "exit_code": 1,
+      "ok": false,
+      "codes": [
+        "FINALIZE105",
+        "FINALIZE107",
+        "FINALIZE110"
+      ]
+    },
+    "handoff_validate": {
+      "exit_code": 0,
+      "ok": true,
+      "codes": []
+    },
+    "prior_handoff_validate": {
+      "exit_code": 0,
+      "ok": true,
+      "codes": []
+    },
+    "receiving_dry_run": {
+      "exit_code": 0,
+      "codes": [],
+      "mode": "dry-run",
+      "packet_written": false,
+      "active_context_modified": false,
+      "source_count": 28,
+      "budget": {
+        "total_tokens": 140000,
+        "reserved_output_tokens": 16000,
+        "reserved_input_tokens": 4096,
+        "estimated_input_tokens": 111884
+      },
+      "omissions": [],
+      "inventory_selected": false
+    }
+  },
+  "scope": "Author closure after final review-phase checkpoint; observed before this receipt was stored. Independent review and exact-revision macOS/hosted CI remain open.",
+  "test_snapshot_manifest_sha256": "837d1a2549d245e6c8e0fd8d84e3f215d81a3d11b77d250742c7f66be9e76262",
+  "platform_tests": {
+    "windows": {
+      "passed": 759,
+      "skipped": 13,
+      "total": 772,
+      "files": 37,
+      "default_timeout_ms": 15000,
+      "log_sha256": "1ca42db97a1559965bbbda797e45676ffb5523d432c0ae050c20a8e2009e1b11"
+    },
+    "linux": {
+      "passed": 766,
+      "skipped": 6,
+      "total": 772,
+      "files": 37,
+      "default_timeout_ms": 15000,
+      "log_sha256": "564140bac6f9ec8bc29300c7952223bd153de4da0de95ae96e37dbcc48c51c76"
+    }
+  }
+}

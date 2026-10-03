@@ -1,0 +1,40 @@
+version: 1
+change_id: CHG-FIELD-WORKFLOW-001
+revision: 1
+title: Safe task drafts and explicit text-source coverage from field reports
+status: verified
+risk: medium
+author: CanonTrail implementation agent
+canonical_source: .agent-context/tasks/T-FIELD-WORKFLOW-001/brief.md
+decision_rationale: The maintainer authorized review and implementation of useful field feedback. Repeated manual schema authoring and unsupported shader inputs have neutral reproducible causes. Limit new writes to a never-existing task directory and retain explicit caller decisions; format coverage does not authorize binary or broad discovery ingestion.
+documentation_structure:
+  decision: no-feature-document-change
+  rationale: Existing task/context protocol and usage guide own these capabilities; a synthetic command example suffices.
+  feature_documents: []
+acceptance_cases:
+  - {id: AC-SCAFFOLD, given: An initialized repository and explicit caller task metadata., expected: Dry-run writes nothing; apply creates only three schema-valid task drafts without claiming a decision or verification., failure_or_uncertainty: Existing directories unsafe paths incompatible schemas and incomplete inputs fail before task output., counterexample: A generated pending acceptance is marked pass or an existing task is overwritten., oracle: Parsed output against shipped and installed schemas plus independent before-after filesystem manifests., status: pass, evidence_refs: [test/task-create.test.ts, .agent-context/tasks/T-FIELD-WORKFLOW-001/evidence/verification.md]}
+  - {id: AC-FORMATS, given: Explicit additional module or shader sources., expected: Whole and section selection preserve exact hashes costs and authority while valid UTF-8 sources are supported., failure_or_uncertainty: Binary malformed oversized missing excluded or over-budget requirements fail without replacing a lock., counterexample: An engine binary is treated as text or a new source becomes canonical merely by selection., oracle: Neutral raw-byte fixtures and known SHA-256 values across compile excerpt and resume., status: pass, evidence_refs: [test/context-formats.test.ts, .agent-context/tasks/T-FIELD-WORKFLOW-001/evidence/verification.md]}
+  - {id: AC-GUIDANCE, given: First-task excerpt comparison or a task author planning a checkpoint., expected: Actionable instructions distinguish preparation current context and historical evidence without bypassing gates., failure_or_uncertainty: A missing or corrupt lock is never reported as covered., counterexample: Instructions suggest recompiling to repair missing historical evidence or building a shared runtime., oracle: CLI-output assertions and walkthrough of the neutral worked example., status: pass, evidence_refs: [test/context-inspection.test.ts, test/task-create.test.ts, .agent-context/tasks/T-FIELD-WORKFLOW-001/evidence/self-review.md]}
+impacts:
+  - {area: requirement, decision: affected, rationale: Bound the selected field-friction improvements., evidence_refs: [.agent-context/tasks/T-FIELD-WORKFLOW-001/brief.md]}
+  - {area: data-contracts, decision: affected, rationale: Produce existing task/header/change shapes with explicit pending lifecycle; no stored schema migration., evidence_refs: [schemas/task-state.schema.json, schemas/change-record.schema.json]}
+  - {area: domain-logic, decision: affected, rationale: Add task authoring and a narrowly checked text-extension family., evidence_refs: [src/context.ts]}
+  - {area: tests-reference-cases, decision: affected, rationale: Neutral API and distributed-CLI regressions pass on Windows and Linux., evidence_refs: [test/task-create.test.ts, test/context-formats.test.ts, test/context-inspection.test.ts, .agent-context/tasks/T-FIELD-WORKFLOW-001/evidence/quality.json]}
+  - {area: example-data, decision: affected, rationale: The exact synthetic first-task command is executed by a no-write regression., evidence_refs: [examples/task-create/README.md, test/task-create.test.ts]}
+  - {area: ui-api, decision: affected, rationale: New CLI task command and actionable initial-excerpt diagnostic., evidence_refs: [src/cli.ts, src/context-inspection.ts]}
+  - {area: documentation, decision: affected, rationale: Explain honest drafts formats provenance and checkpoint order., evidence_refs: [docs/usage.md, ARTIFACT_PROTOCOL.md]}
+  - {area: diagrams-visuals, decision: not-affected, rationale: No graphical interface diagrams or rendered application output., evidence_refs: []}
+  - {area: terminology, decision: affected, rationale: Keep draft idea decision and verification distinct; source formats are not document authority., evidence_refs: [ARTIFACT_PROTOCOL.md]}
+  - {area: operations-compatibility, decision: affected, rationale: Preserve shared CLI consumers and require portable exact task paths; no automatic target schema changes., evidence_refs: [.agent-context/tasks/T-FIELD-WORKFLOW-001/brief.md]}
+verification:
+  checks:
+    - {name: Neutral repro and regression suite, status: pass, evidence_refs: [.agent-context/tasks/T-FIELD-WORKFLOW-001/evidence/verification.md]}
+    - {name: Isolated Windows and Linux typecheck build and full suite, status: pass, evidence_refs: [.agent-context/tasks/T-FIELD-WORKFLOW-001/evidence/quality.json]}
+    - {name: Stable runtime and historical preservation, status: pass, evidence_refs: [.agent-context/tasks/T-FIELD-WORKFLOW-001/evidence/verification.md, .agent-context/tasks/T-FIELD-WORKFLOW-001/evidence/active-lock-retention.json]}
+  terminology_search: {status: pass, terms: [draft, idea, task create, text source], evidence_refs: [.agent-context/tasks/T-FIELD-WORKFLOW-001/evidence/self-review.md, ARTIFACT_PROTOCOL.md, docs/usage.md]}
+  visual_review: {applicable: false, status: not-applicable, evidence_refs: [.agent-context/tasks/T-FIELD-WORKFLOW-001/evidence/self-review.md]}
+  unverifiable_items: []
+independent_review: {status: not-required, reviewer: null, findings: [Bounded medium-risk authoring and source-selection change; does not close earlier high-risk review gates, macOS and dependency remediation remain separate release work], evidence_refs: [.agent-context/tasks/T-FIELD-WORKFLOW-001/evidence/self-review.md], waiver: null}
+supersedes: []
+superseded_by: null
+updated_at: "2026-10-01T21:43:37Z"

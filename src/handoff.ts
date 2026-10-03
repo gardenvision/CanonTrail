@@ -1,16 +1,21 @@
 import { validateLockedSection } from "./context-sections.js";
 import { execFile } from "node:child_process";
-import { access, mkdir, readFile, realpath, writeFile } from "node:fs/promises";
+import { readFile } from "node:fs/promises";
 import { createRequire } from "node:module";
 import path from "node:path";
 import { promisify } from "node:util";
 import { Ajv2020 } from "ajv/dist/2020.js";
 import type { FormatsPlugin } from "ajv-formats";
-import { parse, stringify } from "yaml";
+import { Document, isScalar, parse, Scalar } from "yaml";
 import { loadConfig } from "./config.js";
 import { computeContextLockHash, type ContextLock } from "./context.js";
 import { isIsoDateTime } from "./date-time.js";
 import { normalizePath, sha256 } from "./indexer.js";
+import { safeRepositoryFile } from "./context-source-path.js";
+import { decodeContinuityText, preflightImmutable, readContinuityBytes, readContinuityText,
+  writeImmutableContinuity, writeMutableContinuity } from "./continuity-files.js";
+import { inventoryReference, parseGitStatusCapture, resolveInventoryPath, verifyWorktreeInventory,
+  writeWorktreeInventory, type WorktreeEntry, type WorktreeInventory, type WorktreeInventoryRef } from "./worktree-inventory.js";
 
 const execFileAsync = promisify(execFile);
 const require = createRequire(import.meta.url);
@@ -75,6 +80,7 @@ export interface Handoff {
   resume_sources: string[];
   worktree_dirty: boolean;
   uncommitted_summary: string | null;
+  worktree_inventory?: WorktreeInventoryRef;
   handoff_hash: string;
 }
 
@@ -127,6 +133,7 @@ interface TaskState {
   objective: string;
   source_system?: string;
   source_ref?: string;
+  file_intents: string[];
   checks: Array<{ id: string; status?: string; evidence_refs: string[] }>;
 }
 
@@ -150,26 +157,6 @@ function normalizeRelativePath(value: string, field: string): string {
   return normalized;
 }
 
-async function exists(filePath: string): Promise<boolean> {
-  try {
-    await access(filePath);
-    return true;
-  } catch {
-    return false;
-  }
-}
-
-async function safeRepositoryFile(root: string, relativePath: string): Promise<string | undefined> {
-  const absolute = path.join(root, ...relativePath.split("/"));
-  if (!(await exists(absolute))) return undefined;
-  const [realRoot, realFile] = await Promise.all([realpath(root), realpath(absolute)]);
-  const relative = normalizePath(path.relative(realRoot, realFile));
-  if (relative === ".." || relative.startsWith("../") || path.isAbsolute(relative)) {
-    throw new Error(`path resolves outside the repository: ${relativePath}`);
-  }
-  return realFile;
-}
-
 function canonicalize(value: unknown): unknown {
   if (Array.isArray(value)) return value.map(canonicalize);
   if (!isRecord(value)) return value;
@@ -181,7 +168,10 @@ export function computeHandoffHash(value: Omit<Handoff, "handoff_hash"> | JsonRe
 }
 
 export function serializeHandoff(handoff: Handoff): string {
-  return stringify(handoff, { lineWidth: 0 });
+  const document = new Document(handoff);
+  const timestamp = document.get("created_at", true);
+  if (isScalar(timestamp)) timestamp.type = Scalar.QUOTE_DOUBLE;
+  return document.toString({ lineWidth: 0 });
 }
 
 export function validateHandoffSemantics(value: JsonRecord): HandoffFinding[] {
@@ -231,7 +221,7 @@ async function loadDraft(root: string, inputPath?: string): Promise<HandoffDraft
   const relative = normalizeRelativePath(inputPath, "input path");
   const absolute = await safeRepositoryFile(root, relative);
   if (!absolute) throw new Error(`handoff input does not exist: ${relative}`);
-  const value: unknown = parse(await readFile(absolute, "utf8"));
+  const value: unknown = parse(decodeContinuityText(await readFile(absolute), relative));
   if (!isRecord(value)) throw new Error("handoff input must contain a mapping");
   const decisions = parseArrayOfRecords(value.decisions, "decisions", (entry) => {
     const authority = requiredString(entry, "authority");
@@ -289,9 +279,7 @@ async function loadDraft(root: string, inputPath?: string): Promise<HandoffDraft
 
 async function loadTaskState(root: string, taskId: string): Promise<TaskState> {
   const statePath = `.agent-context/tasks/${taskId}/state.yaml`;
-  const absolute = await safeRepositoryFile(root, statePath);
-  if (!absolute) throw new Error(`required task state does not exist: ${statePath}`);
-  const value: unknown = parse(await readFile(absolute, "utf8"));
+  const value: unknown = parse(await readContinuityText(root, statePath));
   if (!isRecord(value) || value.task_id !== taskId || typeof value.objective !== "string") {
     throw new Error(`${statePath} must contain matching task_id and objective`);
   }
@@ -307,16 +295,15 @@ async function loadTaskState(root: string, taskId: string): Promise<TaskState> {
     objective: value.objective,
     ...(typeof value.source_system === "string" ? { source_system: value.source_system } : {}),
     ...(typeof value.source_ref === "string" ? { source_ref: value.source_ref } : {}),
+    file_intents: Array.isArray(value.file_intents) ? value.file_intents.filter((entry): entry is string => typeof entry === "string").map(entry => entry.trim().replace(/^\.\//, "")) : [],
     checks,
   };
 }
 
-async function loadContextLock(root: string, taskId: string): Promise<{ lock: ContextLock; raw: string; path: string }> {
+async function loadContextLock(root: string, taskId: string): Promise<{ lock: ContextLock; raw: Buffer; path: string }> {
   const lockPath = `.agent-context/tasks/${taskId}/context.lock.json`;
-  const absolute = await safeRepositoryFile(root, lockPath);
-  if (!absolute) throw new Error(`required current context lock does not exist: ${lockPath}`);
-  const raw = await readFile(absolute, "utf8");
-  const value: unknown = JSON.parse(raw);
+  const raw = (await readContinuityBytes(root, lockPath))!;
+  const value: unknown = JSON.parse(decodeContinuityText(raw, lockPath));
   if (!isRecord(value) || value.task_id !== taskId || typeof value.lock_hash !== "string") {
     throw new Error(`${lockPath} must contain matching task_id and lock_hash`);
   }
@@ -336,32 +323,35 @@ function validateArchivedSectionShapes(value: JsonRecord): void {
   }
 }
 
-async function gitStatus(root: string): Promise<Array<{ code: string; path: string; state: Exclude<FileState, "inspected"> }>> {
-  let stdout: string;
+async function gitStatus(root: string): Promise<WorktreeEntry[]> {
+  let prefix: string;
   try {
-    const result = await execFileAsync("git", ["status", "--porcelain=v1", "-z", "--untracked-files=all"], {
+    const result = await execFileAsync("git", ["--no-optional-locks", "rev-parse", "--show-prefix"], {
       cwd: root,
-      encoding: "utf8",
+      encoding: "buffer",
+      maxBuffer: 16 * 1024 * 1024,
       windowsHide: true,
     });
-    stdout = result.stdout;
-  } catch {
-    throw new Error("Git worktree status is required to create a handoff safely");
+    // Strip Git's final line ending only: whitespace can be part of a path.
+    if (decodeContinuityText(result.stderr, "Git root diagnostic").trim()) throw new Error(`Git root diagnostic: ${JSON.stringify(result.stderr.toString("utf8"))}`);
+    prefix = decodeContinuityText(result.stdout, "Git root").replace(/\r?\n$/, "");
+  } catch (error) {
+    throw new Error(`The Git worktree root must be identifiable before creating a handoff safely: ${(error as Error).message}`);
   }
-  const entries: Array<{ code: string; path: string; state: Exclude<FileState, "inspected"> }> = [];
-  const records = stdout.split("\0");
-  for (let index = 0; index < records.length; index += 1) {
-    const record = records[index];
-    if (!record) continue;
-    const code = record.slice(0, 2);
-    const normalized = normalizePath(record.slice(3));
-    const state: Exclude<FileState, "inspected"> = code.includes("D")
-      ? "deleted"
-      : code === "??" || code.includes("A") ? "created" : "modified";
-    entries.push({ code, path: normalized, state });
-    if (code.includes("R") || code.includes("C")) index += 1;
+  if (prefix !== "") {
+    throw new Error("The CanonTrail project root must be the Git worktree root to create a handoff/checkpoint; nested project roots are not supported. No handoff artifacts were written. Do not move or reinitialize an existing project merely to bypass this boundary.");
   }
-  return entries.sort((left, right) => left.path.localeCompare(right.path) || left.code.localeCompare(right.code));
+  try {
+    const result = await execFileAsync("git", ["--no-optional-locks", "status", "--porcelain=v1", "-z", "--untracked-files=all"], {
+      cwd: root,
+      encoding: "buffer",
+      maxBuffer: 16 * 1024 * 1024,
+      windowsHide: true,
+    });
+    return parseGitStatusCapture(result.stdout, result.stderr);
+  } catch (error) {
+    throw new Error(`Complete UTF-8 Git worktree status is required to create a handoff safely (16 MiB capture limit; no truncation). Resolve Git diagnostics or access/path limits and retry; no Git configuration was changed. ${(error as Error).message}`);
+  }
 }
 
 function defaultChecks(state: TaskState): HandoffCheck[] {
@@ -374,40 +364,34 @@ function defaultChecks(state: TaskState): HandoffCheck[] {
   }));
 }
 
-function mergeFiles(gitEntries: Awaited<ReturnType<typeof gitStatus>>, draftFiles: HandoffFile[]): HandoffFile[] {
+function mergeFiles(gitEntries: WorktreeEntry[], draftFiles: HandoffFile[], relevant: Set<string>): HandoffFile[] {
   const merged = new Map<string, HandoffFile>();
   for (const entry of gitEntries) {
+    if (!relevant.has(entry.path) && !(entry.original_path && relevant.has(entry.original_path))) continue;
     merged.set(entry.path, {
       path: entry.path,
-      state: entry.state,
-      summary: `Git status ${entry.code.trim() || entry.code} before handoff.`,
+      state: entry.code.includes("D") ? "deleted" : entry.code === "??" || entry.code.includes("A") ? "created" : "modified",
+      summary: `Git status ${entry.code.trim()} before handoff; selected by task context or exact file intent.${entry.original_path ? ` Original path: ${JSON.stringify(entry.original_path)}.` : ""}`,
     });
   }
   for (const file of draftFiles) merged.set(file.path, file);
-  return [...merged.values()].sort((left, right) => left.path.localeCompare(right.path));
+  return [...merged.values()].sort((left, right) => left.path < right.path ? -1 : left.path > right.path ? 1 : 0);
 }
 
 function unique(values: string[]): string[] {
   return [...new Set(values)];
 }
 
-async function writeArchive(filePath: string, content: string): Promise<void> {
-  await mkdir(path.dirname(filePath), { recursive: true });
-  try {
-    await writeFile(filePath, content, { encoding: "utf8", flag: "wx" });
-  } catch (error) {
-    if ((error as NodeJS.ErrnoException).code !== "EEXIST") throw error;
-    if (await readFile(filePath, "utf8") !== content) throw new Error(`archive already exists with different content: ${filePath}`);
-  }
-}
-
-export async function verifyHandoffForTask(root: string, taskId: string, value: JsonRecord): Promise<void> {
+async function validateConfiguredArtifact(root: string, name: string, value: unknown, requiredProperty?: string): Promise<void> {
   const config = await loadConfig(root);
-  const schemaPath = normalizeRelativePath(`${config.schemaPath}/handoff.schema.json`, "handoff schema path");
+  const schemaPath = normalizeRelativePath(`${config.schemaPath}/${name}.schema.json`, `${name} schema path`);
   const schemaFile = await safeRepositoryFile(root, schemaPath);
-  if (!schemaFile) throw new Error(`handoff schema does not exist: ${schemaPath}`);
-  const schema: unknown = JSON.parse(await readFile(schemaFile, "utf8"));
-  if (!isRecord(schema)) throw new Error(`handoff schema is invalid: ${schemaPath}`);
+  if (!schemaFile) throw new Error(`${name} schema does not exist: ${schemaPath}; review and synchronize the installed schemas explicitly`);
+  const schema: unknown = JSON.parse(decodeContinuityText(await readFile(schemaFile), schemaPath));
+  if (!isRecord(schema)) throw new Error(`${name} schema is invalid: ${schemaPath}`);
+  if (requiredProperty && (!isRecord(schema.properties) || !isRecord(schema.properties[requiredProperty]))) {
+    throw new Error(`${name} schema does not explicitly support ${requiredProperty}; review and synchronize the installed schemas before creating a compact handoff. No automatic schema migration.`);
+  }
   const ajv = new Ajv2020({ allErrors: true, strict: true });
   addFormats(ajv);
   const validate = ajv.compile(schema);
@@ -415,8 +399,14 @@ export async function verifyHandoffForTask(root: string, taskId: string, value: 
     const detail = (validate.errors ?? [])
       .map((error) => `${error.instancePath || "/"} ${error.message ?? "is invalid"}`)
       .join("; ");
-    throw new Error(`existing handoff does not satisfy the current schema: ${detail}`);
+    throw new Error(`${name} does not satisfy the current schema: ${detail}; review installed schema compatibility`);
   }
+}
+
+export async function verifyHandoffForTask(root: string, taskId: string, value: JsonRecord): Promise<void> {
+  await validateConfiguredArtifact(root, "handoff", value);
+  const inventory = await verifyWorktreeInventory(root, value);
+  if (inventory) await validateConfiguredArtifact(root, "worktree-inventory", inventory);
   const findings = validateHandoffSemantics(value);
   if (findings.length > 0) {
     throw new Error(`existing handoff is invalid and cannot be safely archived: ${findings.map((entry) => entry.message).join("; ")}`);
@@ -435,12 +425,10 @@ export async function verifyHandoffForTask(root: string, taskId: string, value: 
     throw new Error("existing handoff does not identify archived source context");
   }
   const archivePath = normalizeRelativePath(value.source_context_lock_path, "existing source context lock path");
-  if (!archivePath.startsWith(`.agent-context/tasks/${taskId}/evidence/context-locks/`)) {
+  if (archivePath !== `.agent-context/tasks/${taskId}/evidence/context-locks/${value.source_context_lock_hash.slice(7)}.json`) {
     throw new Error("existing handoff source context archive is outside the owning task");
   }
-  const absoluteArchive = await safeRepositoryFile(root, archivePath);
-  if (!absoluteArchive) throw new Error("existing handoff source context archive is missing");
-  const archive: unknown = JSON.parse(await readFile(absoluteArchive, "utf8"));
+  const archive: unknown = JSON.parse(await readContinuityText(root, archivePath));
   if (!isRecord(archive) || typeof archive.lock_hash !== "string") {
     throw new Error("existing handoff source context archive is invalid");
   }
@@ -479,7 +467,6 @@ export async function createHandoff(options: CreateHandoffOptions): Promise<Hand
   if (!isIsoDateTime(createdAt)) throw new Error("created-at must be an ISO date-time");
   const taskRoot = `.agent-context/tasks/${taskId}`;
   const outputPath = `${taskRoot}/handoff.yaml`;
-  const outputAbsolute = path.join(root, ...outputPath.split("/"));
   const [state, context, draft, gitEntries] = await Promise.all([
     loadTaskState(root, taskId),
     loadContextLock(root, taskId),
@@ -488,14 +475,14 @@ export async function createHandoff(options: CreateHandoffOptions): Promise<Hand
   ]);
   const lockHex = context.lock.lock_hash.replace(/^sha256:/, "");
   const sourceArchivePath = `${taskRoot}/evidence/context-locks/${lockHex}.json`;
-  const existingHandoff = await exists(outputAbsolute) ? await readFile(outputAbsolute, "utf8") : undefined;
+  const existingHandoff = await readContinuityBytes(root, outputPath, false);
   if (existingHandoff && !options.replace) {
     throw new Error(`handoff already exists; use --replace to archive and replace ${outputPath}`);
   }
 
   let previousArchivePath: string | null = null;
   if (existingHandoff) {
-    const previous: unknown = parse(existingHandoff);
+    const previous: unknown = parse(decodeContinuityText(existingHandoff, outputPath));
     if (!isRecord(previous)) throw new Error("existing handoff is invalid and cannot be safely archived");
     await verifyHandoffForTask(root, taskId, previous);
     const previousHash = String(previous.handoff_hash).replace(/^sha256:/, "");
@@ -503,10 +490,13 @@ export async function createHandoff(options: CreateHandoffOptions): Promise<Hand
   }
 
   const draftFiles = draft.files ?? [];
-  const files = mergeFiles(gitEntries, draftFiles);
+  const files = mergeFiles(gitEntries, draftFiles, new Set([...context.lock.sources.map(source => source.path), ...state.file_intents]));
+  const inventory: WorktreeInventory = { version: 1, task_id: taskId, created_at: createdAt, entries: gitEntries };
+  const inventoryBytes = JSON.stringify(inventory, null, 2) + "\n";
+  const inventoryRef = inventoryReference(inventory, inventoryBytes);
   const worktreeDirty = gitEntries.length > 0;
   const uncommittedSummary = worktreeDirty
-    ? draft.uncommitted_summary ?? `Git status before handoff: ${gitEntries.map((entry) => `${entry.code} ${entry.path}`).join("; ")}`
+    ? draft.uncommitted_summary ?? `Git reports ${gitEntries.length} changed/untracked entries; ${files.length} task-selected or explicitly reported files are listed below. The complete hash-bound worktree_inventory is separate on-demand safety evidence, not an ownership claim or file-content backup.`
     : draft.uncommitted_summary ?? null;
   const resumeSources = unique([
     ...context.lock.sources.map((source) => source.path),
@@ -538,20 +528,40 @@ export async function createHandoff(options: CreateHandoffOptions): Promise<Hand
     resume_sources: resumeSources,
     worktree_dirty: worktreeDirty,
     uncommitted_summary: uncommittedSummary,
+    worktree_inventory: inventoryRef,
   };
   const handoff: Handoff = { ...withoutHash, handoff_hash: computeHandoffHash(withoutHash) };
   const semanticFindings = validateHandoffSemantics(handoff as unknown as JsonRecord).filter((entry) => entry.code !== "HANDOFF005");
   if (semanticFindings.length > 0) throw new Error(semanticFindings.map((entry) => entry.message).join("; "));
-  const serialized = serializeHandoff(handoff);
-  const outputModified = existingHandoff !== serialized;
+  // Fail BEFORE any archive/output write on old or restrictive installed schemas.
+  await validateConfiguredArtifact(root, "handoff", handoff, "worktree_inventory");
+  await validateConfiguredArtifact(root, "worktree-inventory", inventory);
+  await resolveInventoryPath(root, inventoryRef.path, false);
+  const serialized = Buffer.from(serializeHandoff(handoff), "utf8");
+  const outputModified = !existingHandoff?.equals(serialized);
+  // Complete deterministic preflight, including the LAST potential collision,
+  // before creating a sidecar. A dry run observes these same boundaries.
+  await preflightImmutable(root, inventoryRef.path, Buffer.from(inventoryBytes));
+  await preflightImmutable(root, sourceArchivePath, context.raw);
+  if (existingHandoff && previousArchivePath) await preflightImmutable(root, previousArchivePath, existingHandoff);
+  for (const source of context.lock.sources) {
+    const absolute = await safeRepositoryFile(root, source.path);
+    if (!absolute) throw new Error(`Current context source is missing: ${source.path}; review and recompile before handoff creation`);
+    const bytes = await readFile(absolute);
+    if (sha256(bytes) !== source.content_hash) throw new Error(`Current context source changed: ${source.path}; review and recompile before handoff creation`);
+    validateLockedSection(source, bytes);
+  }
+  for (const source of resumeSources) {
+    if (!(await safeRepositoryFile(root, source))) throw new Error(`New handoff has a missing resume source: ${source}`);
+  }
 
   if (options.apply) {
-    await writeArchive(path.join(root, ...sourceArchivePath.split("/")), context.raw);
+    await writeWorktreeInventory(root, inventoryRef, inventoryBytes);
+    await writeImmutableContinuity(root, sourceArchivePath, context.raw);
     if (existingHandoff && previousArchivePath) {
-      await writeArchive(path.join(root, ...previousArchivePath.split("/")), existingHandoff);
+      await writeImmutableContinuity(root, previousArchivePath, existingHandoff);
     }
-    await mkdir(path.dirname(outputAbsolute), { recursive: true });
-    if (outputModified) await writeFile(outputAbsolute, serialized, "utf8");
+    if (outputModified) await writeMutableContinuity(root, outputPath, serialized, existingHandoff);
   }
 
   return {
@@ -574,6 +584,10 @@ export function formatHandoffCreateReport(report: HandoffCreateReport): string {
     `Source context archive: ${report.source_context_archive_path}`,
     `Previous handoff archive: ${report.previous_handoff_archive_path ?? "none"}`,
     `Worktree dirty: ${report.handoff.worktree_dirty}`,
+    ...(report.handoff.worktree_inventory ? [
+      `Worktree inventory: ${report.handoff.worktree_inventory.entry_count} entries (${JSON.stringify(report.handoff.worktree_inventory.path)}; ${outputState})`,
+      `Task-selected/explicit files: ${report.handoff.files.length}; inventory is verified separately, not automatically loaded as context.`,
+    ] : []),
     `Resume sources: ${report.handoff.resume_sources.length}`,
     `Handoff hash: ${report.handoff.handoff_hash}`,
     `Next${report.mode === "dry-run" ? " (after --apply)" : ""}: ensure ${JSON.stringify(`.agent-context/tasks/${report.task_id}/state.yaml`)} sets latest_handoff to ${JSON.stringify(report.output_path)}.`,

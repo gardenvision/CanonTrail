@@ -1,0 +1,92 @@
+{
+  "kind": "implementation-and-guidance-snapshot",
+  "created_at": "2026-09-26T10:48:07.745Z",
+  "base_revision": "f2f95541853ca97daf486c92844745c498f9afb8",
+  "files": [
+    {
+      "path": "src/handoff.ts",
+      "bytes": 27913,
+      "sha256": "610a2f8227ab81d62cba4330babfb9a947323a46b7dd214d1134f20e3b4c9bc5"
+    },
+    {
+      "path": "src/worktree-inventory.ts",
+      "bytes": 7710,
+      "sha256": "243d310743bda0a9cf1a5bf00a3edb7e9d6fe319eaab5e8f65100328999c2485"
+    },
+    {
+      "path": "src/resume.ts",
+      "bytes": 13484,
+      "sha256": "0f8e59a950a1166e788f058c37dbac53a945e1562fa0414ccfca102b601cafc4"
+    },
+    {
+      "path": "src/resume-audit.ts",
+      "bytes": 8932,
+      "sha256": "f24bacb3cb26a7918741c90a53ce86cc71fb57ee2cd1db6dc1786edb04ae532d"
+    },
+    {
+      "path": "src/validator.ts",
+      "bytes": 67144,
+      "sha256": "f56e29a98729e079ffc4ddffe2314d128b37985436a8292a32f90a67fe106153"
+    },
+    {
+      "path": "src/cli.ts",
+      "bytes": 36681,
+      "sha256": "f190cabb69d91fd02d91b4aff2753e1d9438d7ea0d60114c7c03bee96bc40fd7"
+    },
+    {
+      "path": "src/initializer.ts",
+      "bytes": 43826,
+      "sha256": "26cbdf398bf269a973fdb45e8cbe388bce196f88b02ff7475d15e5e1bd48b349"
+    },
+    {
+      "path": "schemas/handoff.schema.json",
+      "bytes": 4225,
+      "sha256": "858b75104c5aa6d2bfcf574a55cd4077466476899a5ff7f85f2391ddd518d3eb"
+    },
+    {
+      "path": "schemas/worktree-inventory.schema.json",
+      "bytes": 864,
+      "sha256": "6be6ad3cda004374255818e35400d9674a135f57f84959141c44cfc74c581e37"
+    },
+    {
+      "path": "test/handoff.test.ts",
+      "bytes": 13922,
+      "sha256": "311959389beca1506e2b6fafbb77d48b1afb435cde34598fe5cde4e4ea023b39"
+    },
+    {
+      "path": "test/compact-handoff.test.ts",
+      "bytes": 18993,
+      "sha256": "b173a58bb2ec0156c9a4fc495943bf2076b94a9cd6096d279bcd9e568c100f3f"
+    },
+    {
+      "path": "ARTIFACT_PROTOCOL.md",
+      "bytes": 89895,
+      "sha256": "e68fd76963438c16729cc67672ca425db595cccadb2eab03b3c2684351f9a4b7"
+    },
+    {
+      "path": "docs/usage.md",
+      "bytes": 12483,
+      "sha256": "dc7bf704f7b872f60c04d24e8e01450e0a4cadb2c4a6ca59554e724df57070fd"
+    },
+    {
+      "path": "docs/self-documentation.md",
+      "bytes": 3969,
+      "sha256": "c3f7d6c9a58470ebb3025e21c6b4b068156295adfcab0e8863c825fd6fe38b9b"
+    },
+    {
+      "path": "ROADMAP.md",
+      "bytes": 5582,
+      "sha256": "258c672b35409eaf32f9e317ddad0d599f204cc4fe9c07055ce16e4aa7575bd6"
+    },
+    {
+      "path": "examples/compact-handoff/README.md",
+      "bytes": 2832,
+      "sha256": "fa803a9eaf3e6ae9ca1f76d23e20735cecaa494bf2f16e5a6072d1c668eb5ab9"
+    },
+    {
+      "path": "examples/compact-handoff/inventory.fixture.json",
+      "bytes": 211,
+      "sha256": "fdbf87b9c3c7fae6a25a6f38545c360634c6d8a8552747a68d06a07f68bbbd52"
+    }
+  ]
+}

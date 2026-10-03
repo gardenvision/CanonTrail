@@ -6,7 +6,9 @@ import { parse } from "yaml";
 import { computeContextLockHash, type ContextLock } from "./context.js";
 import { validateLockedSection } from "./context-sections.js";
 import { safeRepositoryFile } from "./context-source-path.js";
+import { decodeContinuityText, readContinuityBytes, resolveContinuityFile } from "./continuity-files.js";
 import { validateHandoffSemantics } from "./handoff.js";
+import { verifyWorktreeInventory } from "./worktree-inventory.js";
 import { sha256 } from "./indexer.js";
 import { validateResumePacketSemantics, type ResumePacket } from "./resume.js";
 import type { Diagnostic } from "./types.js";
@@ -42,6 +44,7 @@ export async function auditResumeReferences(
   }
   async function bytes(relative: string): Promise<Buffer> {
     relativePath(relative);
+    if (relative.startsWith(".agent-context/tasks/")) return (await readContinuityBytes(root, relative))!;
     const exact = await safeRepositoryFile(root, relative);
     if (!exact) throw new Error(`Required provenance file does not exist: ${relative}`);
     return readFile(exact);
@@ -57,7 +60,7 @@ export async function auditResumeReferences(
   if (namedHash && packet.packet_hash !== `sha256:${namedHash[1]}`) fail("RESUME005", "resume packet filename does not match packet_hash");
   if (taskRoot) {
     try {
-      const state: unknown = parse((await bytes(`${taskRoot}/state.yaml`)).toString("utf8"));
+      const state: unknown = parse(decodeContinuityText(await bytes(`${taskRoot}/state.yaml`), `${taskRoot}/state.yaml`));
       schema("task-state", state);
       if ((state as RecordValue).task_id !== packet.task_id) throw new Error("Owning task identity does not match");
     } catch (error) { fail("RESUME005", "resume packet owner cannot be established", error); }
@@ -71,16 +74,16 @@ export async function auditResumeReferences(
     // semantic self-hash but different YAML serialization. Never mask corruption
     // in an existing archive by falling back to a convenient latest copy.
     const archived = taskRoot && purpose === "retained-integrity"
-      ? await safeRepositoryFile(root, taskRoot + "/evidence/handoffs/" + packet.handoff_hash.slice(7) + ".yaml")
+      ? await readContinuityBytes(root, taskRoot + "/evidence/handoffs/" + packet.handoff_hash.slice(7) + ".yaml", false)
       : undefined;
-    const chosen = archived ?? await safeRepositoryFile(root, packet.handoff_path);
-    if (!chosen) throw new Error("Bound handoff provenance does not exist");
-    const candidate = await readFile(chosen);
-    const parsed: unknown = parse(candidate.toString("utf8"));
+    const candidate = archived ?? await bytes(packet.handoff_path);
+    const parsed: unknown = parse(decodeContinuityText(candidate, packet.handoff_path));
     schema("handoff", parsed);
     handoff = parsed as RecordValue;
     handoffBytes = candidate!;
     if (validateHandoffSemantics(handoff).length) throw new Error("Handoff semantic/self-hash validation failed");
+    const inventory = await verifyWorktreeInventory(root, handoff);
+    if (inventory) schema("worktree-inventory", inventory);
     const fields = ["task_id", "handoff_hash", "source_session_id", "source_context_lock_path", "source_context_lock_hash",
       "objective", "next_safe_action", "worktree_dirty", "uncommitted_summary", "blockers", "open_questions", "do_not_repeat"];
     if (fields.some(field => !isDeepStrictEqual(handoff[field], value[field]))) throw new Error("Packet projection does not match its bound handoff");
@@ -90,7 +93,7 @@ export async function auditResumeReferences(
     if (taskRoot && relative !== `${taskRoot}/evidence/context-locks/${hash.slice(7)}.json`) {
       throw new Error("Context archive must use its exact owning task and hash-derived path");
     }
-    const parsed: unknown = JSON.parse((await bytes(relative)).toString("utf8"));
+    const parsed: unknown = JSON.parse(decodeContinuityText(await bytes(relative), relative));
     schema("context-lock", parsed);
     const lock = parsed as ContextLock;
     const { lock_hash: _ignored, ...payload } = lock;
@@ -137,6 +140,7 @@ export async function auditResumeReferences(
   try {
     relativePath(packet.active_context_lock_path);
     if (taskRoot && packet.active_context_lock_path !== `${taskRoot}/context.lock.json`) throw new Error("Active context path is outside the owner");
+    if (purpose === "current-use") await resolveContinuityFile(root, packet.active_context_lock_path, true);
   } catch (error) { fail("RESUME009", "active context lock path does not match the owning task", error); }
   if (!taskRoot && lock.sources.some(source => source.line_ranges !== undefined || source.selection_hash !== undefined)) {
     fail("RESUME010", "sectioned receiving context requires an operational task owner");

@@ -1,0 +1,147 @@
+handoff_id: H-T-CONTINUITY-WRITE-HARDENING-001-20260927130300
+task_id: T-CONTINUITY-WRITE-HARDENING-001
+created_at: "2026-09-27T13:03:00Z"
+source_session_id: canontrail442-write-hardening
+checkpoint_trigger: phase-transition
+source_context_lock_path: .agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/evidence/context-locks/f86cd19abc8f2fda470d7510bb2c02eb94f09e343ce6548210522a441c66ad19.json
+source_context_lock_hash: sha256:f86cd19abc8f2fda470d7510bb2c02eb94f09e343ce6548210522a441c66ad19
+objective: Close reviewed continuity write and retained-provenance gaps without changing consumer projects or rewriting history.
+completed:
+  - Implemented byte-exact no-link continuity reads and writes with complete deterministic output preflight.
+  - Added fail-closed Git diagnostics, unbound archived-handoff auditing, current-source preflight and clearer human reports.
+  - Recorded all 29 new regression cases; the first 16 failed before the fix. The final 772-case Linux suite passes 766 with 6 capability skips.
+  - Corrected the synthetic worked example after a stronger byte-parser regression exposed noncanonical spacing; no historical evidence was reformatted.
+  - Preserved tracked historical artifacts, reviewed archives, original packages and the shared stable runtime; updated protocol and task records.
+decisions:
+  - statement: Address the remaining review findings in a separate high-risk task without consumer rollout or automatic Git configuration changes.
+    authority: approved
+    source: .agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/brief.md
+files:
+  - path: .agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/brief.md
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: .agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/change.yaml
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: .agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/evidence/verification.md
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: .agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/state.yaml
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: ARTIFACT_PROTOCOL.md
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: ROADMAP.md
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: docs/release-checklist.md
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: docs/self-documentation.md
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: docs/usage.md
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: examples/compact-handoff/README.md
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: examples/compact-handoff/inventory.fixture.json
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: src/cli.ts
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: src/continuity-files.ts
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: src/docs.ts
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: src/handoff.ts
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: src/resume-audit.ts
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: src/resume.ts
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: src/validator.ts
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: src/worktree-inventory.ts
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: test/compact-handoff-review.test.ts
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: test/compact-handoff.test.ts
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: test/continuity-write-hardening.test.ts
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: test/handoff.test.ts
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+checks:
+  - name: CHECK-QUALITY
+    status: pass
+    evidence: .agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/evidence/verification.md
+  - name: CHECK-WINDOWS
+    status: not-run
+    evidence: .agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/evidence/verification.md
+  - name: CHECK-PRESERVATION
+    status: pass
+    evidence: .agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/evidence/verification.md
+  - name: CHECK-REVIEW
+    status: not-run
+    evidence: ""
+blockers:
+  - Independent approval of the new correction and exact-revision hosted macOS CI remain open; old R3 approval does not cover new bytes.
+open_questions:
+  - Complete and record the current default-timeout Windows full repeat; earlier setup timeouts and interrupted runs must stay visible.
+next_safe_action: Validate this handoff and prepare receiving context, read evidence/verification.md and the external STATUS.md route, then reconcile the Windows full-suite result and run the recorded repository gates before requesting independent review and revision-bound CI.
+do_not_repeat:
+  - Do not rebuild candidate/dist or mutate consumer projects. The shared runtime intentionally remains f2f9554.
+  - Do not rewrite historical archives or claim that self-hashes authenticate approval.
+  - Do not infer independent approval, a human waiver, commit, push or publication from author tests.
+  - Do not claim crash-atomic writes or security against hostile concurrent filesystem changes; exclusive stable-tree access remains required.
+resume_sources:
+  - AGENTS.md
+  - .agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/state.yaml
+  - .agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/brief.md
+  - .agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/change.yaml
+  - examples/resume-history/README.md
+  - ARTIFACT_PROTOCOL.md
+  - examples/compact-handoff/README.md
+  - examples/context-inspection/README.md
+  - .agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/evidence/verification.md
+  - src/context-source-path.ts
+  - src/continuity-files.ts
+  - src/handoff.ts
+  - src/resume-audit.ts
+  - src/resume.ts
+  - src/validator.ts
+  - src/worktree-inventory.ts
+  - test/compact-handoff-review.test.ts
+  - test/continuity-write-hardening.test.ts
+  - docs/release-checklist.md
+  - docs/self-documentation.md
+  - docs/usage.md
+  - examples/compact-handoff/inventory.fixture.json
+  - ROADMAP.md
+  - src/cli.ts
+  - src/docs.ts
+  - test/compact-handoff.test.ts
+  - test/handoff.test.ts
+  - .agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/context.lock.json
+worktree_dirty: true
+uncommitted_summary: Git reports 54 changed/untracked entries; 23 task-selected or explicitly reported files are listed below. The complete hash-bound worktree_inventory is separate on-demand safety evidence, not an ownership claim or file-content backup.
+worktree_inventory:
+  path: .agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/evidence/worktree-inventories/9f3c81ce22845e7680ee827b5717f1da7d1fdc6926eec3e4160958c0f0e57b00.worktree-inventory.json
+  content_hash: sha256:9f3c81ce22845e7680ee827b5717f1da7d1fdc6926eec3e4160958c0f0e57b00
+  entry_count: 54
+handoff_hash: sha256:70e7e4704a50a0d4be5cfb5bd690821d502c05249d289c6624d4d6d718333982

@@ -1,0 +1,42 @@
+version: 1
+change_id: CHG-CONTINUITY-WRITE-HARDENING-001
+revision: 1
+title: Fail-closed continuity capture and byte-exact no-link archives
+status: implemented
+risk: high
+author: CanonTrail implementation agent
+canonical_source: ARTIFACT_PROTOCOL.md
+decision_rationale: The maintainer authorized remaining review corrections. Exact-byte archival and complete status disclosure must hold across older writers and every reader, not just the new inventory path. Known collisions must be detected before any output. Separate historical integrity from current use and retain explicit stable-tree and unsigned-provenance limits.
+documentation_structure:
+  decision: no-feature-document-change
+  rationale: Existing continuity protocol usage guide and compact-handoff example own these refinements; no new product boundary or schema shape.
+  feature_documents: []
+acceptance_cases:
+  - {id: AC-GIT, given: Git exits zero but warns that part of the worktree was unreadable., expected: Handoff and checkpoint creation reject without writing output., failure_or_uncertainty: No automatic global Git configuration or guessed completeness., counterexample: A truncated status inventory is reported complete., oracle: Injected warning and real long-path Git fixtures with before-after hashes., status: pass, evidence_refs: [.agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/evidence/verification.md, test/continuity-write-hardening.test.ts]}
+  - {id: AC-BYTES, given: Existing output bytes decode to the same text but differ or inventory JSON is ambiguous., expected: Writers reject raw collisions and readers reject invalid encoding or noncanonical sidecars., failure_or_uncertainty: Legacy valid YAML and JSON are not silently normalized or rewritten., counterexample: Corrupt archive accepted by creation validation and resume., oracle: Raw malformed-UTF8 and BOM/duplicate-key fixtures plus exact-valid-byte controls., status: pass, evidence_refs: [.agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/evidence/verification.md, test/continuity-write-hardening.test.ts]}
+  - {id: AC-PATHS, given: Any archive packet active output or latest handoff path is linked aliased or has a known incompatible output., expected: Every destination is checked before writes and rechecked when used., failure_or_uncertainty: Stable exclusive tree required; no guarantee against hostile races or crash-atomic multi-file commit., counterexample: A deep junction redirects writes or a deterministic late collision leaves new files., oracle: Link alias and late-collision preservation tests in disposable roots., status: pass, evidence_refs: [.agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/evidence/verification.md, test/continuity-write-hardening.test.ts]}
+  - {id: AC-HISTORY, given: A retained middle handoff is not referenced by a resume packet., expected: Its own hash owner source archive and optional inventory are audited while old source freshness is not required., failure_or_uncertainty: Historical integrity is not current-use permission., counterexample: Removing its inventory passes repository validation or later source drift invalidates genuine history., oracle: Three-generation handoff fixture and retained-source drift controls., status: pass, evidence_refs: [.agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/evidence/verification.md, test/continuity-write-hardening.test.ts]}
+  - {id: AC-ENTRY, given: New handoff creation or a human-readable diagnostic encounters invalid current inputs., expected: Selected-source drift and missing resume sources fail before writes; detail and deterministic ordering are retained., failure_or_uncertainty: Generic evidence prose is not automatically a filesystem reference., counterexample: Immediately unusable handoff succeeds or repair details disappear outside JSON., oracle: Source-drift missing-input and CLI output assertions., status: pass, evidence_refs: [.agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/evidence/verification.md, test/continuity-write-hardening.test.ts]}
+impacts:
+  - {area: requirement, decision: affected, rationale: Enforce complete capture and retained provenance across continuity operations., evidence_refs: [.agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/brief.md]}
+  - {area: data-contracts, decision: affected, rationale: Tighten byte and path validation without artifact-shape change., evidence_refs: [ARTIFACT_PROTOCOL.md]}
+  - {area: domain-logic, decision: affected, rationale: Shared control-path and raw-byte checks plus retained archive validation., evidence_refs: [src/handoff.ts, src/resume.ts, src/resume-audit.ts, src/worktree-inventory.ts, src/validator.ts]}
+  - {area: tests-reference-cases, decision: affected, rationale: Expand negative and preservation coverage from both independent reviews., evidence_refs: [test/continuity-write-hardening.test.ts, test/compact-handoff.test.ts, .agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/evidence/verification.md]}
+  - {area: example-data, decision: affected, rationale: Existing worked example must state complete capture and stable-tree limits., evidence_refs: [examples/compact-handoff/README.md]}
+  - {area: ui-api, decision: affected, rationale: Human diagnostics must expose the same actionable details as JSON., evidence_refs: [src/cli.ts, src/docs.ts]}
+  - {area: documentation, decision: affected, rationale: Explain stronger preflight and remaining operational limits., evidence_refs: [ARTIFACT_PROTOCOL.md, docs/usage.md, docs/self-documentation.md, ROADMAP.md]}
+  - {area: diagrams-visuals, decision: not-affected, rationale: No application interface or diagram changes., evidence_refs: []}
+  - {area: terminology, decision: affected, rationale: Exact bytes code-unit ordering historical integrity and stable-tree access remain distinct., evidence_refs: [ARTIFACT_PROTOCOL.md]}
+  - {area: operations-compatibility, decision: affected, rationale: Same no-link and encoding contract on Windows Linux and macOS with explicit capability evidence., evidence_refs: [docs/platform-support.md]}
+verification:
+  checks:
+    - {name: Frozen r2 Linux typecheck build and full suite, status: pass, evidence_refs: [.agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/evidence/verification.md]}
+    - {name: Windows default-timeout full suite repeat, status: pass, evidence_refs: [.agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/evidence/verification.md]}
+    - {name: Historical and stable-runtime byte preservation, status: pass, evidence_refs: [.agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/evidence/verification.md]}
+  terminology_search: {status: pass, terms: [exact bytes, historical integrity, stable tree, worktree_inventory], evidence_refs: [.agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/evidence/verification.md]}
+  visual_review: {applicable: true, status: pass, evidence_refs: [test/continuity-write-hardening.test.ts, .agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/evidence/verification.md]}
+  unverifiable_items: [New independent review pending, Exact-revision macOS execution pending]
+independent_review: {status: pending, reviewer: null, findings: [Prior compact-handoff R3 review does not approve new hardening bytes], evidence_refs: [], waiver: null}
+supersedes: []
+superseded_by: null
+updated_at: "2026-09-27T13:05:00Z"

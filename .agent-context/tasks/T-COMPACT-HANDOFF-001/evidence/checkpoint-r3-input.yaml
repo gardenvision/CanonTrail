@@ -1,0 +1,20 @@
+completed:
+  - Reproduced a decoded-equal raw-byte inventory collision before committing and added a failing full-create regression plus an exact-byte control.
+  - Corrected the inventory writer to compare raw buffers; all 43 focused cases passed.
+  - Ran full 743-case suites in isolated Windows and Linux snapshots; Windows passed 730 with 13 skips and Linux passed 739 with 4 skips.
+  - Repeated the original scratch probe against the built correction and confirmed rejection with existing corrupt bytes unchanged.
+  - Preserved historical continuity artifacts, original review receipts and the shared stable f2f9554 runtime; documented revision 3 without claiming independent approval.
+decisions:
+  - statement: Compare and write exact inventory bytes without schema changes or consumer rollout; keep previous review receipts scoped to their original snapshots.
+    authority: approved
+    source: .agent-context/tasks/T-COMPACT-HANDOFF-001/brief.md
+blockers:
+  - Independent review of revisions 2 and 3 and exact macOS execution remain open before release or consumer rollout.
+open_questions:
+  - Obtain the maintainer's review-subtask decision and then coordinate a permitted test-branch commit/push for hosted CI; neither is inferred from this checkpoint.
+next_safe_action: Validate this handoff and compile validated receiving context, inspect precommit-review-r3.md and the final gate receipt, then resolve the pending independent-review and exact macOS CI route before commit/publication decisions.
+do_not_repeat:
+  - Do not build in the shared source checkout; candidate/dist intentionally remains the stable f2f9554 consumer runtime. Build in isolated copies.
+  - Do not change consumer projects, rewrite historical evidence, commit, push or infer review approval from author tests.
+  - Do not accept decoded-text equality in place of raw-byte equality or rehash converted historical evidence.
+  - Do not treat the revision-1 Claude review as approval of revised bytes; deferred archive-path and atomicity findings remain open.

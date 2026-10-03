@@ -141,6 +141,14 @@ export async function excerptContextSource(options: {
   if (tokens > maxTokens) throw new Error(`Excerpt needs ${tokens} estimated tokens; limit is ${maxTokens}. No truncated excerpt emitted.`);
   let selection: { task_id: string; lock_hash: string; whole_source_selected: boolean; recorded_source_hash: string | null } | null = null;
   if (options.taskId !== undefined) {
+    const comparisonPath = `${taskRoot(options.taskId)}/context.lock.json`;
+    try { await lstat(path.join(root, comparisonPath)); }
+    catch (error) {
+      if ((error as NodeJS.ErrnoException).code === "ENOENT") {
+        throw new Error(`No context lock exists for task ${JSON.stringify(options.taskId)}. Before the first compile, run context excerpt without --task to inspect the source; --task only compares an existing lock. Check the task id if a lock was expected. No context coverage or writes were recorded.`);
+      }
+      throw error;
+    }
     const lock = await readLock(root, options.taskId, config);
     const source = lock.sources.find(s => s.path === options.source);
     selection = { task_id: options.taskId, lock_hash: lock.lock_hash,

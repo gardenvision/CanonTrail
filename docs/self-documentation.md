@@ -1,6 +1,6 @@
 ---
 topic_id: canontrail-self-documentation
-stand: "2026-09-14"
+stand: "2026-10-01"
 status: public-source-alpha
 truth_level: draft
 verification:
@@ -35,8 +35,15 @@ do_not_use_instead: [VISION.md, ARTIFACT_PROTOCOL.md, ROADMAP.md]
 | Clean-source preparation, hosting completion and review/CI receipts | `.agent-context/tasks/T-RELEASE-CLOSURE-001/state.yaml` |
 | Third-party dependency inventory | `docs/third-party-notices.md` |
 | Landing-page design and onboarding verification | `.agent-context/tasks/T-README-ONBOARDING-001/state.yaml` |
+| Compact handoff inventories and reference-failure guidance | `.agent-context/tasks/T-COMPACT-HANDOFF-001/state.yaml`; `ARTIFACT_PROTOCOL.md` section 8.2 |
+| Continuity byte/path preflight and retained-handoff hardening | `.agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/state.yaml` |
+| Abstract field feedback, task draft creation and checked shader/module context | `.agent-context/tasks/T-FIELD-WORKFLOW-001/state.yaml` |
 
 Read `AGENTS.md` first and choose new task, validated resume, unfinished bootstrap, or maintenance. Load the relevant owner, not this entire tree by default. Exact task sources belong in a context lock; a narrative summary is not a substitute.
+
+The October field-feedback task reviews a bounded, externally retained consumer corpus and publishes only abstract findings and synthetic fixtures. It adds task draft authoring rather than automatic decisions/completion, and explicit shader/module text support rather than binary ingestion. Its state/evidence own current progress and tests. The shared stable consumer CLI is deliberately not rebuilt in place; source documentation and the older executable must not be conflated. The newly observed dependency-audit finding is a separate pre-publication follow-up, not silently covered by older green audit receipts.
+
+Compact-handoff revision 3 received a bounded independent conditional review confirming A-D, including the new inventory writer correction. Two review receipts and their non-interchangeable scopes are recorded in T-CONTINUITY-WRITE-HARDENING-001/evidence/review-intake.md. The older archive writers, Git warning handling, retained history and detailed diagnostics are corrected and author-tested on Windows/Linux in that separate high-risk task. Its new bytes are not approved by the R3 review; independent review and exact macOS/CI remain open. Current exact verification and remaining gates belong in its state/change/evidence, not in old receipts. No consumer rollout, stable-runtime replacement or coordination feature is implied.
 
 This baseline intentionally does not include private development-task history. Existing product definitions and synthetic examples are not newly promoted by copying them. Current candidate checks must be recorded afresh. The preparation task remains separate from license selection, independent release review and publication permission.
 

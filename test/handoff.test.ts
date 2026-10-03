@@ -192,6 +192,7 @@ describe("createHandoff", () => {
       next_safe_action: "Run the focused fixture test, then inspect the exact failure before changing more code.",
     }));
 
+    await compileContext({ root, taskId: "T-HANDOFF-001", apply: true });
     const report = await createHandoff({
       root,
       taskId: "T-HANDOFF-001",
@@ -202,15 +203,15 @@ describe("createHandoff", () => {
     });
 
     expect(report.handoff.worktree_dirty).toBe(true);
-    expect(report.handoff.uncommitted_summary).toContain("src/feature.ts");
+    expect(report.handoff.uncommitted_summary).toContain("hash-bound worktree_inventory");
     expect(report.handoff.files).toContainEqual({
       path: "src/feature.ts",
       state: "modified",
       summary: "Changed the fixture behavior.",
     });
-    expect(report.handoff.files).toEqual(expect.arrayContaining([
-      expect.objectContaining({ path: "src/Änderung mit Leerzeichen.ts", state: "created" }),
-    ]));
+    expect(report.handoff.files.some(file => file.path === "src/Änderung mit Leerzeichen.ts")).toBe(false);
+    const inventory = JSON.parse(await readFile(path.join(root, report.handoff.worktree_inventory!.path), "utf8"));
+    expect(inventory.entries).toContainEqual({ code: "??", path: "src/Änderung mit Leerzeichen.ts" });
     expect(report.handoff.completed).toEqual(["Inspected and changed the bounded feature."]);
     expect(await readFile(featurePath, "utf8")).toBe(changedSource);
     expect((await validateRepository(root, { checkIndex: false, checkContextLocks: false })).ok).toBe(true);

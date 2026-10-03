@@ -1,0 +1,331 @@
+{
+  "version": 1,
+  "task_id": "T-FIELD-WORKFLOW-001",
+  "created_at": "2026-10-01T21:49:10.0237107Z",
+  "entries": [
+    {
+      "code": " M",
+      "path": ".agent-context/context-index.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-COMPACT-HANDOFF-001/brief.md"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-COMPACT-HANDOFF-001/change.yaml"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-COMPACT-HANDOFF-001/checkpoint-input.yaml"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-COMPACT-HANDOFF-001/context.lock.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/checkpoint-r2-input.yaml"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/checkpoint-r3-input.yaml"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/context-locks/0cac86e6c49b743c67285b59e956ff7815f3a3f4f9c195a287f09d43d3d31995.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/context-locks/9b1b174603ac83afcc91ce3ccc3b34f8b6d8d41b2ec0c6d89469606132b1dd50.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/context-locks/a906b59a8fbeba03d09bb1bdc1fb23bdb12cce87ad12bbf208bead0feee746c7.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/final-gates-r2.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/final-gates-r3.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/final-gates.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/handoffs/312a2c4af7081790278e2802ba82942cc655adfbbbd7af231adf1514278a5ef5.yaml"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/handoffs/3879df68b3b2ca3bd04424548350cdcd53967fbefe2bc6b310a591b25f6e7f97.yaml"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/implementation-fingerprints.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/precommit-review-r3.md"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/review-remediation.md"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/review-request.md"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/verification.txt"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/worktree-inventories/4cde1f40b426893c635b5d036b0c8827bdb227a21668708cb402a043abf77a4e.worktree-inventory.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/worktree-inventories/8497881835d0571cd6aceedcbf0bfc4b114410ad3f9c52c6300da1a7f419aee8.worktree-inventory.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/worktree-inventories/8bb26f7ab9de038c7dd49b47470ad5d0dae0bf70c8b22d90969416e625349c44.worktree-inventory.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-COMPACT-HANDOFF-001/handoff.yaml"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-COMPACT-HANDOFF-001/state.yaml"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/brief.md"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/change.yaml"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/context.lock.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/evidence/checkpoint-input.yaml"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/evidence/context-locks/dbd98218d27e43a959304077d485ed5f7c1dd021515eafafd7401549abbf3bcb.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/evidence/context-locks/f86cd19abc8f2fda470d7510bb2c02eb94f09e343ce6548210522a441c66ad19.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/evidence/final-gates.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/evidence/handoffs/70e7e4704a50a0d4be5cfb5bd690821d502c05249d289c6624d4d6d718333982.yaml"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/evidence/review-intake.md"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/evidence/verification.md"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/evidence/worktree-inventories/9f3c81ce22845e7680ee827b5717f1da7d1fdc6926eec3e4160958c0f0e57b00.worktree-inventory.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/evidence/worktree-inventories/df21f86730ec141a99e57115275918721e49af27ae419f54b03109433cb82ae2.worktree-inventory.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/handoff.yaml"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/state.yaml"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-FIELD-WORKFLOW-001/brief.md"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-FIELD-WORKFLOW-001/change.yaml"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-FIELD-WORKFLOW-001/checkpoint-input.yaml"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-FIELD-WORKFLOW-001/context.lock.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-FIELD-WORKFLOW-001/evidence/active-lock-retention.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-FIELD-WORKFLOW-001/evidence/intake.md"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-FIELD-WORKFLOW-001/evidence/quality.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-FIELD-WORKFLOW-001/evidence/retained-locks/T-COMPACT-HANDOFF-001-bf9cc1b5fc3a9ce1f5d24cb5855c5c62b2fee3eb0f3cafe967856e27fc47b67d.bin"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-FIELD-WORKFLOW-001/evidence/retained-locks/T-CONTINUITY-WRITE-HARDENING-001-805e0cfaf7217deb27b7c55f9f08f577e23359c67ec9b42709596ea7c1bf2215.bin"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-FIELD-WORKFLOW-001/evidence/self-review.md"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-FIELD-WORKFLOW-001/evidence/verification.md"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-FIELD-WORKFLOW-001/state.yaml"
+    },
+    {
+      "code": " M",
+      "path": "ARTIFACT_PROTOCOL.md"
+    },
+    {
+      "code": " M",
+      "path": "ROADMAP.md"
+    },
+    {
+      "code": " M",
+      "path": "docs/release-checklist.md"
+    },
+    {
+      "code": " M",
+      "path": "docs/self-documentation.md"
+    },
+    {
+      "code": " M",
+      "path": "docs/usage.md"
+    },
+    {
+      "code": "??",
+      "path": "examples/compact-handoff/README.md"
+    },
+    {
+      "code": "??",
+      "path": "examples/compact-handoff/inventory.fixture.json"
+    },
+    {
+      "code": "??",
+      "path": "examples/task-create/README.md"
+    },
+    {
+      "code": " M",
+      "path": "schemas/handoff.schema.json"
+    },
+    {
+      "code": "??",
+      "path": "schemas/worktree-inventory.schema.json"
+    },
+    {
+      "code": " M",
+      "path": "src/cli.ts"
+    },
+    {
+      "code": " M",
+      "path": "src/context-inspection.ts"
+    },
+    {
+      "code": "??",
+      "path": "src/context-text.ts"
+    },
+    {
+      "code": " M",
+      "path": "src/context.ts"
+    },
+    {
+      "code": "??",
+      "path": "src/continuity-files.ts"
+    },
+    {
+      "code": " M",
+      "path": "src/docs.ts"
+    },
+    {
+      "code": " M",
+      "path": "src/handoff.ts"
+    },
+    {
+      "code": " M",
+      "path": "src/initializer.ts"
+    },
+    {
+      "code": " M",
+      "path": "src/resume-audit.ts"
+    },
+    {
+      "code": " M",
+      "path": "src/resume.ts"
+    },
+    {
+      "code": "??",
+      "path": "src/task-create.ts"
+    },
+    {
+      "code": " M",
+      "path": "src/validator.ts"
+    },
+    {
+      "code": "??",
+      "path": "src/worktree-inventory.ts"
+    },
+    {
+      "code": "??",
+      "path": "test/compact-handoff-review.test.ts"
+    },
+    {
+      "code": "??",
+      "path": "test/compact-handoff.test.ts"
+    },
+    {
+      "code": "??",
+      "path": "test/context-formats.test.ts"
+    },
+    {
+      "code": " M",
+      "path": "test/context-inspection.test.ts"
+    },
+    {
+      "code": "??",
+      "path": "test/continuity-write-hardening.test.ts"
+    },
+    {
+      "code": " M",
+      "path": "test/handoff.test.ts"
+    },
+    {
+      "code": "??",
+      "path": "test/task-create.test.ts"
+    }
+  ]
+}

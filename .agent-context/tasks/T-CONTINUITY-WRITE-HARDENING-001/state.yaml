@@ -1,0 +1,22 @@
+task_id: T-CONTINUITY-WRITE-HARDENING-001
+status: review
+objective: Close reviewed continuity write and retained-provenance gaps without changing consumer projects or rewriting history.
+non_goals: [No consumer rollout or stable build replacement, No multi-file crash transaction or authentication claim, No unrelated coordinator or task generator feature]
+acceptance_criteria:
+  - {id: AC-GIT, statement: Incomplete or warned Git status cannot produce a handoff., verification: Warning with successful exit and real Windows long-path fixture; no-write checks., status: pass}
+  - {id: AC-BYTES, statement: Immutable continuity outputs retain exact valid bytes and ambiguous inventory bytes fail consistently., verification: Decoded-equal malformed UTF-8 collisions and valid Unicode controls across all readers and writers., status: pass}
+  - {id: AC-PATHS, statement: Linked or aliased destinations and known output collisions fail before writes., verification: Junction symlink hardlink path-spelling and late-output-collision fixtures., status: pass}
+  - {id: AC-HISTORY, statement: Unbound archived handoffs retain integrity checks without present-day source freshness., verification: Three handoffs with an unbound middle archive; missing sidecar and source-drift controls., status: pass}
+  - {id: AC-ENTRY, statement: New handoffs reject stale selected context and missing explicit resume inputs; reports expose useful details., verification: Stale-source no-write tests and real CLI diagnostic checks., status: pass}
+dependencies: []
+documentation_impact: [ARTIFACT_PROTOCOL.md, docs/usage.md, docs/self-documentation.md, ROADMAP.md, docs/release-checklist.md, examples/compact-handoff/README.md]
+file_intents: [src/continuity-files.ts, src/handoff.ts, src/worktree-inventory.ts, src/resume.ts, src/resume-audit.ts, src/validator.ts, src/cli.ts, src/docs.ts, test/continuity-write-hardening.test.ts, test/handoff.test.ts, test/compact-handoff.test.ts, test/compact-handoff-review.test.ts, ARTIFACT_PROTOCOL.md, docs/usage.md, docs/self-documentation.md, ROADMAP.md, docs/release-checklist.md, examples/compact-handoff/README.md, examples/compact-handoff/inventory.fixture.json]
+required_context_sources: [ARTIFACT_PROTOCOL.md, src/continuity-files.ts, src/handoff.ts, src/worktree-inventory.ts, src/resume.ts, src/resume-audit.ts, src/validator.ts, src/context-source-path.ts, test/compact-handoff-review.test.ts, test/continuity-write-hardening.test.ts]
+parallel_safety: exclusive
+checks:
+  - {id: CHECK-QUALITY, command_or_observation: Typecheck isolated build and full Linux suite on the frozen r2 snapshot., status: pass, evidence_refs: [.agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/evidence/verification.md]}
+  - {id: CHECK-WINDOWS, command_or_observation: Full Windows default-timeout suite including real long-path Git warnings and case aliases., status: pass, evidence_refs: [.agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/evidence/verification.md]}
+  - {id: CHECK-PRESERVATION, command_or_observation: Raw preservation of historical archives stable build and reviewed inputs., status: pass, evidence_refs: [.agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/evidence/verification.md]}
+  - {id: CHECK-REVIEW, command_or_observation: Independent review of the new write-hardening change; earlier R3 approval covers only its bounded snapshot., status: pending, evidence_refs: []}
+latest_handoff: .agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/handoff.yaml
+updated_at: "2026-09-27T13:05:00Z"

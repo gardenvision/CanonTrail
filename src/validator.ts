@@ -1,6 +1,7 @@
 import { isDeepStrictEqual } from "node:util";
 import { existsSync } from "node:fs";
 import { safeRepositoryFile } from "./context-source-path.js";
+import { decodeContinuityText, readContinuityText, resolveContinuityFile } from "./continuity-files.js";
 import { parseContextSections, validateLockedSection, type LockedSection } from "./context-sections.js";
 import { lstat, readFile, readdir } from "node:fs/promises";
 import { createRequire } from "node:module";
@@ -15,6 +16,7 @@ import { computeContextLockHash, contextIndexCompatibilityReasons, type ContextL
 import { computeProjectEvidenceHash, discoverEvidenceCandidates, type ProjectEvidenceRecord } from "./evidence.js";
 import { taskCheckInvokesCanonTrailFinalize } from "./finalize-guard.js";
 import { validateHandoffSemantics } from "./handoff.js";
+import { parseWorktreeInventoryBytes, resolveInventoryPath, validateWorktreeInventoryShape, verifyWorktreeInventory } from "./worktree-inventory.js";
 import {
   computeMigrationDecisionSetHash,
   computeMigrationApplyIntentHash,
@@ -228,7 +230,14 @@ function checkReference(
   if (!target.absolutePath) {
     addDiagnostic(diagnostics, "error", code, `reference escapes the repository: ${reference}`, sourcePath);
   } else if (!target.exists && !target.allowedMissing) {
-    addDiagnostic(diagnostics, "error", code, `referenced path does not exist: ${reference}`, sourcePath);
+    const owner = /^\.agent-context\/tasks\/([^/]+)\//.exec(sourcePath)?.[1];
+    const recovery = code === "LOCK003"
+      ? "Active context source is missing. Review the removal or rename with the task owner, then recompile the active lock after resolving its source selection. Missing required sources must be restored or explicitly reconsidered against the task; do not drop them merely to pass validation. Preserve historical locks and evidence."
+      : code === "HANDOFF004"
+        ? "Handoff resume source is missing. Review the removal or rename with the task owner and restore or resolve the referenced source. Recompile the active context before a reviewed handoff replacement; replacement still requires the existing handoff to verify and cannot bypass missing-source checks. Preserve archived handoffs and their evidence."
+        : "This is missing provenance/reference data, not merely an outdated context lock; recompilation cannot restore it. Check a possible move or deletion with the owner. Repair active references only after review; preserve the original paths and bytes required by historical hashed evidence. Path existence alone does not prove the same artifact revision.";
+    addDiagnostic(diagnostics, "error", code, `referenced path does not exist: ${reference}`, sourcePath,
+      `Reference owner: ${owner ? `task ${JSON.stringify(owner)}` : `document/artifact ${JSON.stringify(sourcePath)}`}. Missing target: ${JSON.stringify(normalizePath(path.relative(root, target.absolutePath)))} (repository-relative). ${recovery}`);
   }
 }
 
@@ -336,6 +345,8 @@ function schemaForArtifact(artifactPath: string): string | undefined {
   if (basename === "context.lock.json") return "context-lock";
   if (basename.endsWith(".evidence.yaml") || basename.endsWith(".evidence.yml")) return "evidence-record";
   if (basename === "handoff.yaml" || basename === "handoff.yml") return "handoff";
+  if (/^\.agent-context\/tasks\/[^/]+\/evidence\/handoffs\/[a-f0-9]{64}\.ya?ml$/.test(artifactPath)) return "handoff";
+  if (basename.endsWith(".worktree-inventory.json")) return "worktree-inventory";
   if (basename === "maintenance.yaml" || basename === "maintenance.yml") return "maintenance";
   if (basename === "migration.plan.json" && /^\.agent-context\/migrations\/[^/]+\/migration\.plan\.json$/.test(artifactPath)) return "migration-plan";
   if (basename === "transaction.json" && /^\.agent-context\/migrations\/[^/]+\/transactions\/[^/]+\/transaction\.json$/.test(artifactPath)) return "migration-transaction";
@@ -381,13 +392,40 @@ async function loadStructuredArtifacts(
   const files = (await walkFiles(root, config)).filter(
     (artifactPath) => isStructuredArtifact(artifactPath) && isGovernedPath(artifactPath, config),
   );
+  // The general scanner omits links. Do not let that make a retained handoff
+  // disappear from an otherwise governed task's integrity check, even when no
+  // resume packet happens to reference it. Inspect ONLY the fixed archive root.
+  const owners = new Set(files.flatMap(file => /^\.agent-context\/tasks\/([^/]+)\/state\.ya?ml$/.exec(file)?.[1] ?? []));
+  for (const owner of owners) {
+    const archiveRoot = `.agent-context/tasks/${owner}/evidence/handoffs`;
+    try {
+      const probe = await resolveContinuityFile(root, `${archiveRoot}/__coverage_probe__.yaml`);
+      let entries;
+      try { entries = await readdir(path.dirname(probe), { withFileTypes: true }); }
+      catch (error) { if ((error as NodeJS.ErrnoException).code === "ENOENT") continue; throw error; }
+      for (const entry of entries) {
+        if (!/^[a-f0-9]{64}\.ya?ml$/.test(entry.name)) continue;
+        const retained = `${archiveRoot}/${entry.name}`;
+        await resolveContinuityFile(root, retained, true);
+        if (!files.includes(retained)) {
+          addDiagnostic(diagnostics, "error", "HANDOFF009", "retained handoff is outside the governed artifact scan; restore deliberate archive coverage", retained);
+        }
+      }
+    } catch (error) {
+      addDiagnostic(diagnostics, "error", "HANDOFF008", "retained handoff archive cannot be safely inventoried", archiveRoot, (error as Error).message);
+    }
+  }
   for (const artifactPath of files) {
     try {
       const absolute = artifactPath.startsWith(".agent-context/migrations/")
         ? await resolveMigrationControlPath(root, artifactPath, "file")
+        : artifactPath.startsWith(".agent-context/tasks/")
+          ? await resolveContinuityFile(root, artifactPath, true)
         : path.join(root, ...artifactPath.split("/"));
-      const raw = await readFile(absolute, "utf8");
-      const value: unknown = artifactPath.endsWith(".json") ? JSON.parse(raw) : parse(raw);
+      const bytes = await readFile(absolute);
+      const raw = decodeContinuityText(bytes, artifactPath);
+      const value: unknown = artifactPath.endsWith(".worktree-inventory.json") ? parseWorktreeInventoryBytes(bytes)
+        : artifactPath.endsWith(".json") ? JSON.parse(raw) : parse(raw);
       artifacts.set(artifactPath, value);
       const schemaName = schemaForArtifact(artifactPath);
       if (schemaName) {
@@ -872,22 +910,51 @@ async function validateHandoffs(
   root: string,
   config: CanonTrailConfig,
   artifacts: Map<string, unknown>,
+  validators: Map<string, ValidateFunction>,
 ): Promise<void> {
   for (const [artifactPath, value] of artifacts) {
-    if (!/^handoff\.ya?ml$/.test(path.posix.basename(artifactPath)) || !isRecord(value)) continue;
+    if (artifactPath.endsWith(".worktree-inventory.json")) {
+      try {
+        validateWorktreeInventoryShape(value);
+        const absolute = await resolveInventoryPath(root, artifactPath, true);
+        const hash = sha256(await readFile(absolute));
+        if (artifactPath !== `.agent-context/tasks/${value.task_id}/evidence/worktree-inventories/${hash.slice(7)}.worktree-inventory.json`) {
+          throw new Error("Inventory filename/task owner does not match its exact bytes");
+        }
+      } catch (error) {
+        addDiagnostic(diagnostics, "error", "WORKTREE001", "worktree inventory provenance is invalid", artifactPath, (error as Error).message);
+      }
+      continue;
+    }
+    const archivedHandoff = /^\.agent-context\/tasks\/([^/]+)\/evidence\/handoffs\/([a-f0-9]{64})\.ya?ml$/.exec(artifactPath);
+    if ((!/^handoff\.ya?ml$/.test(path.posix.basename(artifactPath)) && !archivedHandoff) || !isRecord(value)) continue;
+    try {
+      const inventory = await verifyWorktreeInventory(root, value);
+      if (inventory) {
+        const schema = validators.get("worktree-inventory");
+        if (!schema || !schema(inventory)) throw new Error("Required worktree-inventory schema is missing or incompatible");
+      }
+    } catch (error) {
+      addDiagnostic(diagnostics, "error", "HANDOFF008", "handoff worktree inventory is missing, unsafe or inconsistent", artifactPath, (error as Error).message);
+    }
     for (const finding of validateHandoffSemantics(value)) {
       addDiagnostic(diagnostics, "error", finding.code, finding.message, artifactPath);
     }
-    for (const reference of strings(value.resume_sources)) {
-      checkReference(diagnostics, root, config, artifactPath, reference, root, "HANDOFF004");
+    if (!archivedHandoff) {
+      for (const reference of strings(value.resume_sources)) {
+        checkReference(diagnostics, root, config, artifactPath, reference, root, "HANDOFF004");
+      }
     }
-    const taskMatch = /^\.agent-context\/tasks\/([^/]+)\/handoff\.ya?ml$/.exec(artifactPath);
+    const taskMatch = archivedHandoff ?? /^\.agent-context\/tasks\/([^/]+)\/handoff\.ya?ml$/.exec(artifactPath);
     if (taskMatch && value.task_id !== taskMatch[1]) {
       addDiagnostic(diagnostics, "error", "HANDOFF007", "handoff task_id does not match its task directory", artifactPath);
     }
+    if (archivedHandoff && value.handoff_hash !== `sha256:${archivedHandoff[2]}`) {
+      addDiagnostic(diagnostics, "error", "HANDOFF007", "archived handoff filename does not match its self-hash", artifactPath);
+    }
     if (typeof value.source_context_lock_path !== "string") continue;
     const sourceLockPath = normalizePath(value.source_context_lock_path);
-    if (taskMatch && !sourceLockPath.startsWith(`.agent-context/tasks/${taskMatch[1]}/evidence/context-locks/`)) {
+    if (taskMatch && (typeof value.source_context_lock_hash !== "string" || sourceLockPath !== `.agent-context/tasks/${taskMatch[1]}/evidence/context-locks/${value.source_context_lock_hash.slice(7)}.json`)) {
       addDiagnostic(diagnostics, "error", "HANDOFF006", "source context lock must be archived under the owning task", artifactPath);
       continue;
     }
@@ -895,12 +962,14 @@ async function validateHandoffs(
     const target = referenceTarget(root, config, sourceLockPath, root);
     if (!target.exists || !target.absolutePath) continue;
     try {
-      const archive: unknown = JSON.parse(await readFile(target.absolutePath, "utf8"));
+      const archive: unknown = JSON.parse(await readContinuityText(root, sourceLockPath));
       if (!isRecord(archive) || typeof archive.lock_hash !== "string") {
         addDiagnostic(diagnostics, "error", "HANDOFF006", "archived source context lock is invalid", artifactPath);
         continue;
       }
       const { lock_hash: _ignored, ...payload } = archive;
+      const schema = validators.get("context-lock");
+      if (!schema || !schema(archive)) throw new Error("Archived source context schema is missing or incompatible");
       const computed = computeContextLockHash(payload as Omit<ContextLock, "lock_hash">);
       if (
         computed !== archive.lock_hash ||
@@ -909,8 +978,9 @@ async function validateHandoffs(
       ) {
         addDiagnostic(diagnostics, "error", "HANDOFF006", "archived source context lock does not match the handoff", artifactPath);
       }
-    } catch {
-      addDiagnostic(diagnostics, "error", "HANDOFF006", "archived source context lock cannot be parsed", artifactPath);
+      for (const source of archive.sources as ContextLock["sources"]) validateLockedSection(source);
+    } catch (error) {
+      addDiagnostic(diagnostics, "error", "HANDOFF006", "archived source context lock cannot be parsed or validated", artifactPath, (error as Error).message);
     }
   }
 }
@@ -1244,7 +1314,7 @@ export async function validateRepository(rootInput: string, options: ValidateOpt
   await validateMigrationPlans(diagnostics, artifacts, root);
   await validateMigrationTransactions(diagnostics, artifacts, root);
   await validateMigrationExecutionEvidence(diagnostics, artifacts, root);
-  await validateHandoffs(diagnostics, root, config, artifacts);
+  await validateHandoffs(diagnostics, root, config, artifacts, validators);
   const documentPaths = new Set(documents.map(document => document.path));
   const documentInventoryValid = !diagnostics.some(d => d.severity === "error" &&
     (d.code === "DOC001" || d.code === "DOC002" || (documentPaths.has(d.path ?? "") && ["SCHEMA004", "SCHEMA005"].includes(d.code))));

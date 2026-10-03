@@ -1,5 +1,6 @@
 import { access, readFile, realpath, stat, writeFile } from "node:fs/promises";
 import { safeRepositoryFile } from "./context-source-path.js";
+import { ADDITIONAL_TEXT_EXTENSIONS, isAdditionalTextSource, readContextSourceBytes } from "./context-text.js";
 import { assertSectionContextSchemas } from "./context-schema.js";
 import path from "node:path";
 import { matchingGitBlobs, readGitValue as gitValue } from "./context-git.js";
@@ -27,6 +28,7 @@ const TEXT_EXTENSIONS = new Set([
   ".ini", ".java", ".js", ".json", ".jsx", ".kt", ".kts", ".md", ".meta", ".properties",
   ".ps1", ".py", ".rs", ".scss", ".sh", ".sql", ".svelte", ".toml", ".ts", ".tsx", ".txt",
   ".vue", ".xml", ".yaml", ".yml",
+  ...ADDITIONAL_TEXT_EXTENSIONS,
 ]);
 const STOP_WORDS = new Set([
   "about", "after", "against", "agent", "and", "before", "between", "canonical", "change", "context",
@@ -988,7 +990,13 @@ export async function compileContext(options: CompileContextOptions): Promise<Co
       omissions.push({ candidate: candidate.path, reason: "Optional candidate no longer exists.", required: false });
       continue;
     }
-    const content = await readFile(absolute);
+    let content: Buffer;
+    try { content = await readContextSourceBytes(absolute, candidate.path); }
+    catch (error) {
+      if (candidate.required || !isAdditionalTextSource(candidate.path)) throw error;
+      omissions.push({ candidate: candidate.path, reason: `Optional text code source was not selected: ${(error as Error).message}`, required: false });
+      continue;
+    }
     const section = sections.get(candidate.path);
     if (section && sha256(content) !== section.content_hash) throw new Error("Context section source changed: " + candidate.path);
     const selected = section ? selectContextSection(content, section.from, section.to) : undefined;
@@ -1142,7 +1150,7 @@ export async function applyContextPreview(options: ApplyContextPreviewOptions): 
     seen.add(normalized);
     const absolute = await safeRepositoryFile(root, normalized);
     if (!absolute) throw new Error(`context preview source no longer exists: ${normalized}`);
-    const content = await readFile(absolute);
+    const content = await readContextSourceBytes(absolute, normalized);
     if (sha256(content) !== source.content_hash) {
       throw new Error(`context preview source changed: ${normalized}`);
     }

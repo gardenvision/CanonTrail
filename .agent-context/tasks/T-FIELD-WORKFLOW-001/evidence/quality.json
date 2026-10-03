@@ -1,0 +1,66 @@
+{
+  "observed_at": "2026-10-01T21:43:22.142Z",
+  "source_snapshot": "field-feedback-r2",
+  "source_manifest_sha256": "daf39d66ad9ac215872e910f025e236b80a8deb43d9a7b9aa87147c29b7f67c8",
+  "snapshot_files": 277,
+  "tested_input_files_still_exact": 138,
+  "test_timeout_ms": 15000,
+  "max_workers": 1,
+  "author_execution_only": true,
+  "macos_executed": false,
+  "runs": [
+    {
+      "platform": "windows",
+      "node": "v24.11.1",
+      "test_files": 39,
+      "total_tests": 827,
+      "passed": 814,
+      "failed": 0,
+      "skipped": 13,
+      "skipped_cases": [],
+      "typecheck_exit": 0,
+      "build_exit": 0,
+      "test_exit": 0,
+      "test_json_sha256": "c850b4bf9e2bf5c57251a4ba6401ebb16030a1e490e2ba62ac380e065aac6572",
+      "test_log_sha256": "ce98e73f18e9c246f15c06ffd7dae43a6365215acd0cb19b7f21752aa6f799d4",
+      "audit_exit": 1,
+      "audit_vulnerabilities": {
+        "info": 0,
+        "low": 0,
+        "moderate": 0,
+        "high": 1,
+        "critical": 0,
+        "total": 1
+      },
+      "audit_log_sha256": "3bc027bd2fdc990143dd9d3a02aafabe4a2fafa26c9e1d63666a3a3b5c39944e",
+      "dependency_followup": "fast-uri 3.1.6 is pinned; the audit is NOT clean. No dependency change or release approval is claimed."
+    },
+    {
+      "platform": "linux",
+      "node": "v24.20.0",
+      "test_files": 39,
+      "total_tests": 827,
+      "passed": 820,
+      "failed": 0,
+      "skipped": 7,
+      "skipped_cases": [],
+      "typecheck_exit": 0,
+      "build_exit": 0,
+      "test_exit": 0,
+      "test_json_sha256": "dfd34673c41f9f6df37d1c025976db7a51a05c56fc9e12b3f8585dd3f690f423",
+      "test_log_sha256": "1935e3f3f45663f9e367e895546e2b592c1d6ba17b1a4ff1cd4ef22492263282",
+      "audit_exit": 1,
+      "audit_vulnerabilities": {
+        "info": 0,
+        "low": 0,
+        "moderate": 0,
+        "high": 1,
+        "critical": 0,
+        "total": 1
+      },
+      "audit_log_sha256": "3bc027bd2fdc990143dd9d3a02aafabe4a2fafa26c9e1d63666a3a3b5c39944e",
+      "dependency_followup": "fast-uri 3.1.6 is pinned; the audit is NOT clean. No dependency change or release approval is claimed."
+    }
+  ],
+  "boundary": "Portable summary only; raw logs and byte manifest are retained in the maintainer evidence store by the listed hashes. Later task/documentation metadata is validated separately. No provider-token measurements or consumer rollout."
+}

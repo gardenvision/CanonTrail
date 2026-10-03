@@ -1,7 +1,7 @@
 {
   "version": 1,
   "hash_algorithm": "sha256",
-  "root_hash": "sha256:fcdc19483ae8d1cfe3908c05e38ae12e0d35b5ce4d1a8ffa61cbe24af0f1a643",
+  "root_hash": "sha256:2e7b7815497ced55337252a242520ca73629e56cab0fb84b52c2482fe1ccb7a0",
   "documents": [
     {
       "path": ".agent-context/tasks/T-ALPHA-CANDIDATE-001/brief.md",
@@ -20,6 +20,80 @@
         "VISION.md"
       ],
       "topic_id": "alpha-candidate-preparation-task"
+    },
+    {
+      "path": ".agent-context/tasks/T-COMPACT-HANDOFF-001/brief.md",
+      "content_hash": "sha256:8ad9cd39671fa84bfa0d0100752bad5d54216427916f2671762896c5d9b2ae6e",
+      "stand": "2026-09-27",
+      "status": "review",
+      "truth_level": "active-snapshot",
+      "verification_state": "internally-reviewed",
+      "read_if_task_touches": [
+        "compact handoffs",
+        "missing evidence reference diagnostics"
+      ],
+      "primary_systems": [
+        "context continuity"
+      ],
+      "do_not_use_instead": [
+        "ARTIFACT_PROTOCOL.md"
+      ],
+      "topic_id": "task-compact-handoff-001"
+    },
+    {
+      "path": ".agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/precommit-review-r3.md",
+      "content_hash": "sha256:8c787f873b617ac50e9649b0b8810c5ba53285c3de11963116183b35ec015994",
+      "stand": "2026-09-27",
+      "status": "author-tested-review-pending",
+      "truth_level": "active-snapshot",
+      "verification_state": "internally-reviewed",
+      "read_if_task_touches": [
+        "raw-byte inventory collision",
+        "compact handoff precommit checks"
+      ],
+      "primary_systems": [
+        "context continuity"
+      ],
+      "do_not_use_instead": [
+        "ARTIFACT_PROTOCOL.md"
+      ],
+      "topic_id": "compact-handoff-precommit-review-r3"
+    },
+    {
+      "path": ".agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/review-remediation.md",
+      "content_hash": "sha256:67983ef76954d6a43c06b8f5b5ae9072b85d3b9e9e0c1d164b5807b71791583c",
+      "stand": "2026-09-27",
+      "status": "implemented-review-pending",
+      "truth_level": "active-snapshot",
+      "verification_state": "internally-reviewed",
+      "read_if_task_touches": [
+        "compact handoff review remediation"
+      ],
+      "primary_systems": [
+        "context continuity"
+      ],
+      "do_not_use_instead": [
+        "ARTIFACT_PROTOCOL.md"
+      ],
+      "topic_id": "compact-handoff-review-remediation"
+    },
+    {
+      "path": ".agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/review-request.md",
+      "content_hash": "sha256:b7caa4c82b518c60dc4a18e3b1438b5df2896609dbbda52d2064fc6103171efa",
+      "stand": "2026-09-26",
+      "status": "pending",
+      "truth_level": "active-snapshot",
+      "verification_state": "unverified",
+      "read_if_task_touches": [
+        "independent compact handoff review"
+      ],
+      "primary_systems": [
+        "context continuity"
+      ],
+      "do_not_use_instead": [
+        "ARTIFACT_PROTOCOL.md"
+      ],
+      "topic_id": "compact-handoff-independent-review-request"
     },
     {
       "path": ".agent-context/tasks/T-CONTEXT-BUDGET-CLARITY-001/brief.md",
@@ -42,6 +116,140 @@
         "VISION.md"
       ],
       "topic_id": "task-context-budget-clarity-001"
+    },
+    {
+      "path": ".agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/brief.md",
+      "content_hash": "sha256:7308ac3913c6a49b539a8b04d4aed04eb8e4a30d6e6d401ea9888c532baf7397",
+      "stand": "2026-09-27",
+      "status": "review",
+      "truth_level": "active-snapshot",
+      "verification_state": "internally-reviewed",
+      "read_if_task_touches": [
+        "continuity write hardening",
+        "retained handoff integrity"
+      ],
+      "primary_systems": [
+        "context continuity"
+      ],
+      "do_not_use_instead": [
+        "ARTIFACT_PROTOCOL.md"
+      ],
+      "topic_id": "task-continuity-write-hardening-001"
+    },
+    {
+      "path": ".agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/evidence/review-intake.md",
+      "content_hash": "sha256:73ff1bb8dc61b839561fc4db3dc332de503c36373f9b59265da00fb0ef2994f2",
+      "stand": "2026-09-27",
+      "status": "triaged",
+      "truth_level": "active-snapshot",
+      "verification_state": "internally-reviewed",
+      "read_if_task_touches": [
+        "continuity hardening review scope"
+      ],
+      "primary_systems": [
+        "context continuity"
+      ],
+      "do_not_use_instead": [
+        "ARTIFACT_PROTOCOL.md"
+      ],
+      "topic_id": "continuity-write-hardening-review-intake"
+    },
+    {
+      "path": ".agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/evidence/verification.md",
+      "content_hash": "sha256:527e5cebdf33e6a7e9b8b6fdd5739bb507a370a8bc4bbe6cc4f59bb293c58f4b",
+      "stand": "2026-09-27",
+      "status": "current",
+      "truth_level": "active-snapshot",
+      "verification_state": "internally-reviewed",
+      "read_if_task_touches": [
+        "continuity write hardening verification",
+        "review follow-up"
+      ],
+      "primary_systems": [
+        "context continuity"
+      ],
+      "do_not_use_instead": [
+        "ARTIFACT_PROTOCOL.md"
+      ],
+      "topic_id": "continuity-write-hardening-verification-001"
+    },
+    {
+      "path": ".agent-context/tasks/T-FIELD-WORKFLOW-001/brief.md",
+      "content_hash": "sha256:3bab53b1b0006d74ace22855d33f042f36d8b68b640d3908c100e08aeba38550",
+      "stand": "2026-10-01",
+      "status": "completed",
+      "truth_level": "active-snapshot",
+      "verification_state": "internally-reviewed",
+      "read_if_task_touches": [
+        "field workflow improvements",
+        "task scaffolding",
+        "shader context"
+      ],
+      "primary_systems": [
+        "task authoring",
+        "context compilation"
+      ],
+      "do_not_use_instead": [
+        "ARTIFACT_PROTOCOL.md"
+      ],
+      "topic_id": "task-field-workflow-001"
+    },
+    {
+      "path": ".agent-context/tasks/T-FIELD-WORKFLOW-001/evidence/intake.md",
+      "content_hash": "sha256:28397fb66008900305a0199100710c0cb73322c57d54afd1369ae98559027a74",
+      "stand": "2026-10-01",
+      "status": "reviewed-intake",
+      "truth_level": "active-snapshot",
+      "verification_state": "internally-reviewed",
+      "read_if_task_touches": [
+        "field workflow improvements"
+      ],
+      "primary_systems": [
+        "task authoring",
+        "context compilation"
+      ],
+      "do_not_use_instead": [
+        "ARTIFACT_PROTOCOL.md"
+      ],
+      "topic_id": "field-workflow-intake-001"
+    },
+    {
+      "path": ".agent-context/tasks/T-FIELD-WORKFLOW-001/evidence/self-review.md",
+      "content_hash": "sha256:1d402d112f44938d8a9f0c54758d90aa89b0ff7df0bf66bab2d5146015bb02d9",
+      "stand": "2026-10-01",
+      "status": "author-review",
+      "truth_level": "active-snapshot",
+      "verification_state": "internally-reviewed",
+      "read_if_task_touches": [
+        "field workflow improvements"
+      ],
+      "primary_systems": [
+        "task authoring",
+        "context compilation"
+      ],
+      "do_not_use_instead": [
+        "ARTIFACT_PROTOCOL.md"
+      ],
+      "topic_id": "field-workflow-self-review-001"
+    },
+    {
+      "path": ".agent-context/tasks/T-FIELD-WORKFLOW-001/evidence/verification.md",
+      "content_hash": "sha256:58d0bc59fca8c5f9b0ad35a33f9b84777246653d52c90bd0ded4a0d0926a57dc",
+      "stand": "2026-10-01",
+      "status": "implementation-verified",
+      "truth_level": "active-snapshot",
+      "verification_state": "internally-reviewed",
+      "read_if_task_touches": [
+        "field workflow improvements"
+      ],
+      "primary_systems": [
+        "task authoring",
+        "context compilation"
+      ],
+      "do_not_use_instead": [
+        "ARTIFACT_PROTOCOL.md"
+      ],
+      "topic_id": "field-workflow-verification-001"
     },
     {
       "path": ".agent-context/tasks/T-FROZEN-EXAMPLE-LIFECYCLE-001/brief.md",
@@ -97,6 +305,40 @@
         "docs/alpha-readiness.md"
       ],
       "topic_id": "task-public-prep-001"
+    },
+    {
+      "path": ".agent-context/tasks/T-PUBLISH-CONTINUITY-001/brief.md",
+      "content_hash": "sha256:efc2ae7bd671085bfefa26f4815c5a011143c00fa2f8fee2b107de85dc34bd10",
+      "stand": "2026-10-03",
+      "status": "in-progress",
+      "truth_level": "active-snapshot",
+      "verification_state": "unverified",
+      "read_if_task_touches": [
+        "T-PUBLISH-CONTINUITY-001"
+      ],
+      "primary_systems": [],
+      "do_not_use_instead": [
+        "AGENTS.md"
+      ],
+      "topic_id": "task-T-PUBLISH-CONTINUITY-001"
+    },
+    {
+      "path": ".agent-context/tasks/T-PUBLISH-CONTINUITY-001/evidence/progress.md",
+      "content_hash": "sha256:60ab6c404118ee40f614c1a5e498063c7f359ddacb4b560a5be34877a590692d",
+      "stand": "2026-10-03",
+      "status": "in-progress",
+      "truth_level": "active-snapshot",
+      "verification_state": "internally-reviewed",
+      "read_if_task_touches": [
+        "T-PUBLISH-CONTINUITY-001"
+      ],
+      "primary_systems": [
+        "release preparation"
+      ],
+      "do_not_use_instead": [
+        "ARTIFACT_PROTOCOL.md"
+      ],
+      "topic_id": "publish-continuity-progress"
     },
     {
       "path": ".agent-context/tasks/T-README-ONBOARDING-001/brief.md",
@@ -158,8 +400,8 @@
     },
     {
       "path": "ARTIFACT_PROTOCOL.md",
-      "content_hash": "sha256:ab7a37b8727ce7145fbcdeee2d040d40fb7a69dc9476356c621b1d0e2ab06dad",
-      "stand": "2026-09-25",
+      "content_hash": "sha256:0eb68003a99bda82e9b6e64962f45d7fca5ea52d2b5ea64769223982fcffa611",
+      "stand": "2026-10-01",
       "status": "design-target",
       "truth_level": "design-target",
       "verification_state": "structurally-reviewed",
@@ -350,8 +592,8 @@
     },
     {
       "path": "docs/release-checklist.md",
-      "content_hash": "sha256:1d359e6fa53634b7d01be9e5d9607096344ab951b8eac6b60b9d19cef98c6250",
-      "stand": "2026-09-14",
+      "content_hash": "sha256:9c7f34ff35e7f90803bb06b4aa91235e271703f1cf3fce1a6b35e0cd25ffa467",
+      "stand": "2026-09-27",
       "status": "public-source-hosting-reviewed",
       "truth_level": "draft",
       "verification_state": "verified",
@@ -370,8 +612,8 @@
     },
     {
       "path": "docs/self-documentation.md",
-      "content_hash": "sha256:7cdab0f81ce6540f65d0489732ba68b80b76173a441eac42b098c3d5b9fb8e1b",
-      "stand": "2026-09-14",
+      "content_hash": "sha256:095b35ba7a02f64c2f66b67475be4b886a3868c7a1ef0965e4952f30d262c529",
+      "stand": "2026-10-01",
       "status": "public-source-alpha",
       "truth_level": "draft",
       "verification_state": "unverified",
@@ -411,8 +653,8 @@
     },
     {
       "path": "docs/usage.md",
-      "content_hash": "sha256:943cebd2f1140bbe15ff12b20145a2a4b8115fb757391f1fe8223e6089419867",
-      "stand": "2026-09-25",
+      "content_hash": "sha256:50f677d6cbbc7a950ad12bef009000d335971dedee9ae200c5b2f4179c03c0db",
+      "stand": "2026-10-01",
       "status": "public-source-alpha",
       "truth_level": "draft",
       "verification_state": "unverified",
@@ -429,6 +671,25 @@
         "ARTIFACT_PROTOCOL.md"
       ],
       "topic_id": "usage-guide"
+    },
+    {
+      "path": "examples/compact-handoff/README.md",
+      "content_hash": "sha256:0607337335ecd6bb1acfb8fd019d7c519ff6c5da1984bfc1c27f0f83a0e48841",
+      "stand": "2026-09-27",
+      "status": "worked-example",
+      "truth_level": "design-target",
+      "verification_state": "internally-reviewed",
+      "read_if_task_touches": [
+        "compact handoff usage",
+        "separate worktree inventory"
+      ],
+      "primary_systems": [
+        "context continuity"
+      ],
+      "do_not_use_instead": [
+        "ARTIFACT_PROTOCOL.md"
+      ],
+      "topic_id": "compact-handoff-example"
     },
     {
       "path": "examples/context-inspection/README.md",
@@ -638,6 +899,25 @@
       "topic_id": "example-resume-history"
     },
     {
+      "path": "examples/task-create/README.md",
+      "content_hash": "sha256:c3c1881c57d3b71b3b61ef7c8c40e781273269f62f43b1c7a32b395e9c654555",
+      "stand": "2026-10-01",
+      "status": "teaching-example",
+      "truth_level": "draft",
+      "verification_state": "unverified",
+      "read_if_task_touches": [
+        "task draft authoring"
+      ],
+      "primary_systems": [
+        "task authoring"
+      ],
+      "do_not_use_instead": [
+        "ARTIFACT_PROTOCOL.md",
+        "docs/usage.md"
+      ],
+      "topic_id": "task-create-example"
+    },
+    {
       "path": "examples/usage-constraints/README.md",
       "content_hash": "sha256:19ae127edaa6564dc3f0023c90a7e7f79f781ba08575e9d6ce26a385424892d6",
       "stand": "2026-09-06",
@@ -782,8 +1062,8 @@
     },
     {
       "path": "ROADMAP.md",
-      "content_hash": "sha256:2cb3495152f1fd44cee37b7e93314b11503537355e035186a8ff93a9c0939f85",
-      "stand": "2026-09-14",
+      "content_hash": "sha256:9fd9f006be4a59f3c89975cdb9616ce90d9a3b39ee4f2eadc57ba2647b12e1b6",
+      "stand": "2026-10-01",
       "status": "public-source-alpha",
       "truth_level": "draft",
       "verification_state": "unverified",

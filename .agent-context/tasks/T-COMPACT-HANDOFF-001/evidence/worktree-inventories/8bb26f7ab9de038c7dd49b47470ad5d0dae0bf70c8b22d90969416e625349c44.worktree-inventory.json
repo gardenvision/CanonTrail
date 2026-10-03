@@ -1,0 +1,143 @@
+{
+  "version": 1,
+  "task_id": "T-COMPACT-HANDOFF-001",
+  "created_at": "2026-09-27T08:12:00Z",
+  "entries": [
+    {
+      "code": " M",
+      "path": ".agent-context/context-index.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-COMPACT-HANDOFF-001/brief.md"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-COMPACT-HANDOFF-001/change.yaml"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-COMPACT-HANDOFF-001/checkpoint-input.yaml"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-COMPACT-HANDOFF-001/context.lock.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/checkpoint-r2-input.yaml"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/context-locks/0cac86e6c49b743c67285b59e956ff7815f3a3f4f9c195a287f09d43d3d31995.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/final-gates.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/implementation-fingerprints.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/review-remediation.md"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/review-request.md"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/verification.txt"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/worktree-inventories/4cde1f40b426893c635b5d036b0c8827bdb227a21668708cb402a043abf77a4e.worktree-inventory.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-COMPACT-HANDOFF-001/handoff.yaml"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-COMPACT-HANDOFF-001/state.yaml"
+    },
+    {
+      "code": " M",
+      "path": "ARTIFACT_PROTOCOL.md"
+    },
+    {
+      "code": " M",
+      "path": "ROADMAP.md"
+    },
+    {
+      "code": " M",
+      "path": "docs/release-checklist.md"
+    },
+    {
+      "code": " M",
+      "path": "docs/self-documentation.md"
+    },
+    {
+      "code": " M",
+      "path": "docs/usage.md"
+    },
+    {
+      "code": "??",
+      "path": "examples/compact-handoff/README.md"
+    },
+    {
+      "code": "??",
+      "path": "examples/compact-handoff/inventory.fixture.json"
+    },
+    {
+      "code": " M",
+      "path": "schemas/handoff.schema.json"
+    },
+    {
+      "code": "??",
+      "path": "schemas/worktree-inventory.schema.json"
+    },
+    {
+      "code": " M",
+      "path": "src/cli.ts"
+    },
+    {
+      "code": " M",
+      "path": "src/handoff.ts"
+    },
+    {
+      "code": " M",
+      "path": "src/initializer.ts"
+    },
+    {
+      "code": " M",
+      "path": "src/resume-audit.ts"
+    },
+    {
+      "code": " M",
+      "path": "src/resume.ts"
+    },
+    {
+      "code": " M",
+      "path": "src/validator.ts"
+    },
+    {
+      "code": "??",
+      "path": "src/worktree-inventory.ts"
+    },
+    {
+      "code": "??",
+      "path": "test/compact-handoff-review.test.ts"
+    },
+    {
+      "code": "??",
+      "path": "test/compact-handoff.test.ts"
+    },
+    {
+      "code": " M",
+      "path": "test/handoff.test.ts"
+    }
+  ]
+}

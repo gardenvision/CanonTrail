@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:canontrail:schema:worktree-inventory:1",
+  "title": "Immutable Git status inventory (not file-content backup)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "task_id", "created_at", "entries"],
+  "properties": {
+    "version": {"const": 1},
+    "task_id": {"type": "string", "minLength": 1},
+    "created_at": {"type": "string", "format": "date-time"},
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["code", "path"],
+        "properties": {
+          "code": {"type": "string", "pattern": "^[ MTADRCU?!]{2}$"},
+          "path": {"type": "string", "minLength": 1},
+          "original_path": {"type": "string", "minLength": 1}
+        }
+      }
+    }
+  }
+}

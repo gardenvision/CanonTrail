@@ -1,0 +1,19 @@
+task_id: T-FIELD-WORKFLOW-001
+status: verified
+objective: Reduce evidenced task-authoring and source-selection friction without inventing completion or weakening continuity boundaries.
+non_goals: [No consumer rollout or shared CLI build, No Git mutation or release, No scheduler or automatic completion]
+acceptance_criteria:
+  - {id: AC-SCAFFOLD, statement: New task scaffolds are safe schema-valid drafts with explicit pending decisions., verification: Neutral API and CLI fixtures with preservation checks., status: pass}
+  - {id: AC-FORMATS, statement: Explicit shader and module text sources participate in bounded context without admitting binary data., verification: Whole and section compile excerpt resume invalid-byte and budget tests., status: pass}
+  - {id: AC-GUIDANCE, statement: Initial excerpts and the authoring lifecycle provide honest actionable guidance., verification: Exact CLI messages and worked-example checks., status: pass}
+dependencies: []
+documentation_impact: [ARTIFACT_PROTOCOL.md, docs/usage.md, docs/self-documentation.md, ROADMAP.md]
+file_intents: [src/task-create.ts, src/context-text.ts, src/cli.ts, src/context.ts, src/context-inspection.ts, test/task-create.test.ts, test/context-formats.test.ts, test/context-inspection.test.ts, ARTIFACT_PROTOCOL.md, docs/usage.md, docs/self-documentation.md, docs/alpha-readiness.md, ROADMAP.md, examples/task-create/README.md]
+required_context_sources: [ARTIFACT_PROTOCOL.md, src/task-create.ts, src/context-text.ts, src/continuity-files.ts, src/context.ts, src/context-inspection.ts, schemas/task-state.schema.json, schemas/change-record.schema.json, schemas/artifact-header.schema.json, src/config.ts]
+parallel_safety: exclusive
+checks:
+  - {id: CHECK-FOCUSED, command_or_observation: Neutral reproduction and regression suite including the exact documented CLI example., status: pass, evidence_refs: [.agent-context/tasks/T-FIELD-WORKFLOW-001/evidence/verification.md]}
+  - {id: CHECK-QUALITY, command_or_observation: Isolated Windows and Linux typecheck build and full suite; dependency audit remains a separate reported release issue., status: pass, evidence_refs: [.agent-context/tasks/T-FIELD-WORKFLOW-001/evidence/quality.json]}
+  - {id: CHECK-PRESERVATION, command_or_observation: Stable runtime history and private source boundary preservation., status: pass, evidence_refs: [.agent-context/tasks/T-FIELD-WORKFLOW-001/evidence/verification.md]}
+latest_handoff: .agent-context/tasks/T-FIELD-WORKFLOW-001/handoff.yaml
+updated_at: "2026-10-01T21:43:37Z"

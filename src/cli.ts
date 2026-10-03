@@ -4,6 +4,7 @@ import { access, readFile } from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
 import { Command, Option } from "commander";
+import { resolveContinuityFile } from "./continuity-files.js";
 import { detectCompatibility, formatCompatibilityReport } from "./compatibility.js";
 import {
   createCheckpoint,
@@ -61,6 +62,7 @@ import {
   type MigrationDecisionSet,
 } from "./migration.js";
 import { createResumePacket, formatResumeCreateReport } from "./resume.js";
+import { createTask, formatTaskCreateReport, type CreateTaskOptions } from "./task-create.js";
 import { formatValidationReport, validateRepository, validateResumePacketAt } from "./validator.js";
 
 const program = new Command();
@@ -161,6 +163,27 @@ program
     if (!report.ok) {
       process.exitCode = 1;
     }
+  });
+
+const taskCommand = program.command("task").description("Prepare honest task drafts without scheduling or completing work");
+taskCommand.command("create")
+  .description("Preview three schema-valid task draft files; --apply creates only a new task directory")
+  .argument("[root]", "initialized project root", ".")
+  .requiredOption("--task <id>", "new task directory identity")
+  .requiredOption("--change-id <id>", "explicit CHG- identity for the new idea record")
+  .requiredOption("--objective <text>", "caller-provided objective")
+  .requiredOption("--accept <statement>", "acceptance statement; repeat for additional criteria", (value: string, previous: string[]) => [...previous, value], [])
+  .requiredOption("--author <name>", "caller-provided change author; not reviewer authentication")
+  .addOption(new Option("--risk <level>", "explicit provisional risk; review before implementation").choices(["low", "medium", "high", "critical"]).makeOptionMandatory())
+  .option("--created-at <date-time>", "explicit timestamp for reproducible draft output")
+  .option("--apply", "create a new task; existing task directories are never overwritten")
+  .option("--json", "print complete generated draft content and planned paths")
+  .action(async (root: string, options: { task: string; changeId: string; objective: string; accept: string[]; author: string;
+    risk: CreateTaskOptions["risk"]; createdAt?: string; apply?: boolean; json?: boolean }) => {
+    const report = await createTask({ root, taskId: options.task, changeId: options.changeId, objective: options.objective,
+      acceptance: options.accept, author: options.author, risk: options.risk,
+      ...(options.createdAt !== undefined ? { createdAt: options.createdAt } : {}), apply: options.apply ?? false });
+    process.stdout.write(options.json ? `${JSON.stringify(report, null, 2)}\n` : `${formatTaskCreateReport(report)}\n`);
   });
 
 program
@@ -497,7 +520,7 @@ const handoffCommand = program
 
 handoffCommand
   .command("create")
-  .description("Compile a task handoff and preserve its source-session context lock")
+  .description("Compile a compact handoff, preserve its source lock and bind a complete separate worktree inventory; compatible installed schemas and a fresh source lock are required")
   .argument("[root]", "repository root", ".")
   .requiredOption("--task <id>", "task id under .agent-context/tasks")
   .requiredOption("--session <id>", "source session id")
@@ -549,6 +572,8 @@ handoffCommand
     const repository = await validateRepository(absoluteRoot, { checkIndex: false, checkContextLocks: false });
     const diagnostics = repository.diagnostics.filter((diagnostic) =>
       diagnostic.path === artifactPath || (!diagnostic.path && diagnostic.code.startsWith("SCHEMA")));
+    try { await resolveContinuityFile(absoluteRoot, artifactPath, true); }
+    catch (error) { diagnostics.push({ severity: "error", code: "HANDOFF008", path: artifactPath, message: "Latest handoff path cannot be safely read", detail: (error as Error).message }); }
     if (!exists) {
       diagnostics.unshift({
         severity: "error",
@@ -571,6 +596,7 @@ handoffCommand
     } else {
       for (const diagnostic of diagnostics) {
         process.stdout.write(`ERROR ${diagnostic.code} ${artifactPath}: ${diagnostic.message}\n`);
+        if (diagnostic.detail) process.stdout.write(`  ${diagnostic.detail}\n`);
       }
       process.stdout.write(`FAIL handoff: ${artifactPath}\n`);
     }
@@ -583,7 +609,7 @@ const checkpointCommand = program
 
 checkpointCommand
   .command("create")
-  .description("Create a provider-neutral checkpoint backed by the durable handoff lifecycle")
+  .description("Create a provider-neutral compact handoff checkpoint with a separate worktree inventory; review installed schema compatibility before use")
   .argument("[root]", "repository root", ".")
   .requiredOption("--task <id>", "task id under .agent-context/tasks")
   .requiredOption("--session <id>", "source session id")
@@ -684,7 +710,7 @@ const resumeCommand = program
 
 resumeCommand
   .command("create")
-  .description("Compile a receiving-session context lock and immutable resume packet")
+  .description("Compile a receiving context and immutable resume packet; bound worktree inventory is verified separately, not implicitly loaded; incompatible schemas fail")
   .argument("[root]", "repository root", ".")
   .requiredOption("--task <id>", "task id under .agent-context/tasks")
   .requiredOption("--session <id>", "receiving session id")
@@ -741,6 +767,7 @@ resumeCommand
     } else {
       for (const diagnostic of report.diagnostics) {
         process.stdout.write(`ERROR ${diagnostic.code} ${report.path}: ${diagnostic.message}\n`);
+        if (diagnostic.detail) process.stdout.write(`  ${diagnostic.detail}\n`);
       }
       process.stdout.write(`FAIL resume packet: ${report.path}\n`);
     }
@@ -756,6 +783,9 @@ program
     const preflight = await validateRepository(absoluteRoot, { checkIndex: false, checkContextLocks: false });
     if (!preflight.ok) {
       process.stderr.write(`${formatValidationReport(preflight)}\n`);
+      if (preflight.diagnostics.some(finding => finding.detail?.startsWith("Reference owner:"))) {
+        process.stderr.write("Index not written: resolve the missing references with their owners first. Follow each finding's source- or evidence-specific recovery guidance. Do not rewrite historical receipts or add missing-reference exceptions to force a passing index.\n");
+      }
       process.exitCode = 1;
       return;
     }

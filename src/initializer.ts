@@ -116,6 +116,7 @@ const SCHEMA_FILES = [
   "migration-transaction.schema.json",
   "resume-packet.schema.json",
   "task-state.schema.json",
+  "worktree-inventory.schema.json",
 ] as const;
 
 const UNIVERSAL_EXCLUDES = new Set([

@@ -1,0 +1,59 @@
+{
+  "observed_at": "2026-10-01T21:53:43.009Z",
+  "scope": "Read-only closure after final checkpoint pointer and active-lock refresh; the receipt itself is appended afterwards.",
+  "validation": {
+    "markdownDocuments": 55,
+    "structuredArtifacts": 52,
+    "schemas": 16,
+    "errors": 0,
+    "warnings": 0
+  },
+  "documentation_health": "healthy",
+  "documentation_findings": {
+    "errors": 0,
+    "warnings": 0,
+    "total": 0
+  },
+  "repository_structural_finalize": true,
+  "scoped_task_finalize": true,
+  "handoff_valid": true,
+  "handoff_hash": "sha256:adbb05e68df123468e5fed9f28fb209f5f62eb65f1778d635468f1fe76b730a1",
+  "source_lock_hash": "sha256:e5a2b7ef64ec0aad708462736fd2f7f4b76b7db54430adf54ed153a5760d833b",
+  "receiving": {
+    "mode": "dry-run",
+    "writes": false,
+    "sources": 37,
+    "estimated_input_tokens": 101929,
+    "budget": {
+      "total_tokens": 128000,
+      "reserved_output_tokens": 16000,
+      "reserved_input_tokens": 4096,
+      "estimated_input_tokens": 101929
+    },
+    "omissions": [],
+    "inventory_loaded_as_context": false
+  },
+  "previous_tasks": [
+    {
+      "report": "compact-review-gates-final",
+      "codes": [
+        "FINALIZE105",
+        "FINALIZE107",
+        "FINALIZE110"
+      ],
+      "status_preserved": "review",
+      "change_status_preserved": "implemented"
+    },
+    {
+      "report": "hardening-review-gates-final",
+      "codes": [
+        "FINALIZE105",
+        "FINALIZE107",
+        "FINALIZE110"
+      ],
+      "status_preserved": "review",
+      "change_status_preserved": "implemented"
+    }
+  ],
+  "boundary": "Structural/documentation checks do not clear the separate dependency audit, independent continuity review, macOS/CI or publication gates."
+}

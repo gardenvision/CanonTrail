@@ -1,0 +1,24 @@
+{
+  "observed_at": "2026-10-01T21:37:49.056Z",
+  "reason": "Before refreshing only these owning active locks, reviewed changes to protocol, usage, roadmap, self-documentation and CLI registration. Their historical handoffs and evidence are not rewritten and their review gates remain open.",
+  "records": [
+    {
+      "task_id": "T-COMPACT-HANDOFF-001",
+      "source": ".agent-context/tasks/T-COMPACT-HANDOFF-001/context.lock.json",
+      "archive": ".agent-context/tasks/T-FIELD-WORKFLOW-001/evidence/retained-locks/T-COMPACT-HANDOFF-001-bf9cc1b5fc3a9ce1f5d24cb5855c5c62b2fee3eb0f3cafe967856e27fc47b67d.bin",
+      "raw_sha256": "bf9cc1b5fc3a9ce1f5d24cb5855c5c62b2fee3eb0f3cafe967856e27fc47b67d",
+      "lock_hash": "sha256:2a381c255c2dfba8b8efec8e48e5cbf4e34d089be3fc8b577a270f0ff10e655a",
+      "state_sha256": "e68f33ad29807d46c9e68ac2747693addcd16731e43f2ca46e23475708d3f906",
+      "lifecycle": "review"
+    },
+    {
+      "task_id": "T-CONTINUITY-WRITE-HARDENING-001",
+      "source": ".agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/context.lock.json",
+      "archive": ".agent-context/tasks/T-FIELD-WORKFLOW-001/evidence/retained-locks/T-CONTINUITY-WRITE-HARDENING-001-805e0cfaf7217deb27b7c55f9f08f577e23359c67ec9b42709596ea7c1bf2215.bin",
+      "raw_sha256": "805e0cfaf7217deb27b7c55f9f08f577e23359c67ec9b42709596ea7c1bf2215",
+      "lock_hash": "sha256:3772378251910bfcade0deb64568a98bff1994debf864c865ccb123c4cd8a552",
+      "state_sha256": "5e5a5b481994b6617fbd945723f5695fac24d1ed7cac8ea7c3abbe8f9fcb33e3",
+      "lifecycle": "review"
+    }
+  ]
+}

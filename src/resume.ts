@@ -1,4 +1,6 @@
-import { access, mkdir, readFile, writeFile } from "node:fs/promises";
+import { readFile } from "node:fs/promises";
+import { decodeContinuityText, preflightImmutable, readContinuityBytes,
+  writeImmutableContinuity, writeMutableContinuity } from "./continuity-files.js";
 import { safeRepositoryFile } from "./context-source-path.js";
 import { assertSectionContextSchemas } from "./context-schema.js";
 import { loadConfig } from "./config.js";
@@ -15,6 +17,7 @@ import {
 import { isIsoDateTime } from "./date-time.js";
 import { verifyHandoffForTask, type Handoff } from "./handoff.js";
 import { normalizePath, sha256 } from "./indexer.js";
+import type { WorktreeInventoryRef } from "./worktree-inventory.js";
 
 type JsonRecord = Record<string, unknown>;
 
@@ -68,6 +71,7 @@ export interface ResumeCreateReport {
   packet_written: boolean;
   context_archive_written: boolean;
   active_context_modified: boolean;
+  worktree_inventory: WorktreeInventoryRef | null;
   packet: ResumePacket;
   context_lock: ContextLock;
 }
@@ -93,37 +97,6 @@ function normalizeRelativePath(value: string, field: string): string {
     throw new Error(`${field} must be a repository-relative path: ${value}`);
   }
   return normalized;
-}
-
-async function exists(filePath: string): Promise<boolean> {
-  try {
-    await access(filePath);
-    return true;
-  } catch {
-    return false;
-  }
-}
-
-async function immutableState(filePath: string, content: string): Promise<"missing" | "identical"> {
-  if (!(await exists(filePath))) return "missing";
-  if (await readFile(filePath, "utf8") !== content) {
-    throw new Error(`immutable artifact already exists with different content: ${filePath}`);
-  }
-  return "identical";
-}
-
-async function writeImmutable(filePath: string, content: string): Promise<boolean> {
-  await mkdir(path.dirname(filePath), { recursive: true });
-  try {
-    await writeFile(filePath, content, { encoding: "utf8", flag: "wx" });
-    return true;
-  } catch (error) {
-    if ((error as NodeJS.ErrnoException).code !== "EEXIST") throw error;
-    if (await readFile(filePath, "utf8") !== content) {
-      throw new Error(`immutable artifact already exists with different content: ${filePath}`);
-    }
-    return false;
-  }
 }
 
 export function computeResumePacketHash(value: Omit<ResumePacket, "packet_hash"> | JsonRecord): string {
@@ -182,10 +155,9 @@ export async function createResumePacket(options: CreateResumeOptions): Promise<
   if (!isIsoDateTime(createdAt)) throw new Error("created-at must be an ISO date-time");
   const taskRoot = `.agent-context/tasks/${taskId}`;
   const handoffPath = `${taskRoot}/handoff.yaml`;
-  const handoffAbsolute = await safeRepositoryFile(root, handoffPath);
-  if (!handoffAbsolute) throw new Error(`required latest handoff does not exist: ${handoffPath}`);
-  const handoffRaw = await readFile(handoffAbsolute, "utf8");
-  const handoffValue: unknown = parse(handoffRaw);
+  const handoffRaw = await readContinuityBytes(root, handoffPath, false);
+  if (!handoffRaw) throw new Error(`required latest handoff does not exist: ${handoffPath}`);
+  const handoffValue: unknown = parse(decodeContinuityText(handoffRaw, handoffPath));
   if (!isRecord(handoffValue)) throw new Error("latest handoff must contain a mapping");
   await verifyHandoffForTask(root, taskId, handoffValue);
   const handoff = handoffValue as unknown as Handoff;
@@ -207,7 +179,7 @@ export async function createResumePacket(options: CreateResumeOptions): Promise<
   if (!handoffSource || !handoffSource.selector.split(",").includes("explicit-include")) {
     throw new Error("receiving context lock does not contain the latest handoff as required context");
   }
-  if (handoffSource.content_hash !== sha256(Buffer.from(handoffRaw, "utf8"))) {
+  if (handoffSource.content_hash !== sha256(handoffRaw)) {
     throw new Error("receiving context lock handoff hash does not match the latest handoff bytes");
   }
 
@@ -245,15 +217,16 @@ export async function createResumePacket(options: CreateResumeOptions): Promise<
   if (findings.length > 0) throw new Error(findings.map((finding) => finding.message).join("; "));
   const packetHex = packet.packet_hash.replace(/^sha256:/, "");
   const packetPath = `${taskRoot}/evidence/resume-packets/${packetHex}.resume.packet.json`;
-  const packetText = serializeResumePacket(packet);
-  const contextText = serializeContextLock(contextLock);
-  const packetAbsolute = path.join(root, ...packetPath.split("/"));
-  const archiveAbsolute = path.join(root, ...receivingArchivePath.split("/"));
-  const activeAbsolute = path.join(root, ...activeContextPath.split("/"));
+  const packetBytes = Buffer.from(serializeResumePacket(packet), "utf8");
+  const contextBytes = Buffer.from(serializeContextLock(contextLock), "utf8");
 
-  await immutableState(packetAbsolute, packetText);
-  await immutableState(archiveAbsolute, contextText);
+  await preflightImmutable(root, packetPath, packetBytes);
+  await preflightImmutable(root, receivingArchivePath, contextBytes);
+  const previousActive = await readContinuityBytes(root, activeContextPath, false);
   await verifyProspectiveSources(root, contextLock);
+  // The compact inventory is intentionally outside model context, but remains
+  // mandatory provenance. Recheck it after compilation and before any write.
+  await verifyHandoffForTask(root, taskId, handoffValue);
   if (contextLock.sources.some(source => source.line_ranges)) {
     await assertSectionContextSchemas(root, await loadConfig(root), contextLock);
   }
@@ -262,18 +235,11 @@ export async function createResumePacket(options: CreateResumeOptions): Promise<
   let contextArchiveWritten = false;
   let activeContextModified = false;
   if (options.apply) {
-    contextArchiveWritten = await writeImmutable(archiveAbsolute, contextText);
-    let previousActive: string | undefined;
-    try {
-      previousActive = await readFile(activeAbsolute, "utf8");
-    } catch {
-      previousActive = undefined;
-    }
-    if (previousActive !== contextText) {
-      await writeFile(activeAbsolute, contextText, "utf8");
-      activeContextModified = true;
-    }
-    packetWritten = await writeImmutable(packetAbsolute, packetText);
+    contextArchiveWritten = await writeImmutableContinuity(root, receivingArchivePath, contextBytes);
+    // Publish immutable receipts before switching the mutable working view.
+    // Known collisions were checked before ANY write; this is not crash atomic.
+    packetWritten = await writeImmutableContinuity(root, packetPath, packetBytes);
+    activeContextModified = await writeMutableContinuity(root, activeContextPath, contextBytes, previousActive);
   }
 
   return {
@@ -286,6 +252,7 @@ export async function createResumePacket(options: CreateResumeOptions): Promise<
     packet_written: packetWritten,
     context_archive_written: contextArchiveWritten,
     active_context_modified: activeContextModified,
+    worktree_inventory: handoff.worktree_inventory ?? null,
     packet,
     context_lock: contextLock,
   };
@@ -298,6 +265,9 @@ export function formatResumeCreateReport(report: ResumeCreateReport): string {
     `Receiving context: ${report.receiving_context_archive_path}`,
     `Active context: ${report.active_context_lock_path} (${report.mode === "dry-run" ? "not written" : report.active_context_modified ? "written" : "unchanged"})`,
     `Read order: ${report.packet.read_order.length} sources`,
+    report.worktree_inventory
+      ? `Worktree inventory: ${report.worktree_inventory.entry_count} entries (${JSON.stringify(report.worktree_inventory.path)}); verified separately, not implicitly loaded into context.`
+      : "Worktree inventory: legacy inline disclosure (no separate sidecar).",
     `Next safe action: ${report.packet.next_safe_action}`,
     `Packet hash: ${report.packet.packet_hash}`,
   ].join("\n");

@@ -1,0 +1,152 @@
+handoff_id: H-T-COMPACT-HANDOFF-001-20260927084402
+task_id: T-COMPACT-HANDOFF-001
+created_at: 2026-09-27T08:44:02Z
+source_session_id: canontrail-compact-precommit-r3-20260927
+checkpoint_trigger: phase-transition
+source_context_lock_path: .agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/context-locks/a906b59a8fbeba03d09bb1bdc1fb23bdb12cce87ad12bbf208bead0feee746c7.json
+source_context_lock_hash: sha256:a906b59a8fbeba03d09bb1bdc1fb23bdb12cce87ad12bbf208bead0feee746c7
+objective: Keep task handoffs compact while retaining complete hash-bound Git status evidence, and explain missing evidence reference failures without weakening validation.
+completed:
+  - Reproduced a decoded-equal raw-byte inventory collision before committing and added a failing full-create regression plus an exact-byte control.
+  - Corrected the inventory writer to compare raw buffers; all 43 focused cases passed.
+  - Ran full 743-case suites in isolated Windows and Linux snapshots; Windows passed 730 with 13 skips and Linux passed 739 with 4 skips.
+  - Repeated the original scratch probe against the built correction and confirmed rejection with existing corrupt bytes unchanged.
+  - Preserved historical continuity artifacts, original review receipts and the shared stable f2f9554 runtime; documented revision 3 without claiming independent approval.
+decisions:
+  - statement: Compare and write exact inventory bytes without schema changes or consumer rollout; keep previous review receipts scoped to their original snapshots.
+    authority: approved
+    source: .agent-context/tasks/T-COMPACT-HANDOFF-001/brief.md
+files:
+  - path: .agent-context/tasks/T-COMPACT-HANDOFF-001/brief.md
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: .agent-context/tasks/T-COMPACT-HANDOFF-001/change.yaml
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: .agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/precommit-review-r3.md
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: .agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/review-remediation.md
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: .agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/verification.txt
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: .agent-context/tasks/T-COMPACT-HANDOFF-001/handoff.yaml
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: .agent-context/tasks/T-COMPACT-HANDOFF-001/state.yaml
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: ARTIFACT_PROTOCOL.md
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: docs/release-checklist.md
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: docs/self-documentation.md
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: docs/usage.md
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: examples/compact-handoff/inventory.fixture.json
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: examples/compact-handoff/README.md
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: ROADMAP.md
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: schemas/handoff.schema.json
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: schemas/worktree-inventory.schema.json
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: src/cli.ts
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: src/handoff.ts
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: src/initializer.ts
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: src/resume-audit.ts
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: src/resume.ts
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: src/validator.ts
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: src/worktree-inventory.ts
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: test/compact-handoff-review.test.ts
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: test/compact-handoff.test.ts
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: test/handoff.test.ts
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+checks:
+  - name: CHECK-QUALITY
+    status: pass
+    evidence: .agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/precommit-review-r3.md
+  - name: CHECK-REVIEW
+    status: not-run
+    evidence: ""
+blockers:
+  - Independent review of revisions 2 and 3 and exact macOS execution remain open before release or consumer rollout.
+open_questions:
+  - Obtain the maintainer's review-subtask decision and then coordinate a permitted test-branch commit/push for hosted CI; neither is inferred from this checkpoint.
+next_safe_action: Validate this handoff and compile validated receiving context, inspect precommit-review-r3.md and the final gate receipt, then resolve the pending independent-review and exact macOS CI route before commit/publication decisions.
+do_not_repeat:
+  - Do not build in the shared source checkout; candidate/dist intentionally remains the stable f2f9554 consumer runtime. Build in isolated copies.
+  - Do not change consumer projects, rewrite historical evidence, commit, push or infer review approval from author tests.
+  - Do not accept decoded-text equality in place of raw-byte equality or rehash converted historical evidence.
+  - Do not treat the revision-1 Claude review as approval of revised bytes; deferred archive-path and atomicity findings remain open.
+resume_sources:
+  - AGENTS.md
+  - .agent-context/tasks/T-COMPACT-HANDOFF-001/state.yaml
+  - .agent-context/tasks/T-COMPACT-HANDOFF-001/brief.md
+  - .agent-context/tasks/T-COMPACT-HANDOFF-001/change.yaml
+  - examples/compact-handoff/README.md
+  - ARTIFACT_PROTOCOL.md
+  - examples/resume-history/README.md
+  - integrations/gsd/canontrail/skills/canontrail-finalize/SKILL.md
+  - integrations/superpowers/skills/canontrail-feature-lifecycle/SKILL.md
+  - .agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/precommit-review-r3.md
+  - .agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/review-remediation.md
+  - .agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/verification.txt
+  - src/handoff.ts
+  - src/initializer.ts
+  - src/resume-audit.ts
+  - src/resume.ts
+  - src/validator.ts
+  - src/worktree-inventory.ts
+  - test/compact-handoff-review.test.ts
+  - test/compact-handoff.test.ts
+  - docs/release-checklist.md
+  - docs/self-documentation.md
+  - docs/usage.md
+  - examples/compact-handoff/inventory.fixture.json
+  - ROADMAP.md
+  - schemas/handoff.schema.json
+  - schemas/worktree-inventory.schema.json
+  - test/handoff.test.ts
+  - .agent-context/tasks/T-COMPACT-HANDOFF-001/handoff.yaml
+  - .agent-context/tasks/T-COMPACT-HANDOFF-001/context.lock.json
+worktree_dirty: true
+uncommitted_summary: Git reports 40 changed/untracked entries; 26 task-selected or explicitly reported files are listed below. The complete hash-bound worktree_inventory is separate on-demand safety evidence, not an ownership claim or file-content backup.
+worktree_inventory:
+  path: .agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/worktree-inventories/8497881835d0571cd6aceedcbf0bfc4b114410ad3f9c52c6300da1a7f419aee8.worktree-inventory.json
+  content_hash: sha256:8497881835d0571cd6aceedcbf0bfc4b114410ad3f9c52c6300da1a7f419aee8
+  entry_count: 40
+handoff_hash: sha256:9cfe25b786768405b4f3c97a3b0bc2414ef8ff266d40c072d40f4cd722bfac71

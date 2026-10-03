@@ -1,0 +1,27 @@
+task_id: T-PUBLISH-CONTINUITY-001
+status: in-progress
+objective: Integrate tested continuity and task-authoring updates with public main and publish a reviewable branch with exact hosted checks.
+non_goals: [No consumer rollout, No real-project migration, No PersonalCanon implementation, No invented independent approval]
+acceptance_criteria:
+  - id: AC-001
+    statement: Public main corrections and existing working changes are preserved.
+    verification: Diff and exact starting snapshot comparison; exercise both branches' regression tests.
+    status: pending
+  - id: AC-002
+    statement: Pinned dependency audit finding is remediated without unrelated upgrades.
+    verification: Lockfile diff and current npm audit plus complete suite.
+    status: pending
+  - id: AC-003
+    statement: The source passes checks and the branch is published with honest review and platform status.
+    verification: Hosted branch identity and per-platform outcomes; review gates retained.
+    status: pending
+dependencies: []
+documentation_impact: [ROADMAP.md, docs/self-documentation.md, docs/third-party-notices.md, docs/release-checklist.md]
+file_intents: [package-lock.json, docs/third-party-notices.md, ROADMAP.md, docs/self-documentation.md, docs/release-checklist.md, src/handoff.ts, src/continuity-files.ts, src/context.ts, src/cli.ts, src/validator.ts, src/resume.ts]
+required_context_sources: [ARTIFACT_PROTOCOL.md, package.json, package-lock.json, src/handoff.ts, src/continuity-files.ts, src/context.ts, src/task-create.ts, .github/workflows/validate.yml]
+parallel_safety: exclusive
+owner: null
+worktree: null
+checks: []
+latest_handoff: null
+updated_at: 2026-10-03T12:00:00Z

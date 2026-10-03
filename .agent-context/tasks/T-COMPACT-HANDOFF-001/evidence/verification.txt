@@ -1,0 +1,38 @@
+CanonTrail compact handoff implementation verification, 2026-09-26
+Base: f2f95541853ca97daf486c92844745c498f9afb8
+Branch: codex/compact-handoff-inventory
+Scope: local author implementation and synthetic regressions; not independent approval or release evidence.
+Host: Windows. No Linux/macOS execution of this working snapshot is claimed.
+
+Commands observed:
+1. npm run check: PASS.
+2. npm run build: PASS.
+3. Initial focused continuity baseline: 50 passed, 1 failed. The failing assertion required the old all-files inline disclosure; the test was corrected to require complete sidecar retention and task-selected inline files. No integrity gate was weakened.
+4. Focused handoff/compact tests: 29 passed (before the worked-example case and 8 additional counterexamples).
+5. First full suite: 709 passed, 13 skipped, 722 total, 35 files; duration 144.99s. Later counterexample tests were added, so this is not the final suite result.
+6. Updated compact test file: 30 passed, 0 skipped; duration 14.50s.
+7. Dedicated measurement run: 1 passed, 29 filtered-out cases (intentional -t selection, not the full-suite capability skip count).
+8. git diff --check: PASS at this checkpoint.
+9. Tracked historical context locks/handoffs/resume examples: 12 checked directly against raw HEAD bytes; 0 changed.
+10. Index/validate/audit: 44 Markdown, 34 structured artifacts, 16 schemas; 0 errors and warnings; healthy audit with one explicit frozen example.
+
+Exact measurement emitted by the synthetic 900-unrelated-files fixture:
+{"fixture":"900-unrelated-dirty-entries","inventory_entries":902,"inventory_bytes":83928,"compact_handoff_bytes":1678,"legacy_shaped_handoff_bytes":149599,"receiving_estimated_input_tokens":579,"provider_tokens_measured":false}
+
+Interpretation: 902 Git-status entries are retained byte-hash-bound; only two selected paths appear in handoff.files. The 83,928-byte inventory is not in the receiving read_order. The 149,599-byte comparison is a reconstructed old all-entry disclosure over the same synthetic status entries, not a byte-identical replay of a real historical handoff. 1,678 bytes is the actual newly generated handoff in this fixture. No real provider usage or whole-session saving was measured.
+
+Counterexamples include malformed/duplicate Git records, Unicode/newline/backslash observations, real staged rename, missing/tampered inventory, mismatched count/owner/path, missing schema, permissive legacy schema without explicit field support, legacy inline handoff, historical packet after replacement, rehashed task/time/dirty/order/duplicate/unknown-field divergence, scanner exclusions, hard links, linked directory and immutable collision. The real CLI index test confirms REF001 source owner/target guidance, exit 1 and unchanged index bytes.
+
+Current finalization observation before closure metadata updates: repository and docs PASS; the task correctly remains blocked on unfinished lifecycle/review records. Do not treat this as a product-test failure or invent independent review. A fresh final suite and final gate observation follow before handoff.
+
+Second full-suite attempt (after all 30 new cases): 716 passed, 1 failed, 13 skipped, 730 total in 35 files; duration 156.02s. Failure: existing migration-control-evidence test "checks execution containment again before writing the apply intent". Its replaceWithLink helper encountered EPERM while renaming the temporary execution directory, before constructing the adversarial junction and reaching the expected product rejection. The migration code, helper and assertion are unchanged. This is an observed Windows setup failure, not a proven diagnosis of the external lock holder. Do not call this attempt green. Keep the assertion strict; reproduce the suite/file without weakening the test or broadening this handoff task into a migration change.
+
+Unchanged focused repeat of migration-control-evidence.test.ts: 33 passed, 5 native-file-symlink capability skips, 38 total; duration 8.41s. The exact failing containment case passed (58ms). No source/helper/assertion change between the failing run and this reproduction. A final unchanged complete-suite repeat is in progress.
+
+Final unchanged full-suite repeat: PASS, 717 passed, 13 capability skips, 730 total, 35 files; duration 177.18s. The existing EPERM setup incident remains disclosed above, not retroactively reclassified as passing. No test/production changes were made between that failing attempt, the focused repeat and this final full run.
+
+Implementation and guide bytes are bound by implementation-fingerprints.json (17 files). No independent reviewer has approved this snapshot yet. No hosted Windows/Linux/macOS run or publication occurred.
+
+Own dogfood checkpoint: created with the new isolated CLI, 26 complete inventory entries, 19 selected/explicit file descriptions, 21 resume sources. The human output explicitly names the sidecar, count and on-demand context boundary. Handoff self-hash: sha256:312a2c4af7081790278e2802ba82942cc655adfbbbd7af231adf1514278a5ef5. Source-context archive: sha256:0cac86e6c49b743c67285b59e956ff7815f3a3f4f9c195a287f09d43d3d31995. Creation left state unchanged; latest_handoff was then set deliberately and the active context will be recompiled. A first CLI invocation used the wrong --source-session spelling and was rejected before creation; --help established the correct --session option.
+
+Runtime isolation: the new build was copied into a separate local preview. The shared dist entrypoint was restored from a fresh build of exact HEAD f2f9554, with all 87 baseline build files byte-verified. Three new, unused generated module files were removed from that shared dist after checking their absolute targets. No target consumer schema was updated. Building the working branch again would explicitly replace the shared build with the new implementation; local path details are in the external continuity status, not this distributable tree.

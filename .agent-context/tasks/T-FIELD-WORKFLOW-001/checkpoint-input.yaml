@@ -1,0 +1,24 @@
+completed:
+  - "Bounded field intake and version-aware classification recorded without copying private consumer reports into public source."
+  - "Safe task drafts, explicit shader/module text support and initial-excerpt guidance implemented and author-reviewed."
+  - "Windows full suite 814 passed / 13 skipped; Linux 820 passed / 7 skipped, 827 cases each; typecheck and isolated build pass."
+decisions:
+  - statement: "Keep consumer projects and the shared built runtime untouched; no release or Git mutation is authorized by this task."
+    authority: approved
+    source: .agent-context/tasks/T-FIELD-WORKFLOW-001/brief.md
+  - statement: "Close only the bounded field-workflow acceptance; earlier continuity review gates and a new dependency audit follow-up stay distinct."
+    authority: delegated
+    source: .agent-context/tasks/T-FIELD-WORKFLOW-001/change.yaml
+blockers:
+  - "Release readiness is not established; independent continuity review and exact platform/CI evidence remain open."
+  - "npm audit exits 1 for pinned transitive fast-uri 3.1.6. A focused update and validation are needed before publication."
+open_questions: []
+next_safe_action: "Validate this handoff and establish a receiving context, then review the verification receipt and plan the narrowly scoped dependency update plus outstanding continuity review/platform work. Obtain separate authorization before publication or consumer rollout."
+do_not_repeat:
+  - "Do not rewrite historical evidence, use old approval for new bytes, or rebuild the shared consumer dist directory."
+  - "Do not rescan private asset trees or republish private field reports."
+resume_sources:
+  - .agent-context/tasks/T-FIELD-WORKFLOW-001/evidence/verification.md
+  - .agent-context/tasks/T-FIELD-WORKFLOW-001/evidence/quality.json
+  - .agent-context/tasks/T-FIELD-WORKFLOW-001/evidence/intake.md
+uncommitted_summary: "Existing compact-handoff and continuity-hardening work remains uncommitted. This task adds bounded task/context source and tests, usage/protocol updates and its own evidence. Stable dist and consumer files remain untouched. Only the two owning active review locks are refreshed after preserving their prior bytes; all older handoffs and review statuses remain intact."
