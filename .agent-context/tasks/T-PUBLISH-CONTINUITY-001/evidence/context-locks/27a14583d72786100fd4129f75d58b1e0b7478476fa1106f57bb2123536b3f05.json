@@ -1,14 +1,14 @@
 {
   "task_id": "T-PUBLISH-CONTINUITY-001",
   "agent_run_id": null,
-  "created_at": "2026-10-03T13:04:00Z",
+  "created_at": "2026-10-03T13:02:00Z",
   "context_index_hash": "sha256:68a70034b19fb8b54a59314eac2e785d0ede38cf4db7548fc9136e12ae6ad429",
   "base_revision": "f08d3cadb04441a24ee9fabc7bea65c1dc0ea55b",
   "budget": {
     "total_tokens": 128000,
     "reserved_output_tokens": 16000,
     "reserved_input_tokens": 4096,
-    "estimated_input_tokens": 97158
+    "estimated_input_tokens": 95906
   },
   "sources": [
     {
@@ -26,14 +26,14 @@
     },
     {
       "path": ".agent-context/tasks/T-PUBLISH-CONTINUITY-001/state.yaml",
-      "content_hash": "sha256:ab8b38513bf60c41054131fc6935c525c3bce633058ec39a46e80b08a52d992d",
+      "content_hash": "sha256:ba1620210007a391b1658a85958d6cc94846b58399dc43ea68ddf5487ba3ad38",
       "git_blob": null,
       "truth_level": "active-snapshot",
       "level": "L0",
       "priority": 1,
       "selection_reason": "Current task objective, acceptance criteria, and file intents.",
       "selector": "task-state",
-      "estimated_tokens": 568,
+      "estimated_tokens": 554,
       "ownership": "project",
       "source_system": null
     },
@@ -296,22 +296,14 @@
       "estimated_tokens": 3241,
       "ownership": "project",
       "source_system": null
-    },
-    {
-      "path": ".agent-context/tasks/T-PUBLISH-CONTINUITY-001/handoff.yaml",
-      "content_hash": "sha256:2fa3bb76d61db55c577374e70681854e90a4f601101683afde84a37af94e43a1",
-      "git_blob": null,
-      "truth_level": "active-snapshot",
-      "level": "L4",
-      "priority": 40,
-      "selection_reason": "Latest durable checkpoint for this task.",
-      "selector": "latest-handoff",
-      "estimated_tokens": 1238,
-      "ownership": "project",
-      "source_system": null
     }
   ],
   "omissions": [
+    {
+      "candidate": ".agent-context/tasks/T-PUBLISH-CONTINUITY-001/handoff.yaml",
+      "reason": "No handoff exists for this task yet.",
+      "required": false
+    },
     {
       "candidate": "src/validator.ts",
       "reason": "Optional candidate needs 18108 estimated tokens and does not fit after reserving 0 for later required sources.",
@@ -319,5 +311,5 @@
     }
   ],
   "raw_transcripts_included": false,
-  "lock_hash": "sha256:9c4889f26dad658708539b1f9c95cbde757357de84f370daf2d13c9b5b43de82"
+  "lock_hash": "sha256:27a14583d72786100fd4129f75d58b1e0b7478476fa1106f57bb2123536b3f05"
 }

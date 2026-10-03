@@ -1,6 +1,6 @@
 ---
 topic_id: implementation-roadmap
-stand: "2026-10-01"
+stand: "2026-10-03"
 status: public-source-alpha
 truth_level: draft
 verification:
@@ -58,7 +58,7 @@ Subsequent review independently confirmed R3 A-D with conditions. `T-CONTINUITY-
 - `T-FIELD-WORKFLOW-001` implements dry-run-first task/change drafts, additional checked module/shader sources, and initial-excerpt guidance from bounded field feedback. Its own verification owns completion; pending continuity review/platform/rollout gates remain separate. Explicit working/completion context phases and semantic document splitting are still later work.
 - Better relevance fixtures across unrelated projects and safer compact-evidence authoring.
 - Broader source-format policies (especially binary-capable engine assets) and generated-directory profiles require separate tests and design; the new shader/module allow-list is not arbitrary text ingestion.
-- Reconcile the 2026-10-01 dependency audit before publishing a new build: the pinned transitive `fast-uri` 3.1.6 receives one high-severity npm audit entry spanning three advisories; upstream patches are available. Preserve exact existing build identity, examine application exposure and validate a scoped lockfile update instead of a blanket audit-fix. The field task records the observation; this is not a claim of a demonstrated CanonTrail network exploit.
+- `T-PUBLISH-CONTINUITY-001` integrates public-main corrections with continuity/task-authoring work and changes only the transitive fast-uri lock from 3.1.6 to 3.1.8. The lock-only update reports zero advisories; clean-install tests, audit and exact hosted checks must still establish the new publication boundary. This is not a demonstrated CanonTrail network exploit or permission to replace a consumer runtime. Independent continuity review gates remain open.
 - Evidence-backed semantic feature discovery; no promise of complete automatic documentation.
 - Clearer lifecycle treatment when a verified canonical document changes after a historical promotion.
 - Versioned upstream interoperability fixtures and unsupported-version reporting.

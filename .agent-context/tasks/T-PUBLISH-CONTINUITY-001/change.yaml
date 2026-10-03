@@ -2,7 +2,7 @@ version: 1
 change_id: CHG-PUBLISH-CONTINUITY-001
 revision: 1
 title: Integrate tested continuity and task-authoring updates with public main and publish a reviewable branch with exact hosted checks.
-status: decided
+status: implemented
 risk: high
 author: CanonTrail publication maintainer
 canonical_source: .agent-context/tasks/T-PUBLISH-CONTINUITY-001/brief.md
@@ -18,16 +18,16 @@ acceptance_cases:
     failure_or_uncertainty: Resolve overlapping changes deliberately; preserve original source and historical bytes.
     counterexample: Integration drops a public-main invariant or rewrites a historical archive.
     oracle: Exact baseline manifest and both sets of regression assertions.
-    status: pending
-    evidence_refs: []
+    status: pass
+    evidence_refs: [.agent-context/tasks/T-PUBLISH-CONTINUITY-001/evidence/progress.md]
   - id: AC-002
     given: The lockfile pins an affected transitive URI package.
     expected: Pinned dependency audit finding is remediated without unrelated upgrades.
     failure_or_uncertainty: Do not force major upgrades or report an unavailable audit as clean.
     counterexample: Unrelated dependency versions change or vulnerable URI serialization remains pinned.
     oracle: Current registry metadata audit result and exact lockfile version diff.
-    status: pending
-    evidence_refs: []
+    status: pass
+    evidence_refs: [.agent-context/tasks/T-PUBLISH-CONTINUITY-001/evidence/progress.md]
   - id: AC-003
     given: Integrated source and dependency changes are recorded on a new branch.
     expected: The source passes checks and the branch is published with honest review and platform status.
@@ -78,16 +78,17 @@ impacts:
     rationale: Current package and cross-platform CI remain the publication gates.
     evidence_refs: [package-lock.json, .github/workflows/validate.yml]
 verification:
-  checks: []
+  checks:
+    - {name: Fresh Windows installation check build complete suite and runtime/full audit, status: pass, evidence_refs: [.agent-context/tasks/T-PUBLISH-CONTINUITY-001/evidence/progress.md]}
   terminology_search:
-    status: pending
-    terms: []
-    evidence_refs: []
+    status: pass
+    terms: [independent review, exact bytes, fast-uri, shared stable runtime]
+    evidence_refs: [.agent-context/tasks/T-PUBLISH-CONTINUITY-001/evidence/progress.md]
   visual_review:
     applicable: false
     status: not-applicable
     evidence_refs: []
-  unverifiable_items: []
+  unverifiable_items: [Exact hosted checks pending, Independent continuity review pending]
 independent_review:
   status: pending
   reviewer: null
@@ -96,4 +97,4 @@ independent_review:
   waiver: null
 supersedes: []
 superseded_by: null
-updated_at: 2026-10-03T12:00:00Z
+updated_at: 2026-10-03T13:00:00Z

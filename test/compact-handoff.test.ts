@@ -39,6 +39,25 @@ const audit = (root: string) => validateRepository(root, { checkIndex: false, ch
 function rehash(handoff: Handoff) { const { handoff_hash: _, ...payload } = handoff; handoff.handoff_hash = computeHandoffHash(payload); }
 
 describe("compact worktree provenance", () => {
+  it("captures a real Git status above 1 MiB without losing unrelated inventory entries", async () => {
+    const f = await fixture(); await mkdir(path.join(f.root, "peer"));
+    const names = Array.from({ length: 6200 }, (_, i) => `peer/${String(i).padStart(4, "0")}-${"x".repeat(165)}.txt`);
+    for (let offset = 0; offset < names.length; offset += 64) {
+      await Promise.all(names.slice(offset, offset + 64).map(name => writeFile(path.join(f.root, name), "peer\n")));
+    }
+    const observed = await promisify(execFile)("git", ["--no-optional-locks", "status", "--porcelain=v1", "-z", "--untracked-files=all"], {
+      cwd: f.root, encoding: "buffer", maxBuffer: 16 * 1024 * 1024, windowsHide: true,
+    });
+    expect(observed.stdout.byteLength).toBeGreaterThan(1024 * 1024);
+    expect(observed.stderr.byteLength).toBe(0);
+    const report = await createHandoff({ ...f.options, apply: true });
+    const inventory = await verifyWorktreeInventory(f.root, report.handoff as unknown as Record<string, unknown>);
+    expect(inventory!.entries).toEqual(parseWorktreeStatus(observed.stdout.toString("utf8")));
+    expect(new Set(inventory!.entries.map(entry => entry.path))).toEqual(new Set(names));
+    expect(report.handoff.files).toHaveLength(0);
+    await expect(verifyHandoffForTask(f.root, taskId, report.handoff as unknown as Record<string, unknown>)).resolves.toBeUndefined();
+  }, 180000);
+
   it("keeps the worked example's raw-byte inventory contract reproducible", async () => {
     const bytes = await readFile("examples/compact-handoff/inventory.fixture.json", "utf8"), value: unknown = JSON.parse(bytes);
     validateWorktreeInventoryShape(value);

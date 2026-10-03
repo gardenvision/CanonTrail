@@ -1,11 +1,11 @@
 ---
 topic_id: task-T-PUBLISH-CONTINUITY-001
 stand: 2026-10-03
-status: in-progress
+status: review
 truth_level: active-snapshot
 verification:
-  state: unverified
-  evidence: []
+  state: internally-reviewed
+  evidence: [.agent-context/tasks/T-PUBLISH-CONTINUITY-001/evidence/progress.md]
 read_if_task_touches:
   - T-PUBLISH-CONTINUITY-001
 primary_systems: []

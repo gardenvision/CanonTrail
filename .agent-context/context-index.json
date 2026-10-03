@@ -1,7 +1,7 @@
 {
   "version": 1,
   "hash_algorithm": "sha256",
-  "root_hash": "sha256:739cc69e14b69501967ce1ba8c208e9e140d8ebbe055d41a3ebc8546bdd29a08",
+  "root_hash": "sha256:68a70034b19fb8b54a59314eac2e785d0ede38cf4db7548fc9136e12ae6ad429",
   "documents": [
     {
       "path": ".agent-context/tasks/T-ALPHA-CANDIDATE-001/brief.md",
@@ -308,11 +308,11 @@
     },
     {
       "path": ".agent-context/tasks/T-PUBLISH-CONTINUITY-001/brief.md",
-      "content_hash": "sha256:efc2ae7bd671085bfefa26f4815c5a011143c00fa2f8fee2b107de85dc34bd10",
+      "content_hash": "sha256:e96e6e0bdfed2d0569998a27a6979f6d5c778fed323e28b102d36f2d39e47451",
       "stand": "2026-10-03",
-      "status": "in-progress",
+      "status": "review",
       "truth_level": "active-snapshot",
-      "verification_state": "unverified",
+      "verification_state": "internally-reviewed",
       "read_if_task_touches": [
         "T-PUBLISH-CONTINUITY-001"
       ],
@@ -324,7 +324,7 @@
     },
     {
       "path": ".agent-context/tasks/T-PUBLISH-CONTINUITY-001/evidence/progress.md",
-      "content_hash": "sha256:60ab6c404118ee40f614c1a5e498063c7f359ddacb4b560a5be34877a590692d",
+      "content_hash": "sha256:cb5922e2a29e000015cd0526c7f55d0796acf3856de66839f34d9b6d6a89a090",
       "stand": "2026-10-03",
       "status": "in-progress",
       "truth_level": "active-snapshot",
@@ -465,8 +465,8 @@
     },
     {
       "path": "ROADMAP.md",
-      "content_hash": "sha256:9fd9f006be4a59f3c89975cdb9616ce90d9a3b39ee4f2eadc57ba2647b12e1b6",
-      "stand": "2026-10-01",
+      "content_hash": "sha256:71203b02fb3d7b7c361932bb6e0d0acf09160749cee3189e4e523382e7b0788c",
+      "stand": "2026-10-03",
       "status": "public-source-alpha",
       "truth_level": "draft",
       "verification_state": "unverified",
@@ -696,7 +696,7 @@
     },
     {
       "path": "docs/release-checklist.md",
-      "content_hash": "sha256:9c7f34ff35e7f90803bb06b4aa91235e271703f1cf3fce1a6b35e0cd25ffa467",
+      "content_hash": "sha256:e82992fc8380962d1e8baa8ae154c8beb9a42ab0912f270637bd927b1b351ccd",
       "stand": "2026-09-27",
       "status": "public-source-hosting-reviewed",
       "truth_level": "draft",
@@ -716,8 +716,8 @@
     },
     {
       "path": "docs/self-documentation.md",
-      "content_hash": "sha256:095b35ba7a02f64c2f66b67475be4b886a3868c7a1ef0965e4952f30d262c529",
-      "stand": "2026-10-01",
+      "content_hash": "sha256:07e02026b33f49423e64f6ba861e1c8b056569f6cadc405c89ba7a91e1f053d2",
+      "stand": "2026-10-03",
       "status": "public-source-alpha",
       "truth_level": "draft",
       "verification_state": "unverified",
@@ -738,8 +738,8 @@
     },
     {
       "path": "docs/third-party-notices.md",
-      "content_hash": "sha256:7e647e45fe561810b44ed8c9b28417ce38060c949c746f2495cca40111e1c287",
-      "stand": "2026-09-13",
+      "content_hash": "sha256:ecb1c02467dde83d0c24fceff727c78103e3e4797753013f6f4a586dedb320e7",
+      "stand": "2026-10-03",
       "status": "source-distribution-inventory",
       "truth_level": "draft",
       "verification_state": "unverified",

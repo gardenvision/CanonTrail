@@ -18,6 +18,13 @@ The compact-handoff transport checklist added on 2026-09-27 is supported by auth
 
 The later bounded R3 review conditionally confirms its A-D remedies. New continuity write-hardening is a separate task and needs exact-source tests and independent review; no earlier receipt covers those new bytes. Consumer checks must additionally cover warning-free Git status, an up-to-date source lock, unlinked exact control paths and retained archive coverage. Multi-file crash atomicity and producer authentication are not promised.
 
+T-PUBLISH-CONTINUITY-001 owns the October integration with public main and the
+scoped fast-uri dependency correction. Its author-run clean Windows snapshot
+passes the full suite and repository gates. Branch publication is a review
+delivery, not an Alpha release or consumer rollout. Inspect the exact branch's
+hosted matrix and retain the outstanding independent continuity review gates;
+do not transfer platform or review approval from earlier snapshots.
+
 ## Decisions and remaining gates
 
 1. Approved and prepared: `https://github.com/gardenvision/CanonTrail`, with clean root commit `23d542302e7327931cb2c60b7a35ae60e6e47f16` and no private development ancestors. The separately authorized private-repository rename is complete. Never merge old private branches, tags or raw project reports into this history.

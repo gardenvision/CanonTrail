@@ -1,32 +1,32 @@
 {
   "task_id": "T-COMPACT-HANDOFF-001",
   "agent_run_id": null,
-  "created_at": "2026-10-01T21:48:33.305Z",
-  "context_index_hash": "sha256:cea50d1314de18d827daf0131bd463b5c38323198fb30031a047b02ca110512a",
-  "base_revision": "f2f95541853ca97daf486c92844745c498f9afb8",
+  "created_at": "2026-10-03T13:02:00Z",
+  "context_index_hash": "sha256:68a70034b19fb8b54a59314eac2e785d0ede38cf4db7548fc9136e12ae6ad429",
+  "base_revision": "f08d3cadb04441a24ee9fabc7bea65c1dc0ea55b",
   "budget": {
     "total_tokens": 140000,
     "reserved_output_tokens": 16000,
     "reserved_input_tokens": 4096,
-    "estimated_input_tokens": 108817
+    "estimated_input_tokens": 111067
   },
   "sources": [
     {
       "path": "AGENTS.md",
-      "content_hash": "sha256:c107a0b6ee502cfea944746c2207c2b098da52cd7652f8a7b673e6ce06d620e5",
-      "git_blob": "08b5dc3ff73fd37728ff075fadac820bc95119ea",
+      "content_hash": "sha256:d28858d55c21d71e53d259afd2afb17eebd61a272b418efd1f2b269abac94e0b",
+      "git_blob": "72afc67b5121eae227a2126b3277e31b5db0db13",
       "truth_level": "canonical",
       "level": "L0",
       "priority": 0,
       "selection_reason": "Repository governing instructions.",
       "selector": "governing-instructions",
-      "estimated_tokens": 1429,
+      "estimated_tokens": 1451,
       "ownership": "project",
       "source_system": null
     },
     {
       "path": ".agent-context/tasks/T-COMPACT-HANDOFF-001/state.yaml",
-      "content_hash": "sha256:e68f33ad29807d46c9e68ac2747693addcd16731e43f2ca46e23475708d3f906",
+      "content_hash": "sha256:c67fae35e401e83844c28069ad4b1559912889c632965c0bd9298a180df97764",
       "git_blob": null,
       "truth_level": "active-snapshot",
       "level": "L0",
@@ -40,7 +40,7 @@
     {
       "path": ".agent-context/tasks/T-COMPACT-HANDOFF-001/brief.md",
       "content_hash": "sha256:8ad9cd39671fa84bfa0d0100752bad5d54216427916f2671762896c5d9b2ae6e",
-      "git_blob": null,
+      "git_blob": "29b3bb296657370ae2f371fc4f31c289b6a53dc2",
       "truth_level": "active-snapshot",
       "level": "L0",
       "priority": 2,
@@ -53,7 +53,7 @@
     {
       "path": ".agent-context/tasks/T-COMPACT-HANDOFF-001/change.yaml",
       "content_hash": "sha256:d752ab685d1f391d5477c0fe3f7aecfbd7a727359dba1e9cce71ff7d285acddd",
-      "git_blob": null,
+      "git_blob": "21bfe526b9338cddca279f6e753d4cab61bcafe1",
       "truth_level": "active-snapshot",
       "level": "L0",
       "priority": 3,
@@ -66,7 +66,7 @@
     {
       "path": "examples/compact-handoff/README.md",
       "content_hash": "sha256:0607337335ecd6bb1acfb8fd019d7c519ff6c5da1984bfc1c27f0f83a0e48841",
-      "git_blob": null,
+      "git_blob": "e860fe58e181d24067a16e0923d6303a61ccab4c",
       "truth_level": "design-target",
       "level": "L1",
       "priority": 13,
@@ -79,7 +79,7 @@
     {
       "path": "ARTIFACT_PROTOCOL.md",
       "content_hash": "sha256:0eb68003a99bda82e9b6e64962f45d7fca5ea52d2b5ea64769223982fcffa611",
-      "git_blob": null,
+      "git_blob": "4cc52c00f82ddabe3775d9ddcf92392bff908b99",
       "truth_level": "design-target",
       "level": "L1",
       "priority": 14,
@@ -131,7 +131,7 @@
     {
       "path": ".agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/precommit-review-r3.md",
       "content_hash": "sha256:8c787f873b617ac50e9649b0b8810c5ba53285c3de11963116183b35ec015994",
-      "git_blob": null,
+      "git_blob": "58e5cd0ff5f59a57181a2468d2bc35e4794d1cf8",
       "truth_level": "historical",
       "level": "L4",
       "priority": 22,
@@ -144,7 +144,7 @@
     {
       "path": ".agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/review-remediation.md",
       "content_hash": "sha256:67983ef76954d6a43c06b8f5b5ae9072b85d3b9e9e0c1d164b5807b71791583c",
-      "git_blob": null,
+      "git_blob": "30a0dcb5f05f663d5e6c6613137a7224a7085b25",
       "truth_level": "historical",
       "level": "L4",
       "priority": 22,
@@ -157,7 +157,7 @@
     {
       "path": ".agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/verification.txt",
       "content_hash": "sha256:e52a70a34048012c8b73c1354a6feefba5e8e8efcdc4ea79bae0471be0b96eaf",
-      "git_blob": null,
+      "git_blob": "ea47d277ecce9cb8ad112a4e1b7953140e638cdd",
       "truth_level": "historical",
       "level": "L4",
       "priority": 22,
@@ -169,28 +169,28 @@
     },
     {
       "path": "src/handoff.ts",
-      "content_hash": "sha256:55eb8a6e7d32e47d76ca4a91262ea83be57949561dc30b4121ad9ecc033b23d2",
-      "git_blob": null,
+      "content_hash": "sha256:b9f2954899ba83763af72399234180748fe65734c5bc307d6b2c494f57d2bcf1",
+      "git_blob": "f5e68f902b82760c166ced1f2408308c9995041e",
       "truth_level": "unclassified",
       "level": "L3",
       "priority": 25,
       "selection_reason": "Persistently required by the current task state.; Existing file declared by the current task.",
       "selector": "task-required-context,task-file-intent",
-      "estimated_tokens": 7219,
+      "estimated_tokens": 7303,
       "ownership": "project",
       "source_system": null
     },
     {
       "path": "src/initializer.ts",
-      "content_hash": "sha256:26cbdf398bf269a973fdb45e8cbe388bce196f88b02ff7475d15e5e1bd48b349",
+      "content_hash": "sha256:569bc66b69c6ef4c5a4cd2edb9aa5ef6aac7f0898c016cf52b543ecc5aa3dcd8",
       "line_ranges": [
         [
-          103,
-          120
+          104,
+          121
         ]
       ],
       "selection_hash": "sha256:fe3226c0b5b0729e788e2de9cfaf88ae30fdcde1e1811472ff2eec4f00a56457",
-      "git_blob": null,
+      "git_blob": "debab0aea1e5934c49069a15493bd5397ffb480d",
       "truth_level": "unclassified",
       "level": "L3",
       "priority": 25,
@@ -203,7 +203,7 @@
     {
       "path": "src/resume-audit.ts",
       "content_hash": "sha256:547469466943ec7cdefd273ca3c60cfc06083b92f2f864179d80a7b4a41b2c05",
-      "git_blob": null,
+      "git_blob": "14821001f70e82626d5a88b4ebb85e772d20e235",
       "truth_level": "unclassified",
       "level": "L3",
       "priority": 25,
@@ -216,7 +216,7 @@
     {
       "path": "src/resume.ts",
       "content_hash": "sha256:34a89b09a844a92c30b9bf42967d3faaf45f3897a653e7c142570417fae08e17",
-      "git_blob": null,
+      "git_blob": "0f4a6121968c30fc39ba2ea18e3e4d879ee82890",
       "truth_level": "unclassified",
       "level": "L3",
       "priority": 25,
@@ -228,21 +228,21 @@
     },
     {
       "path": "src/validator.ts",
-      "content_hash": "sha256:67a7263a282f6fdf84df859380dde57e1b4f9594523b7debd6c7147403320d6a",
-      "git_blob": null,
+      "content_hash": "sha256:10ba292405f41b3ad65751e461ae0a291043051392419a6b427e479064deb7a4",
+      "git_blob": "5a297220fb6677fe21c25bbecd09740d9dc3b132",
       "truth_level": "unclassified",
       "level": "L3",
       "priority": 25,
       "selection_reason": "Persistently required by the current task state.; Existing file declared by the current task.",
       "selector": "task-required-context,task-file-intent",
-      "estimated_tokens": 17679,
+      "estimated_tokens": 18108,
       "ownership": "project",
       "source_system": null
     },
     {
       "path": "src/worktree-inventory.ts",
       "content_hash": "sha256:0cb3ef5c8e878b64326a3767d5f13117e6d6e697d96a326a5db33d0913979a66",
-      "git_blob": null,
+      "git_blob": "1611f45904e48e8dccfff67cc063c348081bd751",
       "truth_level": "unclassified",
       "level": "L3",
       "priority": 25,
@@ -255,7 +255,7 @@
     {
       "path": "test/compact-handoff-review.test.ts",
       "content_hash": "sha256:0271a82b422fcd228f186f93359b3f56c9a7184be44d9a2e27620c48c8f1a7df",
-      "git_blob": null,
+      "git_blob": "21deb2be15cc876469ec5eb79baf89042c8edd92",
       "truth_level": "unclassified",
       "level": "L3",
       "priority": 25,
@@ -267,72 +267,20 @@
     },
     {
       "path": "test/compact-handoff.test.ts",
-      "content_hash": "sha256:cc89401fbe5b81abc3bfaf4bcd03f1f97a6e8f71dc7f87079bb83aa23b3969a7",
+      "content_hash": "sha256:33b25357560a3f3b4a11ecdd301651ac4a1ac5ccd3753141a12a01306e7675fd",
       "git_blob": null,
       "truth_level": "unclassified",
       "level": "L3",
       "priority": 25,
       "selection_reason": "Persistently required by the current task state.; Existing file declared by the current task.",
       "selector": "task-required-context,task-file-intent",
-      "estimated_tokens": 4961,
-      "ownership": "project",
-      "source_system": null
-    },
-    {
-      "path": "docs/release-checklist.md",
-      "content_hash": "sha256:9c7f34ff35e7f90803bb06b4aa91235e271703f1cf3fce1a6b35e0cd25ffa467",
-      "git_blob": null,
-      "truth_level": "draft",
-      "level": "L3",
-      "priority": 30,
-      "selection_reason": "Existing file declared by the current task.",
-      "selector": "task-file-intent",
-      "estimated_tokens": 2366,
-      "ownership": "project",
-      "source_system": null
-    },
-    {
-      "path": "docs/self-documentation.md",
-      "content_hash": "sha256:095b35ba7a02f64c2f66b67475be4b886a3868c7a1ef0965e4952f30d262c529",
-      "git_blob": null,
-      "truth_level": "draft",
-      "level": "L3",
-      "priority": 30,
-      "selection_reason": "Existing file declared by the current task.",
-      "selector": "task-file-intent",
-      "estimated_tokens": 1400,
-      "ownership": "project",
-      "source_system": null
-    },
-    {
-      "path": "docs/usage.md",
-      "content_hash": "sha256:50f677d6cbbc7a950ad12bef009000d335971dedee9ae200c5b2f4179c03c0db",
-      "git_blob": null,
-      "truth_level": "draft",
-      "level": "L3",
-      "priority": 30,
-      "selection_reason": "Existing file declared by the current task.",
-      "selector": "task-file-intent",
-      "estimated_tokens": 5078,
-      "ownership": "project",
-      "source_system": null
-    },
-    {
-      "path": "examples/compact-handoff/inventory.fixture.json",
-      "content_hash": "sha256:3d1923f2f6bd685f97191e34fda74915d61695182932517aff313d4c76af5477",
-      "git_blob": null,
-      "truth_level": "unclassified",
-      "level": "L3",
-      "priority": 30,
-      "selection_reason": "Existing file declared by the current task.",
-      "selector": "task-file-intent",
-      "estimated_tokens": 61,
+      "estimated_tokens": 5312,
       "ownership": "project",
       "source_system": null
     },
     {
       "path": "ROADMAP.md",
-      "content_hash": "sha256:9fd9f006be4a59f3c89975cdb9616ce90d9a3b39ee4f2eadc57ba2647b12e1b6",
+      "content_hash": "sha256:71203b02fb3d7b7c361932bb6e0d0acf09160749cee3189e4e523382e7b0788c",
       "git_blob": null,
       "truth_level": "draft",
       "level": "L3",
@@ -344,9 +292,61 @@
       "source_system": null
     },
     {
+      "path": "docs/release-checklist.md",
+      "content_hash": "sha256:e82992fc8380962d1e8baa8ae154c8beb9a42ab0912f270637bd927b1b351ccd",
+      "git_blob": null,
+      "truth_level": "draft",
+      "level": "L3",
+      "priority": 30,
+      "selection_reason": "Existing file declared by the current task.",
+      "selector": "task-file-intent",
+      "estimated_tokens": 2480,
+      "ownership": "project",
+      "source_system": null
+    },
+    {
+      "path": "docs/self-documentation.md",
+      "content_hash": "sha256:07e02026b33f49423e64f6ba861e1c8b056569f6cadc405c89ba7a91e1f053d2",
+      "git_blob": null,
+      "truth_level": "draft",
+      "level": "L3",
+      "priority": 30,
+      "selection_reason": "Existing file declared by the current task.",
+      "selector": "task-file-intent",
+      "estimated_tokens": 1446,
+      "ownership": "project",
+      "source_system": null
+    },
+    {
+      "path": "docs/usage.md",
+      "content_hash": "sha256:5c08955057b1bf3f9d2d08151d3be285b6890f91040b805d9b18f0d2b1b7b972",
+      "git_blob": "b36621363a95cb7199013f7ed5b4556b68c4a661",
+      "truth_level": "draft",
+      "level": "L3",
+      "priority": 30,
+      "selection_reason": "Existing file declared by the current task.",
+      "selector": "task-file-intent",
+      "estimated_tokens": 6202,
+      "ownership": "project",
+      "source_system": null
+    },
+    {
+      "path": "examples/compact-handoff/inventory.fixture.json",
+      "content_hash": "sha256:3d1923f2f6bd685f97191e34fda74915d61695182932517aff313d4c76af5477",
+      "git_blob": "005403179708480771cfb028538413c88dd6575a",
+      "truth_level": "unclassified",
+      "level": "L3",
+      "priority": 30,
+      "selection_reason": "Existing file declared by the current task.",
+      "selector": "task-file-intent",
+      "estimated_tokens": 61,
+      "ownership": "project",
+      "source_system": null
+    },
+    {
       "path": "schemas/handoff.schema.json",
       "content_hash": "sha256:858b75104c5aa6d2bfcf574a55cd4077466476899a5ff7f85f2391ddd518d3eb",
-      "git_blob": null,
+      "git_blob": "974875de2c38e6b6a436b575ff477b6836e32bb0",
       "truth_level": "unclassified",
       "level": "L3",
       "priority": 30,
@@ -359,7 +359,7 @@
     {
       "path": "schemas/worktree-inventory.schema.json",
       "content_hash": "sha256:6be6ad3cda004374255818e35400d9674a135f57f84959141c44cfc74c581e37",
-      "git_blob": null,
+      "git_blob": "6d209e4d73f323b6483d5431ff99e1d2db7ee4cf",
       "truth_level": "unclassified",
       "level": "L3",
       "priority": 30,
@@ -371,21 +371,21 @@
     },
     {
       "path": "src/cli.ts",
-      "content_hash": "sha256:a5005bb4381cff4c40b1b29bf1d6e2fd522a8dbf8c79e49214cfe8147b6aefa1",
-      "git_blob": null,
+      "content_hash": "sha256:a6a6c976898cc9474d7afc8f757e02837c835d6f78fc57fb5133a197f7e01a5c",
+      "git_blob": "3fdb3c8f4e4a718576f1c40e0675a7c0dee7c64d",
       "truth_level": "unclassified",
       "level": "L3",
       "priority": 30,
       "selection_reason": "Existing file declared by the current task.",
       "selector": "task-file-intent",
-      "estimated_tokens": 9857,
+      "estimated_tokens": 9937,
       "ownership": "project",
       "source_system": null
     },
     {
       "path": "test/handoff.test.ts",
       "content_hash": "sha256:66b9c430a9a0d7dda5f1c0830a09e76cc5adcce7ecb9ba3afcd264710e8673b7",
-      "git_blob": null,
+      "git_blob": "c9b8104b363f8258e2c70d3599d45d8448ce526a",
       "truth_level": "unclassified",
       "level": "L3",
       "priority": 30,
@@ -398,7 +398,7 @@
     {
       "path": ".agent-context/tasks/T-COMPACT-HANDOFF-001/handoff.yaml",
       "content_hash": "sha256:44d93b45dc1f68200ad6aff5b090e0953f579b1bf99b018938c45ee911a6e18d",
-      "git_blob": null,
+      "git_blob": "60e8aab667f11e385e6822f7f497ddc3433b53ad",
       "truth_level": "active-snapshot",
       "level": "L4",
       "priority": 40,
@@ -411,5 +411,5 @@
   ],
   "omissions": [],
   "raw_transcripts_included": false,
-  "lock_hash": "sha256:f39e3dae18c5b914c4f275148ba1f69bbaf96ae36187e930c1355a00491e9530"
+  "lock_hash": "sha256:54b88f43a1e644b08e87bedf9ea35de79c45c80bd0625b1716cbfd4eff87c9c6"
 }

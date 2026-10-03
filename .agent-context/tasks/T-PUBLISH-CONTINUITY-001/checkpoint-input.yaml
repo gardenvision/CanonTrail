@@ -1,0 +1,29 @@
+completed:
+  - Preserved the exact starting source and 31 historical locks and archive files.
+  - Integrated public main corrections with compact handoffs task drafts and checked shader/module context.
+  - Updated only the fast-uri lock from 3.1.6 to 3.1.8 and reconciled third-party inventory.
+  - Passed fresh Windows installation typecheck build 823 tests with 13 explicit skips audit validation documentation audit and strict repository completion.
+decisions:
+  - statement: Publish the branch for exact hosted checks while retaining independent high-risk review and keeping shared consumer runtimes unchanged.
+    authority: approved
+    source: .agent-context/tasks/T-PUBLISH-CONTINUITY-001/brief.md
+checks:
+  - name: Fresh Windows quality chain
+    status: pass
+    evidence: .agent-context/tasks/T-PUBLISH-CONTINUITY-001/evidence/progress.md
+  - name: Exact hosted matrix
+    status: not-run
+    evidence: Pending branch push; inspect actual GitHub checks rather than transferring older platform receipts.
+blockers:
+  - Independent review is required before the high-risk integration is verified or merged.
+open_questions:
+  - Exact hosted platform results will be observed after branch publication; source records describe the pre-CI snapshot.
+next_safe_action: Inspect the draft branch and exact hosted Windows Linux macOS and Node-floor outcomes; preserve failures and review gates without replacing consumer runtimes.
+do_not_repeat:
+  - Do not rewrite historical evidence to match current sources.
+  - Do not rebuild a shared stable consumer CLI in place or mark earlier reviews as approval of this integration.
+resume_sources:
+  - .agent-context/tasks/T-PUBLISH-CONTINUITY-001/brief.md
+  - .agent-context/tasks/T-PUBLISH-CONTINUITY-001/state.yaml
+  - .agent-context/tasks/T-PUBLISH-CONTINUITY-001/change.yaml
+  - .agent-context/tasks/T-PUBLISH-CONTINUITY-001/evidence/progress.md

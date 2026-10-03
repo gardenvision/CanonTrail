@@ -16,10 +16,10 @@ documentation_impact: [ARTIFACT_PROTOCOL.md, docs/usage.md, docs/release-checkli
 file_intents: [src/handoff.ts, src/worktree-inventory.ts, src/resume.ts, src/resume-audit.ts, src/validator.ts, src/cli.ts, src/initializer.ts, schemas/handoff.schema.json, schemas/worktree-inventory.schema.json, test/handoff.test.ts, test/compact-handoff.test.ts, test/compact-handoff-review.test.ts, ARTIFACT_PROTOCOL.md, docs/usage.md, docs/release-checklist.md, docs/self-documentation.md, ROADMAP.md, examples/compact-handoff/README.md, examples/compact-handoff/inventory.fixture.json]
 required_context_sources: [ARTIFACT_PROTOCOL.md, src/handoff.ts, src/worktree-inventory.ts, src/resume.ts, src/resume-audit.ts, src/validator.ts, test/compact-handoff.test.ts, test/compact-handoff-review.test.ts]
 context_sections:
-  - {path: src/initializer.ts, from: 103, to: 120, content_hash: "sha256:26cbdf398bf269a973fdb45e8cbe388bce196f88b02ff7475d15e5e1bd48b349"}
+  - {path: src/initializer.ts, from: 104, to: 121, content_hash: "sha256:569bc66b69c6ef4c5a4cd2edb9aa5ef6aac7f0898c016cf52b543ecc5aa3dcd8"}
 parallel_safety: exclusive
 checks:
   - {id: CHECK-QUALITY, command_or_observation: Revision 3 typecheck isolated build and full Windows/Linux suites including raw-byte collision regressions; final structural checks recorded separately., status: pass, evidence_refs: [.agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/precommit-review-r3.md]}
   - {id: CHECK-REVIEW, command_or_observation: Independent continuity-contract review of implementation and counterexamples., status: pending, evidence_refs: []}
 latest_handoff: .agent-context/tasks/T-COMPACT-HANDOFF-001/handoff.yaml
-updated_at: "2026-09-27T08:41:00Z"
+updated_at: "2026-10-03T13:00:00Z"
