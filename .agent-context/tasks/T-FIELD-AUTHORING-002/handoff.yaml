@@ -1,0 +1,174 @@
+handoff_id: H-T-FIELD-AUTHORING-002-20261008194827
+task_id: T-FIELD-AUTHORING-002
+created_at: "2026-10-08T19:48:27Z"
+source_session_id: canontrail-field-friction-20261008
+checkpoint_trigger: phase-transition
+source_provider: codex
+source_context_lock_path: .agent-context/tasks/T-FIELD-AUTHORING-002/evidence/context-locks/d89da90d1fe4fafa334a987671bd4e56d70d8cded43c44c08b022d6150445e73.json
+source_context_lock_hash: sha256:d89da90d1fe4fafa334a987671bd4e56d70d8cded43c44c08b022d6150445e73
+objective: Reduce task documentation authoring and evidence-copy friction while preserving repository safety and explicit coordination authority.
+completed:
+  - Implemented complete draft authoring schema choice diagnostics and immutable historical document snapshots.
+  - Executed 82 focused cases and full exact-source Windows and native Linux regressions.
+  - Recorded optional external coordinator rules without granting peer-message or resource-expiry authority.
+  - Preserved all 155 old task files and both shared runtime hashes; no consumer update.
+decisions:
+  - statement: Limit implementation to the maintainer-authorized authoring/provenance and coordinator guidance scope; retain strict global indexing.
+    authority: delegated
+    source: Maintainer's October 8 field-feedback improvement request; scope recorded in the task brief.
+  - statement: Author checks do not close new high-risk independent review or authorize rollout and publication.
+    authority: provisional
+    source: ARTIFACT_PROTOCOL.md and this task's pending change review.
+files:
+  - path: .agent-context/tasks/T-FIELD-AUTHORING-002/brief.md
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: .agent-context/tasks/T-FIELD-AUTHORING-002/change.yaml
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: .agent-context/tasks/T-FIELD-AUTHORING-002/evidence/author-review.md
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: .agent-context/tasks/T-FIELD-AUTHORING-002/evidence/quality.json
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: .agent-context/tasks/T-FIELD-AUTHORING-002/evidence/verification.md
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: .agent-context/tasks/T-FIELD-AUTHORING-002/report.md
+    state: created
+    summary: Small current result and next action; detailed raw receipts remain external.
+  - path: .agent-context/tasks/T-FIELD-AUTHORING-002/state.yaml
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: ARTIFACT_PROTOCOL.md
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: ROADMAP.md
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: docs/finding-codes.md
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: docs/parallel-work.md
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: docs/self-documentation.md
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: docs/usage.md
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: examples/document-authoring/README.md
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: package-lock.json
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: schemas/document-snapshot.schema.json
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: src/agent-guide.ts
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: src/cli.ts
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: src/document-authoring.ts
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: src/document-snapshot.ts
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: src/initializer.ts
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: src/schema-diagnostics.ts
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: src/validator.ts
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: test/document-authoring.test.ts
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: test/document-fixture.ts
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: test/document-snapshot.test.ts
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: test/schema-diagnostics.test.ts
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+checks:
+  - name: Focused authoring snapshot and diagnostics
+    status: pass
+    evidence: 82 of 82; see task evidence quality summary.
+  - name: Full Windows and Linux regressions
+    status: pass
+    evidence: Windows 945 pass 13 skip; Linux 951 pass 7 skip; 958 cases on each exact-source copy.
+  - name: Strict global project health
+    status: fail
+    evidence: 19 LOCK004 source drifts in three untouched peer tasks; see verification.
+  - name: New high-risk independent review
+    status: not-run
+    evidence: No approval or human waiver recorded.
+blockers:
+  - New high-risk independent review is pending; no verified or release claim.
+  - Strict project health still reports preserved peer drift; do not edit old receipts to hide it.
+open_questions:
+  - Task-local working-index isolation remains the next separate contract.
+  - Consumer rollout and macOS verification need their own evidence and authority.
+next_safe_action: Review the exact new document-authoring snapshot and diagnostic boundary independently from this task's report and raw manifest; preserve old tasks and installed runtimes, then design task-local working-index isolation without relaxing global dependency or release safety.
+do_not_repeat:
+  - Do not build in the shared source checkout or modify consumer projects.
+  - Do not rewrite old peer locks or receipts to force global success.
+  - Do not use predecessor approval or peer messages as new user permission.
+resume_sources:
+  - AGENTS.md
+  - .agent-context/tasks/T-FIELD-AUTHORING-002/state.yaml
+  - .agent-context/tasks/T-FIELD-AUTHORING-002/brief.md
+  - .agent-context/tasks/T-FIELD-AUTHORING-002/change.yaml
+  - VISION.md
+  - examples/feature-save-schema/project-doc.md
+  - examples/resume-history/README.md
+  - ARTIFACT_PROTOCOL.md
+  - docs/parallel-work.md
+  - .agent-context/tasks/T-FIELD-AUTHORING-002/evidence/author-review.md
+  - .agent-context/tasks/T-FIELD-AUTHORING-002/evidence/quality.json
+  - .agent-context/tasks/T-FIELD-AUTHORING-002/evidence/verification.md
+  - .agent-context/tasks/T-FIELD-AUTHORING-002/report.md
+  - docs/usage.md
+  - schemas/artifact-header.schema.json
+  - schemas/change-record.schema.json
+  - schemas/task-state.schema.json
+  - src/cli.ts
+  - src/continuity-files.ts
+  - src/indexer.ts
+  - src/task-create.ts
+  - src/validator.ts
+  - test/document-authoring.test.ts
+  - test/document-snapshot.test.ts
+  - test/schema-diagnostics.test.ts
+  - test/task-create.test.ts
+  - ROADMAP.md
+  - docs/finding-codes.md
+  - docs/self-documentation.md
+  - examples/document-authoring/README.md
+  - package-lock.json
+  - schemas/document-snapshot.schema.json
+  - src/agent-guide.ts
+  - src/document-authoring.ts
+  - src/document-snapshot.ts
+  - src/initializer.ts
+  - src/schema-diagnostics.ts
+  - test/document-fixture.ts
+  - .agent-context/tasks/T-FIELD-AUTHORING-002/context.lock.json
+worktree_dirty: true
+uncommitted_summary: New authoring and snapshot code tests schema and guidance are uncommitted on codex/field-friction-20261008. Old task receipts and shared runtimes are unchanged. No publication or consumer rollout.
+worktree_inventory:
+  path: .agent-context/tasks/T-FIELD-AUTHORING-002/evidence/worktree-inventories/80a9ea5df4061697b1d990666d6dc1bb1dbf939f83c31508594a0bea7ac8dbd0.worktree-inventory.json
+  content_hash: sha256:80a9ea5df4061697b1d990666d6dc1bb1dbf939f83c31508594a0bea7ac8dbd0
+  entry_count: 30
+handoff_hash: sha256:0eefccd5705d2d4c40fae94e759c0eff9c682ea8a593fe45abf083a2eb8baa58

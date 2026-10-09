@@ -1,0 +1,21 @@
+completed:
+  - Implemented byte-exact no-link continuity reads and writes with complete deterministic output preflight.
+  - Added fail-closed Git diagnostics, unbound archived-handoff auditing, current-source preflight and clearer human reports.
+  - Recorded all 29 new regression cases; the first 16 failed before the fix. The final 772-case Linux suite passes 766 with 6 capability skips.
+  - Completed the full Windows r2 suite with the unchanged default 15-second limit; 759 passed and 13 platform skips, 772 total in 37 files. Typecheck and isolated build pass on both systems.
+  - Corrected the synthetic worked example after a stronger byte-parser regression exposed noncanonical spacing; no historical evidence was reformatted.
+  - Preserved tracked historical artifacts, reviewed archives, original packages and the shared stable runtime; updated protocol and task records.
+decisions:
+  - statement: Address the remaining review findings in a separate high-risk task without consumer rollout or automatic Git configuration changes.
+    authority: approved
+    source: .agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/brief.md
+blockers:
+  - Independent approval of the new correction and exact-revision hosted macOS CI remain open; old R3 approval does not cover new bytes.
+open_questions:
+  - Arrange a specifically authorized independent review and exact-revision hosted CI before publication or consumer rollout; no review waiver has been granted.
+next_safe_action: Validate this handoff and prepare receiving context, read evidence/verification.md and the closure receipt, then arrange authorized independent review of these exact corrected bytes and revision-bound hosted macOS CI without changing the stable consumer runtime or old evidence.
+do_not_repeat:
+  - Do not rebuild candidate/dist or mutate consumer projects. The shared runtime intentionally remains f2f9554.
+  - Do not rewrite historical archives or claim that self-hashes authenticate approval.
+  - Do not infer independent approval, a human waiver, commit, push or publication from author tests.
+  - Do not claim crash-atomic writes or security against hostile concurrent filesystem changes; exclusive stable-tree access remains required.

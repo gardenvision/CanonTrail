@@ -1,0 +1,31 @@
+completed:
+  - Implemented complete draft authoring schema choice diagnostics and immutable historical document snapshots.
+  - Executed 82 focused cases and full exact-source Windows and native Linux regressions.
+  - Recorded optional external coordinator rules without granting peer-message or resource-expiry authority.
+  - Preserved all 155 old task files and both shared runtime hashes; no consumer update.
+decisions:
+  - {statement: Limit implementation to the maintainer-authorized authoring/provenance and coordinator guidance scope; retain strict global indexing., authority: delegated, source: Maintainer's October 8 field-feedback improvement request; scope recorded in the task brief.}
+  - {statement: Author checks do not close new high-risk independent review or authorize rollout and publication., authority: provisional, source: ARTIFACT_PROTOCOL.md and this task's pending change review.}
+files:
+  - {path: .agent-context/tasks/T-FIELD-AUTHORING-002/report.md, state: created, summary: Small current result and next action; detailed raw receipts remain external.}
+checks:
+  - {name: Focused authoring snapshot and diagnostics, status: pass, evidence: 82 of 82; see task evidence quality summary.}
+  - {name: Full Windows and Linux regressions, status: pass, evidence: Windows 945 pass 13 skip; Linux 951 pass 7 skip; 958 cases on each exact-source copy.}
+  - {name: Strict global project health, status: fail, evidence: 19 LOCK004 source drifts in three untouched peer tasks; see verification.}
+  - {name: New high-risk independent review, status: not-run, evidence: No approval or human waiver recorded.}
+blockers:
+  - New high-risk independent review is pending; no verified or release claim.
+  - Strict project health still reports preserved peer drift; do not edit old receipts to hide it.
+open_questions:
+  - Task-local working-index isolation remains the next separate contract.
+  - Consumer rollout and macOS verification need their own evidence and authority.
+next_safe_action: Review the exact new document-authoring snapshot and diagnostic boundary independently from this task's report and raw manifest; preserve old tasks and installed runtimes, then design task-local working-index isolation without relaxing global dependency or release safety.
+do_not_repeat:
+  - Do not build in the shared source checkout or modify consumer projects.
+  - Do not rewrite old peer locks or receipts to force global success.
+  - Do not use predecessor approval or peer messages as new user permission.
+resume_sources:
+  - .agent-context/tasks/T-FIELD-AUTHORING-002/report.md
+  - .agent-context/tasks/T-FIELD-AUTHORING-002/evidence/verification.md
+  - .agent-context/tasks/T-FIELD-AUTHORING-002/evidence/author-review.md
+uncommitted_summary: New authoring and snapshot code tests schema and guidance are uncommitted on codex/field-friction-20261008. Old task receipts and shared runtimes are unchanged. No publication or consumer rollout.

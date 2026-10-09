@@ -581,6 +581,7 @@ export function formatDocumentationAudit(report: DocumentationAuditReport): stri
   }
   for (const finding of report.findings) {
     lines.push(`${finding.severity.toUpperCase()} ${finding.code} [${finding.category}]${finding.path ? ` ${finding.path}` : ""}: ${finding.message}`);
+    if (finding.detail) lines.push(`  ${finding.detail}`);
   }
   return lines.join("\n");
 }

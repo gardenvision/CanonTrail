@@ -31,6 +31,15 @@ async function lock(f: Awaited<ReturnType<typeof fixture>>) {
 }
 
 describe("exact bounded context excerpts", () => {
+  it("explains task-free preparation before the first lock without claiming selection", async () => {
+    const f = await fixture();
+    await rm(path.join(f.root, f.base, "context.lock.json"));
+    await expect(excerptContextSource({ root: f.root, source: "docs/source.md", from: 1, to: 2, taskId: "T-A" }))
+      .rejects.toThrow("run context excerpt without --task");
+    const first = await excerptContextSource({ root: f.root, source: "docs/source.md", from: 1, to: 2 });
+    expect(first.lock_selection).toBeNull(); expect(first.writes_performed).toBe(false);
+    await expect(readFile(path.join(f.root, f.base, "context.lock.json"))).rejects.toThrow();
+  });
   it.each(["\n", "\r\n", "\r"])("preserves UTF-8, BOM, blank lines and %j delimiters", async newline => {
     const text = "\ufeff# Ä" + newline + "" + newline + "草🌱" + newline + "end";
     const f = await fixture(text);

@@ -1,0 +1,283 @@
+{
+  "task_id": "T-AGENT-GUIDANCE-STATUS-001",
+  "agent_run_id": null,
+  "created_at": "2026-10-03T19:44:34.694Z",
+  "context_index_hash": "sha256:7df97b955ee7a893f708019aa3e578e33e4e6d47a9bbb12ca9cd09cc3a93203d",
+  "base_revision": "be191bafa4af1b5597384d36d42a6de520549673",
+  "budget": {
+    "total_tokens": 80000,
+    "reserved_output_tokens": 12000,
+    "reserved_input_tokens": 2048,
+    "estimated_input_tokens": 65273
+  },
+  "sources": [
+    {
+      "path": "AGENTS.md",
+      "content_hash": "sha256:d28858d55c21d71e53d259afd2afb17eebd61a272b418efd1f2b269abac94e0b",
+      "git_blob": "72afc67b5121eae227a2126b3277e31b5db0db13",
+      "truth_level": "canonical",
+      "level": "L0",
+      "priority": 0,
+      "selection_reason": "Repository governing instructions.",
+      "selector": "governing-instructions",
+      "estimated_tokens": 1451,
+      "ownership": "project",
+      "source_system": null
+    },
+    {
+      "path": ".agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/state.yaml",
+      "content_hash": "sha256:2014b0e65c71ccec4c8752cce9b3e86de35a407a3da3d99c848f31d16ee940a9",
+      "git_blob": null,
+      "truth_level": "active-snapshot",
+      "level": "L0",
+      "priority": 1,
+      "selection_reason": "Current task objective, acceptance criteria, and file intents.",
+      "selector": "task-state",
+      "estimated_tokens": 541,
+      "ownership": "project",
+      "source_system": null
+    },
+    {
+      "path": ".agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/brief.md",
+      "content_hash": "sha256:a2f1845f003b25235e54aaca5af5e75ae13a9d6e4f71dab9c8f92545ae831cad",
+      "git_blob": null,
+      "truth_level": "active-snapshot",
+      "level": "L0",
+      "priority": 2,
+      "selection_reason": "Current task brief.",
+      "selector": "task-brief",
+      "estimated_tokens": 545,
+      "ownership": "project",
+      "source_system": null
+    },
+    {
+      "path": ".agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/change.yaml",
+      "content_hash": "sha256:95e2565e904f897fd1db3e724835915b995dd33477167c85d3acf4ba5a7649d9",
+      "git_blob": null,
+      "truth_level": "active-snapshot",
+      "level": "L0",
+      "priority": 3,
+      "selection_reason": "Current change decision and acceptance oracle.",
+      "selector": "task-change",
+      "estimated_tokens": 1314,
+      "ownership": "project",
+      "source_system": null
+    },
+    {
+      "path": "VISION.md",
+      "content_hash": "sha256:83a88277367d21d27d3d7fa53e2a915138ef9d62ef39a6999a83b3bb9361f987",
+      "git_blob": "5d84c81f54ea344e3dddbac9f6a397e482bab107",
+      "truth_level": "canonical",
+      "level": "L1",
+      "priority": 9,
+      "selection_reason": "Weak routing metadata matched 1 normalized semantic task term.; Persistently required by the current task state.",
+      "selector": "metadata-routing,task-required-context",
+      "estimated_tokens": 2079,
+      "ownership": "project",
+      "source_system": null
+    },
+    {
+      "path": "docs/decisions/0001-typescript-cli.md",
+      "content_hash": "sha256:d561b67300f1fa0db00cf6cdcf0c9023d9e8c6daac831a39cfba87d8a98d7180",
+      "git_blob": "29ee81515e704beb57885b22a2424a28ce8bb018",
+      "truth_level": "canonical",
+      "level": "L1",
+      "priority": 9,
+      "selection_reason": "Weak routing metadata matched 1 normalized semantic task term.",
+      "selector": "metadata-routing",
+      "estimated_tokens": 536,
+      "ownership": "project",
+      "source_system": null
+    },
+    {
+      "path": "docs/parallel-work.md",
+      "content_hash": "sha256:a37b214f0316b7522570fc26cf91652f9c991074693414b05b03b7ef7d1d9df9",
+      "git_blob": "75e5262be56c314337508897ad94457b7a824f7f",
+      "truth_level": "design-target",
+      "level": "L1",
+      "priority": 14,
+      "selection_reason": "Weak routing metadata matched 1 normalized semantic task term.",
+      "selector": "metadata-routing",
+      "estimated_tokens": 1340,
+      "ownership": "project",
+      "source_system": null
+    },
+    {
+      "path": "integrations/gsd/canontrail/skills/canontrail-finalize/SKILL.md",
+      "content_hash": "sha256:2ea4fa240f9c5af18272cd2e3eb9fd851bb8a56ec5f40723fdc60dd6dd43cddd",
+      "git_blob": "9022fccbbd30c52fa8c6674e8a0a89f7dfc26944",
+      "truth_level": "design-target",
+      "level": "L1",
+      "priority": 14,
+      "selection_reason": "Weak routing metadata matched 1 normalized semantic task term.",
+      "selector": "metadata-routing",
+      "estimated_tokens": 650,
+      "ownership": "project",
+      "source_system": null
+    },
+    {
+      "path": "integrations/superpowers/skills/canontrail-feature-lifecycle/SKILL.md",
+      "content_hash": "sha256:70215fcc77952fb26b660908819b0a7a8126684d6441a0b11ecef44696f778e5",
+      "git_blob": "6b84f965131a652d426205a44f533335482711b3",
+      "truth_level": "design-target",
+      "level": "L1",
+      "priority": 14,
+      "selection_reason": "Weak routing metadata shared 2 normalized semantic task terms, but no single routing entry or complete system name established a strong match.",
+      "selector": "metadata-routing",
+      "estimated_tokens": 798,
+      "ownership": "project",
+      "source_system": null
+    },
+    {
+      "path": "ARTIFACT_PROTOCOL.md",
+      "content_hash": "sha256:d741f9c16fc6a43fdad4dc38e32e39591503b4e07a7c1e2552abd01853abf388",
+      "git_blob": "cee31117705ea11adcf390ed7577ee83a661a4a8",
+      "truth_level": "design-target",
+      "level": "L3",
+      "priority": 25,
+      "selection_reason": "Persistently required by the current task state.; Existing file declared by the current task.",
+      "selector": "task-required-context,task-file-intent",
+      "estimated_tokens": 24492,
+      "ownership": "project",
+      "source_system": null
+    },
+    {
+      "path": "docs/usage.md",
+      "content_hash": "sha256:416f4874bf1f79c6cfcff088be62547ff03788713417e99705572756cc3da77a",
+      "git_blob": "24f57e12032ca81dc9f5df92958c3988d1e32bc2",
+      "truth_level": "draft",
+      "level": "L3",
+      "priority": 25,
+      "selection_reason": "Persistently required by the current task state.; Existing file declared by the current task.",
+      "selector": "task-required-context,task-file-intent",
+      "estimated_tokens": 6364,
+      "ownership": "project",
+      "source_system": null
+    },
+    {
+      "path": "schemas/change-record.schema.json",
+      "content_hash": "sha256:a1e14d748c78d41ed82d3b42f0750a5dcd7139c93c6af31a40aee5bd98e0d015",
+      "git_blob": "b3234f2efd3508e4dd938a40b874803710619a33",
+      "truth_level": "unclassified",
+      "level": "L3",
+      "priority": 25,
+      "selection_reason": "Persistently required by the current task state.",
+      "selector": "task-required-context",
+      "estimated_tokens": 3578,
+      "ownership": "project",
+      "source_system": null
+    },
+    {
+      "path": "schemas/task-state.schema.json",
+      "content_hash": "sha256:89e18a925be4e783d0cf37c7a387abce2301e3e5d74af36e33bdff424e8e9b33",
+      "git_blob": "13bf863b544109e654caf8257512fbef50922b99",
+      "truth_level": "unclassified",
+      "level": "L3",
+      "priority": 25,
+      "selection_reason": "Persistently required by the current task state.",
+      "selector": "task-required-context",
+      "estimated_tokens": 1474,
+      "ownership": "project",
+      "source_system": null
+    },
+    {
+      "path": "src/cli.ts",
+      "content_hash": "sha256:a6a6c976898cc9474d7afc8f757e02837c835d6f78fc57fb5133a197f7e01a5c",
+      "git_blob": "3fdb3c8f4e4a718576f1c40e0675a7c0dee7c64d",
+      "truth_level": "unclassified",
+      "level": "L3",
+      "priority": 25,
+      "selection_reason": "Persistently required by the current task state.; Existing file declared by the current task.",
+      "selector": "task-required-context,task-file-intent",
+      "estimated_tokens": 9937,
+      "ownership": "project",
+      "source_system": null
+    },
+    {
+      "path": "src/continuity-files.ts",
+      "content_hash": "sha256:7141a036de7b0cae3a0f5dbd6a76a957fd2d1bb153bc650c4aacfc3138290b42",
+      "git_blob": "7c69537f430542f27f424b2131cba7b3cd2f4ebd",
+      "truth_level": "unclassified",
+      "level": "L3",
+      "priority": 25,
+      "selection_reason": "Persistently required by the current task state.",
+      "selector": "task-required-context",
+      "estimated_tokens": 1154,
+      "ownership": "project",
+      "source_system": null
+    },
+    {
+      "path": "src/finalize.ts",
+      "content_hash": "sha256:c11f5aa1902edd498009017d4ebfb4bec12bff8d051b6c024473dc2db49452bd",
+      "git_blob": "00687e59fa6e2d8323468df21ee6856001d74911",
+      "truth_level": "unclassified",
+      "level": "L3",
+      "priority": 25,
+      "selection_reason": "Persistently required by the current task state.",
+      "selector": "task-required-context",
+      "estimated_tokens": 3848,
+      "ownership": "project",
+      "source_system": null
+    },
+    {
+      "path": "README.md",
+      "content_hash": "sha256:2800afd85cc36ac1ff4d5886000bfbe6dea9a6ecbbb9d451ac8a5d95d035c528",
+      "git_blob": "e5849e1fa377110ab8e5f097695fb062a00f8fa8",
+      "truth_level": "draft",
+      "level": "L3",
+      "priority": 30,
+      "selection_reason": "Existing file declared by the current task.",
+      "selector": "task-file-intent",
+      "estimated_tokens": 3037,
+      "ownership": "project",
+      "source_system": null
+    },
+    {
+      "path": "ROADMAP.md",
+      "content_hash": "sha256:01f458388da2b01842ca06c7fd255c1f809ae1a1937d6029d1d431f63c673e7a",
+      "git_blob": "1dd8bbfd401857290286c87e79fd319e33935410",
+      "truth_level": "draft",
+      "level": "L3",
+      "priority": 30,
+      "selection_reason": "Existing file declared by the current task.",
+      "selector": "task-file-intent",
+      "estimated_tokens": 2135,
+      "ownership": "project",
+      "source_system": null
+    }
+  ],
+  "omissions": [
+    {
+      "candidate": ".agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/handoff.yaml",
+      "reason": "No handoff exists for this task yet.",
+      "required": false
+    },
+    {
+      "candidate": "docs/self-documentation.md",
+      "reason": "Optional candidate needs 1600 estimated tokens and does not fit after reserving 0 for later required sources.",
+      "required": false
+    },
+    {
+      "candidate": "examples/agent-guidance/README.md",
+      "reason": "File intent does not exist yet; it may be a planned output.",
+      "required": false
+    },
+    {
+      "candidate": "src/agent-guide.ts",
+      "reason": "File intent does not exist yet; it may be a planned output.",
+      "required": false
+    },
+    {
+      "candidate": "src/task-status.ts",
+      "reason": "File intent does not exist yet; it may be a planned output.",
+      "required": false
+    },
+    {
+      "candidate": "test/agent-guidance-status.test.ts",
+      "reason": "File intent does not exist yet; it may be a planned output.",
+      "required": false
+    }
+  ],
+  "raw_transcripts_included": false,
+  "lock_hash": "sha256:3a3d19aaa3dd5e4bda12204765129f6a643372342e1774497a9523df7e0ac948"
+}

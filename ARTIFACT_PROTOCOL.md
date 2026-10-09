@@ -1,6 +1,6 @@
 ---
 topic_id: artifact-protocol
-stand: "2026-09-06"
+stand: "2026-10-08"
 status: design-target
 truth_level: design-target
 verification:
@@ -11,8 +11,15 @@ verification:
     - schemas/compatibility.schema.json
     - schemas/context-lock.schema.json
     - schemas/evidence-record.schema.json
+    - schemas/document-snapshot.schema.json
+    - src/document-authoring.ts
+    - src/document-snapshot.ts
     - schemas/task-state.schema.json
     - schemas/handoff.schema.json
+    - schemas/worktree-inventory.schema.json
+    - src/worktree-inventory.ts
+    - test/compact-handoff.test.ts
+    - test/compact-handoff-review.test.ts
     - src/context.ts
     - test/context.test.ts
     - src/handoff.ts
@@ -302,6 +309,8 @@ The initial compiler uses this deterministic selector order:
 
 Selection requires a fresh deterministic context index. Index regeneration preflights governed documents and schemas but does not let an expected stale prior lock block the new index; normal repository validation still checks every active lock. Sources are ordered by stable priority and path. The initial token estimate is `ceil(UTF-8 bytes / 4)`, with the output/tool reserve and input safety reserve subtracted before selection. New compilations default to a 1,024-token input safety reserve; callers MAY set another non-negative deterministic amount. Existing locks without the additive field remain readable with a historical safety value of zero. Space for every later required source is reserved before an optional source may be selected. If the complete required set does not fit, compilation MUST fail before replacing an existing lock. A path declared in `required_context_sources` MUST already exist as a supported, non-excluded repository text source; missing, unsafe, excluded, unsupported, or over-budget required sources fail before an existing lock is replaced. Missing, excluded, unsupported, planned, or over-budget optional candidates MUST appear in sorted omissions with a reason.
 
+The explicit text allow-list includes module sources `.mjs`/`.cjs` and shader sources `.hlsl`, `.glsl`, `.shader`, `.compute`, `.cginc`. New whole-file and section compilations and saved-preview application MUST bound these module/shader source formats to 8 MiB, require valid UTF-8 without NUL, and preserve exact bytes for hashing. Invalid required sources fail before replacing the working lock; an invalid optional candidate remains a visible omission. This is not automatic discovery, execution or canonical authority. Ambiguous binary-capable engine formats such as `.asset`, `.prefab` and `.unity` remain outside this allow-list. `.mjs` was already supported on the earlier public-main baseline without this whole-file policy: the owner explicitly accepted applying these stricter limits to new `.mjs` compilations and saved-preview application as a compatibility tightening. Other previously supported whole-file extensions retain their earlier encoding policy. Historical locks are not rewritten or retroactively subjected to this new format policy, and stored artifact shapes are unchanged.
+
 The chosen task-owned context-lock output MUST NOT be an input to the same compilation. Identity includes platform-equivalent path case and filesystem aliases of an existing output, not only literal path strings. A legacy `file_intents` entry that names that output is ignored and recorded as an explicit optional omission, whether or not an older lock already exists. Naming the output through `required_context_sources` or an explicit `--include` is a circular hard requirement and MUST fail before an existing lock is replaced.
 
 Cross-task context-lock dependencies MUST remain acyclic. Before adding another task lock through `required_context_sources` or `--include`, the compiler traverses its recorded task-lock sources and fails before write if the chain returns to the current output. The same cycle reached only through optional `file_intents` is omitted with the deterministic dependency chain instead of failing the compilation. This rule prevents previous or mutually dependent lock bytes from making a replacement stale immediately; it does not rewrite historical locks or reject an acyclic one-way dependency.
@@ -328,6 +337,8 @@ The first context lock is a bounded starting view, not a declaration that no oth
 
 The current compiler implements deterministic initial routing, task ownership, persistent required sources, file intents, explicit includes, and handoff selection. Richer selector languages, autonomous multi-step retrieval, and semantic discovery remain future capabilities and MUST NOT be inferred from this protocol.
 
+The compile report MUST show the estimated cost of every required source, its selector and category, sorted largest first with locale-independent code-unit path ordering for ties; the human view MAY show only the five largest while the JSON report retains the complete list. Over-budget failures SHOULD name those largest drivers alongside category totals. This is a diagnostic over the selected candidate bytes, not actual provider-token usage or permission to discard requirements. Report fields MUST NOT change persisted lock bytes, source selection, or authority.
+
 ### 7.1 Read-only inspection and source excerpts
 
 The report-only commands `context inspect` and `context excerpt` use `schemas/context-inspection.schema.json`; they MUST NOT modify a task, lock, source, index, configuration or completion gate. This schema is packaged for report consumers and copied by new initializations, not a new persisted project artifact or a required migration of existing project schemas.
@@ -342,6 +353,8 @@ An excerpt requires an explicit source path and inclusive one-based line range. 
 
 Optional task comparison names the existing lock and whether that exact current whole source is selected. The report itself is NOT automatic partial-lock coverage, evidence of model reading, semantic sufficiency, or a new canonical document. Saving an excerpt report alone does not make its upstream source an active freshness dependency. For explicit locked section coverage use section 7.2; otherwise require the whole source or recheck its hash. Required sources MUST NOT be silently removed to force a smaller lock.
 
+Before the first lock exists, excerpt creation without `--task` remains available. A requested missing task-lock comparison MUST fail with guidance to use that source-only mode or correct the task identity; it MUST NOT report missing, malformed or inaccessible lock data as successful coverage.
+
 Filesystem checks assume stable local inputs and narrow mutation races; they do not promise atomic snapshots under concurrent path replacement. No new source mutation or external publication is authorized. See `examples/context-inspection/README.md`.
 
 ### 7.2 Explicit source sections (opt-in)
@@ -349,6 +362,8 @@ Filesystem checks assume stable local inputs and narrow mutation races; they do 
 Task state MAY declare `context_sections` entries with exact repository-relative `path`, inclusive one-based `from`/`to`, and the expected full-file SHA-256 `content_hash`. Version 1 permits one contiguous range per unique source. The agent chooses and justifies the range; CanonTrail does not infer semantic boundaries or guarantee sufficient context. Both project task-state and context-lock schemas must explicitly support the fields before compilation or resume; no schema/config is silently rewritten.
 
 A declared section is a required input. It may introduce a source or replace an otherwise optional file-intent/weak-route candidate, but MUST NOT narrow a fully required source: AGENTS, task records, strong canonical routes, persistent whole sources, explicit whole includes, external workflow sources and directly cited task evidence retain whole-file coverage. Control/task artifacts under .agent-context cannot be sectioned. A conflicting request fails with an explicit explanation rather than silently widening, truncating or dropping an input.
+
+When a task-owned `required_context_sources` declaration makes a large file whole-required, the owner MAY first review whether the entire file is genuinely necessary. Only if a specific range is sufficient MAY the owner remove that particular whole-file declaration and record a current hash-bound `context_sections` range, then recompile and inspect the resulting lock. This does not override any other independent whole-file requirement (including strong canonical routing or a direct evidence citation). A larger budget or the full source is required when such a requirement remains. The range choice and any information intentionally left out remain the owner's responsibility; the compiler cannot establish semantic sufficiency.
 
 Source identities use the exact spelling of each on-disk directory entry on every platform. A case alias accepted by Windows or a case-insensitive macOS/Linux volume MUST NOT become a second source identity. Distinct correctly spelled names on a case-sensitive volume remain distinct; implementations MUST NOT enforce identity by blanket lowercasing. Historical source paths are not retrospectively rewritten or re-resolved.
 
@@ -366,19 +381,121 @@ Operational `resume validate` accepts packets only inside their `.agent-context/
 
 See `examples/context-sections/README.md` for byte-reproducible input and lock fields. See `docs/alpha-readiness.md` for this candidate's still-open review and platform gates; opt-in functionality is not an independent approval or a rollout to existing projects. Private historical review records are not part of this distribution.
 
+### 7.3 Explicit task working view (opt-in)
+
+`index --task TASK-ID` is a read-only orientation report, not an update to the
+global index. `context compile --working-index --task TASK-ID` opts into that
+same current working view. Default index generation, validation, documentation
+audit, finalization and repository CI retain their strict behavior. A scoped
+PASS MUST NOT be represented as repository validity, task completion, canonical
+promotion or permission to change another task.
+
+Version 1 starts from a full repository structural preflight without current
+active-source or stored-index freshness checks, preserving every raw diagnostic.
+Static active-lock integrity (including recognized mode, owner identity,
+self-hash, budget, duplicate sources, required-omission checks and the compiler's
+exact repository-relative source-path grammar) MUST remain enabled. Lexical
+identity is checked without current filesystem existence or content freshness;
+backslashes, drive-relative paths, control characters and dot/empty components
+are not missing-source exceptions. Historical terminal locks keep their existing
+path/freshness boundary. Orientation is not permission to overwrite corrupted
+provenance. It may
+exclude only governed Markdown inside an unrelated operational task directory
+whose parsed header positively declares `draft`, `active-snapshot` or `historical`.
+Its owning task MUST also exist with schema-valid matching identity. A folder
+name alone is not evidence of an unrelated operational owner.
+This is a deliberately narrow policy: only that excluded note's `SCHEMA005`
+header error and a `REF001` diagnostic identifying an actually missing local
+target can be isolated. Shared governed documents, canonical/design-target
+truth anywhere, unknown/unparsable authority, unsafe references, duplicate
+identities, structured corruption and unrecognized error codes remain blocking.
+Configured exclusions remain the project's explicit boundary, not an automatic
+quarantine or an assertion that excluded sources are safe.
+Every excluded note's recognized local metadata reference MUST first pass exact
+portable path/physical-identity checks. A diagnostic containing "missing target"
+is not proof that drive-relative, stream, control-character, Git-control or
+otherwise ambiguous identities are safe to isolate.
+
+The relevant-task closure includes the owner, explicit dependencies and the
+existing section-11 schema-defined reference grammar, plus local metadata
+references from every retained governed document. Owners of retained task
+documents MUST enter that closure even without an outgoing metadata link;
+canonical peer truth MUST NOT be selected under a falsely ownerless scope.
+Retained peer metadata may introduce further peers; resolve to a fixed point
+before exclusion. Explicit
+whole-file includes and current selected-source paths also establish scope.
+Ordinary prose/task-ID mentions do not. Referenced peers with missing/invalid
+task identity or uncertain physical spelling fail scope before writes; never
+treat uncertainty as proof of independence. A new owner can establish this
+working view before its first context lock exists.
+
+The report names relevant task IDs, excluded paths/raw-source hashes/declared
+truth, isolated findings, blocking findings and the unchanged full structural
+preflight. `index_written` and `completion_approval` are always false.
+`task-working-index.schema.json` is a packaged report contract copied by new
+initializations, not a persisted approval artifact or mandatory report-schema
+migration for old projects. The view hash domain-binds its task, dependency
+closure, excluded identities and retained document inventory. Do not substitute
+that hash for a global-index hash.
+
+New scoped locks add optional `context_index_scope: task-working`; absence
+retains the old global meaning and hash recipe. The installed context-lock
+schema MUST explicitly support the marker and validate the actual prospective
+payload before even a dry run returns or an apply writes. A permissive old
+schema that merely tolerates unknown keys is insufficient. Synchronization is
+an explicit reviewed consumer operation; no tool copies schemas automatically.
+Section/full-source requirements, budgets, source identity and content checks
+are unchanged. Saved-preview apply and active/current-use validation reconstruct
+scope from today's task, references and selected paths, not report-authored
+exclusions. Recomputed self-hashes cannot waive a genuine required source.
+
+A handoff retains the exact scoped source lock unchanged. Fresh resume creation
+infers the working mode from the verified source-context archive, reconstructs
+current requirements and produces a new receiving lock. Exact receiving-packet
+validation must use that lock's mode rather than silently treating it as global.
+An explicit unknown marker MUST fail integrity and current-use checks even with
+a permissive old installed schema. Known historical scoped receipts may be read
+for retained integrity without asserting today's installed mode capability;
+active scoped locks and current-use receiving validation MUST prove explicit
+compatible installed support and validate the actual payload again. Integrity
+success is never current-use approval. Retained receipts remain historical as
+defined in section 8.1. Raw repository
+errors remain errors: this working route does not extend section-11 completion
+deferral or let a broken note pass integration/CI.
+
+This opt-in path assumes stable exclusive local inputs. Discovery is bounded
+to 100,000 non-excluded filesystem entries; uncertain links/special entries or
+multiply linked governed/task inputs fail closed. Governed Markdown must be
+valid UTF-8, at most 8 MiB and byte-equal to its discovery read. These checks do
+not provide an atomic tree snapshot, relax default scanner policy or infer
+semantic independence. Configure narrow explicit roots/exclusions deliberately
+for a larger repository; failure does not authorize blanket exclusions.
+See `examples/task-working-index/README.md`.
+
 ## 8. Task and session continuity
 
 The provider-neutral entrypoint SHOULD explain CanonTrail's capabilities and first determine whether the arriving session is starting a new task, resuming a validated handoff, continuing an unfinished documentation bootstrap, or performing documentation maintenance. Provider bridges SHOULD route to that entrypoint instead of duplicating these rules.
 
+`canontrail guide` emits concise instructions bundled with the running CLI,
+without reading newer checkout or online documentation. It MUST retain the safe
+receiving-session order and user/project authority boundary. A CLI version label
+alone is not exact build identity, independent review, or permission to update a
+consumer. The guide MUST NOT initialize a target, install host skills, mutate
+schemas, run agents or infer current live session state.
+
 Task state MAY reference an external source system and source artifact. External task IDs are opaque strings; CanonTrail MUST NOT require another tool to adopt CanonTrail's ID format.
+
+`canontrail task create` is an optional draft-authoring convenience, not a scheduler or decision engine. It requires explicit portable task/change identities, objective, acceptance statements, author and provisional risk. It previews exactly three files by default: governed `brief.md`, `state.yaml`, and `change.yaml`. Apply MUST create only a previously nonexistent task directory and MUST NOT merge into or overwrite an existing directory, even an empty one. Initialized configuration, a readable project entrypoint, governed/non-excluded output paths and both shipped and installed task/change/header schemas must pass preflight. No schema or configuration is synchronized automatically. Control paths retain exact portable spelling and no-link checks; stable exclusive filesystem access is required. Exclusive file creation cannot promise a crash-atomic three-file transaction: unexpected I/O failure may leave a partial new draft for explicit inspection, never automatic deletion or overwrite.
+
+Generated state/brief MUST remain `draft`, change `idea`, documentary verification `unverified`, and acceptance/impact/review decisions pending. Caller text is data; no source authority, evidence, owner lease, Git base, context lock, handoff or passing outcome may be invented. The owner must resolve the draft and the section 12 decision/impact gates before implementation. Draft creation itself MUST NOT initialize the project, update its index, run project commands, contact remotes, or perform Git operations. See `examples/task-create/README.md`.
 
 A checkpoint is required at task pause, agent/provider switch, external blocker, phase transition, explicit handoff, or pre-compaction trigger.
 
 A handoff records objective, completed work, decisions and authority, changed/inspected files, checks and evidence, blockers, open questions, dirty-worktree disclosure, do-not-repeat guidance, resume sources, and one concrete next safe action.
 
-`canontrail handoff create` compiles those fields from durable task state, the current task context lock, an optional structured checkpoint input, and local Git status. It is dry-run by default. Apply writes only the task-owned latest `handoff.yaml` and an immutable copy of the source session's exact context lock under task evidence. It does not update task state, compile receiving-session context, commit, push, create worktrees, or write external workflow artifacts.
+`canontrail handoff create` compiles those fields from durable task state, the current task context lock, an optional structured checkpoint input, and local Git status. It is dry-run by default. Apply writes only the task-owned latest `handoff.yaml`, its separate immutable worktree inventory, an immutable copy of the source session's exact context lock, and an explicitly replaced handoff's archive under task evidence. It does not update task state, compile receiving-session context, commit, push, create worktrees, or write external workflow artifacts.
 
-Handoff and checkpoint creation require the target to be a readable local Git worktree because dirty-state disclosure is a required safety input. Validation of an already durable handoff and resume packet does not perform remote operations or require Git network access. Context compilation continues to degrade safely when Git identity is unavailable and records no Git blob/base claim in that case.
+Handoff and checkpoint creation require the target to be the root of a readable local Git worktree because dirty-state disclosure is a required safety input. Git-status paths and task/context paths MUST use the same root. New creation below a Git worktree root is currently unsupported and MUST fail before any artifact writes, including dry-run and checkpoint entry points. A linked Git worktree's own root remains supported. This boundary does not move or reinitialize a nested project, and does not retroactively reject existing durable artifacts. Validation of an already durable handoff and resume packet does not perform remote operations or require Git network access. Context compilation continues to degrade safely when Git identity is unavailable and records no Git blob/base claim in that case.
 
 `canontrail checkpoint create` is the provider-neutral checkpoint entry point. It records the checkpoint trigger and optional source-provider provenance, then delegates to the same handoff creation and validation lifecycle. It does not create a second checkpoint truth artifact. The supported trigger vocabulary is pause, agent switch, provider switch, external blocker, phase transition, explicit handoff, and pre-compaction.
 
@@ -398,6 +515,8 @@ A persisted resume packet is an immutable receipt of one receiving context, not 
 
 Repository validate, documentation audit, index preflight and finalize MUST check every governed packet for retained integrity and provenance. This mode MUST NOT compare historical selected source bytes or requirements with today's task/tree. Their disappearance or later legitimate edits are not corruption of the old receipt. A repository PASS is therefore NOT approval to consume any saved read_order. Current active-context-lock checks, task completion and all unrelated repository gates remain unchanged.
 
+Retained hash-named handoffs under an operational task's `evidence/handoffs/` MUST also be audited even when no packet references them: schema, self-hash/filename, owner, source-lock archive and optional inventory remain required. Historical `resume_sources` are not re-resolved against today's files. A governed task's retained handoff directory cannot silently disappear through a link or scanner exclusion; incomplete archive coverage fails with `HANDOFF008`/`HANDOFF009`. This does not make an old handoff current-use approval.
+
 Retained integrity MUST include packet schema/self-hash, operational task identity, exact hash-derived owner paths for both context archives, archive schemas/task/hash bindings, receiving session/time, budget sums, duplicate sources, required omissions, transcript exclusion, section shape, read order and omissions. Historical selected paths are validated lexically without resolving their old identities against today's filesystem. The original required-source decision cannot be reconstructed from hashes alone; integrity is not producer authentication or proof of original semantic sufficiency.
 
 The packet's handoff projection (including blockers, open questions and do-not-repeat guidance) and the receiving lock's whole-handoff source MUST bind both the handoff self-hash and its exact original byte hash. For retained integrity, an existing exact owning evidence/handoffs/<handoff-hash-hex>.yaml archive takes precedence; only if absent may the matching current handoff supply those bytes. A corrupted archive MUST NOT be hidden by falling back to latest. This permits retained provenance after replacement or removal of latest, including equal semantic hashes with differing YAML serialization. Missing or corrupt bound provenance still fails. Packets and source-session archives MUST NOT be rewritten to repair drift.
@@ -405,6 +524,89 @@ The packet's handoff projection (including blockers, open questions and do-not-r
 The explicit resume validate --packet request MUST additionally validate that exact governed operational packet for current use: current owning task schema and requirements, exact declared sections and full required sources against the receiving archive, current selected byte/range hashes, and the current owning latest handoff. It MUST NOT substitute the historical handoff archive or a valid mutable active lock for these checks. A terminal status, a recompiled active lock or consistently recomputed packet/archive self-hashes grants no exception. The targeted packet must participate in the governed scan, and referenced schema/provenance failures must remain visible in its own result.
 
 Repository JSON reports declare resume_validation.purpose and current_use_packet_path (null for retained integrity); targeted reports declare validation_scope: current-use. Neither command mutates or retires receipts. Current-use approval is a snapshot check, not protection against subsequent concurrent filesystem mutation or authorization for the task's next action beyond the user's/workflow's grant. Non-operational whole-file examples remain structural illustrations, never resumable tasks. See examples/resume-history/README.md for the A/B continuation and rejection contract.
+
+### 8.2 Compact handoffs and complete worktree observations
+
+New handoffs MUST bind a separate `worktree_inventory` by repository-relative `path`, raw-byte SHA-256 `content_hash`, and `entry_count`. The immutable JSON inventory follows `schemas/worktree-inventory.schema.json`: version 1, owning `task_id`, the handoff's `created_at`, and all entries from `git --no-optional-locks status --porcelain=v1 -z --untracked-files=all`. Each entry retains its two-character status, exact destination path and, for rename/copy records, exact original path. Entries are unique by destination and sorted by lexicographic UTF-16 code-unit comparison (JavaScript string `<`/`>`), not Unicode-codepoint/UTF-8-byte order or host locale. The inline `files` list uses that same order. Paths are observations, not instructions to open files; preserve unusual Git names verbatim. Malformed, incomplete, non-UTF-8 or over-limit capture MUST fail, never truncate. The capture limit is 16 MiB. Nonempty Git stderr, including an exit-zero traversal warning, MUST also fail before outputs: a successful process exit alone does not prove a complete status list. Retain the cause in diagnostics without changing global Git settings. These observations represent names reported by Git, not an independent enumeration of all raw filesystem names; platform Git may already have normalized an unrepresentable name.
+
+The exact JSON UTF-8 bytes, including formatting and final newline, determine the hash and owner path `.agent-context/tasks/<task-id>/evidence/worktree-inventories/<hash-hex>.worktree-inventory.json`. Version-1 sidecars MUST round-trip to `JSON.stringify(parsed, null, 2) + "\n"` in their stored member order, with no BOM, duplicate keys or alternate whitespace. Readers MUST reject malformed UTF-8, never replace invalid bytes by U+FFFD. These control paths MUST use exact stored spelling and regular, unlinked files/directories; symbolic links/junctions, filesystem aliases, multiply linked destination files and conflicting existing bytes fail. Exclusive creation preserves prior evidence. The stable-tree limitation applies: this is not an atomic snapshot against concurrent filesystem mutation. Git may summarize submodule state; ignored files, unsaved editor state and file contents are not captured. This is neither a backup nor an assertion of task ownership. Unsigned hashes are integrity bindings, not producer authentication or independent proof that a producer disclosed all changes.
+
+Handoff and resume creation extend the same no-link/exact-spelling checks to their current control inputs and every archive, packet and mutable destination. Existing immutable content is compared as raw bytes, not decoded text. Creation MUST preflight all known collisions, required input/schema failures and unsafe destinations before its first write, including the previous-handoff archive or final receiving packet. It MUST reject a changed/missing selected current source and missing explicit resume input rather than emit an immediately invalid handoff. A new handoff quotes its timestamp scalar for YAML 1.1/1.2 interoperability; valid historical YAML is not reformatted. Legacy context/handoff semantic self-hashes remain semantic bindings, not new raw-byte attestations or authentication.
+
+All control paths are rechecked at use, but exclusive stable filesystem access remains a precondition. Multi-file apply is not a crash-atomic transaction and cannot defeat a hostile concurrent namespace swap. Unexpected I/O failure after preflight may leave immutable receipts; inspect them against their exact hashes and the latest mutable pointer before resuming. Never delete or rehash evidence automatically to force success. Resume publishes immutable receipts before switching its active working lock. No format marker or consistent rehash can turn these unsigned records into authentication.
+
+Transport MUST preserve these exact bytes. In consumer Git repositories, review `.gitattributes` before first staging: `.agent-context/** -text` disables text/EOL normalization for control artifacts, subject to more-specific attributes and configured filters. Selected source files outside that directory also require reviewed byte-preserving transport. `eol=lf` alone normalizes content and cannot preserve an originally CRLF-hashed file. Neither creation nor validation silently edits attributes, renormalizes Git files or repairs historical hashes. Test a fresh checkout with `core.autocrlf=true`; a clean Git status is not proof of raw-byte equality. If conversion occurred, restore proven original bytes and fix the transport policy deliberately, rather than recomputing historical hashes to bless the mismatch. See the consumer checklist in `docs/usage.md` and the protected/unprotected clone tests in `test/compact-handoff-review.test.ts`.
+
+The new handoff's `files` list contains dirty destinations matching locked context or exact task `file_intents` (also matching the old side of a rename), plus explicitly supplied checkpoint files. Directory intents do not recursively claim their contents. Its generated dirty summary records counts instead of duplicating the whole inventory. Explicit human/agent semantic notes and file declarations remain unchanged, never silently truncated. Relevant sets may themselves be large; this change does not promise a universal context limit. The complete inventory MUST remain accessible by its binding even when none of its paths was selected for the task.
+
+Handoff validation/replacement, resume creation, retained packet audit and explicit current-use validation MUST verify inventory bytes, schema, owning task, timestamp, count, dirty flag and hash-derived path. A missing or corrupt sidecar remains blocking even when the compact handoff and packet self-hashes match. Resume rechecks bound provenance before writing its receiving outputs. The inventory is NOT implicitly added to `resume_sources`, `read_order` or the context lock: tools verify it separately; an agent may explicitly load it for a concrete coordination need. Historical observations are not compared to today's dirty tree or rewritten after subsequent changes.
+
+Legacy handoffs without this additive field retain inline-disclosure validation and their exact bytes. New creation MUST preflight both the target's explicit handoff-field support and its worktree-inventory schema against the prospective artifacts before creating archives or replacing the latest handoff. Unsupported schemas require a deliberate reviewed synchronization; no automatic schema rewrite or silent legacy fallback. Fresh init includes both schemas. Old oversized handoffs are not automatically compacted: their owner may create a new checkpoint after reviewing current state, using explicit replacement so the old handoff, source lock and any inventory remain retained. See `examples/compact-handoff/README.md`.
+
+### 8.3 Document draft authoring and immutable snapshots
+
+`canontrail document create` previews exactly one governed Markdown file with
+all required header fields. The caller explicitly supplies destination, topic,
+title, purpose and routing. New output MUST remain `status: draft`,
+`truth_level: draft` and `verification.state: unverified` with no evidence.
+Caller text MUST NOT set authority or lifecycle fields; generated title/purpose
+are JSON-quoted data with fixed Markdown block structure, not a defense against
+all inline markup or model instructions. Apply exclusively creates a previously
+nonexistent file and required parent directories. Existing truth owners,
+including filesystem aliases, MUST NOT be overwritten. Task-control outputs
+require an existing schema-valid owner and cannot use reserved archive paths.
+Both shipped and installed header schemas, exact unlinked portable paths,
+governed scope and exclusions are preflighted. No init, index refresh, schema
+sync, task status update, promotion, project command, Git or remote action is
+implicit. Stable exclusive inputs remain a precondition.
+
+The meaning of a status field is specific to its artifact. For example, evidence
+results, task checks and documentary verification are not one interchangeable
+enum. Schema diagnostics MUST identify the failing instance path and the actual
+allowed enum/constant values when supplied by the validator; they MUST NOT
+weaken a contract or translate an unsupported result into a passing state.
+
+`canontrail document snapshot` is explicit, preview-first historical provenance
+capture for an existing task, not another documentation owner. It MUST preserve
+the source's exact bytes in
+`.agent-context/tasks/<task>/evidence/document-snapshots/<source-hash>.source.bin`
+and a small `<record-hash>.document-snapshot.json` under the same flat archive.
+The record follows `schemas/document-snapshot.schema.json`. It names task,
+historical source path/hash/size, capture time, bounded purpose and exact archive
+path. Capture requires regular, unlinked, exact-spelled portable local Markdown,
+valid UTF-8 without NUL and at most 8 MiB. Source governance/frontmatter is not
+invented. Git/external workflow control sources and configured exclusions remain
+ineligible. The raw preimage is not indexed Markdown, a new canonical truth, a
+passing test or a full-source addition to model context. Old source drift,
+removal or rename MUST NOT corrupt an intact retained snapshot.
+
+Version-1 `record_hash` reconstructs properties in this order: `version`, `kind`,
+`task_id`, `source_path`, `source_content_hash`, `source_bytes`, `captured_at`,
+`purpose`, `archive_path`. Serialize with JavaScript `JSON.stringify` without
+spacing, encode UTF-8 and prefix the lowercase SHA-256 with `sha256:`. Stored
+record bytes separately MUST equal `JSON.stringify(record, null, 2) + "\n"`,
+without BOM, duplicate keys or alternate whitespace. Owner, record filename,
+preimage filename, byte count and raw hash MUST all agree; a recomputed self-hash
+cannot waive those bindings. Unsigned provenance is not producer authentication
+or proof that the old path actually had the claimed content.
+
+Capture MUST check installed and shipped snapshot schemas, complete archive
+governance/non-exclusion, source identity and both immutable output collisions
+before its first write. Identical existing bytes MAY be reused, never replaced.
+Unexpected I/O failure may leave partial new evidence; no automatic cleanup or
+two-file crash-atomic transaction is promised. A record with missing/corrupt
+preimage fails validation. Unreferenced raw preimages receive visible `SNAP005`
+warnings for explicit inspection; strict warning policy still fails. The reserved
+archive is checked independently of normal scanner exclusions. Linked, unsafe,
+unreadable or incompletely governed archives MUST NOT disappear as an empty set.
+
+`document snapshot-read` MUST verify the retained record and preimage before
+displaying exact decoded text. Its default estimated-content budget is 4,000
+tokens, maximum 32,000; over-budget output fails rather than truncates. Human
+output JSON-quotes source controls/line endings. Content is historical untrusted
+data, not current-source comparison or execution guidance. The command writes
+nothing. Cite the small record for provenance; load full text explicitly only
+for a concrete need. See `examples/document-authoring/README.md`.
 
 ## 9. Canonical promotion
 
@@ -421,6 +623,10 @@ External workflow completion does not automatically update project truth. Promot
 ## 10. Documentation maintenance
 
 The default weekly audit is report-first. It checks staleness, duplicate ownership, contradictions, broken evidence, orphaned handoffs/tasks, superseded drafts, external-layout drift, and context-index freshness.
+
+A missing reference diagnostic SHOULD identify its referring file, owning task when encoded in that file's path, and resolved repository-relative target. Guidance MUST distinguish an active lock source (`LOCK003`), a current handoff resume source (`HANDOFF004`), and evidence/control references. An intentional optional-source removal can be resolved by reviewing selection and recompiling the active lock; a missing required source cannot simply be dropped to pass. For a handoff source, first review and resolve the missing path; recompilation alone does not bypass verification of the existing handoff before replacement. Missing provenance is different: recompiling cannot recreate historical evidence. Index preflight MUST remain blocking and leave the old index unchanged for unresolved references. Preserve historical paths/bytes, never silently rebind a receipt or add an exception to obtain a green report. Stable revision-specific artifact paths are preferred. Even a path that exists is not proof of identical artifact revision; use hash-bound evidence when identity matters. Diagnostic guidance does not implement renaming, infer a new destination, or change any allow-list policy.
+
+Human handoff/resume validation and documentation-audit reports MUST expose diagnostic details as well as the summary, just as JSON does. General legacy evidence strings may be prose: only slash-containing paths and recognized bare source/document extensions are inferred. For arbitrary evidence filenames such as an image or text log, use an explicit repository-relative path (for a root file, `./shot.png` or `./result.txt`) or a structured evidence record. Do not interpret a successful heuristic scan as proof that every word or unqualified filename in a narrative was resolved.
 
 Cleanup MUST NOT delete, rewrite, merge, or promote documentation without review. Deterministic safe fixes MAY be offered as explicit patches.
 
@@ -470,6 +676,17 @@ Dependency discovery MUST inspect schema-defined references: task source/handoff
 Interpretation is field-specific, not a blanket text heuristic. Task source/handoff/documentation-impact/file-intent/required-source declarations and omission candidates use compiler-style whitespace trimming; stored lock sources and feature/external artifact identities remain literal. Documentary canonical-source and evidence references retain validator fragment handling and external-URI treatment; a pure `#fragment` names no file. The compiler also consumes exact trimmed supported evidence files within the owning task's evidence directory (from state checks and `change.yaml`), so that actual identity must be checked as well. Feature updates/non-planned targets and external references also undergo the validator's reference check; both real consumer interpretations remain relevant when they differ. A literal selected `safe#part.ts` does not imply a reference to `safe`. Extensionless paths must not be skipped, and unsupported control characters in genuine reference fields require strict fallback rather than silent omission.
 
 Deferral MUST NOT hide or rewrite findings: raw `repository.ok`, counts and diagnostics remain unchanged, and a failed `project-health` gate explicitly marks only those classified findings `blocking: false`. The additive `completion_scope` report lists the relevant tasks, fallback reason and deferred findings; its report-only contract and example are `schemas/finalize-scope.schema.json` and `examples/parallel-context/task-completion-scope.json`. Fresh initialization includes this report schema alongside the other shipped schemas, but no existing project configuration or stored task/lock artifact must be migrated. The only non-blocking failed gate is this task-scoped project-health gate. Schema, integrity, paths, missing sources, budget, required omissions, unknown findings, global-index failures, documentation audit and warning policy remain blocking under their normal rules. Open target acceptance, project checks or review gates still fail.
+
+Human finalization output SHOULD name the task-completion result separately from raw repository structural health. A task-scoped PASS with non-blocking peer drift MUST visibly state that repository structural health still fails and is not CI or release approval. This is a wording change only; JSON fields, gate status, exit behavior and repository-only strictness remain authoritative.
+
+`canontrail task status` is a read-only view over the same named-task finalize
+result, with no index refresh. Human lifecycle labels and acceptance/check counts
+are recorded claims, not re-executed observations or new task states. Pending
+acceptance/review MUST NOT be described as a failed test; a failed test MUST NOT
+be reduced to mere pending approval. Missing, malformed or unsafe input remains
+unconfirmed/failed under the existing rules. JSON and exit status MUST retain
+the existing finalize semantics, including visible raw repository health and
+unrelated deferred drift. No stored artifact or report-schema change follows.
 
 `canontrail validate` and `canontrail finalize` without `--task` MUST remain repository-wide and strict. A task PASS while project health fails is not integration, CI, release, migration or promotion permission. CI/release owners MUST also run repository-only finalization; the shipped GitHub action always runs it even when an optional task is supplied. GSD/Superpowers continue to own execution and scheduling. Shared-resource order and release guidance lives in `docs/parallel-work.md`, not in an automatic CanonTrail lock service.
 

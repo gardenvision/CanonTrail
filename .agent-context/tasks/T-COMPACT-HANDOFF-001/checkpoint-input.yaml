@@ -1,0 +1,24 @@
+completed:
+  - Recorded decided high-risk task and compiled bounded context before source implementation.
+  - Implemented compact handoff inventory binding and all receiving integrity consumers.
+  - Added blocking reference diagnostics and index guidance without reference exceptions.
+  - All 30 compact-regression cases pass; final full suite has 717 passes and 13 capability skips.
+  - Recorded the unchanged migration-test EPERM setup incident and successful focused/full repeats.
+decisions:
+  - statement: Preserve complete Git-status data in an immutable hash-addressed sidecar while keeping explicit semantic notes unchanged.
+    authority: approved
+    source: .agent-context/tasks/T-COMPACT-HANDOFF-001/brief.md
+files:
+  - {path: src/worktree-inventory.ts, state: created, summary: Exact Git parsing plus safe immutable inventory write and binding verification.}
+  - {path: src/handoff.ts, state: modified, summary: Compact generation and explicit installed-schema preflight.}
+checks:
+  - {name: Typecheck build and full suite, status: pass, evidence: .agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/verification.txt}
+  - {name: Independent review, status: not-run, evidence: Independent reviewer permission requested; no approval inferred.}
+blockers: []
+open_questions:
+  - Independent review permission was requested asynchronously; no reviewer was started without it.
+next_safe_action: Read the task brief and evidence/review-request.md, obtain an authorized independent integrity review of the uncommitted snapshot, then reconcile its findings before marking this task verified or rolling out schemas.
+do_not_repeat:
+  - Do not rewrite legacy handoffs or consumer schemas to make this task pass.
+  - Do not modify Gärtnerei, publish or infer provider-token savings.
+uncommitted_summary: Only this framework branch contains the current implementation and task documentation; full changes remain uncommitted and need verified closure.

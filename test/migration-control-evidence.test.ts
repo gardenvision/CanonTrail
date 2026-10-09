@@ -11,6 +11,7 @@ import {
   prepareMigrationTransformation, type MigrationTargetHeader,
 } from "../src/migration.js";
 import { validateRepository } from "../src/validator.js";
+import { renameFixtureDirectory } from "./fixture-rename.js";
 
 const roots: string[] = [];
 const DATE = "2026-09-05T18:00:00.000Z";
@@ -59,7 +60,7 @@ async function linkDirectory(target: string, link: string) {
 }
 async function replaceWithLink(directory: string) {
   const outside = path.join(await temporaryRoot(), "moved");
-  await rename(directory, outside);
+  await renameFixtureDirectory(directory, outside);
   await linkDirectory(outside, directory);
   return outside;
 }
@@ -252,8 +253,8 @@ describe("independent 43e180e control-evidence findings", () => {
     const f = await fixture();
     await f.apply();
     const upper = path.join(path.dirname(f.execution), "EXECUTION");
-    await rename(f.execution, f.execution + "-rename");
-    await rename(f.execution + "-rename", upper);
+    await renameFixtureDirectory(f.execution, f.execution + "-rename");
+    await renameFixtureDirectory(f.execution + "-rename", upper);
     const names = (await readdir(upper)).sort();
     await expect(f.rollback()).rejects.toThrow(/filesystem alias|no rollback evidence/);
     expect((await readdir(upper)).sort()).toEqual(names);

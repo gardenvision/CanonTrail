@@ -1,0 +1,82 @@
+version: 1
+change_id: CHG-COMPACT-HANDOFF-001
+revision: 3
+title: Compact continuity records with complete separate dirty-worktree provenance
+status: verified
+risk: high
+author: CanonTrail implementation agent
+canonical_source: ARTIFACT_PROTOCOL.md
+decision_rationale: Before committing the maintainer requested further checks. A scratch-only author counterexample found that the existing-inventory collision check compares decoded UTF-8 text instead of raw bytes. Preserve the existing raw-byte integrity requirement by comparing and writing buffers, with rejection-before-handoff regression coverage and no schema or consumer changes.
+documentation_structure:
+  decision: no-feature-document-change
+  rationale: Existing continuity protocol and usage guide own this refinement; a worked example explains the additive artifact.
+  feature_documents: []
+acceptance_cases:
+  - id: AC-COMPACT
+    given: A task has a few explicit sources and hundreds of unrelated dirty paths.
+    expected: New handoff context contains only task-selected changed paths and a count summary while a hash-bound sidecar retains every Git-status entry.
+    failure_or_uncertainty: Explicit semantic input is not truncated; selection is not file ownership and snapshots exclude ignored or unsaved data.
+    counterexample: A foreign entry disappears from the inventory or its complete list is reintroduced into the mandatory receiving context.
+    oracle: Compare the raw Git porcelain inventory with sidecar records and inspect the fresh receiving lock and byte sizes.
+    status: pass
+    evidence_refs: [test/compact-handoff.test.ts, .agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/verification.txt]
+  - id: AC-INTEGRITY
+    given: A new handoff or retained resume packet binds a separate inventory.
+    expected: Every consumer verifies exact bytes task identity count and safe hash-derived path; replacement retains original provenance.
+    failure_or_uncertainty: Missing corrupted unsafe or divergent sidecars fail without replacing outputs; unsigned hashes are not authentication.
+    counterexample: A valid handoff hash masks missing inventory or a retained packet falls back from damaged provenance.
+    oracle: Independent tampering and deletion fixtures exercise direct creation replacement repository and current-use validation.
+    status: pass
+    evidence_refs: [test/compact-handoff.test.ts, test/compact-handoff-review.test.ts, .agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/precommit-review-r3.md]
+  - id: AC-COMPAT
+    given: An existing legacy handoff or an older configured handoff schema is present.
+    expected: Legacy validation remains unchanged and creation requires deliberate schema synchronization before new output is written.
+    failure_or_uncertainty: No fallback silently discards complete dirty disclosure and no automatic migration occurs.
+    counterexample: An old handoff must be rewritten or an unsupported sidecar is written before schema rejection.
+    oracle: Existing worked examples and old-schema byte-preservation tests.
+    status: pass
+    evidence_refs: [test/compact-handoff.test.ts, test/handoff.test.ts, .agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/verification.txt]
+  - id: AC-REFERENCES
+    given: A governed task evidence reference targets a removed or renamed file.
+    expected: The finding names source task and target and distinguishes missing provenance from stale context; index remains unwritten.
+    failure_or_uncertainty: Do not guess a rename or rewrite historical evidence; existence alone does not establish revision identity.
+    counterexample: Index writes despite the broken reference or diagnostics advise rewriting a historical receipt.
+    oracle: Controlled missing-reference fixture and CLI exit code and index-byte checks.
+    status: pass
+    evidence_refs: [test/compact-handoff.test.ts, test/compact-handoff-review.test.ts, .agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/review-remediation.md]
+  - id: AC-GIT-ROOT
+    given: A CanonTrail target lies below its Git worktree root.
+    expected: New handoff and checkpoint creation reject the unsupported mixed path bases before writing any artifact, while root-level projects and existing artifact validation remain supported.
+    failure_or_uncertainty: This intentionally does not implement nested-project handoff support or move existing project configuration.
+    counterexample: A successful new handoff silently omits relevant files because project-relative paths differ from Git-relative paths.
+    oracle: Real nested Git fixture tested through create and checkpoint dry-run/apply with before-after preservation.
+    status: pass
+    evidence_refs: [test/compact-handoff-review.test.ts, .agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/review-remediation.md]
+  - id: AC-BYTE-TRANSPORT
+    given: A consumer clones compact handoffs under core.autocrlf=true.
+    expected: Reviewed exact-byte attributes preserve inventory and handoff validation; unprotected conversion fails with actionable byte-preservation guidance without rewriting hashes.
+    failure_or_uncertainty: No automatic gitattributes edits or normalization of historical artifacts; all selected source bytes have their own transport requirements.
+    counterexample: Documentation recommends rehashing history or claims eol=lf always preserves originally CRLF evidence.
+    oracle: Fresh local clones with and without reviewed attributes, exact inventory-byte checks and validation.
+    status: pass
+    evidence_refs: [test/compact-handoff-review.test.ts, .agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/review-remediation.md]
+impacts:
+  - {area: requirement, decision: affected, rationale: Separate safety provenance from bounded working context., evidence_refs: [.agent-context/tasks/T-COMPACT-HANDOFF-001/brief.md]}
+  - {area: data-contracts, decision: affected, rationale: Add optional inventory binding and new immutable sidecar shape with backward-compatible legacy input., evidence_refs: [schemas/handoff.schema.json, schemas/worktree-inventory.schema.json]}
+  - {area: domain-logic, decision: affected, rationale: Handoff selection and all consuming validators enforce inventory identity., evidence_refs: [src/worktree-inventory.ts, src/handoff.ts, src/resume.ts, src/resume-audit.ts, src/validator.ts]}
+  - {area: tests-reference-cases, decision: affected, rationale: Large worktree integrity and reference regressions plus nested-root and fresh-clone counterexamples., evidence_refs: [test/compact-handoff.test.ts, test/compact-handoff-review.test.ts, test/handoff.test.ts]}
+  - {area: example-data, decision: affected, rationale: A compact handoff worked example documents the sidecar boundary., evidence_refs: [examples/compact-handoff/README.md, examples/compact-handoff/inventory.fixture.json]}
+  - {area: ui-api, decision: affected, rationale: Reports disclose inventory count and on-demand path and reference repair guidance., evidence_refs: [src/cli.ts, src/handoff.ts, src/validator.ts]}
+  - {area: documentation, decision: affected, rationale: Protocol usage and release checklist explain historical integrity Git-root scope and reviewed consumer byte transport., evidence_refs: [ARTIFACT_PROTOCOL.md, docs/usage.md, docs/release-checklist.md, docs/self-documentation.md, ROADMAP.md]}
+  - {area: diagrams-visuals, decision: not-affected, rationale: No diagrams or application layout change., evidence_refs: []}
+  - {area: terminology, decision: affected, rationale: Inventory is a status observation not a backup or ownership manifest., evidence_refs: [ARTIFACT_PROTOCOL.md, docs/usage.md]}
+  - {area: operations-compatibility, decision: affected, rationale: Portable Git parsing and schema preflight preserve old artifacts; revision-3 Windows and Linux runs pass and macOS remains a release gate., evidence_refs: [src/initializer.ts, src/worktree-inventory.ts, .agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/precommit-review-r3.md]}
+verification:
+  checks: [{name: Revision 3 raw-byte collision regression and complete Windows/Linux quality checks, status: pass, evidence_refs: [.agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/precommit-review-r3.md]}, {name: Exact integrated independent and hosted platform checks, status: pass, evidence_refs: [.agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/integrated-review.md, .agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/hosted-ci-50f7d24.json, .agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/integration-closure.md]}]
+  terminology_search: {status: pass, terms: [worktree_inventory, uncommitted_summary, REF001, LOCK003, HANDOFF004], evidence_refs: [ARTIFACT_PROTOCOL.md, docs/usage.md]}
+  visual_review: {applicable: true, status: pass, evidence_refs: [test/compact-handoff.test.ts, test/compact-handoff-review.test.ts, .agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/review-remediation.md]}
+  unverifiable_items: []
+independent_review: {status: pass, reviewer: Local independent reviewer field_authoring_independent_review, findings: [Declared technical acceptance boundaries pass against exact r5 implementation bound to 50f7d24; stable-tree crash and authentication limits remain], evidence_refs: [.agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/integrated-review.md], waiver: null}
+supersedes: []
+superseded_by: null
+updated_at: "2026-10-09T05:15:12Z"

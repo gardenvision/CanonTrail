@@ -1,0 +1,71 @@
+{
+  "version": 1,
+  "task_id": "T-PUBLISH-CONTINUITY-001",
+  "created_at": "2026-10-03T13:02:00Z",
+  "entries": [
+    {
+      "code": " M",
+      "path": ".agent-context/context-index.json"
+    },
+    {
+      "code": " M",
+      "path": ".agent-context/tasks/T-COMPACT-HANDOFF-001/context.lock.json"
+    },
+    {
+      "code": " M",
+      "path": ".agent-context/tasks/T-COMPACT-HANDOFF-001/state.yaml"
+    },
+    {
+      "code": " M",
+      "path": ".agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/context.lock.json"
+    },
+    {
+      "code": " M",
+      "path": ".agent-context/tasks/T-PUBLISH-CONTINUITY-001/brief.md"
+    },
+    {
+      "code": " M",
+      "path": ".agent-context/tasks/T-PUBLISH-CONTINUITY-001/change.yaml"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-PUBLISH-CONTINUITY-001/checkpoint-input.yaml"
+    },
+    {
+      "code": " M",
+      "path": ".agent-context/tasks/T-PUBLISH-CONTINUITY-001/context.lock.json"
+    },
+    {
+      "code": " M",
+      "path": ".agent-context/tasks/T-PUBLISH-CONTINUITY-001/evidence/progress.md"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-PUBLISH-CONTINUITY-001/evidence/quality-source-manifest.json"
+    },
+    {
+      "code": " M",
+      "path": ".agent-context/tasks/T-PUBLISH-CONTINUITY-001/state.yaml"
+    },
+    {
+      "code": " M",
+      "path": "ROADMAP.md"
+    },
+    {
+      "code": " M",
+      "path": "docs/release-checklist.md"
+    },
+    {
+      "code": " M",
+      "path": "docs/self-documentation.md"
+    },
+    {
+      "code": " M",
+      "path": "docs/third-party-notices.md"
+    },
+    {
+      "code": " M",
+      "path": "test/compact-handoff.test.ts"
+    }
+  ]
+}

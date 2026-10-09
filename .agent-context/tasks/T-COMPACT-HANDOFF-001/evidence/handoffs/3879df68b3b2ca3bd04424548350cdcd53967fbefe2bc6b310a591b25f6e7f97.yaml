@@ -1,0 +1,143 @@
+handoff_id: H-T-COMPACT-HANDOFF-001-20260927081200
+task_id: T-COMPACT-HANDOFF-001
+created_at: 2026-09-27T08:12:00Z
+source_session_id: canontrail-compact-review-r2-20260927
+checkpoint_trigger: phase-transition
+source_context_lock_path: .agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/context-locks/9b1b174603ac83afcc91ce3ccc3b34f8b6d8d41b2ec0c6d89469606132b1dd50.json
+source_context_lock_hash: sha256:9b1b174603ac83afcc91ce3ccc3b34f8b6d8d41b2ec0c6d89469606132b1dd50
+objective: Keep task handoffs compact while retaining complete hash-bound Git status evidence, and explain missing evidence reference failures without weakening validation.
+completed:
+  - Implemented the three bounded conditional-review remedies and eleven new counterexample tests.
+  - Final Windows suite passed 728 tests with 13 skips; Linux passed 737 with 4 skips. Both ran 741 cases in 36 files.
+  - Recorded the initial Linux clone-fixture configuration error and corrected it without changing production logic or weakening assertions.
+  - Structural validation and documentation audit passed after lifecycle reconciliation; prior review receipts and shared stable build are preserved.
+decisions:
+  - statement: Reject nested-project handoff creation before writes; preserve raw-byte hashes and use reference-specific repair guidance. No consumer rollout or coordination feature in this revision.
+    authority: approved
+    source: .agent-context/tasks/T-COMPACT-HANDOFF-001/brief.md
+files:
+  - path: .agent-context/tasks/T-COMPACT-HANDOFF-001/brief.md
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: .agent-context/tasks/T-COMPACT-HANDOFF-001/change.yaml
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: .agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/review-remediation.md
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: .agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/verification.txt
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: .agent-context/tasks/T-COMPACT-HANDOFF-001/state.yaml
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: ARTIFACT_PROTOCOL.md
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: docs/release-checklist.md
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: docs/self-documentation.md
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: docs/usage.md
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: examples/compact-handoff/inventory.fixture.json
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: examples/compact-handoff/README.md
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: ROADMAP.md
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: schemas/handoff.schema.json
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: schemas/worktree-inventory.schema.json
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: src/cli.ts
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: src/handoff.ts
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: src/initializer.ts
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: src/resume-audit.ts
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: src/resume.ts
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: src/validator.ts
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: src/worktree-inventory.ts
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: test/compact-handoff-review.test.ts
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: test/compact-handoff.test.ts
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: test/handoff.test.ts
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+checks:
+  - name: CHECK-QUALITY
+    status: pass
+    evidence: .agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/review-remediation.md
+  - name: CHECK-REVIEW
+    status: not-run
+    evidence: ""
+blockers:
+  - Independent closure of revision-2 remedies and exact macOS execution remain open before release or consumer rollout.
+open_questions:
+  - Obtain authorization for the chosen independent review and hosted platform-check route; do not infer it from this checkpoint.
+next_safe_action: Validate this handoff and prepare validated receiving context, then inspect the revision-2 review-remediation evidence and remaining independent-review and macOS gates before planning any rollout.
+do_not_repeat:
+  - Do not run a default build in the shared source checkout; its dist intentionally remains the f2f9554 consumer runtime. Build only in an isolated copy.
+  - Do not update consumer projects or schemas, rewrite historical evidence, push, or infer review approval.
+  - Do not rehash converted historical bytes or use replacement to bypass a missing existing handoff source.
+  - Do not treat the independently reviewed revision-1 snapshot as review of these changed bytes; deferred archive-path safety findings remain documented.
+resume_sources:
+  - AGENTS.md
+  - .agent-context/tasks/T-COMPACT-HANDOFF-001/state.yaml
+  - .agent-context/tasks/T-COMPACT-HANDOFF-001/brief.md
+  - .agent-context/tasks/T-COMPACT-HANDOFF-001/change.yaml
+  - examples/compact-handoff/README.md
+  - ARTIFACT_PROTOCOL.md
+  - examples/resume-history/README.md
+  - integrations/gsd/canontrail/skills/canontrail-finalize/SKILL.md
+  - integrations/superpowers/skills/canontrail-feature-lifecycle/SKILL.md
+  - .agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/review-remediation.md
+  - .agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/verification.txt
+  - src/handoff.ts
+  - src/initializer.ts
+  - src/resume-audit.ts
+  - src/resume.ts
+  - src/validator.ts
+  - src/worktree-inventory.ts
+  - test/compact-handoff.test.ts
+  - docs/release-checklist.md
+  - docs/self-documentation.md
+  - docs/usage.md
+  - examples/compact-handoff/inventory.fixture.json
+  - ROADMAP.md
+  - schemas/handoff.schema.json
+  - schemas/worktree-inventory.schema.json
+  - src/cli.ts
+  - test/compact-handoff-review.test.ts
+  - .agent-context/tasks/T-COMPACT-HANDOFF-001/context.lock.json
+worktree_dirty: true
+uncommitted_summary: Git reports 34 changed/untracked entries; 24 task-selected or explicitly reported files are listed below. The complete hash-bound worktree_inventory is separate on-demand safety evidence, not an ownership claim or file-content backup.
+worktree_inventory:
+  path: .agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/worktree-inventories/8bb26f7ab9de038c7dd49b47470ad5d0dae0bf70c8b22d90969416e625349c44.worktree-inventory.json
+  content_hash: sha256:8bb26f7ab9de038c7dd49b47470ad5d0dae0bf70c8b22d90969416e625349c44
+  entry_count: 34
+handoff_hash: sha256:3879df68b3b2ca3bd04424548350cdcd53967fbefe2bc6b310a591b25f6e7f97

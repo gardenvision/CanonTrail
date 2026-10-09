@@ -1,0 +1,19 @@
+completed:
+  - Implemented the three bounded conditional-review remedies and eleven new counterexample tests.
+  - Final Windows suite passed 728 tests with 13 skips; Linux passed 737 with 4 skips. Both ran 741 cases in 36 files.
+  - Recorded the initial Linux clone-fixture configuration error and corrected it without changing production logic or weakening assertions.
+  - Structural validation and documentation audit passed after lifecycle reconciliation; prior review receipts and shared stable build are preserved.
+decisions:
+  - statement: Reject nested-project handoff creation before writes; preserve raw-byte hashes and use reference-specific repair guidance. No consumer rollout or coordination feature in this revision.
+    authority: approved
+    source: .agent-context/tasks/T-COMPACT-HANDOFF-001/brief.md
+blockers:
+  - Independent closure of revision-2 remedies and exact macOS execution remain open before release or consumer rollout.
+open_questions:
+  - Obtain authorization for the chosen independent review and hosted platform-check route; do not infer it from this checkpoint.
+next_safe_action: Validate this handoff and prepare validated receiving context, then inspect the revision-2 review-remediation evidence and remaining independent-review and macOS gates before planning any rollout.
+do_not_repeat:
+  - Do not run a default build in the shared source checkout; its dist intentionally remains the f2f9554 consumer runtime. Build only in an isolated copy.
+  - Do not update consumer projects or schemas, rewrite historical evidence, push, or infer review approval.
+  - Do not rehash converted historical bytes or use replacement to bypass a missing existing handoff source.
+  - Do not treat the independently reviewed revision-1 snapshot as review of these changed bytes; deferred archive-path safety findings remain documented.

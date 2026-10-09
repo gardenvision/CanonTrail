@@ -29,6 +29,18 @@ Windows, Linux and macOS are targets. The configured matrix is Node24 on each an
 
 Typecheck, build, built-CLI validation and strict repository finalization passed on every host; Ubuntu Node24 also passed the runtime-dependency audit. The release task's `platform-results.json` and `platform-results-c2.json` retain the two distinct runs, actual capability JSON, skipped test names and raw-result hashes; GitHub raw artifacts have 14-day retention. Later documentation/lifecycle commits are not retroactively either tested snapshot and must be checked separately. The final tagged release identifies its exact CI run on the release page. Independent review and actual hosting rules remain distinct.
 
+## October field-friction product head
+
+Exact public head `50f7d2431421c9dfd77abf3bde2eeb87fd5c867f` passes both
+push/PR four-host matrices (runs 37885835727 and 37885844660) and the separate
+completion workflow (37885844532). Windows24.21.0: 1015 passed / five skipped;
+Linux24.21.0, Linux20.19.6 and macOS ARM64/24.20.0: 1013 passed / seven skipped
+each. Every host runs 1020 cases / 46 files with zero failures. Actual capability,
+skip, raw-hash and job records are in
+`.agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/hosted-ci-50f7d24.json`.
+The independent supplement checked these exact identities and results. This
+does not execute future closure metadata or certify all filesystems/capabilities.
+
 ## Historical V3 correction
 
 The exact V3 ZIP (`d95cd0b307f37a4bfa37eaaaaa93b2e13f83973c7d2280f637787b68cf73591d`) passed historical private GitHub run `34747718414`, triggered by transport commit `a7901a3fb7a7a871ba7049e2aa50fc9da759744c`. That development repository is now named `CanonTrail-private`; the old URL in retained evidence is historical, not a run in the new public-source repository. The transport harness executed the archive and verified all 159 file hashes before and after. These older results support only V3, not the current C1 receipt above.

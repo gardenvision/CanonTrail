@@ -1,6 +1,6 @@
 ---
 topic_id: explicit-context-sections-example
-stand: "2026-09-07"
+stand: "2026-09-25"
 status: current
 truth_level: active-snapshot
 verification:
@@ -17,6 +17,8 @@ do_not_use_instead: [ARTIFACT_PROTOCOL.md]
 `source.txt` is a four-line synthetic source. `selection.json` shows the exact task fields and the additional lock-source fields for lines 2–3. It is a fragment illustration, not a complete standalone Context Lock. Tests recompute both hashes from the bytes. The selected estimate excludes lines 1 and 4, but changing either line still requires reevaluation of the full source identity.
 
 Use the task fields in a fixture with the shipped schemas and run context compile. Do not add the same path to required_context_sources or --include: those request the complete file and intentionally conflict. Fresh sessions follow line_ranges; neither a saved excerpt report nor merely listing a source path proves the model read it.
+
+For an existing task that names `source.txt` in `required_context_sources`, first review whether the complete file is actually necessary. If lines 2–3 suffice for the task, remove only that task-owned whole-source declaration and add the `context_sections` entry shown in `selection.json`, using the current complete-file hash. Inspect the read-only `context excerpt` result before choosing the range. Recompile in dry-run mode and verify the lock now contains one selected section, not both a section and a whole-file entry. If another rule independently requires `source.txt` whole, the conflict is intentional: use the whole file or a larger budget. Changing line 1 or 4 after the decision still invalidates the selected source's full-file hash and requires review before recompilation.
 
 A human compile report identifies this fragment as `inclusive lines 2..3` with `remainder not selected`. The exact selected token estimate is recomputed from `source.txt` by the worked-example test. Paths must match each directory entry's spelling, including on case-insensitive filesystems. Both selection fields must be supported by the installed context-lock schema; even schemas containing those field names are checked against the actual prospective lock and task payload before writes.
 

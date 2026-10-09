@@ -1,0 +1,94 @@
+{
+  "observed_at": "2026-09-27T08:15:05.195Z",
+  "scope": "Local revision-2 author checks after Windows/Linux implementation tests; independent remediation approval and macOS remain pending.",
+  "cli_sha256": "ba3301c5a7c0f77ac827bcf554d12598f0d01777201f399100e311fa48cd451c",
+  "validate": {
+    "exit_code": 0,
+    "ok": true,
+    "stats": {
+      "markdownDocuments": 46,
+      "structuredArtifacts": 37,
+      "schemas": 16,
+      "errors": 0,
+      "warnings": 0
+    }
+  },
+  "audit": {
+    "exit_code": 0,
+    "health": "healthy",
+    "findings": {
+      "errors": 0,
+      "warnings": 0,
+      "total": 0
+    }
+  },
+  "repository_finalize": {
+    "exit_code": 0,
+    "ok": true
+  },
+  "task_finalize": {
+    "exit_code": 1,
+    "expected_open_codes": [
+      "FINALIZE105",
+      "FINALIZE107",
+      "FINALIZE110"
+    ]
+  },
+  "handoff_validate": {
+    "exit_code": 0,
+    "ok": true
+  },
+  "receiving_dry_run": {
+    "exit_code": 0,
+    "mode": "dry-run",
+    "no_apply_requested": true,
+    "packet_written": false,
+    "active_context_modified": false,
+    "sources": 27,
+    "budget": {
+      "total_tokens": 116000,
+      "reserved_output_tokens": 16000,
+      "reserved_input_tokens": 4096,
+      "estimated_input_tokens": 93329
+    },
+    "omissions": [
+      {
+        "candidate": "test/compact-handoff-review.test.ts",
+        "reason": "Optional candidate needs 3166 estimated tokens and does not fit after reserving 0 for later required sources.",
+        "required": false
+      },
+      {
+        "candidate": "test/handoff.test.ts",
+        "reason": "Optional candidate needs 3481 estimated tokens and does not fit after reserving 0 for later required sources.",
+        "required": false
+      }
+    ],
+    "inventory_selected": false
+  },
+  "continuity_preservation": {
+    "read_only_checks_preserved_active_lock_and_handoff": true,
+    "replaced_revision_1_handoff_archived_byte_exact": true
+  },
+  "active_lock": {
+    "hash": "sha256:47e3b52ce561e10593c71e78c2b3ec3e43c498031ade186606b26927c79fb837",
+    "sources": 27,
+    "budget": {
+      "total_tokens": 116000,
+      "reserved_output_tokens": 16000,
+      "reserved_input_tokens": 4096,
+      "estimated_input_tokens": 94474
+    },
+    "omissions": [
+      {
+        "candidate": ".agent-context/tasks/T-COMPACT-HANDOFF-001/handoff.yaml",
+        "reason": "Optional candidate needs 2021 estimated tokens and does not fit after reserving 0 for later required sources.",
+        "required": false
+      },
+      {
+        "candidate": "test/handoff.test.ts",
+        "reason": "Optional candidate needs 3481 estimated tokens and does not fit after reserving 0 for later required sources.",
+        "required": false
+      }
+    ]
+  }
+}

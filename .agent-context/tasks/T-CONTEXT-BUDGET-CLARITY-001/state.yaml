@@ -1,0 +1,40 @@
+task_id: T-CONTEXT-BUDGET-CLARITY-001
+status: verified
+objective: Explain per-source required context costs, document safe existing section selection, and distinguish task completion from project health in human reports.
+non_goals:
+  - No automatic narrowing of task-required or strongly routed canonical documents.
+  - No persisted lock/schema change or mutation of Gärtnerei project files.
+  - No assertion of measured provider-token savings.
+acceptance_criteria:
+  - id: AC-COSTS
+    statement: Success and over-budget reports identify the largest required source costs and selectors without changing selection or lock bytes.
+    verification: Deterministic context fixtures, JSON and text report assertions, and old-lock equality.
+    status: pass
+  - id: AC-SECTIONS
+    statement: Existing hash-bound required sections are explained and verified without narrowing an independently required whole source.
+    verification: Existing section fixture plus a whole-to-section counterexample and source-drift checks.
+    status: pass
+  - id: AC-SCOPE
+    statement: Human finalization output distinguishes task completion from non-blocking peer drift and strict project-wide health.
+    verification: Task-scoped fixture and repository-only counterexample.
+    status: pass
+dependencies: []
+documentation_impact: [ARTIFACT_PROTOCOL.md, docs/usage.md]
+file_intents:
+  - src/context.ts
+  - src/finalize.ts
+  - test/context.test.ts
+  - test/context-sections.test.ts
+  - test/task-scoped-finalize.test.ts
+  - ARTIFACT_PROTOCOL.md
+  - docs/usage.md
+  - examples/context-sections/README.md
+  - .agent-context/tasks/T-CONTEXT-BUDGET-CLARITY-001
+required_context_sources: [VISION.md, ARTIFACT_PROTOCOL.md, src/context.ts, src/finalize.ts]
+parallel_safety: safe
+checks:
+  - id: CHECK-CLI
+    command_or_observation: Typecheck, focused tests, build, structural validation and audit for this report-only change.
+    status: pass
+    evidence_refs: [.agent-context/tasks/T-CONTEXT-BUDGET-CLARITY-001/evidence/verification.txt]
+updated_at: "2026-09-25T12:49:04Z"

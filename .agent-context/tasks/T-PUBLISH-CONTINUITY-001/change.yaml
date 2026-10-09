@@ -1,0 +1,110 @@
+version: 1
+change_id: CHG-PUBLISH-CONTINUITY-001
+revision: 3
+title: Integrate tested continuity and task-authoring updates with public main and publish a reviewable branch with exact hosted checks.
+status: verified
+risk: high
+author: CanonTrail publication maintainer
+canonical_source: .agent-context/tasks/T-PUBLISH-CONTINUITY-001/brief.md
+decision_rationale: Preserve the independently reviewed predecessor and apply only bounded report-ordering caller-text and documentation corrections from its conditional review. The owner accepted retained project-name references after superseding an initial rejection; do not rewrite history or immutable archives. The owner explicitly retained the stricter mjs policy and requested clear compatibility documentation. A new head needs exact CI and independent delta review; predecessor evidence is not new approval.
+documentation_structure:
+  decision: no-feature-document-change
+  rationale: Existing protocol usage release and dependency owners cover this bounded integration; no new product feature boundary.
+  feature_documents: []
+acceptance_cases:
+  - id: AC-001
+    given: Public main and the local pending source descend from the same earlier revision.
+    expected: Public main corrections and existing working changes are preserved.
+    failure_or_uncertainty: Resolve overlapping changes deliberately; preserve original source and historical bytes.
+    counterexample: Integration drops a public-main invariant or rewrites a historical archive.
+    oracle: Exact baseline manifest and both sets of regression assertions.
+    status: pass
+    evidence_refs: [.agent-context/tasks/T-PUBLISH-CONTINUITY-001/evidence/progress.md]
+  - id: AC-002
+    given: The lockfile pins an affected transitive URI package.
+    expected: Pinned dependency audit finding is remediated without unrelated upgrades.
+    failure_or_uncertainty: Do not force major upgrades or report an unavailable audit as clean.
+    counterexample: Unrelated dependency versions change or vulnerable URI serialization remains pinned.
+    oracle: Current registry metadata audit result and exact lockfile version diff.
+    status: pass
+    evidence_refs: [.agent-context/tasks/T-PUBLISH-CONTINUITY-001/evidence/progress.md]
+  - id: AC-003
+    given: Integrated source and dependency changes are recorded on a new branch.
+    expected: The source passes checks and the branch is published with honest review and platform status.
+    failure_or_uncertainty: Failed or unexecuted platforms and independent review remain explicit gates.
+    counterexample: Earlier platform results are attributed to the new revision or CI is weakened to pass.
+    oracle: Exact head identity per hosted check plus local quality and structural reports.
+    status: pass
+    evidence_refs: [.agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/hosted-ci-50f7d24.json, .agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/integration-closure.md]
+  - id: AC-004
+    given: The predecessor review found equal-cost locale sorting and raw multiline objective insertion into the generated brief.
+    expected: Report ties use code-unit order and the objective remains visibly quoted data without changing YAML semantics or draft lifecycle.
+    failure_or_uncertainty: Keep the same source selection lock contracts and no-authority draft semantics; do not treat quoting as enforcement of model behavior.
+    counterexample: A changed host locale changes equal-cost report order or caller text creates a second unquoted implementation section.
+    oracle: Predecessor RED and corrected GREEN regressions plus schema and full-suite checks in an isolated snapshot.
+    status: pass
+    evidence_refs: [.agent-context/tasks/T-PUBLISH-CONTINUITY-001/evidence/review-consolidation.md]
+impacts:
+  - area: requirement
+    decision: affected
+    rationale: Publish bounded work and review corrections under explicit compatibility review and platform gates.
+    evidence_refs: [.agent-context/tasks/T-PUBLISH-CONTINUITY-001/brief.md]
+  - area: data-contracts
+    decision: affected
+    rationale: Integrate additive inventory contracts without consumer migration.
+    evidence_refs: [schemas/handoff.schema.json, schemas/worktree-inventory.schema.json]
+  - area: domain-logic
+    decision: affected
+    rationale: Reconcile continuity and context corrections with public-main behavior.
+    evidence_refs: [src/handoff.ts, src/context.ts, src/continuity-files.ts]
+  - area: tests-reference-cases
+    decision: affected
+    rationale: Preserve branch regressions and add RED GREEN report-ordering and multiline-objective counterexamples before the current full suite.
+    evidence_refs: [test/compact-handoff-review.test.ts, test/continuity-write-hardening.test.ts, test/task-create.test.ts, test/migration-control-evidence.test.ts, test/fixture-rename.ts, test/fixture-rename.test.ts]
+  - area: example-data
+    decision: affected
+    rationale: Publish existing neutral task-draft and inventory examples.
+    evidence_refs: [examples/compact-handoff/README.md, examples/task-create/README.md]
+  - area: ui-api
+    decision: affected
+    rationale: Preserve CLI additions and public-main diagnostic improvements.
+    evidence_refs: [src/cli.ts]
+  - area: documentation
+    decision: affected
+    rationale: Dependency review scope format attribution and current integration status must match source.
+    evidence_refs: [docs/self-documentation.md, docs/third-party-notices.md, docs/alpha-readiness.md, ROADMAP.md]
+  - area: diagrams-visuals
+    decision: not-affected
+    rationale: No new graphical output or diagram changes.
+    evidence_refs: []
+  - area: terminology
+    decision: affected
+    rationale: Separate publication CI retained integrity and independent approval.
+    evidence_refs: [ARTIFACT_PROTOCOL.md, docs/release-checklist.md]
+  - area: operations-compatibility
+    decision: affected
+    rationale: Current package and cross-platform CI remain the publication gates.
+    evidence_refs: [package-lock.json, .github/workflows/validate.yml]
+verification:
+  checks:
+    - {name: Predecessor Windows installation check build complete suite and runtime/full audit, status: pass, evidence_refs: [.agent-context/tasks/T-PUBLISH-CONTINUITY-001/evidence/progress.md]}
+    - {name: Current review-correction full chain after bounded case-alias fixture setup correction, status: pass, evidence_refs: [.agent-context/tasks/T-PUBLISH-CONTINUITY-001/evidence/review-consolidation.md]}
+    - {name: Exact integrated independent and hosted platform checks, status: pass, evidence_refs: [.agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/integrated-review.md, .agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/hosted-ci-50f7d24.json, .agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/integration-closure.md]}
+  terminology_search:
+    status: pass
+    terms: [independent review, exact bytes, fast-uri, shared stable runtime]
+    evidence_refs: [.agent-context/tasks/T-PUBLISH-CONTINUITY-001/evidence/progress.md]
+  visual_review:
+    applicable: false
+    status: not-applicable
+    evidence_refs: []
+  unverifiable_items: []
+independent_review:
+  status: pass
+  reviewer: Local independent reviewer field_authoring_independent_review
+  findings: [Exact r5 integration correction and current 50f7d24 platform boundary pass; future closing metadata and merge remain separately gated]
+  evidence_refs: [.agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/integrated-review.md]
+  waiver: null
+supersedes: []
+superseded_by: null
+updated_at: "2026-10-09T05:15:12Z"

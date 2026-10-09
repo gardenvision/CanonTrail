@@ -1,0 +1,151 @@
+handoff_id: H-T-FIELD-WORKFLOW-001-20261001214910
+task_id: T-FIELD-WORKFLOW-001
+created_at: "2026-10-01T21:49:10.0237107Z"
+source_session_id: Canontrail442-field-20261001
+checkpoint_trigger: explicit-handoff
+source_provider: codex
+source_context_lock_path: .agent-context/tasks/T-FIELD-WORKFLOW-001/evidence/context-locks/e5a2b7ef64ec0aad708462736fd2f7f4b76b7db54430adf54ed153a5760d833b.json
+source_context_lock_hash: sha256:e5a2b7ef64ec0aad708462736fd2f7f4b76b7db54430adf54ed153a5760d833b
+objective: Reduce evidenced task-authoring and source-selection friction without inventing completion or weakening continuity boundaries.
+completed:
+  - Bounded field intake and version-aware classification recorded without copying private consumer reports into public source.
+  - Safe task drafts, explicit shader/module text support and initial-excerpt guidance implemented and author-reviewed.
+  - Windows full suite 814 passed / 13 skipped; Linux 820 passed / 7 skipped, 827 cases each; typecheck and isolated build pass.
+decisions:
+  - statement: Keep consumer projects and the shared built runtime untouched; no release or Git mutation is authorized by this task.
+    authority: approved
+    source: .agent-context/tasks/T-FIELD-WORKFLOW-001/brief.md
+  - statement: Close only the bounded field-workflow acceptance; earlier continuity review gates and a new dependency audit follow-up stay distinct.
+    authority: delegated
+    source: .agent-context/tasks/T-FIELD-WORKFLOW-001/change.yaml
+files:
+  - path: .agent-context/tasks/T-FIELD-WORKFLOW-001/brief.md
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: .agent-context/tasks/T-FIELD-WORKFLOW-001/change.yaml
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: .agent-context/tasks/T-FIELD-WORKFLOW-001/evidence/active-lock-retention.json
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: .agent-context/tasks/T-FIELD-WORKFLOW-001/evidence/quality.json
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: .agent-context/tasks/T-FIELD-WORKFLOW-001/evidence/self-review.md
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: .agent-context/tasks/T-FIELD-WORKFLOW-001/evidence/verification.md
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: .agent-context/tasks/T-FIELD-WORKFLOW-001/state.yaml
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: ARTIFACT_PROTOCOL.md
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: ROADMAP.md
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: docs/self-documentation.md
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: docs/usage.md
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: examples/compact-handoff/README.md
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: examples/task-create/README.md
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: src/cli.ts
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: src/context-inspection.ts
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: src/context-text.ts
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: src/context.ts
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: src/continuity-files.ts
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: src/task-create.ts
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: test/context-formats.test.ts
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: test/context-inspection.test.ts
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: test/task-create.test.ts
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+checks:
+  - name: CHECK-FOCUSED
+    status: pass
+    evidence: .agent-context/tasks/T-FIELD-WORKFLOW-001/evidence/verification.md
+  - name: CHECK-QUALITY
+    status: pass
+    evidence: .agent-context/tasks/T-FIELD-WORKFLOW-001/evidence/quality.json
+  - name: CHECK-PRESERVATION
+    status: pass
+    evidence: .agent-context/tasks/T-FIELD-WORKFLOW-001/evidence/verification.md
+blockers:
+  - Release readiness is not established; independent continuity review and exact platform/CI evidence remain open.
+  - npm audit exits 1 for pinned transitive fast-uri 3.1.6. A focused update and validation are needed before publication.
+open_questions: []
+next_safe_action: Validate this handoff and establish a receiving context, then review the verification receipt and plan the narrowly scoped dependency update plus outstanding continuity review/platform work. Obtain separate authorization before publication or consumer rollout.
+do_not_repeat:
+  - Do not rewrite historical evidence, use old approval for new bytes, or rebuild the shared consumer dist directory.
+  - Do not rescan private asset trees or republish private field reports.
+resume_sources:
+  - AGENTS.md
+  - .agent-context/tasks/T-FIELD-WORKFLOW-001/state.yaml
+  - .agent-context/tasks/T-FIELD-WORKFLOW-001/brief.md
+  - .agent-context/tasks/T-FIELD-WORKFLOW-001/change.yaml
+  - examples/feature-save-schema/project-doc.md
+  - VISION.md
+  - ARTIFACT_PROTOCOL.md
+  - docs/parallel-work.md
+  - examples/compact-handoff/README.md
+  - examples/context-inspection/README.md
+  - examples/resume-history/README.md
+  - integrations/gsd/canontrail/skills/canontrail-context/SKILL.md
+  - integrations/gsd/canontrail/skills/canontrail-finalize/SKILL.md
+  - integrations/superpowers/skills/canontrail-feature-lifecycle/SKILL.md
+  - .agent-context/tasks/T-FIELD-WORKFLOW-001/evidence/active-lock-retention.json
+  - .agent-context/tasks/T-FIELD-WORKFLOW-001/evidence/quality.json
+  - .agent-context/tasks/T-FIELD-WORKFLOW-001/evidence/self-review.md
+  - .agent-context/tasks/T-FIELD-WORKFLOW-001/evidence/verification.md
+  - schemas/artifact-header.schema.json
+  - schemas/change-record.schema.json
+  - schemas/task-state.schema.json
+  - src/cli.ts
+  - src/config.ts
+  - src/context-inspection.ts
+  - src/context-text.ts
+  - src/context.ts
+  - src/continuity-files.ts
+  - src/task-create.ts
+  - test/context-formats.test.ts
+  - test/task-create.test.ts
+  - docs/alpha-readiness.md
+  - docs/self-documentation.md
+  - docs/usage.md
+  - examples/task-create/README.md
+  - ROADMAP.md
+  - test/context-inspection.test.ts
+  - .agent-context/tasks/T-FIELD-WORKFLOW-001/context.lock.json
+  - .agent-context/tasks/T-FIELD-WORKFLOW-001/evidence/intake.md
+worktree_dirty: true
+uncommitted_summary: Existing compact-handoff and continuity-hardening work remains uncommitted. This task adds bounded task/context source and tests, usage/protocol updates and its own evidence. Stable dist and consumer files remain untouched. Only the two owning active review locks are refreshed after preserving their prior bytes; all older handoffs and review statuses remain intact.
+worktree_inventory:
+  path: .agent-context/tasks/T-FIELD-WORKFLOW-001/evidence/worktree-inventories/9b6b22bb68f731b3dbaa6be722833f3a1ed970584b36ab3435320bd71b6459b1.worktree-inventory.json
+  content_hash: sha256:9b6b22bb68f731b3dbaa6be722833f3a1ed970584b36ab3435320bd71b6459b1
+  entry_count: 81
+handoff_hash: sha256:adbb05e68df123468e5fed9f28fb209f5f62eb65f1778d635468f1fe76b730a1

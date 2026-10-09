@@ -1,6 +1,8 @@
 import { access, readFile, realpath, stat, writeFile } from "node:fs/promises";
 import { safeRepositoryFile } from "./context-source-path.js";
-import { assertSectionContextSchemas } from "./context-schema.js";
+import { ADDITIONAL_TEXT_EXTENSIONS, isAdditionalTextSource, readContextSourceBytes } from "./context-text.js";
+import { assertSectionContextSchemas, assertWorkingIndexContextSchema } from "./context-schema.js";
+import { requireTaskWorkingIndex, formatTaskWorkingIndex, type TaskWorkingIndexReport } from "./working-index.js";
 import path from "node:path";
 import { matchingGitBlobs, readGitValue as gitValue } from "./context-git.js";
 import { parseContextSections, selectContextSection, validateLockedSection, type ContextSection } from "./context-sections.js";
@@ -29,6 +31,7 @@ const TEXT_EXTENSIONS = new Set([
   ".ini", ".java", ".js", ".json", ".jsx", ".kt", ".kts", ".md", ".meta", ".mjs", ".properties",
   ".ps1", ".py", ".rs", ".scss", ".sh", ".sql", ".svelte", ".toml", ".ts", ".tsx", ".txt",
   ".vue", ".xml", ".yaml", ".yml",
+  ...ADDITIONAL_TEXT_EXTENSIONS,
 ]);
 const STOP_WORDS = new Set([
   "about", "after", "against", "agent", "and", "before", "between", "canonical", "change", "context",
@@ -83,6 +86,7 @@ export interface ContextLock {
   agent_run_id: string | null;
   created_at: string;
   context_index_hash: string;
+  context_index_scope?: "task-working";
   base_revision?: string;
   budget: {
     total_tokens: number;
@@ -107,6 +111,7 @@ export interface CompileContextOptions {
   agentRunId?: string | null;
   createdAt?: string;
   apply?: boolean;
+  workingIndex?: boolean;
 }
 
 export interface ContextCompileReport {
@@ -123,7 +128,14 @@ export interface ContextCompileReport {
     source_count: number;
     estimated_tokens: number;
   }>;
+  required_source_costs: Array<{
+    path: string;
+    category: RequiredContextCategory;
+    selector: string;
+    estimated_tokens: number;
+  }>;
   lock: ContextLock;
+  working_index?: TaskWorkingIndexReport;
 }
 
 export interface ApplyContextPreviewOptions {
@@ -185,7 +197,7 @@ function sameResolvedPath(left: string, right: string): boolean {
 
 function parsePreviewLock(value: unknown): ContextLock {
   if (!isRecord(value) || !hasOnlyKeys(value, [
-    "task_id", "agent_run_id", "created_at", "context_index_hash", "base_revision", "budget",
+    "task_id", "agent_run_id", "created_at", "context_index_hash", "context_index_scope", "base_revision", "budget",
     "sources", "omissions", "raw_transcripts_included", "lock_hash",
   ])) {
     throw new Error("preview lock root is invalid");
@@ -195,6 +207,7 @@ function parsePreviewLock(value: unknown): ContextLock {
     !(typeof value.agent_run_id === "string" || value.agent_run_id === null) ||
     typeof value.created_at !== "string" || !isIsoDateTime(value.created_at) ||
     typeof value.context_index_hash !== "string" || !/^sha256:[a-f0-9]{64}$/i.test(value.context_index_hash) ||
+    !(value.context_index_scope === undefined || value.context_index_scope === "task-working") ||
     !(value.base_revision === undefined || typeof value.base_revision === "string") ||
     value.raw_transcripts_included !== false ||
     typeof value.lock_hash !== "string" || !/^sha256:[a-f0-9]{64}$/i.test(value.lock_hash) ||
@@ -673,6 +686,25 @@ function formatRequiredContextBreakdown(
     .join(", ");
 }
 
+function requiredSourceCosts(
+  prepared: Array<{ candidate: Candidate; tokens: number }>,
+): ContextCompileReport["required_source_costs"] {
+  return prepared
+    .filter((entry) => entry.candidate.required)
+    .map((entry) => ({
+      path: entry.candidate.path,
+      category: requiredContextCategory(entry.candidate),
+      selector: entry.candidate.selector,
+      estimated_tokens: entry.tokens,
+    }))
+    .sort((left, right) => right.estimated_tokens - left.estimated_tokens || compareCodeUnits(left.path, right.path));
+}
+
+function formatRequiredSourceCosts(costs: ContextCompileReport["required_source_costs"]): string[] {
+  return costs.slice(0, 5).map((entry) =>
+    `${entry.path}=${entry.estimated_tokens} tokens (${entry.category}; ${entry.selector})`);
+}
+
 export function computeContextLockHash(value: Omit<ContextLock, "lock_hash">): string {
   return sha256(JSON.stringify(value));
 }
@@ -695,7 +727,8 @@ export async function compileContext(options: CompileContextOptions): Promise<Co
   if (!isIsoDateTime(createdAt)) throw new Error("created-at must be an ISO date-time");
 
   const config = await loadConfig(root);
-  const index = await loadContextIndex(root, config);
+  const working = options.workingIndex ? await requireTaskWorkingIndex(root, taskId, options.includePaths ?? []) : undefined;
+  const index = working?.index ?? await loadContextIndex(root, config);
   const { state, path: statePath } = await loadTaskState(root, taskId);
   const taskRoot = `.agent-context/tasks/${taskId}`;
   const defaultOutput = `${taskRoot}/context.lock.json`;
@@ -973,7 +1006,14 @@ export async function compileContext(options: CompileContextOptions): Promise<Co
         || await isSameAsOutput(root, outputPath, normalized) || await findContextLockCycle(root, outputPath, normalized)) {
       throw new Error("Unsafe or excluded context section: " + section.path);
     }
-    if (candidates.get(normalized)?.required) throw new Error("Cannot narrow a required whole context source: " + normalized);
+    const wholeCandidate = candidates.get(normalized);
+    if (wholeCandidate?.required) {
+      throw new Error(
+        `Cannot narrow a required whole context source: ${normalized} (required by ${wholeCandidate.selector}). ` +
+        "Review any task-owned required_context_sources declaration before replacing it with a hash-bound context_sections range; " +
+        "governing, canonical, external-workflow and cited-evidence whole-source requirements cannot be narrowed.",
+      );
+    }
     addCandidate(candidates, { path: normalized, truthLevel: indexedTruth(index, normalized, "unclassified"), level: "L3", priority: 25,
       reason: "Explicit hash-bound source section from task state.", selector: "task-context-section", required: true, ownership: "project", sourceSystem: null });
   }
@@ -985,7 +1025,13 @@ export async function compileContext(options: CompileContextOptions): Promise<Co
       omissions.push({ candidate: candidate.path, reason: "Optional candidate no longer exists.", required: false });
       continue;
     }
-    const content = await readFile(absolute);
+    let content: Buffer;
+    try { content = await readContextSourceBytes(absolute, candidate.path); }
+    catch (error) {
+      if (candidate.required || !isAdditionalTextSource(candidate.path)) throw error;
+      omissions.push({ candidate: candidate.path, reason: `Optional text code source was not selected: ${(error as Error).message}`, required: false });
+      continue;
+    }
     const section = sections.get(candidate.path);
     if (section && sha256(content) !== section.content_hash) throw new Error("Context section source changed: " + candidate.path);
     const selected = section ? selectContextSection(content, section.from, section.to) : undefined;
@@ -995,11 +1041,13 @@ export async function compileContext(options: CompileContextOptions): Promise<Co
   const availableInputTokens = totalTokens - reservedOutputTokens - inputSafetyTokens;
   const requiredTokens = prepared.filter((entry) => entry.candidate.required).reduce((sum, entry) => sum + entry.tokens, 0);
   const requiredBreakdown = requiredContextBreakdown(prepared);
+  const sourceCosts = requiredSourceCosts(prepared);
   if (requiredTokens > availableInputTokens) {
     const suggestedTotalTokens = requiredTokens + reservedOutputTokens + inputSafetyTokens;
     throw new Error(
       `required context needs ${requiredTokens} estimated tokens but only ${availableInputTokens} input tokens are available; ` +
       `breakdown: ${formatRequiredContextBreakdown(requiredBreakdown)}; ` +
+      `largest required sources: ${formatRequiredSourceCosts(sourceCosts).join(", ")}; ` +
       `raise --total-tokens to at least ${suggestedTotalTokens} (required + reserves), lower --reserve-output/--input-safety, or reduce required sources; see docs/usage.md`,
     );
   }
@@ -1052,6 +1100,7 @@ export async function compileContext(options: CompileContextOptions): Promise<Co
     agent_run_id: options.agentRunId ?? null,
     created_at: createdAt,
     context_index_hash: index.root_hash,
+    ...(working ? { context_index_scope: "task-working" as const } : {}),
     ...(baseRevision ? { base_revision: baseRevision } : {}),
     budget: {
       total_tokens: totalTokens,
@@ -1067,6 +1116,7 @@ export async function compileContext(options: CompileContextOptions): Promise<Co
   // Dry-run locks are also consumed by resume; validate the actual prospective
   // payload, not just the presence of feature field names, before any consumer writes.
   if (sections.size) await assertSectionContextSchemas(root, config, lock);
+  if (working) await assertWorkingIndexContextSchema(root, config, lock);
   const serialized = serializeContextLock(lock);
   let outputModified = false;
   if (options.apply) {
@@ -1096,7 +1146,9 @@ export async function compileContext(options: CompileContextOptions): Promise<Co
     omitted_candidates: omissions.length,
     omitted_file_intents: omittedFileIntents,
     required_context_breakdown: requiredBreakdown,
+    required_source_costs: sourceCosts,
     lock,
+    ...(working ? { working_index: working } : {}),
   };
 }
 
@@ -1123,7 +1175,9 @@ export async function applyContextPreview(options: ApplyContextPreviewOptions): 
   const { lock_hash: _ignored, ...payload } = lock;
   if (computeContextLockHash(payload) !== lock.lock_hash) throw new Error("context preview lock self-hash does not match its payload");
   const config = await loadConfig(root);
-  const index = await loadContextIndex(root, config);
+  const index = lock.context_index_scope === "task-working"
+    ? (await requireTaskWorkingIndex(root, lock.task_id, lock.sources.map(source => source.path))).index
+    : await loadContextIndex(root, config);
   if (lock.context_index_hash !== index.root_hash) throw new Error("context preview uses a stale context index");
   const currentRevision = await gitValue(root, ["rev-parse", "HEAD"]);
   if (lock.base_revision !== undefined && currentRevision !== lock.base_revision) {
@@ -1138,7 +1192,7 @@ export async function applyContextPreview(options: ApplyContextPreviewOptions): 
     seen.add(normalized);
     const absolute = await safeRepositoryFile(root, normalized);
     if (!absolute) throw new Error(`context preview source no longer exists: ${normalized}`);
-    const content = await readFile(absolute);
+    const content = await readContextSourceBytes(absolute, normalized);
     if (sha256(content) !== source.content_hash) {
       throw new Error(`context preview source changed: ${normalized}`);
     }
@@ -1149,6 +1203,7 @@ export async function applyContextPreview(options: ApplyContextPreviewOptions): 
   }
   const sectionReasons = await contextIndexCompatibilityReasons(root, index, lock);
   if (sectionReasons.length) throw new Error("Context preview does not satisfy task context: " + sectionReasons.join("; "));
+  if (lock.context_index_scope === "task-working") await assertWorkingIndexContextSchema(root, config, lock);
 
   if (lock.sources.some((source) => source.truth_level === "unclassified")) {
     await assertUnclassifiedContextSchema(root, config);
@@ -1190,6 +1245,7 @@ export function formatContextCompileReport(report: ContextCompileReport): string
     : report.output_modified ? "written" : "unchanged";
   const lines = [
     `Context compile ${report.mode}: ${report.task_id}`,
+    ...(report.working_index ? [formatTaskWorkingIndex(report.working_index)] : []),
     `Selected sources: ${report.selected_sources}`,
     `Estimated input: ${report.lock.budget.estimated_input_tokens}/${report.lock.budget.total_tokens - report.lock.budget.reserved_output_tokens - (report.lock.budget.reserved_input_tokens ?? 0)} tokens`,
     `Input safety reserve: ${report.lock.budget.reserved_input_tokens ?? 0} tokens`,
@@ -1199,6 +1255,8 @@ export function formatContextCompileReport(report: ContextCompileReport): string
     ...report.required_context_breakdown
       .filter((entry) => entry.source_count > 0)
       .map((entry) => `  - ${entry.category}: ${entry.estimated_tokens} tokens across ${entry.source_count} source${entry.source_count === 1 ? "" : "s"}`),
+    "Largest required sources (estimated, top 5):",
+    ...formatRequiredSourceCosts(report.required_source_costs).map((entry) => `  - ${entry}`),
     `Omitted candidates: ${report.omitted_candidates}`,
     `Output: ${report.output_path} (${outputState})`,
     `Lock hash: ${report.lock.lock_hash}`,

@@ -1,0 +1,115 @@
+handoff_id: H-T-AGENT-GUIDANCE-STATUS-001-20261003200704
+task_id: T-AGENT-GUIDANCE-STATUS-001
+created_at: "2026-10-03T20:07:04.362Z"
+source_session_id: canontrail-guide-status-20261003
+checkpoint_trigger: explicit-handoff
+source_context_lock_path: .agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/evidence/context-locks/d2e6461a0f9ae17e964f4eeb250f0ea11e12346121eae9afc51563bd843c2185.json
+source_context_lock_hash: sha256:d2e6461a0f9ae17e964f4eeb250f0ea11e12346121eae9afc51563bd843c2185
+objective: Add concise bundled CLI guidance and an honest read-only task status view without changing completion authority.
+completed:
+  - Added a concise provider-neutral guide bundled with the running CLI rather than fetched from newer docs.
+  - Added read-only task status reusing existing finalization JSON exit behavior and predicates without index refresh.
+  - Verified 32 new guide/status cases and all 863 runnable cases with 13 explicit capability skips.
+  - Passed isolated Windows typecheck build audit validation documentation and strict repository checks.
+  - Preserved prior task states approvals archives frozen examples and the shared original CLI; archived active context preimages exactly.
+decisions:
+  - statement: Limit this task to runtime-bundled guidance and read-only status presentation; host orchestration consumer rollout and publication stay outside scope.
+    authority: approved
+    source: .agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/brief.md
+files:
+  - path: .agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/brief.md
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: .agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/change.yaml
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: .agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/evidence/quality.json
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: .agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/evidence/self-review.md
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: .agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/evidence/verification.md
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: .agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/state.yaml
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: ARTIFACT_PROTOCOL.md
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: README.md
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: ROADMAP.md
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: docs/self-documentation.md
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: docs/usage.md
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: examples/agent-guidance/README.md
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: src/agent-guide.ts
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: src/cli.ts
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: src/task-status.ts
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: test/agent-guidance-status.test.ts
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+checks:
+  - name: Fresh isolated guide/status quality and preservation
+    status: pass
+    evidence: .agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/evidence/verification.md
+blockers: []
+open_questions:
+  - Whether to publish the new local branch for exact Linux macOS Windows and Node-floor CI; previous CI is not evidence for these bytes.
+  - Separate publication-delta independent review and earlier high-risk integration gates remain open; this task does not close them.
+next_safe_action: Inspect the local guide/status diff and Windows receipts, then decide whether to publish the new branch for exact hosted checks; preserve the sealed PR2 review target and do not replace consumer CLIs without rollout authority.
+do_not_repeat:
+  - Do not infer acceptance from a live host idle/done signal or stored implemented claim.
+  - Do not rebuild the shared original or consumer runtime in place.
+  - Do not merge PR2 or rewrite historical evidence to obtain passing gates.
+resume_sources:
+  - AGENTS.md
+  - .agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/state.yaml
+  - .agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/brief.md
+  - .agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/change.yaml
+  - VISION.md
+  - docs/decisions/0001-typescript-cli.md
+  - docs/parallel-work.md
+  - integrations/gsd/canontrail/skills/canontrail-finalize/SKILL.md
+  - integrations/superpowers/skills/canontrail-feature-lifecycle/SKILL.md
+  - .agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/evidence/quality.json
+  - .agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/evidence/self-review.md
+  - .agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/evidence/verification.md
+  - ARTIFACT_PROTOCOL.md
+  - docs/usage.md
+  - schemas/change-record.schema.json
+  - schemas/task-state.schema.json
+  - src/agent-guide.ts
+  - src/cli.ts
+  - src/continuity-files.ts
+  - src/finalize.ts
+  - src/task-status.ts
+  - test/agent-guidance-status.test.ts
+  - README.md
+  - ROADMAP.md
+  - docs/self-documentation.md
+  - examples/agent-guidance/README.md
+  - .agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/context.lock.json
+worktree_dirty: true
+uncommitted_summary: Git reports 31 changed/untracked entries; 16 task-selected or explicitly reported files are listed below. The complete hash-bound worktree_inventory is separate on-demand safety evidence, not an ownership claim or file-content backup.
+worktree_inventory:
+  path: .agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/evidence/worktree-inventories/2cf5d533a7006e114fcb0ebe1d4f49a50954654424a314ffc1c52bd0023b2bff.worktree-inventory.json
+  content_hash: sha256:2cf5d533a7006e114fcb0ebe1d4f49a50954654424a314ffc1c52bd0023b2bff
+  entry_count: 31
+handoff_hash: sha256:d8d103b3feea56b5de9c2ccb68d9e7a0f53ad0e16d5c638ab4a07c2c291820db

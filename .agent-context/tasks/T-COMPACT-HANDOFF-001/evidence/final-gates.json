@@ -1,0 +1,107 @@
+{
+  "observed_at": "2026-09-26T10:54:01.121Z",
+  "scope": "Local Windows author verification; independent review and publication remain pending",
+  "results": {
+    "validate": {
+      "exit_code": 0,
+      "ok": true,
+      "stats": {
+        "markdownDocuments": 45,
+        "structuredArtifacts": 36,
+        "schemas": 16,
+        "errors": 0,
+        "warnings": 0
+      },
+      "diagnostics": []
+    },
+    "audit": {
+      "exit_code": 0,
+      "finding_counts": {
+        "errors": 0,
+        "warnings": 0,
+        "total": 0
+      }
+    },
+    "repository_finalize": {
+      "exit_code": 0,
+      "ok": true,
+      "gates": [
+        {
+          "id": "index-refresh",
+          "status": "skipped",
+          "summary": "Context index refresh was not requested; freshness is checked without writes.",
+          "findings": []
+        },
+        {
+          "id": "repository",
+          "status": "pass",
+          "summary": "Structural validation passed without warnings.",
+          "findings": []
+        },
+        {
+          "id": "documentation",
+          "status": "pass",
+          "summary": "Documentation audit is healthy.",
+          "findings": []
+        },
+        {
+          "id": "task",
+          "status": "skipped",
+          "summary": "No task id was supplied; repository-level gates only.",
+          "findings": []
+        }
+      ]
+    },
+    "task_finalize": {
+      "exit_code": 1,
+      "ok": false,
+      "gates": [
+        {
+          "id": "index-refresh",
+          "status": "skipped",
+          "summary": "Context index refresh was not requested; freshness is checked without writes.",
+          "findings": []
+        },
+        {
+          "id": "repository",
+          "status": "pass",
+          "summary": "Structural validation passed without warnings.",
+          "findings": []
+        },
+        {
+          "id": "documentation",
+          "status": "pass",
+          "summary": "Documentation audit is healthy.",
+          "findings": []
+        },
+        {
+          "id": "task",
+          "status": "fail",
+          "summary": "Task T-COMPACT-HANDOFF-001 has 3 open completion gate(s).",
+          "findings": [
+            {
+              "code": "FINALIZE105",
+              "message": "task status must be verified or done, found 'review'",
+              "path": ".agent-context/tasks/T-COMPACT-HANDOFF-001/state.yaml"
+            },
+            {
+              "code": "FINALIZE107",
+              "message": "task check 'CHECK-REVIEW' is 'pending'",
+              "path": ".agent-context/tasks/T-COMPACT-HANDOFF-001/state.yaml"
+            },
+            {
+              "code": "FINALIZE110",
+              "message": "change status must be verified, found 'implemented'",
+              "path": ".agent-context/tasks/T-COMPACT-HANDOFF-001/change.yaml"
+            }
+          ]
+        }
+      ]
+    },
+    "handoff": {
+      "exit_code": 0,
+      "ok": true,
+      "diagnostics": []
+    }
+  }
+}

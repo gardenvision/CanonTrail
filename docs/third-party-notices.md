@@ -1,6 +1,6 @@
 ---
 topic_id: canontrail-third-party-inventory
-stand: "2026-09-13"
+stand: "2026-10-03"
 status: source-distribution-inventory
 truth_level: draft
 verification: {state: unverified, evidence: [package.json, package-lock.json, LICENSE.txt]}
@@ -23,7 +23,7 @@ The current lockfile declares four direct and four transitive runtime packages. 
 | commander | 15.0.0 | direct | MIT |
 | yaml | 2.9.0 | direct | ISC |
 | fast-deep-equal | 3.1.3 | transitive | MIT |
-| fast-uri | 3.1.6 | transitive | BSD-3-Clause |
+| fast-uri | 3.1.8 | transitive | BSD-3-Clause |
 | json-schema-traverse | 1.0.0 | transitive | MIT |
 | require-from-string | 2.0.2 | transitive | MIT |
 

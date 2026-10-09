@@ -1,6 +1,6 @@
 ---
 topic_id: finding-codes
-stand: "2026-09-18"
+stand: "2026-10-08"
 status: public-source-alpha
 truth_level: draft
 verification:
@@ -24,13 +24,14 @@ Exit codes: `0` pass — `1` failed validation/finalization/index preflight or C
 |---|---|---|---|
 | `LOCK001` | error | estimated input plus reserves exceeds the lock's total token budget | recompile with a larger `--total-tokens` or smaller reserves |
 | `LOCK002` | error | duplicate source path inside one lock | remove the duplicate citation, then recompile |
-| `LOCK003` | error | source path missing or not resolving with exact spelling | restore the file or fix the reference, then recompile |
+| `LOCK003` | error | active source-path grammar invalid, source missing or not resolving with exact spelling | fix unsafe path identity; for missing current sources restore/review the file, then recompile; working preflight skips existence freshness, not grammar |
 | `LOCK004` | error | source bytes differ from the recorded `content_hash` | reread the source, update the task, recompile; in `finalize --task` unrelated drift is reported separately |
 | `LOCK005` | error | a `required` candidate was omitted | raise the budget or include the source explicitly; required input is never silently dropped |
 | `LOCK006` | warning | raw transcripts included in the lock | keep raw session transcripts out of context sources |
 | `LOCK007` | error | lock self-hash does not match its payload | rebuild the lock from its sources; inspect the file if this was unexpected |
 | `LOCK008` | error | index compatibility: stale index, lock/task identity mismatch, or task-relevant index changes | follow the message: `canontrail index .`, then recompile the lock (or restore the task state) |
 | `LOCK009` | error | section bytes, selection hash or token estimate mismatch | recompile from the exact range (`context excerpt` shows it) |
+| `LOCK010` | error | explicit context-index mode is unknown even if an older schema tolerates it | restore a supported lock; an unknown mode is never legacy/global or deferrable source drift |
 
 ## Context index (`INDEX`)
 
@@ -39,6 +40,18 @@ Exit codes: `0` pass — `1` failed validation/finalization/index preflight or C
 | `INDEX001` | error | context index missing | run `canontrail index .` |
 | `INDEX002` | error | index unreadable or invalid | regenerate with `canontrail index .`; inspect unexpected edits |
 | `INDEX003` | error | index stale (governed documents changed) | run `canontrail index .`, then rerun the original command |
+
+## Task working views (`WIDX`)
+
+| Code | Severity | Trigger | Remedy |
+|---|---|---|---|
+| `WIDX001` | error | working-view dependency/physical identity, byte coverage or bounded discovery cannot be established | inspect the reported cause and true dependencies; do not invent independence or exclude required authority |
+
+Only explicit `index --task` / `context compile --working-index` may isolate the
+two documented error kinds in positively noncanonical, unrelated task notes.
+Original codes and details remain in the full raw structural preflight;
+isolation is not repair. Every unknown/unsafe finding remains blocking, and a
+working PASS is not a global validation/completion/CI result.
 
 ## References (`REF`)
 
@@ -110,7 +123,7 @@ Exit codes: `0` pass — `1` failed validation/finalization/index preflight or C
 | Code | Severity | Trigger | Remedy |
 |---|---|---|---|
 | `SCHEMA001`–`SCHEMA004` | error | schemas directory unreadable, schema load/compile failed, or a validator is unavailable | restore `.agent-context/schemas` from the tool copy |
-| `SCHEMA005` | error | artifact does not conform to its schema | fix the artifact; the diagnostic names the schema |
+| `SCHEMA005` | error | artifact does not conform to its schema | fix the named field; the diagnostic includes actual allowed enum/constant values, not a guessed shared vocabulary |
 | `DOC001` / `DOC005` | error | repository files or structured artifacts cannot be scanned | check permissions and paths |
 | `DOC002` | error | Markdown frontmatter invalid | fix the header block at the named file |
 | `DOC003` | error | duplicate `artifact_id` | keep artifact ids unique |
@@ -118,6 +131,19 @@ Exit codes: `0` pass — `1` failed validation/finalization/index preflight or C
 | `CANON001` / `CANON002` | error | canonical document missing `topic_id` / topic owned twice | fix the header; keep one canonical owner per topic |
 | `CFG001` / `CFG002` | error | configuration cannot be read / migration coverage incomplete | fix `config.yaml`; include `.agent-context/migrations` in `governed_paths` |
 | `MAINT001` / `MAINT002` | error | frozen-example policy cannot be validated / a frozen entry is ineligible | fix `.agent-context/maintenance.yaml` |
+
+## Document snapshots (`SNAP`)
+
+| Code | Severity | Trigger | Remedy |
+|---|---|---|---|
+| `SNAP001` | error | snapshot record/schema/serialization, owner/hash/path binding, or referenced preimage is invalid | inspect the exact retained pair and restore proven original bytes; never recompute history to bless a mismatch |
+| `SNAP002` | error | raw preimage is unsafe, malformed, over limit or inconsistent with its hash filename | preserve and inspect provenance; restore known exact bytes if available |
+| `SNAP004` | error | reserved archive is unreadable, linked, has unexpected entries or lacks complete governed/non-excluded coverage | fix local identity/coverage deliberately; do not silently exclude the archive |
+| `SNAP005` | warning | raw preimage has no intact referring record, possibly after interrupted capture | retain and inspect partial evidence; strict warning policy fails; no automatic deletion |
+
+`document snapshot-read` checks historical byte integrity, not current source
+state, semantic sufficiency or approval. The complete contract is in
+[Document drafts and preserved source revisions](usage.md#document-drafts-and-preserved-source-revisions).
 
 ## Finalization (`FINALIZE`)
 

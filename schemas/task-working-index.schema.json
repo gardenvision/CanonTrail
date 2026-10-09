@@ -1,0 +1,205 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:canontrail:schema:task-working-index:1",
+  "title": "Task Working Index (report only; never repository completion)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "validation_scope",
+    "purpose",
+    "root",
+    "task_id",
+    "ok",
+    "index_written",
+    "completion_approval",
+    "isolation_policy",
+    "relevant_task_ids",
+    "fallback_reason",
+    "excluded_documents",
+    "isolated_findings",
+    "blocking_findings",
+    "repository_preflight",
+    "index"
+  ],
+  "properties": {
+    "version": {
+      "const": 1
+    },
+    "validation_scope": {
+      "const": "task-working"
+    },
+    "purpose": {
+      "const": "orientation-and-context"
+    },
+    "root": {
+      "type": "string"
+    },
+    "task_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "ok": {
+      "type": "boolean"
+    },
+    "index_written": {
+      "const": false
+    },
+    "completion_approval": {
+      "const": false
+    },
+    "isolation_policy": {
+      "const": "noncanonical-peer-markdown-v1"
+    },
+    "relevant_task_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "fallback_reason": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "excluded_documents": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "path",
+          "task_id",
+          "content_hash",
+          "truth_level"
+        ],
+        "properties": {
+          "path": {
+            "type": "string"
+          },
+          "task_id": {
+            "type": "string"
+          },
+          "content_hash": {
+            "type": "string",
+            "pattern": "^sha256:[a-f0-9]{64}$"
+          },
+          "truth_level": {
+            "enum": [
+              "draft",
+              "active-snapshot",
+              "historical"
+            ]
+          }
+        }
+      }
+    },
+    "isolated_findings": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/diagnostic"
+      }
+    },
+    "blocking_findings": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/diagnostic"
+      }
+    },
+    "repository_preflight": {
+      "type": "object",
+      "required": [
+        "root",
+        "ok",
+        "diagnostics",
+        "stats"
+      ],
+      "properties": {
+        "root": {
+          "type": "string"
+        },
+        "ok": {
+          "type": "boolean"
+        },
+        "diagnostics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/diagnostic"
+          }
+        },
+        "stats": {
+          "type": "object"
+        }
+      },
+      "additionalProperties": true
+    },
+    "index": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "version": {
+          "const": 1
+        },
+        "hash_algorithm": {
+          "const": "sha256"
+        },
+        "root_hash": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "documents": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      },
+      "required": [
+        "version",
+        "hash_algorithm",
+        "root_hash",
+        "documents"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$defs": {
+    "diagnostic": {
+      "type": "object",
+      "required": [
+        "code",
+        "severity",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "severity": {
+          "enum": [
+            "error",
+            "warning"
+          ]
+        },
+        "message": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "detail": {
+          "type": "string"
+        },
+        "context_drift": {
+          "type": "object"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}
+

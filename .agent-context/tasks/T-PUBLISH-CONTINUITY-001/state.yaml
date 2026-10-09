@@ -1,0 +1,34 @@
+task_id: T-PUBLISH-CONTINUITY-001
+status: verified
+objective: Integrate tested continuity and task-authoring updates with public main and publish a reviewable branch with exact hosted checks.
+non_goals: [No consumer rollout, No real-project migration, No PersonalCanon implementation, No invented independent approval]
+acceptance_criteria:
+  - id: AC-001
+    statement: Public main corrections and existing working changes are preserved.
+    verification: Diff and exact starting snapshot comparison; exercise both branches' regression tests.
+    status: pass
+  - id: AC-002
+    statement: Pinned dependency audit finding is remediated without unrelated upgrades.
+    verification: Lockfile diff and current npm audit plus complete suite.
+    status: pass
+  - id: AC-003
+    statement: The source passes checks and the branch is published with honest review and platform status.
+    verification: Hosted branch identity and per-platform outcomes; review gates retained.
+    status: pass
+  - id: AC-004
+    statement: Equal-cost reports are locale-independent and multiline objective text stays quoted data with unchanged draft lifecycle.
+    verification: RED GREEN regressions and isolated complete quality chain.
+    status: pass
+dependencies: []
+documentation_impact: [ROADMAP.md, docs/self-documentation.md, docs/third-party-notices.md, docs/release-checklist.md]
+file_intents: [package-lock.json, docs/third-party-notices.md, ROADMAP.md, docs/self-documentation.md, docs/release-checklist.md, docs/alpha-readiness.md, docs/usage.md, examples/task-create/README.md, src/handoff.ts, src/continuity-files.ts, src/safe-write.ts, src/context.ts, src/task-create.ts, src/cli.ts, src/validator.ts, src/resume.ts, test/context.test.ts, test/task-create.test.ts, test/compact-handoff.test.ts, test/continuity-write-hardening.test.ts, test/migration-control-evidence.test.ts, test/fixture-rename.ts, test/fixture-rename.test.ts]
+required_context_sources: [ARTIFACT_PROTOCOL.md, package.json, package-lock.json, src/handoff.ts, src/continuity-files.ts, src/context.ts, src/task-create.ts, .github/workflows/validate.yml, test/migration-control-evidence.test.ts, test/fixture-rename.ts, test/fixture-rename.test.ts]
+parallel_safety: exclusive
+owner: null
+worktree: null
+checks:
+  - {id: CHECK-WINDOWS, command_or_observation: Fresh correction chain passed 831 tests with 13 capability skips; earlier setup failure and unchanged-source probes remain retained., status: pass, evidence_refs: [.agent-context/tasks/T-PUBLISH-CONTINUITY-001/evidence/review-consolidation.md]}
+  - {id: CHECK-CI, command_or_observation: Exact 50f7d24 push and PR matrices plus separate completion gate pass; future metadata requires new checks before merge., status: pass, evidence_refs: [.agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/hosted-ci-50f7d24.json, .agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/integration-closure.md]}
+  - {id: CHECK-REVIEW, command_or_observation: Independent exact-r5 technical supplement bound to published 50f7d24 passes this task's declared technical boundary., status: pass, evidence_refs: [.agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/integrated-review.md]}
+latest_handoff: .agent-context/tasks/T-PUBLISH-CONTINUITY-001/handoff.yaml
+updated_at: "2026-10-09T05:15:12Z"

@@ -1,0 +1,119 @@
+handoff_id: H-T-COMPACT-HANDOFF-001-20260926105123
+task_id: T-COMPACT-HANDOFF-001
+created_at: 2026-09-26T10:51:23.950Z
+source_session_id: canontrail-compact-handoff-20260926
+checkpoint_trigger: pause
+source_context_lock_path: .agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/context-locks/0cac86e6c49b743c67285b59e956ff7815f3a3f4f9c195a287f09d43d3d31995.json
+source_context_lock_hash: sha256:0cac86e6c49b743c67285b59e956ff7815f3a3f4f9c195a287f09d43d3d31995
+objective: Keep task handoffs compact while retaining complete hash-bound Git status evidence, and explain missing evidence reference failures without weakening validation.
+completed:
+  - Recorded decided high-risk task and compiled bounded context before source implementation.
+  - Implemented compact handoff inventory binding and all receiving integrity consumers.
+  - Added blocking reference diagnostics and index guidance without reference exceptions.
+  - All 30 compact-regression cases pass; final full suite has 717 passes and 13 capability skips.
+  - Recorded the unchanged migration-test EPERM setup incident and successful focused/full repeats.
+decisions:
+  - statement: Preserve complete Git-status data in an immutable hash-addressed sidecar while keeping explicit semantic notes unchanged.
+    authority: approved
+    source: .agent-context/tasks/T-COMPACT-HANDOFF-001/brief.md
+files:
+  - path: .agent-context/tasks/T-COMPACT-HANDOFF-001/brief.md
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: .agent-context/tasks/T-COMPACT-HANDOFF-001/change.yaml
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: .agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/verification.txt
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: .agent-context/tasks/T-COMPACT-HANDOFF-001/state.yaml
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: ARTIFACT_PROTOCOL.md
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: docs/usage.md
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: examples/compact-handoff/README.md
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: ROADMAP.md
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: schemas/handoff.schema.json
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: schemas/worktree-inventory.schema.json
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: src/cli.ts
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: src/handoff.ts
+    state: modified
+    summary: Compact generation and explicit installed-schema preflight.
+  - path: src/initializer.ts
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: src/resume-audit.ts
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: src/resume.ts
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: src/validator.ts
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: src/worktree-inventory.ts
+    state: created
+    summary: Exact Git parsing plus safe immutable inventory write and binding verification.
+  - path: test/compact-handoff.test.ts
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: test/handoff.test.ts
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+checks:
+  - name: Typecheck build and full suite
+    status: pass
+    evidence: .agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/verification.txt
+  - name: Independent review
+    status: not-run
+    evidence: Independent reviewer permission requested; no approval inferred.
+blockers: []
+open_questions:
+  - Independent review permission was requested asynchronously; no reviewer was started without it.
+next_safe_action: Read the task brief and evidence/review-request.md, obtain an authorized independent integrity review of the uncommitted snapshot, then reconcile its findings before marking this task verified or rolling out schemas.
+do_not_repeat:
+  - Do not rewrite legacy handoffs or consumer schemas to make this task pass.
+  - Do not modify Gärtnerei, publish or infer provider-token savings.
+resume_sources:
+  - AGENTS.md
+  - .agent-context/tasks/T-COMPACT-HANDOFF-001/state.yaml
+  - .agent-context/tasks/T-COMPACT-HANDOFF-001/brief.md
+  - .agent-context/tasks/T-COMPACT-HANDOFF-001/change.yaml
+  - examples/compact-handoff/README.md
+  - ARTIFACT_PROTOCOL.md
+  - examples/resume-history/README.md
+  - .agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/verification.txt
+  - src/handoff.ts
+  - src/resume-audit.ts
+  - src/resume.ts
+  - src/validator.ts
+  - src/worktree-inventory.ts
+  - test/compact-handoff.test.ts
+  - docs/usage.md
+  - ROADMAP.md
+  - schemas/handoff.schema.json
+  - schemas/worktree-inventory.schema.json
+  - src/cli.ts
+  - test/handoff.test.ts
+  - .agent-context/tasks/T-COMPACT-HANDOFF-001/context.lock.json
+worktree_dirty: true
+uncommitted_summary: Only this framework branch contains the current implementation and task documentation; full changes remain uncommitted and need verified closure.
+worktree_inventory:
+  path: .agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/worktree-inventories/4cde1f40b426893c635b5d036b0c8827bdb227a21668708cb402a043abf77a4e.worktree-inventory.json
+  content_hash: sha256:4cde1f40b426893c635b5d036b0c8827bdb227a21668708cb402a043abf77a4e
+  entry_count: 26
+handoff_hash: sha256:312a2c4af7081790278e2802ba82942cc655adfbbbd7af231adf1514278a5ef5

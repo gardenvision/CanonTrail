@@ -1,0 +1,127 @@
+{
+  "version": 1,
+  "task_id": "T-FIELD-AUTHORING-002",
+  "created_at": "2026-10-08T19:48:27Z",
+  "entries": [
+    {
+      "code": " M",
+      "path": ".agent-context/context-index.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-FIELD-AUTHORING-002/brief.md"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-FIELD-AUTHORING-002/change.yaml"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-FIELD-AUTHORING-002/checkpoint-input.yaml"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-FIELD-AUTHORING-002/context.lock.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-FIELD-AUTHORING-002/evidence/author-review.md"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-FIELD-AUTHORING-002/evidence/quality.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-FIELD-AUTHORING-002/evidence/verification.md"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-FIELD-AUTHORING-002/report.md"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-FIELD-AUTHORING-002/state.yaml"
+    },
+    {
+      "code": " M",
+      "path": "ARTIFACT_PROTOCOL.md"
+    },
+    {
+      "code": " M",
+      "path": "ROADMAP.md"
+    },
+    {
+      "code": " M",
+      "path": "docs/finding-codes.md"
+    },
+    {
+      "code": " M",
+      "path": "docs/parallel-work.md"
+    },
+    {
+      "code": " M",
+      "path": "docs/self-documentation.md"
+    },
+    {
+      "code": " M",
+      "path": "docs/usage.md"
+    },
+    {
+      "code": "??",
+      "path": "examples/document-authoring/README.md"
+    },
+    {
+      "code": " M",
+      "path": "package-lock.json"
+    },
+    {
+      "code": "??",
+      "path": "schemas/document-snapshot.schema.json"
+    },
+    {
+      "code": " M",
+      "path": "src/agent-guide.ts"
+    },
+    {
+      "code": " M",
+      "path": "src/cli.ts"
+    },
+    {
+      "code": "??",
+      "path": "src/document-authoring.ts"
+    },
+    {
+      "code": "??",
+      "path": "src/document-snapshot.ts"
+    },
+    {
+      "code": " M",
+      "path": "src/initializer.ts"
+    },
+    {
+      "code": "??",
+      "path": "src/schema-diagnostics.ts"
+    },
+    {
+      "code": " M",
+      "path": "src/validator.ts"
+    },
+    {
+      "code": "??",
+      "path": "test/document-authoring.test.ts"
+    },
+    {
+      "code": "??",
+      "path": "test/document-fixture.ts"
+    },
+    {
+      "code": "??",
+      "path": "test/document-snapshot.test.ts"
+    },
+    {
+      "code": "??",
+      "path": "test/schema-diagnostics.test.ts"
+    }
+  ]
+}

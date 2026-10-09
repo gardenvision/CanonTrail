@@ -1,0 +1,107 @@
+{
+  "version": 1,
+  "task_id": "T-PUBLISH-CONTINUITY-001",
+  "created_at": "2026-10-03T17:41:00Z",
+  "entries": [
+    {
+      "code": " M",
+      "path": ".agent-context/context-index.json"
+    },
+    {
+      "code": " M",
+      "path": ".agent-context/tasks/T-COMPACT-HANDOFF-001/context.lock.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/context-locks/d4f988715f50222106b68b1ddba25a8107ab0a0a9b28221d85751e7acf1a8681.json"
+    },
+    {
+      "code": " M",
+      "path": ".agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/context.lock.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/evidence/context-locks/089bc51d7f0b2822277d082dcefcce783f14afc12a7b9afa218942bc450b4f0f.json"
+    },
+    {
+      "code": " M",
+      "path": ".agent-context/tasks/T-PUBLISH-CONTINUITY-001/brief.md"
+    },
+    {
+      "code": " M",
+      "path": ".agent-context/tasks/T-PUBLISH-CONTINUITY-001/change.yaml"
+    },
+    {
+      "code": " M",
+      "path": ".agent-context/tasks/T-PUBLISH-CONTINUITY-001/checkpoint-input.yaml"
+    },
+    {
+      "code": " M",
+      "path": ".agent-context/tasks/T-PUBLISH-CONTINUITY-001/context.lock.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-PUBLISH-CONTINUITY-001/evidence/context-locks/869921ad0be7d97a2960f7e3755f642d0a3aaaf3bf3b108078810876f7133fba.json"
+    },
+    {
+      "code": " M",
+      "path": ".agent-context/tasks/T-PUBLISH-CONTINUITY-001/evidence/progress.md"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-PUBLISH-CONTINUITY-001/evidence/review-consolidation.md"
+    },
+    {
+      "code": " M",
+      "path": ".agent-context/tasks/T-PUBLISH-CONTINUITY-001/state.yaml"
+    },
+    {
+      "code": " M",
+      "path": "ARTIFACT_PROTOCOL.md"
+    },
+    {
+      "code": " M",
+      "path": "ROADMAP.md"
+    },
+    {
+      "code": " M",
+      "path": "docs/alpha-readiness.md"
+    },
+    {
+      "code": " M",
+      "path": "docs/self-documentation.md"
+    },
+    {
+      "code": " M",
+      "path": "docs/usage.md"
+    },
+    {
+      "code": " M",
+      "path": "examples/task-create/README.md"
+    },
+    {
+      "code": " M",
+      "path": "src/context.ts"
+    },
+    {
+      "code": " M",
+      "path": "src/safe-write.ts"
+    },
+    {
+      "code": " M",
+      "path": "src/task-create.ts"
+    },
+    {
+      "code": " M",
+      "path": "test/context.test.ts"
+    },
+    {
+      "code": " M",
+      "path": "test/migration-control-evidence.test.ts"
+    },
+    {
+      "code": " M",
+      "path": "test/task-create.test.ts"
+    }
+  ]
+}

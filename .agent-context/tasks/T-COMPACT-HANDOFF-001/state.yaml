@@ -1,0 +1,25 @@
+task_id: T-COMPACT-HANDOFF-001
+status: verified
+objective: Keep task handoffs compact while retaining complete hash-bound Git status evidence, and explain missing evidence reference failures without weakening validation.
+non_goals:
+  - No consumer-project mutation, automatic schema migration, historical rewrite or publication.
+  - No claim of complete file-content backup, ownership inference or measured provider-token savings.
+acceptance_criteria:
+  - {id: AC-COMPACT, statement: Large unrelated dirty inventories do not inflate the required handoff context., verification: Synthetic large-worktree fixture and byte comparison including the declared Git-root boundary., status: pass}
+  - {id: AC-INTEGRITY, statement: Full inventory provenance is required by every handoff and resume consumer., verification: Missing tampered wrong-owner unsafe-path and decoded-equal raw-byte collision counterexamples., status: pass}
+  - {id: AC-COMPAT, statement: Legacy handoffs stay valid and unsupported new schemas fail before writes., verification: Old fixture and stripped-schema no-write tests., status: pass}
+  - {id: AC-REFERENCES, statement: Missing references identify the owner and target and distinguish active-source drift from missing provenance without weakening gates., verification: Validator and CLI index tests., status: pass}
+  - {id: AC-GIT-ROOT, statement: Nested Git project creation rejects before any writes rather than omitting selected files., verification: Real Git handoff and checkpoint fixtures., status: pass}
+  - {id: AC-BYTE-TRANSPORT, statement: Consumer byte preservation is documented and tested with fresh autocrlf clones., verification: Protected and unprotected clone regressions., status: pass}
+dependencies: []
+documentation_impact: [ARTIFACT_PROTOCOL.md, docs/usage.md, docs/release-checklist.md, ROADMAP.md, docs/self-documentation.md]
+file_intents: [src/handoff.ts, src/worktree-inventory.ts, src/resume.ts, src/resume-audit.ts, src/validator.ts, src/cli.ts, src/initializer.ts, schemas/handoff.schema.json, schemas/worktree-inventory.schema.json, test/handoff.test.ts, test/compact-handoff.test.ts, test/compact-handoff-review.test.ts, ARTIFACT_PROTOCOL.md, docs/usage.md, docs/release-checklist.md, docs/self-documentation.md, ROADMAP.md, examples/compact-handoff/README.md, examples/compact-handoff/inventory.fixture.json]
+required_context_sources: [ARTIFACT_PROTOCOL.md, src/handoff.ts, src/worktree-inventory.ts, src/resume.ts, src/resume-audit.ts, src/validator.ts, test/compact-handoff.test.ts, test/compact-handoff-review.test.ts]
+context_sections:
+  - {path: src/initializer.ts, from: 104, to: 123, content_hash: "sha256:8e2b0ffc5cfc467817342f8382489def165983673ef5d3d74de14a9c3d2ea52e"}
+parallel_safety: exclusive
+checks:
+  - {id: CHECK-QUALITY, command_or_observation: Revision 3 typecheck isolated build and full Windows/Linux suites including raw-byte collision regressions; final structural checks recorded separately., status: pass, evidence_refs: [.agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/precommit-review-r3.md]}
+  - {id: CHECK-REVIEW, command_or_observation: Independent exact-r5 technical supplement bound to published 50f7d24 passes this task's declared technical boundary., status: pass, evidence_refs: [.agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/integrated-review.md]}
+latest_handoff: .agent-context/tasks/T-COMPACT-HANDOFF-001/handoff.yaml
+updated_at: "2026-10-09T05:15:12Z"

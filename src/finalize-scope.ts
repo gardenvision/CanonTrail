@@ -57,7 +57,11 @@ function changeReferences(change: Record<string, unknown> | null): unknown[] {
 
 // This only resolves documentary dependencies. It never acquires a lease,
 // changes task state, follows transcripts, or schedules an executing agent.
-export async function resolveCompletionScope(root: string, taskId?: string): Promise<CompletionScope> {
+export async function resolveCompletionScope(root: string, taskId?: string, workingOptions?: {
+  allowMissingTargetLock?: boolean;
+  additionalDocumentaryReferences?: string[];
+  additionalLiteralReferences?: string[];
+}): Promise<CompletionScope> {
   const global: CompletionScope = { mode: "repository", relevant_task_ids: [], fallback_reason: null, deferred_findings: [] };
   if (taskId === undefined) return global;
   const relevant = new Set<string>();
@@ -115,7 +119,10 @@ export async function resolveCompletionScope(root: string, taskId?: string): Pro
       if (!record(value)) throw new Error("Task artifact is not a mapping: " + id + "/" + name);
       return value;
     }
-    const pending = [taskId];
+    const extra = new Set<string>();
+    await references(workingOptions?.additionalDocumentaryReferences ?? [], extra, checkReferencePath);
+    await references(workingOptions?.additionalLiteralReferences ?? [], extra, checkReferencePath, "literal");
+    const pending = [taskId, ...extra];
     while (pending.length > 0) {
       const id = pending.shift()!;
       if (relevant.has(id)) continue;
@@ -124,7 +131,7 @@ export async function resolveCompletionScope(root: string, taskId?: string): Pro
       if (!state || state.task_id !== id || !Array.isArray(state.dependencies) || state.dependencies.some((entry) => typeof entry !== "string")) {
         throw new Error("Task identity/dependencies cannot be established: " + id);
       }
-      const lock = await readTaskFile(id, "context.lock.json", id !== taskId);
+      const lock = await readTaskFile(id, "context.lock.json", id !== taskId || workingOptions?.allowMissingTargetLock === true);
       if (lock && lock.task_id !== id) throw new Error("Context lock identity does not match task: " + id);
       const changes = [await readTaskFile(id, "change.yaml", true), await readTaskFile(id, "change.yml", true)];
       const linked = new Set<string>(state.dependencies as string[]);

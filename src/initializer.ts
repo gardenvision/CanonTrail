@@ -107,6 +107,8 @@ const SCHEMA_FILES = [
   "compatibility.schema.json",
   "context-inspection.schema.json",
   "context-lock.schema.json",
+  "document-snapshot.schema.json",
+  "task-working-index.schema.json",
   "evidence-record.schema.json",
   "finalize-scope.schema.json",
   "handoff.schema.json",
@@ -117,6 +119,7 @@ const SCHEMA_FILES = [
   "migration-transaction.schema.json",
   "resume-packet.schema.json",
   "task-state.schema.json",
+  "worktree-inventory.schema.json",
 ] as const;
 
 const UNIVERSAL_EXCLUDES = new Set([

@@ -4,7 +4,7 @@ import { cp, link, mkdir, mkdtemp, readFile, rm, symlink, writeFile } from "node
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { promisify } from "node:util";
-import { afterEach, describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { parse, stringify } from "yaml";
 import {
   applyContextPreview,
@@ -214,8 +214,23 @@ describe("compileContext", () => {
         ].includes(source.path))
         .reduce((sum, source) => sum + source.estimated_tokens, 0),
     );
+    expect(first.required_source_costs).toHaveLength(6);
+    expect(first.required_source_costs.map((entry) => entry.estimated_tokens)).toEqual(
+      [...first.required_source_costs.map((entry) => entry.estimated_tokens)].sort((left, right) => right - left),
+    );
+    expect(first.required_source_costs.reduce((sum, entry) => sum + entry.estimated_tokens, 0)).toBe(
+      first.required_context_breakdown.reduce((sum, entry) => sum + entry.estimated_tokens, 0),
+    );
+    expect(first.required_source_costs).not.toContainEqual(expect.objectContaining({ path: "src/feature.ts" }));
+    expect(first.required_source_costs.find((entry) => entry.path === "test/feature.test.ts")).toMatchObject({
+      selector: "explicit-include",
+      category: "explicit-required",
+    });
     expect(formatContextCompileReport(first)).toContain("metadata-routed-canonical:");
     expect(formatContextCompileReport(first)).toContain("explicit-required:");
+    expect(formatContextCompileReport(first)).toContain("Largest required sources (estimated, top 5):");
+    expect(formatContextCompileReport(first)).toContain(first.required_source_costs[0]!.path);
+    expect(JSON.parse(JSON.stringify(first)).required_source_costs).toEqual(first.required_source_costs);
 
     const applied = await compileContext({ ...options, apply: true });
     const repeated = await compileContext({ ...options, apply: true });
@@ -225,6 +240,29 @@ describe("compileContext", () => {
       .toBe(serializeContextLock(first.lock));
     expect((await validateRepository(root)).ok).toBe(true);
   }, 15_000);
+
+  it("orders equal-cost required source reports by code units independently of locale", async () => {
+    const root = await fixture();
+    const required = ["src/a.ts", "src/B.ts", "src/é.ts", "src/Z.ts"];
+    for (const relative of required) await writeFile(path.join(root, relative), "export const n = 1;\n");
+    const statePath = path.join(root, ".agent-context/tasks/T-FEATURE-001/state.yaml");
+    const state = parse(await readFile(statePath, "utf8"));
+    state.required_context_sources = required;
+    await writeFile(statePath, stringify(state));
+    await generateContextIndex(root);
+    const locale = vi.spyOn(String.prototype, "localeCompare").mockImplementation(function (this: string, other: string) {
+      const left = String(this);
+      return left < other ? 1 : left > other ? -1 : 0;
+    });
+    try {
+      const report = await compileContext({ root, taskId: "T-FEATURE-001", createdAt });
+      const costs = report.required_source_costs.filter(entry => required.includes(entry.path));
+      expect(new Set(costs.map(entry => entry.estimated_tokens)).size).toBe(1);
+      expect(costs.map(entry => entry.path)).toEqual(["src/B.ts", "src/Z.ts", "src/a.ts", "src/é.ts"]);
+      expect(report.lock.sources.filter(entry => required.includes(entry.path)).map(entry => entry.path))
+        .toEqual(["src/B.ts", "src/Z.ts", "src/a.ts", "src/é.ts"]);
+    } finally { locale.mockRestore(); }
+  });
 
   it("never selects a legacy task-owned lock file intent and remains valid after recompilation", async () => {
     const root = await fixture();
@@ -472,6 +510,8 @@ describe("compileContext", () => {
     await expect(failure).rejects.toThrow(/governing-task=\d+ tokens\/3 sources/);
     await expect(failure).rejects.toThrow(/metadata-routed-canonical=\d+ tokens\/1 sources/);
     await expect(failure).rejects.toThrow(/external-workflow=\d+ tokens\/1 sources/);
+    await expect(failure).rejects.toThrow(/largest required sources: .*tokens \(.*; .*\)/);
+    await expect(failure).rejects.toThrow(generous.required_source_costs[0]!.path);
     expect(await readFile(output, "utf8")).toBe(before);
   });
 
