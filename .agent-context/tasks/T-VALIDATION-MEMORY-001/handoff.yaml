@@ -1,0 +1,116 @@
+handoff_id: HANDOFF-VALIDATION-MEMORY-CLOSURE
+task_id: T-VALIDATION-MEMORY-001
+created_at: "2026-10-09T20:48:00Z"
+source_session_id: Canontrail442
+checkpoint_trigger: phase-transition
+source_provider: codex
+source_context_lock_path: .agent-context/tasks/T-VALIDATION-MEMORY-001/evidence/context-locks/99bd1bdcaadf2649542eb83c94958479836bb6ebf2e27486846e6a1fae93cabf.json
+source_context_lock_hash: sha256:99bd1bdcaadf2649542eb83c94958479836bb6ebf2e27486846e6a1fae93cabf
+objective: Bound retained handoff and inventory object lifetimes without weakening repository validation.
+completed:
+  - Bounded parsed handoff and worktree-inventory lifetimes without skipping integrity checks.
+  - Typecheck build and full Windows suite passed with 1014 passes and 13 skips.
+  - Exact predecessor positive and negative report equality passed; damaged last archive detected under constrained heap.
+  - Read-only real-scale validation completed at the normal heap limit; existing findings remained visible.
+  - Independent local review approved the exact frozen implementation with no actionable findings.
+  - Hosted Windows Linux Node-floor Linux and macOS checks plus completion gate passed for implementation commit 8570c44.
+  - Technical task and change metadata reconciled with completed implementation review and platform evidence.
+decisions:
+  - statement: Keep the existing shared runtime and consumer files unchanged; rollout requires a separate coordinated decision.
+    authority: approved
+    source: Maintainer implementation scope and recorded task non-goals.
+  - statement: Run an independent local review without paid external review.
+    authority: approved
+    source: Maintainer approved the local review subagent in this chat.
+  - statement: Commit the reviewed correction and publish its branch/PR for hosted platform testing only.
+    authority: approved
+    source: Maintainer replied yes go to the explicit commit push and PR request; merge and rollout remain separate.
+  - statement: Publish the bounded closure metadata and merge PR 4 only after successful exact final-head CI; then verify actual main.
+    authority: approved
+    source: Maintainer explicitly asked to create and start the proposed closure and protected-merge goal.
+files:
+  - path: .agent-context/tasks/T-VALIDATION-MEMORY-001/brief.md
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: .agent-context/tasks/T-VALIDATION-MEMORY-001/change.yaml
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: .agent-context/tasks/T-VALIDATION-MEMORY-001/evidence/independent-review.md
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: .agent-context/tasks/T-VALIDATION-MEMORY-001/evidence/platform-verification.md
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: .agent-context/tasks/T-VALIDATION-MEMORY-001/evidence/verification.md
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: .agent-context/tasks/T-VALIDATION-MEMORY-001/state.yaml
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: ARTIFACT_PROTOCOL.md
+    state: modified
+    summary: Explain bounded history lifetimes and their limits without weakening provenance.
+  - path: ROADMAP.md
+    state: modified
+    summary: Record verified technical correction and separate publication/consumer rollout gates.
+  - path: src/validator.ts
+    state: modified
+    summary: Process full continuity payload checks individually; retain other cross-artifact joins.
+  - path: test/validation-memory.test.ts
+    state: created
+    summary: Seven memory and integrity regression cases.
+checks:
+  - name: Native quality chain
+    status: pass
+    evidence: .agent-context/tasks/T-VALIDATION-MEMORY-001/evidence/verification.md
+  - name: Constrained-heap and predecessor parity control
+    status: pass
+    evidence: .agent-context/tasks/T-VALIDATION-MEMORY-001/evidence/verification.md
+  - name: Real-scale validation runtime completion
+    status: pass
+    evidence: .agent-context/tasks/T-VALIDATION-MEMORY-001/evidence/verification.md
+  - name: Independent local review
+    status: pass
+    evidence: .agent-context/tasks/T-VALIDATION-MEMORY-001/evidence/independent-review.md
+  - name: Exact implementation hosted Windows/Linux/macOS execution
+    status: pass
+    evidence: .agent-context/tasks/T-VALIDATION-MEMORY-001/evidence/platform-verification.md
+blockers: []
+open_questions:
+  - Shared-runtime cutover and canonical-owner lifecycle work remain separately authorized future tasks.
+next_safe_action: Verify and publish the metadata-only technical closure, observe exact final-head CI, merge PR 4 through required protections only if all checks pass, and retain actual main verification evidence. Preserve historical archives, consumer files and the existing shared runtime; do not create a tag or npm release.
+do_not_repeat:
+  - Do not raise the normal heap requirement or skip retained archive checks.
+  - Do not repair consumer historical locks or receipts to make validation green.
+  - Do not identify the entire runtime only by its unchanged thin cli.js wrapper hash.
+  - Do not include canonical-owner lifecycle features silently in this memory correction.
+resume_sources:
+  - AGENTS.md
+  - .agent-context/tasks/T-VALIDATION-MEMORY-001/state.yaml
+  - .agent-context/tasks/T-VALIDATION-MEMORY-001/brief.md
+  - .agent-context/tasks/T-VALIDATION-MEMORY-001/change.yaml
+  - examples/resume-history/README.md
+  - ARTIFACT_PROTOCOL.md
+  - examples/compact-handoff/README.md
+  - examples/context-inspection/README.md
+  - integrations/gsd/canontrail/skills/canontrail-finalize/SKILL.md
+  - integrations/superpowers/skills/canontrail-feature-lifecycle/SKILL.md
+  - .agent-context/tasks/T-VALIDATION-MEMORY-001/evidence/independent-review.md
+  - .agent-context/tasks/T-VALIDATION-MEMORY-001/evidence/platform-verification.md
+  - .agent-context/tasks/T-VALIDATION-MEMORY-001/evidence/verification.md
+  - src/handoff.ts
+  - src/resume-audit.ts
+  - src/validator.ts
+  - src/worktree-inventory.ts
+  - test/continuity-write-hardening.test.ts
+  - ROADMAP.md
+  - test/validation-memory.test.ts
+  - .agent-context/tasks/T-VALIDATION-MEMORY-001/handoff.yaml
+  - .agent-context/tasks/T-VALIDATION-MEMORY-001/context.lock.json
+worktree_dirty: true
+uncommitted_summary: The implementation is committed and published at 8570c44 with successful exact hosted CI. Current local changes reconcile only own closure metadata and roadmap/index; independently reviewed code and all existing immutable archives are unchanged. Protected merge and main verification are authorized but not yet performed; shared runtime and consumer remain unchanged.
+worktree_inventory:
+  path: .agent-context/tasks/T-VALIDATION-MEMORY-001/evidence/worktree-inventories/bc23824189ab9d50d8ac7b1d75bc0b23a1c424d5404c0b3c277c22933b4f56bc.worktree-inventory.json
+  content_hash: sha256:bc23824189ab9d50d8ac7b1d75bc0b23a1c424d5404c0b3c277c22933b4f56bc
+  entry_count: 10
+handoff_hash: sha256:ce8ec476c6861f26e4d5ad9e08800b808643901b7aa1166fb189c4fc69746168

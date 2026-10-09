@@ -1,0 +1,67 @@
+{
+  "version": 1,
+  "task_id": "T-VALIDATION-MEMORY-001",
+  "created_at": "2026-10-09T19:54:54.830Z",
+  "entries": [
+    {
+      "code": " M",
+      "path": ".agent-context/context-index.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-VALIDATION-MEMORY-001/brief.md"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-VALIDATION-MEMORY-001/change.yaml"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-VALIDATION-MEMORY-001/checkpoint-input.yaml"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-VALIDATION-MEMORY-001/context.lock.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-VALIDATION-MEMORY-001/evidence/context-locks/819f1da33de953add6372b0066e6db45d88741d0442caa344f7e58f2829e8ed1.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-VALIDATION-MEMORY-001/evidence/independent-review.md"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-VALIDATION-MEMORY-001/evidence/verification.md"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-VALIDATION-MEMORY-001/evidence/worktree-inventories/b2b9c7ed0c24a929859592dfae4ddea4263312c382aa3a1247636b32d597eadb.worktree-inventory.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-VALIDATION-MEMORY-001/handoff.yaml"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-VALIDATION-MEMORY-001/state.yaml"
+    },
+    {
+      "code": " M",
+      "path": "ARTIFACT_PROTOCOL.md"
+    },
+    {
+      "code": " M",
+      "path": "ROADMAP.md"
+    },
+    {
+      "code": " M",
+      "path": "src/validator.ts"
+    },
+    {
+      "code": "??",
+      "path": "test/validation-memory.test.ts"
+    }
+  ]
+}

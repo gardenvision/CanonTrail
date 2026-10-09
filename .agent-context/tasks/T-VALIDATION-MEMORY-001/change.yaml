@@ -1,0 +1,41 @@
+version: 1
+change_id: CHG-VALIDATION-MEMORY-001
+revision: 1
+title: Bound parsed continuity-history lifetime during repository validation
+status: verified
+risk: high
+author: ChatGPT implementation agent
+canonical_source: ARTIFACT_PROTOCOL.md
+decision_rationale: Retained archive integrity is required by section 8.1. Newly complete coverage must not require heap proportional to the total decoded handoff corpus. Release payloads after full per-artifact checks rather than skipping checks or increasing the normal heap.
+documentation_structure:
+  decision: no-feature-document-change
+  rationale: Existing retained-provenance protocol owns the resource correction; no new feature boundary or persisted artifact shape.
+  feature_documents: []
+acceptance_cases:
+  - {id: AC-MEMORY, given: Many individually valid retained handoffs whose combined decoded payload exceeds the constrained heap., expected: Validation completes with full counts using bounded per-artifact lifetimes., failure_or_uncertainty: A single huge input and unrelated artifact classes retain their existing limits; no universal constant-memory claim., counterexample: Increasing heap or omitting unbound archives makes the test green., oracle: Child process with explicit heap limit plus predecessor failure and exact archive count., status: pass, evidence_refs: [.agent-context/tasks/T-VALIDATION-MEMORY-001/evidence/verification.md, test/validation-memory.test.ts]}
+  - {id: AC-INTEGRITY, given: A long archive history with damage near the end or missing bound provenance., expected: Schema self-hash owner source-lock and inventory diagnostics remain blocking., failure_or_uncertainty: No automatic repair or historical source-currentness requirement., counterexample: Size-only or hash-only checking silently accepts inconsistent provenance., oracle: Deliberately corrupted last archive and exact old/new diagnostic comparisons., status: pass, evidence_refs: [.agent-context/tasks/T-VALIDATION-MEMORY-001/evidence/verification.md, test/validation-memory.test.ts]}
+  - {id: AC-COMPAT, given: Existing positive negative and current-use fixtures., expected: Counts diagnostics and retained/current distinctions are unchanged., failure_or_uncertainty: Findings describe recorded integrity not approval or producer authenticity., counterexample: Deferred files vanish from stats or targeted resume participates incorrectly., oracle: Full regression suite and normalized predecessor report comparison., status: pass, evidence_refs: [.agent-context/tasks/T-VALIDATION-MEMORY-001/evidence/verification.md]}
+impacts:
+  - {area: requirement, decision: affected, rationale: Complete coverage must have bounded archive object lifetimes., evidence_refs: [.agent-context/tasks/T-VALIDATION-MEMORY-001/brief.md]}
+  - {area: data-contracts, decision: not-affected, rationale: No persisted fields schemas or report shape change., evidence_refs: []}
+  - {area: domain-logic, decision: affected, rationale: Loading and handoff checks change lifetime scheduling but not predicates., evidence_refs: [src/validator.ts]}
+  - {area: tests-reference-cases, decision: affected, rationale: Exercise memory scaling and late corruption under a small heap., evidence_refs: [test/validation-memory.test.ts]}
+  - {area: example-data, decision: not-affected, rationale: Existing compact handoff example shape remains unchanged; generated tests supply corpus data., evidence_refs: []}
+  - {area: ui-api, decision: not-affected, rationale: No flags output fields statuses or new command., evidence_refs: []}
+  - {area: documentation, decision: affected, rationale: Explain bounded processing without weaker integrity or universal memory claims., evidence_refs: [ARTIFACT_PROTOCOL.md, ROADMAP.md]}
+  - {area: diagrams-visuals, decision: not-affected, rationale: No UI rendering or diagram changes., evidence_refs: []}
+  - {area: terminology, decision: not-affected, rationale: Existing retained-integrity and current-use vocabulary preserved., evidence_refs: []}
+  - {area: operations-compatibility, decision: affected, rationale: Archive processing must work on Windows Linux and macOS without requiring enlarged heap., evidence_refs: [ARTIFACT_PROTOCOL.md]}
+verification:
+  checks:
+    - {name: Typecheck build and full serial Windows suite, status: pass, evidence_refs: [.agent-context/tasks/T-VALIDATION-MEMORY-001/evidence/verification.md]}
+    - {name: Constrained heap and predecessor parity controls, status: pass, evidence_refs: [.agent-context/tasks/T-VALIDATION-MEMORY-001/evidence/verification.md]}
+    - {name: Read-only real-scale runtime completion, status: pass, evidence_refs: [.agent-context/tasks/T-VALIDATION-MEMORY-001/evidence/verification.md]}
+    - {name: Exact implementation hosted platform and completion checks, status: pass, evidence_refs: [.agent-context/tasks/T-VALIDATION-MEMORY-001/evidence/platform-verification.md]}
+  terminology_search: {status: not-applicable, terms: [], evidence_refs: []}
+  visual_review: {applicable: false, status: not-applicable, evidence_refs: []}
+  unverifiable_items: []
+independent_review: {status: pass, reviewer: Independent local Codex review agent, findings: [], evidence_refs: [.agent-context/tasks/T-VALIDATION-MEMORY-001/evidence/independent-review.md], waiver: null}
+supersedes: []
+superseded_by: null
+updated_at: "2026-10-09T20:46:30Z"
