@@ -1,9 +1,9 @@
 ---
 topic_id: task-working-index-001
-stand: "2026-10-08"
-status: review
+stand: "2026-10-09"
+status: completed
 truth_level: active-snapshot
-verification: {state: internally-reviewed, evidence: [.agent-context/tasks/T-TASK-WORKING-INDEX-001/state.yaml, .agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/independent-review-r5.md]}
+verification: {state: verified, evidence: [.agent-context/tasks/T-TASK-WORKING-INDEX-001/state.yaml, .agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/independent-review-r5.md]}
 read_if_task_touches: [T-TASK-WORKING-INDEX-001, task-local working index]
 primary_systems: [context continuity, documentation governance]
 safe_to_edit: [Keep scope exclusions and strict release limits explicit.]
@@ -42,3 +42,13 @@ No consumer rollout, provider messaging engine, scheduler, editor leases,
 legacy lock repair, private content, automatic canonical promotion or paid review.
 The user separately authorized local commit/push/merge of reviewed clean source
 and an optional completion-message file after successful publication.
+
+## October 9 technical closure
+
+This task's implementation, declared acceptance cases, ten impact decisions and
+required technical checks are closed by the exact r5/50f7 evidence and separate
+independent decisions. The current owner is state.yaml; the consolidated record
+is .agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/integration-closure.md.
+Earlier pending statements above are historical checkpoints, not the current
+gate. Final closing metadata, its new head and the protected merge require their
+own exact checks. No consumer rollout, schema migration or promotion is implied.

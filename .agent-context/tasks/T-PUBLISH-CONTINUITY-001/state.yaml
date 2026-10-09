@@ -1,5 +1,5 @@
 task_id: T-PUBLISH-CONTINUITY-001
-status: review
+status: verified
 objective: Integrate tested continuity and task-authoring updates with public main and publish a reviewable branch with exact hosted checks.
 non_goals: [No consumer rollout, No real-project migration, No PersonalCanon implementation, No invented independent approval]
 acceptance_criteria:
@@ -14,7 +14,7 @@ acceptance_criteria:
   - id: AC-003
     statement: The source passes checks and the branch is published with honest review and platform status.
     verification: Hosted branch identity and per-platform outcomes; review gates retained.
-    status: pending
+    status: pass
   - id: AC-004
     statement: Equal-cost reports are locale-independent and multiline objective text stays quoted data with unchanged draft lifecycle.
     verification: RED GREEN regressions and isolated complete quality chain.
@@ -28,7 +28,7 @@ owner: null
 worktree: null
 checks:
   - {id: CHECK-WINDOWS, command_or_observation: Fresh correction chain passed 831 tests with 13 capability skips; earlier setup failure and unchanged-source probes remain retained., status: pass, evidence_refs: [.agent-context/tasks/T-PUBLISH-CONTINUITY-001/evidence/review-consolidation.md]}
-  - {id: CHECK-CI, command_or_observation: Previous head 66be45e passed all hosted platforms; the correction head still requires its own runs., status: pending, evidence_refs: [.agent-context/tasks/T-PUBLISH-CONTINUITY-001/evidence/review-consolidation.md]}
-  - {id: CHECK-REVIEW, command_or_observation: Predecessor conditionally approved; new correction and metadata delta requires independent review before merge., status: pending, evidence_refs: [.agent-context/tasks/T-PUBLISH-CONTINUITY-001/evidence/review-consolidation.md]}
+  - {id: CHECK-CI, command_or_observation: Exact 50f7d24 push and PR matrices plus separate completion gate pass; future metadata requires new checks before merge., status: pass, evidence_refs: [.agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/hosted-ci-50f7d24.json, .agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/integration-closure.md]}
+  - {id: CHECK-REVIEW, command_or_observation: Independent exact-r5 technical supplement bound to published 50f7d24 passes this task's declared technical boundary., status: pass, evidence_refs: [.agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/integrated-review.md]}
 latest_handoff: .agent-context/tasks/T-PUBLISH-CONTINUITY-001/handoff.yaml
-updated_at: 2026-10-03T17:36:00Z
+updated_at: "2026-10-09T05:15:12Z"

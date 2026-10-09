@@ -1,5 +1,5 @@
 task_id: T-COMPACT-HANDOFF-001
-status: review
+status: verified
 objective: Keep task handoffs compact while retaining complete hash-bound Git status evidence, and explain missing evidence reference failures without weakening validation.
 non_goals:
   - No consumer-project mutation, automatic schema migration, historical rewrite or publication.
@@ -20,6 +20,6 @@ context_sections:
 parallel_safety: exclusive
 checks:
   - {id: CHECK-QUALITY, command_or_observation: Revision 3 typecheck isolated build and full Windows/Linux suites including raw-byte collision regressions; final structural checks recorded separately., status: pass, evidence_refs: [.agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/precommit-review-r3.md]}
-  - {id: CHECK-REVIEW, command_or_observation: Independent continuity-contract review of implementation and counterexamples., status: pending, evidence_refs: []}
+  - {id: CHECK-REVIEW, command_or_observation: Independent exact-r5 technical supplement bound to published 50f7d24 passes this task's declared technical boundary., status: pass, evidence_refs: [.agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/integrated-review.md]}
 latest_handoff: .agent-context/tasks/T-COMPACT-HANDOFF-001/handoff.yaml
-updated_at: "2026-10-03T13:00:00Z"
+updated_at: "2026-10-09T05:15:12Z"

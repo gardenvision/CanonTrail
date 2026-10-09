@@ -1,9 +1,9 @@
 ---
 topic_id: task-working-index-result-001
 stand: "2026-10-09"
-status: implementation-awaiting-review
+status: technically-verified
 truth_level: active-snapshot
-verification: {state: internally-reviewed, evidence: [.agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/verification.md]}
+verification: {state: verified, evidence: [.agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/verification.md, .agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/integration-closure.md]}
 read_if_task_touches: [T-TASK-WORKING-INDEX-001, working-index completion]
 primary_systems: [context continuity, documentation governance]
 safe_to_edit: [Keep measured scope approval and deployment separate.]
@@ -35,3 +35,12 @@ completion signal has occurred. Consumers and older shared runtimes are untouche
 Next safe action: receive the review, consolidate only supported gates, archive
 and deliberately refresh current active locks, obtain strict checks and publish
 a reviewable branch. Merge only the exact green head without bypassing protection.
+
+## Current technical closure
+
+The preceding next-action checkpoint is historical. Separate authoring/r5 reviews,
+the integrated supplement and exact 50f7 hosted runs now support technical closure
+of all five explicitly owned active tasks. State/change/brief record that scope;
+evidence/integration-closure.md is the bounded current route. Closing metadata
+and its new head still need separate strict review/CI before protected merge.
+No product bytes, old failed receipts, consumer schema or shared runtime changed.

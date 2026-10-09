@@ -2,7 +2,7 @@ version: 1
 change_id: CHG-FIELD-AUTHORING-002
 revision: 2
 title: Safe document drafts explicit schema choices and immutable noncanonical document snapshots
-status: implemented
+status: verified
 risk: high
 author: CanonTrail implementation agent
 canonical_source: .agent-context/tasks/T-FIELD-AUTHORING-002/brief.md
@@ -16,7 +16,7 @@ acceptance_cases:
   - {id: AC-VALUES, given: A schema-rejected enum or constant field., expected: The diagnostic identifies its actual field and allowed values while retaining error status., failure_or_uncertainty: Unknown constraints remain ordinary schema errors; values are not inferred from neighboring fields., counterexample: Evidence not-run silently becomes task-check pending or a schema is loosened to accept it., oracle: AJV error params compared with the checked schema and CLI output., status: pass, evidence_refs: [.agent-context/tasks/T-FIELD-AUTHORING-002/evidence/verification.md]}
   - {id: AC-SNAPSHOT, given: An existing owned task and a supported local UTF-8 Markdown document., expected: Preview-first capture preserves exact bytes in an immutable record/preimage pair and explicit read-back verifies and displays them without creating current documentary authority., failure_or_uncertainty: Missing linked incompatible oversized malformed or conflicting evidence fails visibly; unexpected partial output is retained., counterexample: A consistently rehashed record names another task or uncontrolled preimage or snapshot drift is ignored., oracle: Independent raw SHA-256 and byte equality plus index inventory and validator counterexamples., status: pass, evidence_refs: [.agent-context/tasks/T-FIELD-AUTHORING-002/evidence/verification.md]}
   - {id: AC-COORDINATION, given: Independent sessions sharing editor/build resources and transient host messaging., expected: Durable task IDs and explicit user-approval provenance remain separate from addresses messages leases and completion., failure_or_uncertainty: Silence timeout or peer reports do not authorize takeover; stale resource state needs a real check., counterexample: A coordinator message automatically expands a worker's scope or a recorded lease is claimed to enforce OS exclusion., oracle: Existing AGENTS/protocol authority and written operating rules., status: pass, evidence_refs: [.agent-context/tasks/T-FIELD-AUTHORING-002/evidence/verification.md]}
-  - {id: AC-QUALITY, given: The exact new source snapshot., expected: Focused and full deterministic checks pass and old artifacts/runtime remain byte-exact with capability limits disclosed., failure_or_uncertainty: Author evidence is not independent review or unexecuted platform approval., counterexample: Previous CI or consumer functionality is attributed to this new build., oracle: Fresh isolated quality receipts and baseline preservation., status: pending, evidence_refs: [.agent-context/tasks/T-FIELD-AUTHORING-002/evidence/quality.json, .agent-context/tasks/T-FIELD-AUTHORING-002/evidence/verification.md]}
+  - {id: AC-QUALITY, given: The exact new source snapshot., expected: Focused and full deterministic checks pass and old artifacts/runtime remain byte-exact with capability limits disclosed., failure_or_uncertainty: Author evidence is not independent review or unexecuted platform approval., counterexample: Previous CI or consumer functionality is attributed to this new build., oracle: Fresh isolated quality receipts and baseline preservation., status: pass, evidence_refs: [.agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/integration-closure.md, .agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/hosted-ci-50f7d24.json]}
 impacts:
   - {area: requirement, decision: affected, rationale: Bound practical authoring improvements and retained index-isolation work., evidence_refs: [.agent-context/tasks/T-FIELD-AUTHORING-002/evidence/verification.md, .agent-context/tasks/T-FIELD-AUTHORING-002/evidence/author-review.md]}
   - {area: data-contracts, decision: affected, rationale: Add a versioned immutable snapshot record with explicit raw-byte bindings; old artifacts unchanged., evidence_refs: [.agent-context/tasks/T-FIELD-AUTHORING-002/evidence/verification.md, .agent-context/tasks/T-FIELD-AUTHORING-002/evidence/author-review.md]}
@@ -33,11 +33,12 @@ verification:
     - {name: Focused API and executed CLI regressions, status: pass, evidence_refs: [.agent-context/tasks/T-FIELD-AUTHORING-002/evidence/quality.json]}
     - {name: Exact-source Windows and native Linux full tests typecheck build clean install and audit, status: pass, evidence_refs: [.agent-context/tasks/T-FIELD-AUTHORING-002/evidence/quality.json]}
     - {name: Historical artifact and shared runtime preservation, status: pass, evidence_refs: [.agent-context/tasks/T-FIELD-AUTHORING-002/evidence/verification.md]}
-    - {name: Strict global repository validity and finalization, status: fail, evidence_refs: [.agent-context/tasks/T-FIELD-AUTHORING-002/evidence/verification.md]}
+    - {name: Strict global repository validity and finalization restored after reviewed active-only refresh, status: pass, evidence_refs: [.agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/integration-closure.md]}
+    - {name: Exact integrated independent and hosted platform checks, status: pass, evidence_refs: [.agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/integrated-review.md, .agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/hosted-ci-50f7d24.json, .agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/integration-closure.md]}
   terminology_search: {status: pass, terms: [draft, snapshot, allowed, coordinator, approval], evidence_refs: [.agent-context/tasks/T-FIELD-AUTHORING-002/evidence/author-review.md]}
   visual_review: {applicable: false, status: not-applicable, evidence_refs: [.agent-context/tasks/T-FIELD-AUTHORING-002/brief.md]}
-  unverifiable_items: [Strict global and new exact hosted checks remain open, No macOS execution of the sealed authoring snapshot, Consumer rollout is not authorized]
+  unverifiable_items: []
 independent_review: {status: pass, reviewer: Local independent reviewer field_authoring_independent_review, findings: [No blocking technical finding in sealed revision 2; later index integration is separately reviewed], evidence_refs: [.agent-context/tasks/T-FIELD-AUTHORING-002/evidence/independent-review.md], waiver: null}
 supersedes: []
 superseded_by: null
-updated_at: "2026-10-08T19:41:34Z"
+updated_at: "2026-10-09T05:15:12Z"

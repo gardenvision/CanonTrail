@@ -1,0 +1,401 @@
+{
+  "version": 1,
+  "target_commit": "50f7d2431421c9dfd77abf3bde2eeb87fd5c867f",
+  "observed_at": "2026-10-09T05:01:45.580Z",
+  "repository": "gardenvision/CanonTrail",
+  "original_collected_summary_sha256": "e2faac42a5917fb440819d0030b01fc547da621b0eab8478599956db829bba37",
+  "runs": [
+    {
+      "id": 37885844660,
+      "url": "https://github.com/gardenvision/CanonTrail/actions/runs/37885844660",
+      "event": "pull_request",
+      "workflow": "CanonTrail validation",
+      "head_sha": "50f7d2431421c9dfd77abf3bde2eeb87fd5c867f",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "id": 113675551231,
+          "name": "Platform (ubuntu-latest, Node 24)",
+          "conclusion": "success",
+          "url": "https://github.com/gardenvision/CanonTrail/actions/runs/37885844660/job/113675551231"
+        },
+        {
+          "id": 113675551434,
+          "name": "Platform (windows-latest, Node 24)",
+          "conclusion": "success",
+          "url": "https://github.com/gardenvision/CanonTrail/actions/runs/37885844660/job/113675551434"
+        },
+        {
+          "id": 113675551455,
+          "name": "Platform (macos-latest, Node 24)",
+          "conclusion": "success",
+          "url": "https://github.com/gardenvision/CanonTrail/actions/runs/37885844660/job/113675551455"
+        },
+        {
+          "id": 113675551550,
+          "name": "Platform (ubuntu-latest, Node 20.19)",
+          "conclusion": "success",
+          "url": "https://github.com/gardenvision/CanonTrail/actions/runs/37885844660/job/113675551550"
+        },
+        {
+          "id": 113677365190,
+          "name": "validate",
+          "conclusion": "success",
+          "url": "https://github.com/gardenvision/CanonTrail/actions/runs/37885844660/job/113677365190"
+        }
+      ],
+      "platforms": [
+        {
+          "artifact": "platform-macos-latest-node-24",
+          "capabilities": {
+            "schema_version": 1,
+            "observed_at": "2026-10-09T04:52:00.468Z",
+            "platform": "darwin",
+            "architecture": "arm64",
+            "os_release": "25.6.0",
+            "node": "v24.20.0",
+            "fixture_filesystem_type": "26",
+            "case_sensitive": false,
+            "unicode_form_sensitive": false,
+            "unicode_nfc_preserved": true,
+            "directory_link": "available",
+            "file_symlink": "available",
+            "posix_mode_bits": "available",
+            "windows_short_names": "not-applicable"
+          },
+          "tests": {
+            "total": 1020,
+            "passed": 1013,
+            "failed": 0,
+            "skipped": 7,
+            "files": 46,
+            "reported_suites": 110,
+            "failed_suites": 0,
+            "success": true
+          },
+          "skipped_tests": [
+            "context review correction regressions keeps distinct exact-case filenames distinct where the filesystem supports them",
+            "compileContext rejects a required context source that differs from the lock output only by path case",
+            "no linked continuity destinations rejects a case-folded archive directory alias before outputs",
+            "retained history and current entry rejects warned long-path traversal or proves complete warning-free capture",
+            "Sonnet review regression boundaries rejects ordinary short-name aliases without banning legitimate tilde names",
+            "Sonnet review regression boundaries rejects a real Windows short-name control-tree alias before execute, rollback, or validation can trust it",
+            "task-scoped completion safety boundary does not reinterpret distinct case-sensitive directory names as task ownership"
+          ],
+          "failed_tests": [],
+          "evidence": {
+            "canontrail-capabilities.json": {
+              "bytes": 441,
+              "sha256": "546a25203dc66cbc522cf20242b9996d91a8faa13d167ef3d6575c1d4ebb21e1"
+            },
+            "canontrail-tests.json": {
+              "bytes": 350135,
+              "sha256": "6a6f212b2ab2c15e101f5872cb4d1d5af21f722a97a10ff396a0fa48e1f87cdf"
+            }
+          }
+        },
+        {
+          "artifact": "platform-ubuntu-latest-node-20.19",
+          "capabilities": {
+            "schema_version": 1,
+            "observed_at": "2026-10-09T04:51:53.962Z",
+            "platform": "linux",
+            "architecture": "x64",
+            "os_release": "6.17.0-1022-azure",
+            "node": "v20.19.6",
+            "fixture_filesystem_type": "61267",
+            "case_sensitive": true,
+            "unicode_form_sensitive": true,
+            "unicode_nfc_preserved": true,
+            "directory_link": "available",
+            "file_symlink": "available",
+            "posix_mode_bits": "available",
+            "windows_short_names": "not-applicable"
+          },
+          "tests": {
+            "total": 1020,
+            "passed": 1013,
+            "failed": 0,
+            "skipped": 7,
+            "files": 46,
+            "reported_suites": 110,
+            "failed_suites": 0,
+            "success": true
+          },
+          "skipped_tests": [
+            "compileContext rejects a required context source that differs from the lock output only by path case",
+            "no linked continuity destinations rejects a case-folded archive directory alias before outputs",
+            "retained history and current entry rejects warned long-path traversal or proves complete warning-free capture",
+            "Sonnet review regression boundaries rejects ordinary short-name aliases without banning legitimate tilde names",
+            "Sonnet review regression boundaries rejects a real Windows short-name control-tree alias before execute, rollback, or validation can trust it",
+            "safe task draft authoring rejects an on-disk task case alias where the filesystem resolves it",
+            "task-scoped completion safety boundary fails closed for an existing case alias without lowercasing distinct paths"
+          ],
+          "failed_tests": [],
+          "evidence": {
+            "canontrail-capabilities.json": {
+              "bytes": 450,
+              "sha256": "584d1bd45b5060b9f99d84fda53daf8ff787d82d086e26c3e36c7f462f8b01ba"
+            },
+            "canontrail-tests.json": {
+              "bytes": 350092,
+              "sha256": "eb6bc638adab939adb4520daf40121264b1495e1ccfb8ccfa6af77a67b4c6acb"
+            }
+          }
+        },
+        {
+          "artifact": "platform-ubuntu-latest-node-24",
+          "capabilities": {
+            "schema_version": 1,
+            "observed_at": "2026-10-09T04:51:49.855Z",
+            "platform": "linux",
+            "architecture": "x64",
+            "os_release": "6.17.0-1022-azure",
+            "node": "v24.21.0",
+            "fixture_filesystem_type": "61267",
+            "case_sensitive": true,
+            "unicode_form_sensitive": true,
+            "unicode_nfc_preserved": true,
+            "directory_link": "available",
+            "file_symlink": "available",
+            "posix_mode_bits": "available",
+            "windows_short_names": "not-applicable"
+          },
+          "tests": {
+            "total": 1020,
+            "passed": 1013,
+            "failed": 0,
+            "skipped": 7,
+            "files": 46,
+            "reported_suites": 110,
+            "failed_suites": 0,
+            "success": true
+          },
+          "skipped_tests": [
+            "compileContext rejects a required context source that differs from the lock output only by path case",
+            "no linked continuity destinations rejects a case-folded archive directory alias before outputs",
+            "retained history and current entry rejects warned long-path traversal or proves complete warning-free capture",
+            "Sonnet review regression boundaries rejects ordinary short-name aliases without banning legitimate tilde names",
+            "Sonnet review regression boundaries rejects a real Windows short-name control-tree alias before execute, rollback, or validation can trust it",
+            "safe task draft authoring rejects an on-disk task case alias where the filesystem resolves it",
+            "task-scoped completion safety boundary fails closed for an existing case alias without lowercasing distinct paths"
+          ],
+          "failed_tests": [],
+          "evidence": {
+            "canontrail-capabilities.json": {
+              "bytes": 450,
+              "sha256": "d8c4016f5aa6b2dad1b7473db04b238dc2acb65f5e8a3e56eb5a14d543bb5a2c"
+            },
+            "canontrail-tests.json": {
+              "bytes": 350151,
+              "sha256": "f07da3330ea62a1b1ec849b32b00a5d755de3d365207ad17fe5c99468dc902cf"
+            }
+          }
+        },
+        {
+          "artifact": "platform-windows-latest-node-24",
+          "capabilities": {
+            "schema_version": 1,
+            "observed_at": "2026-10-09T04:51:59.762Z",
+            "platform": "win32",
+            "architecture": "x64",
+            "os_release": "10.0.26100",
+            "node": "v24.21.0",
+            "fixture_filesystem_type": "0",
+            "case_sensitive": false,
+            "unicode_form_sensitive": true,
+            "unicode_nfc_preserved": true,
+            "directory_link": "available",
+            "file_symlink": "available",
+            "posix_mode_bits": "not-applicable",
+            "windows_short_names": "available"
+          },
+          "tests": {
+            "total": 1020,
+            "passed": 1015,
+            "failed": 0,
+            "skipped": 5,
+            "files": 46,
+            "reported_suites": 110,
+            "failed_suites": 0,
+            "success": true
+          },
+          "skipped_tests": [
+            "completion reference-field inventory does not skip a URI-looking literal POSIX source path",
+            "context review correction regressions keeps distinct exact-case filenames distinct where the filesystem supports them",
+            "structured documentation-audit failure returns a failure for an actually unreadable POSIX directory",
+            "native migration portability preserves POSIX permission bits across atomic apply and rollback",
+            "task-scoped completion safety boundary does not reinterpret distinct case-sensitive directory names as task ownership"
+          ],
+          "failed_tests": [],
+          "evidence": {
+            "canontrail-capabilities.json": {
+              "bytes": 440,
+              "sha256": "4baf6b7c7308e28df0872ed8859d5187ff8acdd265e1207be43feba2011d1706"
+            },
+            "canontrail-tests.json": {
+              "bytes": 349356,
+              "sha256": "caeab3133c7a44a731f80b793a577a9c50b4414281bb6ae59a8e1711095dbc40"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": 37885844532,
+      "url": "https://github.com/gardenvision/CanonTrail/actions/runs/37885844532",
+      "event": "pull_request",
+      "workflow": "CanonTrail",
+      "head_sha": "50f7d2431421c9dfd77abf3bde2eeb87fd5c867f",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "id": 113675550693,
+          "name": "completion-gate",
+          "conclusion": "success",
+          "url": "https://github.com/gardenvision/CanonTrail/actions/runs/37885844532/job/113675550693"
+        }
+      ],
+      "platforms": []
+    },
+    {
+      "id": 37885835727,
+      "url": "https://github.com/gardenvision/CanonTrail/actions/runs/37885835727",
+      "event": "push",
+      "workflow": "CanonTrail validation",
+      "head_sha": "50f7d2431421c9dfd77abf3bde2eeb87fd5c867f",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "id": 113675523636,
+          "name": "Platform (ubuntu-latest, Node 20.19)",
+          "conclusion": "success",
+          "url": "https://github.com/gardenvision/CanonTrail/actions/runs/37885835727/job/113675523636"
+        },
+        {
+          "id": 113675523823,
+          "name": "Platform (macos-latest, Node 24)",
+          "conclusion": "success",
+          "url": "https://github.com/gardenvision/CanonTrail/actions/runs/37885835727/job/113675523823"
+        },
+        {
+          "id": 113675523835,
+          "name": "Platform (ubuntu-latest, Node 24)",
+          "conclusion": "success",
+          "url": "https://github.com/gardenvision/CanonTrail/actions/runs/37885835727/job/113675523835"
+        },
+        {
+          "id": 113675523888,
+          "name": "Platform (windows-latest, Node 24)",
+          "conclusion": "success",
+          "url": "https://github.com/gardenvision/CanonTrail/actions/runs/37885835727/job/113675523888"
+        },
+        {
+          "id": 113677121096,
+          "name": "validate",
+          "conclusion": "success",
+          "url": "https://github.com/gardenvision/CanonTrail/actions/runs/37885835727/job/113677121096"
+        }
+      ],
+      "platforms": [
+        {
+          "artifact": "platform-macos-latest-node-24",
+          "tests": {
+            "total": 1020,
+            "passed": 1013,
+            "failed": 0,
+            "skipped": 7,
+            "files": 46,
+            "reported_suites": 110,
+            "failed_suites": 0,
+            "success": true
+          },
+          "evidence": {
+            "canontrail-capabilities.json": {
+              "bytes": 441,
+              "sha256": "6b4b45bba6efaafb2a943717585e3a1ab6a9ec4805d0204049929d9d36088725"
+            },
+            "canontrail-tests.json": {
+              "bytes": 350105,
+              "sha256": "62d383ebafc9acc726871b2f1f809e828015d07444d5afc8369efe3c3e65e48e"
+            }
+          }
+        },
+        {
+          "artifact": "platform-ubuntu-latest-node-20.19",
+          "tests": {
+            "total": 1020,
+            "passed": 1013,
+            "failed": 0,
+            "skipped": 7,
+            "files": 46,
+            "reported_suites": 110,
+            "failed_suites": 0,
+            "success": true
+          },
+          "evidence": {
+            "canontrail-capabilities.json": {
+              "bytes": 450,
+              "sha256": "72f1cb6b8d4b9b78d06a0d8c62b97a680831b465e67bdef8fc20dad00d7deeb8"
+            },
+            "canontrail-tests.json": {
+              "bytes": 350220,
+              "sha256": "74b0d2eebbe7be0bc1e24a8a5b0e62e36e52d936de936a69052b8e463fab6f0a"
+            }
+          }
+        },
+        {
+          "artifact": "platform-ubuntu-latest-node-24",
+          "tests": {
+            "total": 1020,
+            "passed": 1013,
+            "failed": 0,
+            "skipped": 7,
+            "files": 46,
+            "reported_suites": 110,
+            "failed_suites": 0,
+            "success": true
+          },
+          "evidence": {
+            "canontrail-capabilities.json": {
+              "bytes": 450,
+              "sha256": "fba83206352b8d6ac8c9b180964aa95b34adb35b0f102488a6d5ab9980e55ec7"
+            },
+            "canontrail-tests.json": {
+              "bytes": 350077,
+              "sha256": "4c88e5e6b1637c45ddd9f2cefe86c524df268f268a600522a3965ac497b20bad"
+            }
+          }
+        },
+        {
+          "artifact": "platform-windows-latest-node-24",
+          "tests": {
+            "total": 1020,
+            "passed": 1015,
+            "failed": 0,
+            "skipped": 5,
+            "files": 46,
+            "reported_suites": 110,
+            "failed_suites": 0,
+            "success": true
+          },
+          "evidence": {
+            "canontrail-capabilities.json": {
+              "bytes": 440,
+              "sha256": "3392b096705e19d9d93b4ac1e1b39faed2e25e4577cfbc115b6796b90957fecb"
+            },
+            "canontrail-tests.json": {
+              "bytes": 349253,
+              "sha256": "ed58415a677884e918467f42f30c31d5bd15f005a77554c60e25d19b0a2f17f6"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Capability skips are disclosed, not executed PASS cases.",
+    "Results bind this commit, not future closure metadata or the future main merge.",
+    "No consumer rollout, package publication or canonical promotion."
+  ]
+}

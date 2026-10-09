@@ -2,7 +2,7 @@ version: 1
 change_id: CHG-TASK-WORKING-INDEX-001
 revision: 3
 title: Explicit task working index with conservative document isolation and strict global release boundary
-status: implemented
+status: verified
 risk: high
 author: CanonTrail implementation agent
 canonical_source: .agent-context/tasks/T-TASK-WORKING-INDEX-001/brief.md
@@ -17,7 +17,7 @@ acceptance_cases:
   - {id: AC-LOCK, given: An initialized project with an owned task and exactly identified local documentation., expected: "Opt-in locks bind working scope and installed schema capability; old/default locks remain byte-compatible.", failure_or_uncertainty: Unknown scope or physical identity fails before writes., counterexample: A recomputed hash or unrelated-task label hides a real requirement or global security defect., oracle: Independent raw-byte manifests shipped schemas and focused CLI counterexamples., status: pass, evidence_refs: [.agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/verification.md]}
   - {id: AC-RESUME, given: An initialized project with an owned task and exactly identified local documentation., expected: "Saved previews and fresh receiving contexts re-establish exact scope and requirements without reinterpretation.", failure_or_uncertainty: Unknown scope or physical identity fails before writes., counterexample: A recomputed hash or unrelated-task label hides a real requirement or global security defect., oracle: Independent raw-byte manifests shipped schemas and focused CLI counterexamples., status: pass, evidence_refs: [.agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/verification.md]}
   - {id: AC-STRICT, given: An initialized project with an owned task and exactly identified local documentation., expected: "Global index validate and repository finalization remain strict and never overwrite the global index on scoped success.", failure_or_uncertainty: Unknown scope or physical identity fails before writes., counterexample: A recomputed hash or unrelated-task label hides a real requirement or global security defect., oracle: Independent raw-byte manifests shipped schemas and focused CLI counterexamples., status: pass, evidence_refs: [.agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/verification.md]}
-  - {id: AC-QUALITY, given: An initialized project with an owned task and exactly identified local documentation., expected: "Independent counterexamples and exact-source platform checks establish completion before merge.", failure_or_uncertainty: Unknown scope or physical identity fails before writes., counterexample: A recomputed hash or unrelated-task label hides a real requirement or global security defect., oracle: Independent raw-byte manifests shipped schemas and focused CLI counterexamples., status: pending, evidence_refs: [.agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/progress.md]}
+  - {id: AC-QUALITY, given: An initialized project with an owned task and exactly identified local documentation., expected: "Independent counterexamples and exact-source platform checks establish completion before merge.", failure_or_uncertainty: Unknown scope or physical identity fails before writes., counterexample: A recomputed hash or unrelated-task label hides a real requirement or global security defect., oracle: Independent raw-byte manifests shipped schemas and focused CLI counterexamples., status: pass, evidence_refs: [.agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/integration-closure.md, .agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/hosted-ci-50f7d24.json]}
 impacts:
   - {area: requirement, decision: affected, rationale: "Bound explicit working-scope behavior and preserve the existing requirement contract with new exact-source evidence.", evidence_refs: [.agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/verification.md]}
   - {area: data-contracts, decision: affected, rationale: "Bound explicit working-scope behavior and preserve the existing data-contracts contract with new exact-source evidence.", evidence_refs: [.agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/verification.md]}
@@ -32,10 +32,11 @@ impacts:
 verification:
   checks:
     - {name: Exact r5 native Windows/Linux clean install typecheck build audit focused and full checks, status: pass, evidence_refs: [.agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/quality-r5.json]}
+    - {name: Exact integrated independent and hosted platform checks, status: pass, evidence_refs: [.agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/integrated-review.md, .agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/hosted-ci-50f7d24.json, .agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/integration-closure.md]}
   terminology_search: {status: pass, terms: [working index, task-working, isolated, strict], evidence_refs: [.agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/verification.md]}
   visual_review: {applicable: false, status: not-applicable, evidence_refs: [.agent-context/tasks/T-TASK-WORKING-INDEX-001/brief.md]}
-  unverifiable_items: [New exact hosted CI and integrated predecessor review pending]
+  unverifiable_items: []
 independent_review: {status: pass, reviewer: Local independent reviewer field_authoring_independent_review, findings: [Exact sealed r5 technical delta PASS; integrated predecessor and hosted gates remain separate], evidence_refs: [.agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/independent-review-r5.md], waiver: null}
 supersedes: []
 superseded_by: null
-updated_at: "2026-10-09T04:29:00Z"
+updated_at: "2026-10-09T05:15:12Z"

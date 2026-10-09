@@ -1,10 +1,10 @@
 ---
 topic_id: task-field-authoring-002
-stand: "2026-10-08"
-status: review
+stand: "2026-10-09"
+status: completed
 truth_level: active-snapshot
 verification:
-  state: internally-reviewed
+  state: verified
   evidence: [.agent-context/tasks/T-FIELD-AUTHORING-002/evidence/verification.md, .agent-context/tasks/T-FIELD-AUTHORING-002/evidence/quality.json, ARTIFACT_PROTOCOL.md]
 read_if_task_touches: [T-FIELD-AUTHORING-002]
 primary_systems: [document authoring, evidence snapshots]
@@ -72,7 +72,7 @@ repository finalization against an exact isolated snapshot. Record skips and
 platform limits. High-risk independent review remains pending until actually
 performed; author self-review is not a substitute.
 
-## Current checkpoint
+## Historical authoring-only checkpoint
 
 Implementation and author verification are recorded in the task report and
 evidence. Exact-source Windows and native Linux full regressions passed.
@@ -80,3 +80,13 @@ The new high-risk independent review remains pending, and strict project health
 still reports 19 source drifts in three preserved peer tasks. Quality closure
 stays pending rather than disguising that global result as success. No consumer
 rollout, old receipt refresh, publication or paid review occurred.
+
+## October 9 technical closure
+
+This task's implementation, declared acceptance cases, ten impact decisions and
+required technical checks are closed by the exact r5/50f7 evidence and separate
+independent decisions. The current owner is state.yaml; the consolidated record
+is .agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/integration-closure.md.
+Earlier pending statements above are historical checkpoints, not the current
+gate. Final closing metadata, its new head and the protected merge require their
+own exact checks. No consumer rollout, schema migration or promotion is implied.

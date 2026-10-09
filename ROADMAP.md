@@ -41,7 +41,23 @@ T-MIT-LICENSE-001 applies the explicit MIT decision in a new local revision. It 
 
 T-PUBLIC-PREP-001 introduced neutral `legacy-header-v1` naming with retained historical-input compatibility, recorded the source-content audit boundary, and prepared the release checklist and third-party inventory. Its independent naming/C1 reviews and platform evidence are recorded; neither is borrowed from V3. Its local preparation closure remains distinct from the later release task and actual hosting receipts.
 
-## Useful later work, not this release's automatic scope
+## October 9 field-friction technical closure
+
+Complete document drafts, field-specific diagnostics, immutable noncanonical
+document copies and the narrow task-working view are implemented and technically
+verified. Compact handoff, continuity-hardening and public integration review
+gates are separately supported by the current independent supplement and exact
+50f7 hosted Windows/Linux/macOS/Node-floor runs. The five owner states and
+`T-TASK-WORKING-INDEX-001/evidence/integration-closure.md` own current closure.
+Closing metadata and protected publication still require their own checks.
+Consumer rollout, schema synchronization, canonical promotion, a coordinator
+engine, semantic document splitting and a future tagged release remain separate.
+
+## Historical field-work checkpoints and retained later work
+
+Pending review/platform descriptions below identify earlier checkpoints. They
+are superseded only by the bounded current owner records above, never by rewriting
+old raw evidence or treating earlier approvals as review of later source.
 
 - `T-FIELD-AUTHORING-002` owns complete draft-document creation, explicit
   field-specific schema choices, managed immutable document snapshots and

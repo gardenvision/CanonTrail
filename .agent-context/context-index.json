@@ -1,7 +1,7 @@
 {
   "version": 1,
   "hash_algorithm": "sha256",
-  "root_hash": "sha256:6edd907cda3f347bb9b1ac1b9430c2713607aeb659529b1b3e0e87c16a6fff7b",
+  "root_hash": "sha256:fe9af228b39fe373e75e95fbb1db92a9f3dbf3e158f3883dc9cc6324d01d7b61",
   "documents": [
     {
       "path": ".agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/brief.md",
@@ -79,11 +79,11 @@
     },
     {
       "path": ".agent-context/tasks/T-COMPACT-HANDOFF-001/brief.md",
-      "content_hash": "sha256:8ad9cd39671fa84bfa0d0100752bad5d54216427916f2671762896c5d9b2ae6e",
-      "stand": "2026-09-27",
-      "status": "review",
+      "content_hash": "sha256:505b7d76c8403b03e98cda1e2c7fe655579de34e4059a13c8ed3d7f5dd9e8567",
+      "stand": "2026-10-09",
+      "status": "completed",
       "truth_level": "active-snapshot",
-      "verification_state": "internally-reviewed",
+      "verification_state": "verified",
       "read_if_task_touches": [
         "compact handoffs",
         "missing evidence reference diagnostics"
@@ -175,11 +175,11 @@
     },
     {
       "path": ".agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/brief.md",
-      "content_hash": "sha256:7308ac3913c6a49b539a8b04d4aed04eb8e4a30d6e6d401ea9888c532baf7397",
-      "stand": "2026-09-27",
-      "status": "review",
+      "content_hash": "sha256:2b8adbe0f53537955ee862d6e195750efdceee0d72c6232d32dcf243ca054260",
+      "stand": "2026-10-09",
+      "status": "completed",
       "truth_level": "active-snapshot",
-      "verification_state": "internally-reviewed",
+      "verification_state": "verified",
       "read_if_task_touches": [
         "continuity write hardening",
         "retained handoff integrity"
@@ -231,11 +231,11 @@
     },
     {
       "path": ".agent-context/tasks/T-FIELD-AUTHORING-002/brief.md",
-      "content_hash": "sha256:a3ebf7bd952cfe593c1b2955c0e1844919c5a45ad5a0723d1f7180b50be6abea",
-      "stand": "2026-10-08",
-      "status": "review",
+      "content_hash": "sha256:b708a814dbb5d05abb67df80e2e0ea4de9dfd8c5ee8c7340c568fe29d1f2ca77",
+      "stand": "2026-10-09",
+      "status": "completed",
       "truth_level": "active-snapshot",
-      "verification_state": "internally-reviewed",
+      "verification_state": "verified",
       "read_if_task_touches": [
         "T-FIELD-AUTHORING-002"
       ],
@@ -312,11 +312,11 @@
     },
     {
       "path": ".agent-context/tasks/T-FIELD-AUTHORING-002/report.md",
-      "content_hash": "sha256:7a33d259278ebdad093379080ce1153c57f9d1697bfffa75d1b0b925874ca7a2",
-      "stand": "2026-10-08",
-      "status": "implementation-awaiting-review",
+      "content_hash": "sha256:efa80d73fd7bdb8907dec3767984b4422580953ba5dccefa0f5c533957240eb6",
+      "stand": "2026-10-09",
+      "status": "technically-verified",
       "truth_level": "active-snapshot",
-      "verification_state": "internally-reviewed",
+      "verification_state": "verified",
       "read_if_task_touches": [
         "T-FIELD-AUTHORING-002",
         "field documentation authoring"
@@ -466,11 +466,11 @@
     },
     {
       "path": ".agent-context/tasks/T-PUBLISH-CONTINUITY-001/brief.md",
-      "content_hash": "sha256:4482c11ae83c08753f2753f8116bcd12190c73b2056756af8a9b78695754188b",
-      "stand": "2026-10-03",
-      "status": "review",
+      "content_hash": "sha256:f15ae6bdcd4a0ec6b9d5cef3bcc43143c7dffa00725ecf8d3c78a98b4e2f83ad",
+      "stand": "2026-10-09",
+      "status": "completed",
       "truth_level": "active-snapshot",
-      "verification_state": "internally-reviewed",
+      "verification_state": "verified",
       "read_if_task_touches": [
         "T-PUBLISH-CONTINUITY-001"
       ],
@@ -556,11 +556,11 @@
     },
     {
       "path": ".agent-context/tasks/T-TASK-WORKING-INDEX-001/brief.md",
-      "content_hash": "sha256:a67b14cd70706a5adbfbb9979b78e47bb56d03c6a533545cf5f86c0779489464",
-      "stand": "2026-10-08",
-      "status": "review",
+      "content_hash": "sha256:97ffc6783e687a12e90d39305560f5e63e5cb95f5894b2bf456898a99afb59a5",
+      "stand": "2026-10-09",
+      "status": "completed",
       "truth_level": "active-snapshot",
-      "verification_state": "internally-reviewed",
+      "verification_state": "verified",
       "read_if_task_touches": [
         "T-TASK-WORKING-INDEX-001",
         "task-local working index"
@@ -612,6 +612,52 @@
         "ARTIFACT_PROTOCOL.md"
       ],
       "topic_id": "task-working-index-independent-review-r5"
+    },
+    {
+      "path": ".agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/integrated-review.md",
+      "content_hash": "sha256:5873351415d4ad9126a44cd6f9cdbf13b558993c0850867527f8e9c64c5ec155",
+      "stand": "2026-10-09",
+      "status": "technical-boundaries-reviewed",
+      "truth_level": "active-snapshot",
+      "verification_state": "reviewed",
+      "read_if_task_touches": [
+        "field-friction integration review",
+        "T-COMPACT-HANDOFF-001",
+        "T-CONTINUITY-WRITE-HARDENING-001",
+        "T-PUBLISH-CONTINUITY-001"
+      ],
+      "primary_systems": [
+        "context continuity",
+        "documentation governance"
+      ],
+      "do_not_use_instead": [
+        "ARTIFACT_PROTOCOL.md"
+      ],
+      "topic_id": "field-friction-integrated-independent-review"
+    },
+    {
+      "path": ".agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/integration-closure.md",
+      "content_hash": "sha256:08fb9edfbccb9549182de4c5541c018226e628a5b264894334356b95e1767c1e",
+      "stand": "2026-10-09",
+      "status": "closure-metadata-prepared",
+      "truth_level": "active-snapshot",
+      "verification_state": "internally-reviewed",
+      "read_if_task_touches": [
+        "field-friction closure",
+        "T-FIELD-AUTHORING-002",
+        "T-TASK-WORKING-INDEX-001",
+        "T-COMPACT-HANDOFF-001",
+        "T-CONTINUITY-WRITE-HARDENING-001",
+        "T-PUBLISH-CONTINUITY-001"
+      ],
+      "primary_systems": [
+        "documentation governance",
+        "context continuity"
+      ],
+      "do_not_use_instead": [
+        "ARTIFACT_PROTOCOL.md"
+      ],
+      "topic_id": "field-friction-integration-closure"
     },
     {
       "path": ".agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/progress.md",
@@ -674,11 +720,11 @@
     },
     {
       "path": ".agent-context/tasks/T-TASK-WORKING-INDEX-001/report.md",
-      "content_hash": "sha256:73e311df1afc38b0523f82ba186114eccbc52c6a35c6fedb4a114c4d32326a48",
+      "content_hash": "sha256:086f234d14cb5f27080f6f08bc44cf4fb942d533ba3536eb47104ad00cbc192d",
       "stand": "2026-10-09",
-      "status": "implementation-awaiting-review",
+      "status": "technically-verified",
       "truth_level": "active-snapshot",
-      "verification_state": "internally-reviewed",
+      "verification_state": "verified",
       "read_if_task_touches": [
         "T-TASK-WORKING-INDEX-001",
         "working-index completion"
@@ -781,7 +827,7 @@
     },
     {
       "path": "ROADMAP.md",
-      "content_hash": "sha256:0be5030d06fabcb6bae964786b56356e5032d9e9c654253409a568687eb900e8",
+      "content_hash": "sha256:78df818bf30a0340063eb96de774ec1542fcfdfacdf1566c834707d862c9c1a2",
       "stand": "2026-10-08",
       "status": "public-source-alpha",
       "truth_level": "draft",
@@ -844,7 +890,7 @@
     },
     {
       "path": "docs/alpha-readiness.md",
-      "content_hash": "sha256:6df83e17b13dbec1deb1799be94fe75306f125334d1d429291a838b9f202b8dd",
+      "content_hash": "sha256:49b08b9e8fb62a106014e0e8aaeccf6b20dfd7c54bddbfb029da161f75cf949d",
       "stand": "2026-10-03",
       "status": "public-source-hosting-configured",
       "truth_level": "draft",
@@ -991,7 +1037,7 @@
     },
     {
       "path": "docs/platform-support.md",
-      "content_hash": "sha256:f7d98389738fba75890a90ccfe959fc3ff4a0ce20380e96eaa8f5942d3f5909b",
+      "content_hash": "sha256:b6b941c540ae93783f094d6d47171859c8e6e8100c8c2eedbe53e8dcc382a643",
       "stand": "2026-09-14",
       "status": "c2-platform-evidence-recorded",
       "truth_level": "draft",
@@ -1012,7 +1058,7 @@
     },
     {
       "path": "docs/release-checklist.md",
-      "content_hash": "sha256:e82992fc8380962d1e8baa8ae154c8beb9a42ab0912f270637bd927b1b351ccd",
+      "content_hash": "sha256:043708500f3e4804f1346f15112d4a40749e57dbb46c292f2a2a173cddcf796b",
       "stand": "2026-09-27",
       "status": "public-source-hosting-reviewed",
       "truth_level": "draft",
@@ -1032,7 +1078,7 @@
     },
     {
       "path": "docs/self-documentation.md",
-      "content_hash": "sha256:9a51ec2efe15a649028a0a1798bb1702d62afd305d987fd835c59792212521d2",
+      "content_hash": "sha256:508f816207c6d87c9bcf2a6cde3dab539cd4b863cc315fad4ab89b7f13d8d608",
       "stand": "2026-10-08",
       "status": "public-source-alpha",
       "truth_level": "draft",

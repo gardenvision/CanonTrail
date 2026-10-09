@@ -1,14 +1,14 @@
 {
   "task_id": "T-PUBLISH-CONTINUITY-001",
-  "agent_run_id": "explicit-owned-completion-transition-20261009",
-  "created_at": "2026-10-09T05:50:13.021Z",
-  "context_index_hash": "sha256:fe9af228b39fe373e75e95fbb1db92a9f3dbf3e158f3883dc9cc6324d01d7b61",
-  "base_revision": "50f7d2431421c9dfd77abf3bde2eeb87fd5c867f",
+  "agent_run_id": "reviewed-integration-refresh-20261009",
+  "created_at": "2026-10-09T04:42:03.084Z",
+  "context_index_hash": "sha256:6edd907cda3f347bb9b1ac1b9430c2713607aeb659529b1b3e0e87c16a6fff7b",
+  "base_revision": "cf2702d041c11934a8749267e792c0331ebabcd9",
   "budget": {
     "total_tokens": 256000,
     "reserved_output_tokens": 16000,
     "reserved_input_tokens": 4096,
-    "estimated_input_tokens": 175418
+    "estimated_input_tokens": 174394
   },
   "sources": [
     {
@@ -26,40 +26,40 @@
     },
     {
       "path": ".agent-context/tasks/T-PUBLISH-CONTINUITY-001/state.yaml",
-      "content_hash": "sha256:8f2d1063bebca9718f69a427e032e588f97ab1aa8f76afc90b8caa4d5f3908a3",
-      "git_blob": null,
+      "content_hash": "sha256:aea0bb253b5211e781fc7b987525f3c5a7c299867a95f8ff2d475dfbde32c983",
+      "git_blob": "a63a5c86d0c6644c1c33e7022ea5619da620226b",
       "truth_level": "active-snapshot",
       "level": "L0",
       "priority": 1,
       "selection_reason": "Current task objective, acceptance criteria, and file intents.",
       "selector": "task-state",
-      "estimated_tokens": 826,
+      "estimated_tokens": 802,
       "ownership": "project",
       "source_system": null
     },
     {
       "path": ".agent-context/tasks/T-PUBLISH-CONTINUITY-001/brief.md",
-      "content_hash": "sha256:f15ae6bdcd4a0ec6b9d5cef3bcc43143c7dffa00725ecf8d3c78a98b4e2f83ad",
-      "git_blob": null,
+      "content_hash": "sha256:4482c11ae83c08753f2753f8116bcd12190c73b2056756af8a9b78695754188b",
+      "git_blob": "aa65ba1f9fba6d2ebc2e9f5e3ac9c1051c1413e3",
       "truth_level": "active-snapshot",
       "level": "L0",
       "priority": 2,
       "selection_reason": "Current task brief.",
       "selector": "task-brief",
-      "estimated_tokens": 735,
+      "estimated_tokens": 588,
       "ownership": "project",
       "source_system": null
     },
     {
       "path": ".agent-context/tasks/T-PUBLISH-CONTINUITY-001/change.yaml",
-      "content_hash": "sha256:755125f464e5b4148f546ed4d58384a593b4e4e6d2b780690e3c18db64708106",
-      "git_blob": null,
+      "content_hash": "sha256:dc8e3ac277e62b8e9d7ec3ae2111766184be19f0f185a34f95324bc565395cac",
+      "git_blob": "a5a989f1b7755a33cb2de9939d4167fa31b26ec4",
       "truth_level": "active-snapshot",
       "level": "L0",
       "priority": 3,
       "selection_reason": "Current change decision and acceptance oracle.",
       "selector": "task-change",
-      "estimated_tokens": 1890,
+      "estimated_tokens": 1803,
       "ownership": "project",
       "source_system": null
     },
@@ -79,7 +79,7 @@
     {
       "path": "ARTIFACT_PROTOCOL.md",
       "content_hash": "sha256:f29d218124b5d13319953e749339cc0f18a368fb927f2fe44d8e503c7c5024c7",
-      "git_blob": "c0d943a3a8411dfeb28b962721e8534855ceae41",
+      "git_blob": null,
       "truth_level": "design-target",
       "level": "L1",
       "priority": 14,
@@ -183,7 +183,7 @@
     {
       "path": "package-lock.json",
       "content_hash": "sha256:2d61313a509eaacb2b6079a630d5df08b12bc194b89b12b80668234be261f35a",
-      "git_blob": "a29e66d813a1484a1559e70e8b1f52598f379fb5",
+      "git_blob": null,
       "truth_level": "unclassified",
       "level": "L3",
       "priority": 25,
@@ -209,7 +209,7 @@
     {
       "path": "src/context.ts",
       "content_hash": "sha256:918ec577962d6f2f0a8c3c0bb7197c5b04ab4bb0604c1d7046f47a236137c834",
-      "git_blob": "6daedba8676a6a2c74f8cf936c75065e3873fbde",
+      "git_blob": null,
       "truth_level": "unclassified",
       "level": "L3",
       "priority": 25,
@@ -235,7 +235,7 @@
     {
       "path": "src/handoff.ts",
       "content_hash": "sha256:be33ba681c2640911bad6be37e07d888feb961057b91c207c1b49f22815f5b20",
-      "git_blob": "a8d0ab6c671b6c3b23f34347ccea84d86273130b",
+      "git_blob": null,
       "truth_level": "unclassified",
       "level": "L3",
       "priority": 25,
@@ -299,53 +299,53 @@
     },
     {
       "path": "ROADMAP.md",
-      "content_hash": "sha256:78df818bf30a0340063eb96de774ec1542fcfdfacdf1566c834707d862c9c1a2",
+      "content_hash": "sha256:0be5030d06fabcb6bae964786b56356e5032d9e9c654253409a568687eb900e8",
       "git_blob": null,
       "truth_level": "draft",
       "level": "L3",
       "priority": 30,
       "selection_reason": "Existing file declared by the current task.",
       "selector": "task-file-intent",
-      "estimated_tokens": 2817,
+      "estimated_tokens": 2569,
       "ownership": "project",
       "source_system": null
     },
     {
       "path": "docs/alpha-readiness.md",
-      "content_hash": "sha256:49b08b9e8fb62a106014e0e8aaeccf6b20dfd7c54bddbfb029da161f75cf949d",
-      "git_blob": null,
+      "content_hash": "sha256:6df83e17b13dbec1deb1799be94fe75306f125334d1d429291a838b9f202b8dd",
+      "git_blob": "07765fbb592d55faba08d6d91cb53bed9b0176e7",
       "truth_level": "draft",
       "level": "L3",
       "priority": 30,
       "selection_reason": "Existing file declared by the current task.",
       "selector": "task-file-intent",
-      "estimated_tokens": 3139,
+      "estimated_tokens": 2992,
       "ownership": "project",
       "source_system": null
     },
     {
       "path": "docs/release-checklist.md",
-      "content_hash": "sha256:043708500f3e4804f1346f15112d4a40749e57dbb46c292f2a2a173cddcf796b",
-      "git_blob": null,
+      "content_hash": "sha256:e82992fc8380962d1e8baa8ae154c8beb9a42ab0912f270637bd927b1b351ccd",
+      "git_blob": "6fee4b1264d0d36900778d8a0524c8cd70313ade",
       "truth_level": "draft",
       "level": "L3",
       "priority": 30,
       "selection_reason": "Existing file declared by the current task.",
       "selector": "task-file-intent",
-      "estimated_tokens": 2642,
+      "estimated_tokens": 2480,
       "ownership": "project",
       "source_system": null
     },
     {
       "path": "docs/self-documentation.md",
-      "content_hash": "sha256:508f816207c6d87c9bcf2a6cde3dab539cd4b863cc315fad4ab89b7f13d8d608",
+      "content_hash": "sha256:9a51ec2efe15a649028a0a1798bb1702d62afd305d987fd835c59792212521d2",
       "git_blob": null,
       "truth_level": "draft",
       "level": "L3",
       "priority": 30,
       "selection_reason": "Existing file declared by the current task.",
       "selector": "task-file-intent",
-      "estimated_tokens": 2668,
+      "estimated_tokens": 2459,
       "ownership": "project",
       "source_system": null
     },
@@ -365,7 +365,7 @@
     {
       "path": "docs/usage.md",
       "content_hash": "sha256:39d678b802d0c39ab7b8435eadab3f5e2264c964735a30f6ea51346ccc9f9eab",
-      "git_blob": "7025b3cfb14c674b820f0ccbca0d9009d0e3fcf9",
+      "git_blob": null,
       "truth_level": "draft",
       "level": "L3",
       "priority": 30,
@@ -391,7 +391,7 @@
     {
       "path": "src/cli.ts",
       "content_hash": "sha256:02fe064db12a8e43eb6173515d55bf57baa63c6ace9e5a0ea669bc9929c658a1",
-      "git_blob": "ddcfa8beba6b3c40735c1581f37b36928f75b112",
+      "git_blob": null,
       "truth_level": "unclassified",
       "level": "L3",
       "priority": 30,
@@ -404,7 +404,7 @@
     {
       "path": "src/resume.ts",
       "content_hash": "sha256:6170b3ad5a379ab4a925334df9c289f5839698e942bcd3dc755bd7ca4ab84899",
-      "git_blob": "727e9a6d220be7e63f3aa3cb12d65f1a20ef588b",
+      "git_blob": null,
       "truth_level": "unclassified",
       "level": "L3",
       "priority": 30,
@@ -430,7 +430,7 @@
     {
       "path": "src/validator.ts",
       "content_hash": "sha256:753b7e1f2bf6c5b2776f9b8e9ae2a864d7d181d8f83fe3a8e136d1289c3df005",
-      "git_blob": "fb60f55c28b774c9127134266276aa06772eb1b3",
+      "git_blob": null,
       "truth_level": "unclassified",
       "level": "L3",
       "priority": 30,
@@ -508,5 +508,5 @@
   ],
   "omissions": [],
   "raw_transcripts_included": false,
-  "lock_hash": "sha256:4f408429a50cca9214c6d245d854e8afff062ceb4f999f214927c45b094b9f30"
+  "lock_hash": "sha256:a7822e8dee9ad77785286b37458edc368a29d97396adf262fe99850fd0f5046d"
 }

@@ -2,7 +2,7 @@ version: 1
 change_id: CHG-COMPACT-HANDOFF-001
 revision: 3
 title: Compact continuity records with complete separate dirty-worktree provenance
-status: implemented
+status: verified
 risk: high
 author: CanonTrail implementation agent
 canonical_source: ARTIFACT_PROTOCOL.md
@@ -72,11 +72,11 @@ impacts:
   - {area: terminology, decision: affected, rationale: Inventory is a status observation not a backup or ownership manifest., evidence_refs: [ARTIFACT_PROTOCOL.md, docs/usage.md]}
   - {area: operations-compatibility, decision: affected, rationale: Portable Git parsing and schema preflight preserve old artifacts; revision-3 Windows and Linux runs pass and macOS remains a release gate., evidence_refs: [src/initializer.ts, src/worktree-inventory.ts, .agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/precommit-review-r3.md]}
 verification:
-  checks: [{name: Revision 3 raw-byte collision regression and complete Windows/Linux quality checks, status: pass, evidence_refs: [.agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/precommit-review-r3.md]}]
+  checks: [{name: Revision 3 raw-byte collision regression and complete Windows/Linux quality checks, status: pass, evidence_refs: [.agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/precommit-review-r3.md]}, {name: Exact integrated independent and hosted platform checks, status: pass, evidence_refs: [.agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/integrated-review.md, .agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/hosted-ci-50f7d24.json, .agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/integration-closure.md]}]
   terminology_search: {status: pass, terms: [worktree_inventory, uncommitted_summary, REF001, LOCK003, HANDOFF004], evidence_refs: [ARTIFACT_PROTOCOL.md, docs/usage.md]}
   visual_review: {applicable: true, status: pass, evidence_refs: [test/compact-handoff.test.ts, test/compact-handoff-review.test.ts, .agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/review-remediation.md]}
-  unverifiable_items: [Revision-bound macOS execution and independent remediation review remain open; no provider-token saving measurement.]
-independent_review: {status: pending, reviewer: Pending revised-snapshot reviewer; prior Claude review covered revision 1, findings: [Author remediation of F1 Git-root boundary is tested but not independently closed, Author remediation of F2 raw-byte transport is tested but not independently closed, Author remediation of F3 source-specific guidance is tested but not independently closed, New raw-byte collision correction has author regression coverage but no independent approval, Exact revision macOS execution remains a release condition], evidence_refs: [.agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/review-remediation.md, .agent-context/tasks/T-COMPACT-HANDOFF-001/evidence/precommit-review-r3.md], waiver: null}
+  unverifiable_items: []
+independent_review: {status: pass, reviewer: Local independent reviewer field_authoring_independent_review, findings: [Declared technical acceptance boundaries pass against exact r5 implementation bound to 50f7d24; stable-tree crash and authentication limits remain], evidence_refs: [.agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/integrated-review.md], waiver: null}
 supersedes: []
 superseded_by: null
-updated_at: "2026-09-27T08:41:00Z"
+updated_at: "2026-10-09T05:15:12Z"

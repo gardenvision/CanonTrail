@@ -25,6 +25,17 @@ delivery, not an Alpha release or consumer rollout. Inspect the exact branch's
 hosted matrix and retain the outstanding independent continuity review gates;
 do not transfer platform or review approval from earlier snapshots.
 
+## October field-friction closure checkpoint
+
+The three older high-risk continuity/publication technical gates and the two
+new authoring/working-index tasks are now supported by separate independent
+decisions and exact 50f7 hosted results. Read the consolidated
+`T-TASK-WORKING-INDEX-001/evidence/integration-closure.md` before interpreting the
+historical pending descriptions above. New closure metadata needs its own bounded
+review and exact CI; checked squash integration and main verification remain
+publication steps, not approval inferred from this document. No tag, npm release
+or consumer rollout is authorized by the technical closure.
+
 ## Decisions and remaining gates
 
 1. Approved and prepared: `https://github.com/gardenvision/CanonTrail`, with clean root commit `23d542302e7327931cb2c60b7a35ae60e6e47f16` and no private development ancestors. The separately authorized private-repository rename is complete. Never merge old private branches, tags or raw project reports into this history.

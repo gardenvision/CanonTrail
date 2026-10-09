@@ -1,5 +1,5 @@
 task_id: T-CONTINUITY-WRITE-HARDENING-001
-status: review
+status: verified
 objective: Close reviewed continuity write and retained-provenance gaps without changing consumer projects or rewriting history.
 non_goals: [No consumer rollout or stable build replacement, No multi-file crash transaction or authentication claim, No unrelated coordinator or task generator feature]
 acceptance_criteria:
@@ -17,6 +17,6 @@ checks:
   - {id: CHECK-QUALITY, command_or_observation: Typecheck isolated build and full Linux suite on the frozen r2 snapshot., status: pass, evidence_refs: [.agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/evidence/verification.md]}
   - {id: CHECK-WINDOWS, command_or_observation: Full Windows default-timeout suite including real long-path Git warnings and case aliases., status: pass, evidence_refs: [.agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/evidence/verification.md]}
   - {id: CHECK-PRESERVATION, command_or_observation: Raw preservation of historical archives stable build and reviewed inputs., status: pass, evidence_refs: [.agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/evidence/verification.md]}
-  - {id: CHECK-REVIEW, command_or_observation: Independent review of the new write-hardening change; earlier R3 approval covers only its bounded snapshot., status: pending, evidence_refs: []}
+  - {id: CHECK-REVIEW, command_or_observation: Independent exact-r5 technical supplement bound to published 50f7d24 passes this task's declared technical boundary., status: pass, evidence_refs: [.agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/integrated-review.md]}
 latest_handoff: .agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/handoff.yaml
-updated_at: "2026-09-27T13:05:00Z"
+updated_at: "2026-10-09T05:15:12Z"

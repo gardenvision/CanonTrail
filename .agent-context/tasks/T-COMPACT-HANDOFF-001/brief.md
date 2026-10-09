@@ -1,10 +1,10 @@
 ---
 topic_id: task-compact-handoff-001
-stand: "2026-09-27"
-status: review
+stand: "2026-10-09"
+status: completed
 truth_level: active-snapshot
 verification:
-  state: internally-reviewed
+  state: verified
   evidence: [src/handoff.ts, src/resume-audit.ts, src/validator.ts]
 read_if_task_touches: [compact handoffs, missing evidence reference diagnostics]
 primary_systems: [context continuity]
@@ -28,7 +28,7 @@ Missing references remain blocking. Diagnostics identify the referring file/task
 
 Use hundreds of unrelated changes plus a small task to compare compact versus legacy-shaped handoff size and prove full inventory retention. Verify rename/deletion/untracked cases, deterministic dry run, old schema rejection, legacy compatibility, sidecar corruption/missing/wrong ownership, unsafe linked paths, immutable collisions, replacement and retained/current resume validation. Execute focused and full suites, typecheck/build, index/validate/audit/finalize; record independent review because continuity integrity crosses several consumers. Estimates are not provider-token savings.
 
-## Current state
+## Historical implementation checkpoints
 
 Decision recorded before implementation. Worktree began clean at f2f95541853ca97daf486c92844745c498f9afb8. Working branch: codex/compact-handoff-inventory.
 
@@ -47,3 +47,13 @@ Pre-commit checks reopened this task as revision 3 on 2026-09-27. A new scratch 
 Revision 3 is now implemented and author-tested: the raw-buffer correction passes both new cases, all 43 focused cases and the complete 743-case Windows/Linux suites. Windows passes 730 with 13 skips; Linux passes 739 with 4 skips. The failed pre-fix regression is retained. Independent review of changed bytes and macOS execution remain open; the task returns to review, not verified. See `evidence/precommit-review-r3.md`.
 
 The bounded revision-3 review has now been received and hash-verified: report SHA-256 17777a1f83d87cacced1489012ae123b348a52ea024de66218a771be1dfc1458, identifying Codex as reviewer, approves A-D with conditions. A separate Claude report (336a9e9a9ed79151b920b7ec8cde0df2437d52aeb0e1b17a579d41d731a51505) reviews the older R1 package, not the current source. Their remaining cross-writer, capture and retained-provenance findings are reconciled in `.agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/evidence/review-intake.md`. That new high-risk task owns the corrections. These receipts do not independently approve the subsequent implementation; the combined working state remains review-pending. No historical handoff, archive or review receipt is rewritten to change its old claims.
+
+## October 9 technical closure
+
+This task's implementation, declared acceptance cases, ten impact decisions and
+required technical checks are closed by the exact r5/50f7 evidence and separate
+independent decisions. The current owner is state.yaml; the consolidated record
+is .agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/integration-closure.md.
+Earlier pending statements above are historical checkpoints, not the current
+gate. Final closing metadata, its new head and the protected merge require their
+own exact checks. No consumer rollout, schema migration or promotion is implied.

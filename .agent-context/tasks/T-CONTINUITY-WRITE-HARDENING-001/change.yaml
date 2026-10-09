@@ -2,7 +2,7 @@ version: 1
 change_id: CHG-CONTINUITY-WRITE-HARDENING-001
 revision: 1
 title: Fail-closed continuity capture and byte-exact no-link archives
-status: implemented
+status: verified
 risk: high
 author: CanonTrail implementation agent
 canonical_source: ARTIFACT_PROTOCOL.md
@@ -33,10 +33,11 @@ verification:
     - {name: Frozen r2 Linux typecheck build and full suite, status: pass, evidence_refs: [.agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/evidence/verification.md]}
     - {name: Windows default-timeout full suite repeat, status: pass, evidence_refs: [.agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/evidence/verification.md]}
     - {name: Historical and stable-runtime byte preservation, status: pass, evidence_refs: [.agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/evidence/verification.md]}
+    - {name: Exact integrated independent and hosted platform checks, status: pass, evidence_refs: [.agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/integrated-review.md, .agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/hosted-ci-50f7d24.json, .agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/integration-closure.md]}
   terminology_search: {status: pass, terms: [exact bytes, historical integrity, stable tree, worktree_inventory], evidence_refs: [.agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/evidence/verification.md]}
   visual_review: {applicable: true, status: pass, evidence_refs: [test/continuity-write-hardening.test.ts, .agent-context/tasks/T-CONTINUITY-WRITE-HARDENING-001/evidence/verification.md]}
-  unverifiable_items: [New independent review pending, Exact-revision macOS execution pending]
-independent_review: {status: pending, reviewer: null, findings: [Prior compact-handoff R3 review does not approve new hardening bytes], evidence_refs: [], waiver: null}
+  unverifiable_items: []
+independent_review: {status: pass, reviewer: Local independent reviewer field_authoring_independent_review, findings: [Declared technical acceptance boundaries pass against exact r5 implementation bound to 50f7d24; stable-tree crash and authentication limits remain], evidence_refs: [.agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/integrated-review.md], waiver: null}
 supersedes: []
 superseded_by: null
-updated_at: "2026-09-27T13:05:00Z"
+updated_at: "2026-10-09T05:15:12Z"

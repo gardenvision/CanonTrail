@@ -2,7 +2,7 @@ version: 1
 change_id: CHG-PUBLISH-CONTINUITY-001
 revision: 3
 title: Integrate tested continuity and task-authoring updates with public main and publish a reviewable branch with exact hosted checks.
-status: implemented
+status: verified
 risk: high
 author: CanonTrail publication maintainer
 canonical_source: .agent-context/tasks/T-PUBLISH-CONTINUITY-001/brief.md
@@ -34,8 +34,8 @@ acceptance_cases:
     failure_or_uncertainty: Failed or unexecuted platforms and independent review remain explicit gates.
     counterexample: Earlier platform results are attributed to the new revision or CI is weakened to pass.
     oracle: Exact head identity per hosted check plus local quality and structural reports.
-    status: pending
-    evidence_refs: []
+    status: pass
+    evidence_refs: [.agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/hosted-ci-50f7d24.json, .agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/integration-closure.md]
   - id: AC-004
     given: The predecessor review found equal-cost locale sorting and raw multiline objective insertion into the generated brief.
     expected: Report ties use code-unit order and the objective remains visibly quoted data without changing YAML semantics or draft lifecycle.
@@ -89,6 +89,7 @@ verification:
   checks:
     - {name: Predecessor Windows installation check build complete suite and runtime/full audit, status: pass, evidence_refs: [.agent-context/tasks/T-PUBLISH-CONTINUITY-001/evidence/progress.md]}
     - {name: Current review-correction full chain after bounded case-alias fixture setup correction, status: pass, evidence_refs: [.agent-context/tasks/T-PUBLISH-CONTINUITY-001/evidence/review-consolidation.md]}
+    - {name: Exact integrated independent and hosted platform checks, status: pass, evidence_refs: [.agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/integrated-review.md, .agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/hosted-ci-50f7d24.json, .agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/integration-closure.md]}
   terminology_search:
     status: pass
     terms: [independent review, exact bytes, fast-uri, shared stable runtime]
@@ -97,13 +98,13 @@ verification:
     applicable: false
     status: not-applicable
     evidence_refs: []
-  unverifiable_items: [New head hosted checks pending, Independent delta review pending]
+  unverifiable_items: []
 independent_review:
-  status: pending
-  reviewer: Claude independent local reviewer of predecessor 66be45e
-  findings: [Predecessor conditionally approved; current runtime and metadata delta remains unreviewed, Retained project-name references accepted by owner, Stricter mjs policy explicitly accepted as a compatibility change]
-  evidence_refs: [.agent-context/tasks/T-PUBLISH-CONTINUITY-001/evidence/review-consolidation.md]
+  status: pass
+  reviewer: Local independent reviewer field_authoring_independent_review
+  findings: [Exact r5 integration correction and current 50f7d24 platform boundary pass; future closing metadata and merge remain separately gated]
+  evidence_refs: [.agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/integrated-review.md]
   waiver: null
 supersedes: []
 superseded_by: null
-updated_at: 2026-10-03T17:36:00Z
+updated_at: "2026-10-09T05:15:12Z"

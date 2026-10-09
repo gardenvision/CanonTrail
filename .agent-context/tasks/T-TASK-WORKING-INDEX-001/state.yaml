@@ -1,5 +1,5 @@
 task_id: T-TASK-WORKING-INDEX-001
-status: review
+status: verified
 objective: Enable explicit task-local context orientation without hiding global authority dependencies or repository failures.
 non_goals: [No relaxed CI completion, No consumer rollout, No scheduler or editor lock engine, No historical evidence rewrite]
 acceptance_criteria:
@@ -8,7 +8,7 @@ acceptance_criteria:
   - {id: AC-LOCK, statement: "Opt-in locks bind working scope and installed schema capability; old/default locks remain byte-compatible.", verification: Independent API CLI and raw-byte counterexamples., status: pass}
   - {id: AC-RESUME, statement: "Saved previews and fresh receiving contexts re-establish exact scope and requirements without reinterpretation.", verification: Independent API CLI and raw-byte counterexamples., status: pass}
   - {id: AC-STRICT, statement: "Global index validate and repository finalization remain strict and never overwrite the global index on scoped success.", verification: Independent API CLI and raw-byte counterexamples., status: pass}
-  - {id: AC-QUALITY, statement: "Independent counterexamples and exact-source platform checks establish completion before merge.", verification: Independent API CLI and raw-byte counterexamples., status: pending}
+  - {id: AC-QUALITY, statement: "Independent counterexamples and exact-source platform checks establish completion before merge.", verification: Independent API CLI and raw-byte counterexamples., status: pass}
 dependencies: []
 documentation_impact: [ARTIFACT_PROTOCOL.md, docs/usage.md, docs/parallel-work.md, docs/finding-codes.md, docs/self-documentation.md, ROADMAP.md]
 file_intents: [src/working-index.ts, src/cli.ts, src/context.ts, src/context-source-path.ts, src/context-schema.ts, src/finalize-scope.ts, src/validator.ts, src/resume.ts, src/resume-audit.ts, src/handoff.ts, schemas/context-lock.schema.json, schemas/task-working-index.schema.json, test/working-index.test.ts, test/completion-reference-fields.test.ts, examples/task-working-index/README.md, ARTIFACT_PROTOCOL.md, docs/usage.md, docs/parallel-work.md, docs/finding-codes.md, docs/self-documentation.md, ROADMAP.md]
@@ -16,7 +16,7 @@ required_context_sources: [VISION.md, ARTIFACT_PROTOCOL.md, docs/parallel-work.m
 parallel_safety: exclusive
 checks:
   - {id: CHECK-REGRESSIONS, command_or_observation: Execute positive and adversarial scope source schema and resume cases., status: pass, evidence_refs: [.agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/verification.md]}
-  - {id: CHECK-PLATFORMS, command_or_observation: Run fresh isolated typecheck build tests audit and exact hosted matrix., status: pending, evidence_refs: [.agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/progress.md]}
+  - {id: CHECK-PLATFORMS, command_or_observation: Exact r5 native chains and exact 50f7d24 Windows Linux macOS and Node-floor hosted checks pass with disclosed skips., status: pass, evidence_refs: [.agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/hosted-ci-50f7d24.json, .agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/integration-closure.md]}
   - {id: CHECK-REVIEW, command_or_observation: Independent exact sealed r5 technical review passed 99 corrected cases; integrated publication gate remains separate., status: pass, evidence_refs: [.agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/independent-review-r5.md]}
 latest_handoff: null
-updated_at: "2026-10-09T04:29:00Z"
+updated_at: "2026-10-09T05:15:12Z"

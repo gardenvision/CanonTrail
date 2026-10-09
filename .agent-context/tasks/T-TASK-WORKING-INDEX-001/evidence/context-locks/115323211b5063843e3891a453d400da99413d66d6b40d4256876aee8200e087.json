@@ -1,14 +1,14 @@
 {
   "task_id": "T-TASK-WORKING-INDEX-001",
-  "agent_run_id": "explicit-owned-completion-transition-20261009",
-  "created_at": "2026-10-09T05:50:21.116Z",
-  "context_index_hash": "sha256:fe9af228b39fe373e75e95fbb1db92a9f3dbf3e158f3883dc9cc6324d01d7b61",
-  "base_revision": "50f7d2431421c9dfd77abf3bde2eeb87fd5c867f",
+  "agent_run_id": "reviewed-integration-refresh-20261009",
+  "created_at": "2026-10-09T04:42:11.018Z",
+  "context_index_hash": "sha256:6edd907cda3f347bb9b1ac1b9430c2713607aeb659529b1b3e0e87c16a6fff7b",
+  "base_revision": "cf2702d041c11934a8749267e792c0331ebabcd9",
   "budget": {
     "total_tokens": 256000,
     "reserved_output_tokens": 16000,
     "reserved_input_tokens": 4096,
-    "estimated_input_tokens": 156151
+    "estimated_input_tokens": 151136
   },
   "sources": [
     {
@@ -26,40 +26,40 @@
     },
     {
       "path": ".agent-context/tasks/T-TASK-WORKING-INDEX-001/state.yaml",
-      "content_hash": "sha256:efb0e8f6cff90a93ddd158d191b6c5510fc382a5ca0adb5024ac84bb405ea4b6",
+      "content_hash": "sha256:fded797fbf7b41eedd34035a7753bfb218cc78922e31260ffa1ab460a44714dd",
       "git_blob": null,
       "truth_level": "active-snapshot",
       "level": "L0",
       "priority": 1,
       "selection_reason": "Current task objective, acceptance criteria, and file intents.",
       "selector": "task-state",
-      "estimated_tokens": 915,
+      "estimated_tokens": 882,
       "ownership": "project",
       "source_system": null
     },
     {
       "path": ".agent-context/tasks/T-TASK-WORKING-INDEX-001/brief.md",
-      "content_hash": "sha256:97ffc6783e687a12e90d39305560f5e63e5cb95f5894b2bf456898a99afb59a5",
+      "content_hash": "sha256:a67b14cd70706a5adbfbb9979b78e47bb56d03c6a533545cf5f86c0779489464",
       "git_blob": null,
       "truth_level": "active-snapshot",
       "level": "L0",
       "priority": 2,
       "selection_reason": "Current task brief.; Persistently required by the current task state.",
       "selector": "task-brief,task-required-context",
-      "estimated_tokens": 726,
+      "estimated_tokens": 580,
       "ownership": "project",
       "source_system": null
     },
     {
       "path": ".agent-context/tasks/T-TASK-WORKING-INDEX-001/change.yaml",
-      "content_hash": "sha256:b5d222cb779ad32a5075f7713ec1fc2f7fe17cf442be30c89a99bc8095065901",
+      "content_hash": "sha256:8d068d8c5775a5407347e70a73705cd3c490beafcc5533f1f390441f5b051cbc",
       "git_blob": null,
       "truth_level": "active-snapshot",
       "level": "L0",
       "priority": 3,
       "selection_reason": "Current change decision and acceptance oracle.",
       "selector": "task-change",
-      "estimated_tokens": 2365,
+      "estimated_tokens": 2275,
       "ownership": "project",
       "source_system": null
     },
@@ -92,7 +92,7 @@
     {
       "path": "docs/parallel-work.md",
       "content_hash": "sha256:3428d31bedbfd7104db2d6d5119de143231437f8a9b52db83a944952d6eeb6c3",
-      "git_blob": "a9d7e3f9ad149fe228dd0008f6ad2759c4035a85",
+      "git_blob": null,
       "truth_level": "design-target",
       "level": "L1",
       "priority": 14,
@@ -142,22 +142,9 @@
       "source_system": null
     },
     {
-      "path": ".agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/hosted-ci-50f7d24.json",
-      "content_hash": "sha256:c0cbff5886f291a7c60cb071caa6db01e911a651dee42951e51d22d11460bb89",
-      "git_blob": null,
-      "truth_level": "historical",
-      "level": "L4",
-      "priority": 22,
-      "selection_reason": "Compact or directly cited task evidence.",
-      "selector": "task-evidence-reference",
-      "estimated_tokens": 4004,
-      "ownership": "project",
-      "source_system": null
-    },
-    {
       "path": ".agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/independent-review-r5.md",
       "content_hash": "sha256:15042c08ed81302b5c43d6d06b11c858dc7772197f603048a7b9d5f66b4c55ee",
-      "git_blob": "8cead79d69c54f0e9360a35157cbb9f1aae99b5f",
+      "git_blob": null,
       "truth_level": "historical",
       "level": "L4",
       "priority": 22,
@@ -168,35 +155,22 @@
       "source_system": null
     },
     {
-      "path": ".agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/integrated-review.md",
-      "content_hash": "sha256:5873351415d4ad9126a44cd6f9cdbf13b558993c0850867527f8e9c64c5ec155",
+      "path": ".agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/progress.md",
+      "content_hash": "sha256:da48115b39a6a28b71b61b25b0273d67d6894d86cce9d732b30819dd7c7ebbb7",
       "git_blob": null,
       "truth_level": "historical",
       "level": "L4",
       "priority": 22,
       "selection_reason": "Compact or directly cited task evidence.",
       "selector": "task-evidence-reference",
-      "estimated_tokens": 826,
-      "ownership": "project",
-      "source_system": null
-    },
-    {
-      "path": ".agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/integration-closure.md",
-      "content_hash": "sha256:08fb9edfbccb9549182de4c5541c018226e628a5b264894334356b95e1767c1e",
-      "git_blob": null,
-      "truth_level": "historical",
-      "level": "L4",
-      "priority": 22,
-      "selection_reason": "Compact or directly cited task evidence.",
-      "selector": "task-evidence-reference",
-      "estimated_tokens": 800,
+      "estimated_tokens": 1341,
       "ownership": "project",
       "source_system": null
     },
     {
       "path": ".agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/quality-r5.json",
       "content_hash": "sha256:e174eb94c28b6307f392ae20fcb9341ac7f07592986befe890d006ca17ca019d",
-      "git_blob": "36b388da1d20def107577f84a92232f66e56d7eb",
+      "git_blob": null,
       "truth_level": "historical",
       "level": "L4",
       "priority": 22,
@@ -209,7 +183,7 @@
     {
       "path": ".agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/verification.md",
       "content_hash": "sha256:4a2c6d5a325382194c9b9546fc46e3dc1363f45028cf283c48f805a200ca59e5",
-      "git_blob": "3e0d449f16db0ed850e89504ecb0550520f4dd35",
+      "git_blob": null,
       "truth_level": "historical",
       "level": "L4",
       "priority": 22,
@@ -222,7 +196,7 @@
     {
       "path": "ARTIFACT_PROTOCOL.md",
       "content_hash": "sha256:f29d218124b5d13319953e749339cc0f18a368fb927f2fe44d8e503c7c5024c7",
-      "git_blob": "c0d943a3a8411dfeb28b962721e8534855ceae41",
+      "git_blob": null,
       "truth_level": "design-target",
       "level": "L3",
       "priority": 25,
@@ -248,7 +222,7 @@
     {
       "path": "schemas/context-lock.schema.json",
       "content_hash": "sha256:76cf7195ab2baa99d29047a7845d918aad07b8fe32423de173f837e53b7af8b5",
-      "git_blob": "5f013cf7023c722c0e73bb51b32e2f2f4b3a3064",
+      "git_blob": null,
       "truth_level": "unclassified",
       "level": "L3",
       "priority": 25,
@@ -274,7 +248,7 @@
     {
       "path": "src/context.ts",
       "content_hash": "sha256:918ec577962d6f2f0a8c3c0bb7197c5b04ab4bb0604c1d7046f47a236137c834",
-      "git_blob": "6daedba8676a6a2c74f8cf936c75065e3873fbde",
+      "git_blob": null,
       "truth_level": "unclassified",
       "level": "L3",
       "priority": 25,
@@ -300,7 +274,7 @@
     {
       "path": "src/finalize-scope.ts",
       "content_hash": "sha256:316eedd95151c08fc203fab7a747b6da16fc2b789ae02dce1821ef3f956d0a9d",
-      "git_blob": "d76d49aa04bf6daccd24fd78caceab64233e8e90",
+      "git_blob": null,
       "truth_level": "unclassified",
       "level": "L3",
       "priority": 25,
@@ -326,7 +300,7 @@
     {
       "path": "src/validator.ts",
       "content_hash": "sha256:753b7e1f2bf6c5b2776f9b8e9ae2a864d7d181d8f83fe3a8e136d1289c3df005",
-      "git_blob": "fb60f55c28b774c9127134266276aa06772eb1b3",
+      "git_blob": null,
       "truth_level": "unclassified",
       "level": "L3",
       "priority": 25,
@@ -338,21 +312,21 @@
     },
     {
       "path": "ROADMAP.md",
-      "content_hash": "sha256:78df818bf30a0340063eb96de774ec1542fcfdfacdf1566c834707d862c9c1a2",
+      "content_hash": "sha256:0be5030d06fabcb6bae964786b56356e5032d9e9c654253409a568687eb900e8",
       "git_blob": null,
       "truth_level": "draft",
       "level": "L3",
       "priority": 30,
       "selection_reason": "Existing file declared by the current task.",
       "selector": "task-file-intent",
-      "estimated_tokens": 2817,
+      "estimated_tokens": 2569,
       "ownership": "project",
       "source_system": null
     },
     {
       "path": "docs/finding-codes.md",
       "content_hash": "sha256:4052f97d0f4cbe28a9eeb057d7ff62d1ad4d9371aeff724c4ec3c627a1da301e",
-      "git_blob": "1d364f35b8b11a20433d0b697f968bcd95905006",
+      "git_blob": null,
       "truth_level": "draft",
       "level": "L3",
       "priority": 30,
@@ -364,21 +338,21 @@
     },
     {
       "path": "docs/self-documentation.md",
-      "content_hash": "sha256:508f816207c6d87c9bcf2a6cde3dab539cd4b863cc315fad4ab89b7f13d8d608",
+      "content_hash": "sha256:9a51ec2efe15a649028a0a1798bb1702d62afd305d987fd835c59792212521d2",
       "git_blob": null,
       "truth_level": "draft",
       "level": "L3",
       "priority": 30,
       "selection_reason": "Existing file declared by the current task.",
       "selector": "task-file-intent",
-      "estimated_tokens": 2668,
+      "estimated_tokens": 2459,
       "ownership": "project",
       "source_system": null
     },
     {
       "path": "docs/usage.md",
       "content_hash": "sha256:39d678b802d0c39ab7b8435eadab3f5e2264c964735a30f6ea51346ccc9f9eab",
-      "git_blob": "7025b3cfb14c674b820f0ccbca0d9009d0e3fcf9",
+      "git_blob": null,
       "truth_level": "draft",
       "level": "L3",
       "priority": 30,
@@ -391,7 +365,7 @@
     {
       "path": "examples/task-working-index/README.md",
       "content_hash": "sha256:8d5af6430777aa0a1c977f08bbad12a7da74eb2bccc5d6d518aa72403cb8e788",
-      "git_blob": "160a7a86c68bcd827db1e5d0550bb6274c6c00c3",
+      "git_blob": null,
       "truth_level": "draft",
       "level": "L3",
       "priority": 30,
@@ -404,7 +378,7 @@
     {
       "path": "schemas/task-working-index.schema.json",
       "content_hash": "sha256:b74650daa78b919132ff4864a1f4ebf3814d5b8af0beda26edfaab34496cacdd",
-      "git_blob": "f0e0793b3df7b1b9a1dbfdd79bb67d919653ebb0",
+      "git_blob": null,
       "truth_level": "unclassified",
       "level": "L3",
       "priority": 30,
@@ -417,7 +391,7 @@
     {
       "path": "src/cli.ts",
       "content_hash": "sha256:02fe064db12a8e43eb6173515d55bf57baa63c6ace9e5a0ea669bc9929c658a1",
-      "git_blob": "ddcfa8beba6b3c40735c1581f37b36928f75b112",
+      "git_blob": null,
       "truth_level": "unclassified",
       "level": "L3",
       "priority": 30,
@@ -430,7 +404,7 @@
     {
       "path": "src/context-schema.ts",
       "content_hash": "sha256:a8ee80d901235cf7e0b267084c7ab7dc71015aa0aec722bf01e79494cb76fabb",
-      "git_blob": "6d350ee19b027dfc45bf3a5fe04d027fd588c857",
+      "git_blob": null,
       "truth_level": "unclassified",
       "level": "L3",
       "priority": 30,
@@ -443,7 +417,7 @@
     {
       "path": "src/context-source-path.ts",
       "content_hash": "sha256:ae008aa1acbf4688c71517efe15c39463a02376b16e932b8e7620545e257983d",
-      "git_blob": "eaf8b5c9090757ca16c79fe30f6973b3b0b8a2e9",
+      "git_blob": null,
       "truth_level": "unclassified",
       "level": "L3",
       "priority": 30,
@@ -456,7 +430,7 @@
     {
       "path": "src/handoff.ts",
       "content_hash": "sha256:be33ba681c2640911bad6be37e07d888feb961057b91c207c1b49f22815f5b20",
-      "git_blob": "a8d0ab6c671b6c3b23f34347ccea84d86273130b",
+      "git_blob": null,
       "truth_level": "unclassified",
       "level": "L3",
       "priority": 30,
@@ -469,7 +443,7 @@
     {
       "path": "src/resume-audit.ts",
       "content_hash": "sha256:5ba9efa901d049de5c80c5afd263fbc285079ff86e8a239c6a17c0b71f2ca3af",
-      "git_blob": "8e0a4b4d5a9f8afdc3659a8f176a76a6e32f96a1",
+      "git_blob": null,
       "truth_level": "unclassified",
       "level": "L3",
       "priority": 30,
@@ -482,7 +456,7 @@
     {
       "path": "src/resume.ts",
       "content_hash": "sha256:6170b3ad5a379ab4a925334df9c289f5839698e942bcd3dc755bd7ca4ab84899",
-      "git_blob": "727e9a6d220be7e63f3aa3cb12d65f1a20ef588b",
+      "git_blob": null,
       "truth_level": "unclassified",
       "level": "L3",
       "priority": 30,
@@ -495,7 +469,7 @@
     {
       "path": "src/working-index.ts",
       "content_hash": "sha256:e5fe0d0e8e44d1d235013273b8cd7737507a5be2aa57f396a02f63bd5008cee8",
-      "git_blob": "302532da3335b66eb635682f0f98c7a3040c8f52",
+      "git_blob": null,
       "truth_level": "unclassified",
       "level": "L3",
       "priority": 30,
@@ -508,7 +482,7 @@
     {
       "path": "test/completion-reference-fields.test.ts",
       "content_hash": "sha256:6303756719c19dc1fb4f1bf68207cfa03fc1f23bd5304f5ba2cf904abf018c1d",
-      "git_blob": "f27c4808cfe7d5c0be788cefea345fc2eb85501d",
+      "git_blob": null,
       "truth_level": "unclassified",
       "level": "L3",
       "priority": 30,
@@ -521,7 +495,7 @@
     {
       "path": "test/working-index.test.ts",
       "content_hash": "sha256:be85b682a2941d660fea5913b182fd8eb5f49d503997a423e5f9940b5f8ef87f",
-      "git_blob": "77df31e8d24b5c6a3caa1a33fb72798686340654",
+      "git_blob": null,
       "truth_level": "unclassified",
       "level": "L3",
       "priority": 30,
@@ -540,5 +514,5 @@
     }
   ],
   "raw_transcripts_included": false,
-  "lock_hash": "sha256:351bdb1bdf83832f1ffbf148a5d1eedd0dca582472032d97e8b9902537bc91f9"
+  "lock_hash": "sha256:115323211b5063843e3891a453d400da99413d66d6b40d4256876aee8200e087"
 }

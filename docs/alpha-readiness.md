@@ -62,6 +62,16 @@ owns those conditions; earlier release receipts are not approval of this delta.
 The document's retained verification state describes checked factual guidance,
 not independent approval, canonical promotion or release of the correction.
 
+## October field-friction technical closure
+
+The five current authoring/working-index/continuity/publication owner records
+are technically closed with distinct independent reviews, native r5 quality
+and exact 50f7 hosted Windows/Linux/macOS/Node-floor results. Read
+`.agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/integration-closure.md`;
+historical pending notes above describe earlier heads. No future closing-metadata
+or merge CI is claimed. Alpha limits, no consumer rollout, no automatic schema
+migration, no canonical promotion and separate tag/npm gates remain unchanged.
+
 ## Recorded evidence and remaining gates
 
 | Gate | Current evidence and limit |

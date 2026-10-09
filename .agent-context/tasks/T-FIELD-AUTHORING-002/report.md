@@ -1,10 +1,10 @@
 ---
 topic_id: field-authoring-002-result
-stand: "2026-10-08"
-status: implementation-awaiting-review
+stand: "2026-10-09"
+status: technically-verified
 truth_level: active-snapshot
 verification:
-  state: internally-reviewed
+  state: verified
   evidence: [.agent-context/tasks/T-FIELD-AUTHORING-002/evidence/verification.md, .agent-context/tasks/T-FIELD-AUTHORING-002/evidence/quality.json, .agent-context/tasks/T-FIELD-AUTHORING-002/evidence/author-review.md]
 read_if_task_touches: [T-FIELD-AUTHORING-002, field documentation authoring]
 primary_systems: [document authoring, evidence snapshots]
@@ -79,3 +79,12 @@ terminal locks, 103 existing archives/evidence files and older shared runtime
 hashes are unchanged. This updates current orientation without overwriting the
 earlier authoring-only quality receipt. Independent integration and new exact
 hosted checks remain pending; no predecessor CI is attributed to this snapshot.
+
+## Current technical closure
+
+The earlier checkpoints above remain historical. Independent authoring review,
+integrated r5 review and exact 50f7 hosted platform evidence now close this task's
+technical acceptance and checks; state/change/brief agree on verified completion.
+The current consolidated route is the working-index task's
+evidence/integration-closure.md. Final closing metadata and protected publication
+still get their own exact checks; no consumer update or canonical promotion occurs.

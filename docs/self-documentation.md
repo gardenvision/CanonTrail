@@ -45,7 +45,20 @@ do_not_use_instead: [VISION.md, ARTIFACT_PROTOCOL.md, ROADMAP.md]
 
 Read `AGENTS.md` first and choose new task, validated resume, unfinished bootstrap, or maintenance. Load the relevant owner, not this entire tree by default. Exact task sources belong in a context lock; a narrative summary is not a substitute.
 
-## Current October 8 work
+## Current October 9 technical closure
+
+The five previously active authoring, working-index and continuity/publication
+tasks now record verified technical completion. Each closes only its declared
+acceptance and impact scope. The distinct independent decisions and exact 50f7
+Windows/Linux/macOS/Node-floor results are consolidated in
+`.agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/integration-closure.md`.
+The product remains Alpha, optional working views do not relax global safety,
+and source/runtime/consumer identity must stay distinct. Closure metadata and
+the protected merge require their own exact checks; no future CI is claimed.
+Old locks are archived before these explicit owned completion transitions;
+arbitrary terminal locks and earlier failed receipts are not rewritten.
+
+## Historical October 8–9 implementation checkpoints
 
 The independent delta review of exact `cf2702d` was received and its report hash
 checked (`cc8090251f9e17cd21982dac78dfa8746fb4efae91666d4c4e3487921c96785e`).
@@ -81,7 +94,7 @@ recompiled, preserving terminal/historical receipts; final metadata still needs
 fresh strict checks. The task report owns the current next safe action; earlier
 October 8 implementation notes are historical.
 
-## Retained predecessor state (not current approval)
+## Historical predecessor checkpoints (not current gate status)
 
 The October 3 guide/status task follows the sealed publication correction
 be191ba on a separate local branch. That baseline passed its exact hosted
