@@ -1,7 +1,8 @@
 import { access, readFile, realpath, stat, writeFile } from "node:fs/promises";
 import { safeRepositoryFile } from "./context-source-path.js";
 import { ADDITIONAL_TEXT_EXTENSIONS, isAdditionalTextSource, readContextSourceBytes } from "./context-text.js";
-import { assertSectionContextSchemas } from "./context-schema.js";
+import { assertSectionContextSchemas, assertWorkingIndexContextSchema } from "./context-schema.js";
+import { requireTaskWorkingIndex, formatTaskWorkingIndex, type TaskWorkingIndexReport } from "./working-index.js";
 import path from "node:path";
 import { matchingGitBlobs, readGitValue as gitValue } from "./context-git.js";
 import { parseContextSections, selectContextSection, validateLockedSection, type ContextSection } from "./context-sections.js";
@@ -85,6 +86,7 @@ export interface ContextLock {
   agent_run_id: string | null;
   created_at: string;
   context_index_hash: string;
+  context_index_scope?: "task-working";
   base_revision?: string;
   budget: {
     total_tokens: number;
@@ -109,6 +111,7 @@ export interface CompileContextOptions {
   agentRunId?: string | null;
   createdAt?: string;
   apply?: boolean;
+  workingIndex?: boolean;
 }
 
 export interface ContextCompileReport {
@@ -132,6 +135,7 @@ export interface ContextCompileReport {
     estimated_tokens: number;
   }>;
   lock: ContextLock;
+  working_index?: TaskWorkingIndexReport;
 }
 
 export interface ApplyContextPreviewOptions {
@@ -193,7 +197,7 @@ function sameResolvedPath(left: string, right: string): boolean {
 
 function parsePreviewLock(value: unknown): ContextLock {
   if (!isRecord(value) || !hasOnlyKeys(value, [
-    "task_id", "agent_run_id", "created_at", "context_index_hash", "base_revision", "budget",
+    "task_id", "agent_run_id", "created_at", "context_index_hash", "context_index_scope", "base_revision", "budget",
     "sources", "omissions", "raw_transcripts_included", "lock_hash",
   ])) {
     throw new Error("preview lock root is invalid");
@@ -203,6 +207,7 @@ function parsePreviewLock(value: unknown): ContextLock {
     !(typeof value.agent_run_id === "string" || value.agent_run_id === null) ||
     typeof value.created_at !== "string" || !isIsoDateTime(value.created_at) ||
     typeof value.context_index_hash !== "string" || !/^sha256:[a-f0-9]{64}$/i.test(value.context_index_hash) ||
+    !(value.context_index_scope === undefined || value.context_index_scope === "task-working") ||
     !(value.base_revision === undefined || typeof value.base_revision === "string") ||
     value.raw_transcripts_included !== false ||
     typeof value.lock_hash !== "string" || !/^sha256:[a-f0-9]{64}$/i.test(value.lock_hash) ||
@@ -722,7 +727,8 @@ export async function compileContext(options: CompileContextOptions): Promise<Co
   if (!isIsoDateTime(createdAt)) throw new Error("created-at must be an ISO date-time");
 
   const config = await loadConfig(root);
-  const index = await loadContextIndex(root, config);
+  const working = options.workingIndex ? await requireTaskWorkingIndex(root, taskId, options.includePaths ?? []) : undefined;
+  const index = working?.index ?? await loadContextIndex(root, config);
   const { state, path: statePath } = await loadTaskState(root, taskId);
   const taskRoot = `.agent-context/tasks/${taskId}`;
   const defaultOutput = `${taskRoot}/context.lock.json`;
@@ -1094,6 +1100,7 @@ export async function compileContext(options: CompileContextOptions): Promise<Co
     agent_run_id: options.agentRunId ?? null,
     created_at: createdAt,
     context_index_hash: index.root_hash,
+    ...(working ? { context_index_scope: "task-working" as const } : {}),
     ...(baseRevision ? { base_revision: baseRevision } : {}),
     budget: {
       total_tokens: totalTokens,
@@ -1109,6 +1116,7 @@ export async function compileContext(options: CompileContextOptions): Promise<Co
   // Dry-run locks are also consumed by resume; validate the actual prospective
   // payload, not just the presence of feature field names, before any consumer writes.
   if (sections.size) await assertSectionContextSchemas(root, config, lock);
+  if (working) await assertWorkingIndexContextSchema(root, config, lock);
   const serialized = serializeContextLock(lock);
   let outputModified = false;
   if (options.apply) {
@@ -1140,6 +1148,7 @@ export async function compileContext(options: CompileContextOptions): Promise<Co
     required_context_breakdown: requiredBreakdown,
     required_source_costs: sourceCosts,
     lock,
+    ...(working ? { working_index: working } : {}),
   };
 }
 
@@ -1166,7 +1175,9 @@ export async function applyContextPreview(options: ApplyContextPreviewOptions): 
   const { lock_hash: _ignored, ...payload } = lock;
   if (computeContextLockHash(payload) !== lock.lock_hash) throw new Error("context preview lock self-hash does not match its payload");
   const config = await loadConfig(root);
-  const index = await loadContextIndex(root, config);
+  const index = lock.context_index_scope === "task-working"
+    ? (await requireTaskWorkingIndex(root, lock.task_id, lock.sources.map(source => source.path))).index
+    : await loadContextIndex(root, config);
   if (lock.context_index_hash !== index.root_hash) throw new Error("context preview uses a stale context index");
   const currentRevision = await gitValue(root, ["rev-parse", "HEAD"]);
   if (lock.base_revision !== undefined && currentRevision !== lock.base_revision) {
@@ -1192,6 +1203,7 @@ export async function applyContextPreview(options: ApplyContextPreviewOptions): 
   }
   const sectionReasons = await contextIndexCompatibilityReasons(root, index, lock);
   if (sectionReasons.length) throw new Error("Context preview does not satisfy task context: " + sectionReasons.join("; "));
+  if (lock.context_index_scope === "task-working") await assertWorkingIndexContextSchema(root, config, lock);
 
   if (lock.sources.some((source) => source.truth_level === "unclassified")) {
     await assertUnclassifiedContextSchema(root, config);
@@ -1233,6 +1245,7 @@ export function formatContextCompileReport(report: ContextCompileReport): string
     : report.output_modified ? "written" : "unchanged";
   const lines = [
     `Context compile ${report.mode}: ${report.task_id}`,
+    ...(report.working_index ? [formatTaskWorkingIndex(report.working_index)] : []),
     `Selected sources: ${report.selected_sources}`,
     `Estimated input: ${report.lock.budget.estimated_input_tokens}/${report.lock.budget.total_tokens - report.lock.budget.reserved_output_tokens - (report.lock.budget.reserved_input_tokens ?? 0)} tokens`,
     `Input safety reserve: ${report.lock.budget.reserved_input_tokens ?? 0} tokens`,

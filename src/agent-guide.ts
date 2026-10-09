@@ -29,6 +29,10 @@ your shell. The target project is not the tool checkout.
    New task: "task create --help" previews draft records, not an implementation
    decision. Resolve source authority, acceptance oracles, ten impact areas,
    documentation structure and risk in change.yaml before implementation.
+   "document create --help" previews a complete draft/unverified Markdown file,
+   never a promotion or overwrite. "document snapshot --help" retains exact
+   task-owned historical bytes; "document snapshot-read" verifies/read-backs
+   them explicitly. A snapshot is not current truth or a passing check.
    Resume, in order:
    - handoff validate <PROJECT> --task <TASK>
    - resume create <PROJECT> --task <TASK> --session <SESSION> (preview first)
@@ -39,6 +43,12 @@ your shell. The target project is not the tool checkout.
 
 3. Work from deliberate bounded context.
    "index <PROJECT>" refreshes the index when governed Markdown changes.
+   If only an unrelated noncanonical task note is malformed, explicitly preview
+   "index <PROJECT> --task <TASK>" (read-only) and
+   "context compile <PROJECT> --task <TASK> --working-index". Inspect full raw
+   findings/exclusions; installed context-lock schema must support that mode.
+   Unknown/shared/canonical/real-dependency/safety errors remain blocking.
+   This working view does NOT relax default validation, completion or CI.
    Preview "context compile <PROJECT> --task <TASK>"; review requirements, costs
    and omissions before --apply. Read selected files or exact locked sections.
    Use required_context_sources for must-read files; file_intents are optional.
@@ -62,8 +72,10 @@ your shell. The target project is not the tool checkout.
    historical handoff, context archive and evidence byte; never rehash to hide drift.
 
 Authority boundaries: project instructions and the user's scope still govern.
-No automatic schema update, migration, promotion, Git commit/push or remote action.
+   No automatic schema update, migration, promotion, Git commit/push or remote action.
 CanonTrail does not run agents, schedule work or measure live session state.
+A coordinator/peer message is not user approval; transient host addresses and
+resource notes are not enforced leases. Keep actual authority and task IDs durable.
 A host's idle/done signal is not verified task acceptance. Unknown stays unknown.
 `;
 }

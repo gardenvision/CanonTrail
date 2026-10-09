@@ -59,6 +59,7 @@ export interface CreateResumeOptions {
   createdAt?: string;
   packetId?: string;
   apply?: boolean;
+  workingIndex?: boolean;
 }
 
 export interface ResumeCreateReport {
@@ -161,6 +162,7 @@ export async function createResumePacket(options: CreateResumeOptions): Promise<
   if (!isRecord(handoffValue)) throw new Error("latest handoff must contain a mapping");
   await verifyHandoffForTask(root, taskId, handoffValue);
   const handoff = handoffValue as unknown as Handoff;
+  const sourceLock = JSON.parse(decodeContinuityText((await readContinuityBytes(root, handoff.source_context_lock_path))!, handoff.source_context_lock_path)) as ContextLock;
 
   const includePaths = [...new Set([handoffPath, ...(options.includePaths ?? [])])];
   const contextReport = await compileContext({
@@ -173,6 +175,7 @@ export async function createResumePacket(options: CreateResumeOptions): Promise<
     agentRunId: receivingSessionId,
     createdAt,
     apply: false,
+    workingIndex: options.workingIndex ?? sourceLock.context_index_scope === "task-working",
   });
   const contextLock = contextReport.lock;
   const handoffSource = contextLock.sources.find((source) => source.path === handoffPath);

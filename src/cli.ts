@@ -65,7 +65,10 @@ import {
 import { createResumePacket, formatResumeCreateReport } from "./resume.js";
 import { createTask, formatTaskCreateReport, type CreateTaskOptions } from "./task-create.js";
 import { formatTaskStatus, inspectTaskStatus } from "./task-status.js";
+import { createDocument, formatDocumentCreate } from "./document-authoring.js";
+import { captureDocumentSnapshot, formatDocumentSnapshotCapture, formatDocumentSnapshotRead, readDocumentSnapshot } from "./document-snapshot.js";
 import { formatValidationReport, validateRepository, validateResumePacketAt } from "./validator.js";
+import { createTaskWorkingIndex, formatTaskWorkingIndex } from "./working-index.js";
 
 const program = new Command();
 
@@ -208,6 +211,55 @@ taskCommand.command("create")
       acceptance: options.accept, author: options.author, risk: options.risk,
       ...(options.createdAt !== undefined ? { createdAt: options.createdAt } : {}), apply: options.apply ?? false });
     process.stdout.write(options.json ? `${JSON.stringify(report, null, 2)}\n` : `${formatTaskCreateReport(report)}\n`);
+  });
+
+const documentCommand = program.command("document").description("Author honest drafts and retain immutable noncanonical document snapshots");
+
+documentCommand.command("create")
+  .description("Preview one complete draft/unverified Markdown file; --apply never overwrites")
+  .argument("[root]", "initialized project root", ".")
+  .requiredOption("--path <path>", "new governed repository-relative Markdown destination")
+  .requiredOption("--topic <id>", "explicit topic identity; not canonical promotion")
+  .requiredOption("--title <text>", "caller-provided title, rendered as data")
+  .requiredOption("--purpose <text>", "caller-provided scope, not verification evidence")
+  .requiredOption("--route <text>", "task-routing entry; repeat as needed", (value: string, previous: string[]) => [...previous, value], [])
+  .option("--system <text>", "explicit relevant system; repeat as needed", (value: string, previous: string[]) => [...previous, value], [])
+  .option("--created-at <date-time>", "fixed timestamp for exact preview/apply content")
+  .option("--apply", "exclusively create the previewed new document")
+  .option("--json", "print complete draft content and planned path")
+  .action(async (root: string, options: { path: string; topic: string; title: string; purpose: string; route: string[]; system: string[];
+    createdAt?: string; apply?: boolean; json?: boolean }) => {
+    const report = await createDocument({ root, path: options.path, topicId: options.topic, title: options.title, purpose: options.purpose,
+      routing: options.route, systems: options.system, ...(options.createdAt !== undefined ? { createdAt: options.createdAt } : {}), apply: options.apply ?? false });
+    process.stdout.write(options.json ? JSON.stringify(report, null, 2) + "\n" : formatDocumentCreate(report) + "\n");
+  });
+
+documentCommand.command("snapshot")
+  .description("Preview task-owned exact document provenance; --apply creates immutable evidence only")
+  .argument("[root]", "initialized project root", ".")
+  .requiredOption("--task <id>", "existing task owning the snapshot")
+  .requiredOption("--source <path>", "repository-relative Markdown source; never modified")
+  .requiredOption("--purpose <text>", "why this historical revision is retained")
+  .option("--expect-hash <sha256>", "required raw source identity, if supplied")
+  .option("--created-at <date-time>", "fixed timestamp for reproducible evidence")
+  .option("--apply", "create only the immutable preimage/record pair")
+  .option("--json", "print record and planned paths; no source full text")
+  .action(async (root: string, options: { task: string; source: string; purpose: string; expectHash?: string; createdAt?: string; apply?: boolean; json?: boolean }) => {
+    const report = await captureDocumentSnapshot({ root, taskId: options.task, sourcePath: options.source, purpose: options.purpose,
+      ...(options.expectHash !== undefined ? { expectedHash: options.expectHash } : {}),
+      ...(options.createdAt !== undefined ? { createdAt: options.createdAt } : {}), apply: options.apply ?? false });
+    process.stdout.write(options.json ? JSON.stringify(report, null, 2) + "\n" : formatDocumentSnapshotCapture(report) + "\n");
+  });
+
+documentCommand.command("snapshot-read")
+  .description("Verify and display exact historical snapshot text within an explicit budget; read-only")
+  .argument("[root]", "initialized project root", ".")
+  .requiredOption("--record <path>", "exact task-owned hash-named snapshot record")
+  .option("--max-tokens <number>", "estimated content budget; fail instead of truncate", integerOption, 4000)
+  .option("--json", "print verified record and exact decoded source text")
+  .action(async (root: string, options: { record: string; maxTokens: number; json?: boolean }) => {
+    const report = await readDocumentSnapshot({ root, recordPath: options.record, maxTokens: options.maxTokens });
+    process.stdout.write(options.json ? JSON.stringify(report, null, 2) + "\n" : formatDocumentSnapshotRead(report) + "\n");
   });
 
 program
@@ -498,6 +550,7 @@ contextCommand
   .option("--agent-run <id>", "optional provider-neutral agent run id")
   .option("--created-at <date-time>", "explicit timestamp for reproducible output")
   .option("--apply", "write the task-owned context.lock.json; default is dry-run")
+  .option("--working-index", "explicit task working view; isolate eligible peer Markdown defects, never global/CI approval")
   .option("--json", "print the machine-readable compile report")
   .action(async (
     root: string,
@@ -511,6 +564,7 @@ contextCommand
       createdAt?: string;
       apply?: boolean;
       json?: boolean;
+      workingIndex?: boolean;
     },
   ) => {
     const report = await compileContext({
@@ -521,6 +575,7 @@ contextCommand
       inputSafetyTokens: options.inputSafety,
       includePaths: options.include ?? [],
       agentRunId: options.agentRun ?? null,
+      workingIndex: options.workingIndex ?? false,
       ...(options.createdAt ? { createdAt: options.createdAt } : {}),
       apply: options.apply ?? false,
     });
@@ -800,11 +855,18 @@ resumeCommand
 
 program
   .command("index")
-  .description("Generate the deterministic context index from governed Markdown")
+  .description("Generate the strict global context index, or a read-only task working view with --task")
   .argument("[root]", "repository root", ".")
   .option("--json", "print the machine-readable index report")
-  .action(async (root: string, options: { json?: boolean }) => {
+  .option("--task <id>", "report an explicit task working index without writing the global index")
+  .action(async (root: string, options: { json?: boolean; task?: string }) => {
     const absoluteRoot = path.resolve(root);
+    if (options.task) {
+      const report = await createTaskWorkingIndex(absoluteRoot, options.task);
+      process.stdout.write(options.json ? JSON.stringify(report, null, 2) + "\n" : formatTaskWorkingIndex(report) + "\n");
+      if (!report.ok) process.exitCode = 1;
+      return;
+    }
     const preflight = await validateRepository(absoluteRoot, { checkIndex: false, checkContextLocks: false });
     if (!preflight.ok) {
       process.stderr.write(`${formatValidationReport(preflight)}\n`);

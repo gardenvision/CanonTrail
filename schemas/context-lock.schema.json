@@ -34,6 +34,10 @@
       "pattern": "^sha256:[a-f0-9]{64}$",
       "description": "Index identity recorded at compilation. Active validation may accept a different fresh index after task-relevant compatibility checks; never rewrite this provenance implicitly. Exact saved-preview application still requires equality."
     },
+    "context_index_scope": {
+      "const": "task-working",
+      "description": "Opt-in task working index reconstructed from current task/dependencies/shared truth. Missing means the legacy global index; never rewrite historical markers or use this scope as repository/CI approval."
+    },
     "base_revision": {
       "type": "string",
       "minLength": 1

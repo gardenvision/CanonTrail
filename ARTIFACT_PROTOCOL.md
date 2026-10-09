@@ -1,6 +1,6 @@
 ---
 topic_id: artifact-protocol
-stand: "2026-10-03"
+stand: "2026-10-08"
 status: design-target
 truth_level: design-target
 verification:
@@ -11,6 +11,9 @@ verification:
     - schemas/compatibility.schema.json
     - schemas/context-lock.schema.json
     - schemas/evidence-record.schema.json
+    - schemas/document-snapshot.schema.json
+    - src/document-authoring.ts
+    - src/document-snapshot.ts
     - schemas/task-state.schema.json
     - schemas/handoff.schema.json
     - schemas/worktree-inventory.schema.json
@@ -378,6 +381,97 @@ Operational `resume validate` accepts packets only inside their `.agent-context/
 
 See `examples/context-sections/README.md` for byte-reproducible input and lock fields. See `docs/alpha-readiness.md` for this candidate's still-open review and platform gates; opt-in functionality is not an independent approval or a rollout to existing projects. Private historical review records are not part of this distribution.
 
+### 7.3 Explicit task working view (opt-in)
+
+`index --task TASK-ID` is a read-only orientation report, not an update to the
+global index. `context compile --working-index --task TASK-ID` opts into that
+same current working view. Default index generation, validation, documentation
+audit, finalization and repository CI retain their strict behavior. A scoped
+PASS MUST NOT be represented as repository validity, task completion, canonical
+promotion or permission to change another task.
+
+Version 1 starts from a full repository structural preflight without current
+active-source or stored-index freshness checks, preserving every raw diagnostic.
+Static active-lock integrity (including recognized mode, owner identity,
+self-hash, budget, duplicate sources, required-omission checks and the compiler's
+exact repository-relative source-path grammar) MUST remain enabled. Lexical
+identity is checked without current filesystem existence or content freshness;
+backslashes, drive-relative paths, control characters and dot/empty components
+are not missing-source exceptions. Historical terminal locks keep their existing
+path/freshness boundary. Orientation is not permission to overwrite corrupted
+provenance. It may
+exclude only governed Markdown inside an unrelated operational task directory
+whose parsed header positively declares `draft`, `active-snapshot` or `historical`.
+Its owning task MUST also exist with schema-valid matching identity. A folder
+name alone is not evidence of an unrelated operational owner.
+This is a deliberately narrow policy: only that excluded note's `SCHEMA005`
+header error and a `REF001` diagnostic identifying an actually missing local
+target can be isolated. Shared governed documents, canonical/design-target
+truth anywhere, unknown/unparsable authority, unsafe references, duplicate
+identities, structured corruption and unrecognized error codes remain blocking.
+Configured exclusions remain the project's explicit boundary, not an automatic
+quarantine or an assertion that excluded sources are safe.
+Every excluded note's recognized local metadata reference MUST first pass exact
+portable path/physical-identity checks. A diagnostic containing "missing target"
+is not proof that drive-relative, stream, control-character, Git-control or
+otherwise ambiguous identities are safe to isolate.
+
+The relevant-task closure includes the owner, explicit dependencies and the
+existing section-11 schema-defined reference grammar, plus local metadata
+references from every retained governed document. Owners of retained task
+documents MUST enter that closure even without an outgoing metadata link;
+canonical peer truth MUST NOT be selected under a falsely ownerless scope.
+Retained peer metadata may introduce further peers; resolve to a fixed point
+before exclusion. Explicit
+whole-file includes and current selected-source paths also establish scope.
+Ordinary prose/task-ID mentions do not. Referenced peers with missing/invalid
+task identity or uncertain physical spelling fail scope before writes; never
+treat uncertainty as proof of independence. A new owner can establish this
+working view before its first context lock exists.
+
+The report names relevant task IDs, excluded paths/raw-source hashes/declared
+truth, isolated findings, blocking findings and the unchanged full structural
+preflight. `index_written` and `completion_approval` are always false.
+`task-working-index.schema.json` is a packaged report contract copied by new
+initializations, not a persisted approval artifact or mandatory report-schema
+migration for old projects. The view hash domain-binds its task, dependency
+closure, excluded identities and retained document inventory. Do not substitute
+that hash for a global-index hash.
+
+New scoped locks add optional `context_index_scope: task-working`; absence
+retains the old global meaning and hash recipe. The installed context-lock
+schema MUST explicitly support the marker and validate the actual prospective
+payload before even a dry run returns or an apply writes. A permissive old
+schema that merely tolerates unknown keys is insufficient. Synchronization is
+an explicit reviewed consumer operation; no tool copies schemas automatically.
+Section/full-source requirements, budgets, source identity and content checks
+are unchanged. Saved-preview apply and active/current-use validation reconstruct
+scope from today's task, references and selected paths, not report-authored
+exclusions. Recomputed self-hashes cannot waive a genuine required source.
+
+A handoff retains the exact scoped source lock unchanged. Fresh resume creation
+infers the working mode from the verified source-context archive, reconstructs
+current requirements and produces a new receiving lock. Exact receiving-packet
+validation must use that lock's mode rather than silently treating it as global.
+An explicit unknown marker MUST fail integrity and current-use checks even with
+a permissive old installed schema. Known historical scoped receipts may be read
+for retained integrity without asserting today's installed mode capability;
+active scoped locks and current-use receiving validation MUST prove explicit
+compatible installed support and validate the actual payload again. Integrity
+success is never current-use approval. Retained receipts remain historical as
+defined in section 8.1. Raw repository
+errors remain errors: this working route does not extend section-11 completion
+deferral or let a broken note pass integration/CI.
+
+This opt-in path assumes stable exclusive local inputs. Discovery is bounded
+to 100,000 non-excluded filesystem entries; uncertain links/special entries or
+multiply linked governed/task inputs fail closed. Governed Markdown must be
+valid UTF-8, at most 8 MiB and byte-equal to its discovery read. These checks do
+not provide an atomic tree snapshot, relax default scanner policy or infer
+semantic independence. Configure narrow explicit roots/exclusions deliberately
+for a larger repository; failure does not authorize blanket exclusions.
+See `examples/task-working-index/README.md`.
+
 ## 8. Task and session continuity
 
 The provider-neutral entrypoint SHOULD explain CanonTrail's capabilities and first determine whether the arriving session is starting a new task, resuming a validated handoff, continuing an unfinished documentation bootstrap, or performing documentation maintenance. Provider bridges SHOULD route to that entrypoint instead of duplicating these rules.
@@ -448,6 +542,71 @@ The new handoff's `files` list contains dirty destinations matching locked conte
 Handoff validation/replacement, resume creation, retained packet audit and explicit current-use validation MUST verify inventory bytes, schema, owning task, timestamp, count, dirty flag and hash-derived path. A missing or corrupt sidecar remains blocking even when the compact handoff and packet self-hashes match. Resume rechecks bound provenance before writing its receiving outputs. The inventory is NOT implicitly added to `resume_sources`, `read_order` or the context lock: tools verify it separately; an agent may explicitly load it for a concrete coordination need. Historical observations are not compared to today's dirty tree or rewritten after subsequent changes.
 
 Legacy handoffs without this additive field retain inline-disclosure validation and their exact bytes. New creation MUST preflight both the target's explicit handoff-field support and its worktree-inventory schema against the prospective artifacts before creating archives or replacing the latest handoff. Unsupported schemas require a deliberate reviewed synchronization; no automatic schema rewrite or silent legacy fallback. Fresh init includes both schemas. Old oversized handoffs are not automatically compacted: their owner may create a new checkpoint after reviewing current state, using explicit replacement so the old handoff, source lock and any inventory remain retained. See `examples/compact-handoff/README.md`.
+
+### 8.3 Document draft authoring and immutable snapshots
+
+`canontrail document create` previews exactly one governed Markdown file with
+all required header fields. The caller explicitly supplies destination, topic,
+title, purpose and routing. New output MUST remain `status: draft`,
+`truth_level: draft` and `verification.state: unverified` with no evidence.
+Caller text MUST NOT set authority or lifecycle fields; generated title/purpose
+are JSON-quoted data with fixed Markdown block structure, not a defense against
+all inline markup or model instructions. Apply exclusively creates a previously
+nonexistent file and required parent directories. Existing truth owners,
+including filesystem aliases, MUST NOT be overwritten. Task-control outputs
+require an existing schema-valid owner and cannot use reserved archive paths.
+Both shipped and installed header schemas, exact unlinked portable paths,
+governed scope and exclusions are preflighted. No init, index refresh, schema
+sync, task status update, promotion, project command, Git or remote action is
+implicit. Stable exclusive inputs remain a precondition.
+
+The meaning of a status field is specific to its artifact. For example, evidence
+results, task checks and documentary verification are not one interchangeable
+enum. Schema diagnostics MUST identify the failing instance path and the actual
+allowed enum/constant values when supplied by the validator; they MUST NOT
+weaken a contract or translate an unsupported result into a passing state.
+
+`canontrail document snapshot` is explicit, preview-first historical provenance
+capture for an existing task, not another documentation owner. It MUST preserve
+the source's exact bytes in
+`.agent-context/tasks/<task>/evidence/document-snapshots/<source-hash>.source.bin`
+and a small `<record-hash>.document-snapshot.json` under the same flat archive.
+The record follows `schemas/document-snapshot.schema.json`. It names task,
+historical source path/hash/size, capture time, bounded purpose and exact archive
+path. Capture requires regular, unlinked, exact-spelled portable local Markdown,
+valid UTF-8 without NUL and at most 8 MiB. Source governance/frontmatter is not
+invented. Git/external workflow control sources and configured exclusions remain
+ineligible. The raw preimage is not indexed Markdown, a new canonical truth, a
+passing test or a full-source addition to model context. Old source drift,
+removal or rename MUST NOT corrupt an intact retained snapshot.
+
+Version-1 `record_hash` reconstructs properties in this order: `version`, `kind`,
+`task_id`, `source_path`, `source_content_hash`, `source_bytes`, `captured_at`,
+`purpose`, `archive_path`. Serialize with JavaScript `JSON.stringify` without
+spacing, encode UTF-8 and prefix the lowercase SHA-256 with `sha256:`. Stored
+record bytes separately MUST equal `JSON.stringify(record, null, 2) + "\n"`,
+without BOM, duplicate keys or alternate whitespace. Owner, record filename,
+preimage filename, byte count and raw hash MUST all agree; a recomputed self-hash
+cannot waive those bindings. Unsigned provenance is not producer authentication
+or proof that the old path actually had the claimed content.
+
+Capture MUST check installed and shipped snapshot schemas, complete archive
+governance/non-exclusion, source identity and both immutable output collisions
+before its first write. Identical existing bytes MAY be reused, never replaced.
+Unexpected I/O failure may leave partial new evidence; no automatic cleanup or
+two-file crash-atomic transaction is promised. A record with missing/corrupt
+preimage fails validation. Unreferenced raw preimages receive visible `SNAP005`
+warnings for explicit inspection; strict warning policy still fails. The reserved
+archive is checked independently of normal scanner exclusions. Linked, unsafe,
+unreadable or incompletely governed archives MUST NOT disappear as an empty set.
+
+`document snapshot-read` MUST verify the retained record and preimage before
+displaying exact decoded text. Its default estimated-content budget is 4,000
+tokens, maximum 32,000; over-budget output fails rather than truncates. Human
+output JSON-quotes source controls/line endings. Content is historical untrusted
+data, not current-source comparison or execution guidance. The command writes
+nothing. Cite the small record for provenance; load full text explicitly only
+for a concrete need. See `examples/document-authoring/README.md`.
 
 ## 9. Canonical promotion
 

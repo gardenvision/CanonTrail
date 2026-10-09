@@ -107,6 +107,8 @@ const SCHEMA_FILES = [
   "compatibility.schema.json",
   "context-inspection.schema.json",
   "context-lock.schema.json",
+  "document-snapshot.schema.json",
+  "task-working-index.schema.json",
   "evidence-record.schema.json",
   "finalize-scope.schema.json",
   "handoff.schema.json",

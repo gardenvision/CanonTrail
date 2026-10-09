@@ -80,6 +80,11 @@ describe("completion reference-field inventory", () => {
     const result = await resolveCompletionScope(root, "A");
     expect(result.mode).toBe("repository"); expect(result.fallback_reason).toContain("control character");
   });
+  it("does not turn the finite context-index mode label into a peer reference", async () => {
+    const root = await minimalFixture();
+    await setReference(root, "context.lock.json", "context_index_scope", "task-working");
+    expect((await resolveCompletionScope(root, "A")).relevant_task_ids).toEqual(["A"]);
+  });
   it.for(["state.yaml", "change.yaml", "change.yml"])("checks exact compiler evidence identities only for consumed %s", async (file, context) => {
     const root = await minimalFixture();
     const literal = ".agent-context/tasks/A/evidence/check#result.md";
@@ -107,7 +112,10 @@ describe("completion reference-field inventory", () => {
   const inventory = [
     ["task-state", "properties", "task_id,feature_id,source_system,source_ref,status,objective,non_goals,acceptance_criteria,dependencies,documentation_impact,file_intents,required_context_sources,parallel_safety,owner,worktree,checks,latest_handoff,updated_at,context_sections"],
     ["task-state", "properties.checks.items.properties", "id,command_or_observation,status,evidence_refs"],
-    ["context-lock", "properties", "task_id,agent_run_id,created_at,context_index_hash,base_revision,budget,sources,omissions,raw_transcripts_included,lock_hash"],
+    // context_index_scope is a finite mode label, not a path/dependency. The
+    // working-view builder enforces its scope; field collection must not turn
+    // the literal "task-working" into a repository reference.
+    ["context-lock", "properties", "task_id,agent_run_id,created_at,context_index_hash,context_index_scope,base_revision,budget,sources,omissions,raw_transcripts_included,lock_hash"],
     ["context-lock", "properties.sources.items.properties", "path,content_hash,git_blob,truth_level,level,priority,selection_reason,selector,estimated_tokens,ownership,source_system,line_ranges,selection_hash"],
     ["context-lock", "properties.omissions.items.properties", "candidate,reason,required"],
     ["change-record", "properties", "version,change_id,revision,title,status,risk,author,canonical_source,decision_rationale,documentation_structure,acceptance_cases,impacts,verification,independent_review,external_evidence,supersedes,superseded_by,updated_at"],

@@ -5,6 +5,7 @@ import type { ValidateFunction } from "ajv/dist/2020.js";
 import { parse } from "yaml";
 import { computeContextLockHash, type ContextLock } from "./context.js";
 import { validateLockedSection } from "./context-sections.js";
+import { assertKnownContextIndexScope } from "./context-schema.js";
 import { safeRepositoryFile } from "./context-source-path.js";
 import { decodeContinuityText, readContinuityBytes, resolveContinuityFile } from "./continuity-files.js";
 import { validateHandoffSemantics } from "./handoff.js";
@@ -95,6 +96,7 @@ export async function auditResumeReferences(
     }
     const parsed: unknown = JSON.parse(decodeContinuityText(await bytes(relative), relative));
     schema("context-lock", parsed);
+    assertKnownContextIndexScope(parsed);
     const lock = parsed as ContextLock;
     const { lock_hash: _ignored, ...payload } = lock;
     if (lock.task_id !== packet.task_id || lock.lock_hash !== hash || computeContextLockHash(payload) !== hash) {

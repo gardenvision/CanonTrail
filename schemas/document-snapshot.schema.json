@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:canontrail:schema:document-snapshot:1",
+  "title": "Immutable Noncanonical Document Snapshot",
+  "$comment": "Snapshot provenance only, not verification or authority. record_hash is SHA-256 of UTF-8 JSON.stringify of the payload reconstructed in property order: version, kind, task_id, source_path, source_content_hash, source_bytes, captured_at, purpose, archive_path. No whitespace. Lowercase sha256: digest. Raw preimage and record filenames are independently bound by the verifier. Source identity is historical; current source bytes need not still exist or match.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "kind", "task_id", "source_path", "source_content_hash", "source_bytes", "captured_at", "purpose", "archive_path", "record_hash"],
+  "properties": {
+    "version": { "const": 1 },
+    "kind": { "const": "document-snapshot" },
+    "task_id": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$" },
+    "source_path": { "type": "string", "minLength": 1 },
+    "source_content_hash": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+    "source_bytes": { "type": "integer", "minimum": 0, "maximum": 8388608 },
+    "captured_at": { "type": "string", "format": "date-time" },
+    "purpose": { "type": "string", "minLength": 1 },
+    "archive_path": { "type": "string", "minLength": 1 },
+    "record_hash": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" }
+  }
+}

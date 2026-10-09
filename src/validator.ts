@@ -1,8 +1,9 @@
 import { isDeepStrictEqual } from "node:util";
 import { existsSync } from "node:fs";
-import { safeRepositoryFile } from "./context-source-path.js";
+import { assertRepositorySourcePath, safeRepositoryFile } from "./context-source-path.js";
 import { decodeContinuityText, readContinuityText, resolveContinuityFile } from "./continuity-files.js";
 import { parseContextSections, validateLockedSection, type LockedSection } from "./context-sections.js";
+import { assertKnownContextIndexScope, assertWorkingIndexContextSchema } from "./context-schema.js";
 import { lstat, readFile, readdir } from "node:fs/promises";
 import { createRequire } from "node:module";
 import path from "node:path";
@@ -52,6 +53,9 @@ import type {
 } from "./types.js";
 import { auditResumeReferences } from "./resume-audit.js";
 import { compareCodeUnits } from "./ordering.js";
+import { formatValidatorErrors } from "./schema-diagnostics.js";
+import { auditDocumentSnapshots } from "./document-snapshot.js";
+import { requireTaskWorkingIndex } from "./working-index.js";
 
 type JsonRecord = Record<string, unknown>;
 
@@ -61,6 +65,9 @@ const addFormats = require("ajv-formats") as FormatsPlugin;
 export interface ValidateOptions {
   checkIndex?: boolean;
   checkContextLocks?: boolean;
+  /** Keep semantic/integrity checks while skipping present-day source/index
+   * freshness. Unlike checkContextLocks:false, this never skips self-hashes. */
+  checkContextLockFreshness?: boolean;
   strictContextLockTaskId?: string;
   /** Explicit current-use request: prove this packet participated and validate
    * its current sources/task policy. Without this, packets are retained receipts. */
@@ -105,9 +112,7 @@ function addDiagnostic(
 }
 
 function formatAjvErrors(validate: ValidateFunction): string {
-  return (validate.errors ?? [])
-    .map((error) => `${error.instancePath || "/"} ${error.message ?? "is invalid"}`)
-    .join("; ");
+  return formatValidatorErrors(validate);
 }
 
 async function loadSchemaValidators(
@@ -261,6 +266,19 @@ function standaloneUsageReference(value: string): { reference: string; explicit:
   return { reference: entry, explicit: false };
 }
 
+/** Same field grammar used by metadata validation; prose is not a dependency. */
+export function governedMetadataReferences(document: DocumentRecord): string[] {
+  if (!document.header) return [];
+  const result = [...strings(document.header.verification?.evidence), ...strings(document.header.supersedes)]
+    .filter(isLikelyPath);
+  for (const usage of strings(document.header.do_not_use_instead)) {
+    const parsed = standaloneUsageReference(usage);
+    if (parsed && (parsed.explicit || isLikelyPath(parsed.reference))
+        && !/^(?:https?:|urn:|mailto:)/i.test(parsed.reference)) result.push(parsed.reference);
+  }
+  return result;
+}
+
 function validateMetadataReferences(
   diagnostics: Diagnostic[],
   root: string,
@@ -273,7 +291,7 @@ function validateMetadataReferences(
     }
     const referenceCounts = new Map<string, number>();
     for (const reference of [
-      ...strings(document.header.verification.evidence),
+      ...strings(document.header.verification?.evidence),
       ...strings(document.header.supersedes),
     ]) {
       referenceCounts.set(reference, (referenceCounts.get(reference) ?? 0) + 1);
@@ -356,6 +374,7 @@ function schemaForArtifact(artifactPath: string): string | undefined {
   if (basename === "change.yaml" || basename === "change.yml") return "change-record";
   if (basename === "compatibility.yaml" || basename === "compatibility.yml") return "compatibility";
   if (basename === "context.lock.json") return "context-lock";
+  if (basename.endsWith(".document-snapshot.json")) return "document-snapshot";
   if (basename.endsWith(".evidence.yaml") || basename.endsWith(".evidence.yml")) return "evidence-record";
   if (basename === "handoff.yaml" || basename === "handoff.yml") return "handoff";
   if (/^\.agent-context\/tasks\/[^/]+\/evidence\/handoffs\/[a-f0-9]{64}\.ya?ml$/.test(artifactPath)) return "handoff";
@@ -988,6 +1007,7 @@ async function validateHandoffs(
       const { lock_hash: _ignored, ...payload } = archive;
       const schema = validators.get("context-lock");
       if (!schema || !schema(archive)) throw new Error("Archived source context schema is missing or incompatible");
+      assertKnownContextIndexScope(archive);
       const computed = computeContextLockHash(payload as Omit<ContextLock, "lock_hash">);
       if (
         computed !== archive.lock_hash ||
@@ -1025,8 +1045,13 @@ async function validateResumePackets(
     const { lock, taskRoot } = audited;
     if (taskRoot) {
       try {
-        if (!documentInventoryValid) throw new Error("Current document inventory is incomplete or has invalid routing metadata.");
-        const reasons = await contextIndexCompatibilityReasons(root, buildContextIndex(documents), lock);
+        assertKnownContextIndexScope(lock);
+        if (lock.context_index_scope === "task-working") await assertWorkingIndexContextSchema(root, config, lock);
+        if (!documentInventoryValid && lock.context_index_scope !== "task-working") throw new Error("Current document inventory is incomplete or has invalid routing metadata.");
+        const index = lock.context_index_scope === "task-working"
+          ? (await requireTaskWorkingIndex(root, lock.task_id, lock.sources.map(source => source.path))).index
+          : buildContextIndex(documents);
+        const reasons = await contextIndexCompatibilityReasons(root, index, lock);
         if (reasons.length) addDiagnostic(diagnostics, "error", "RESUME010", "receiving context does not satisfy task requirements", artifactPath, reasons.join("; "));
       } catch (error) {
         addDiagnostic(diagnostics, "error", "RESUME010", "receiving context task compatibility cannot be established", artifactPath, (error as Error).message);
@@ -1060,11 +1085,17 @@ async function validateContextLocks(
   artifacts: Map<string, unknown>,
   strictTaskId?: string,
   documents: DocumentRecord[] = [],
+  checkFreshness = true,
 ): Promise<void> {
   for (const [artifactPath, value] of artifacts) {
     if (path.posix.basename(artifactPath) !== "context.lock.json" || !isRecord(value)) continue;
+    try { assertKnownContextIndexScope(value); }
+    catch (error) { addDiagnostic(diagnostics, "error", "LOCK010", "context lock index mode is unsupported", artifactPath, (error as Error).message); }
     const taskMatch = /^\.agent-context\/tasks\/([^/]+)\/context\.lock\.json$/.exec(artifactPath);
     const taskId = taskMatch?.[1];
+    if (taskId && value.task_id !== taskId) {
+      addDiagnostic(diagnostics, "error", "LOCK008", "context lock task identity is unavailable or inconsistent", artifactPath);
+    }
     const taskState = taskId ? artifacts.get(`.agent-context/tasks/${taskId}/state.yaml`) : undefined;
     const taskStatus = isRecord(taskState) && typeof taskState.status === "string" ? taskState.status : "";
     const historical = Boolean(
@@ -1072,6 +1103,10 @@ async function validateContextLocks(
       taskId !== strictTaskId &&
       ["verified", "done", "superseded"].includes(taskStatus),
     );
+    if (!historical && value.context_index_scope === "task-working") {
+      try { await assertWorkingIndexContextSchema(root, config, value as unknown as ContextLock); }
+      catch (error) { addDiagnostic(diagnostics, "error", "LOCK008", "active task working context schema capability cannot be established", artifactPath, (error as Error).message); }
+    }
     const driftOwner = taskId && value.task_id === taskId && isRecord(taskState) && taskState.task_id === taskId ? taskId : undefined;
     const budget = isRecord(value.budget) ? value.budget : {};
     const total = typeof budget.total_tokens === "number" ? budget.total_tokens : 0;
@@ -1098,7 +1133,15 @@ async function validateContextLocks(
       seenPaths.add(source.path);
       try { validateLockedSection(source as unknown as LockedSection); }
       catch (error) { addDiagnostic(diagnostics, "error", "LOCK009", "invalid context section", artifactPath, (error as Error).message); }
-      if (historical) continue;
+      if (!historical) {
+        try { assertRepositorySourcePath(source.path); }
+        catch (error) {
+          addDiagnostic(diagnostics, "error", source.path.includes("\\") ? "REF002" : "LOCK003",
+            "active context source requires an exact repository-relative path", artifactPath, (error as Error).message);
+          continue;
+        }
+      }
+      if (historical || !checkFreshness) continue;
       checkReference(diagnostics, root, config, artifactPath, source.path, root, "LOCK003");
       const target = referenceTarget(root, config, source.path, root);
       if (target.exists && target.absolutePath && typeof source.content_hash === "string" && /^sha256:[a-f0-9]{64}$/i.test(source.content_hash)) {
@@ -1137,9 +1180,16 @@ async function validateContextLocks(
     if (value.raw_transcripts_included === true) {
       addDiagnostic(diagnostics, "warning", "LOCK006", "raw transcripts are included in the context lock", artifactPath);
     }
-    if (artifactPath.startsWith(".agent-context/tasks/") && !historical) {
+    if (artifactPath.startsWith(".agent-context/tasks/") && !historical && checkFreshness) {
       const indexPath = path.join(root, ...normalizePath(config.indexPath).split("/"));
       try {
+        if (value.context_index_scope === "task-working") {
+          if (!taskId || value.task_id !== taskId) throw new Error("context lock task identity is unavailable or inconsistent");
+          const index = (await requireTaskWorkingIndex(root, taskId, records(value.sources).map(source => String(source.path)))).index;
+          const reasons = await contextIndexCompatibilityReasons(root, index, value as unknown as ContextLock);
+          if (reasons.length) addDiagnostic(diagnostics, "error", "LOCK008", "task working index no longer covers current requirements", artifactPath, reasons.join("; "));
+          continue;
+        }
         const currentIndex: unknown = JSON.parse(await readFile(indexPath, "utf8"));
         const currentRootHash = isRecord(currentIndex) && typeof currentIndex.root_hash === "string" ? currentIndex.root_hash : "";
         if (value.context_index_hash !== currentRootHash || records(value.sources).some(source => source.line_ranges !== undefined)
@@ -1333,6 +1383,8 @@ export async function validateRepository(rootInput: string, options: ValidateOpt
     addDiagnostic(diagnostics, "error", "DOC005", "structured artifacts cannot be scanned", undefined, (error as Error).message);
   }
   await validateChangeRecords(diagnostics, root, config, artifacts, documents);
+  diagnostics.push(...await auditDocumentSnapshots(root, config,
+    [...artifacts.keys()].filter(artifactPath => schemaForArtifact(artifactPath) === "document-snapshot")));
   diagnostics.push(...await validateFrozenExamplePolicy(root, documents));
   if (options.requiredResumePacketPath && !artifacts.has(options.requiredResumePacketPath)) {
     addDiagnostic(diagnostics, "error", "RESUME000", "requested packet was not loaded by the governed artifact scan; excluded, aliased or unreadable inputs cannot be approved", options.requiredResumePacketPath);
@@ -1347,7 +1399,7 @@ export async function validateRepository(rootInput: string, options: ValidateOpt
     (d.code === "DOC001" || d.code === "DOC002" || (documentPaths.has(d.path ?? "") && ["SCHEMA004", "SCHEMA005"].includes(d.code))));
   await validateResumePackets(diagnostics, root, config, artifacts, documents, documentInventoryValid, validators, options.requiredResumePacketPath);
   if (options.checkContextLocks !== false) {
-    await validateContextLocks(diagnostics, root, config, artifacts, options.strictContextLockTaskId, documents);
+    await validateContextLocks(diagnostics, root, config, artifacts, options.strictContextLockTaskId, documents, options.checkContextLockFreshness !== false);
   }
   await validateTaskStates(diagnostics, root, artifacts);
 

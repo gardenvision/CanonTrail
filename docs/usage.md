@@ -1,6 +1,6 @@
 ---
 topic_id: usage-guide
-stand: "2026-10-03"
+stand: "2026-10-08"
 status: public-source-alpha
 truth_level: draft
 verification:
@@ -127,6 +127,102 @@ context_sections:
 Then refresh the index if governed Markdown changed, compile without `--apply`, inspect the section, omissions and budget, and apply only a sound proposal. The section is itself required and bound to the *entire* source hash: edits outside lines 20–48 also force a fresh decision. If another rule still requires the whole file (for example governing instructions, strong canonical routing, a direct evidence citation or `--include`), compilation rejects the narrower request; keep the whole file or use a larger budget. [The worked example](../examples/context-sections/README.md) shows exact hashes and bytes. `--include` requests a whole source, not a section.
 
 The compiler uses an explicit text-extension list. Alongside `.js`, `.ts`, `.cs`, `.kt`, `.md`, `.json` and `.yaml`, it accepts `.mjs`, `.cjs`, `.hlsl`, `.glsl`, `.shader`, `.compute` and `.cginc`. These module/shader formats must be valid UTF-8 without NUL and at most 8 MiB; a rejected required source fails before lock replacement, while an invalid optional source is reported as omitted. **Compatibility change:** earlier public main accepted whole `.mjs` sources without these checks; the owner deliberately selected the stricter policy for new compilations and saved previews. Existing historical locks are preserved, not automatically revalidated under the new encoding policy. Explicit selection still determines what is loaded; extension support does not scan the source tree or make code canonical. Binary-capable `.asset`, `.prefab`, `.unity`, images and model files remain outside this text contract. Record their exact identity through compact evidence and inspect them with the appropriate project tool. Do not rename real sources just to bypass the boundary. Use `context inspect` to understand costs and drift.
+
+### Continue around one unrelated unfinished task note
+
+An opt-in working view can unblock orientation and bounded context compilation,
+not release checks:
+
+```text
+node <CANONTRAIL_HOME>/dist/cli.js index <TARGET_PROJECT> --task <TASK-ID> --json
+node <CANONTRAIL_HOME>/dist/cli.js context compile <TARGET_PROJECT> --task <TASK-ID> --working-index --total-tokens 48000 --reserve-output 8000 --json
+```
+
+`index --task` writes nothing, including the global index. The compile preview
+shows the full structural preflight and exactly which peer-note defects were
+isolated. Review its requirements and exclusions before explicit `--apply`.
+Only current source/index freshness is skipped in that preflight; static lock
+integrity, including self-hashes, supported modes and exact relative source-path
+grammar, still blocks the working view. An invalid path is not a missing-file
+freshness exception; historical terminal receipts keep their existing boundary.
+Only unrelated, positively noncanonical governed task Markdown is eligible;
+header-schema errors and missing local references are the two isolatable error
+kinds. Unparsable/unknown headers, shared or canonical/design-target documents,
+real dependencies, unsafe identities and structured corruption still stop it.
+Treat an unexpected error as a defect to investigate, not a reason to force scope.
+
+Scoped locks explicitly carry `context_index_scope: task-working`. Compare the
+current installed `context-lock.schema.json` before opting in; missing/incompatible
+support fails even a dry run without changing any schema. Old/default locks stay
+unchanged. A saved preview is rechecked against today's task and scope before
+apply. A valid handoff retains the source lock, and fresh resume automatically
+reconstructs the same mode from that verified archive. Validate the exact
+receiving packet before reading/acting; no approval is inherited.
+
+Default `index`, `validate`, `docs audit`, `finalize` and CI remain strict. The
+raw peer findings must be repaired by their owner before repository integration.
+This is not a new completion waiver or runtime/editor lease. Discovery rejects
+uncertain links and is limited to 100,000 non-excluded entries; review explicit
+root/exclusion choices rather than hiding required files. See the
+[worked example](../examples/task-working-index/README.md) and
+[protocol section 7.3](../ARTIFACT_PROTOCOL.md#73-explicit-task-working-view-opt-in).
+
+## Document drafts and preserved source revisions
+
+Check the running executable's help. The development candidate adds complete
+draft creation without asking an agent to memorize every header field:
+
+```text
+node <CANONTRAIL_HOME>/dist/cli.js document create <TARGET_PROJECT> --path docs/canontrail/export.md --topic receipt-export --title "Receipt export" --purpose "Describe observed behavior and unresolved limits" --route "receipt export" --created-at 2026-10-08T12:00:00Z --json
+```
+
+Repeat `--route` and optional `--system` entries as needed. Inspect the preview;
+repeat with `--apply` only for a wanted **new** file. A fixed `--created-at`
+keeps preview/apply bytes reproducible. The result is always draft/unverified
+with empty evidence, not canonical truth. Existing files are never overwritten,
+even if their bytes happen to match. In `.agent-context`, only an existing
+task's nonreserved Markdown destinations are allowed. The command does not
+refresh an index or change the task; review the draft's source, evidence and
+existing topic owner afterward. Both installed and shipped header schemas are
+checked; older executables without the command are not silently upgraded.
+
+For a before-copy, use the managed snapshot command instead of copying a `.md`
+file into governed task documentation and guessing a special extension:
+
+```text
+node <CANONTRAIL_HOME>/dist/cli.js document snapshot <TARGET_PROJECT> --task <TASK-ID> --source docs/canontrail/export.md --purpose "Before revision of export documentation" --created-at 2026-10-08T12:00:00Z --json
+node <CANONTRAIL_HOME>/dist/cli.js document snapshot-read <TARGET_PROJECT> --record <record-path-returned-by-capture> --json
+```
+
+Capture is no-write by default; explicit `--apply` writes only the immutable
+raw preimage plus its small hash-bound record. Source, index and state remain
+unchanged. `--expect-hash sha256:<exact-raw-hash>` can pin the intended source.
+The generated `.source.bin` is a defined archive role, not current Markdown;
+no manual rename or header removal is needed. Cite the record for historical
+provenance. Neither the record nor copied source proves verification or
+approval, and the preimage is not automatically loaded into context.
+
+Read-back verifies both stored artifacts and preserves BOM, Unicode and line
+endings. Its default limit is 4,000 estimated content tokens; use a justified
+`--max-tokens` up to 32,000. It fails instead of truncating. Human display quotes
+the text so controls are visible, while JSON `content` re-encodes to the exact
+raw bytes. A changed/removed current source does not invalidate the historical
+copy; current comparison is explicitly not performed. Keep source content
+local unless sharing it is authorized.
+
+New init includes `document-snapshot.schema.json`. An existing project's schema
+must be deliberately compared/synchronized before capture; the command does
+not copy schemas or rerun init. Wrong owners/hashes, broken preimages, links,
+configuration-hidden archives and unexpected archive entries remain visible
+validation errors. Orphan preimages from interrupted capture are warnings,
+never deleted automatically; strict warning policy fails. Two-file capture is
+not crash-atomic. Preserve partial evidence and inspect it before retrying.
+See the [neutral worked example](../examples/document-authoring/README.md).
+
+Status vocabularies are field-specific. `SCHEMA005` now includes the actual
+instance path and its allowed enum/constant values; use those values and the
+named schema, not a status copied from another artifact. No allowed list or
+completion gate was relaxed to make authoring easier.
 
 ## Verification and handoffs
 

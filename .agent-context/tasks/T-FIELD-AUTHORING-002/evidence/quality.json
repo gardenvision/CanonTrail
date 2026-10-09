@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "kind": "author-quality-summary",
+  "task_id": "T-FIELD-AUTHORING-002",
+  "tested_source": {
+    "base_revision": "cf2702d041c11934a8749267e792c0331ebabcd9",
+    "manifest_sha256": "75d0fdec0f11cd9b0aa519e3fe00ab9711fe6429f60f4d3df54582e02e04f990",
+    "files": 351,
+    "bytes": 2969220,
+    "platform_copy_differences": 0
+  },
+  "focused_windows": { "total": 82, "passed": 82, "failed": 0, "skipped": 0, "files": 3, "report_sha256": "ec6c3e3075b9745a47d64c250642422f9db7fc8c06fe5c6bd2d384baf0bbb093" },
+  "full_windows": { "node": "v24.11.1", "total": 958, "passed": 945, "failed": 0, "skipped": 13, "files": 45, "report_sha256": "d6ce88d1c259a8b34f40ee2a7d52f1f001eb70a883a421df01dee9334790c3d1" },
+  "full_linux": { "node": "v24.20.0", "filesystem": "native ext4 under WSL", "total": 958, "passed": 951, "failed": 0, "skipped": 7, "files": 45, "report_sha256": "4e7c0a1ce6e60e0d6151351a998ee7e9a8bf8d81559fe2efe06584c1ab000e11", "environment_sha256": "a5072f178fcc01f574be9962c2f0335c13664c1ddbbfd4c2d31f9ad03d98bde2" },
+  "both_platforms": { "clean_install": "pass", "typecheck": "pass", "isolated_build": "pass", "dependency_audit": "pass", "vulnerabilities": 0, "default_timeout_ms": 15000, "skip_policy_changed": false },
+  "preservation": { "baseline_files": 338, "intended_existing_file_changes": 12, "old_task_files": 155, "old_task_changes": 0, "tested_snapshot_source_changes": 0, "shared_runtime_changes": 0 },
+  "strict_project_validation_before_own_closure_metadata": { "ok": false, "markdown": 65, "structured": 69, "schemas": 17, "errors": 19, "warnings": 0, "only_error_code": "LOCK004", "affected_preserved_peer_tasks": 3 },
+  "structural_preflight_before_own_closure_metadata": { "ok": true, "context_freshness_checked": false, "errors": 0, "warnings": 0, "full_repository_approval": false },
+  "earlier_focused_r1": { "total": 77, "passed": 70, "failed": 7, "classification": "author fixture/oracle mistakes; corrected only in a fresh source snapshot", "original_receipt_retained": true, "r1_working_copy_later_changed": "only its package lock for the development-dependency probe" },
+  "macos_executed": false,
+  "independent_review": "pending",
+  "consumer_rollout": false,
+  "release_approved": false,
+  "provider_token_measurement": false
+}

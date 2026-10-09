@@ -9,6 +9,7 @@ import type { FormatsPlugin } from "ajv-formats";
 import { Document, isScalar, parse, Scalar } from "yaml";
 import { loadConfig } from "./config.js";
 import { computeContextLockHash, type ContextLock } from "./context.js";
+import { assertKnownContextIndexScope } from "./context-schema.js";
 import { isIsoDateTime } from "./date-time.js";
 import { normalizePath, sha256 } from "./indexer.js";
 import { safeRepositoryFile } from "./context-source-path.js";
@@ -308,6 +309,7 @@ async function loadContextLock(root: string, taskId: string): Promise<{ lock: Co
   if (!isRecord(value) || value.task_id !== taskId || typeof value.lock_hash !== "string") {
     throw new Error(`${lockPath} must contain matching task_id and lock_hash`);
   }
+  assertKnownContextIndexScope(value);
   const { lock_hash: _ignored, ...payload } = value;
   if (computeContextLockHash(payload as Omit<ContextLock, "lock_hash">) !== value.lock_hash) {
     throw new Error(`${lockPath} has an invalid self-hash`);
@@ -438,6 +440,7 @@ export async function verifyHandoffForTask(root: string, taskId: string, value: 
   if (!isRecord(archive) || typeof archive.lock_hash !== "string") {
     throw new Error("existing handoff source context archive is invalid");
   }
+  assertKnownContextIndexScope(archive);
   const { lock_hash: _ignored, ...payload } = archive;
   if (
     computeContextLockHash(payload as Omit<ContextLock, "lock_hash">) !== archive.lock_hash ||

@@ -1,6 +1,6 @@
 ---
 topic_id: canontrail-self-documentation
-stand: "2026-10-03"
+stand: "2026-10-08"
 status: public-source-alpha
 truth_level: draft
 verification:
@@ -40,8 +40,48 @@ do_not_use_instead: [VISION.md, ARTIFACT_PROTOCOL.md, ROADMAP.md]
 | Abstract field feedback, task draft creation and checked shader/module context | `.agent-context/tasks/T-FIELD-WORKFLOW-001/state.yaml` |
 | Public-main integration, dependency correction and branch publication | `.agent-context/tasks/T-PUBLISH-CONTINUITY-001/state.yaml` |
 | Bundled runtime agent guide and read-only task status | `.agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/state.yaml`; `docs/usage.md` |
+| Complete document drafts, explicit enum diagnostics and immutable document copies | `.agent-context/tasks/T-FIELD-AUTHORING-002/state.yaml`; `docs/usage.md`; `ARTIFACT_PROTOCOL.md` section 8.3 |
+| Opt-in task working index and narrow peer-note isolation | `.agent-context/tasks/T-TASK-WORKING-INDEX-001/state.yaml`; `ARTIFACT_PROTOCOL.md` section 7.3 |
 
 Read `AGENTS.md` first and choose new task, validated resume, unfinished bootstrap, or maintenance. Load the relevant owner, not this entire tree by default. Exact task sources belong in a context lock; a narrative summary is not a substitute.
+
+## Current October 8 work
+
+The independent delta review of exact `cf2702d` was received and its report hash
+checked (`cc8090251f9e17cd21982dac78dfa8746fb4efae91666d4c4e3487921c96785e`).
+It conditionally approves the predecessor's two deltas, not new authoring work.
+The raw review is externally retained. Existing high-risk task metadata and
+release gates still need separate consolidation; no merge or rollout follows.
+
+`T-FIELD-AUTHORING-002` is on local branch `codex/field-friction-20261008`, based
+on `cf2702d`. It reduces document-header, enum-diagnostic and copy-provenance
+friction with explicit draft/snapshot commands, while documenting coordinator
+authority rather than adding messaging or a supervisor. Global malformed-note
+isolation is now a distinct opt-in task, not a hidden exemption.
+The shared older `dist/` and consumer projects stay unchanged. Build/test in an
+isolated exact-source copy; the task's evidence owns actual results and review
+limits. Historical locks/receipts and the sealed PR target remain unchanged.
+The new authoring/snapshot boundary passed 82 focused cases plus exact-source
+full Windows (945 pass / 13 skip) and native Linux (951 pass / 7 skip) chains.
+Its task report is the small current checkpoint; detailed verification and
+the external raw manifest own the measured claims. New independent review,
+strict peer-drift closure and macOS evidence remain open, with no consumer
+update or publication. The sealed authoring r2 boundary has now received its
+own independent technical PASS; that report does not approve the new index work
+or close platform/integration gates. `T-TASK-WORKING-INDEX-001` has locally
+implemented a read-only scope view, optional installed-schema-checked lock
+marker, preview checks and fresh-resume mode inference. Its latest sealed r5
+passed native Windows (1007 pass / 13 skips) and Linux (1013 pass / seven skips),
+1020 cases on each with zero failures. Independent reviews rejected real earlier
+defects, recorded with RED/GREEN regressions; independent r5 technical review
+passed 99 corrected fresh cases. Integrated predecessor review remains pending.
+These native results are not macOS, CI,
+completion or consumer approval. Five inspected active locks were archived/
+recompiled, preserving terminal/historical receipts; final metadata still needs
+fresh strict checks. The task report owns the current next safe action; earlier
+October 8 implementation notes are historical.
+
+## Retained predecessor state (not current approval)
 
 The October 3 guide/status task follows the sealed publication correction
 be191ba on a separate local branch. That baseline passed its exact hosted

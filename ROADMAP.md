@@ -1,6 +1,6 @@
 ---
 topic_id: implementation-roadmap
-stand: "2026-10-03"
+stand: "2026-10-08"
 status: public-source-alpha
 truth_level: draft
 verification:
@@ -42,6 +42,26 @@ T-MIT-LICENSE-001 applies the explicit MIT decision in a new local revision. It 
 T-PUBLIC-PREP-001 introduced neutral `legacy-header-v1` naming with retained historical-input compatibility, recorded the source-content audit boundary, and prepared the release checklist and third-party inventory. Its independent naming/C1 reviews and platform evidence are recorded; neither is borrowed from V3. Its local preparation closure remains distinct from the later release task and actual hosting receipts.
 
 ## Useful later work, not this release's automatic scope
+
+- `T-FIELD-AUTHORING-002` owns complete draft-document creation, explicit
+  field-specific schema choices, managed immutable document snapshots and
+  durable coordinator guidance. It is a new candidate; author checks do not
+  transfer the predecessor's independent approval or update consumers. Its
+  newly observed development-only source-map-js advisory is corrected only by
+  a semver-compatible 1.2.1-to-1.2.2 lock entry; fresh evidence owns that result.
+- `T-TASK-WORKING-INDEX-001` implements opt-in task-local working-index isolation.
+  Exact r5 native Windows/Linux runtime and regression chains passed, as did
+  its independent technical delta review. Integrated predecessor review and
+  fresh hosted/platform/publication gates remain pending; technical scope PASS
+  is not completion or consumer rollout.
+  An unrelated
+  malformed task note should not prevent conflict-free orientation, but missing
+  global canonical truth, real dependencies, unsafe references and release/CI
+  defects must remain visible and blocking. The separate explicit working view
+  does not replace the global index, quarantine files or relax completion.
+- Keep an external human/host coordinator optional. Durable participants,
+  approval provenance and resource observations are useful; live messages,
+  scheduler decisions and enforced editor locks remain externally owned.
 
 - `T-AGENT-GUIDANCE-STATUS-001` owns the additive bundled `guide` and read-only
   `task status` view. It preserves finalize JSON/predicates and recorded lifecycle

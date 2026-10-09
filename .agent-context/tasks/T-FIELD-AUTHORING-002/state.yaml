@@ -1,0 +1,23 @@
+task_id: T-FIELD-AUTHORING-002
+status: review
+objective: Reduce task documentation authoring and evidence-copy friction while preserving repository safety and explicit coordination authority.
+non_goals: [No consumer rollout or schema synchronization, No relaxed global index validation, No scheduler or live messaging, No push merge or release, No peer task changes]
+acceptance_criteria:
+  - {id: AC-DRAFT, statement: Governed document drafts have complete honest headers and exclusive preview-first creation., verification: Installed/shipped schemas and raw-byte preservation fixtures., status: pass}
+  - {id: AC-VALUES, statement: Schema diagnostics identify fields and actual allowed choices without changing validation., verification: Independently checked enum/const failures in API and CLI output., status: pass}
+  - {id: AC-SNAPSHOT, statement: Archived document bytes remain exact noncanonical legible and validated without depending on current source bytes., verification: Raw-byte hash oracles drift cases and rehashed binding counterexamples., status: pass}
+  - {id: AC-COORDINATION, statement: Coordination guidance does not turn peer messages transient addresses or elapsed time into user permission., verification: Written approval boundary and source inspection., status: pass}
+  - {id: AC-QUALITY, statement: Focused and full checks preserve historical artifacts and shared installed runtimes., verification: Isolated quality receipts and baseline preservation., status: pending}
+dependencies: []
+documentation_impact: [ARTIFACT_PROTOCOL.md, docs/usage.md, docs/parallel-work.md, docs/finding-codes.md, ROADMAP.md, docs/self-documentation.md]
+file_intents: [src/document-authoring.ts, src/schema-diagnostics.ts, src/document-snapshot.ts, src/validator.ts, src/cli.ts, src/initializer.ts, src/agent-guide.ts, package-lock.json, schemas/document-snapshot.schema.json, test/document-authoring.test.ts, test/document-snapshot.test.ts, test/schema-diagnostics.test.ts, test/document-fixture.ts, examples/document-authoring/README.md, ARTIFACT_PROTOCOL.md, docs/usage.md, docs/parallel-work.md, docs/finding-codes.md, ROADMAP.md, docs/self-documentation.md]
+required_context_sources: [VISION.md, ARTIFACT_PROTOCOL.md, docs/usage.md, docs/parallel-work.md, src/cli.ts, src/validator.ts, src/task-create.ts, src/continuity-files.ts, src/indexer.ts, schemas/artifact-header.schema.json, schemas/task-state.schema.json, schemas/change-record.schema.json, test/task-create.test.ts, test/document-authoring.test.ts, test/document-snapshot.test.ts, test/schema-diagnostics.test.ts, .agent-context/tasks/T-FIELD-AUTHORING-002/report.md]
+parallel_safety: exclusive
+checks:
+  - {id: CHECK-FOCUSED, command_or_observation: Run authoring snapshots and schema-diagnostic regressions against the built CLI., status: pass, evidence_refs: [.agent-context/tasks/T-FIELD-AUTHORING-002/evidence/quality.json]}
+  - {id: CHECK-QUALITY, command_or_observation: Run isolated typecheck build full tests and strict repository checks., status: blocked, evidence_refs: [.agent-context/tasks/T-FIELD-AUTHORING-002/evidence/verification.md]}
+  - {id: CHECK-REGRESSIONS, command_or_observation: Exact-source Windows and native Linux install typecheck build audit and full tests passed; strict global health remains separate., status: pass, evidence_refs: [.agent-context/tasks/T-FIELD-AUTHORING-002/evidence/quality.json]}
+  - {id: CHECK-PRESERVATION, command_or_observation: Compare historical task artifacts and shared runtime hashes against the exact baseline., status: pass, evidence_refs: [.agent-context/tasks/T-FIELD-AUTHORING-002/evidence/verification.md]}
+  - {id: CHECK-REVIEW, command_or_observation: Independent local reviewer passed the exact sealed revision-2 technical authoring and snapshot boundary; later index integration is a separate review., status: pass, evidence_refs: [.agent-context/tasks/T-FIELD-AUTHORING-002/evidence/independent-review.md]}
+latest_handoff: .agent-context/tasks/T-FIELD-AUTHORING-002/handoff.yaml
+updated_at: "2026-10-08T19:52:08Z"
