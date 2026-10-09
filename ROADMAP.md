@@ -14,6 +14,15 @@ do_not_use_instead: [VISION.md, ARTIFACT_PROTOCOL.md]
 
 # Bounded Alpha roadmap
 
+## Current validation-memory correction
+
+`T-VALIDATION-MEMORY-001` addresses cumulative decoded retained-handoff and
+inventory memory after complete archive coverage exposed a large-consumer heap
+failure. Full per-artifact integrity remains mandatory; no hash-only fallback,
+consumer evidence rewrite or heap-size workaround is a closure. Its own
+constrained-heap regressions, independent review and revision-bound platform
+results are required before publication or consumer rollout.
+
 ## Existing implementation to verify for this candidate
 
 - Governed metadata, indexing and structural validation.

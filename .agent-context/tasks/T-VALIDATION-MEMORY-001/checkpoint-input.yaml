@@ -1,0 +1,60 @@
+completed:
+  - Bounded parsed handoff and worktree-inventory lifetimes without skipping integrity checks.
+  - Typecheck build and full Windows suite passed with 1014 passes and 13 skips.
+  - Exact predecessor positive and negative report equality passed; damaged last archive detected under constrained heap.
+  - Read-only real-scale validation completed at the normal heap limit; existing findings remained visible.
+  - Independent local review approved the exact frozen implementation with no actionable findings.
+decisions:
+  - statement: Keep the existing shared runtime and consumer files unchanged until review and platform gates close.
+    authority: approved
+    source: Maintainer implementation scope and recorded task non-goals.
+  - statement: Run an independent local review without paid external review.
+    authority: approved
+    source: Maintainer approved the local review subagent in this chat.
+  - statement: Commit the reviewed correction and publish its branch/PR for hosted platform testing only.
+    authority: approved
+    source: Maintainer replied yes go to the explicit commit push and PR request; merge and rollout remain separate.
+files:
+  - path: src/validator.ts
+    state: modified
+    summary: Process full continuity payload checks individually; retain other cross-artifact joins.
+  - path: test/validation-memory.test.ts
+    state: created
+    summary: Seven memory and integrity regression cases.
+  - path: ARTIFACT_PROTOCOL.md
+    state: modified
+    summary: Explain bounded history lifetimes and their limits without weakening provenance.
+  - path: ROADMAP.md
+    state: modified
+    summary: Record this correction and outstanding review/platform gates.
+checks:
+  - name: Native quality chain
+    status: pass
+    evidence: .agent-context/tasks/T-VALIDATION-MEMORY-001/evidence/verification.md
+  - name: Constrained-heap and predecessor parity control
+    status: pass
+    evidence: .agent-context/tasks/T-VALIDATION-MEMORY-001/evidence/verification.md
+  - name: Real-scale validation runtime completion
+    status: pass
+    evidence: .agent-context/tasks/T-VALIDATION-MEMORY-001/evidence/verification.md
+  - name: Independent local review
+    status: pass
+    evidence: .agent-context/tasks/T-VALIDATION-MEMORY-001/evidence/independent-review.md
+  - name: Exact Linux/macOS execution
+    status: not-run
+    evidence: No exact Linux/macOS results yet.
+blockers: []
+open_questions:
+  - Exact Linux/macOS execution and a coordinated publication/cutover remain open.
+next_safe_action: Publish the maintainer-authorized reviewed branch and pull request, inspect the exact hosted Windows/Linux/macOS results, and retain their revision-bound evidence. Do not merge or coordinate consumer cutover without separate authorization; preserve historical context archives and the unchanged shared runtime.
+do_not_repeat:
+  - Do not raise the normal heap requirement or skip retained archive checks.
+  - Do not repair consumer historical locks or receipts to make validation green.
+  - Do not identify the entire runtime only by its unchanged thin cli.js wrapper hash.
+  - Do not include canonical-owner lifecycle features silently in this memory correction.
+resume_sources:
+  - .agent-context/tasks/T-VALIDATION-MEMORY-001/brief.md
+  - .agent-context/tasks/T-VALIDATION-MEMORY-001/state.yaml
+  - .agent-context/tasks/T-VALIDATION-MEMORY-001/change.yaml
+  - .agent-context/tasks/T-VALIDATION-MEMORY-001/evidence/verification.md
+uncommitted_summary: Separate local branch contains the memory correction, seven tests, protocol/roadmap updates and task metadata. Public baseline, shared runtime and consumer files are unchanged. No commit or remote action has occurred.

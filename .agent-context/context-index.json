@@ -1,7 +1,7 @@
 {
   "version": 1,
   "hash_algorithm": "sha256",
-  "root_hash": "sha256:fe9af228b39fe373e75e95fbb1db92a9f3dbf3e158f3883dc9cc6324d01d7b61",
+  "root_hash": "sha256:97040aaa76fe4b9db0350d971498c98cae5a0393614de4b5d1bac9933954513c",
   "documents": [
     {
       "path": ".agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/brief.md",
@@ -740,6 +740,66 @@
       "topic_id": "task-working-index-result-001"
     },
     {
+      "path": ".agent-context/tasks/T-VALIDATION-MEMORY-001/brief.md",
+      "content_hash": "sha256:d8804c97d0da8a6a3ca7ec2230f1252fad1d8f948b2926c0e505f93ebec63408",
+      "stand": "2026-10-09",
+      "status": "review",
+      "truth_level": "active-snapshot",
+      "verification_state": "internally-reviewed",
+      "read_if_task_touches": [
+        "large retained continuity archives",
+        "validation memory"
+      ],
+      "primary_systems": [
+        "repository validation",
+        "retained provenance"
+      ],
+      "do_not_use_instead": [
+        "ARTIFACT_PROTOCOL.md"
+      ],
+      "topic_id": "validation-memory-bounded-history"
+    },
+    {
+      "path": ".agent-context/tasks/T-VALIDATION-MEMORY-001/evidence/independent-review.md",
+      "content_hash": "sha256:241bff0b17b5b2be08ee99fd6b4f8f47a755e3a9a43cdc89dc4c40b6bc097cc9",
+      "stand": "2026-10-09",
+      "status": "current",
+      "truth_level": "active-snapshot",
+      "verification_state": "reviewed",
+      "read_if_task_touches": [
+        "validation memory",
+        "retained continuity history"
+      ],
+      "primary_systems": [
+        "repository validation",
+        "independent review"
+      ],
+      "do_not_use_instead": [
+        "ARTIFACT_PROTOCOL.md"
+      ],
+      "topic_id": "validation-memory-independent-review-disposition"
+    },
+    {
+      "path": ".agent-context/tasks/T-VALIDATION-MEMORY-001/evidence/verification.md",
+      "content_hash": "sha256:755c90fc0ca12b49f8db6403b3fb1601965089c4693d93d317dbae2522685ff3",
+      "stand": "2026-10-09",
+      "status": "current",
+      "truth_level": "active-snapshot",
+      "verification_state": "internally-reviewed",
+      "read_if_task_touches": [
+        "validation memory",
+        "retained continuity history"
+      ],
+      "primary_systems": [
+        "repository validation",
+        "retained provenance"
+      ],
+      "do_not_use_instead": [
+        "ARTIFACT_PROTOCOL.md"
+      ],
+      "topic_id": "validation-memory-author-verification"
+    },
+    {
       "path": "AGENTS.md",
       "content_hash": "sha256:d28858d55c21d71e53d259afd2afb17eebd61a272b418efd1f2b269abac94e0b",
       "stand": "2026-09-12",
@@ -762,7 +822,7 @@
     },
     {
       "path": "ARTIFACT_PROTOCOL.md",
-      "content_hash": "sha256:f29d218124b5d13319953e749339cc0f18a368fb927f2fe44d8e503c7c5024c7",
+      "content_hash": "sha256:0d624e43b066e4f85c69d12e0bb5eb0e378df5f637fd0adadf266cb3f57eb6cd",
       "stand": "2026-10-08",
       "status": "design-target",
       "truth_level": "design-target",
@@ -827,7 +887,7 @@
     },
     {
       "path": "ROADMAP.md",
-      "content_hash": "sha256:78df818bf30a0340063eb96de774ec1542fcfdfacdf1566c834707d862c9c1a2",
+      "content_hash": "sha256:63094ec78776e22102da14797a99fb3300fe6431c4d92e165f1a28f7a728a58d",
       "stand": "2026-10-08",
       "status": "public-source-alpha",
       "truth_level": "draft",

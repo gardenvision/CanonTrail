@@ -517,6 +517,14 @@ Repository validate, documentation audit, index preflight and finalize MUST chec
 
 Retained hash-named handoffs under an operational task's `evidence/handoffs/` MUST also be audited even when no packet references them: schema, self-hash/filename, owner, source-lock archive and optional inventory remain required. Historical `resume_sources` are not re-resolved against today's files. A governed task's retained handoff directory cannot silently disappear through a link or scanner exclusion; incomplete archive coverage fails with `HANDOFF008`/`HANDOFF009`. This does not make an old handoff current-use approval.
 
+Repository validation MUST NOT retain the complete decoded handoff and worktree
+inventory history at once. These payloads are processed individually with their
+full schema, semantic and provenance checks; only paths, counts and diagnostics
+survive each check. This is bounded lifetime for these artifact classes, not
+hash-only validation, an archive exclusion or a claim of constant memory for the
+entire repository. One large artifact, governed Markdown and other cross-artifact
+state still consume memory under their existing contracts.
+
 Retained integrity MUST include packet schema/self-hash, operational task identity, exact hash-derived owner paths for both context archives, archive schemas/task/hash bindings, receiving session/time, budget sums, duplicate sources, required omissions, transcript exclusion, section shape, read order and omissions. Historical selected paths are validated lexically without resolving their old identities against today's filesystem. The original required-source decision cannot be reconstructed from hashes alone; integrity is not producer authentication or proof of original semantic sufficiency.
 
 The packet's handoff projection (including blockers, open questions and do-not-repeat guidance) and the receiving lock's whole-handoff source MUST bind both the handoff self-hash and its exact original byte hash. For retained integrity, an existing exact owning evidence/handoffs/<handoff-hash-hex>.yaml archive takes precedence; only if absent may the matching current handoff supply those bytes. A corrupted archive MUST NOT be hidden by falling back to latest. This permits retained provenance after replacement or removal of latest, including equal semantic hashes with differing YAML serialization. Missing or corrupt bound provenance still fails. Packets and source-session archives MUST NOT be rewritten to repair drift.

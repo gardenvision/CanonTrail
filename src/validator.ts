@@ -419,8 +419,9 @@ async function loadStructuredArtifacts(
   config: CanonTrailConfig,
   validators: Map<string, ValidateFunction>,
   diagnostics: Diagnostic[],
-): Promise<Map<string, unknown>> {
+): Promise<{ artifacts: Map<string, unknown>; continuityPaths: string[] }> {
   const artifacts = new Map<string, unknown>();
+  const continuityPaths: string[] = [];
   const files = (await walkFiles(root, config)).filter(
     (artifactPath) => isStructuredArtifact(artifactPath) && isGovernedPath(artifactPath, config),
   );
@@ -448,6 +449,28 @@ async function loadStructuredArtifacts(
     }
   }
   for (const artifactPath of files) {
+    // Handoffs and their complete inventories need no in-memory cross-artifact
+    // join. Keep only their identities until the semantic audit, then parse and
+    // fully validate one at a time. History size must not retain all YAML graphs.
+    const schemaName = schemaForArtifact(artifactPath);
+    if (schemaName === "handoff" || schemaName === "worktree-inventory") {
+      continuityPaths.push(artifactPath);
+      continue;
+    }
+    const loaded = await loadStructuredArtifact(root, artifactPath, validators, diagnostics);
+    if (loaded) artifacts.set(artifactPath, loaded.value);
+  }
+  return { artifacts, continuityPaths };
+}
+
+/** This helper owns raw and decoded buffers only for one artifact. No parsed
+ * continuity payload is cached across iterations, including invalid schemas. */
+async function loadStructuredArtifact(
+  root: string,
+  artifactPath: string,
+  validators: Map<string, ValidateFunction>,
+  diagnostics: Diagnostic[],
+): Promise<{ value: unknown } | undefined> {
     try {
       const absolute = artifactPath.startsWith(".agent-context/migrations/")
         ? await resolveMigrationControlPath(root, artifactPath, "file")
@@ -458,7 +481,6 @@ async function loadStructuredArtifacts(
       const raw = decodeContinuityText(bytes, artifactPath);
       const value: unknown = artifactPath.endsWith(".worktree-inventory.json") ? parseWorktreeInventoryBytes(bytes)
         : artifactPath.endsWith(".json") ? JSON.parse(raw) : parse(raw);
-      artifacts.set(artifactPath, value);
       const schemaName = schemaForArtifact(artifactPath);
       if (schemaName) {
         const validate = validators.get(schemaName);
@@ -475,11 +497,10 @@ async function loadStructuredArtifacts(
           );
         }
       }
+      return { value };
     } catch (error) {
       addDiagnostic(diagnostics, "error", "DOC004", "structured artifact cannot be parsed", artifactPath, (error as Error).message);
     }
-  }
-  return artifacts;
 }
 
 async function validateMigrationPlans(diagnostics: Diagnostic[], artifacts: Map<string, unknown>, root: string): Promise<void> {
@@ -1377,8 +1398,9 @@ export async function validateRepository(rootInput: string, options: ValidateOpt
   validateMetadataReferences(diagnostics, root, config, documents);
 
   let artifacts = new Map<string, unknown>();
+  let continuityPaths: string[] = [];
   try {
-    artifacts = await loadStructuredArtifacts(root, config, validators, diagnostics);
+    ({ artifacts, continuityPaths } = await loadStructuredArtifacts(root, config, validators, diagnostics));
   } catch (error) {
     addDiagnostic(diagnostics, "error", "DOC005", "structured artifacts cannot be scanned", undefined, (error as Error).message);
   }
@@ -1393,7 +1415,16 @@ export async function validateRepository(rootInput: string, options: ValidateOpt
   await validateMigrationPlans(diagnostics, artifacts, root);
   await validateMigrationTransactions(diagnostics, artifacts, root);
   await validateMigrationExecutionEvidence(diagnostics, artifacts, root);
-  await validateHandoffs(diagnostics, root, config, artifacts, validators);
+  let continuityCount = 0;
+  for (const artifactPath of continuityPaths) {
+    const loaded = await loadStructuredArtifact(root, artifactPath, validators, diagnostics);
+    if (!loaded) continue;
+    continuityCount++;
+    // All existing schema, self-hash, owner, source-lock and inventory checks
+    // still run. The one-entry map is local to this awaited iteration, never
+    // merged into the retained task/migration state used by other validators.
+    await validateHandoffs(diagnostics, root, config, new Map([[artifactPath, loaded.value]]), validators);
+  }
   const documentPaths = new Set(documents.map(document => document.path));
   const documentInventoryValid = !diagnostics.some(d => d.severity === "error" &&
     (d.code === "DOC001" || d.code === "DOC002" || (documentPaths.has(d.path ?? "") && ["SCHEMA004", "SCHEMA005"].includes(d.code))));
@@ -1420,7 +1451,7 @@ export async function validateRepository(rootInput: string, options: ValidateOpt
     diagnostics,
     stats: {
       markdownDocuments: documents.length,
-      structuredArtifacts: artifacts.size,
+      structuredArtifacts: artifacts.size + continuityCount,
       schemas: schemaCount,
       errors,
       warnings,

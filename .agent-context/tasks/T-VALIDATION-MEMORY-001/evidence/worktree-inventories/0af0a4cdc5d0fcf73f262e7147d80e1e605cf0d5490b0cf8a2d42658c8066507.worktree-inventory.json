@@ -1,0 +1,79 @@
+{
+  "version": 1,
+  "task_id": "T-VALIDATION-MEMORY-001",
+  "created_at": "2026-10-09T20:28:08.641Z",
+  "entries": [
+    {
+      "code": " M",
+      "path": ".agent-context/context-index.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-VALIDATION-MEMORY-001/brief.md"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-VALIDATION-MEMORY-001/change.yaml"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-VALIDATION-MEMORY-001/checkpoint-input.yaml"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-VALIDATION-MEMORY-001/context.lock.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-VALIDATION-MEMORY-001/evidence/context-locks/819f1da33de953add6372b0066e6db45d88741d0442caa344f7e58f2829e8ed1.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-VALIDATION-MEMORY-001/evidence/context-locks/f3a605d7d3cbb1b058a09743a7af35979df435ee0e747e91302b971773a7b35f.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-VALIDATION-MEMORY-001/evidence/handoffs/637ea7a7f719b0b2c5854ad3cde1a96ec10db762ca411f15b279bd50f391141b.yaml"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-VALIDATION-MEMORY-001/evidence/independent-review.md"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-VALIDATION-MEMORY-001/evidence/verification.md"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-VALIDATION-MEMORY-001/evidence/worktree-inventories/5e7c8b683a7fa207c8b22412fcb51d50b4d5177df559bd1ed50904f1de0894f4.worktree-inventory.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-VALIDATION-MEMORY-001/evidence/worktree-inventories/b2b9c7ed0c24a929859592dfae4ddea4263312c382aa3a1247636b32d597eadb.worktree-inventory.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-VALIDATION-MEMORY-001/handoff.yaml"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-VALIDATION-MEMORY-001/state.yaml"
+    },
+    {
+      "code": " M",
+      "path": "ARTIFACT_PROTOCOL.md"
+    },
+    {
+      "code": " M",
+      "path": "ROADMAP.md"
+    },
+    {
+      "code": " M",
+      "path": "src/validator.ts"
+    },
+    {
+      "code": "??",
+      "path": "test/validation-memory.test.ts"
+    }
+  ]
+}

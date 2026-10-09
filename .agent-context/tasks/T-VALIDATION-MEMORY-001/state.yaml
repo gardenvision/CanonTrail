@@ -1,0 +1,20 @@
+task_id: T-VALIDATION-MEMORY-001
+status: review
+objective: Bound retained handoff and inventory object lifetimes without weakening repository validation.
+non_goals: [No consumer changes or shared runtime replacement, No archive exclusion or hash-only audit, No lifecycle or canonical registry implementation, No merge or consumer rollout]
+acceptance_criteria:
+  - {id: AC-MEMORY, statement: A large retained continuity corpus validates under a constrained heap without retaining all decoded payloads., verification: Independent child process and predecessor RED control., status: pass}
+  - {id: AC-INTEGRITY, statement: Late corruption and source-lock or inventory provenance failures remain visible., verification: Positive and negative histories with exact diagnostic comparisons., status: pass}
+  - {id: AC-COMPAT, statement: "Report counts, historical freshness rules and current-use gates remain unchanged.", verification: Existing continuity suite and report equality controls., status: pass}
+dependencies: []
+documentation_impact: [ARTIFACT_PROTOCOL.md, ROADMAP.md]
+file_intents: [src/validator.ts, test/validation-memory.test.ts, ARTIFACT_PROTOCOL.md, ROADMAP.md]
+required_context_sources: [ARTIFACT_PROTOCOL.md, src/validator.ts, src/handoff.ts, src/resume-audit.ts, src/worktree-inventory.ts, test/continuity-write-hardening.test.ts]
+parallel_safety: exclusive
+latest_handoff: .agent-context/tasks/T-VALIDATION-MEMORY-001/handoff.yaml
+checks:
+  - {id: CHECK-QUALITY, command_or_observation: Typecheck build and full serial native suite with 1014 passed and 13 skipped., status: pass, evidence_refs: [.agent-context/tasks/T-VALIDATION-MEMORY-001/evidence/verification.md]}
+  - {id: CHECK-MEMORY, command_or_observation: Constrained-heap predecessor control and exact positive/negative report equality., status: pass, evidence_refs: [.agent-context/tasks/T-VALIDATION-MEMORY-001/evidence/verification.md]}
+  - {id: CHECK-CONSUMER, command_or_observation: Read-only real-scale validation completed without heap override; existing findings are not approval., status: pass, evidence_refs: [.agent-context/tasks/T-VALIDATION-MEMORY-001/evidence/verification.md]}
+  - {id: CHECK-REVIEW, command_or_observation: Independent local review approved exact source/runtime identities and 46 fresh comparisons plus mixed-history memory controls., status: pass, evidence_refs: [.agent-context/tasks/T-VALIDATION-MEMORY-001/evidence/independent-review.md]}
+updated_at: "2026-10-09T19:53:50Z"
