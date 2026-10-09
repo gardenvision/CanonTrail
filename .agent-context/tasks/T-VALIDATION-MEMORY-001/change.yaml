@@ -2,7 +2,7 @@ version: 1
 change_id: CHG-VALIDATION-MEMORY-001
 revision: 1
 title: Bound parsed continuity-history lifetime during repository validation
-status: implemented
+status: verified
 risk: high
 author: ChatGPT implementation agent
 canonical_source: ARTIFACT_PROTOCOL.md
@@ -31,10 +31,11 @@ verification:
     - {name: Typecheck build and full serial Windows suite, status: pass, evidence_refs: [.agent-context/tasks/T-VALIDATION-MEMORY-001/evidence/verification.md]}
     - {name: Constrained heap and predecessor parity controls, status: pass, evidence_refs: [.agent-context/tasks/T-VALIDATION-MEMORY-001/evidence/verification.md]}
     - {name: Read-only real-scale runtime completion, status: pass, evidence_refs: [.agent-context/tasks/T-VALIDATION-MEMORY-001/evidence/verification.md]}
+    - {name: Exact implementation hosted platform and completion checks, status: pass, evidence_refs: [.agent-context/tasks/T-VALIDATION-MEMORY-001/evidence/platform-verification.md]}
   terminology_search: {status: not-applicable, terms: [], evidence_refs: []}
   visual_review: {applicable: false, status: not-applicable, evidence_refs: []}
-  unverifiable_items: [Exact Linux/macOS execution pending]
+  unverifiable_items: []
 independent_review: {status: pass, reviewer: Independent local Codex review agent, findings: [], evidence_refs: [.agent-context/tasks/T-VALIDATION-MEMORY-001/evidence/independent-review.md], waiver: null}
 supersedes: []
 superseded_by: null
-updated_at: "2026-10-09T19:53:50Z"
+updated_at: "2026-10-09T20:46:30Z"

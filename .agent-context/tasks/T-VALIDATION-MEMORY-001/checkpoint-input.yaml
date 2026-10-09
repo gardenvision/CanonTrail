@@ -4,8 +4,10 @@ completed:
   - Exact predecessor positive and negative report equality passed; damaged last archive detected under constrained heap.
   - Read-only real-scale validation completed at the normal heap limit; existing findings remained visible.
   - Independent local review approved the exact frozen implementation with no actionable findings.
+  - Hosted Windows Linux Node-floor Linux and macOS checks plus completion gate passed for implementation commit 8570c44.
+  - Technical task and change metadata reconciled with completed implementation review and platform evidence.
 decisions:
-  - statement: Keep the existing shared runtime and consumer files unchanged until review and platform gates close.
+  - statement: Keep the existing shared runtime and consumer files unchanged; rollout requires a separate coordinated decision.
     authority: approved
     source: Maintainer implementation scope and recorded task non-goals.
   - statement: Run an independent local review without paid external review.
@@ -14,6 +16,9 @@ decisions:
   - statement: Commit the reviewed correction and publish its branch/PR for hosted platform testing only.
     authority: approved
     source: Maintainer replied yes go to the explicit commit push and PR request; merge and rollout remain separate.
+  - statement: Publish the bounded closure metadata and merge PR 4 only after successful exact final-head CI; then verify actual main.
+    authority: approved
+    source: Maintainer explicitly asked to create and start the proposed closure and protected-merge goal.
 files:
   - path: src/validator.ts
     state: modified
@@ -26,7 +31,7 @@ files:
     summary: Explain bounded history lifetimes and their limits without weakening provenance.
   - path: ROADMAP.md
     state: modified
-    summary: Record this correction and outstanding review/platform gates.
+    summary: Record verified technical correction and separate publication/consumer rollout gates.
 checks:
   - name: Native quality chain
     status: pass
@@ -40,13 +45,13 @@ checks:
   - name: Independent local review
     status: pass
     evidence: .agent-context/tasks/T-VALIDATION-MEMORY-001/evidence/independent-review.md
-  - name: Exact Linux/macOS execution
-    status: not-run
-    evidence: No exact Linux/macOS results yet.
+  - name: Exact implementation hosted Windows/Linux/macOS execution
+    status: pass
+    evidence: .agent-context/tasks/T-VALIDATION-MEMORY-001/evidence/platform-verification.md
 blockers: []
 open_questions:
-  - Exact Linux/macOS execution and a coordinated publication/cutover remain open.
-next_safe_action: Publish the maintainer-authorized reviewed branch and pull request, inspect the exact hosted Windows/Linux/macOS results, and retain their revision-bound evidence. Do not merge or coordinate consumer cutover without separate authorization; preserve historical context archives and the unchanged shared runtime.
+  - Shared-runtime cutover and canonical-owner lifecycle work remain separately authorized future tasks.
+next_safe_action: Verify and publish the metadata-only technical closure, observe exact final-head CI, merge PR 4 through required protections only if all checks pass, and retain actual main verification evidence. Preserve historical archives, consumer files and the existing shared runtime; do not create a tag or npm release.
 do_not_repeat:
   - Do not raise the normal heap requirement or skip retained archive checks.
   - Do not repair consumer historical locks or receipts to make validation green.
@@ -57,4 +62,5 @@ resume_sources:
   - .agent-context/tasks/T-VALIDATION-MEMORY-001/state.yaml
   - .agent-context/tasks/T-VALIDATION-MEMORY-001/change.yaml
   - .agent-context/tasks/T-VALIDATION-MEMORY-001/evidence/verification.md
-uncommitted_summary: Separate local branch contains the memory correction, seven tests, protocol/roadmap updates and task metadata. Public baseline, shared runtime and consumer files are unchanged. No commit or remote action has occurred.
+  - .agent-context/tasks/T-VALIDATION-MEMORY-001/evidence/platform-verification.md
+uncommitted_summary: The implementation is committed and published at 8570c44 with successful exact hosted CI. Current local changes reconcile only own closure metadata and roadmap/index; independently reviewed code and all existing immutable archives are unchanged. Protected merge and main verification are authorized but not yet performed; shared runtime and consumer remain unchanged.

@@ -53,10 +53,22 @@ The reviewer did not rebuild or edit either checkout, access the consumer,
 perform remote operations or independently rerun the full author suite.
 The recorded full suite was supplemental, separate from the independent oracle.
 
-## Remaining gates
+## Gates at the review checkpoint
 
 Technical approval binds only the identities above. Exact Linux/macOS execution,
 publication, consumer schema synchronization and coordinated rollout remain
 open. It does not establish constant memory for all artifact classes, atomic
 filesystem behavior, producer authenticity or current-use consumer approval.
 Task/change remain review/implemented until the declared platform gate closes.
+
+## Subsequent closure reconciliation
+
+The reviewed source/test/runtime bytes were committed unchanged as
+`8570c44df6ece76bd78d1f1abbdf7717d1a9014e`. Its exact hosted platform matrices
+and completion gate subsequently passed; evidence/platform-verification.md
+records those execution results. The technical task/change now close as
+verified. This dated reconciliation does not extend the review to changed
+implementation bytes or turn the earlier Windows review into a Linux/macOS
+execution claim. Consumer rollout, canonical-owner work and a tagged release
+remain separate. Publication/main receipts are recorded after their actual runs,
+outside this self-referential source snapshot.

@@ -1,7 +1,7 @@
 task_id: T-VALIDATION-MEMORY-001
-status: review
+status: verified
 objective: Bound retained handoff and inventory object lifetimes without weakening repository validation.
-non_goals: [No consumer changes or shared runtime replacement, No archive exclusion or hash-only audit, No lifecycle or canonical registry implementation, No merge or consumer rollout]
+non_goals: [No consumer changes or shared runtime replacement, No archive exclusion or hash-only audit, No lifecycle or canonical registry implementation, No consumer rollout or tagged/npm release]
 acceptance_criteria:
   - {id: AC-MEMORY, statement: A large retained continuity corpus validates under a constrained heap without retaining all decoded payloads., verification: Independent child process and predecessor RED control., status: pass}
   - {id: AC-INTEGRITY, statement: Late corruption and source-lock or inventory provenance failures remain visible., verification: Positive and negative histories with exact diagnostic comparisons., status: pass}
@@ -17,4 +17,5 @@ checks:
   - {id: CHECK-MEMORY, command_or_observation: Constrained-heap predecessor control and exact positive/negative report equality., status: pass, evidence_refs: [.agent-context/tasks/T-VALIDATION-MEMORY-001/evidence/verification.md]}
   - {id: CHECK-CONSUMER, command_or_observation: Read-only real-scale validation completed without heap override; existing findings are not approval., status: pass, evidence_refs: [.agent-context/tasks/T-VALIDATION-MEMORY-001/evidence/verification.md]}
   - {id: CHECK-REVIEW, command_or_observation: Independent local review approved exact source/runtime identities and 46 fresh comparisons plus mixed-history memory controls., status: pass, evidence_refs: [.agent-context/tasks/T-VALIDATION-MEMORY-001/evidence/independent-review.md]}
-updated_at: "2026-10-09T19:53:50Z"
+  - {id: CHECK-PLATFORMS, command_or_observation: Exact 8570c44 hosted Windows Linux and macOS matrices and completion gate passed; all seven new memory cases ran on every host., status: pass, evidence_refs: [.agent-context/tasks/T-VALIDATION-MEMORY-001/evidence/platform-verification.md]}
+updated_at: "2026-10-09T20:46:30Z"

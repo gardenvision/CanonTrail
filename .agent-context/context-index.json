@@ -1,7 +1,7 @@
 {
   "version": 1,
   "hash_algorithm": "sha256",
-  "root_hash": "sha256:97040aaa76fe4b9db0350d971498c98cae5a0393614de4b5d1bac9933954513c",
+  "root_hash": "sha256:dbf691550b37f4ad7bfa03b9a780d36431df94cf447e81d6c8f21db345da0cdf",
   "documents": [
     {
       "path": ".agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/brief.md",
@@ -741,11 +741,11 @@
     },
     {
       "path": ".agent-context/tasks/T-VALIDATION-MEMORY-001/brief.md",
-      "content_hash": "sha256:d8804c97d0da8a6a3ca7ec2230f1252fad1d8f948b2926c0e505f93ebec63408",
+      "content_hash": "sha256:bb6572eec437008eca9852cb88b729cb7165bb14c744096f7ac5e2519726802a",
       "stand": "2026-10-09",
-      "status": "review",
+      "status": "completed",
       "truth_level": "active-snapshot",
-      "verification_state": "internally-reviewed",
+      "verification_state": "reviewed",
       "read_if_task_touches": [
         "large retained continuity archives",
         "validation memory"
@@ -761,7 +761,7 @@
     },
     {
       "path": ".agent-context/tasks/T-VALIDATION-MEMORY-001/evidence/independent-review.md",
-      "content_hash": "sha256:241bff0b17b5b2be08ee99fd6b4f8f47a755e3a9a43cdc89dc4c40b6bc097cc9",
+      "content_hash": "sha256:a8c8bcc208e91c71306e8a492eb64b9173368a048ef7e060572c7a783dbebe78",
       "stand": "2026-10-09",
       "status": "current",
       "truth_level": "active-snapshot",
@@ -780,8 +780,29 @@
       "topic_id": "validation-memory-independent-review-disposition"
     },
     {
+      "path": ".agent-context/tasks/T-VALIDATION-MEMORY-001/evidence/platform-verification.md",
+      "content_hash": "sha256:28f04f7165e3c2d783c8c2f1bc53e973cbcfec3a41d161c5b1d78696233f90a2",
+      "stand": "2026-10-09",
+      "status": "current",
+      "truth_level": "active-snapshot",
+      "verification_state": "reviewed",
+      "read_if_task_touches": [
+        "validation memory",
+        "retained continuity history",
+        "platform verification"
+      ],
+      "primary_systems": [
+        "repository validation",
+        "platform compatibility"
+      ],
+      "do_not_use_instead": [
+        "ARTIFACT_PROTOCOL.md"
+      ],
+      "topic_id": "validation-memory-hosted-platform-verification"
+    },
+    {
       "path": ".agent-context/tasks/T-VALIDATION-MEMORY-001/evidence/verification.md",
-      "content_hash": "sha256:755c90fc0ca12b49f8db6403b3fb1601965089c4693d93d317dbae2522685ff3",
+      "content_hash": "sha256:96016e7c604b506f54308fe06a060acb5e59b9dec6830466ec860d48083b9b6b",
       "stand": "2026-10-09",
       "status": "current",
       "truth_level": "active-snapshot",
@@ -887,7 +908,7 @@
     },
     {
       "path": "ROADMAP.md",
-      "content_hash": "sha256:63094ec78776e22102da14797a99fb3300fe6431c4d92e165f1a28f7a728a58d",
+      "content_hash": "sha256:8d50a5d698e66fc4fda2e9c02ae2c5426dbe1310afc4f03dcfb79289a7a499c9",
       "stand": "2026-10-08",
       "status": "public-source-alpha",
       "truth_level": "draft",

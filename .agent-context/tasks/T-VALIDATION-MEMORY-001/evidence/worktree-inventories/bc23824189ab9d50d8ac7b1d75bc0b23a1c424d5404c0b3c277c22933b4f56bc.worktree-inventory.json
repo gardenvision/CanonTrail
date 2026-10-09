@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "task_id": "T-VALIDATION-MEMORY-001",
+  "created_at": "2026-10-09T20:48:00Z",
+  "entries": [
+    {
+      "code": " M",
+      "path": ".agent-context/context-index.json"
+    },
+    {
+      "code": " M",
+      "path": ".agent-context/tasks/T-VALIDATION-MEMORY-001/brief.md"
+    },
+    {
+      "code": " M",
+      "path": ".agent-context/tasks/T-VALIDATION-MEMORY-001/change.yaml"
+    },
+    {
+      "code": " M",
+      "path": ".agent-context/tasks/T-VALIDATION-MEMORY-001/checkpoint-input.yaml"
+    },
+    {
+      "code": " M",
+      "path": ".agent-context/tasks/T-VALIDATION-MEMORY-001/context.lock.json"
+    },
+    {
+      "code": " M",
+      "path": ".agent-context/tasks/T-VALIDATION-MEMORY-001/evidence/independent-review.md"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-VALIDATION-MEMORY-001/evidence/platform-verification.md"
+    },
+    {
+      "code": " M",
+      "path": ".agent-context/tasks/T-VALIDATION-MEMORY-001/evidence/verification.md"
+    },
+    {
+      "code": " M",
+      "path": ".agent-context/tasks/T-VALIDATION-MEMORY-001/state.yaml"
+    },
+    {
+      "code": " M",
+      "path": "ROADMAP.md"
+    }
+  ]
+}

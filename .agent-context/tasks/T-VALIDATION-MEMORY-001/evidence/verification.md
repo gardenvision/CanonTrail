@@ -14,9 +14,9 @@ do_not_use_instead: [ARTIFACT_PROTOCOL.md]
 
 # Bounded validation memory: author verification
 
-This is a working-tree correction on public baseline
+This records the author correction on public baseline
 `1567677c19eee656ea6878631014b54e1226b5ca`, in a separate local clone.
-It is not a published release, consumer rollout or independent approval.
+It is not a tagged release, consumer rollout or independent approval.
 Private raw diagnostics and test harnesses are retained outside this repository.
 
 ## Native quality chain
@@ -97,6 +97,9 @@ failed before executing the CLI because a Windows import path was not a file
 URL; its log is retained separately and is not a product validation result.
 
 Independent local review subsequently approved the exact implementation; see
-evidence/independent-review.md. Revision-bound Linux/macOS execution remains open.
+evidence/independent-review.md. Revision-bound Windows/Linux/macOS execution for
+the unchanged implementation committed as `8570c44` subsequently passed; see
+evidence/platform-verification.md. The native measurements above remain their
+original observations, not measurements from the hosted runs.
 Consumer migration/rollout and canonical-owner lifecycle work are separate
-tasks. Neither this evidence nor a green author suite closes those gates.
+tasks. Neither this evidence nor a green author suite authorizes those actions.

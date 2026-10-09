@@ -20,8 +20,11 @@ do_not_use_instead: [VISION.md, ARTIFACT_PROTOCOL.md]
 inventory memory after complete archive coverage exposed a large-consumer heap
 failure. Full per-artifact integrity remains mandatory; no hash-only fallback,
 consumer evidence rewrite or heap-size workaround is a closure. Its own
-constrained-heap regressions, independent review and revision-bound platform
-results are required before publication or consumer rollout.
+constrained-heap regressions, independent review and exact Windows/Linux/macOS
+checks passed for implementation commit `8570c44`; its task evidence records
+the measured hosts and limitations. The technical task is verified. Closing
+metadata, protected publication and actual main checks are observed separately;
+consumer rollout remains an explicit later decision.
 
 ## Existing implementation to verify for this candidate
 
