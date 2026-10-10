@@ -69,6 +69,7 @@ import { createDocument, formatDocumentCreate } from "./document-authoring.js";
 import { captureDocumentSnapshot, formatDocumentSnapshotCapture, formatDocumentSnapshotRead, readDocumentSnapshot } from "./document-snapshot.js";
 import { formatValidationReport, validateRepository, validateResumePacketAt } from "./validator.js";
 import { createTaskWorkingIndex, formatTaskWorkingIndex } from "./working-index.js";
+import { rebuildMetadataIndex, formatMetadataIndex } from "./metadata-index.js";
 
 const program = new Command();
 
@@ -855,12 +856,20 @@ resumeCommand
 
 program
   .command("index")
-  .description("Generate the strict global context index, or a read-only task working view with --task")
+  .description("Generate a strict global index, an explicit metadata-only cache, or a read-only task working view")
   .argument("[root]", "repository root", ".")
   .option("--json", "print the machine-readable index report")
   .option("--task <id>", "report an explicit task working index without writing the global index")
-  .action(async (root: string, options: { json?: boolean; task?: string }) => {
+  .option("--metadata-only", "explicitly rebuild only checked metadata; NOT repository/continuity/completion approval")
+  .action(async (root: string, options: { json?: boolean; task?: string; metadataOnly?: boolean }) => {
     const absoluteRoot = path.resolve(root);
+    if (options.metadataOnly) {
+      if (options.task) throw new Error("--metadata-only and --task are different index scopes and cannot be combined");
+      const report = await rebuildMetadataIndex(absoluteRoot);
+      process.stdout.write(options.json ? JSON.stringify(report, null, 2) + "\n" : formatMetadataIndex(report) + "\n");
+      if (!report.ok) process.exitCode = 1;
+      return;
+    }
     if (options.task) {
       const report = await createTaskWorkingIndex(absoluteRoot, options.task);
       process.stdout.write(options.json ? JSON.stringify(report, null, 2) + "\n" : formatTaskWorkingIndex(report) + "\n");
@@ -878,7 +887,7 @@ program
     }
     const result = await generateContextIndex(absoluteRoot);
     if (options.json) {
-      process.stdout.write(`${JSON.stringify({ root: absoluteRoot, path: result.path, documents: result.index.documents.length, root_hash: result.index.root_hash }, null, 2)}\n`);
+      process.stdout.write(`${JSON.stringify({ root: absoluteRoot, path: result.path, documents: result.index.documents.length, root_hash: result.index.root_hash, index_version: result.index.version, document_order: result.index.document_order }, null, 2)}\n`);
     } else {
       process.stdout.write(`Wrote ${result.path} with ${result.index.documents.length} documents (${result.index.root_hash}).\n`);
     }

@@ -15,6 +15,7 @@ phases:
     evidence:
       - .agent-context/tasks/T-ALPHA-CANDIDATE-001/evidence/verification.json
 subsystem_tasks:
+  - {id: DOC-INDEX-UPGRADE, title: Explicit index reconstruction and cutover, status: review, knowledge_owner: docs/index-rebuild.md}
   - {id: DOC-PURPOSE, title: Product scope, status: review, knowledge_owner: VISION.md}
   - {id: DOC-CONTRACT, title: Artifact contracts, status: review, knowledge_owner: ARTIFACT_PROTOCOL.md}
   - {id: DOC-ENTRY, title: Source install and usage, status: review, knowledge_owner: README.md}

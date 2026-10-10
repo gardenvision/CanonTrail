@@ -1,0 +1,147 @@
+{
+  "version": 1,
+  "task_id": "T-INDEX-UPGRADE-001",
+  "created_at": "2026-10-10T06:28:25.466Z",
+  "entries": [
+    {
+      "code": " M",
+      "path": ".agent-context/context-index.json"
+    },
+    {
+      "code": " M",
+      "path": ".agent-context/documentation-plan.yaml"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-INDEX-UPGRADE-001/brief.md"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-INDEX-UPGRADE-001/change.yaml"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-INDEX-UPGRADE-001/context.lock.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-INDEX-UPGRADE-001/evidence/context-locks/0df3e0910dbeb7c35c4828424f7eefdaf438727cc61c15cbecfd0001c9070b07.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-INDEX-UPGRADE-001/evidence/context-locks/c25170d7f29822d61e8b69c2643217cb40bb537637b0a1f3203a6a6ee1fd6d28.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-INDEX-UPGRADE-001/evidence/context-locks/f842a59dd70a7ef6881d33057e625383def45f834b6ee4629d92be5247fd8f00.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-INDEX-UPGRADE-001/evidence/handoffs/e89de3436e3f8d152c4ff73facc32e912d48ccde624b95f73078cbf4e191c426.yaml"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-INDEX-UPGRADE-001/evidence/implementation-r3.manifest.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-INDEX-UPGRADE-001/evidence/independent-review.md"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-INDEX-UPGRADE-001/evidence/local-quality.receipt.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-INDEX-UPGRADE-001/evidence/verification.md"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-INDEX-UPGRADE-001/evidence/worktree-inventories/310df8e7bcc15a814d8e5ecc3acc085eb0dcd8a3c95956158867c17697a12db1.worktree-inventory.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-INDEX-UPGRADE-001/evidence/worktree-inventories/60c8af04f10ab284dd67ec5203dcac948fa2c50a98271898f964dd7adfb36e6e.worktree-inventory.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-INDEX-UPGRADE-001/handoff.yaml"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-INDEX-UPGRADE-001/state.yaml"
+    },
+    {
+      "code": " M",
+      "path": "ARTIFACT_PROTOCOL.md"
+    },
+    {
+      "code": " M",
+      "path": "ROADMAP.md"
+    },
+    {
+      "code": " M",
+      "path": "docs/finding-codes.md"
+    },
+    {
+      "code": "??",
+      "path": "docs/index-rebuild.md"
+    },
+    {
+      "code": " M",
+      "path": "docs/self-documentation.md"
+    },
+    {
+      "code": " M",
+      "path": "docs/usage.md"
+    },
+    {
+      "code": "??",
+      "path": "examples/index-rebuild/README.md"
+    },
+    {
+      "code": "??",
+      "path": "schemas/context-index.schema.json"
+    },
+    {
+      "code": " M",
+      "path": "schemas/task-working-index.schema.json"
+    },
+    {
+      "code": " M",
+      "path": "src/cli.ts"
+    },
+    {
+      "code": " M",
+      "path": "src/config.ts"
+    },
+    {
+      "code": " M",
+      "path": "src/context.ts"
+    },
+    {
+      "code": " M",
+      "path": "src/indexer.ts"
+    },
+    {
+      "code": " M",
+      "path": "src/initializer.ts"
+    },
+    {
+      "code": "??",
+      "path": "src/metadata-index.ts"
+    },
+    {
+      "code": " M",
+      "path": "src/types.ts"
+    },
+    {
+      "code": " M",
+      "path": "src/validator.ts"
+    },
+    {
+      "code": "??",
+      "path": "test/index-upgrade.test.ts"
+    }
+  ]
+}

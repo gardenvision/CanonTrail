@@ -106,6 +106,7 @@ const SCHEMA_FILES = [
   "change-record.schema.json",
   "compatibility.schema.json",
   "context-inspection.schema.json",
+  "context-index.schema.json",
   "context-lock.schema.json",
   "document-snapshot.schema.json",
   "task-working-index.schema.json",

@@ -42,6 +42,7 @@ do_not_use_instead: [VISION.md, ARTIFACT_PROTOCOL.md, ROADMAP.md]
 | Bundled runtime agent guide and read-only task status | `.agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/state.yaml`; `docs/usage.md` |
 | Complete document drafts, explicit enum diagnostics and immutable document copies | `.agent-context/tasks/T-FIELD-AUTHORING-002/state.yaml`; `docs/usage.md`; `ARTIFACT_PROTOCOL.md` section 8.3 |
 | Opt-in task working index and narrow peer-note isolation | `.agent-context/tasks/T-TASK-WORKING-INDEX-001/state.yaml`; `ARTIFACT_PROTOCOL.md` section 7.3 |
+| Explicit metadata index reconstruction, format identity and central cutover | `docs/index-rebuild.md`; `.agent-context/tasks/T-INDEX-UPGRADE-001/state.yaml` |
 
 Read `AGENTS.md` first and choose new task, validated resume, unfinished bootstrap, or maintenance. Load the relevant owner, not this entire tree by default. Exact task sources belong in a context lock; a narrative summary is not a substitute.
 

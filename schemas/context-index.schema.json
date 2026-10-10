@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:canontrail:schema:context-index:2",
+  "title": "Deterministic metadata context index, format 2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "document_order", "hash_algorithm", "root_hash", "documents"],
+  "properties": {
+    "version": {"const": 2},
+    "document_order": {"const": "utf16-code-unit"},
+    "hash_algorithm": {"const": "sha256"},
+    "root_hash": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+    "documents": {"type": "array", "items": {
+      "type": "object", "additionalProperties": false,
+      "required": ["path", "content_hash", "stand", "status", "truth_level", "verification_state", "read_if_task_touches", "primary_systems", "do_not_use_instead"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "content_hash": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+        "stand": {"type": "string", "format": "date"},
+        "status": {"type": "string"},
+        "truth_level": {"type": "string"},
+        "verification_state": {"type": "string"},
+        "read_if_task_touches": {"type": "array", "items": {"type": "string"}},
+        "primary_systems": {"type": "array", "items": {"type": "string"}},
+        "do_not_use_instead": {"type": "array", "items": {"type": "string"}},
+        "artifact_id": {"type": "string"},
+        "artifact_kind": {"type": "string"},
+        "topic_id": {"type": "string"}
+      }
+    }}
+  }
+}

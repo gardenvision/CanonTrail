@@ -14,6 +14,15 @@ do_not_use_instead: [VISION.md, ARTIFACT_PROTOCOL.md]
 
 # Bounded Alpha roadmap
 
+## Current index upgrade boundary
+
+`T-INDEX-UPGRADE-001` separates explicit metadata cache reconstruction from strict
+retained-provenance approval and declares deterministic index format 2. Its local
+regressions, independent review and technical closure are recorded separately.
+No consumer cutover, historical evidence repair or release is implied. The usage
+owner is `docs/index-rebuild.md`; canonical-registration/knowledge-distillation
+work remains a distinct future scope, not part of this correction.
+
 ## Current validation-memory correction
 
 `T-VALIDATION-MEMORY-001` addresses cumulative decoded retained-handoff and

@@ -24,6 +24,8 @@ import type {
 } from "./types.js";
 import { compareCodeUnits } from "./ordering.js";
 import { writeFileAtomic } from "./safe-write.js";
+import { isDeepStrictEqual } from "node:util";
+import { contextIndexFormatProblem } from "./indexer.js";
 
 const INTEGRATION_IDS = new Set<IntegrationId>(["superpowers", "gsd-core", "gsd-pi"]);
 const TEXT_EXTENSIONS = new Set([
@@ -467,11 +469,13 @@ async function loadContextIndex(root: string, config: CanonTrailConfig): Promise
   const indexPath = path.join(root, ...normalizePath(config.indexPath).split("/"));
   const raw = await readFile(indexPath, "utf8");
   const value: unknown = JSON.parse(raw);
-  if (!isRecord(value) || value.version !== 1 || typeof value.root_hash !== "string" || !Array.isArray(value.documents)) {
+  const problem = contextIndexFormatProblem(value);
+  if (problem) throw new Error(`${config.indexPath}: ${problem}`);
+  if (!isRecord(value) || typeof value.root_hash !== "string" || !Array.isArray(value.documents)) {
     throw new Error(`${config.indexPath} is not a valid context index`);
   }
   const current = buildContextIndex(await discoverMarkdown(root, config));
-  if (current.root_hash !== value.root_hash) {
+  if (!isDeepStrictEqual(current, value)) {
     throw new Error(`context index is stale; run 'canontrail index .', then rerun this command`);
   }
   return current;

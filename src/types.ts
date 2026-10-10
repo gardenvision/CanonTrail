@@ -82,7 +82,8 @@ export interface ContextIndexDocument {
 }
 
 export interface ContextIndex {
-  version: 1;
+  version: 2;
+  document_order: "utf16-code-unit";
   hash_algorithm: "sha256";
   root_hash: string;
   documents: ContextIndexDocument[];

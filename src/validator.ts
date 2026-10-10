@@ -38,6 +38,7 @@ import {
 } from "./migration.js";
 import {
   buildContextIndex,
+  contextIndexFormatProblem,
   discoverMarkdown,
   isGovernedPath,
   normalizePath,
@@ -119,13 +120,14 @@ async function loadSchemaValidators(
   root: string,
   diagnostics: Diagnostic[],
   schemaPath: string,
+  capturedSchemas?: ReadonlyMap<string, string>,
 ): Promise<{ validators: Map<string, ValidateFunction>; count: number }> {
   const validators = new Map<string, ValidateFunction>();
   const normalizedSchemaPath = normalizePath(schemaPath);
   const schemaDirectory = path.join(root, ...normalizedSchemaPath.split("/"));
   let schemaFiles: string[];
   try {
-    schemaFiles = (await readdir(schemaDirectory))
+    schemaFiles = (capturedSchemas ? [...capturedSchemas.keys()] : await readdir(schemaDirectory))
       .filter((name) => name.endsWith(".schema.json"))
       .sort((left, right) => compareCodeUnits(left, right));
   } catch (error) {
@@ -140,7 +142,7 @@ async function loadSchemaValidators(
   for (const schemaFile of schemaFiles) {
     const relativePath = `${normalizedSchemaPath}/${schemaFile}`;
     try {
-      const schemaValue: unknown = JSON.parse(await readFile(path.join(schemaDirectory, schemaFile), "utf8"));
+      const schemaValue: unknown = JSON.parse(capturedSchemas ? capturedSchemas.get(schemaFile)! : await readFile(path.join(schemaDirectory, schemaFile), "utf8"));
       if (!isRecord(schemaValue)) {
         throw new Error("schema root must be an object");
       }
@@ -367,6 +369,30 @@ function validateDocumentIdentity(
       canonicalTopics.set(header.topic_id, document.path);
     }
   }
+}
+
+/** Input-metadata checks only. This is intentionally not validateRepository:
+ * no task/lock/handoff/packet/snapshot/migration payload is read or approved. */
+export async function validateIndexMetadata(
+  root: string, config: CanonTrailConfig, documents: DocumentRecord[],
+  capturedSchemas: ReadonlyMap<string, string>,
+): Promise<{ diagnostics: Diagnostic[]; schemaCount: number }> {
+  const diagnostics: Diagnostic[] = [];
+  const { validators, count } = await loadSchemaValidators(root, diagnostics, config.schemaPath, capturedSchemas);
+  const headerValidator = validators.get("artifact-header");
+  for (const document of documents) {
+    if (!document.header) addDiagnostic(diagnostics, "error", "DOC002", "Markdown frontmatter is invalid", document.path, document.parseError);
+    else if (!headerValidator) addDiagnostic(diagnostics, "error", "SCHEMA004", "artifact-header validator is unavailable", document.path);
+    else if (!headerValidator(document.header)) addDiagnostic(diagnostics, "error", "SCHEMA005", "Markdown header does not conform to artifact-header.schema.json", document.path, formatAjvErrors(headerValidator));
+  }
+  validateDocumentIdentity(diagnostics, config, documents);
+  validateMetadataReferences(diagnostics, root, config, documents);
+  if (!diagnostics.some(d => d.severity === "error")) {
+    const indexValidator = validators.get("context-index");
+    if (!indexValidator) addDiagnostic(diagnostics, "error", "SCHEMA004", "context-index validator is unavailable; install the current context-index schema before metadata reconstruction", config.schemaPath);
+    else if (!indexValidator(buildContextIndex(documents))) addDiagnostic(diagnostics, "error", "SCHEMA005", "Generated index does not conform to context-index.schema.json", config.indexPath, formatAjvErrors(indexValidator));
+  }
+  return { diagnostics, schemaCount: count };
 }
 
 function schemaForArtifact(artifactPath: string): string | undefined {
@@ -1212,6 +1238,8 @@ async function validateContextLocks(
           continue;
         }
         const currentIndex: unknown = JSON.parse(await readFile(indexPath, "utf8"));
+        const formatProblem = contextIndexFormatProblem(currentIndex);
+        if (formatProblem) throw new Error(formatProblem);
         const currentRootHash = isRecord(currentIndex) && typeof currentIndex.root_hash === "string" ? currentIndex.root_hash : "";
         if (value.context_index_hash !== currentRootHash || records(value.sources).some(source => source.line_ranges !== undefined)
             || (isRecord(taskState) && Array.isArray(taskState.context_sections) && taskState.context_sections.length > 0)) {
@@ -1325,6 +1353,11 @@ async function validateIndex(
       normalizePath(config.indexPath),
       code === "ENOENT" ? undefined : (error as Error).message,
     );
+    return;
+  }
+  const formatProblem = contextIndexFormatProblem(actual);
+  if (formatProblem) {
+    addDiagnostic(diagnostics, "error", "INDEX004", formatProblem, normalizePath(config.indexPath));
     return;
   }
   if (!isDeepStrictEqual(actual, expected)) {

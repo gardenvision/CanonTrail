@@ -79,6 +79,22 @@ No `--apply` or `--refresh-index` exists here. Reporting runs no application
 tests and writes no project files. Full-project CI/release still needs
 `finalize` without `--task`. See the [neutral example](../examples/agent-guidance/README.md).
 
+## Index reconstruction and central upgrades
+
+Normal `index` retains strict structural checks. When retained history prevents
+cache reconstruction, an explicit `index <TARGET_PROJECT> --metadata-only` checks
+only metadata inputs and rebuilds the index without opening structured archives.
+It is **not repository integrity, handoff/resume or completion approval**; run
+strict `validate`, `docs audit` and `finalize` separately and retain their failures.
+It cannot be combined with `--task` and never becomes an automatic fallback.
+
+New indexes declare format 2 and deterministic UTF-16 code-unit document ordering.
+`INDEX004` identifies legacy/unsupported ordering separately from stale content.
+All shared sessions must use one pinned, reviewed runtime; stop old writers and
+review/install the new context-index schema and changed task-working-index schema
+once centrally. See [index reconstruction and cutover](index-rebuild.md) for the
+exact limits, safe paths, preserved history and invalid-latest-handoff boundary.
+
 ## Tasks and bounded context
 
 For a new task, preview a schema-valid draft with the new `task create` command (check the actual executable's help before using development-source instructions):
