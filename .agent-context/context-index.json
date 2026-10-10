@@ -1,7 +1,8 @@
 {
-  "version": 1,
+  "version": 2,
+  "document_order": "utf16-code-unit",
   "hash_algorithm": "sha256",
-  "root_hash": "sha256:dbf691550b37f4ad7bfa03b9a780d36431df94cf447e81d6c8f21db345da0cdf",
+  "root_hash": "sha256:1b57c74980a833e6fb015bb99de21fef767f703b72cc3f9aaee46eab10e24752",
   "documents": [
     {
       "path": ".agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/brief.md",
@@ -428,6 +429,116 @@
       "topic_id": "frozen-example-lifecycle-task"
     },
     {
+      "path": ".agent-context/tasks/T-INDEX-CI-001/brief.md",
+      "content_hash": "sha256:66a8dd9dc0cb4f85e3333dfaffc2ba06692c2e1c81888b47bc4eb01beaa7badc",
+      "stand": "2026-10-10",
+      "status": "completed",
+      "truth_level": "active-snapshot",
+      "verification_state": "internally-reviewed",
+      "read_if_task_touches": [
+        "T-INDEX-CI-001"
+      ],
+      "primary_systems": [],
+      "do_not_use_instead": [
+        "AGENTS.md"
+      ],
+      "topic_id": "task-T-INDEX-CI-001"
+    },
+    {
+      "path": ".agent-context/tasks/T-INDEX-CI-001/evidence/independent-review.md",
+      "content_hash": "sha256:b9f2c4ebe418a8864e1d973b830c44a14eada8fc5bb05b85234d426aa7ee3138",
+      "stand": "2026-10-10",
+      "status": "verified",
+      "truth_level": "active-snapshot",
+      "verification_state": "internally-reviewed",
+      "read_if_task_touches": [
+        "T-INDEX-CI-001"
+      ],
+      "primary_systems": [
+        "test instrumentation"
+      ],
+      "do_not_use_instead": [
+        "ARTIFACT_PROTOCOL.md"
+      ],
+      "topic_id": "index-ci-independent-review"
+    },
+    {
+      "path": ".agent-context/tasks/T-INDEX-CI-001/evidence/verification.md",
+      "content_hash": "sha256:5aaec4f08ca23f728a417f61e56ebd015b14464849568951c98966b9a37ee24a",
+      "stand": "2026-10-10",
+      "status": "review",
+      "truth_level": "active-snapshot",
+      "verification_state": "internally-reviewed",
+      "read_if_task_touches": [
+        "T-INDEX-CI-001"
+      ],
+      "primary_systems": [
+        "test instrumentation"
+      ],
+      "do_not_use_instead": [
+        "docs/index-rebuild.md",
+        "ARTIFACT_PROTOCOL.md"
+      ],
+      "topic_id": "index-ci-instrumentation-verification"
+    },
+    {
+      "path": ".agent-context/tasks/T-INDEX-UPGRADE-001/brief.md",
+      "content_hash": "sha256:8b09bb242abdff33a73a9baea839850328c95615172717a215166493e4715903",
+      "stand": "2026-10-10",
+      "status": "completed",
+      "truth_level": "active-snapshot",
+      "verification_state": "reviewed",
+      "read_if_task_touches": [
+        "index upgrade correction"
+      ],
+      "primary_systems": [
+        "context index"
+      ],
+      "do_not_use_instead": [
+        "ARTIFACT_PROTOCOL.md",
+        "docs/index-rebuild.md"
+      ],
+      "topic_id": "index-upgrade-task"
+    },
+    {
+      "path": ".agent-context/tasks/T-INDEX-UPGRADE-001/evidence/independent-review.md",
+      "content_hash": "sha256:1fe87477dba4533299744851d34a24831e861964ca862eb35a04c83139467e3a",
+      "stand": "2026-10-10",
+      "status": "verified",
+      "truth_level": "active-snapshot",
+      "verification_state": "internally-reviewed",
+      "read_if_task_touches": [
+        "index upgrade independent review"
+      ],
+      "primary_systems": [
+        "context index"
+      ],
+      "do_not_use_instead": [
+        "ARTIFACT_PROTOCOL.md",
+        "docs/index-rebuild.md"
+      ],
+      "topic_id": "index-upgrade-independent-review-record"
+    },
+    {
+      "path": ".agent-context/tasks/T-INDEX-UPGRADE-001/evidence/verification.md",
+      "content_hash": "sha256:9d54993ee7b8004226fe47b8b26bd5e7cac31e15f4d1fc8471a075b1b3e4628f",
+      "stand": "2026-10-10",
+      "status": "review",
+      "truth_level": "active-snapshot",
+      "verification_state": "internally-reviewed",
+      "read_if_task_touches": [
+        "index upgrade verification"
+      ],
+      "primary_systems": [
+        "context index"
+      ],
+      "do_not_use_instead": [
+        "ARTIFACT_PROTOCOL.md",
+        "docs/index-rebuild.md"
+      ],
+      "topic_id": "index-upgrade-author-verification"
+    },
+    {
       "path": ".agent-context/tasks/T-MIT-LICENSE-001/brief.md",
       "content_hash": "sha256:3cc4808c2a5cd2c0b74e57ca457c70539b96aee256aa3cec84556c1946335f14",
       "stand": "2026-09-13",
@@ -843,7 +954,7 @@
     },
     {
       "path": "ARTIFACT_PROTOCOL.md",
-      "content_hash": "sha256:0d624e43b066e4f85c69d12e0bb5eb0e378df5f637fd0adadf266cb3f57eb6cd",
+      "content_hash": "sha256:edc08c3b2860aea589e56f857e6ae648e53c26ce88c6ede01c1d6b1b768bfb8f",
       "stand": "2026-10-08",
       "status": "design-target",
       "truth_level": "design-target",
@@ -908,7 +1019,7 @@
     },
     {
       "path": "ROADMAP.md",
-      "content_hash": "sha256:8d50a5d698e66fc4fda2e9c02ae2c5426dbe1310afc4f03dcfb79289a7a499c9",
+      "content_hash": "sha256:9bbcaceed7153f044f8dd0b1e9b387ffe1a2736c71797636d43fec686db7c91d",
       "stand": "2026-10-08",
       "status": "public-source-alpha",
       "truth_level": "draft",
@@ -1035,7 +1146,7 @@
     },
     {
       "path": "docs/finding-codes.md",
-      "content_hash": "sha256:4052f97d0f4cbe28a9eeb057d7ff62d1ad4d9371aeff724c4ec3c627a1da301e",
+      "content_hash": "sha256:61c19beed7500070c67e121e4b2848dd02b73acf492011b51bf7fe4e54f8e96b",
       "stand": "2026-10-08",
       "status": "public-source-alpha",
       "truth_level": "draft",
@@ -1053,6 +1164,26 @@
         "docs/usage.md"
       ],
       "topic_id": "finding-codes"
+    },
+    {
+      "path": "docs/index-rebuild.md",
+      "content_hash": "sha256:7fee0f82861570e1e3f8936e354da891a22027a5d258f7a6d0ca41150b442485",
+      "stand": "2026-10-10",
+      "status": "verified",
+      "truth_level": "draft",
+      "verification_state": "reviewed",
+      "read_if_task_touches": [
+        "explicit metadata index reconstruction",
+        "index format upgrade"
+      ],
+      "primary_systems": [
+        "context index"
+      ],
+      "do_not_use_instead": [
+        "ARTIFACT_PROTOCOL.md",
+        "docs/usage.md"
+      ],
+      "topic_id": "index-rebuild"
     },
     {
       "path": "docs/integrations.md",
@@ -1159,7 +1290,7 @@
     },
     {
       "path": "docs/self-documentation.md",
-      "content_hash": "sha256:508f816207c6d87c9bcf2a6cde3dab539cd4b863cc315fad4ab89b7f13d8d608",
+      "content_hash": "sha256:9a845847908094fd14bbb27664d93549f3afa9de5d2da932341a872a3d739d5c",
       "stand": "2026-10-08",
       "status": "public-source-alpha",
       "truth_level": "draft",
@@ -1200,7 +1331,7 @@
     },
     {
       "path": "docs/usage.md",
-      "content_hash": "sha256:39d678b802d0c39ab7b8435eadab3f5e2264c964735a30f6ea51346ccc9f9eab",
+      "content_hash": "sha256:4b14d2a02b0a4798e28a55f397a9b8935956c60824d7356fa3ea44580f108f4d",
       "stand": "2026-10-08",
       "status": "public-source-alpha",
       "truth_level": "draft",
@@ -1410,6 +1541,26 @@
       "artifact_id": "T-SAVE-001",
       "artifact_kind": "external-task-brief",
       "topic_id": "example-save-task"
+    },
+    {
+      "path": "examples/index-rebuild/README.md",
+      "content_hash": "sha256:a1f0e1f8eaea6ae1a07daf5cd5dd422a326ead7069b9077e1fbd2c91b7877c5b",
+      "stand": "2026-10-10",
+      "status": "synthetic-reference",
+      "truth_level": "draft",
+      "verification_state": "unverified",
+      "read_if_task_touches": [
+        "metadata index reconstruction",
+        "index format example"
+      ],
+      "primary_systems": [
+        "context index"
+      ],
+      "do_not_use_instead": [
+        "docs/index-rebuild.md",
+        "ARTIFACT_PROTOCOL.md"
+      ],
+      "topic_id": "example-index-rebuild"
     },
     {
       "path": "examples/migration-plan/README.md",

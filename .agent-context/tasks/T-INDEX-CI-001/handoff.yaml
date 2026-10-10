@@ -1,0 +1,65 @@
+handoff_id: H-T-INDEX-CI-001-20261010115223
+task_id: T-INDEX-CI-001
+created_at: "2026-10-10T11:52:23.172Z"
+source_session_id: index-ci-publication-20261010
+checkpoint_trigger: phase-transition
+source_provider: codex
+source_context_lock_path: .agent-context/tasks/T-INDEX-CI-001/evidence/context-locks/52e614be72228e982408dfdf1cdb3694c0cb452ebbbaf7429eefde88d51fc470.json
+source_context_lock_hash: sha256:52e614be72228e982408dfdf1cdb3694c0cb452ebbbaf7429eefde88d51fc470
+objective: Make metadata-index race-test instrumentation observe canonical temporary paths on every platform, without changing runtime behavior
+completed: []
+decisions: []
+files:
+  - path: .agent-context/tasks/T-INDEX-CI-001/brief.md
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: .agent-context/tasks/T-INDEX-CI-001/change.yaml
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: .agent-context/tasks/T-INDEX-CI-001/evidence/independent-review.md
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: .agent-context/tasks/T-INDEX-CI-001/evidence/quality.receipt.json
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: .agent-context/tasks/T-INDEX-CI-001/evidence/verification.md
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: .agent-context/tasks/T-INDEX-CI-001/state.yaml
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: test/index-upgrade.test.ts
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+checks:
+  - name: CHECK-QUALITY
+    status: pass
+    evidence: .agent-context/tasks/T-INDEX-CI-001/evidence/quality.receipt.json
+  - name: CHECK-REVIEW
+    status: pass
+    evidence: .agent-context/tasks/T-INDEX-CI-001/evidence/independent-review.md
+blockers: []
+open_questions: []
+next_safe_action: Verify the declared closure delta, publish this test-only correction to PR 5, and merge only after all exact hosted platform and completion checks pass; leave consumer writers unchanged until a quiet window is confirmed.
+do_not_repeat: []
+resume_sources:
+  - AGENTS.md
+  - .agent-context/tasks/T-INDEX-CI-001/state.yaml
+  - .agent-context/tasks/T-INDEX-CI-001/brief.md
+  - .agent-context/tasks/T-INDEX-CI-001/change.yaml
+  - docs/decisions/0001-typescript-cli.md
+  - .agent-context/tasks/T-INDEX-CI-001/evidence/independent-review.md
+  - .agent-context/tasks/T-INDEX-CI-001/evidence/quality.receipt.json
+  - .agent-context/tasks/T-INDEX-CI-001/evidence/verification.md
+  - ARTIFACT_PROTOCOL.md
+  - src/continuity-files.ts
+  - src/metadata-index.ts
+  - test/index-upgrade.test.ts
+  - .agent-context/tasks/T-INDEX-CI-001/context.lock.json
+worktree_dirty: true
+uncommitted_summary: Git reports 9 changed/untracked entries; 7 task-selected or explicitly reported files are listed below. The complete hash-bound worktree_inventory is separate on-demand safety evidence, not an ownership claim or file-content backup.
+worktree_inventory:
+  path: .agent-context/tasks/T-INDEX-CI-001/evidence/worktree-inventories/a8f8bdd11eb9f86e36c9f41af53fc12b4a98776214cd3f8131e8a361351a4af8.worktree-inventory.json
+  content_hash: sha256:a8f8bdd11eb9f86e36c9f41af53fc12b4a98776214cd3f8131e8a361351a4af8
+  entry_count: 9
+handoff_hash: sha256:f8288cbfde3ed81bc2c9b835054202ea987e05fae3cbdd8fdb063661e5cc3324

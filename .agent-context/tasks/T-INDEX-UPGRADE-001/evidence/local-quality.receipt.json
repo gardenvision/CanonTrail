@@ -1,0 +1,329 @@
+{
+  "purpose": "author-local-verification-evidence-not-release",
+  "baseline": "8d48b72816b2195da73b3256d729534684504f3e",
+  "implementation_revision": "R3",
+  "original_review_manifest_sha256": "0cc5b2e03cb85072d4ca4673d9d6f5b58532257c345f956ca2e9d8d718e0c9a5",
+  "raw_receipts": "retained separately in private Goal output; hashes below bind the measured logs, not public delivery",
+  "receipts": [
+    {
+      "name": "check-r3.log",
+      "bytes": 63,
+      "sha256": "ca1e247d8a64ed733f305f35395670d288f0d0e870ec3d85761db0e3376b9b14"
+    },
+    {
+      "name": "build-r3.log",
+      "bytes": 54,
+      "sha256": "c4400fe37a5f4008f86ead39a5dd9bc74a6b4e7449b5b0d15dc6b48d419325db"
+    },
+    {
+      "name": "windows-focused-r3.log",
+      "bytes": 381,
+      "sha256": "90231d28602d327f5fcfdcf844d11069cf18ec99ea396b4d46760d814f0c43e2"
+    },
+    {
+      "name": "windows-full-suite-r3.log",
+      "bytes": 377,
+      "sha256": "b5fcc2069e5bb089668cb45489fdfcfaf33c0147657716db47643ffc543946ba"
+    },
+    {
+      "name": "linux-check-r3.log",
+      "bytes": 59,
+      "sha256": "3782fa9c3431ff90253487fa77980b03fe72d986a1e74c9639d20b2d134e5742"
+    },
+    {
+      "name": "linux-build-r3.log",
+      "bytes": 50,
+      "sha256": "b2a9e1a59f1d674417502092b9b3c9425f31bf9d92d7b54ce627f40c91f1ef56"
+    },
+    {
+      "name": "linux-focused-suite-r3.log",
+      "bytes": 8034,
+      "sha256": "61607f677db65c93edbeebadd19a302e96d62dbf6769e5411f78d7cc01104188"
+    },
+    {
+      "name": "linux-source-verification-r3.json",
+      "bytes": 172,
+      "sha256": "1ff0cb4d335b6567c043791cfd54228e743246cf9be34f2f04a678db82882de2"
+    },
+    {
+      "name": "audit-dependencies.log",
+      "bytes": 25,
+      "sha256": "4b02d4a3c23d969c46bd2041360f80bfcb1fe760d9db864009acdd710f9de601"
+    },
+    {
+      "name": "terminology-r3.txt",
+      "bytes": 6570,
+      "sha256": "e49bb4aa5d047cc569a094ffa27a196585cbc232463482cde0280e547e6177ab"
+    },
+    {
+      "name": "review-manifest-r3.json",
+      "bytes": 3224,
+      "sha256": "0cc5b2e03cb85072d4ca4673d9d6f5b58532257c345f956ca2e9d8d718e0c9a5"
+    },
+    {
+      "name": "INDEPENDENT_REVIEW_R1.md",
+      "bytes": 9466,
+      "sha256": "e1452eeae2d6e4264ce1c104e0d6044ecf578b461de3039028a846061d2363fc"
+    },
+    {
+      "name": "INDEPENDENT_REVIEW_R2.md",
+      "bytes": 9207,
+      "sha256": "178b02541f3ab1d9f8c5aeefe6eba5e1155745ea3afcbca9341b394dc932b161"
+    },
+    {
+      "name": "INDEPENDENT_REVIEW_R3.md",
+      "bytes": 10249,
+      "sha256": "541a82e01e6ef16c176261886be0e8f61cc2c2fdfeded319dd55cd75caaa3048"
+    }
+  ],
+  "runtime": [
+    {
+      "path": "dist/agent-guide.js",
+      "bytes": 5090,
+      "sha256": "16d3c5e2b99c8914411afa8f9fa8f923e632dfdf56ec3d906c7f4918b98daf3e"
+    },
+    {
+      "path": "dist/checkpoint.js",
+      "bytes": 5230,
+      "sha256": "810f343fc7f3d0c3da440cd3b96906b0f62a4609612d6a150b75d1ad5bbf6434"
+    },
+    {
+      "path": "dist/cli.js",
+      "bytes": 43196,
+      "sha256": "0494e1cfb7046fabcb067d4eaff3493f17c721a6358543e79392b2dbd9680f80"
+    },
+    {
+      "path": "dist/compatibility.js",
+      "bytes": 4609,
+      "sha256": "d4fcb69706b35a568937a6c44538e16596cf7069e26608cc1c28e4e4df56d202"
+    },
+    {
+      "path": "dist/config.js",
+      "bytes": 3107,
+      "sha256": "24a4d1995dfb935837e4b3c4cfa05a40e722b47cd70ae7f382777a9f30eb5eab"
+    },
+    {
+      "path": "dist/context-git.js",
+      "bytes": 1465,
+      "sha256": "9c8ec9d375b82fbf72fc3f21d78495be0874b912784ca6028a9a901f4e8acc79"
+    },
+    {
+      "path": "dist/context-inspection.js",
+      "bytes": 16676,
+      "sha256": "4d35516b5e8a04e06644602dc044b58cb302260cfa5f2f75bdf26dcda8b5c04e"
+    },
+    {
+      "path": "dist/context-schema.js",
+      "bytes": 4117,
+      "sha256": "e158aff44d90c79f086905efcf8be0c3740ce030339c581bf9493cbbbe050909"
+    },
+    {
+      "path": "dist/context-sections.js",
+      "bytes": 3349,
+      "sha256": "4907fd7248b940f427a5addd113213c28afd8aad8f76085da7f7d229506a6744"
+    },
+    {
+      "path": "dist/context-source-path.js",
+      "bytes": 2477,
+      "sha256": "9194f6be0730e767f2d61bacf0c8202f5f1262242b5ee7f831d3f8c1d8989a05"
+    },
+    {
+      "path": "dist/context-text.js",
+      "bytes": 2180,
+      "sha256": "f176a99437f21ef3ee06ed66696340b33182df5b4a640fc798c6f8a23efd31fb"
+    },
+    {
+      "path": "dist/context.js",
+      "bytes": 57194,
+      "sha256": "a393a530bcf7ef8908dcf0c2aedfc34b051e1f2e0fba6b6482e3a9b8aca135f8"
+    },
+    {
+      "path": "dist/continuity-files.js",
+      "bytes": 4621,
+      "sha256": "4803d7b85a201452a9caa2344f200ba1b9d352671935776145964fcf8415a21c"
+    },
+    {
+      "path": "dist/date-time.js",
+      "bytes": 442,
+      "sha256": "8828083159ff6698ca015a2d83e0f3a9dfb41ae478004bafab91df48662da2b5"
+    },
+    {
+      "path": "dist/docs.js",
+      "bytes": 24061,
+      "sha256": "2dbed132f8558dc32bed8bcf2a3a133fd5e34d8697ab86c8ba46be583cb4ea72"
+    },
+    {
+      "path": "dist/document-authoring.js",
+      "bytes": 8636,
+      "sha256": "92f132531b1d8aaf4c6d163b3d1f0d2d8bc18f41c1720509c47025983c528f2f"
+    },
+    {
+      "path": "dist/document-snapshot.js",
+      "bytes": 13935,
+      "sha256": "de4b3fa1a7f264afe660817f4ffb921d61135449fbfcf7410f51d8cf3904c795"
+    },
+    {
+      "path": "dist/evidence.js",
+      "bytes": 12575,
+      "sha256": "329372ffc7de6daa5c6aae96d6868b0ad4414e937579fdc22ca6f81247614178"
+    },
+    {
+      "path": "dist/finalize-guard.js",
+      "bytes": 2902,
+      "sha256": "d9ad15d56577f079eae275b3a4ac5612fb176feef8885593b39d488f62600449"
+    },
+    {
+      "path": "dist/finalize-scope.js",
+      "bytes": 12106,
+      "sha256": "020ea87c744132a59cb229c35c32634de0d501c576600d0846211518ddab2f3c"
+    },
+    {
+      "path": "dist/finalize.js",
+      "bytes": 15532,
+      "sha256": "c84d31b276a3a426ae483bb681b50c34403b6f0a2d60cfe722b0c5be0c493026"
+    },
+    {
+      "path": "dist/frontmatter.js",
+      "bytes": 1049,
+      "sha256": "a76def593334b5c146b1cd78ffc5fdd8b4d468b99930723853cd601e7515857d"
+    },
+    {
+      "path": "dist/frozen-examples.js",
+      "bytes": 4859,
+      "sha256": "fe81b34077c7e9a20039fd7f81faf8f950f524bba5d3eb6031e0660e5d2ad002"
+    },
+    {
+      "path": "dist/handoff.js",
+      "bytes": 26819,
+      "sha256": "c8b13bab8f4717ad5d2e34dd96702ea68d8cfc15520902ab64d6836260c63e5b"
+    },
+    {
+      "path": "dist/indexer.js",
+      "bytes": 9499,
+      "sha256": "30cb260b0bc66c879cc84b888d1ad0da5f5ba4995da6b1095e6fdaa0d61e6f32"
+    },
+    {
+      "path": "dist/initializer.js",
+      "bytes": 42355,
+      "sha256": "3cda937f1538de502d8d3ad41f44f7660dcea309594e542d432b2507c0f24850"
+    },
+    {
+      "path": "dist/metadata-index.js",
+      "bytes": 13226,
+      "sha256": "f119d1cdadeaeb0a6069ded4eacd9dd603dce8d770931cf4dbf941693715cca0"
+    },
+    {
+      "path": "dist/migration-content-preview.js",
+      "bytes": 2913,
+      "sha256": "7070bb600ee7bb5a38d248a1c6738a0c8c23928779eef337637d39254dc7a3c0"
+    },
+    {
+      "path": "dist/migration-control-path.js",
+      "bytes": 5335,
+      "sha256": "741bdaebdb9f813110c32387759733d1b10e097a392c705b1f2bc116f296e908"
+    },
+    {
+      "path": "dist/migration.js",
+      "bytes": 77622,
+      "sha256": "18dde11be08efd316c5cf0b2d0cf9f30b11b8b4135bd44624725c02eeae4609b"
+    },
+    {
+      "path": "dist/ordering.js",
+      "bytes": 571,
+      "sha256": "c419294cf61d5e060b79c68f7a4b3b3dd9e961baec88a469ca91c41d4e57294e"
+    },
+    {
+      "path": "dist/readiness.js",
+      "bytes": 11875,
+      "sha256": "d7324aae35d9a3a37f390b5cb740eaf33da6828995a93daab274c8c2fe8eddcd"
+    },
+    {
+      "path": "dist/resume-audit.js",
+      "bytes": 9365,
+      "sha256": "4645aeaa3615db9ec89af723f723d52b3f1ab8835f5f0d2e1b57de9484e41b73"
+    },
+    {
+      "path": "dist/resume.js",
+      "bytes": 11636,
+      "sha256": "7ec040060d4786a25054f16cd72c16349333c525b92d031f83832f4c8ff812c3"
+    },
+    {
+      "path": "dist/safe-write.js",
+      "bytes": 1087,
+      "sha256": "7200a84d66b6285c914af7f07c668fcf31443fb482f5a16013635065b2609742"
+    },
+    {
+      "path": "dist/schema-diagnostics.js",
+      "bytes": 947,
+      "sha256": "fb5f5a959e186ea609280c43c9f133fc2b0fd760b759a615bced0283d3466848"
+    },
+    {
+      "path": "dist/task-create.js",
+      "bytes": 10518,
+      "sha256": "4e2cb01a4ec192cd759ed343c6cb4b1f6657fb2f45ca81c74b30799730f1cbb0"
+    },
+    {
+      "path": "dist/task-status.js",
+      "bytes": 5115,
+      "sha256": "6ba0d3c862bdfe2ece325636ea975ed9ec6c731ef748a7f2601cd8001ab8f253"
+    },
+    {
+      "path": "dist/types.js",
+      "bytes": 44,
+      "sha256": "01ae2a5b120382f9a648ced7ee8507493a134f216d100fc61600c6c9738235d2"
+    },
+    {
+      "path": "dist/validator.js",
+      "bytes": 80179,
+      "sha256": "8f5b6166f84b08dcd09b0b84f3e3f5cfdf3af61def2318ff73568a2baeb411e5"
+    },
+    {
+      "path": "dist/working-index.js",
+      "bytes": 10913,
+      "sha256": "c9d1155975623fc58857f35a3cef878db4231b2028360a4753f6c33d7d434d3b"
+    },
+    {
+      "path": "dist/worktree-inventory.js",
+      "bytes": 7336,
+      "sha256": "4d68518cefc9982a8aed3d2ca2570be29983f6c4e196d8f4332bf81a638677b6"
+    }
+  ],
+  "platform_scope": {
+    "windows_full": {
+      "passed": 1068,
+      "skipped": 13,
+      "total": 1081,
+      "files": 48,
+      "node": "v24.11.1"
+    },
+    "linux_focused": {
+      "passed": 135,
+      "skipped": 0,
+      "files": 3,
+      "node": "v24.20.0"
+    },
+    "native_macos": "not-run",
+    "hosted_ci": "not-run",
+    "minimum_node_floor": "not-run"
+  },
+  "independent_review": {
+    "revision": "R3",
+    "verdict": "APPROVE-local-implementation-only",
+    "ownership_assertions_per_platform": 89,
+    "broader_windows": {
+      "passed": 49,
+      "capability_unavailable": 1
+    },
+    "broader_linux": {
+      "passed": 50
+    },
+    "task_closure_delta": "separate-review-required"
+  },
+  "exclusions": [
+    "consumer update",
+    "history repair",
+    "canonical promotion",
+    "publication",
+    "remote operations"
+  ]
+}

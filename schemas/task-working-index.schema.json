@@ -142,7 +142,10 @@
       ],
       "properties": {
         "version": {
-          "const": 1
+          "const": 2
+        },
+        "document_order": {
+          "const": "utf16-code-unit"
         },
         "hash_algorithm": {
           "const": "sha256"
@@ -160,6 +163,7 @@
       },
       "required": [
         "version",
+        "document_order",
         "hash_algorithm",
         "root_hash",
         "documents"
@@ -202,4 +206,3 @@
     }
   }
 }
-

@@ -1,0 +1,85 @@
+handoff_id: H-T-INDEX-UPGRADE-001-20261010054741
+task_id: T-INDEX-UPGRADE-001
+created_at: "2026-10-10T05:47:41.915Z"
+source_session_id: canontrail-index-upgrade-20261010
+checkpoint_trigger: pre-compaction
+source_provider: codex
+source_context_lock_path: .agent-context/tasks/T-INDEX-UPGRADE-001/evidence/context-locks/c25170d7f29822d61e8b69c2643217cb40bb537637b0a1f3203a6a6ee1fd6d28.json
+source_context_lock_hash: sha256:c25170d7f29822d61e8b69c2643217cb40bb537637b0a1f3203a6a6ee1fd6d28
+objective: Implement explicit metadata-only context index reconstruction and deterministic index format upgrade diagnostics without weakening strict integrity approval.
+completed: []
+decisions: []
+files:
+  - path: .agent-context/tasks/T-INDEX-UPGRADE-001/brief.md
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: .agent-context/tasks/T-INDEX-UPGRADE-001/change.yaml
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: .agent-context/tasks/T-INDEX-UPGRADE-001/state.yaml
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: docs/index-rebuild.md
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: schemas/task-working-index.schema.json
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: src/cli.ts
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: src/context.ts
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: src/indexer.ts
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: src/types.ts
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: src/validator.ts
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+checks:
+  - name: CHECK-QUALITY
+    status: not-run
+    evidence: ""
+  - name: CHECK-BOUNDARY
+    status: not-run
+    evidence: ""
+  - name: CHECK-REVIEW
+    status: not-run
+    evidence: ""
+blockers: []
+open_questions: []
+next_safe_action: Complete metadata-index safety regressions and protocol/schema examples in this isolated source clone, then run the full quality chain and authorized independent review; do not update consumer projects or publish.
+do_not_repeat: []
+resume_sources:
+  - AGENTS.md
+  - .agent-context/tasks/T-INDEX-UPGRADE-001/state.yaml
+  - .agent-context/tasks/T-INDEX-UPGRADE-001/brief.md
+  - .agent-context/tasks/T-INDEX-UPGRADE-001/change.yaml
+  - examples/feature-save-schema/project-doc.md
+  - examples/resume-history/README.md
+  - ARTIFACT_PROTOCOL.md
+  - examples/compact-handoff/README.md
+  - examples/context-inspection/README.md
+  - docs/index-rebuild.md
+  - schemas/task-working-index.schema.json
+  - src/config.ts
+  - src/context.ts
+  - src/continuity-files.ts
+  - src/indexer.ts
+  - src/types.ts
+  - src/validator.ts
+  - src/working-index.ts
+  - src/cli.ts
+  - src/docs.ts
+  - .agent-context/tasks/T-INDEX-UPGRADE-001/context.lock.json
+worktree_dirty: true
+uncommitted_summary: Git reports 14 changed/untracked entries; 10 task-selected or explicitly reported files are listed below. The complete hash-bound worktree_inventory is separate on-demand safety evidence, not an ownership claim or file-content backup.
+worktree_inventory:
+  path: .agent-context/tasks/T-INDEX-UPGRADE-001/evidence/worktree-inventories/60c8af04f10ab284dd67ec5203dcac948fa2c50a98271898f964dd7adfb36e6e.worktree-inventory.json
+  content_hash: sha256:60c8af04f10ab284dd67ec5203dcac948fa2c50a98271898f964dd7adfb36e6e
+  entry_count: 14
+handoff_hash: sha256:e89de3436e3f8d152c4ff73facc32e912d48ccde624b95f73078cbf4e191c426

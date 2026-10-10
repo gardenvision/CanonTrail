@@ -1,0 +1,63 @@
+{
+  "version": 1,
+  "task_id": "T-INDEX-UPGRADE-001",
+  "created_at": "2026-10-10T05:47:41.915Z",
+  "entries": [
+    {
+      "code": " M",
+      "path": ".agent-context/context-index.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-INDEX-UPGRADE-001/brief.md"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-INDEX-UPGRADE-001/change.yaml"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-INDEX-UPGRADE-001/context.lock.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-INDEX-UPGRADE-001/evidence/context-locks/f842a59dd70a7ef6881d33057e625383def45f834b6ee4629d92be5247fd8f00.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-INDEX-UPGRADE-001/state.yaml"
+    },
+    {
+      "code": "??",
+      "path": "docs/index-rebuild.md"
+    },
+    {
+      "code": " M",
+      "path": "schemas/task-working-index.schema.json"
+    },
+    {
+      "code": " M",
+      "path": "src/cli.ts"
+    },
+    {
+      "code": " M",
+      "path": "src/context.ts"
+    },
+    {
+      "code": " M",
+      "path": "src/indexer.ts"
+    },
+    {
+      "code": "??",
+      "path": "src/metadata-index.ts"
+    },
+    {
+      "code": " M",
+      "path": "src/types.ts"
+    },
+    {
+      "code": " M",
+      "path": "src/validator.ts"
+    }
+  ]
+}

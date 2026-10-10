@@ -1,0 +1,41 @@
+version: 1
+change_id: CHG-INDEX-UPGRADE-001
+revision: 3
+title: Explicit metadata-only index reconstruction with versioned hash semantics
+status: verified
+risk: high
+author: ChatGPT implementation agent
+canonical_source: ARTIFACT_PROTOCOL.md
+decision_rationale: A metadata projection is not repository approval. Explicit opt-in separates index inputs from retained archive integrity without modifying strict existing commands; versioned deterministic ordering makes central CLI upgrades diagnosable. Independent R2 findings require portable protected-role checks and recognizable-cache replacement authority before approval.
+documentation_structure:
+  decision: create-feature-documents
+  rationale: The explicit projection boundary and upgrade recipe need one understandable usage owner while strict integrity remains in the existing protocol.
+  feature_documents:
+    - {feature_id: index-rebuild, action: create, path: docs/index-rebuild.md, status: verified, evidence_refs: [.agent-context/tasks/T-INDEX-UPGRADE-001/evidence/verification.md, .agent-context/tasks/T-INDEX-UPGRADE-001/evidence/independent-review.md]}
+acceptance_cases:
+  - {id: AC-PROJECTION, given: Valid governed metadata plus damaged retained continuity history., expected: Explicit metadata rebuild succeeds without parsing that history and states integrity approval was not performed., failure_or_uncertainty: Strict repository and current-use commands remain failed; projection is not recovery., counterexample: Filter errors after replaying all archives or label projection as repository PASS., oracle: Instrumented file-read sentinel and corrupt-history CLI counterchecks., status: pass, evidence_refs: [test/index-upgrade.test.ts, .agent-context/tasks/T-INDEX-UPGRADE-001/evidence/independent-review.md]}
+  - {id: AC-SAFETY, given: Invalid header/schema/reference or unsafe input/output identity., expected: Rebuild fails without replacing the old index., failure_or_uncertainty: Stable exclusive tree is required; not an atomic filesystem snapshot., counterexample: Linked/outside output or missing reference is accepted after checking only frontmatter presence., oracle: Raw-byte before/after snapshots and exact diagnostic assertions., status: pass, evidence_refs: [test/index-upgrade.test.ts, .agent-context/tasks/T-INDEX-UPGRADE-001/evidence/independent-review.md]}
+  - {id: AC-STRICT, given: Same damaged provenance with strict commands., expected: Strict validation audit finalize and current-use gates still fail with original diagnostics., failure_or_uncertainty: No automatic archive repair or new replacement authority., counterexample: Opt-in semantics accidentally leak into normal index or finalize refresh., oracle: Same-input default/opt-in and current-use comparisons., status: pass, evidence_refs: [test/index-upgrade.test.ts, .agent-context/tasks/T-INDEX-UPGRADE-001/evidence/independent-review.md]}
+  - {id: AC-FORMAT, given: Mixed-case Unicode paths and legacy/current/unknown index formats., expected: Current output declares deterministic code-unit ordering and loaders reject incompatible current-use formats with actionable guidance., failure_or_uncertainty: Old shipped CLI cannot be retroactively made aware of a new marker., counterexample: Volatile producer metadata changes root hashes or a new format silently overwrites unknown future input., oracle: Reordered equal-content fixtures and historical receipt byte preservation., status: pass, evidence_refs: [test/index-upgrade.test.ts, .agent-context/tasks/T-INDEX-UPGRADE-001/evidence/independent-review.md]}
+impacts:
+  - {area: requirement, decision: affected, rationale: Distinguish metadata reconstruction from integrity approval., evidence_refs: [.agent-context/tasks/T-INDEX-UPGRADE-001/brief.md]}
+  - {area: data-contracts, decision: affected, rationale: Deterministic index semantics and nested working-view report contract have matching declarations., evidence_refs: [src/types.ts, schemas/context-index.schema.json, schemas/task-working-index.schema.json]}
+  - {area: domain-logic, decision: affected, rationale: Narrow index-input preflight and shared cache ownership/format checks are implemented., evidence_refs: [src/indexer.ts, src/metadata-index.ts, src/validator.ts]}
+  - {area: tests-reference-cases, decision: affected, rationale: Adversarial opt-in ownership and legacy/future index controls passed., evidence_refs: [test/index-upgrade.test.ts, .agent-context/tasks/T-INDEX-UPGRADE-001/evidence/verification.md]}
+  - {area: example-data, decision: affected, rationale: Worked synthetic reconstruction/upgrade example matches the tested non-approval boundary., evidence_refs: [examples/index-rebuild/README.md]}
+  - {area: ui-api, decision: affected, rationale: New explicit flag and labeled report with no integrity-approval claim., evidence_refs: [src/cli.ts]}
+  - {area: documentation, decision: affected, rationale: Protocol and usage must explain the changed explicit boundary., evidence_refs: [ARTIFACT_PROTOCOL.md, docs/index-rebuild.md]}
+  - {area: diagrams-visuals, decision: not-affected, rationale: No graphical UI or diagram rendering changes; text CLI output is tested., evidence_refs: []}
+  - {area: terminology, decision: affected, rationale: Distinguish metadata-only reconstruction incompatible format and stale content., evidence_refs: [docs/index-rebuild.md]}
+  - {area: operations-compatibility, decision: affected, rationale: Central quiet-window cutover and exact filesystem policy across target platforms., evidence_refs: [docs/index-rebuild.md]}
+verification:
+  checks:
+    - {name: Windows check build full serial suite and Linux focused/native boundary regressions, status: pass, evidence_refs: [.agent-context/tasks/T-INDEX-UPGRADE-001/evidence/local-quality.receipt.json, .agent-context/tasks/T-INDEX-UPGRADE-001/evidence/verification.md]}
+    - {name: Exact raw-byte preservation and strict counterexamples, status: pass, evidence_refs: [test/index-upgrade.test.ts, .agent-context/tasks/T-INDEX-UPGRADE-001/evidence/independent-review.md]}
+  terminology_search: {status: pass, terms: [metadata-only, incompatible index, stale index], evidence_refs: [docs/index-rebuild.md, docs/finding-codes.md, .agent-context/tasks/T-INDEX-UPGRADE-001/evidence/local-quality.receipt.json]}
+  visual_review: {applicable: false, status: not-applicable, evidence_refs: []}
+  unverifiable_items: []
+independent_review: {status: pass, reviewer: Authorized independent local review agent, findings: [R1 fresh-init absence issue corrected, R2 provenance overwrite and case-role bypass rejected then corrected and independently retested, R3 approved only for the exact local implementation seal], evidence_refs: [.agent-context/tasks/T-INDEX-UPGRADE-001/evidence/independent-review.md], waiver: null}
+supersedes: []
+superseded_by: null
+updated_at: "2026-10-10T06:27:04Z"

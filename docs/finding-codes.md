@@ -40,6 +40,9 @@ Exit codes: `0` pass — `1` failed validation/finalization/index preflight or C
 | `INDEX001` | error | context index missing | run `canontrail index .` |
 | `INDEX002` | error | index unreadable or invalid | regenerate with `canontrail index .`; inspect unexpected edits |
 | `INDEX003` | error | index stale (governed documents changed) | run `canontrail index .`, then rerun the original command |
+| `INDEX004` | error | legacy or unsupported index format/order/hash semantics | inspect the format and pin one compatible CLI; explicitly rebuild legacy format 1 before current use; stop old writers |
+| `INDEX005` | error | explicit metadata reconstruction could not prove safe inputs/output | follow the detailed cause; old index remains intact; projection is not repository approval |
+| `INDEX006` | warning | a configured governed path is safely absent during metadata reconstruction | create/review that planned scope before using its documentation; the report explicitly lists unindexed absent paths, not approval |
 
 ## Task working views (`WIDX`)
 

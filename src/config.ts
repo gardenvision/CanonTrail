@@ -46,6 +46,11 @@ export async function loadConfig(root: string): Promise<CanonTrailConfig> {
     throw error;
   }
 
+  return parseConfigText(raw);
+}
+
+/** Parse captured config bytes without reopening a mutable filesystem input. */
+export function parseConfigText(raw: string): CanonTrailConfig {
   const value: unknown = parse(raw);
   if (typeof value !== "object" || value === null || Array.isArray(value)) {
     throw new Error(".agent-context/config.yaml must contain a mapping");

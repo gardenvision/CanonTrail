@@ -1,0 +1,134 @@
+handoff_id: H-T-INDEX-UPGRADE-001-20261010061809
+task_id: T-INDEX-UPGRADE-001
+created_at: "2026-10-10T06:18:09.362Z"
+source_session_id: canontrail-index-upgrade-20261010
+checkpoint_trigger: phase-transition
+source_provider: codex
+source_context_lock_path: .agent-context/tasks/T-INDEX-UPGRADE-001/evidence/context-locks/0df3e0910dbeb7c35c4828424f7eefdaf438727cc61c15cbecfd0001c9070b07.json
+source_context_lock_hash: sha256:0df3e0910dbeb7c35c4828424f7eefdaf438727cc61c15cbecfd0001c9070b07
+objective: Implement explicit metadata-only context index reconstruction and deterministic index format upgrade diagnostics without weakening strict integrity approval.
+completed: []
+decisions: []
+files:
+  - path: .agent-context/documentation-plan.yaml
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: .agent-context/tasks/T-INDEX-UPGRADE-001/brief.md
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: .agent-context/tasks/T-INDEX-UPGRADE-001/change.yaml
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: .agent-context/tasks/T-INDEX-UPGRADE-001/handoff.yaml
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: .agent-context/tasks/T-INDEX-UPGRADE-001/state.yaml
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: ARTIFACT_PROTOCOL.md
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: ROADMAP.md
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: docs/finding-codes.md
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: docs/index-rebuild.md
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: docs/self-documentation.md
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: docs/usage.md
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: examples/index-rebuild/README.md
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: schemas/context-index.schema.json
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: schemas/task-working-index.schema.json
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: src/cli.ts
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: src/config.ts
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: src/context.ts
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: src/indexer.ts
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: src/initializer.ts
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: src/metadata-index.ts
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: src/types.ts
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: src/validator.ts
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: test/index-upgrade.test.ts
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+checks:
+  - name: CHECK-QUALITY
+    status: not-run
+    evidence: ""
+  - name: CHECK-BOUNDARY
+    status: not-run
+    evidence: ""
+  - name: CHECK-REVIEW
+    status: not-run
+    evidence: ""
+blockers: []
+open_questions: []
+next_safe_action: Finish the sealed R3 independent review and native full-suite verification; close acceptance only against those results, preserve R1/R2 rejection evidence, then validate owned continuity. No consumer or remote operation is authorized.
+do_not_repeat: []
+resume_sources:
+  - AGENTS.md
+  - .agent-context/tasks/T-INDEX-UPGRADE-001/state.yaml
+  - .agent-context/tasks/T-INDEX-UPGRADE-001/brief.md
+  - .agent-context/tasks/T-INDEX-UPGRADE-001/change.yaml
+  - examples/feature-save-schema/project-doc.md
+  - examples/resume-history/README.md
+  - ARTIFACT_PROTOCOL.md
+  - examples/compact-handoff/README.md
+  - examples/context-inspection/README.md
+  - docs/index-rebuild.md
+  - schemas/task-working-index.schema.json
+  - src/config.ts
+  - src/context.ts
+  - src/continuity-files.ts
+  - src/indexer.ts
+  - src/types.ts
+  - src/validator.ts
+  - src/working-index.ts
+  - .agent-context/documentation-plan.yaml
+  - ROADMAP.md
+  - docs/finding-codes.md
+  - docs/self-documentation.md
+  - docs/usage.md
+  - examples/index-rebuild/README.md
+  - schemas/context-index.schema.json
+  - src/cli.ts
+  - src/initializer.ts
+  - src/metadata-index.ts
+  - test/index-upgrade.test.ts
+  - .agent-context/tasks/T-INDEX-UPGRADE-001/handoff.yaml
+  - .agent-context/tasks/T-INDEX-UPGRADE-001/context.lock.json
+worktree_dirty: true
+uncommitted_summary: Git reports 29 changed/untracked entries; 23 task-selected or explicitly reported files are listed below. The complete hash-bound worktree_inventory is separate on-demand safety evidence, not an ownership claim or file-content backup.
+worktree_inventory:
+  path: .agent-context/tasks/T-INDEX-UPGRADE-001/evidence/worktree-inventories/310df8e7bcc15a814d8e5ecc3acc085eb0dcd8a3c95956158867c17697a12db1.worktree-inventory.json
+  content_hash: sha256:310df8e7bcc15a814d8e5ecc3acc085eb0dcd8a3c95956158867c17697a12db1
+  entry_count: 29
+handoff_hash: sha256:b9e039a68b6072e5bdd2da29bbe3b70a12f5c5844e5c461afffebd8dcf1e2e14

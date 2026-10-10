@@ -1,0 +1,20 @@
+task_id: T-INDEX-UPGRADE-001
+status: verified
+objective: Implement explicit metadata-only context index reconstruction and deterministic index format upgrade diagnostics without weakening strict integrity approval.
+non_goals: [No consumer update or shared runtime replacement, No archive repair or integrity waiver, No implicit canonical promotion, No commit push merge or publication]
+acceptance_criteria:
+  - {id: AC-PROJECTION, statement: Explicit metadata reconstruction does not decode retained continuity history and does not claim repository approval., verification: Sentinel/corrupt-history fixtures and exact CLI report., status: pass}
+  - {id: AC-SAFETY, statement: Invalid metadata schemas references ownership and unsafe filesystem identities fail before index replacement., verification: Negative cases with exact old-index preservation., status: pass}
+  - {id: AC-STRICT, statement: Strict index validate audit finalize and current handoff/resume still reject corrupt provenance., verification: Same-fixture strict counterchecks., status: pass}
+  - {id: AC-FORMAT, statement: Current index semantics are deterministic and incompatible input is actionable without changing old receipts., verification: Mixed-case Unicode ordering legacy and future-format controls., status: pass}
+dependencies: []
+documentation_impact: [ARTIFACT_PROTOCOL.md, docs/index-rebuild.md, docs/usage.md, docs/finding-codes.md]
+file_intents: [src/indexer.ts, src/types.ts, src/validator.ts, src/context.ts, src/cli.ts, src/config.ts, src/initializer.ts, src/metadata-index.ts, schemas/context-index.schema.json, schemas/task-working-index.schema.json, docs/index-rebuild.md, docs/usage.md, docs/finding-codes.md, docs/self-documentation.md, ARTIFACT_PROTOCOL.md, ROADMAP.md, .agent-context/documentation-plan.yaml, examples/index-rebuild/README.md, test/index-upgrade.test.ts]
+required_context_sources: [ARTIFACT_PROTOCOL.md, src/indexer.ts, src/validator.ts, src/context.ts, src/working-index.ts, src/continuity-files.ts, src/types.ts, src/config.ts, schemas/task-working-index.schema.json, docs/index-rebuild.md]
+parallel_safety: exclusive
+latest_handoff: .agent-context/tasks/T-INDEX-UPGRADE-001/handoff.yaml
+checks:
+  - {id: CHECK-QUALITY, command_or_observation: Typecheck build and full serial native suite., status: pass, evidence_refs: [.agent-context/tasks/T-INDEX-UPGRADE-001/evidence/local-quality.receipt.json, .agent-context/tasks/T-INDEX-UPGRADE-001/evidence/verification.md]}
+  - {id: CHECK-BOUNDARY, command_or_observation: Metadata-only negative and strict counterchecks with source/archive preservation., status: pass, evidence_refs: [test/index-upgrade.test.ts, .agent-context/tasks/T-INDEX-UPGRADE-001/evidence/verification.md]}
+  - {id: CHECK-REVIEW, command_or_observation: Authorized independent local review of exact changed boundary., status: pass, evidence_refs: [.agent-context/tasks/T-INDEX-UPGRADE-001/evidence/independent-review.md]}
+updated_at: "2026-10-10T06:27:04Z"

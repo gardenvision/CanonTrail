@@ -1,0 +1,25 @@
+task_id: T-INDEX-CI-001
+status: verified
+objective: Make metadata-index race-test instrumentation observe canonical temporary paths on every platform, without changing runtime behavior
+non_goals: [No runtime or schema change, No historical task rewrite, No consumer cutover, No weakened assertion or added skip]
+acceptance_criteria:
+  - id: AC-001
+    statement: Injected changes must actually occur exactly once and preserve the previous index
+    verification: Injection counters, explicit root-alias control and raw-byte preservation.
+    status: pass
+  - id: AC-002
+    statement: Production source schemas and previous task files remain byte-identical.
+    verification: Parent-bound exact diff and raw hashes; exact hosted CI is a separate publication gate.
+    status: pass
+dependencies: []
+documentation_impact: []
+file_intents: [test/index-upgrade.test.ts]
+required_context_sources: [ARTIFACT_PROTOCOL.md, test/index-upgrade.test.ts, src/metadata-index.ts, src/continuity-files.ts]
+parallel_safety: exclusive
+owner: null
+worktree: null
+checks:
+  - {id: CHECK-QUALITY, command_or_observation: Windows full suite and Linux focused typecheck build and tests., status: pass, evidence_refs: [.agent-context/tasks/T-INDEX-CI-001/evidence/quality.receipt.json]}
+  - {id: CHECK-REVIEW, command_or_observation: Independent alias injection and production-preservation review., status: pass, evidence_refs: [.agent-context/tasks/T-INDEX-CI-001/evidence/independent-review.md]}
+latest_handoff: .agent-context/tasks/T-INDEX-CI-001/handoff.yaml
+updated_at: "2026-10-10T11:50:00Z"
