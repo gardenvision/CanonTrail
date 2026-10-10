@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "task_id": "T-INDEX-CI-001",
+  "created_at": "2026-10-10T11:52:23.172Z",
+  "entries": [
+    {
+      "code": " M",
+      "path": ".agent-context/context-index.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-INDEX-CI-001/brief.md"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-INDEX-CI-001/change.yaml"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-INDEX-CI-001/context.lock.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-INDEX-CI-001/evidence/independent-review.md"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-INDEX-CI-001/evidence/quality.receipt.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-INDEX-CI-001/evidence/verification.md"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-INDEX-CI-001/state.yaml"
+    },
+    {
+      "code": " M",
+      "path": "test/index-upgrade.test.ts"
+    }
+  ]
+}

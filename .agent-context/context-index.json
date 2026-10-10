@@ -2,7 +2,7 @@
   "version": 2,
   "document_order": "utf16-code-unit",
   "hash_algorithm": "sha256",
-  "root_hash": "sha256:a4620eea164990a9af623d25d95c0152eed4e98d1a2d2a033485512f7de0a407",
+  "root_hash": "sha256:1b57c74980a833e6fb015bb99de21fef767f703b72cc3f9aaee46eab10e24752",
   "documents": [
     {
       "path": ".agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/brief.md",
@@ -427,6 +427,59 @@
         "ARTIFACT_PROTOCOL.md"
       ],
       "topic_id": "frozen-example-lifecycle-task"
+    },
+    {
+      "path": ".agent-context/tasks/T-INDEX-CI-001/brief.md",
+      "content_hash": "sha256:66a8dd9dc0cb4f85e3333dfaffc2ba06692c2e1c81888b47bc4eb01beaa7badc",
+      "stand": "2026-10-10",
+      "status": "completed",
+      "truth_level": "active-snapshot",
+      "verification_state": "internally-reviewed",
+      "read_if_task_touches": [
+        "T-INDEX-CI-001"
+      ],
+      "primary_systems": [],
+      "do_not_use_instead": [
+        "AGENTS.md"
+      ],
+      "topic_id": "task-T-INDEX-CI-001"
+    },
+    {
+      "path": ".agent-context/tasks/T-INDEX-CI-001/evidence/independent-review.md",
+      "content_hash": "sha256:b9f2c4ebe418a8864e1d973b830c44a14eada8fc5bb05b85234d426aa7ee3138",
+      "stand": "2026-10-10",
+      "status": "verified",
+      "truth_level": "active-snapshot",
+      "verification_state": "internally-reviewed",
+      "read_if_task_touches": [
+        "T-INDEX-CI-001"
+      ],
+      "primary_systems": [
+        "test instrumentation"
+      ],
+      "do_not_use_instead": [
+        "ARTIFACT_PROTOCOL.md"
+      ],
+      "topic_id": "index-ci-independent-review"
+    },
+    {
+      "path": ".agent-context/tasks/T-INDEX-CI-001/evidence/verification.md",
+      "content_hash": "sha256:5aaec4f08ca23f728a417f61e56ebd015b14464849568951c98966b9a37ee24a",
+      "stand": "2026-10-10",
+      "status": "review",
+      "truth_level": "active-snapshot",
+      "verification_state": "internally-reviewed",
+      "read_if_task_touches": [
+        "T-INDEX-CI-001"
+      ],
+      "primary_systems": [
+        "test instrumentation"
+      ],
+      "do_not_use_instead": [
+        "docs/index-rebuild.md",
+        "ARTIFACT_PROTOCOL.md"
+      ],
+      "topic_id": "index-ci-instrumentation-verification"
     },
     {
       "path": ".agent-context/tasks/T-INDEX-UPGRADE-001/brief.md",

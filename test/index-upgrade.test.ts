@@ -1,5 +1,5 @@
 import { execFile } from "node:child_process";
-import { cp, link, mkdir, mkdtemp, readFile, rm, symlink, writeFile } from "node:fs/promises";
+import { cp, link, mkdir, mkdtemp, readFile, realpath, rm, symlink, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { promisify } from "node:util";
@@ -50,8 +50,15 @@ async function config(root: string, patch: Record<string, unknown> = {}) {
     index_path: ".agent-context/context-index.json", governed_paths: ["."], exclude_paths: [".git"],
     require_frontmatter_for_all_markdown: true, require_topic_id_for_canonical: true, allow_missing_references: [], ...patch }));
 }
+async function temporaryRoot(prefix: string) {
+  // Runtime reads use canonical identities. tmpdir() can spell the same root
+  // through /var -> /private/var or Windows case/short-name aliases.
+  const root = await realpath(await mkdtemp(path.join(tmpdir(), prefix)));
+  roots.push(root);
+  return root;
+}
 async function fixture() {
-  const root = await mkdtemp(path.join(tmpdir(), "ct-index-upgrade-")); roots.push(root);
+  const root = await temporaryRoot("ct-index-upgrade-");
   await cp(path.resolve("schemas"), path.join(root, "schemas"), { recursive: true });
   await config(root);
   await put(root, "AGENTS.md", md());
@@ -62,9 +69,10 @@ async function fixture() {
   await generateContextIndex(root);
   return root;
 }
-async function unchangedFailure(root: string) {
+async function unchangedFailure(root: string, assertInjected?: () => void) {
   const indexPath = path.join(root, ".agent-context/context-index.json"), before = await readFile(indexPath);
   const report = await rebuildMetadataIndex(root);
+  assertInjected?.();
   expect(report.ok, JSON.stringify(report.diagnostics)).toBe(false);
   expect(report.index_written).toBe(false); expect(report.completion_approval).toBe(false);
   expect(await readFile(indexPath)).toEqual(before);
@@ -171,7 +179,7 @@ describe("explicit metadata-only index boundary", () => {
   });
 
   it("preserves a genuine fresh-init adoption manifest even if configured as the index output", async () => {
-    const root = await mkdtemp(path.join(tmpdir(), "ct-index-provenance-")); roots.push(root);
+    const root = await temporaryRoot("ct-index-provenance-");
     await initializeProject(root);
     const manifestPath = path.join(root, ".agent-context/adoption-manifest.json"), before = await readFile(manifestPath);
     expect(JSON.parse(before.toString()).version).toBe(1);
@@ -197,7 +205,7 @@ describe("explicit metadata-only index boundary", () => {
   });
 
   it("rejects linked parents, linked references and multiply linked metadata", async () => {
-    const root = await fixture(), other = await mkdtemp(path.join(tmpdir(), "ct-index-outside-")); roots.push(other);
+    const root = await fixture(), other = await temporaryRoot("ct-index-outside-");
     await symlink(other, path.join(root, "alias"), process.platform === "win32" ? "junction" : "dir");
     await config(root, { governed_paths: ["AGENTS.md", task], index_path: "alias/index.json" }); await unchangedFailure(root);
     await config(root, { governed_paths: ["AGENTS.md", task] });
@@ -223,7 +231,7 @@ describe("explicit metadata-only index boundary", () => {
   });
 
   it.each(["baseline", "none"] as const)("rebuilds fresh init with %s documentation and explicitly reports its safely absent planned scopes", async documentation => {
-    const root = await mkdtemp(path.join(tmpdir(), "ct-index-init-")); roots.push(root);
+    const root = await temporaryRoot("ct-index-init-");
     await initializeProject(root, { documentation });
     const report = await rebuildMetadataIndex(root);
     expect(report.ok, JSON.stringify(report.diagnostics)).toBe(true);
@@ -237,17 +245,35 @@ describe("explicit metadata-only index boundary", () => {
 
   it("does not treat a missing root appearing after preflight as a stable empty scope", async () => {
     const root = await fixture(); await config(root, { governed_paths: ["AGENTS.md", task, "future-docs"] }); spy.reads.clear();
-    spy.onRead = async (name, count) => { if (name === path.join(root, "AGENTS.md") && count === 2) await mkdir(path.join(root, "future-docs")); };
-    const report = await unchangedFailure(root);
+    let injections = 0;
+    spy.onRead = async (name, count) => { if (name === path.join(root, "AGENTS.md") && count === 2) { injections++; await mkdir(path.join(root, "future-docs")); } };
+    const report = await unchangedFailure(root, () => expect(injections, "scope mutation must actually execute").toBe(1));
     expect(report.missing_configured_paths).toEqual(["future-docs"]);
     expect(report.diagnostics.some(d => d.code === "INDEX005" && d.detail?.includes("inventory changed after preflight"))).toBe(true);
   });
 
   it("rechecks captured bytes before use and preserves the previous index if an input changes", async () => {
     const root = await fixture(); spy.reads.clear();
-    spy.onRead = async (name, count) => { if (name === path.join(root, "AGENTS.md") && count === 2) await put(root, "AGENTS.md", md() + "changed\n"); };
-    const report = await unchangedFailure(root);
+    let injections = 0;
+    spy.onRead = async (name, count) => { if (name === path.join(root, "AGENTS.md") && count === 2) { injections++; await put(root, "AGENTS.md", md() + "changed\n"); } };
+    const report = await unchangedFailure(root, () => expect(injections, "input mutation must actually execute").toBe(1));
     expect(report.diagnostics.some(d => d.detail?.includes("changed after preflight"))).toBe(true);
+  });
+
+  it.each(["input", "scope"])("observes %s mutation through a repository-root alias", async kind => {
+    const root = await fixture(), parent = await temporaryRoot("ct-index-root-alias-"), alias = path.join(parent, "repository");
+    await symlink(root, alias, process.platform === "win32" ? "junction" : "dir");
+    if (kind === "scope") await config(root, { governed_paths: ["AGENTS.md", task, "future-docs"] });
+    spy.reads.clear(); let injections = 0;
+    spy.onRead = async (name, count) => {
+      if (name === path.join(root, "AGENTS.md") && count === 2) {
+        injections++;
+        if (kind === "input") await put(root, "AGENTS.md", md() + "changed through alias\n");
+        else await mkdir(path.join(root, "future-docs"));
+      }
+    };
+    const report = await unchangedFailure(alias, () => expect(injections, "canonical read must trigger the alias-root control").toBe(1));
+    expect(report.diagnostics.some(d => d.code === "INDEX005" && d.detail?.includes("changed after preflight"))).toBe(true);
   });
 });
 

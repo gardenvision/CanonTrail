@@ -1,0 +1,93 @@
+version: 1
+change_id: CHG-INDEX-CI-001
+revision: 1
+title: Observe canonical temporary-path reads in metadata-index race tests
+status: verified
+risk: medium
+author: ChatGPT implementation agent
+canonical_source: ARTIFACT_PROTOCOL.md
+decision_rationale: Hosted Windows and macOS exposed hooks comparing temporary-path aliases with canonical runtime reads. Canonicalize fixture roots and require observed injections; do not modify production safeguards.
+documentation_structure:
+  decision: no-feature-document-change
+  rationale: Only test instrumentation and task evidence change; the existing metadata-index contract remains exact.
+  feature_documents: []
+acceptance_cases:
+  - id: AC-001
+    given: A temporary fixture reached through an alias or canonical path.
+    expected: Injected changes must actually occur exactly once and preserve the previous index
+    failure_or_uncertainty: A missed hook fails explicitly rather than claiming a race was exercised.
+    counterexample: String-only temporary-path comparison silently misses canonical reads.
+    oracle: Injection counters plus rejection diagnostics and raw-byte old-index preservation.
+    status: pass
+    evidence_refs: [test/index-upgrade.test.ts, .agent-context/tasks/T-INDEX-CI-001/evidence/verification.md]
+  - id: AC-002
+    given: The reviewed production runtime and previous historical task records.
+    expected: Production source schemas and previous task files remain byte-identical.
+    failure_or_uncertainty: A runtime change requires a separately declared review.
+    counterexample: Relax production safeguards or rewrite old review records to pass CI.
+    oracle: Parent-bound exact diff and raw hashes; hosted platform checks remain an external publication gate.
+    status: pass
+    evidence_refs: [.agent-context/tasks/T-INDEX-CI-001/evidence/quality.receipt.json, .agent-context/tasks/T-INDEX-CI-001/evidence/independent-review.md]
+impacts:
+  - area: requirement
+    decision: not-affected
+    rationale: No user behavior change.
+    evidence_refs: []
+  - area: data-contracts
+    decision: not-affected
+    rationale: No schema or format change.
+    evidence_refs: []
+  - area: domain-logic
+    decision: not-affected
+    rationale: Runtime verification remains exact.
+    evidence_refs: []
+  - area: tests-reference-cases
+    decision: affected
+    rationale: Canonicalize fixture identities and assert actual injection.
+    evidence_refs: [test/index-upgrade.test.ts]
+  - area: example-data
+    decision: not-affected
+    rationale: No worked-example change.
+    evidence_refs: []
+  - area: ui-api
+    decision: not-affected
+    rationale: No command or output change.
+    evidence_refs: []
+  - area: documentation
+    decision: not-affected
+    rationale: Existing feature owner remains accurate; retain failure and correction in this task.
+    evidence_refs: []
+  - area: diagrams-visuals
+    decision: not-affected
+    rationale: No visual change.
+    evidence_refs: []
+  - area: terminology
+    decision: not-affected
+    rationale: No public vocabulary change.
+    evidence_refs: []
+  - area: operations-compatibility
+    decision: affected
+    rationale: Path aliases on hosted platforms must not defeat instrumentation.
+    evidence_refs: [test/index-upgrade.test.ts]
+verification:
+  checks:
+    - {name: Windows full suite and Linux focused typecheck build and tests, status: pass, evidence_refs: [.agent-context/tasks/T-INDEX-CI-001/evidence/quality.receipt.json]}
+    - {name: Independent alias controls and unchanged production identity, status: pass, evidence_refs: [.agent-context/tasks/T-INDEX-CI-001/evidence/independent-review.md]}
+  terminology_search:
+    status: not-applicable
+    terms: []
+    evidence_refs: []
+  visual_review:
+    applicable: false
+    status: not-applicable
+    evidence_refs: []
+  unverifiable_items: []
+independent_review:
+  status: pass
+  reviewer: Authorized independent local reviewer
+  findings: [Test-only alias instrumentation approved, Production and prior task bytes unchanged, Hosted publication gate remains separate]
+  evidence_refs: [.agent-context/tasks/T-INDEX-CI-001/evidence/independent-review.md]
+  waiver: null
+supersedes: []
+superseded_by: null
+updated_at: "2026-10-10T11:50:00Z"
