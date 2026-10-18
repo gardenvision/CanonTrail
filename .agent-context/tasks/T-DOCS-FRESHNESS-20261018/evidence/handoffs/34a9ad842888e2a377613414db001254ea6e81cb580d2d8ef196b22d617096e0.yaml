@@ -1,0 +1,100 @@
+handoff_id: H-T-DOCS-FRESHNESS-20261018-20261018190303
+task_id: T-DOCS-FRESHNESS-20261018
+created_at: "2026-10-18T19:03:03.639Z"
+source_session_id: docs-freshness-20261018
+checkpoint_trigger: phase-transition
+source_provider: codex
+source_context_lock_path: .agent-context/tasks/T-DOCS-FRESHNESS-20261018/evidence/context-locks/4a7f58b8d2b9bb864c7018da6ebae93f23b624cf756b695802f02447b312b3bb.json
+source_context_lock_hash: sha256:4a7f58b8d2b9bb864c7018da6ebae93f23b624cf756b695802f02447b312b3bb
+objective: Review six aged operational documents against current local behavior and revision-bound receipts, correct stale prose without weakening policy or rewriting historical artifacts, and rerun strict closure gates
+completed:
+  - Reviewed six aged document owners against current code, CLI help, protocol and exact historical evidence.
+  - Corrected pre-public contribution wording and current-versus-historical platform and migration claims.
+  - Read-only API reconfirmed public hosting and private vulnerability reporting without configuration changes.
+decisions: []
+files:
+  - path: .agent-context/tasks/T-DOCS-FRESHNESS-20261018/brief.md
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: .agent-context/tasks/T-DOCS-FRESHNESS-20261018/change.yaml
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: .agent-context/tasks/T-DOCS-FRESHNESS-20261018/checkpoint-input.yaml
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: .agent-context/tasks/T-DOCS-FRESHNESS-20261018/state.yaml
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: ARTIFACT_PROTOCOL.md
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: CONTRIBUTING.md
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: SECURITY.md
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: docs/change-integrity.md
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: docs/migration.md
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: docs/platform-support.md
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: examples/migration-plan/README.md
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+checks:
+  - name: Six individual document preflights
+    status: pass
+    evidence: All six selected headers and references pass; no repository approval inferred.
+  - name: Typecheck and distributable build
+    status: pass
+    evidence: maintenance-check.log and maintenance-build.log retained outside distributed source.
+  - name: Migration vocabulary and byte-preservation controls
+    status: pass
+    evidence: Actual migration-naming focused test command passed; raw results retained outside distributed source.
+  - name: Full Windows suite and final maintenance closure
+    status: not-run
+    evidence: Pending frozen-source suite and final index, audit, validation and completion checks.
+blockers: []
+open_questions:
+  - Exact new hosted matrix including macOS and Node floor remains a later integration/publication gate.
+next_safe_action: Freeze the reviewed documentation candidate, run its full Windows suite, verify completed-task and retained-example byte preservation, then record actual evidence and rerun strict task and repository closure without changing consumer projects or publishing.
+do_not_repeat:
+  - Do not update completed task locks or rewrite old reports when current prose changes.
+  - Do not relax freshness policy or backdate an audit.
+  - Do not treat a reporting-configuration read as notification-delivery testing or independent security review.
+resume_sources:
+  - AGENTS.md
+  - .agent-context/tasks/T-DOCS-FRESHNESS-20261018/state.yaml
+  - .agent-context/tasks/T-DOCS-FRESHNESS-20261018/brief.md
+  - .agent-context/tasks/T-DOCS-FRESHNESS-20261018/change.yaml
+  - VISION.md
+  - docs/decisions/0001-typescript-cli.md
+  - examples/resume-history/README.md
+  - ARTIFACT_PROTOCOL.md
+  - docs/parallel-work.md
+  - integrations/gsd/canontrail/skills/canontrail-finalize/SKILL.md
+  - integrations/superpowers/skills/canontrail-feature-lifecycle/SKILL.md
+  - .github/workflows/validate.yml
+  - CONTRIBUTING.md
+  - SECURITY.md
+  - docs/change-integrity.md
+  - docs/migration.md
+  - docs/platform-support.md
+  - examples/migration-plan/README.md
+  - package.json
+  - .agent-context/tasks/T-DOCS-FRESHNESS-20261018/checkpoint-input.yaml
+  - .agent-context/tasks/T-DOCS-FRESHNESS-20261018/context.lock.json
+  - .agent-context/tasks/T-DOCS-FRESHNESS-20261018/evidence/review.md
+  - .agent-context/tasks/T-DOCS-FRESHNESS-20261018/evidence/hosting-observation.json
+worktree_dirty: true
+uncommitted_summary: Documentation-only maintenance atop the existing uncommitted file-preflight candidate; no commit, push, hosting change or consumer cutover.
+worktree_inventory:
+  path: .agent-context/tasks/T-DOCS-FRESHNESS-20261018/evidence/worktree-inventories/1271d85ec5e8d92cf62e2333c3cf08d9bf97cf46222b491e13d5383480094731.worktree-inventory.json
+  content_hash: sha256:1271d85ec5e8d92cf62e2333c3cf08d9bf97cf46222b491e13d5383480094731
+  entry_count: 51
+handoff_hash: sha256:34a9ad842888e2a377613414db001254ea6e81cb580d2d8ef196b22d617096e0

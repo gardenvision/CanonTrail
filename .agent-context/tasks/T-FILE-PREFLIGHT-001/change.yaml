@@ -1,0 +1,111 @@
+version: 1
+change_id: CHG-FILE-PREFLIGHT-001
+revision: 1
+title: Add read-only single-file authoring preflight, precise missing-field diagnostics, and discoverable entry helpers without changing repository approval
+status: verified
+risk: medium
+author: ChatGPT implementation agent
+canonical_source: ARTIFACT_PROTOCOL.md
+decision_rationale: The user authorized bounded authoring-friction improvements. A read-only file preflight exposes syntax schema and Markdown reference defects without scanning peers or granting repository approval; existing strict validators remain authoritative.
+documentation_structure:
+  decision: create-feature-documents
+  rationale: Single-file preflight is a separately understandable report-only capability; usage and entry routes link to its one owner.
+  feature_documents:
+    - {feature_id: file-preflight, action: create, path: docs/file-preflight.md, status: verified, evidence_refs: [.agent-context/tasks/T-FILE-PREFLIGHT-001/evidence/verification.md]}
+acceptance_cases:
+  - id: AC-001
+    given: A chosen governed document or known artifact beside malformed peer tasks.
+    expected: A chosen governed Markdown or known structured artifact is checked without scanning peer tasks or writing files
+    failure_or_uncertainty: Missing unsafe excluded unknown or over-limit targets fail without writes.
+    counterexample: Calling repository validation or scanning peer handoffs as a hidden preflight.
+    oracle: Exact read ledger and before/after fixture hashes.
+    status: pass
+    evidence_refs: [test/file-preflight.test.ts, .agent-context/tasks/T-FILE-PREFLIGHT-001/evidence/verification.md]
+  - id: AC-002
+    given: Missing verification mappings invalid status enums malformed YAML or JSON.
+    expected: Malformed YAML and missing or invalid fields return path-specific diagnostics, including actual allowed values, without a raw crash
+    failure_or_uncertainty: Return coded path-specific findings and nonzero CLI status rather than dereference invalid structures.
+    counterexample: Missing verification causes an unhandled evidence-property TypeError.
+    oracle: Independent malformed inputs with expected field pointers and real schema values.
+    status: pass
+    evidence_refs: [test/file-preflight.test.ts, test/schema-diagnostics.test.ts, .agent-context/tasks/T-FILE-PREFLIGHT-001/evidence/verification.md]
+  - id: AC-003
+    given: A structurally valid single file and a separately broken repository or self-hash.
+    expected: Passing preflight never implies repository validity, continuity integrity, or task completion; existing strict gates remain unchanged
+    failure_or_uncertainty: Report structural-only scope and explicitly omitted cross-artifact integrity checks.
+    counterexample: A check success is presented as a valid handoff or completed task.
+    oracle: Fixed non-approval flags report-schema tests and unchanged strict rejection controls.
+    status: pass
+    evidence_refs: [schemas/file-preflight.schema.json, test/file-preflight.test.ts]
+  - id: AC-004
+    given: A fresh reader following the shipped entry prompt and guide.
+    expected: The entry route exposes existing authoring snapshot and task-working tools with executable examples
+    failure_or_uncertainty: Keep existing authoring budget scope and runtime caveats visible without changing consumer files.
+    counterexample: Inventing new-doc when document create already exists or recommending blanket quarantine.
+    oracle: Real CLI help and an executable worked example.
+    status: pass
+    evidence_refs: [src/agent-guide.ts, examples/file-preflight/README.md, test/file-preflight.test.ts]
+impacts:
+  - area: requirement
+    decision: affected
+    rationale: Define a non-approving read-only single-file contract.
+    evidence_refs: [docs/file-preflight.md]
+  - area: data-contracts
+    decision: affected
+    rationale: New report-only schema; existing stored artifact shapes remain unchanged.
+    evidence_refs: [schemas/file-preflight.schema.json, docs/file-preflight.md]
+  - area: domain-logic
+    decision: affected
+    rationale: Validate only selected bytes and required local schemas with bounded safe reads.
+    evidence_refs: [src/file-preflight.ts, src/validator.ts, src/docs.ts, src/indexer.ts]
+  - area: tests-reference-cases
+    decision: affected
+    rationale: New isolation path malformed-input read-only CLI and approval-boundary tests.
+    evidence_refs: [test/file-preflight.test.ts, test/schema-diagnostics.test.ts, .agent-context/tasks/T-FILE-PREFLIGHT-001/evidence/verification.md]
+  - area: example-data
+    decision: affected
+    rationale: Add a neutral executable report example.
+    evidence_refs: [examples/file-preflight/README.md, examples/file-preflight/subject.md, examples/file-preflight/report.json]
+  - area: ui-api
+    decision: affected
+    rationale: Add check command and clearer text/JSON diagnostics; no graphical UI.
+    evidence_refs: [src/cli.ts]
+  - area: documentation
+    decision: affected
+    rationale: One feature owner and links from existing entry and usage guidance.
+    evidence_refs: [docs/file-preflight.md]
+  - area: diagrams-visuals
+    decision: not-affected
+    rationale: No diagram or graphical surface changes.
+    evidence_refs: []
+  - area: terminology
+    decision: not-affected
+    rationale: Existing lifecycle and field-specific status vocabulary is preserved.
+    evidence_refs: []
+  - area: operations-compatibility
+    decision: affected
+    rationale: Additive command only; no consumer runtime schema migration or shared-file writes.
+    evidence_refs: [docs/file-preflight.md, src/continuity-files.ts]
+verification:
+  checks:
+    - {name: Windows and Linux typecheck and distributable build, status: pass, evidence_refs: [.agent-context/tasks/T-FILE-PREFLIGHT-001/evidence/verification.md]}
+    - {name: Full serial Windows and Linux suites plus focused and malformed-header controls, status: pass, evidence_refs: [.agent-context/tasks/T-FILE-PREFLIGHT-001/evidence/verification.md, test/file-preflight.test.ts]}
+    - {name: Author self-review and existing task/runtime raw-byte preservation, status: pass, evidence_refs: [.agent-context/tasks/T-FILE-PREFLIGHT-001/evidence/verification.md]}
+  terminology_search:
+    status: not-applicable
+    terms: []
+    evidence_refs: []
+  visual_review:
+    applicable: false
+    status: not-applicable
+    evidence_refs: []
+  unverifiable_items: []
+independent_review:
+  status: not-required
+  reviewer: null
+  findings: []
+  evidence_refs: []
+  waiver: null
+supersedes: []
+superseded_by: null
+updated_at: 2026-10-18T12:01:17.984Z

@@ -200,7 +200,7 @@ function findContradictionCandidates(documents: DocumentRecord[]): Documentation
     if (entries.length < 2) continue;
     const signatures = new Set(entries.map((entry) => {
       const header = entry.header!;
-      return `${header.truth_level}\u0000${header.status}\u0000${header.verification.state}`;
+      return `${header.truth_level}\u0000${header.status}\u0000${header.verification?.state}`;
     }));
     if (signatures.size < 2) continue;
     const paths = entries.map((entry) => entry.path).sort((left, right) => compareCodeUnits(left, right));
@@ -467,6 +467,8 @@ export async function auditDocumentation(rootInput: string, options: Documentati
     options.validation ?? validateRepository(root),
   ]);
   const findings = options.includeRepositoryDiagnostics === false ? [] : validation.diagnostics.map(fromDiagnostic);
+  const invalidHeaders = new Set(validation.diagnostics.filter(diagnostic =>
+    ["DOC002", "SCHEMA004", "SCHEMA005"].includes(diagnostic.code)).map(diagnostic => diagnostic.path));
   const frozen = await assessFrozenExamples(root, policy.frozen_examples, documents);
   for (const diagnostic of frozen.diagnostics) {
     if (!findings.some(f => f.code === diagnostic.code && f.path === diagnostic.path && f.message === diagnostic.message)) findings.push(fromDiagnostic(diagnostic));
@@ -478,7 +480,7 @@ export async function auditDocumentation(rootInput: string, options: Documentati
   const freshness = { current: 0, stale: 0, future: 0, exempt: 0, invalid: 0 };
   for (const document of documents) {
     const header = document.header;
-    if (!header) {
+    if (!header || invalidHeaders.has(document.path) || !header.verification || typeof header.verification.state !== "string") {
       freshness.invalid += 1;
       continue;
     }
@@ -530,7 +532,10 @@ export async function auditDocumentation(rootInput: string, options: Documentati
   const errors = findings.filter((finding) => finding.severity === "error").length;
   const warnings = findings.length - errors;
   const indexCode = validation.diagnostics.find((diagnostic) => diagnostic.code.startsWith("INDEX"))?.code;
-  const indexState = indexCode === "INDEX001" ? "missing"
+  // Invalid governed metadata prevents deriving the expected projection. Absence
+  // of an INDEX finding in that case is not evidence of a current index.
+  const indexUnassessable = documents.some(document => !document.header || invalidHeaders.has(document.path));
+  const indexState = indexUnassessable ? "invalid" : indexCode === "INDEX001" ? "missing"
     : indexCode === "INDEX003" ? "stale"
       : indexCode ? "invalid"
         : "current";

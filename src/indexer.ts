@@ -150,6 +150,11 @@ function indexDocument(document: DocumentRecord): ContextIndexDocument {
     throw new Error(`${document.path}: cannot index a document without valid frontmatter`);
   }
   const header = document.header;
+  if (!header.verification || typeof header.verification.state !== "string"
+      || !Array.isArray(header.read_if_task_touches) || !Array.isArray(header.primary_systems)
+      || !Array.isArray(header.do_not_use_instead)) {
+    throw new Error(`${JSON.stringify(document.path)}: incomplete governed metadata; use 'canontrail check <file>' with the exact, shell-quoted path for field-specific schema diagnostics`);
+  }
   return {
     path: document.path,
     content_hash: sha256(document.source),

@@ -2,7 +2,7 @@
   "version": 2,
   "document_order": "utf16-code-unit",
   "hash_algorithm": "sha256",
-  "root_hash": "sha256:1b57c74980a833e6fb015bb99de21fef767f703b72cc3f9aaee46eab10e24752",
+  "root_hash": "sha256:71587ba6205c2bbd2fc29a4bb6c0580c6706d6c17a4d60a6b5e21be21869129a",
   "documents": [
     {
       "path": ".agent-context/tasks/T-AGENT-GUIDANCE-STATUS-001/brief.md",
@@ -231,6 +231,41 @@
       "topic_id": "continuity-write-hardening-verification-001"
     },
     {
+      "path": ".agent-context/tasks/T-DOCS-FRESHNESS-20261018/brief.md",
+      "content_hash": "sha256:e809eb19ddaa3646f56981abc9d583014358cfa0a5eb2123149eaecfc72081ed",
+      "stand": "2026-10-18",
+      "status": "completed",
+      "truth_level": "active-snapshot",
+      "verification_state": "verified",
+      "read_if_task_touches": [
+        "T-DOCS-FRESHNESS-20261018"
+      ],
+      "primary_systems": [],
+      "do_not_use_instead": [
+        "AGENTS.md"
+      ],
+      "topic_id": "task-T-DOCS-FRESHNESS-20261018"
+    },
+    {
+      "path": ".agent-context/tasks/T-DOCS-FRESHNESS-20261018/evidence/review.md",
+      "content_hash": "sha256:fac2f731e85d823fee96d698938ae5bff8417d26eca03a6c222e300c1e126a28",
+      "stand": "2026-10-18",
+      "status": "verified-local",
+      "truth_level": "active-snapshot",
+      "verification_state": "verified",
+      "read_if_task_touches": [
+        "T-DOCS-FRESHNESS-20261018",
+        "six-document freshness review"
+      ],
+      "primary_systems": [
+        "documentation maintenance"
+      ],
+      "do_not_use_instead": [
+        "ARTIFACT_PROTOCOL.md"
+      ],
+      "topic_id": "documentation-freshness-review-20261018"
+    },
+    {
       "path": ".agent-context/tasks/T-FIELD-AUTHORING-002/brief.md",
       "content_hash": "sha256:b708a814dbb5d05abb67df80e2e0ea4de9dfd8c5ee8c7340c568fe29d1f2ca77",
       "stand": "2026-10-09",
@@ -409,6 +444,40 @@
         "ARTIFACT_PROTOCOL.md"
       ],
       "topic_id": "field-workflow-verification-001"
+    },
+    {
+      "path": ".agent-context/tasks/T-FILE-PREFLIGHT-001/brief.md",
+      "content_hash": "sha256:bb589a9bfcdbbc433a67cac50a0b96a520be80a60b0f2adb7d8aa13bc7ea9397",
+      "stand": "2026-10-18",
+      "status": "completed",
+      "truth_level": "active-snapshot",
+      "verification_state": "verified",
+      "read_if_task_touches": [
+        "T-FILE-PREFLIGHT-001"
+      ],
+      "primary_systems": [],
+      "do_not_use_instead": [
+        "AGENTS.md"
+      ],
+      "topic_id": "task-T-FILE-PREFLIGHT-001"
+    },
+    {
+      "path": ".agent-context/tasks/T-FILE-PREFLIGHT-001/evidence/verification.md",
+      "content_hash": "sha256:859404e73cda13050668097b527433ab9ff40b4d5540c3be09562f81bad504ca",
+      "stand": "2026-10-18",
+      "status": "verified-local",
+      "truth_level": "active-snapshot",
+      "verification_state": "verified",
+      "read_if_task_touches": [
+        "T-FILE-PREFLIGHT-001 verification"
+      ],
+      "primary_systems": [
+        "file preflight"
+      ],
+      "do_not_use_instead": [
+        "docs/file-preflight.md"
+      ],
+      "topic_id": "file-preflight-verification"
     },
     {
       "path": ".agent-context/tasks/T-FROZEN-EXAMPLE-LIFECYCLE-001/brief.md",
@@ -954,8 +1023,8 @@
     },
     {
       "path": "ARTIFACT_PROTOCOL.md",
-      "content_hash": "sha256:edc08c3b2860aea589e56f857e6ae648e53c26ce88c6ede01c1d6b1b768bfb8f",
-      "stand": "2026-10-08",
+      "content_hash": "sha256:daa5126360aae815d06292607e4f347a87fe9058a194ab87a5f0f93bd86cc6dc",
+      "stand": "2026-10-18",
       "status": "design-target",
       "truth_level": "design-target",
       "verification_state": "structurally-reviewed",
@@ -980,11 +1049,11 @@
     },
     {
       "path": "CONTRIBUTING.md",
-      "content_hash": "sha256:9b60df0f8dc45f174ab87eab4bd5caca24169d4bcdfe2f3bf0fd86c71ccd923d",
-      "stand": "2026-09-13",
-      "status": "draft-before-public-release",
+      "content_hash": "sha256:dddf7da08ca07e06e83d28ae20a7afce610509cda3406eff53a05b002cab3fe1",
+      "stand": "2026-10-18",
+      "status": "public-source-alpha-guidance",
       "truth_level": "draft",
-      "verification_state": "unverified",
+      "verification_state": "reviewed",
       "read_if_task_touches": [
         "contributions",
         "pull requests"
@@ -999,8 +1068,8 @@
     },
     {
       "path": "README.md",
-      "content_hash": "sha256:e7d0fa1dd40aef47600389ce91b44776ba354896a9dc021344d5bb552a38581f",
-      "stand": "2026-09-18",
+      "content_hash": "sha256:317453e5d2e988ba386c282fa9d356559b43a93ba15b36cb9fb641dedd274ea1",
+      "stand": "2026-10-18",
       "status": "public-source-alpha",
       "truth_level": "draft",
       "verification_state": "unverified",
@@ -1019,8 +1088,8 @@
     },
     {
       "path": "ROADMAP.md",
-      "content_hash": "sha256:9bbcaceed7153f044f8dd0b1e9b387ffe1a2736c71797636d43fec686db7c91d",
-      "stand": "2026-10-08",
+      "content_hash": "sha256:20c397b451c7a14953f42fa0da468161f8b49683f8d039d835c53fcaf4028d98",
+      "stand": "2026-10-18",
       "status": "public-source-alpha",
       "truth_level": "draft",
       "verification_state": "unverified",
@@ -1039,8 +1108,8 @@
     },
     {
       "path": "SECURITY.md",
-      "content_hash": "sha256:a3b30fe2910065d8a462c20a678e39e06a2a012e7a60704a77b7bea4c7d14d21",
-      "stand": "2026-09-14",
+      "content_hash": "sha256:c25fd0ba0fbdc8a8b2145521aa7f8d551bb555d24c0fe6c57e4018c6eee27bc1",
+      "stand": "2026-10-18",
       "status": "configured-for-public-alpha",
       "truth_level": "draft",
       "verification_state": "verified",
@@ -1102,11 +1171,11 @@
     },
     {
       "path": "docs/change-integrity.md",
-      "content_hash": "sha256:4c7e9d8d2b1f9f16a1b41bb9cbef843816a3a5fc9a090406d64d5ddaf5a3cad0",
-      "stand": "2026-09-12",
+      "content_hash": "sha256:b5d899659a3ab6c62337fd6bcd9d9e32d37875b6705cf40806fed08d761b1d66",
+      "stand": "2026-10-18",
       "status": "alpha-candidate",
       "truth_level": "draft",
-      "verification_state": "unverified",
+      "verification_state": "reviewed",
       "read_if_task_touches": [
         "change integrity",
         "acceptance criteria",
@@ -1145,9 +1214,29 @@
       "topic_id": "implementation-language"
     },
     {
+      "path": "docs/file-preflight.md",
+      "content_hash": "sha256:3c51ba5b0a236f1fce24d32997ecc8d738d0f77b45c0091321a7374e84dada66",
+      "stand": "2026-10-18",
+      "status": "implemented-awaiting-release",
+      "truth_level": "draft",
+      "verification_state": "verified",
+      "read_if_task_touches": [
+        "single-file preflight",
+        "document authoring errors"
+      ],
+      "primary_systems": [
+        "file preflight"
+      ],
+      "do_not_use_instead": [
+        "ARTIFACT_PROTOCOL.md",
+        "docs/usage.md"
+      ],
+      "topic_id": "file-preflight"
+    },
+    {
       "path": "docs/finding-codes.md",
-      "content_hash": "sha256:61c19beed7500070c67e121e4b2848dd02b73acf492011b51bf7fe4e54f8e96b",
-      "stand": "2026-10-08",
+      "content_hash": "sha256:460af006020ff4c5750051ea742080465148e4ba73e469ae2418d66ec4526880",
+      "stand": "2026-10-18",
       "status": "public-source-alpha",
       "truth_level": "draft",
       "verification_state": "internally-reviewed",
@@ -1208,8 +1297,8 @@
     },
     {
       "path": "docs/migration.md",
-      "content_hash": "sha256:e7664c146bbfac55e8f601dab010f35ebeb553f9ba48a9c7cac0c17aa12df0db",
-      "stand": "2026-09-13",
+      "content_hash": "sha256:581154a14ec13af74d511b71194e05e91056c37986e2b78c233f59d309cb2e4b",
+      "stand": "2026-10-18",
       "status": "experimental-alpha-candidate",
       "truth_level": "draft",
       "verification_state": "verified",
@@ -1249,9 +1338,9 @@
     },
     {
       "path": "docs/platform-support.md",
-      "content_hash": "sha256:b6b941c540ae93783f094d6d47171859c8e6e8100c8c2eedbe53e8dcc382a643",
-      "stand": "2026-09-14",
-      "status": "c2-platform-evidence-recorded",
+      "content_hash": "sha256:58885a08147f44115fd4348334afccc2385616e651a70745d0568434392d790c",
+      "stand": "2026-10-18",
+      "status": "revision-bound-platform-evidence",
       "truth_level": "draft",
       "verification_state": "verified",
       "read_if_task_touches": [
@@ -1290,8 +1379,8 @@
     },
     {
       "path": "docs/self-documentation.md",
-      "content_hash": "sha256:9a845847908094fd14bbb27664d93549f3afa9de5d2da932341a872a3d739d5c",
-      "stand": "2026-10-08",
+      "content_hash": "sha256:8ad517b742d860680377185b3d184a64a001b7497abe40df30959487e45a45a2",
+      "stand": "2026-10-18",
       "status": "public-source-alpha",
       "truth_level": "draft",
       "verification_state": "unverified",
@@ -1331,8 +1420,8 @@
     },
     {
       "path": "docs/usage.md",
-      "content_hash": "sha256:4b14d2a02b0a4798e28a55f397a9b8935956c60824d7356fa3ea44580f108f4d",
-      "stand": "2026-10-08",
+      "content_hash": "sha256:c2336d66bba93834891156658155a35ca614b6bc3522714acab43803841a1b74",
+      "stand": "2026-10-18",
       "status": "public-source-alpha",
       "truth_level": "draft",
       "verification_state": "unverified",
@@ -1543,6 +1632,40 @@
       "topic_id": "example-save-task"
     },
     {
+      "path": "examples/file-preflight/README.md",
+      "content_hash": "sha256:778943f70a56b09d27314983290aa3b95995e7eb8bd593436b8cf5a560a6e06a",
+      "stand": "2026-10-18",
+      "status": "draft",
+      "truth_level": "draft",
+      "verification_state": "unverified",
+      "read_if_task_touches": [
+        "file preflight worked example"
+      ],
+      "primary_systems": [
+        "file preflight"
+      ],
+      "do_not_use_instead": [
+        "docs/file-preflight.md"
+      ],
+      "topic_id": "file-preflight-worked-example"
+    },
+    {
+      "path": "examples/file-preflight/subject.md",
+      "content_hash": "sha256:8d6686edf2a7c579cca8140af399a73197a595cd26654cb7909b4358063c2762",
+      "stand": "2026-10-18",
+      "status": "draft",
+      "truth_level": "draft",
+      "verification_state": "unverified",
+      "read_if_task_touches": [
+        "file preflight worked example"
+      ],
+      "primary_systems": [
+        "file preflight"
+      ],
+      "do_not_use_instead": [],
+      "topic_id": "file-preflight-teaching-subject"
+    },
+    {
       "path": "examples/index-rebuild/README.md",
       "content_hash": "sha256:a1f0e1f8eaea6ae1a07daf5cd5dd422a326ead7069b9077e1fbd2c91b7877c5b",
       "stand": "2026-10-10",
@@ -1564,11 +1687,11 @@
     },
     {
       "path": "examples/migration-plan/README.md",
-      "content_hash": "sha256:bd7c126f0d742ea44d549a9bf06771a659e6ac683ac52a160195d1ad335ff3c9",
-      "stand": "2026-09-13",
+      "content_hash": "sha256:28f3078a22317c81721b6ac3588f424eac2a4e58b44540c9e9bedaec349cfdce",
+      "stand": "2026-10-18",
       "status": "current-teaching-example",
       "truth_level": "draft",
-      "verification_state": "unverified",
+      "verification_state": "reviewed",
       "read_if_task_touches": [
         "migration plan vocabulary"
       ],

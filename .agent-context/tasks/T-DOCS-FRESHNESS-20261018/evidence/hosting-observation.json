@@ -1,0 +1,30 @@
+{
+  "observed_at": "2026-10-18T18:59:51.371Z",
+  "method": "Read-only GitHub REST API through authenticated gh; no settings changed.",
+  "repository": {
+    "full_name": "gardenvision/CanonTrail",
+    "html_url": "https://github.com/gardenvision/CanonTrail",
+    "private": false,
+    "archived": false,
+    "default_branch": "main",
+    "has_issues": true
+  },
+  "public_main": "34edacab3ee6001813208e192c217eec595958b9",
+  "private_vulnerability_reporting": {
+    "enabled": true,
+    "reporting_url": "https://github.com/gardenvision/CanonTrail/security/advisories/new",
+    "delivery_tested": false,
+    "advisory_submitted": false
+  },
+  "recent_releases": [
+    {
+      "tag_name": "v0.1.0-alpha.1",
+      "draft": false,
+      "prerelease": true,
+      "published_at": "2026-09-14T07:59:38Z",
+      "html_url": "https://github.com/gardenvision/CanonTrail/releases/tag/v0.1.0-alpha.1"
+    }
+  ],
+  "remote_writes_performed": false,
+  "limit": "Configuration observations are neither delivery testing, policy change, independent review nor approval of this local candidate."
+}

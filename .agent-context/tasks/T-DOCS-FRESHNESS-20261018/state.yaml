@@ -1,0 +1,43 @@
+task_id: T-DOCS-FRESHNESS-20261018
+status: verified
+objective: Review six aged operational documents against current local behavior and revision-bound receipts, correct stale prose without weakening policy or rewriting historical artifacts, and rerun strict closure gates
+non_goals: [No product code change, No new release or licensing policy, No GitHub settings change, No consumer rollout, No completed-task or retained-example rewrite, No inventory redesign]
+acceptance_criteria:
+  - id: AC-001
+    statement: Each refreshed document has a source-backed review and any stale claim is corrected rather than merely redated
+    verification: Per-document source-to-claim ledger and meaningful diff rather than an unchecked date bump.
+    status: pass
+  - id: AC-002
+    statement: Retained examples, completed task files, live runtime and existing consumer projects remain byte-identical
+    verification: Raw bytes compared to the pre-maintenance snapshot and unchanged existing-runtime hash.
+    status: pass
+  - id: AC-003
+    statement: Platform and security reporting claims distinguish current observations from historical evidence and do not fabricate release approval
+    verification: Read-only public repository and reporting API plus exact old and new platform receipts.
+    status: pass
+  - id: AC-004
+    statement: Current index, repository validation and current-date documentation audit are clean after the review without weakening warning policy
+    verification: Independently recorded index validation and current-date audit; terminal finalization is not its own acceptance oracle.
+    status: pass
+dependencies: []
+documentation_impact: [CONTRIBUTING.md, SECURITY.md, docs/change-integrity.md, docs/migration.md, docs/platform-support.md, examples/migration-plan/README.md]
+file_intents: [CONTRIBUTING.md, SECURITY.md, docs/change-integrity.md, docs/migration.md, docs/platform-support.md, examples/migration-plan/README.md, .agent-context/tasks/T-DOCS-FRESHNESS-20261018/checkpoint-input.yaml]
+required_context_sources: [ARTIFACT_PROTOCOL.md, CONTRIBUTING.md, SECURITY.md, docs/change-integrity.md, docs/migration.md, docs/platform-support.md, examples/migration-plan/README.md, .github/workflows/validate.yml, package.json]
+parallel_safety: exclusive
+owner: null
+worktree: null
+checks:
+  - id: CHECK-CONTENT
+    command_or_observation: Source-to-claim review of six existing owners plus read-only public hosting and confidential-reporting API checks
+    status: pass
+    evidence_refs: [.agent-context/tasks/T-DOCS-FRESHNESS-20261018/evidence/review.md, .agent-context/tasks/T-DOCS-FRESHNESS-20261018/evidence/hosting-observation.json]
+  - id: CHECK-TESTS
+    command_or_observation: npm run check then npm run build and the full serial Windows npm test suite; migration-naming focused command also executed
+    status: pass
+    evidence_refs: [.agent-context/tasks/T-DOCS-FRESHNESS-20261018/evidence/review.md]
+  - id: CHECK-PRESERVATION
+    command_or_observation: Compare raw bytes against the pre-maintenance and frozen-test manifests; no previous task or retained plan payload changes
+    status: pass
+    evidence_refs: [.agent-context/tasks/T-DOCS-FRESHNESS-20261018/evidence/review.md]
+latest_handoff: .agent-context/tasks/T-DOCS-FRESHNESS-20261018/handoff.yaml
+updated_at: 2026-10-18T19:09:55.350Z

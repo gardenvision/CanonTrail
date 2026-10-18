@@ -1,0 +1,158 @@
+handoff_id: H-T-FILE-PREFLIGHT-001-20261018120314
+task_id: T-FILE-PREFLIGHT-001
+created_at: "2026-10-18T12:03:14.421Z"
+source_session_id: file-preflight-20261018
+checkpoint_trigger: explicit-handoff
+source_provider: codex
+source_context_lock_path: .agent-context/tasks/T-FILE-PREFLIGHT-001/evidence/context-locks/8c16ec12e06464e07fb6dd3d354bc50150ef2613d472c64f0a9c4287e620f128.json
+source_context_lock_hash: sha256:8c16ec12e06464e07fb6dd3d354bc50150ef2613d472c64f0a9c4287e620f128
+objective: Add read-only single-file authoring preflight, precise missing-field diagnostics, and discoverable entry helpers without changing repository approval
+completed:
+  - Implemented bounded read-only single-file preflight and precise field diagnostics.
+  - Verified all four acceptance cases and ten impact areas; Windows/Linux full suites passed.
+  - Retained baseline counterexamples, author review and exact test receipts outside the distributed source tree.
+decisions:
+  - statement: File structure success never grants repository integrity or completion approval.
+    authority: approved
+    source: ARTIFACT_PROTOCOL.md section 3.2 and the owning decided change record.
+  - statement: This local task excludes publication, consumer replacement and inventory representation changes.
+    authority: delegated
+    source: User-authorized bounded implementation scope recorded in the task brief and change record.
+files:
+  - path: .agent-context/tasks/T-FILE-PREFLIGHT-001/brief.md
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: .agent-context/tasks/T-FILE-PREFLIGHT-001/change.yaml
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: .agent-context/tasks/T-FILE-PREFLIGHT-001/evidence/verification.md
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: .agent-context/tasks/T-FILE-PREFLIGHT-001/handoff.yaml
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: .agent-context/tasks/T-FILE-PREFLIGHT-001/state.yaml
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: .github/README.md
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: ARTIFACT_PROTOCOL.md
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: README.md
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: ROADMAP.md
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: docs/file-preflight.md
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: docs/self-documentation.md
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: docs/usage.md
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: examples/file-preflight/README.md
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: examples/file-preflight/report.json
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: schemas/file-preflight.schema.json
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: src/agent-guide.ts
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: src/cli.ts
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: src/docs.ts
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: src/file-preflight.ts
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: src/indexer.ts
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: src/initializer.ts
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: src/schema-diagnostics.ts
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: src/validator.ts
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: test/file-preflight.test.ts
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: test/schema-diagnostics.test.ts
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+checks:
+  - name: Frozen candidate full Windows suite
+    status: pass
+    evidence: 1120 passed, 13 existing platform skips, 0 failures; evidence/verification.md binds the raw receipt.
+  - name: Frozen candidate full Linux suite
+    status: pass
+    evidence: 1126 passed, 7 existing platform skips, 0 failures; evidence/verification.md binds the raw receipt.
+  - name: Focused and additional malformed-header controls
+    status: pass
+    evidence: 85 focused tests plus ten extra variants rejected without a crash; evidence/verification.md.
+blockers: []
+open_questions:
+  - Publication/integration and native macOS/hosted CI remain outside this local closure.
+next_safe_action: Review the locally verified file-preflight candidate and its evidence before any authorized integration or consumer switch; design inventory growth reduction as a separate compatibility-sensitive task without deleting retained records.
+do_not_repeat:
+  - Do not rebuild the immutable live runtime or rewrite existing consumer schemas, locks or instructions.
+  - Do not treat a file-structure PASS as self-hash, current-use, project or completion approval.
+  - Do not discard old inventory files or infer release approval from local test success.
+resume_sources:
+  - AGENTS.md
+  - .agent-context/tasks/T-FILE-PREFLIGHT-001/state.yaml
+  - .agent-context/tasks/T-FILE-PREFLIGHT-001/brief.md
+  - .agent-context/tasks/T-FILE-PREFLIGHT-001/change.yaml
+  - ARTIFACT_PROTOCOL.md
+  - docs/parallel-work.md
+  - examples/compact-handoff/README.md
+  - examples/context-inspection/README.md
+  - examples/resume-history/README.md
+  - integrations/gsd/canontrail/skills/canontrail-finalize/SKILL.md
+  - integrations/superpowers/skills/canontrail-feature-lifecycle/SKILL.md
+  - .agent-context/tasks/T-FILE-PREFLIGHT-001/evidence/verification.md
+  - docs/file-preflight.md
+  - src/agent-guide.ts
+  - src/config.ts
+  - src/continuity-files.ts
+  - src/docs.ts
+  - src/document-authoring.ts
+  - src/indexer.ts
+  - src/schema-diagnostics.ts
+  - src/validator.ts
+  - README.md
+  - ROADMAP.md
+  - docs/self-documentation.md
+  - docs/usage.md
+  - examples/file-preflight/README.md
+  - examples/file-preflight/report.json
+  - schemas/file-preflight.schema.json
+  - src/cli.ts
+  - src/file-preflight.ts
+  - src/initializer.ts
+  - test/agent-guidance-status.test.ts
+  - test/file-preflight.test.ts
+  - test/schema-diagnostics.test.ts
+  - .agent-context/tasks/T-FILE-PREFLIGHT-001/handoff.yaml
+  - .agent-context/tasks/T-FILE-PREFLIGHT-001/context.lock.json
+worktree_dirty: true
+uncommitted_summary: Local additive file-preflight implementation, neutral example and verification records on a separate branch; no commit or remote write has been performed.
+worktree_inventory:
+  path: .agent-context/tasks/T-FILE-PREFLIGHT-001/evidence/worktree-inventories/91f7c59da0dfe63288e3c6dac09619ad1a71d2f6e710bb28ebea0935a4654b58.worktree-inventory.json
+  content_hash: sha256:91f7c59da0dfe63288e3c6dac09619ad1a71d2f6e710bb28ebea0935a4654b58
+  entry_count: 32
+handoff_hash: sha256:51d5b41811a3139d2eb8f7f19eb028027281f16f63e6b26090ac6819880b48d2

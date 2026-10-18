@@ -1,0 +1,128 @@
+handoff_id: H-T-FILE-PREFLIGHT-001-20261018114243
+task_id: T-FILE-PREFLIGHT-001
+created_at: "2026-10-18T11:42:43.883Z"
+source_session_id: file-preflight-20261018
+checkpoint_trigger: phase-transition
+source_provider: codex
+source_context_lock_path: .agent-context/tasks/T-FILE-PREFLIGHT-001/evidence/context-locks/4fdfbe0a1c82604ccdf46222b00a6ee769ccb314824a944a944e093385ed7a20.json
+source_context_lock_hash: sha256:4fdfbe0a1c82604ccdf46222b00a6ee769ccb314824a944a944e093385ed7a20
+objective: Add read-only single-file authoring preflight, precise missing-field diagnostics, and discoverable entry helpers without changing repository approval
+completed: []
+decisions: []
+files:
+  - path: .agent-context/tasks/T-FILE-PREFLIGHT-001/brief.md
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: .agent-context/tasks/T-FILE-PREFLIGHT-001/change.yaml
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: .agent-context/tasks/T-FILE-PREFLIGHT-001/state.yaml
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: .github/README.md
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: ARTIFACT_PROTOCOL.md
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: README.md
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: ROADMAP.md
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: docs/file-preflight.md
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: docs/self-documentation.md
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: docs/usage.md
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: examples/file-preflight/README.md
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: examples/file-preflight/report.json
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: schemas/file-preflight.schema.json
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: src/agent-guide.ts
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: src/cli.ts
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: src/docs.ts
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: src/file-preflight.ts
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: src/indexer.ts
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: src/initializer.ts
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: src/schema-diagnostics.ts
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: src/validator.ts
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+  - path: test/file-preflight.test.ts
+    state: created
+    summary: Git status ?? before handoff; selected by task context or exact file intent.
+  - path: test/schema-diagnostics.test.ts
+    state: modified
+    summary: Git status M before handoff; selected by task context or exact file intent.
+checks: []
+blockers: []
+open_questions: []
+next_safe_action: Run full Windows and Linux checks of the frozen code, self-review the bounded file-preflight and crash-guard delta, then close only the owning task and report before any publication or consumer switch.
+do_not_repeat: []
+resume_sources:
+  - AGENTS.md
+  - .agent-context/tasks/T-FILE-PREFLIGHT-001/state.yaml
+  - .agent-context/tasks/T-FILE-PREFLIGHT-001/brief.md
+  - .agent-context/tasks/T-FILE-PREFLIGHT-001/change.yaml
+  - ARTIFACT_PROTOCOL.md
+  - docs/parallel-work.md
+  - examples/compact-handoff/README.md
+  - examples/context-inspection/README.md
+  - examples/resume-history/README.md
+  - integrations/gsd/canontrail/skills/canontrail-finalize/SKILL.md
+  - integrations/superpowers/skills/canontrail-feature-lifecycle/SKILL.md
+  - docs/file-preflight.md
+  - src/agent-guide.ts
+  - src/config.ts
+  - src/continuity-files.ts
+  - src/docs.ts
+  - src/document-authoring.ts
+  - src/indexer.ts
+  - src/schema-diagnostics.ts
+  - src/validator.ts
+  - README.md
+  - ROADMAP.md
+  - docs/self-documentation.md
+  - docs/usage.md
+  - examples/file-preflight/README.md
+  - examples/file-preflight/report.json
+  - schemas/file-preflight.schema.json
+  - src/cli.ts
+  - src/file-preflight.ts
+  - src/initializer.ts
+  - test/agent-guidance-status.test.ts
+  - test/file-preflight.test.ts
+  - test/schema-diagnostics.test.ts
+  - .agent-context/tasks/T-FILE-PREFLIGHT-001/context.lock.json
+worktree_dirty: true
+uncommitted_summary: Git reports 27 changed/untracked entries; 23 task-selected or explicitly reported files are listed below. The complete hash-bound worktree_inventory is separate on-demand safety evidence, not an ownership claim or file-content backup.
+worktree_inventory:
+  path: .agent-context/tasks/T-FILE-PREFLIGHT-001/evidence/worktree-inventories/c2f4510c7957b5738c81d693cf65c0d34db8390170b3d71a4ef83f5c8c115195.worktree-inventory.json
+  content_hash: sha256:c2f4510c7957b5738c81d693cf65c0d34db8390170b3d71a4ef83f5c8c115195
+  entry_count: 27
+handoff_hash: sha256:ca3ca798a3f123593445b847c4f63f1b372d44a9c2fba3129ef375a2c628c9cf

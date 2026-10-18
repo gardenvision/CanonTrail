@@ -1,0 +1,115 @@
+{
+  "version": 1,
+  "task_id": "T-FILE-PREFLIGHT-001",
+  "created_at": "2026-10-18T11:42:43.883Z",
+  "entries": [
+    {
+      "code": " M",
+      "path": ".agent-context/context-index.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-FILE-PREFLIGHT-001/brief.md"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-FILE-PREFLIGHT-001/change.yaml"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-FILE-PREFLIGHT-001/context.lock.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-FILE-PREFLIGHT-001/state.yaml"
+    },
+    {
+      "code": " M",
+      "path": ".github/README.md"
+    },
+    {
+      "code": " M",
+      "path": "ARTIFACT_PROTOCOL.md"
+    },
+    {
+      "code": " M",
+      "path": "README.md"
+    },
+    {
+      "code": " M",
+      "path": "ROADMAP.md"
+    },
+    {
+      "code": "??",
+      "path": "docs/file-preflight.md"
+    },
+    {
+      "code": " M",
+      "path": "docs/finding-codes.md"
+    },
+    {
+      "code": " M",
+      "path": "docs/self-documentation.md"
+    },
+    {
+      "code": " M",
+      "path": "docs/usage.md"
+    },
+    {
+      "code": "??",
+      "path": "examples/file-preflight/README.md"
+    },
+    {
+      "code": "??",
+      "path": "examples/file-preflight/report.json"
+    },
+    {
+      "code": "??",
+      "path": "examples/file-preflight/subject.md"
+    },
+    {
+      "code": "??",
+      "path": "schemas/file-preflight.schema.json"
+    },
+    {
+      "code": " M",
+      "path": "src/agent-guide.ts"
+    },
+    {
+      "code": " M",
+      "path": "src/cli.ts"
+    },
+    {
+      "code": " M",
+      "path": "src/docs.ts"
+    },
+    {
+      "code": "??",
+      "path": "src/file-preflight.ts"
+    },
+    {
+      "code": " M",
+      "path": "src/indexer.ts"
+    },
+    {
+      "code": " M",
+      "path": "src/initializer.ts"
+    },
+    {
+      "code": " M",
+      "path": "src/schema-diagnostics.ts"
+    },
+    {
+      "code": " M",
+      "path": "src/validator.ts"
+    },
+    {
+      "code": "??",
+      "path": "test/file-preflight.test.ts"
+    },
+    {
+      "code": " M",
+      "path": "test/schema-diagnostics.test.ts"
+    }
+  ]
+}

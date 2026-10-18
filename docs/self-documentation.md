@@ -1,6 +1,6 @@
 ---
 topic_id: canontrail-self-documentation
-stand: "2026-10-08"
+stand: "2026-10-18"
 status: public-source-alpha
 truth_level: draft
 verification:
@@ -20,6 +20,7 @@ do_not_use_instead: [VISION.md, ARTIFACT_PROTOCOL.md, ROADMAP.md]
 | Artifact/lifecycle rules and safety contracts | `ARTIFACT_PROTOCOL.md` |
 | Product introduction, installation and copyable agent entry | `README.md` (authored source); `.github/README.md` is its generated presentation only |
 | Detailed adoption, task commands, safe resume and development reference | `docs/usage.md` |
+| Read-only file structure preflight and its non-approval boundary | `docs/file-preflight.md`; `.agent-context/tasks/T-FILE-PREFLIGHT-001/state.yaml` |
 | Current implementation priorities | `ROADMAP.md` |
 | Alpha readiness, limitations and release gates | `docs/alpha-readiness.md` |
 | Workflow interoperability | `docs/integrations.md` |

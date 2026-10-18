@@ -1,0 +1,29 @@
+completed:
+  - Reviewed six aged document owners against current code, CLI help, protocol and exact historical evidence.
+  - Corrected pre-public contribution wording and current-versus-historical platform and migration claims.
+  - Read-only API reconfirmed public hosting and private vulnerability reporting without configuration changes.
+checks:
+  - name: Six individual document preflights
+    status: pass
+    evidence: All six selected headers and references pass; no repository approval inferred.
+  - name: Typecheck and distributable build
+    status: pass
+    evidence: maintenance-check.log and maintenance-build.log retained outside distributed source.
+  - name: Migration vocabulary and byte-preservation controls
+    status: pass
+    evidence: Actual migration-naming focused test command passed; raw results retained outside distributed source.
+  - name: Full Windows suite and final maintenance closure
+    status: pass
+    evidence: Full frozen-source Windows suite passed 1120 cases with 13 existing skips and no failures; current audit is healthy with no findings. Strict finalization is observed separately after closure.
+blockers: []
+open_questions:
+  - Exact new hosted matrix including macOS and Node floor remains a later integration/publication gate.
+next_safe_action: Run final strict named-task and repository closure with the current maintenance context; if green, commit and push the authorized branch and open its pull request for exact platform CI. Observe the CI results without merging main, creating a release or changing any consumer project.
+do_not_repeat:
+  - Do not update completed task locks or rewrite old reports when current prose changes.
+  - Do not relax freshness policy or backdate an audit.
+  - Do not treat a reporting-configuration read as notification-delivery testing or independent security review.
+resume_sources:
+  - .agent-context/tasks/T-DOCS-FRESHNESS-20261018/evidence/review.md
+  - .agent-context/tasks/T-DOCS-FRESHNESS-20261018/evidence/hosting-observation.json
+uncommitted_summary: Verified documentation maintenance atop the file-preflight candidate. The owner authorized branch commit/push and a pull request after green local checks; main merge, releases, hosting settings and consumer changes remain unauthorized.

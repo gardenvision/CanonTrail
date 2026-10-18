@@ -6,6 +6,10 @@ export function formatSchemaErrors(errors: ErrorObject[] | null | undefined): st
   return (errors ?? []).map(error => {
     const field = error.instancePath || "/";
     const base = `${field} ${error.message ?? "is invalid"}`;
+    if (error.keyword === "required" && typeof error.params.missingProperty === "string") {
+      const property = error.params.missingProperty.replace(/~/g, "~0").replace(/\//g, "~1");
+      return `${base}; missing field: ${JSON.stringify(`${error.instancePath}/${property}`)}`;
+    }
     if (error.keyword === "enum" && Array.isArray(error.params.allowedValues)) {
       return `${base}; allowed values: ${error.params.allowedValues.map(value => JSON.stringify(value)).join(", ")}`;
     }
