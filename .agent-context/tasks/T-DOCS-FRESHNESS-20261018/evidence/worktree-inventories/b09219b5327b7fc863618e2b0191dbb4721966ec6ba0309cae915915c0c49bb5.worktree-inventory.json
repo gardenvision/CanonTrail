@@ -1,0 +1,227 @@
+{
+  "version": 1,
+  "task_id": "T-DOCS-FRESHNESS-20261018",
+  "created_at": "2026-10-18T19:11:26.788Z",
+  "entries": [
+    {
+      "code": " M",
+      "path": ".agent-context/context-index.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-DOCS-FRESHNESS-20261018/brief.md"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-DOCS-FRESHNESS-20261018/change.yaml"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-DOCS-FRESHNESS-20261018/checkpoint-input.yaml"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-DOCS-FRESHNESS-20261018/context.lock.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-DOCS-FRESHNESS-20261018/evidence/change-r1.yaml.fixture"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-DOCS-FRESHNESS-20261018/evidence/context-locks/4a7f58b8d2b9bb864c7018da6ebae93f23b624cf756b695802f02447b312b3bb.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-DOCS-FRESHNESS-20261018/evidence/hosting-observation.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-DOCS-FRESHNESS-20261018/evidence/review.md"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-DOCS-FRESHNESS-20261018/evidence/worktree-inventories/1271d85ec5e8d92cf62e2333c3cf08d9bf97cf46222b491e13d5383480094731.worktree-inventory.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-DOCS-FRESHNESS-20261018/handoff.yaml"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-DOCS-FRESHNESS-20261018/state.yaml"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-FILE-PREFLIGHT-001/brief.md"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-FILE-PREFLIGHT-001/change.yaml"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-FILE-PREFLIGHT-001/checkpoint-input.yaml"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-FILE-PREFLIGHT-001/context.lock.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-FILE-PREFLIGHT-001/evidence/context-locks/4fdfbe0a1c82604ccdf46222b00a6ee769ccb314824a944a944e093385ed7a20.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-FILE-PREFLIGHT-001/evidence/context-locks/8c16ec12e06464e07fb6dd3d354bc50150ef2613d472c64f0a9c4287e620f128.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-FILE-PREFLIGHT-001/evidence/context-locks/fbe515144ed183c1b3a8e46406d8c706470721d3585ea6379ee29afc0708fad3.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-FILE-PREFLIGHT-001/evidence/handoffs/51d5b41811a3139d2eb8f7f19eb028027281f16f63e6b26090ac6819880b48d2.yaml"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-FILE-PREFLIGHT-001/evidence/handoffs/ca3ca798a3f123593445b847c4f63f1b372d44a9c2fba3129ef375a2c628c9cf.yaml"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-FILE-PREFLIGHT-001/evidence/verification.md"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-FILE-PREFLIGHT-001/evidence/worktree-inventories/46ff7d3c24e378def1d0f745f8bac359fc11e03986ee5a08520a3a92c222f58e.worktree-inventory.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-FILE-PREFLIGHT-001/evidence/worktree-inventories/91f7c59da0dfe63288e3c6dac09619ad1a71d2f6e710bb28ebea0935a4654b58.worktree-inventory.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-FILE-PREFLIGHT-001/evidence/worktree-inventories/c2f4510c7957b5738c81d693cf65c0d34db8390170b3d71a4ef83f5c8c115195.worktree-inventory.json"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-FILE-PREFLIGHT-001/handoff.yaml"
+    },
+    {
+      "code": "??",
+      "path": ".agent-context/tasks/T-FILE-PREFLIGHT-001/state.yaml"
+    },
+    {
+      "code": " M",
+      "path": ".github/README.md"
+    },
+    {
+      "code": " M",
+      "path": "ARTIFACT_PROTOCOL.md"
+    },
+    {
+      "code": " M",
+      "path": "CONTRIBUTING.md"
+    },
+    {
+      "code": " M",
+      "path": "README.md"
+    },
+    {
+      "code": " M",
+      "path": "ROADMAP.md"
+    },
+    {
+      "code": " M",
+      "path": "SECURITY.md"
+    },
+    {
+      "code": " M",
+      "path": "docs/change-integrity.md"
+    },
+    {
+      "code": "??",
+      "path": "docs/file-preflight.md"
+    },
+    {
+      "code": " M",
+      "path": "docs/finding-codes.md"
+    },
+    {
+      "code": " M",
+      "path": "docs/migration.md"
+    },
+    {
+      "code": " M",
+      "path": "docs/platform-support.md"
+    },
+    {
+      "code": " M",
+      "path": "docs/self-documentation.md"
+    },
+    {
+      "code": " M",
+      "path": "docs/usage.md"
+    },
+    {
+      "code": "??",
+      "path": "examples/file-preflight/README.md"
+    },
+    {
+      "code": "??",
+      "path": "examples/file-preflight/report.json"
+    },
+    {
+      "code": "??",
+      "path": "examples/file-preflight/subject.md"
+    },
+    {
+      "code": " M",
+      "path": "examples/migration-plan/README.md"
+    },
+    {
+      "code": "??",
+      "path": "schemas/file-preflight.schema.json"
+    },
+    {
+      "code": " M",
+      "path": "src/agent-guide.ts"
+    },
+    {
+      "code": " M",
+      "path": "src/cli.ts"
+    },
+    {
+      "code": " M",
+      "path": "src/docs.ts"
+    },
+    {
+      "code": "??",
+      "path": "src/file-preflight.ts"
+    },
+    {
+      "code": " M",
+      "path": "src/indexer.ts"
+    },
+    {
+      "code": " M",
+      "path": "src/initializer.ts"
+    },
+    {
+      "code": " M",
+      "path": "src/schema-diagnostics.ts"
+    },
+    {
+      "code": " M",
+      "path": "src/validator.ts"
+    },
+    {
+      "code": "??",
+      "path": "test/file-preflight.test.ts"
+    },
+    {
+      "code": " M",
+      "path": "test/schema-diagnostics.test.ts"
+    }
+  ]
+}

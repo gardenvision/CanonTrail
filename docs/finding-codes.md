@@ -1,6 +1,6 @@
 ---
 topic_id: finding-codes
-stand: "2026-10-08"
+stand: "2026-10-18"
 status: public-source-alpha
 truth_level: draft
 verification:
@@ -17,6 +17,22 @@ do_not_use_instead: [docs/usage.md]
 Validation, finalization and documentation audits report stable codes such as `LOCK004` or `CHANGE004`. This page maps the codes you meet in normal operation to their trigger and remedy. Sources of truth remain the emitting modules (`src/validator.ts`, `src/finalize.ts`, `src/docs.ts`, `src/context.ts`, `src/resume.ts`, `src/handoff.ts`, `src/evidence.ts`).
 
 Exit codes: `0` pass — `1` failed validation/finalization/index preflight or CLI error — `2` `init` conflicts (dry run or applied; nothing overwritten). See [Troubleshooting](usage.md#troubleshooting) for step-by-step remedies.
+
+## Single-file preflight (`CHECK` / `ART`)
+
+`check <file> [root]` is file-structure inspection only, never repository,
+self-hash, continuity or completion approval. It also reuses `CFG001`,
+`DOC002`, `SCHEMA002`/`SCHEMA005` and `REF001`/`REF002` for their local checks.
+
+| Code | Severity | Trigger | Remedy |
+|---|---|---|---|
+| `CHECK001` | error | selected file identity is unsafe or cannot be resolved | use an exact portable repository-relative path, not Git control data or an alias |
+| `CHECK002` | error | selected file is missing, excluded, ungoverned, unsupported, non-text or over 8 MiB | inspect the cause and configured scope; no generic lint/approval fallback is produced |
+| `ART001` | error | selected structured JSON/YAML cannot be parsed | repair syntax in the named file; no other task or index is changed |
+
+For this command, `REF002` additionally covers unsafe physical identity or more
+than 1024 local metadata references. Referenced external URI locators are not
+fetched. [Single-file preflight](file-preflight.md) owns the full report boundary.
 
 ## Context locks (`LOCK`)
 
@@ -126,7 +142,7 @@ working PASS is not a global validation/completion/CI result.
 | Code | Severity | Trigger | Remedy |
 |---|---|---|---|
 | `SCHEMA001`–`SCHEMA004` | error | schemas directory unreadable, schema load/compile failed, or a validator is unavailable | restore `.agent-context/schemas` from the tool copy |
-| `SCHEMA005` | error | artifact does not conform to its schema | fix the named field; the diagnostic includes actual allowed enum/constant values, not a guessed shared vocabulary |
+| `SCHEMA005` | error | artifact does not conform to its schema | fix the named field; the diagnostic includes precise missing-field pointers and actual allowed enum/constant values, not a guessed shared vocabulary |
 | `DOC001` / `DOC005` | error | repository files or structured artifacts cannot be scanned | check permissions and paths |
 | `DOC002` | error | Markdown frontmatter invalid | fix the header block at the named file |
 | `DOC003` | error | duplicate `artifact_id` | keep artifact ids unique |

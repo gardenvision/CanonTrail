@@ -281,7 +281,7 @@ export function governedMetadataReferences(document: DocumentRecord): string[] {
   return result;
 }
 
-function validateMetadataReferences(
+export function validateMetadataReferences(
   diagnostics: Diagnostic[],
   root: string,
   config: CanonTrailConfig,
@@ -395,7 +395,7 @@ export async function validateIndexMetadata(
   return { diagnostics, schemaCount: count };
 }
 
-function schemaForArtifact(artifactPath: string): string | undefined {
+export function schemaForArtifact(artifactPath: string): string | undefined {
   const basename = path.posix.basename(artifactPath);
   if (basename === "change.yaml" || basename === "change.yml") return "change-record";
   if (basename === "compatibility.yaml" || basename === "compatibility.yml") return "compatibility";
@@ -820,7 +820,7 @@ async function validateChangeRecords(
       const governedDocument = documentsByPath.get(normalizePath(documentPath));
       const header = governedDocument?.header;
       if (!header || documentStatus === "planned") continue;
-      const verificationState = header.verification.state;
+      const verificationState = header.verification?.state;
       if (
         documentStatus === "drafted" &&
         featureDocument.action === "create" &&
@@ -1335,7 +1335,10 @@ async function validateIndex(
   config: CanonTrailConfig,
   documents: DocumentRecord[],
 ): Promise<void> {
-  if (documents.some((document) => !document.header)) {
+  const paths = new Set(documents.map(document => document.path));
+  if (documents.some((document) => !document.header) || diagnostics.some(diagnostic =>
+    diagnostic.severity === "error" && diagnostic.path !== undefined && paths.has(diagnostic.path)
+    && ["SCHEMA004", "SCHEMA005"].includes(diagnostic.code))) {
     return;
   }
   const expected = buildContextIndex(documents);

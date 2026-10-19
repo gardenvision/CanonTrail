@@ -70,6 +70,7 @@ import { captureDocumentSnapshot, formatDocumentSnapshotCapture, formatDocumentS
 import { formatValidationReport, validateRepository, validateResumePacketAt } from "./validator.js";
 import { createTaskWorkingIndex, formatTaskWorkingIndex } from "./working-index.js";
 import { rebuildMetadataIndex, formatMetadataIndex } from "./metadata-index.js";
+import { checkFile, formatFilePreflight } from "./file-preflight.js";
 
 const program = new Command();
 
@@ -160,6 +161,18 @@ program
     });
     process.stdout.write(options.json ? `${JSON.stringify(report, null, 2)}\n` : `${formatInitReport(report)}\n`);
     if (!report.ok) process.exitCode = 2;
+  });
+
+program
+  .command("check")
+  .description("Read-only structure preflight of one governed file; NOT repository, integrity or completion approval")
+  .argument("<file>", "exact repository-relative Markdown or recognized structured artifact")
+  .argument("[root]", "initialized project root", ".")
+  .option("--json", "print the bounded single-file report, including failures")
+  .action(async (file: string, root: string, options: { json?: boolean }) => {
+    const report = await checkFile(root, file);
+    process.stdout.write(options.json ? JSON.stringify(report, null, 2) + "\n" : formatFilePreflight(report) + "\n");
+    if (!report.ok) process.exitCode = 1;
   });
 
 program

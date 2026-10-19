@@ -1,11 +1,11 @@
 ---
 topic_id: canontrail-platform-support
-stand: "2026-09-14"
-status: c2-platform-evidence-recorded
+stand: "2026-10-18"
+status: revision-bound-platform-evidence
 truth_level: draft
 verification:
   state: verified
-  evidence: [.github/workflows/validate.yml, scripts/platform-capabilities.js, test/migration-platform.test.ts, .agent-context/tasks/T-FROZEN-EXAMPLE-LIFECYCLE-001/evidence/platform-results.json, .agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/platform-results.json]
+  evidence: [.github/workflows/validate.yml, scripts/platform-capabilities.js, test/migration-platform.test.ts, .agent-context/tasks/T-FROZEN-EXAMPLE-LIFECYCLE-001/evidence/platform-results.json, .agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/platform-results.json, .agent-context/tasks/T-FILE-PREFLIGHT-001/evidence/verification.md, .agent-context/tasks/T-DOCS-FRESHNESS-20261018/evidence/review.md]
 read_if_task_touches: [platform compatibility, migration portability, CI matrix]
 primary_systems: [platform verification]
 safe_to_edit: [Separate target support from actually observed exact-candidate results.]
@@ -29,9 +29,9 @@ Windows, Linux and macOS are targets. The configured matrix is Node24 on each an
 
 Typecheck, build, built-CLI validation and strict repository finalization passed on every host; Ubuntu Node24 also passed the runtime-dependency audit. The release task's `platform-results.json` and `platform-results-c2.json` retain the two distinct runs, actual capability JSON, skipped test names and raw-result hashes; GitHub raw artifacts have 14-day retention. Later documentation/lifecycle commits are not retroactively either tested snapshot and must be checked separately. The final tagged release identifies its exact CI run on the release page. Independent review and actual hosting rules remain distinct.
 
-## October field-friction product head
+## Historical October field-friction revision
 
-Exact public head `50f7d2431421c9dfd77abf3bde2eeb87fd5c867f` passes both
+Exact recorded revision `50f7d2431421c9dfd77abf3bde2eeb87fd5c867f` passed both
 push/PR four-host matrices (runs 37885835727 and 37885844660) and the separate
 completion workflow (37885844532). Windows24.21.0: 1015 passed / five skipped;
 Linux24.21.0, Linux20.19.6 and macOS ARM64/24.20.0: 1013 passed / seven skipped
@@ -40,6 +40,21 @@ skip, raw-hash and job records are in
 `.agent-context/tasks/T-TASK-WORKING-INDEX-001/evidence/hosted-ci-50f7d24.json`.
 The independent supplement checked these exact identities and results. This
 does not execute future closure metadata or certify all filesystems/capabilities.
+
+## Current local development evidence
+
+The file-preflight candidate's frozen 2026-10-18 source snapshot passed local
+Windows/Node 24.11.1 (1120 tests, 13 existing skips) and Linux/Node 24.20.0
+(1126 tests, 7 existing skips), 1133 cases in 49 files per host and zero failures.
+Its exact manifest and raw-result hashes are retained in
+`.agent-context/tasks/T-FILE-PREFLIGHT-001/evidence/verification.md`.
+This is local source-snapshot evidence, not a current main-branch hosted run,
+native macOS test, Node-floor test or approval of subsequent documentation bytes.
+
+The 2026-10-18 documentation review inspected the configured matrix and retained
+receipts; it did not run a new hosted matrix or change the workflow. Before
+publishing this later candidate, require fresh exact-candidate hosted results.
+Neither a renewed document date nor old cross-platform results fill that gap.
 
 ## Historical V3 correction
 

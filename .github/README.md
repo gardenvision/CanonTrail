@@ -98,6 +98,11 @@ docs and compile a bounded context. Inspect required sources, budget and
 omissions. Read the selected files or exact sections. Add narrowly needed
 sources and recompile when the task reveals missing information.
 
+For new governed notes, use document create to preview a complete draft header.
+After editing a note or known task artifact, run check <relative-file> <TARGET_PROJECT>
+for a read-only file preflight; a file PASS is not repository or completion approval.
+Use document snapshot for before-copies rather than indexing duplicate raw Markdown.
+
 For a handoff, first validate it; preview and apply a receiving resume
 packet/context; validate that exact packet; read its selected sources;
 only then continue with the recorded next safe action.
@@ -172,6 +177,7 @@ A dry run writes nothing. Inspect it before applying: an adoption with conflicts
 | I want to… | Start here |
 |---|---|
 | Create tasks, control context or safely resume | [Usage guide](../docs/usage.md) |
+| Check one note or task file before updating the shared index | `node <CLI> check <file> <project> --json` · [Single-file preflight](../docs/file-preflight.md) |
 | Give an agent version-matched operating instructions | `node <CLI> guide` · [Bundled guidance](../docs/usage.md#bundled-guidance-and-task-status) |
 | Something failed or an error code needs explaining | [Troubleshooting](../docs/usage.md#troubleshooting) · [Finding codes](../docs/finding-codes.md) |
 | Understand scope and the rules | [Vision](../VISION.md) · [Artifact protocol](../ARTIFACT_PROTOCOL.md) |

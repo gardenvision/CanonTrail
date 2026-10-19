@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "purpose": "single-file-preflight",
+  "validation_scope": "file-structure",
+  "root": ".",
+  "path": "examples/file-preflight/subject.md",
+  "kind": "markdown",
+  "ok": true,
+  "writes_performed": false,
+  "repository_validation_performed": false,
+  "continuity_validation": "not-performed",
+  "self_hash_validation": "not-performed",
+  "completion_approval": false,
+  "source": {
+    "bytes": 516,
+    "content_hash": "sha256:8d6686edf2a7c579cca8140af399a73197a595cd26654cb7909b4358063c2762"
+  },
+  "schema": {
+    "name": "artifact-header",
+    "shipped": "pass",
+    "installed": "pass"
+  },
+  "diagnostics": [],
+  "boundary": "File structure only: repository validity, canonical uniqueness, self-hashes, cross-artifact ownership/provenance, current sources, task completion and CI are NOT approved. Run the relevant strict checks separately. Stable local inputs required; not an atomic snapshot."
+}

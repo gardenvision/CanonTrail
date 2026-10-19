@@ -109,6 +109,7 @@ const SCHEMA_FILES = [
   "context-index.schema.json",
   "context-lock.schema.json",
   "document-snapshot.schema.json",
+  "file-preflight.schema.json",
   "task-working-index.schema.json",
   "evidence-record.schema.json",
   "finalize-scope.schema.json",
@@ -597,6 +598,7 @@ ${unityRules}
 ## Documentation discipline
 
 - Treat bootstrap documents marked \`draft\` and \`unverified\` as discovery queues, not established truth.
+- Use \`document create\` for complete draft headers and \`document snapshot\` for before-copies. After editing, \`check <relative-file> . --json\` is a read-only file-structure preflight, not repository or completion approval.
 - Treat Superpowers, GSD, and other workflow artifacts as externally owned inputs. Do not rewrite them or silently promote them to canonical documentation.
 - At the start of a task, record its objective, scope, dependencies, acceptance criteria, and context sources.
 - Before implementing or resuming a task, run canontrail context compile . --task <task-id> --apply; recompile after selected sources change or validation reports task-relevant index changes; unrelated index updates alone do not require rewriting a valid lock.

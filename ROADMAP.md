@@ -1,6 +1,6 @@
 ---
 topic_id: implementation-roadmap
-stand: "2026-10-08"
+stand: "2026-10-18"
 status: public-source-alpha
 truth_level: draft
 verification:
@@ -13,6 +13,14 @@ do_not_use_instead: [VISION.md, ARTIFACT_PROTOCOL.md]
 ---
 
 # Bounded Alpha roadmap
+
+## Current authoring preflight
+
+`T-FILE-PREFLIGHT-001` adds an explicit read-only file-structure check and fixes
+missing-header-field crashes without relaxing global validation. Its one feature
+owner is `docs/file-preflight.md`. Existing task/document/snapshot/budget helpers
+are made more visible in the entry route. Inventory-storage redesign is a later
+separate scope; no consumer update, archive rewrite or publication is implied.
 
 ## Current index upgrade boundary
 

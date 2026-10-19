@@ -1,0 +1,113 @@
+version: 1
+change_id: CHG-DOCS-FRESHNESS-20261018
+revision: 1
+title: Review six aged operational documents against current local behavior and revision-bound receipts, correct stale prose without weakening policy or rewriting historical artifacts, and rerun strict closure gates
+status: decided
+risk: medium
+author: ChatGPT documentation maintenance agent
+canonical_source: ARTIFACT_PROTOCOL.md
+decision_rationale: The user approved actual content review of six aged documents before integration. Reconcile prose with the existing protocol, observed public hosting and revision-bound evidence without changing product policy or inventing new release approval.
+documentation_structure:
+  decision: update-existing-feature-documents
+  rationale: Existing contribution, reporting, change-integrity, migration, platform and example owners remain the correct boundaries; this maintenance creates no competing product feature or canonical owner.
+  feature_documents:
+    - {feature_id: contribution-guidance, action: update, path: CONTRIBUTING.md, status: drafted, evidence_refs: [AGENTS.md]}
+    - {feature_id: security-reporting-guidance, action: update, path: SECURITY.md, status: drafted, evidence_refs: [.agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/hosting-results.json]}
+    - {feature_id: change-integrity-guidance, action: update, path: docs/change-integrity.md, status: drafted, evidence_refs: [ARTIFACT_PROTOCOL.md]}
+    - {feature_id: migration-guidance, action: update, path: docs/migration.md, status: drafted, evidence_refs: [src/migration.ts, test/migration-naming.test.ts]}
+    - {feature_id: platform-guidance, action: update, path: docs/platform-support.md, status: drafted, evidence_refs: [.github/workflows/validate.yml]}
+    - {feature_id: migration-example-guidance, action: update, path: examples/migration-plan/README.md, status: drafted, evidence_refs: [test/migration-naming.test.ts]}
+acceptance_cases:
+  - id: AC-001
+    given: Six draft documents exceed their 30-day review period and contain factual wording dating from earlier release stages.
+    expected: Each refreshed document has a source-backed review and any stale claim is corrected rather than merely redated
+    failure_or_uncertainty: Preserve unresolved facts explicitly and leave a warning rather than fabricate a content review.
+    counterexample: Changing stand without checking prose against a source.
+    oracle: Per-document source-to-claim review ledger and meaningful diff; exact command/help checks.
+    status: pending
+    evidence_refs: []
+  - id: AC-002
+    given: Completed tasks and synthetic historical JSON inputs must remain immutable during current documentation review.
+    expected: Retained examples, completed task files, live runtime and existing consumer projects remain byte-identical
+    failure_or_uncertainty: Stop for unexpected byte drift; no rehashing or consumer repair is authorized.
+    counterexample: Refreshing the completed preflight task lock to hide this maintenance.
+    oracle: Raw SHA-256 comparison with the pre-maintenance manifest and unchanged live-runtime receipt.
+    status: pending
+    evidence_refs: []
+  - id: AC-003
+    given: Existing hosted evidence belongs to exact old commits; current local candidate has Windows/Linux tests but no exact new hosted matrix.
+    expected: Platform and security reporting claims distinguish current observations from historical evidence and do not fabricate release approval
+    failure_or_uncertainty: State observation dates and untested email delivery or host capabilities; do not change GitHub settings.
+    counterexample: Calling a configured CI matrix a successful current macOS run.
+    oracle: Read-only GitHub API facts, checked-in workflow and revision-bound receipts compared to current candidate evidence.
+    status: pending
+    evidence_refs: []
+  - id: AC-004
+    given: The six documents have actual current review evidence and maintenance owns a current context.
+    expected: Current index validation audit and strict repository plus named-task finalization pass after the documentation review
+    failure_or_uncertainty: Keep any failing gate visible; do not relax freshness policy or backdate the audit.
+    counterexample: Omitting --fail-on-warnings to manufacture strict closure.
+    oracle: Built CLI index, validate, dated docs audit and both strict finalize reports.
+    status: pending
+    evidence_refs: []
+impacts:
+  - area: requirement
+    decision: not-affected
+    rationale: Existing protocol and owner decisions are preserved; no new product or contribution-acceptance promise.
+    evidence_refs: []
+  - area: data-contracts
+    decision: not-affected
+    rationale: No artifact schema, stored example payload or runtime report contract changes.
+    evidence_refs: []
+  - area: domain-logic
+    decision: not-affected
+    rationale: No executable product behavior changes; command examples are inspected or exercised in scratch fixtures only.
+    evidence_refs: []
+  - area: tests-reference-cases
+    decision: affected
+    rationale: Re-run migration vocabulary and relevant documentation/validation controls; bind exact source receipts and preservation checks.
+    evidence_refs: [test/migration-naming.test.ts, test/usage-references.test.ts]
+  - area: example-data
+    decision: affected
+    rationale: Review the migration example explanation; both retained plan JSON payloads stay byte-identical.
+    evidence_refs: [examples/migration-plan/README.md, examples/migration-plan/plan.json, examples/migration-plan/neutral-plan.json]
+  - area: ui-api
+    decision: not-affected
+    rationale: No graphical UI or CLI/API contract changes.
+    evidence_refs: []
+  - area: documentation
+    decision: affected
+    rationale: Review all six existing owners without creating replacement truth or modifying historical receipts.
+    evidence_refs: [CONTRIBUTING.md, SECURITY.md, docs/change-integrity.md, docs/migration.md, docs/platform-support.md, examples/migration-plan/README.md]
+  - area: diagrams-visuals
+    decision: not-affected
+    rationale: No diagram or graphical layout changes; existing tables retain their data and structure.
+    evidence_refs: []
+  - area: terminology
+    decision: not-affected
+    rationale: No rename or status-vocabulary change; historical adapter spellings remain compatibility evidence.
+    evidence_refs: []
+  - area: operations-compatibility
+    decision: affected
+    rationale: Clarify current hosting and exact candidate platform boundaries without changing settings, releases, consumers or supported contracts.
+    evidence_refs: [.github/workflows/validate.yml, docs/platform-support.md, SECURITY.md]
+verification:
+  checks: []
+  terminology_search:
+    status: not-applicable
+    terms: []
+    evidence_refs: []
+  visual_review:
+    applicable: false
+    status: not-applicable
+    evidence_refs: []
+  unverifiable_items: []
+independent_review:
+  status: not-required
+  reviewer: null
+  findings: []
+  evidence_refs: []
+  waiver: null
+supersedes: []
+superseded_by: null
+updated_at: 2026-10-18T18:57:49.171Z

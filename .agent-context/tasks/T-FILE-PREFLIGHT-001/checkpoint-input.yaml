@@ -1,0 +1,34 @@
+completed:
+  - Implemented bounded read-only single-file preflight and precise field diagnostics.
+  - Verified all four acceptance cases and ten impact areas; Windows/Linux full suites passed.
+  - Retained baseline counterexamples, author review and exact test receipts outside the distributed source tree.
+decisions:
+  - statement: File structure success never grants repository integrity or completion approval.
+    authority: approved
+    source: ARTIFACT_PROTOCOL.md section 3.2 and the owning decided change record.
+  - statement: This local task excludes publication, consumer replacement and inventory representation changes.
+    authority: delegated
+    source: User-authorized bounded implementation scope recorded in the task brief and change record.
+checks:
+  - name: Frozen candidate full Windows suite
+    status: pass
+    evidence: 1120 passed, 13 existing platform skips, 0 failures; evidence/verification.md binds the raw receipt.
+  - name: Frozen candidate full Linux suite
+    status: pass
+    evidence: 1126 passed, 7 existing platform skips, 0 failures; evidence/verification.md binds the raw receipt.
+  - name: Focused and additional malformed-header controls
+    status: pass
+    evidence: 85 focused tests plus ten extra variants rejected without a crash; evidence/verification.md.
+blockers:
+  - Strict project/documentation finalization has six pre-existing DOCS101 age warnings; the owning task and structural gates pass. Review the old documents before claiming strict repository closure.
+open_questions:
+  - Publication/integration and native macOS/hosted CI remain outside this local closure.
+next_safe_action: Review the six unchanged older documents identified in evidence/verification.md before claiming strict repository closure; then review the local file-preflight candidate for authorized integration, keeping inventory growth reduction as a separate compatibility-sensitive task.
+do_not_repeat:
+  - Do not rebuild the immutable live runtime or rewrite existing consumer schemas, locks or instructions.
+  - Do not treat a file-structure PASS as self-hash, current-use, project or completion approval.
+  - Do not discard old inventory files or infer release approval from local test success.
+resume_sources:
+  - docs/file-preflight.md
+  - .agent-context/tasks/T-FILE-PREFLIGHT-001/evidence/verification.md
+uncommitted_summary: Local additive file-preflight implementation, neutral example and verification records on a separate branch; no commit or remote write has been performed.

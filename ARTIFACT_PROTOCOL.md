@@ -1,6 +1,6 @@
 ---
 topic_id: artifact-protocol
-stand: "2026-10-08"
+stand: "2026-10-18"
 status: design-target
 truth_level: design-target
 verification:
@@ -12,6 +12,9 @@ verification:
     - schemas/context-lock.schema.json
     - schemas/evidence-record.schema.json
     - schemas/document-snapshot.schema.json
+    - schemas/file-preflight.schema.json
+    - src/file-preflight.ts
+    - test/file-preflight.test.ts
     - src/document-authoring.ts
     - src/document-snapshot.ts
     - schemas/task-state.schema.json
@@ -128,6 +131,33 @@ External artifacts MUST retain their external ownership and MUST NOT be indexed 
 Entries with surrounding prose and code spans, Markdown link notation, or line breaks remain narrative and MUST be preserved verbatim in the document and context index. CanonTrail MUST NOT resolve the entire sentence as a filename or infer a dependency from its embedded file-like words. A passing validator does not assert that narrative mentions exist. For a dependency requiring deterministic validation, record a separate standalone path entry (and keep the explanation), or use the appropriate evidence field when it actually supplies verification.
 
 For legacy bare entries, a slash alone identifies a path only without whitespace; recognized filename extensions (md, yaml/yml, json, ts, js, cs) or a trailing-slash directory also allow spaces. Ambiguous prose ending in such a filename should use marked-up narrative; a standalone path with markup characters should use the sole-backtick form. This lexical contract is intentionally not a natural-language classifier. `verification.evidence` and `supersedes` are unchanged and MUST NOT receive the narrative exemption. No header or index shape changes and no automatic migration, promotion, reference rewriting or missing-reference exception follow from this rule. See the worked example in `examples/usage-constraints/README.md`.
+
+### 3.2 Single-file authoring preflight
+
+`canontrail check <file> [root]` is a read-only structural report over one explicit
+governed Markdown or schema-recognized artifact. It MUST NOT scan peer task
+payloads, rebuild an index, change files, run Git/project commands or contact a
+remote. The initialized config, selected input and required installed/shipped
+schemas are checked through exact portable, regular unlinked local identities.
+Inputs are bounded to 8 MiB each and valid UTF-8 without NUL. Markdown metadata
+references retain their field grammar and explicit missing-reference policy;
+unsafe identities MUST NOT be excused. At most 1024 distinct local references
+are inspected. Unknown, excluded, missing, malformed or oversized inputs fail.
+
+The report follows `schemas/file-preflight.schema.json`. Success is file structure
+only: repository validation, self-hashes, cross-artifact identity/provenance,
+current sources, canonical uniqueness and completion are NOT approved. Structured
+artifact references and semantic integrity remain for their strict validators.
+The report MUST say these checks were not performed even when `ok` is true.
+No existing artifact schema or initialized project is migrated automatically;
+the report schema is optional for report consumers and included by new init.
+
+Invalid header shapes MUST remain failing diagnostics instead of causing internal
+property-access errors in validation, audit or index preflight. Missing-field
+diagnostics SHOULD name the precise JSON-pointer field. This does not exempt the
+document, permit a partial global index or relax any completion gate. Stable local
+inputs are required; the read-only check is not an atomic filesystem snapshot.
+See `docs/file-preflight.md` and `examples/file-preflight/README.md`.
 
 ## 4. Default project layout
 

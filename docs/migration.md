@@ -1,11 +1,11 @@
 ---
 topic_id: canontrail-documentation-migration
-stand: "2026-09-13"
+stand: "2026-10-18"
 status: experimental-alpha-candidate
 truth_level: draft
 verification:
   state: verified
-  evidence: [src/migration.ts, schemas/migration-plan.schema.json, schemas/migration-transaction.schema.json, test/migration-transformation.test.ts, test/migration-naming.test.ts, .agent-context/tasks/T-PUBLIC-PREP-001/evidence/verification.json, .agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/review-receipt.json]
+  evidence: [src/migration.ts, schemas/migration-plan.schema.json, schemas/migration-transaction.schema.json, test/migration-transformation.test.ts, test/migration-naming.test.ts, .agent-context/tasks/T-PUBLIC-PREP-001/evidence/verification.json, .agent-context/tasks/T-RELEASE-CLOSURE-001/evidence/review-receipt.json, .agent-context/tasks/T-DOCS-FRESHNESS-20261018/evidence/review.md]
 read_if_task_touches: [documentation migration, brownfield adoption]
 primary_systems: [migration planning, documentation governance]
 safe_to_edit: [Keep planning, execution permission and canonical promotion separate.]
@@ -50,4 +50,4 @@ Rollback restores the recorded bytes only if the transaction and recovery eviden
 
 `reviewed_by` and self-hashes are audit metadata, not cryptographic reviewer authentication. High-risk execution needs trusted out-of-band approval of the exact inputs. Tests and structural PASS do not grant that permission. See `ARTIFACT_PROTOCOL.md` for the complete normative path, evidence, recovery and lifecycle requirements; this usage guide does not weaken them.
 
-This candidate does not carry private historical pilot reports or approvals. Independent release review and exact-platform checks remain pending in `docs/alpha-readiness.md`.
+This source distribution does not carry private historical pilot reports or approvals. Existing review and platform receipts apply only to their exact revisions; the published source-Alpha tag does not authorize a migration in another project. The 2026-10-18 documentation review checks this guide against the shipped options, binding guards and regression references, not a new independent audit of migration safety. Read `docs/alpha-readiness.md` and the current owning task records for the relevant candidate's actual release gates. Keep backup, reviewed roots, trusted approval and exact transaction confirmation even when all structural checks pass.

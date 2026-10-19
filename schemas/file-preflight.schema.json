@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://canontrail.dev/schemas/file-preflight.schema.json",
+  "title": "Read-only single-file structural preflight, not a persisted approval",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "purpose", "validation_scope", "root", "path", "kind", "ok", "writes_performed", "repository_validation_performed", "continuity_validation", "self_hash_validation", "completion_approval", "source", "schema", "diagnostics", "boundary"],
+  "allOf": [{
+    "if": { "properties": { "ok": { "const": true } }, "required": ["ok"] },
+    "then": { "properties": {
+      "kind": { "enum": ["markdown", "structured"] },
+      "source": { "type": "object" },
+      "schema": { "type": "object", "properties": { "shipped": { "const": "pass" }, "installed": { "const": "pass" } } },
+      "diagnostics": { "type": "array", "items": { "type": "object", "properties": { "severity": { "const": "warning" } } } }
+    } }
+  }],
+  "properties": {
+    "version": { "const": 1 },
+    "purpose": { "const": "single-file-preflight" },
+    "validation_scope": { "const": "file-structure" },
+    "root": { "type": "string" },
+    "path": { "type": "string" },
+    "kind": { "enum": ["markdown", "structured", "unknown"] },
+    "ok": { "type": "boolean" },
+    "writes_performed": { "const": false },
+    "repository_validation_performed": { "const": false },
+    "continuity_validation": { "const": "not-performed" },
+    "self_hash_validation": { "const": "not-performed" },
+    "completion_approval": { "const": false },
+    "source": {
+      "oneOf": [{ "type": "null" }, {
+        "type": "object", "additionalProperties": false,
+        "required": ["bytes", "content_hash"],
+        "properties": { "bytes": { "type": "integer", "minimum": 0, "maximum": 8388608 }, "content_hash": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" } }
+      }]
+    },
+    "schema": {
+      "oneOf": [{ "type": "null" }, {
+        "type": "object", "additionalProperties": false,
+        "required": ["name", "shipped", "installed"],
+        "properties": { "name": { "type": "string", "minLength": 1 }, "shipped": { "enum": ["pass", "fail", "not-run"] }, "installed": { "enum": ["pass", "fail", "not-run"] } }
+      }]
+    },
+    "diagnostics": {
+      "type": "array", "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["code", "severity", "message"],
+        "properties": { "code": { "type": "string" }, "severity": { "enum": ["error", "warning"] }, "message": { "type": "string" }, "path": { "type": "string" }, "detail": { "type": "string" } }
+      }
+    },
+    "boundary": { "type": "string", "minLength": 1 }
+  }
+}

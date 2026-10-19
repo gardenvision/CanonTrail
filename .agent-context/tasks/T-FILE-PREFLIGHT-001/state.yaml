@@ -1,0 +1,43 @@
+task_id: T-FILE-PREFLIGHT-001
+status: verified
+objective: Add read-only single-file authoring preflight, precise missing-field diagnostics, and discoverable entry helpers without changing repository approval
+non_goals: [No consumer update, No global error isolation change, No inventory format change, No history rewrite, No remote operation]
+acceptance_criteria:
+  - id: AC-001
+    statement: A chosen governed Markdown or known structured artifact is checked without scanning peer tasks or writing files
+    verification: Read-ledger and before/after raw hashes in isolated fixtures; unrelated malformed peers remain unread.
+    status: pass
+  - id: AC-002
+    statement: Malformed YAML and missing or invalid fields return path-specific diagnostics, including actual allowed values, without a raw crash
+    verification: Invalid header/task fixtures and actual CLI JSON/text exit-status checks.
+    status: pass
+  - id: AC-003
+    statement: Passing preflight never implies repository validity, continuity integrity, or task completion; existing strict gates remain unchanged
+    verification: Non-approval flags are always false and existing repository checks still reject independent defects.
+    status: pass
+  - id: AC-004
+    statement: The entry route exposes existing authoring snapshot and task-working tools with executable examples
+    verification: CLI help and executed neutral worked example plus bundled-guide regression checks.
+    status: pass
+dependencies: []
+documentation_impact: [docs/file-preflight.md, docs/usage.md, docs/finding-codes.md, README.md, ARTIFACT_PROTOCOL.md]
+file_intents: [src/file-preflight.ts, src/cli.ts, src/validator.ts, src/docs.ts, src/indexer.ts, src/schema-diagnostics.ts, src/agent-guide.ts, src/initializer.ts, schemas/file-preflight.schema.json, test/file-preflight.test.ts, test/schema-diagnostics.test.ts, test/agent-guidance-status.test.ts, docs/file-preflight.md, docs/usage.md, README.md, .github/README.md, ARTIFACT_PROTOCOL.md, ROADMAP.md, docs/self-documentation.md, examples/file-preflight/README.md, examples/file-preflight/report.json]
+required_context_sources: [ARTIFACT_PROTOCOL.md, src/validator.ts, src/docs.ts, src/indexer.ts, src/config.ts, src/continuity-files.ts, src/schema-diagnostics.ts, src/document-authoring.ts, src/agent-guide.ts, docs/file-preflight.md]
+parallel_safety: exclusive
+owner: null
+worktree: null
+checks:
+  - id: CHECK-TYPES-BUILD
+    command_or_observation: npm run check and npm run build on the frozen Windows and Linux candidate
+    status: pass
+    evidence_refs: [.agent-context/tasks/T-FILE-PREFLIGHT-001/evidence/verification.md]
+  - id: CHECK-SUITES
+    command_or_observation: Full serial npm test runs on both platforms plus focused and additional malformed-header controls
+    status: pass
+    evidence_refs: [.agent-context/tasks/T-FILE-PREFLIGHT-001/evidence/verification.md, test/file-preflight.test.ts]
+  - id: CHECK-BOUNDARIES
+    command_or_observation: Author self-review of exact read ledger non-approval controls and raw-byte preservation
+    status: pass
+    evidence_refs: [.agent-context/tasks/T-FILE-PREFLIGHT-001/evidence/verification.md]
+latest_handoff: .agent-context/tasks/T-FILE-PREFLIGHT-001/handoff.yaml
+updated_at: 2026-10-18T12:01:17.984Z

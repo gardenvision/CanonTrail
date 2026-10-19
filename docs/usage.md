@@ -1,6 +1,6 @@
 ---
 topic_id: usage-guide
-stand: "2026-10-08"
+stand: "2026-10-18"
 status: public-source-alpha
 truth_level: draft
 verification:
@@ -185,8 +185,22 @@ root/exclusion choices rather than hiding required files. See the
 
 ## Document drafts and preserved source revisions
 
-Check the running executable's help. The development candidate adds complete
-draft creation without asking an agent to memorize every header field:
+Before updating a shared index, check the file you just edited:
+
+```text
+node <CANONTRAIL_HOME>/dist/cli.js check docs/canontrail/export.md <TARGET_PROJECT> --json
+node <CANONTRAIL_HOME>/dist/cli.js check .agent-context/tasks/<TASK-ID>/state.yaml <TARGET_PROJECT> --json
+```
+
+This is a read-only structural preflight of one governed file. It names missing
+fields and actual allowed values without scanning other tasks. Even a PASS does
+not validate self-hashes, cross-artifact relationships, current sources or project
+health. Use `document create` below for a complete new header, `document snapshot`
+for before-copies, and the strict repository/completion commands for their own
+gates. See [single-file preflight](file-preflight.md) for the exact scope and limits.
+
+Check the running executable's help. Complete draft creation avoids asking an
+agent to memorize every required header field:
 
 ```text
 node <CANONTRAIL_HOME>/dist/cli.js document create <TARGET_PROJECT> --path docs/canontrail/export.md --topic receipt-export --title "Receipt export" --purpose "Describe observed behavior and unresolved limits" --route "receipt export" --created-at 2026-10-08T12:00:00Z --json
@@ -303,6 +317,7 @@ Common symptoms and their fixes:
 
 - **`Cannot find module '…/dist/cli.js'`** (or any MODULE_NOT_FOUND when running the CLI): the tool is not built. In `CANONTRAIL_HOME`, run `npm ci --ignore-scripts` (first time only) and `npm run build`; confirm with `node dist/cli.js --help`.
 - **`npm test` fails on a clean checkout**: the CLI integration tests execute `node dist/cli.js`. Run `npm run build` first, then `npm test`.
+- **A new note or edited task artifact fails schema checks**: run `check <relative-file> <TARGET_PROJECT> --json` before rebuilding the shared index. `SCHEMA005` identifies the field, including a missing-field pointer and actual allowed values. Keep lifecycle/check vocabularies distinct; do not translate failures into passes. A missing `verification` mapping must produce a failing diagnostic, not an internal property-access error. Use `document create` rather than guessing a shortened header.
 - **`canontrail: project is not empty; use 'canontrail init --adopt' to preserve and document an existing project`**: the target already contains files; add `--adopt` (preview with `--dry-run` first).
 - **`CONFLICT <path>: existing file preserved` (exit 2)**: nothing was overwritten. A dry run also exits 2 when it finds conflicts, and writes nothing. Merge manually - a suggested bridge may be under `.agent-context/generated/bridges/<name>.proposed` - then re-run the preview until it is conflict-free or deliberately accepted.
 - **`context index is stale; run 'canontrail index .', then rerun this command`**: refresh the index, then rerun the original command (compile, validate or finalize).

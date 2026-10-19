@@ -33,6 +33,10 @@ your shell. The target project is not the tool checkout.
    never a promotion or overwrite. "document snapshot --help" retains exact
    task-owned historical bytes; "document snapshot-read" verifies/read-backs
    them explicitly. A snapshot is not current truth or a passing check.
+   After editing a governed note or schema-recognized task artifact, use
+   "check <REPOSITORY-RELATIVE-FILE> <PROJECT> --json" for a quick read-only
+   syntax/schema preflight. Missing fields and actual allowed values are shown.
+   A file PASS is not repository, self-hash, handoff or task-completion approval.
    Resume, in order:
    - handoff validate <PROJECT> --task <TASK>
    - resume create <PROJECT> --task <TASK> --session <SESSION> (preview first)
@@ -54,6 +58,8 @@ your shell. The target project is not the tool checkout.
    Use required_context_sources for must-read files; file_intents are optional.
    Add narrowly needed sources and recompile after selected-source changes.
    Required budget failures are not permission to drop safety requirements.
+   The error names the minimum estimated total budget and largest required files;
+   review those drivers instead of guessing budgets or dropping requirements.
    Estimates are not measured provider tokens or a compaction/savings guarantee.
 
 4. Check progress honestly.

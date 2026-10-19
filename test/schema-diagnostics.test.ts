@@ -28,6 +28,14 @@ describe("actual field-specific schema choices", () => {
     validate({ value: "other" }); const text = formatSchemaErrors(validate.errors);
     expect(text).toContain('"line\\nnext", {"nested":"value"}');
     expect(text).toContain("must have required property 'required'");
+    expect(text).toContain('missing field: "/required"');
+  });
+
+  it("names the precise escaped JSON pointer for missing nested fields", () => {
+    const validate = new Ajv2020({ allErrors: true }).compile({ type: "object", properties: { verification: { type: "object", required: ["evidence", "a/b~c"] } } });
+    validate({ verification: {} });
+    expect(formatSchemaErrors(validate.errors)).toContain('missing field: "/verification/evidence"');
+    expect(formatSchemaErrors(validate.errors)).toContain('missing field: "/verification/a~1b~0c"');
   });
 
   it("reports real task-check values and real documentary verification values separately", async () => {
